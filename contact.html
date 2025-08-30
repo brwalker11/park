@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact | ParkingProfit Solutions</title>
+  <meta name="description" content="Contact ParkingProfit Solutions for a free parking revenue assessment.">
+  <meta name="keywords" content="make money parking lot, monetize parking lot, parking enforcement software, parking revenue">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"ParkingProfit Solutions",
+    "url":"https://example.com",
+    "logo":"https://example.com/logo.png"
+  }</script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">ParkingProfit<span style="color:#111827;font-weight:600"> Solutions</span></div>
+      <nav>
+        <a href="index.html" class="">Home</a>
+        <a href="services.html" class="">Services</a>
+        <a href="resources.html" class="">Resources</a>
+        <a href="faq.html" class="">FAQ</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+  
+<h1>Contact Us</h1>
+<div class="card">
+  <form onsubmit="submitForm(event)">
+    <div class="row"><input id="name" placeholder="Your name" required></div>
+    <div class="row"><input id="email" type="email" placeholder="Email" required></div>
+    <div class="row"><input id="city" placeholder="City / State"></div>
+    <div class="row"><input id="spacesInput" type="number" placeholder="Number of spaces"></div>
+    <div class="row"><textarea id="message" rows="4" placeholder="How can we help?"></textarea></div>
+    <div class="row"><button class="cta" type="submit">Request Free Assessment</button></div>
+    <div class="small" style="margin-top:8px">Or call: <a href="tel:+18001234567">(800) 123-4567</a></div>
+  </form>
+</div>
+
+  <footer>
+    <div class="small">© <span id="year"></span> ParkingProfit Solutions — Built for parking lot owners who want results.</div>
+  </footer>
+  </main>
+</body>
+</html>
