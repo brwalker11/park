@@ -36,6 +36,43 @@
     .calculator{display:flex;gap:12px;flex-wrap:wrap}
     .calc-result{background:#eef2ff;padding:12px;border-radius:8px}
     @media(min-width:900px){.hero{grid-template-columns:1fr 420px}.hero .headline{font-size:34px}}
+  :root{--brand:#0b6efd;--muted:#6b7280;--card:#ffffff;--bg:#f8fafc}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;background:var(--bg);color:#0f172a;line-height:1.5}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{background:#fff;padding:18px 0;box-shadow:0 1px 6px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
+    .nav{display:flex;gap:18px;align-items:center;justify-content:space-between}
+    .logo{font-weight:700;color:var(--brand);font-size:18px}
+    nav a{color:inherit;text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr;gap:24px;padding:32px 0;align-items:center}
+    .hero .headline{font-size:28px;font-weight:800;margin:0}
+    .sub{color:var(--muted);margin-top:8px}
+    .cta{display:inline-block;background:var(--brand);color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700}
+    .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+    .card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    h2{margin:0 0 12px 0;font-size:20px}
+    ul{padding-left:18px}
+    footer{margin-top:40px;padding:24px 0;color:var(--muted);text-align:center}
+    .steps{display:flex;gap:12px;flex-wrap:wrap}
+    .step{flex:1;min-width:160px}
+    .testimonial{font-style:italic;color:#111827}
+    form .row{display:flex;gap:8px;margin-bottom:8px}
+    input,select,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px}
+    .small{font-size:13px;color:var(--muted)}
+    .calculator{display:flex;gap:12px;flex-wrap:wrap}
+    .calc-result{background:#eef2ff;padding:12px;border-radius:8px}
+    /* New sidebar services layout */
+    .two-col{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    .sidenav{position:sticky;top:90px;align-self:start}
+    .sidenav .menu{list-style:none;padding:0;margin:0}
+    .sidenav .menu li{margin-bottom:8px}
+    .sidenav a{display:block;padding:10px 12px;border-radius:10px;background:#f1f5f9;text-decoration:none;color:#0f172a;font-weight:600}
+    .sidenav a:hover{background:#e2e8f0}
+    .section-block{background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06);padding:18px;margin-bottom:16px}
+    .section-block h3{margin:0 0 6px 0}
+    .pill{display:inline-block;background:#eef2ff;border-radius:999px;padding:4px 10px;font-size:12px;margin-bottom:6px}
+    @media(min-width:900px){.hero{grid-template-columns:1fr 420px}.hero .headline{font-size:34px}}
   </style>
   <script type="application/ld+json">{
     "@context":"https://schema.org",
@@ -110,28 +147,65 @@
 
     <section id="services" style="margin-top:26px">
       <h2>Services</h2>
-      <div class="grid3">
-        <div class="card">
-          <strong>Parking Enforcement Software</strong>
-          <p class="small">Cloud-based platform with mobile enforcement, automated ticket issuance, and reporting dashboards.</p>
-        </div>
-        <div class="card">
-          <strong>Automated Ticketing</strong>
-          <p class="small">Reduce staffing needs and increase compliance with camera and sensor options.</p>
-        </div>
-        <div class="card">
-          <strong>Revenue Optimization</strong>
-          <p class="small">Pricing, occupancy analysis, and strategy tailored to your lot's location and demand.</p>
-        </div>
-      </div>
+      <div class="two-col">
+        <!-- LEFT: sticky side navigation -->
+        <aside class="sidenav card">
+          <div class="small" style="margin-bottom:8px;font-weight:700">Explore Services</div>
+          <ul class="menu">
+            <li><a href="#svc-enforcement">Parking Enforcement Software</a></li>
+            <li><a href="#svc-ticketing">Automated Ticketing</a></li>
+            <li><a href="#svc-optimization">Revenue Optimization</a></li>
+            <li><a href="#svc-addons">Add‑ons & Integrations</a></li>
+          </ul>
+          <div style="margin-top:12px"><a class="cta" href="#contact">Book a Free Consultation</a></div>
+        </aside>
 
-      <div style="margin-top:12px" class="card">
-        <h2>Optional Add-ons</h2>
-        <ul>
-          <li>Monthly passes & subscription management</li>
-          <li>Event/short-term booking integrations</li>
-          <li>White-glove onboarding & staff training</li>
-        </ul>
+        <!-- RIGHT: content blocks like the reference layout -->
+        <div>
+          <div id="svc-enforcement" class="section-block">
+            <span class="pill">Core Platform</span>
+            <h3>Parking Enforcement Software</h3>
+            <p class="small">Cloud dashboard + mobile app for enforcement teams. Capture plate/violation, issue citations, accept payments, and view real‑time compliance and occupancy reports.</p>
+            <ul>
+              <li>Mobile LPR capture & photo evidence</li>
+              <li>Custom violation types & workflows</li>
+              <li>Owner & operator reporting</li>
+            </ul>
+          </div>
+
+          <div id="svc-ticketing" class="section-block">
+            <span class="pill">Automation</span>
+            <h3>Automated Ticketing</h3>
+            <p class="small">Camera and sensor options reduce manual patrols while increasing compliance. Configure grace periods, escalation rules, and dispute handling.</p>
+            <ul>
+              <li>24/7 monitoring with alerts</li>
+              <li>Automatic notice creation & delivery</li>
+              <li>Online payments & appeals portal</li>
+            </ul>
+          </div>
+
+          <div id="svc-optimization" class="section-block">
+            <span class="pill">Advisory</span>
+            <h3>Revenue Optimization</h3>
+            <p class="small">We analyze demand, pricing, and occupancy to create a plan tailored to your lot size and neighborhood dynamics.</p>
+            <ul>
+              <li>Pricing strategy (hourly, daily, monthly)</li>
+              <li>Utilization analysis & dynamic pricing</li>
+              <li>Passes, subscriptions, and partnerships</li>
+            </ul>
+          </div>
+
+          <div id="svc-addons" class="section-block">
+            <span class="pill">Add‑ons</span>
+            <h3>Add‑ons & Integrations</h3>
+            <ul>
+              <li>Monthly pass management</li>
+              <li>Event/short‑term bookings</li>
+              <li>White‑glove onboarding & staff training</li>
+            </ul>
+            <div style="margin-top:8px"><a class="cta" href="#contact">Get a Free Parking Revenue Assessment</a></div>
+          </div>
+        </div>
       </div>
     </section>
 
