@@ -29,3 +29,14 @@ function submitForm(e){
   const body = encodeURIComponent('Name: '+payload.name+'\nEmail: '+payload.email+'\nCity: '+payload.city+'\nSpaces: '+payload.spaces+'\nMessage:\n'+payload.message);
   window.location.href = 'mailto:hello@parkingprofit.com?subject='+subject+'&body='+body;
 }
+
+
+/* Optional: adjust hash navigation for sticky header */
+function adjustAnchor(){
+  if (window.location.hash){
+    const el = document.querySelector(window.location.hash);
+    if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+}
+window.addEventListener('load', adjustAnchor);
+window.addEventListener('hashchange', adjustAnchor);
