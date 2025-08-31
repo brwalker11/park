@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calculator | ParkingProfit Solutions</title>
+  <meta name="description" content="Unlock passive income from your parking lot with automated enforcement and revenue optimization.">
+  <meta name="keywords" content="make money parking lot, monetize parking lot, parking enforcement software, parking revenue">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">ParkingProfit<span style="color:#111827;font-weight:600"> Solutions</span></div>
+      <nav>
+        <a href="index.html" class="">Home</a>
+        <a href="services.html" class="">Services</a>
+        <a href="resources.html" class="">Resources</a>
+        <a href="faq.html" class="">FAQ</a>
+        <a href="calculator.html" class="active">Calculator</a>
+        <a href="contact.html" class="">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a> / Calculator</div>
+<div class="section">
+  <div class="kicker">Tool</div>
+  <h1>Parking Revenue Calculator</h1>
+  <p class="sub">Estimate potential monthly gross revenue based on your lot size, occupancy, and rate. This is a rough estimate — actual results will vary by demand and pricing.</p>
+</div>
+
+<div class="card" style="max-width:720px">
+  <div class="row"><div style="flex:1">
+    <label class="small">Number of Spaces</label>
+    <input id="spaces" type="number" value="20" min="1">
+  </div><div style="flex:1">
+    <label class="small">Average Occupancy (%)</label>
+    <input id="occupancy" type="number" value="60" min="0" max="100">
+  </div></div>
+
+  <div class="row"><div style="flex:1">
+    <label class="small">Average Rate per Space / Day ($)</label>
+    <input id="rate" type="number" value="3" min="0">
+  </div><div style="flex:1">
+    <label class="small">Days per Month</label>
+    <input id="days" type="number" value="30" min="1" max="31">
+  </div></div>
+
+  <div class="row">
+    <button onclick="estimate()" class="cta">Estimate</button>
+    <a class="cta secondary" href="contact.html">Talk to an Expert</a>
+  </div>
+  <div id="estimateResult" class="card" style="display:none"></div>
+</div>
+
+<div class="section">
+  <div class="kicker">What goes into the estimate</div>
+  <div class="grid3">
+    <div class="card"><strong>Occupancy</strong><p class="small">Average percent of spaces occupied across the month.</p></div>
+    <div class="card"><strong>Rate</strong><p class="small">Typical daily price per space (or averaged from hourly).</p></div>
+    <div class="card"><strong>Days</strong><p class="small">How many revenue days per month (usually 30).</p></div>
+  </div>
+</div>
+
+<footer>
+    <div class="small">© <span id="year"></span> ParkingProfit Solutions — Built for parking lot owners who want results.</div>
+  </footer>
+  </main>
+</body>
+</html>
