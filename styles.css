@@ -61,6 +61,8 @@ p{margin:0 0 10px 0}
 .cta.secondary{background:#1118270d;color:var(--brand);border:1px solid var(--border)}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:20px}
 .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 22px rgba(15,23,42,0.06);border:1px solid var(--border)}
+.grid3 .card{display:flex;flex-direction:column}
+.grid3 .card .cta{margin-top:auto}
 ul{padding-left:18px;margin:0 0 8px 0}
 footer{margin-top:56px;padding:28px 0;color:var(--muted);text-align:center;border-top:1px solid var(--border)}
 .small{font-size:.9375rem;color:var(--muted)}
