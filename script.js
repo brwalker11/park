@@ -1,7 +1,30 @@
 
-document.addEventListener('DOMContentLoaded', ()=>{
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', () => {
+  const load = (id, file) => {
+    const el = document.getElementById(id);
+    if (!el) return Promise.resolve();
+    return fetch(file)
+      .then(r => r.text())
+      .then(html => {
+        el.innerHTML = html;
+      });
+  };
+
+  Promise.all([
+    load('header', 'header.html'),
+    load('footer', 'footer.html')
+  ]).then(() => {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    document
+      .querySelectorAll('#header nav a')
+      .forEach(link => {
+        if (link.getAttribute('href') === path) {
+          link.classList.add('active');
+        }
+      });
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  });
 });
 
 function estimate(){
