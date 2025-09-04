@@ -73,8 +73,14 @@ footer{margin-top:56px;padding:28px 0;color:var(--muted);text-align:center;borde
 .sidenav .menu li{margin-bottom:10px}
 .sidenav a{display:block;padding:12px 14px;border-radius:12px;background:#f1f5f9;text-decoration:none;color:var(--ink);font-weight:600;border:1px solid var(--border)}
 .sidenav a:hover{background:#e7eef6}
-.service-card{padding:22px;margin-bottom:24px;scroll-margin-top:100px}
-.service-divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.service-card{padding:26px;margin-bottom:36px;scroll-margin-top:100px}
+.service-divider{border:none;border-top:1px solid var(--border);margin:40px 0}
+.services-list h2{font-size:1.5rem;line-height:1.3;margin:0 0 14px 0}
+.services-list h3{font-size:1.25rem;line-height:1.3;margin:0 0 8px 0}
+.services-list p{margin:0 0 12px 0;line-height:1.6}
+.services-list ul{list-style:none;padding:0;margin:0 0 12px 0}
+.services-list li{display:flex;gap:8px;align-items:flex-start;line-height:1.6;padding:4px 0}
+.services-list li::before{content:"\2713"}
 .pill{display:inline-block;background:#eef2ff;border-radius:999px;padding:5px 12px;font-size:.8125rem;margin-bottom:8px;border:1px solid #e0e7ff}
 .kicker{letter-spacing:.18em;text-transform:uppercase;font-weight:700;font-size:.8125rem;color:var(--muted);margin-bottom:8px}
 .breadcrumb{font-size:.9375rem;color:var(--muted);margin:10px 0 18px 0}
