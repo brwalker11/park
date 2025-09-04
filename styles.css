@@ -105,3 +105,10 @@ html{scroll-behavior:smooth}
   white-space:nowrap;
   border:0
 }
+
+.owner-card{margin-top:24px}
+.owner-content{display:flex;gap:20px;align-items:center}
+.owner-image{width:150px;height:150px;border-radius:50%;object-fit:cover}
+@media(max-width:600px){
+  .owner-content{flex-direction:column;text-align:center}
+}
