@@ -35,12 +35,27 @@
   
 <h1>Contact Us</h1>
 <div class="card">
-  <form onsubmit="submitForm(event)">
-    <div class="row"><input id="name" placeholder="Your name" required></div>
-    <div class="row"><input id="email" type="email" placeholder="Email" required></div>
-    <div class="row"><input id="city" placeholder="City / State"></div>
-    <div class="row"><input id="spacesInput" type="number" placeholder="Number of spaces"></div>
-    <div class="row"><textarea id="message" rows="4" placeholder="How can we help?"></textarea></div>
+  <form class="contact-form" onsubmit="submitForm(event)">
+    <div class="row">
+      <label for="name" class="visually-hidden">Name</label>
+      <input id="name" placeholder="Your name" required>
+    </div>
+    <div class="row">
+      <label for="email" class="visually-hidden">Email</label>
+      <input id="email" type="email" placeholder="Email" required>
+    </div>
+    <div class="row">
+      <label for="city" class="visually-hidden">City / State</label>
+      <input id="city" placeholder="City / State">
+    </div>
+    <div class="row">
+      <label for="spacesInput" class="visually-hidden">Number of spaces</label>
+      <input id="spacesInput" type="number" placeholder="Number of spaces">
+    </div>
+    <div class="row">
+      <label for="message" class="visually-hidden">How can we help?</label>
+      <textarea id="message" rows="4" placeholder="How can we help?"></textarea>
+    </div>
     <div class="row"><button class="cta" type="submit">Request Free Assessment</button></div>
     <div class="small" style="margin-top:8px">Or call: <a href="tel:+18001234567">(800) 123-4567</a></div>
   </form>
