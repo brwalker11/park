@@ -12,7 +12,7 @@ function estimate(){
   const result = document.getElementById('estimateResult');
   if (result){
     result.style.display = 'block';
-    result.innerHTML = '<strong>Estimated Gross Monthly Revenue:</strong> $' + monthly.toFixed(2) + '<div class="small">(This is a rough estimate - actual results depend on demand, pricing, and occupancy.)</div>';
+    result.innerHTML = '<strong>Estimated Gross Monthly Revenue:</strong> $' + monthly.toFixed(2) + '<div class="small">(This is a rough estimate; actual results depend on demand, pricing, and occupancy.)</div>';
   }
 }
 
@@ -25,7 +25,7 @@ function submitForm(e){
     spaces: document.getElementById('spacesInput').value,
     message: document.getElementById('message').value
   };
-  const subject = encodeURIComponent('Parking Revenue Assessment Request - ' + payload.name);
+  const subject = encodeURIComponent('Parking Revenue Assessment Request for ' + payload.name);
   const body = encodeURIComponent('Name: '+payload.name+'\nEmail: '+payload.email+'\nCity: '+payload.city+'\nSpaces: '+payload.spaces+'\nMessage:\n'+payload.message);
   window.location.href = 'mailto:hello@parkingprofit.com?subject='+subject+'&body='+body;
 }
