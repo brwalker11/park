@@ -27,7 +27,12 @@ function submitForm(e){
   };
   const subject = encodeURIComponent('Parking Revenue Assessment Request - ' + payload.name);
   const body = encodeURIComponent('Name: '+payload.name+'\nEmail: '+payload.email+'\nCity: '+payload.city+'\nSpaces: '+payload.spaces+'\nMessage:\n'+payload.message);
-  window.location.href = 'mailto:hello@parkingprofit.com?subject='+subject+'&body='+body;
+  fetch('https://mpspark.com/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.error('Submission failed', err));
+  window.location.href = 'mailto:dax@mpspark.com?subject='+subject+'&body='+body;
 }
 
 
