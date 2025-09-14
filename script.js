@@ -12,7 +12,7 @@ function estimate(){
   const result = document.getElementById('estimateResult');
   if (result){
     result.style.display = 'block';
-    result.innerHTML = '<strong>Estimated Gross Monthly Revenue:</strong> $' + monthly.toFixed(2) + '<div class="small">(This is a rough estimate — actual results depend on demand, pricing, and occupancy.)</div>';
+    result.innerHTML = '<strong>Estimated Gross Monthly Revenue:</strong> $' + monthly.toFixed(2) + '<div class="small">(This is a rough estimate - actual results depend on demand, pricing, and occupancy.)</div>';
   }
 }
 
