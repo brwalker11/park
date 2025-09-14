@@ -32,7 +32,7 @@ function submitForm(e){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).catch(err => console.error('Submission failed', err));
-  window.location.href = 'mailto:dax@mpspark.com?subject='+subject+'&body='+body;
+  window.location.href = 'mailto:ben.walker@mpspark.com?subject='+subject+'&body='+body;
 }
 
 
