@@ -44,6 +44,12 @@ p{margin:0 0 10px 0}
   margin:8px auto 0;
   max-width:60ch;
 }
+.hero .small{
+  color:#fff;
+}
+.hero .small a{
+  color:#fff;
+}
 .hero-actions{
   display:flex;
   flex-direction:column;
