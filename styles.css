@@ -44,6 +44,22 @@ p{margin:0 0 10px 0}
   margin:8px auto 0;
   max-width:60ch;
 }
+.hero-attribution{
+  margin-top:12px;
+  font-size:.9375rem;
+  color:#fff;
+}
+.hero-attribution__link{
+  color:#fff;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.hero-attribution__link:hover,
+.hero-attribution__link:focus-visible{
+  text-decoration:underline;
+}
 .hero-actions{
   display:flex;
   flex-direction:column;
