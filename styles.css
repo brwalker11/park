@@ -71,8 +71,16 @@ section> * + *{margin-top:var(--space-block)}
   color:#fff;
   margin-top:1rem;
 }
+.hero-powered-by{
+  margin:1.25rem auto 0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.4rem;
+}
 .hero .small a{
   color:#fff;
+  text-decoration:underline;
 }
 .hero-actions{
   display:flex;
