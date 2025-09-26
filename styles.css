@@ -31,7 +31,7 @@ p{margin:0 0 10px 0}
 .section{margin:44px 0}
 .hero{
   position:relative;
-  background:var(--brand);
+  background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 48%,#1e40af 100%);
   color:#fff;
   text-align:center;
   padding:120px 0 132px;
@@ -41,7 +41,7 @@ p{margin:0 0 10px 0}
   content:"";
   position:absolute;
   inset:0;
-  background-image:radial-gradient(circle at 18% 22%,rgba(255,255,255,0.14) 0,rgba(255,255,255,0) 58%),radial-gradient(circle at 82% 30%,rgba(255,255,255,0.12) 0,rgba(255,255,255,0) 62%),radial-gradient(circle at 50% 95%,rgba(148,163,184,0.16) 0,rgba(148,163,184,0) 65%);
+  background-image:radial-gradient(circle at 18% 22%,rgba(255,255,255,0.18) 0,rgba(255,255,255,0) 58%),radial-gradient(circle at 82% 30%,rgba(191,219,254,0.24) 0,rgba(191,219,254,0) 62%),radial-gradient(circle at 50% 95%,rgba(147,197,253,0.22) 0,rgba(147,197,253,0) 65%);
   pointer-events:none;
 }
 .hero > .container{position:relative;z-index:1}
