@@ -31,7 +31,7 @@ p{margin:0 0 10px 0}
 .section{margin:44px 0}
 .hero{
   position:relative;
-  background:linear-gradient(140deg,#0b6efd 0%,#1e3a8a 55%,#0f172a 100%);
+  background:var(--brand);
   color:#fff;
   text-align:center;
   padding:120px 0 132px;
