@@ -81,6 +81,10 @@ p{margin:0 0 10px 0}
 .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 22px rgba(15,23,42,0.06);border:1px solid var(--border)}
 .grid3 .card{display:flex;flex-direction:column}
 .grid3 .card .cta{margin-top:auto}
+.benefits-grid{gap:24px;margin-top:28px}
+.benefit-card{padding:28px 26px;text-align:center;align-items:center;gap:14px}
+.benefit-icon{width:56px;height:56px;border-radius:50%;background:rgba(11,110,253,0.12);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.benefit-icon svg{width:28px;height:28px}
 ul{padding-left:18px;margin:0 0 8px 0}
 footer{margin-top:56px;padding:28px 0;color:var(--muted);text-align:center;border-top:1px solid var(--border)}
 .small{font-size:.9375rem;color:var(--muted)}
