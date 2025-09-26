@@ -81,6 +81,19 @@ p{margin:0 0 10px 0}
 .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 22px rgba(15,23,42,0.06);border:1px solid var(--border)}
 .grid3 .card{display:flex;flex-direction:column}
 .grid3 .card .cta{margin-top:auto}
+.timeline{display:flex;gap:22px;margin-top:28px;flex-wrap:wrap}
+.timeline-step{position:relative;flex:1 1 240px;padding:72px 24px 28px;border-radius:18px;border:1px solid rgba(11,110,253,0.2);background:linear-gradient(180deg,#ffffff 0%,#eef2ff 100%);box-shadow:0 12px 26px rgba(15,23,42,0.08)}
+.timeline-step h3{margin-bottom:10px}
+.timeline-step::after{content:"";position:absolute;top:46px;left:92px;right:-24px;height:2px;background:linear-gradient(90deg,rgba(11,110,253,0.75) 0%,rgba(11,110,253,0.08) 100%)}
+.timeline-step:last-child::after{display:none}
+.timeline-marker{position:absolute;top:24px;left:24px;width:48px;height:48px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(11,110,253,0.28)}
+.timeline-step .small{color:#475569}
+@media(max-width:780px){
+  .timeline{flex-direction:column}
+  .timeline-step{padding:32px 24px 24px}
+  .timeline-step::after{display:none}
+  .timeline-marker{position:static;margin-bottom:18px}
+}
 .benefits-grid{gap:24px;margin-top:28px}
 .benefit-card{padding:28px 26px;text-align:center;align-items:center;gap:14px}
 .benefit-icon{width:56px;height:56px;border-radius:50%;background:rgba(11,110,253,0.12);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
