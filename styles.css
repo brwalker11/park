@@ -170,3 +170,25 @@ html{scroll-behavior:smooth}
 @media(max-width:600px){
   .owner-content{flex-direction:column;text-align:center}
 }
+
+/* Card container for About MPS */
+.card.about-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  padding: 32px 28px;
+  margin: 0 auto;
+  max-width: 920px;
+}
+.about-card h2 { margin-bottom: 8px; }
+.about-card .subhead {
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+.about-card p { margin: 0 0 16px 0; }
+.about-card .btn-primary { margin-top: 6px; }
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .card.about-card { padding: 24px 18px; border-radius: 12px; }
+}
