@@ -376,3 +376,18 @@ html{scroll-behavior:smooth}
   border: none;
   border-top: 1px solid rgba(203, 213, 225, 0.7); /* soft slate gray */
 }
+
+/* Resources page header (matches Services/About) */
+.resources-header.section { text-align: left; padding: 4rem 1rem 2.5rem; }
+.resources-header h1 {
+  font-size: 3.25rem;   /* same as Services & About */
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+.resources-header .subhead {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  opacity: 0.9;
+  max-width: 780px;
+}
