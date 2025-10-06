@@ -278,3 +278,14 @@ html{scroll-behavior:smooth}
 @media (max-width: 640px) {
   .card.about-card { padding: 24px 18px; border-radius: 12px; }
 }
+/* Services subnav (pills) */
+.services-subnav { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,0.85); backdrop-filter: saturate(1.2) blur(6px); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.services-subnav__inner { display: flex; gap: 10px; align-items: center; justify-content: center; padding: 12px 0; }
+.services-subnav .pill { display: inline-block; padding: 10px 14px; border-radius: 999px; background: #f1f5f9; color: #0f172a; font-weight: 600; text-decoration: none; }
+.services-subnav .pill[aria-current="true"] { background: #dbeafe; }
+.services-subnav .pill:hover { background: #e2e8f0; }
+.services-subnav .pill-cta { background: #0ea5e9; color: #fff; }
+.services-subnav .pill-cta:hover { background: #0284c7; color: #fff; }
+@media (max-width: 640px) {
+  .services-subnav__inner { justify-content: flex-start; overflow-x: auto; padding: 10px 12px; }
+}
