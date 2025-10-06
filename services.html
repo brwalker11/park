@@ -40,7 +40,7 @@
 <nav class="services-subnav" aria-label="Services subsections">
   <div class="container services-subnav__inner">
     <a href="#core-platform" class="pill" aria-current="true">Core Platform</a>
-    <a href="#add-ons" class="pill">Add Ons & Integrations</a>
+    <a href="#customizations" class="pill">Customization</a>
     <a href="#contact" class="pill pill-cta">Book a Free Consultation</a>
   </div>
 </nav>
@@ -62,9 +62,9 @@
     </section>
     <hr class="service-divider">
 
-    <section id="add-ons" class="service-card card">
-        <span class="pill">Add Ons</span>
-        <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M9 3v3"/><path d="M15 3v3"/><path d="M5 6h14"/><path d="M7 9h10v4a5 5 0 0 1-10 0V9Z"/></svg>Add Ons & Integrations</h2>
+    <section id="customizations" class="service-card card">
+        <span class="pill">Customizations</span>
+        <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M9 3v3"/><path d="M15 3v3"/><path d="M5 6h14"/><path d="M7 9h10v4a5 5 0 0 1-10 0V9Z"/></svg>Customization</h2>
         <p class="small">Customization and control for every property.</p>
         <p class="small">Every property operates differently, which is why the platform makes it simple to customize parking rules, user access, and exemptions. Owners can easily exempt employee or tenant license plates for free parking and define custom free parking hours to match business schedules or customer needs.</p>
       <ul>
@@ -95,7 +95,7 @@ document.querySelectorAll('.services-subnav a[href^="#"]').forEach(a => {
 });
 
 // Scroll-spy to set aria-current on the active pill
-const sections = ['#core-platform', '#add-ons'].map(s => document.querySelector(s)).filter(Boolean);
+const sections = ['#core-platform', '#customizations'].map(s => document.querySelector(s)).filter(Boolean);
 const pills = Array.from(document.querySelectorAll('.services-subnav .pill')).filter(p => p.getAttribute('href')?.startsWith('#'));
 const setActive = id => {
   pills.forEach(p => p.removeAttribute('aria-current'));
