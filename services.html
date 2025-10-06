@@ -33,21 +33,20 @@
   </header>
 
   <main class="container">
-  
+
 <h1>Services</h1>
 
-<div class="two-col">
-  <aside class="sidenav card">
-    <div class="small aside-heading">Explore Services</div>
-    <ul class="menu">
-      <li><a href="#svc-enforcement">Parking Enforcement Software</a></li>
-      <li><a href="#svc-addons">Add Ons & Integrations</a></li>
-    </ul>
-    <a class="cta" href="contact.html">Book a Free Consultation</a>
-  </aside>
+<!-- Services Subnav -->
+<nav class="services-subnav" aria-label="Services subsections">
+  <div class="container services-subnav__inner">
+    <a href="#core-platform" class="pill" aria-current="true">Core Platform</a>
+    <a href="#add-ons" class="pill">Add Ons & Integrations</a>
+    <a href="#contact" class="pill pill-cta">Book a Free Consultation</a>
+  </div>
+</nav>
 
   <div class="services-list">
-    <section id="svc-enforcement" class="service-card card">
+    <section id="core-platform" class="service-card card">
         <span class="pill">Core Platform</span>
         <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>Parking Enforcement Software</h2>
         <p class="small">AI powered enforcement and ticketing, simplified.</p>
@@ -63,7 +62,7 @@
     </section>
     <hr class="service-divider">
 
-    <section id="svc-addons" class="service-card card">
+    <section id="add-ons" class="service-card card">
         <span class="pill">Add Ons</span>
         <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M9 3v3"/><path d="M15 3v3"/><path d="M5 6h14"/><path d="M7 9h10v4a5 5 0 0 1-10 0V9Z"/></svg>Add Ons & Integrations</h2>
         <p class="small">Customization and control for every property.</p>
@@ -77,11 +76,38 @@
       <a class="cta" href="contact.html">Get a Free Parking Revenue Assessment</a>
     </section>
   </div>
-</div>
 
   <footer>
     <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
   </footer>
   </main>
+
+<script>
+// Smooth scroll for in-page links
+document.querySelectorAll('.services-subnav a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Scroll-spy to set aria-current on the active pill
+const sections = ['#core-platform', '#add-ons'].map(s => document.querySelector(s)).filter(Boolean);
+const pills = Array.from(document.querySelectorAll('.services-subnav .pill')).filter(p => p.getAttribute('href')?.startsWith('#'));
+const setActive = id => {
+  pills.forEach(p => p.removeAttribute('aria-current'));
+  const active = pills.find(p => p.getAttribute('href') === id);
+  if (active) active.setAttribute('aria-current', 'true');
+};
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) setActive('#' + entry.target.id);
+  });
+}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+sections.forEach(sec => obs.observe(sec));
+</script>
 </body>
 </html>
