@@ -289,3 +289,11 @@ html{scroll-behavior:smooth}
 @media (max-width: 640px) {
   .services-subnav__inner { justify-content: flex-start; overflow-x: auto; padding: 10px 12px; }
 }
+.about-hero, .about-mission, .about-owners, .about-trust, .about-cta { margin-bottom: 60px; }
+.mission-card { background: #f8fafc; padding: 40px; border-radius: 16px; text-align: center; }
+.owners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 30px; }
+.owner-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+.owner-photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; }
+.trust-list { list-style: none; padding: 0; display: grid; gap: 12px; margin-top: 20px; }
+.trust-list li::before { content: "✓ "; color: #0284c7; font-weight: bold; }
+.cta-box { background: #e0f2fe; text-align: center; padding: 50px; border-radius: 16px; }
