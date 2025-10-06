@@ -330,3 +330,8 @@ html{scroll-behavior:smooth}
 .trust-list { list-style: none; padding: 0; display: grid; gap: 12px; margin-top: 20px; }
 .trust-list li::before { content: "✓ "; color: #0284c7; font-weight: bold; }
 .cta-box { background: #e0f2fe; text-align: center; padding: 50px; border-radius: 16px; }
+.about-cta p {
+  max-width: 640px;
+  margin: 12px auto 28px;
+  text-align: center;
+}
