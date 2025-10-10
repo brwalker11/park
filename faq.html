@@ -33,22 +33,104 @@
   </header>
 
   <main class="container">
-  
-<h1>FAQ</h1>
-<div class="card">
-  <strong>Q: How can I make money with my parking lot?</strong>
-  <p class="small">Parking lots provide multiple revenue opportunities, from renting spaces to vehicle owners or hosting events, to installing electric vehicle charging stations. We typically pair Scan to Pay (QR/mobile web) tools for quick transactions with LPR or camera-assisted enforcement when real-time compliance monitoring is needed. That mix keeps operating costs low while making it easy for small lot owners to manage demand around the clock.</p>
-  <strong>Q: Is it legal for me to charge for parking?</strong>
-  <p class="small">Yes, it is generally legal to charge for parking in your private lot, but you may need a license, business permit, or compliance with specific zoning and safety requirements. Be sure to verify your local city and county regulations, as these will determine the exact steps you must follow. It’s also important to clearly post your rules and fees. Keep in mind that failing to comply with regulations can result in fines or other legal consequences.</p>
-  <strong>Q: What is the best technology for parking lot management?</strong>
-  <p class="small">For small parking lots, the most effective approach combines a parking management software platform with a real-time occupancy tracking system such as ground sensors or radar. From there, we help owners decide whether Scan to Pay (QR/mobile web) alone meets their needs or if LPR/camera-assisted enforcement should be layered in for added access control and security. This integrated solution streamlines bookings, monitors availability, and enforces violations, reducing manual effort while creating new revenue opportunities. Features like permit and visitor management, as well as selling unused spaces to the public, make it especially valuable.</p>
-  <strong>Q: How big or small does a lot need to be to make it worth charging for parking?</strong>
-  <p class="small">There isn’t a single “magic number” of spaces that guarantees profitability. Instead, it depends on factors such as local demand, land value, operational costs (maintenance, security, technology), and overall revenue potential. A parking lot in a high-traffic area with steady demand is more likely to generate enough income to cover operating expenses and deliver profit. With the right technology in place, even lots as small as six spaces can produce meaningful revenue, and the larger the lot, the greater the earning potential.</p>
-</div>
+    <section class="faq">
+      <h1 class="faq-title">FAQ</h1>
 
-  <footer>
-    <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
-  </footer>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1">
+          Q: How can I make money with my parking lot?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+          <p>Parking lots provide multiple revenue opportunities, from renting spaces to vehicle owners or hosting events, to installing electric vehicle charging stations. We typically pair Scan to Pay (QR/mobile web) tools for quick transactions with LPR or camera-assisted enforcement when real-time compliance monitoring is needed. That mix keeps operating costs low while making it easy for small lot owners to manage demand around the clock.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
+          Q: Is it legal for me to charge for parking?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+          <p>Yes, it is generally legal to charge for parking in your private lot, but you may need a license, business permit, or compliance with specific zoning and safety requirements. Be sure to verify your local city and county regulations, as these will determine the exact steps you must follow. It’s also important to clearly post your rules and fees. Keep in mind that failing to comply with regulations can result in fines or other legal consequences.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
+          Q: What is the best technology for parking lot management?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+          <p>For small parking lots, the most effective approach combines a parking management software platform with a real-time occupancy tracking system such as ground sensors or radar. From there, we help owners decide whether Scan to Pay (QR/mobile web) alone meets their needs or if LPR/camera-assisted enforcement should be layered in for added access control and security. This integrated solution streamlines bookings, monitors availability, and enforces violations, reducing manual effort while creating new revenue opportunities. Features like permit and visitor management, as well as selling unused spaces to the public, make it especially valuable.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4">
+          Q: How big or small does a lot need to be to make it worth charging for parking?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+          <p>There isn’t a single “magic number” of spaces that guarantees profitability. Instead, it depends on factors such as local demand, land value, operational costs (maintenance, security, technology), and overall revenue potential. A parking lot in a high-traffic area with steady demand is more likely to generate enough income to cover operating expenses and deliver profit. With the right technology in place, even lots as small as six spaces can produce meaningful revenue, and the larger the lot, the greater the earning potential.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
+    </footer>
   </main>
+
+  <script>
+    (function(){
+      const items = document.querySelectorAll('.faq-item');
+
+      const setPanelState = (btn, panel, icon, expanded) => {
+        btn.setAttribute('aria-expanded', String(expanded));
+        if (expanded) {
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          panel.setAttribute('aria-hidden', 'false');
+          icon.textContent = '−';
+        } else {
+          panel.style.maxHeight = '0px';
+          panel.setAttribute('aria-hidden', 'true');
+          icon.textContent = '+';
+          panel.classList.remove('open');
+        }
+      };
+
+      items.forEach((item) => {
+        const btn = item.querySelector('.faq-q');
+        const panel = item.querySelector('.faq-a');
+        const icon = item.querySelector('.faq-icon');
+
+        setPanelState(btn, panel, icon, false);
+
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          setPanelState(btn, panel, icon, !expanded);
+        });
+
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        items.forEach((item) => {
+          const btn = item.querySelector('.faq-q');
+          const panel = item.querySelector('.faq-a');
+          if (btn.getAttribute('aria-expanded') === 'true') {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
