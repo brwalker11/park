@@ -126,9 +126,6 @@ li{max-width:var(--max-text)}
 .hero-actions .cta{
   width:100%;
   max-width:320px;
-  display:flex;
-  justify-content:center;
-  white-space:normal;
   text-align:center;
 }
 @media(min-width:600px){
@@ -138,26 +135,43 @@ li{max-width:var(--max-text)}
     max-width:none;
   }
 }
-.hero .cta{background:#fff;color:var(--brand);border-color:#fff}
 .hero .btn-primary{margin-top:14px}
-.hero .cta.secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.65)}
 .sub{color:var(--muted);margin-top:.75rem;max-width:60ch}
 .cta{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   padding:14px 24px;
+  border-radius:12px;
+  border-width:2px;
+  border-style:solid;
   font-size:16px;
   font-weight:600;
   line-height:1;
   white-space:nowrap;
+  box-sizing:border-box;
   background:var(--brand);
   color:#fff;
-  border-radius:12px;
   text-decoration:none;
-  border:2px solid transparent;
+  border-color:transparent;
   box-shadow:0 10px 32px rgba(15,23,42,0.12)
 }
+.cta:hover{background-color:#005CE6}
+.cta:focus{outline:none;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
+.cta--primary{
+  background:#fff;
+  color:#0B5FFF;
+  border-color:transparent;
+}
+.cta--primary:hover{background:#f5f9ff}
+.cta--primary:focus{box-shadow:0 0 0 4px rgba(11,95,255,0.25)}
+.cta--secondary{
+  background:transparent;
+  color:#fff;
+  border-color:#D5E3FF;
+}
+.cta--secondary:hover{background:rgba(255,255,255,0.1)}
+.cta--secondary:focus{box-shadow:0 0 0 4px rgba(213,227,255,0.35)}
 .btn-primary{
   display:inline-flex;
   align-items:center;
