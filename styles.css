@@ -126,6 +126,10 @@ li{max-width:var(--max-text)}
 .hero-actions .cta{
   width:100%;
   max-width:320px;
+  display:flex;
+  justify-content:center;
+  white-space:normal;
+  text-align:center;
 }
 @media(min-width:600px){
   .hero-actions{flex-direction:row;justify-content:center;gap:20px;align-items:stretch}
