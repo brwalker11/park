@@ -123,8 +123,16 @@ li{max-width:var(--max-text)}
   margin-top:clamp(1.5rem,4vw,2.5rem);
   align-items:center;
 }
+.hero-actions .cta{
+  width:100%;
+  max-width:320px;
+}
 @media(min-width:600px){
-  .hero-actions{flex-direction:row;justify-content:center;gap:20px}
+  .hero-actions{flex-direction:row;justify-content:center;gap:20px;align-items:stretch}
+  .hero-actions .cta{
+    flex:1 1 0;
+    max-width:none;
+  }
 }
 .hero .cta{background:#fff;color:var(--brand);border-color:#fff}
 .hero .btn-primary{margin-top:14px}
