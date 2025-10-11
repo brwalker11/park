@@ -41,6 +41,7 @@
 <nav class="services-subnav" aria-label="Services subsections">
   <div class="container services-subnav__inner">
     <a href="#core-platform" class="pill" aria-current="true">Core Platform</a>
+    <a href="#which-fits" class="pill">Which fits my lot</a>
     <a href="#customizations" class="pill">Customization</a>
     <a href="contact.html" class="pill pill-cta">Book a Free Consultation</a>
   </div>
@@ -59,6 +60,52 @@
         <li>Smart alerts and reporting for complete visibility and control</li>
         <li>Simple management without extra hardware or complex systems</li>
       </ul>
+    </section>
+
+    <section id="which-fits" class="service-card card which-fits">
+      <h2>Which fits my lot</h2>
+      <div class="which-fits__columns">
+        <article class="which-fits__panel">
+          <h3>Scan to Pay</h3>
+          <ul>
+            <li>Quick launch and low upfront cost</li>
+            <li>Customers pay on any phone</li>
+            <li>Clear rules and grace periods</li>
+            <li>Simple audits through payment history</li>
+          </ul>
+        </article>
+        <article class="which-fits__panel">
+          <h3>LPR</h3>
+          <ul>
+            <li>Automated compliance with photo evidence</li>
+            <li>Useful for high turnover or chronic abuse</li>
+            <li>Consistent rules and fewer manual checks</li>
+            <li>Clear audit trail and reporting</li>
+          </ul>
+        </article>
+      </div>
+      <div class="which-fits__details">
+        <article class="which-fits__panel">
+          <h3>How we decide with you</h3>
+          <ul>
+            <li>Layout and traffic patterns</li>
+            <li>Typical stay length and turnover</li>
+            <li>Abuse or freeloading rate</li>
+            <li>Budget and timeline</li>
+            <li>Staffing needs</li>
+            <li>Local rules and signage</li>
+          </ul>
+        </article>
+        <article class="which-fits__panel">
+          <h3>What we handle</h3>
+          <ul>
+            <li>QR codes and signage guidance</li>
+            <li>Appeals and dispute workflow setup</li>
+            <li>Reporting and revenue reviews</li>
+            <li>Owner training and ongoing support</li>
+          </ul>
+        </article>
+      </div>
     </section>
     <hr class="service-divider">
 
@@ -95,7 +142,7 @@ document.querySelectorAll('.services-subnav a[href^="#"]').forEach(a => {
 });
 
 // Scroll-spy to set aria-current on the active pill
-const sections = ['#core-platform', '#customizations'].map(s => document.querySelector(s)).filter(Boolean);
+const sections = ['#core-platform', '#which-fits', '#customizations'].map(s => document.querySelector(s)).filter(Boolean);
 const pills = Array.from(document.querySelectorAll('.services-subnav .pill')).filter(p => p.getAttribute('href')?.startsWith('#'));
 const setActive = id => {
   pills.forEach(p => p.removeAttribute('aria-current'));

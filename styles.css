@@ -288,6 +288,10 @@ footer .footer__legal,
 .services-list li{display:flex;gap:8px;align-items:flex-start;line-height:1.6;padding:4px 0}
 .services-list li::before{content:"\2713"}
 .service-card .cta{margin-top:1.25rem}
+.which-fits__columns,.which-fits__details{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:1.5rem}
+.which-fits__panel{padding:1.5rem;border-radius:12px;border:1px solid var(--border);background:var(--card);box-shadow:0 6px 22px rgba(15,23,42,0.06)}
+.which-fits__panel h3{margin:0}
+.which-fits__panel ul{margin:1rem 0 0 1.125rem;padding:0}
 .svc-icon{width:20px;height:20px;stroke:var(--brand);flex-shrink:0}
 .pill{display:inline-block;background:#eef2ff;border-radius:999px;padding:5px 12px;font-size:.8125rem;margin-bottom:8px;border:1px solid #e0e7ff}
 .kicker{letter-spacing:.18em;text-transform:uppercase;font-weight:700;font-size:.8125rem;color:var(--muted);margin-bottom:8px}
