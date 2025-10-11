@@ -35,50 +35,113 @@
 
   <main class="container">
 
-<div class="breadcrumb"><a href="index.html">Home</a> / Calculator</div>
-<section>
-  <div class="kicker">Tool</div>
-  <h1>Parking Revenue Calculator</h1>
-  <p class="sub">Estimate potential monthly gross revenue based on your lot size, occupancy, and rate. This is a rough estimate; actual results will vary by demand and pricing.</p>
-  <p class="small">Use the numbers to decide whether Scan to Pay (QR/mobile web) alone meets your needs or if layering in LPR/camera-assisted enforcement could unlock additional compliance revenue.</p>
-</section>
+    <div class="breadcrumb"><a href="index.html">Home</a> / Calculator</div>
+    <div class="kicker">Tool</div>
 
-<div class="card" style="max-width:720px">
-  <div class="row"><div style="flex:1">
-    <label class="small">Number of Spaces</label>
-    <input id="spaces" type="number" value="20" min="1">
-  </div><div style="flex:1">
-    <label class="small">Average Occupancy (%)</label>
-    <input id="occupancy" type="number" value="60" min="0" max="100">
-  </div></div>
+    <section class="calc max-w-3xl mx-auto">
+      <h1>Parking Revenue Calculator</h1>
+      <p>Adjust the inputs to see a quick estimate. Turn on compliance uplift if you plan to add LPR.</p>
 
-  <div class="row"><div style="flex:1">
-    <label class="small">Average Rate per Space / Day ($)</label>
-    <input id="rate" type="number" value="3" min="0">
-  </div><div style="flex:1">
-    <label class="small">Days per Month</label>
-    <input id="days" type="number" value="30" min="1" max="31">
-  </div></div>
+      <!-- Presets -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
+        <button type="button" class="preset btn" data-preset="retail">Retail</button>
+        <button type="button" class="preset btn" data-preset="nights">Nights and Weekends</button>
+        <button type="button" class="preset btn" data-preset="campus">Campus</button>
+      </div>
 
-  <div class="row">
-    <button onclick="estimate()" class="cta">Estimate</button>
-    <a class="cta secondary" href="contact.html">Talk to an Expert</a>
-  </div>
-  <div id="estimateResult" class="card" style="display:none"></div>
-</div>
+      <!-- Inputs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <label class="field">
+          <span>Number of spaces</span>
+          <input id="spaces" type="number" min="1" value="50" inputmode="numeric">
+        </label>
 
-<section>
-  <div class="kicker">What goes into the estimate</div>
-  <div class="grid3">
-    <div class="card"><strong>Occupancy</strong><p class="small">Average percent of spaces occupied across the month.</p></div>
-    <div class="card"><strong>Rate</strong><p class="small">Typical daily price per space (or averaged from hourly).</p></div>
-    <div class="card"><strong>Days</strong><p class="small">How many revenue days per month (usually 30).</p></div>
-  </div>
-</section>
+        <label class="field">
+          <span>Paid hours per space per day</span>
+          <input id="hoursPerSpace" type="number" min="0" step="0.1" value="2.5">
+        </label>
 
-<footer>
-    <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
-  </footer>
+        <label class="field">
+          <span>Average rate per hour</span>
+          <div class="money">
+            <span>$</span>
+            <input id="rate" type="number" min="0" step="0.25" value="3.00">
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Chargeable days per month</span>
+          <input id="daysPerMonth" type="number" min="1" max="31" value="30">
+        </label>
+
+        <label class="field">
+          <span>Processing fee percent</span>
+          <div class="percent">
+            <input id="processingPct" type="number" min="0" max="25" step="0.25" value="3.0">
+            <span>%</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Platform fee percent</span>
+          <div class="percent">
+            <input id="platformPct" type="number" min="0" max="25" step="0.25" value="5.0">
+            <span>%</span>
+          </div>
+        </label>
+
+        <label class="field col-span-1 md:col-span-2">
+          <span>
+            Compliance uplift percent
+            <small>(turn on if you plan to add LPR)</small>
+          </span>
+          <input id="upliftPct" type="range" min="0" max="25" step="1" value="10" oninput="document.getElementById('upliftPctVal').textContent=this.value+'%'">
+          <div><strong id="upliftPctVal">10%</strong></div>
+          <label class="toggle">
+            <input id="upliftEnabled" type="checkbox" checked>
+            <span>Apply uplift</span>
+          </label>
+        </label>
+      </div>
+
+      <!-- Results -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="card">
+          <div class="label">Monthly gross</div>
+          <div class="value" id="gross">$0</div>
+        </div>
+        <div class="card">
+          <div class="label">Gross with uplift</div>
+          <div class="value" id="grossUplift">$0</div>
+        </div>
+        <div class="card">
+          <div class="label">Estimated net</div>
+          <div class="value" id="net">$0</div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        Estimates are illustrative and depend on pricing, demand, rules, signage, and local conditions.
+      </p>
+
+      <div class="mt-4 flex gap-3">
+        <a href="/contact.html" class="cta cta--primary">Get Your Free Revenue Assessment</a>
+        <a href="/services.html" class="cta cta--secondary">See How We Implement</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">What goes into the estimate</div>
+      <div class="grid3">
+        <div class="card"><strong>Spaces</strong><p class="small">The number of enforceable stalls you expect to monetize.</p></div>
+        <div class="card"><strong>Paid hours</strong><p class="small">Average hours per space per day that are paid and enforceable.</p></div>
+        <div class="card"><strong>Rates &amp; fees</strong><p class="small">Hourly pricing, platform, and processing costs that impact net revenue.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
+    </footer>
   </main>
 </body>
 </html>
