@@ -357,11 +357,22 @@ html{scroll-behavior:smooth}
   transition: background 0.2s ease, color 0.2s ease;
 }
 
+.services-subnav .pill-cta {
+  background: var(--brand);
+  color: #fff;
+  border-color: transparent;
+}
+
 /* Hover state */
-.services-subnav .pill:hover,
-.services-subnav .pill-cta:hover {
+.services-subnav .pill:hover {
   background: #e2e8f0;
   color: #0f172a;
+}
+
+.services-subnav .pill-cta:hover {
+  background: #005CE6;
+  color: #fff;
+  border-color: transparent;
 }
 
 /* Optional active state highlight */
