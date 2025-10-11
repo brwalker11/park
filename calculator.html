@@ -9,57 +9,65 @@
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="styles.css">
   <style>
-.calc h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
-.calc p { margin-bottom: 12px; }
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field input[type="number"] { padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 8px; }
-.field input[type="range"] {
-  width: 100%;
-  appearance: none;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(11,110,253,0.16), rgba(11,110,253,0.16));
-  height: 8px;
-  margin: 4px 0;
-}
-.field input[type="range"]::-webkit-slider-runnable-track {
-  height: 8px;
-  border-radius: 999px;
-  background: #dbeafe;
-}
-.field input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #0b6efd;
-  border: 2px solid #fff;
-  box-shadow: 0 4px 10px rgba(11,110,253,0.35);
-  margin-top: -5px;
-}
-.field input[type="range"]::-moz-range-track {
-  height: 8px;
-  border-radius: 999px;
-  background: #dbeafe;
-}
-.field input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #0b6efd;
-  border: 2px solid #fff;
-  box-shadow: 0 4px 10px rgba(11,110,253,0.35);
-}
-.money, .percent { display: flex; align-items: center; gap: 6px; }
-.results { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 12px; }
-.card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; }
-.label { font-size: 12px; color: #6b7280; }
-.value { font-size: 28px; font-weight: 700; }
-.btn { padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 10px; background: #fff; cursor: pointer; }
-.btn:hover { background: #f3f4f6; }
-.toggle { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; }
-@media (max-width: 768px){
-  .results { position: static; }
-}
+  :root{
+    --mx:1200px; --padX:24px; --gap:24px;
+    --card-bg:#fff; --card-bd:#e6e8ee; --muted:#6b7280;
+    --title:#0f172a; --kpi:#0b1220;
+    --radius:14px; --shadow:0 2px 10px rgba(15,23,42,.06);
+    --blue:#1a73e8; --blue-600:#1557b0;
+  }
+  *,*:before,*:after{box-sizing:border-box}
+  .container{max-width:var(--mx); margin:0 auto; padding:0 var(--padX);}
+  .page-hero{padding:48px 0 8px;}
+  .page-title{font-size:44px; line-height:1.1; font-weight:800; color:var(--title); margin:0;}
+  .page-subtitle{margin-top:10px; color:#3b4151; max-width:70ch}
+  .calc-wrap{padding:8px 0 56px; background:#f7f8fb;}
+  .card{background:var(--card-bg); border:1px solid var(--card-bd); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px;}
+  .grid{display:grid; grid-template-columns:1.2fr .8fr; gap:var(--gap); margin-top:var(--gap);}
+  .kpi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-top:var(--gap);}
+  .kpi-label{color:var(--muted); font-weight:600; margin-bottom:8px}
+  .kpi-value{font-size:36px; font-weight:800; color:var(--kpi); letter-spacing:-0.02em}
+  .field{display:flex; flex-direction:column; gap:8px; margin-bottom:16px}
+  label{font-weight:600; color:#283042}
+  input[type="number"], .input-affix input{
+    width:100%; height:44px; border:1px solid var(--card-bd); border-radius:10px; padding:0 12px;
+    font-size:16px; outline:none; background:#fff;
+  }
+  input[type="number"]:focus, .input-affix input:focus{border-color:var(--blue); box-shadow:0 0 0 3px rgba(26,115,232,.15)}
+  .input-affix{position:relative}
+  .input-affix .prefix, .input-affix .suffix{
+    position:absolute; top:50%; transform:translateY(-50%); color:#6b7280; font-weight:600; pointer-events:none;
+  }
+  .input-affix .prefix{left:12px}
+  .input-affix .suffix{right:12px}
+  .input-affix input{padding-left:28px}
+  .input-affix input#occ{padding-right:36px}
+  input[type="range"]{width:100%}
+  .help{color:var(--muted); font-size:13px; margin-top:6px}
+  .split{display:flex; align-items:flex-end; justify-content:space-between; gap:16px}
+  .uplift-readout{font-size:24px; font-weight:700}
+  .check{display:flex; align-items:center; gap:10px; margin-top:8px; user-select:none}
+  .muted{color:var(--muted)}
+  .btn-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:16px}
+  .btn{display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 18px; border-radius:10px; font-weight:700; border:1px solid transparent; text-decoration:none}
+  .btn-primary{background:var(--blue); color:#fff}
+  .btn-primary:hover{background:var(--blue-600)}
+  .btn-ghost{background:#fff; border-color:var(--card-bd); color:#0f172a}
+  .segmented{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+  .seg-btn{height:40px; border:1px solid var(--card-bd); border-radius:10px; background:#f3f5f9; font-weight:700; cursor:pointer}
+  .seg-btn.is-active{background:#e6efff; border-color:#bcd4ff}
+  .seg-btn:focus{outline:2px solid rgba(26,115,232,.35); outline-offset:2px}
+
+  @media (max-width: 960px){
+    .kpi-grid{grid-template-columns:1fr 1fr}
+    .grid{grid-template-columns:1fr}
+  }
+  @media (max-width: 640px){
+    .kpi-grid{grid-template-columns:1fr}
+    .page-title{font-size:36px}
+    .container{padding:0 16px}
+    .calc-wrap{padding-bottom:40px}
+  }
   </style>
   <script defer src="script.js"></script>
   <script type="application/ld+json">{
@@ -86,102 +94,103 @@
     </div>
   </header>
 
-  <main class="container">
-
-    <div class="breadcrumb"><a href="index.html">Home</a> / Calculator</div>
-    <div class="kicker">Tool</div>
-
-    <section class="calc max-w-4xl mx-auto">
-      <h1>Parking Revenue Calculator</h1>
-      <p>Adjust the inputs to see a quick estimate. Turn on compliance uplift if you plan to add LPR.</p>
-
-      <!-- Presets -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-        <button type="button" class="preset btn" data-preset="retail">Retail</button>
-        <button type="button" class="preset btn" data-preset="nights">Nights and Weekends</button>
-        <button type="button" class="preset btn" data-preset="campus">Campus</button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Inputs -->
-        <div>
-          <div class="grid grid-cols-1 gap-4">
-            <label class="field">
-              <span>Number of spaces</span>
-              <input id="spaces" type="number" min="1" value="50" inputmode="numeric">
-            </label>
-
-            <label class="field">
-              <span>Average occupancy percent</span>
-              <div class="percent">
-                <input id="occ" type="number" min="0" max="100" step="1" value="45">
-                <span>%</span>
-              </div>
-            </label>
-
-            <label class="field">
-              <span>Average paid hours per occupied space per day</span>
-              <input id="hrs" type="number" min="0" step="0.1" value="1.8">
-            </label>
-
-            <label class="field">
-              <span>Average rate per hour</span>
-              <div class="money">
-                <span>$</span>
-                <input id="rate" type="number" min="0" step="0.25" value="3.00">
-              </div>
-            </label>
-
-            <label class="field">
-              <span>Chargeable days per month</span>
-              <input id="days" type="number" min="1" max="31" value="30">
-            </label>
-
-            <label class="field">
-              <span>Compliance uplift percent <small>(turn on if you plan to add LPR)</small></span>
-              <input id="uplift" type="range" min="0" max="25" step="1" value="10" oninput="document.getElementById('upliftVal').textContent=this.value + '%'">
-              <div><strong id="upliftVal">10%</strong></div>
-              <label class="toggle">
-                <input id="upliftOn" type="checkbox" checked>
-                <span>Apply uplift</span>
-              </label>
-            </label>
-          </div>
-        </div>
-
-        <!-- Results -->
-        <div class="results">
-          <div class="card">
-            <div class="label">Monthly gross</div>
-            <div class="value" id="gross">$0</div>
-          </div>
-          <div class="card">
-            <div class="label">Gross with uplift</div>
-            <div class="value" id="grossUplift">$0</div>
-          </div>
-          <div class="card">
-            <div class="label">Estimated monthly total</div>
-            <div class="value" id="net">$0</div>
-          </div>
-
-          <p class="disclaimer">
-            Estimates are illustrative and depend on pricing, demand, rules, signage, and local conditions.
-          </p>
-
-          <div class="mt-4 flex gap-3">
-            <a href="contact.html" class="cta">Get Your Free Revenue Assessment</a>
-            <a href="services.html" class="cta">See How We Implement</a>
-          </div>
-        </div>
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="index.html">Home</a> / Calculator</div>
+        <div class="kicker">Tool</div>
+        <h1 class="page-title">Calculator</h1>
+        <p class="page-subtitle">Adjust the inputs to see a quick estimate. Turn on compliance uplift if you plan to add LPR.</p>
       </div>
     </section>
 
-    <section>
-      <div class="kicker">What goes into the estimate</div>
-      <div class="grid3">
-        <div class="card"><strong>Spaces</strong><p class="small">The number of enforceable stalls you expect to monetize.</p></div>
-        <div class="card"><strong>Paid hours</strong><p class="small">Average hours per space per day that are paid and enforceable.</p></div>
-        <div class="card"><strong>Rates &amp; fees</strong><p class="small">Hourly pricing, platform, and processing costs that impact net revenue.</p></div>
+    <section class="calc-wrap">
+      <div class="container">
+        <!-- Segmented tabs -->
+        <div class="card">
+          <div class="segmented" role="tablist" aria-label="Calculator mode">
+            <button class="seg-btn is-active" role="tab" aria-selected="true" data-mode="retail">Retail</button>
+            <button class="seg-btn" role="tab" aria-selected="false" data-mode="nights">Nights &amp; Weekends</button>
+            <button class="seg-btn" role="tab" aria-selected="false" data-mode="campus">Campus</button>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid" aria-live="polite">
+          <div class="card kpi">
+            <div class="kpi-label">Monthly gross</div>
+            <div class="kpi-value" id="kpiGross">$0</div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-label">Gross with uplift</div>
+            <div class="kpi-value" id="kpiUplift">$0</div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-label">Estimated monthly total</div>
+            <div class="kpi-value" id="kpiTotal">$0</div>
+          </div>
+        </div>
+
+        <!-- Inputs -->
+        <div class="grid">
+          <div class="card" aria-label="Calculator inputs">
+            <div class="field">
+              <label for="spaces">Number of spaces</label>
+              <input id="spaces" type="number" min="0" step="1" value="50" />
+            </div>
+
+            <div class="field">
+              <label for="occ">Average occupancy percent</label>
+              <div class="input-affix">
+                <input id="occ" type="number" min="0" max="100" step="1" value="45" aria-describedby="occSuffix" />
+                <span class="suffix" id="occSuffix">%</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="hoursPerDay">Average paid hours per occupied space per day</label>
+              <input id="hoursPerDay" type="number" min="0" step="0.1" value="1.8" />
+            </div>
+
+            <div class="field">
+              <label for="rate">Average rate per hour</label>
+              <div class="input-affix">
+                <span class="prefix" aria-hidden="true">$</span>
+                <input id="rate" type="number" min="0" step="0.25" value="3.00" inputmode="decimal" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="days">Chargeable days per month</label>
+              <input id="days" type="number" min="0" max="31" step="1" value="30" />
+            </div>
+
+            <div class="field">
+              <div class="split">
+                <div>
+                  <label for="uplift">Compliance uplift percent</label>
+                  <input id="uplift" type="range" min="0" max="40" step="1" value="10" />
+                  <div class="help">Turn on if you plan to add LPR</div>
+                </div>
+                <div class="uplift-readout"><span id="upliftPct">10</span>%</div>
+              </div>
+              <label class="check">
+                <input id="applyUplift" type="checkbox" checked />
+                <span>Apply uplift</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card" aria-label="Calculator summary">
+            <p class="muted">
+              Estimates are illustrative and depend on pricing, demand, rules, signage, and local conditions.
+            </p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="contact.html">Get Your Free Revenue Assessment</a>
+              <a class="btn btn-ghost" href="services.html">See How We Implement</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -189,64 +198,70 @@
       <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
     </footer>
   </main>
-    <script>
-      (function(){
-        const $ = id => document.getElementById(id);
-        const money = v => v.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
-        const ids = ["spaces","occ","hrs","rate","days","uplift","upliftOn"];
-        ids.forEach(id => $(id)?.addEventListener("input", calc));
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const $ = (id) => document.getElementById(id);
+      const fmtMoney = (value) => {
+        const amount = Number.isFinite(value) ? value : 0;
+        return amount.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+      };
 
-        function calc(){
-          const spaces = +$("spaces").value || 0;
-          const occPct = (+$("occ").value || 0) / 100;
-          const hrs = +$("hrs").value || 0;
-          const rate = +$("rate").value || 0;
-          const days = +$("days").value || 0;
-          const upliftOn = $("upliftOn").checked;
-          const upliftPct = upliftOn ? ((+$("uplift").value || 0) / 100) : 0;
+      function recalc(){
+        const spaces = +$('spaces').value || 0;
+        const occ = Math.min(100, Math.max(0, +$('occ').value || 0)) / 100;
+        const hours = +$('hoursPerDay').value || 0;
+        const rate = +$('rate').value || 0;
+        const days = +$('days').value || 0;
+        const base = spaces * occ * hours * rate * days;
 
-          const occupiedSpaces = spaces * occPct;
-          const gross = occupiedSpaces * hrs * rate * days;
-          const grossUplift = gross * (1 + upliftPct);
-          const net = grossUplift; // no fee fields
+        const upliftPct = +$('uplift').value || 0;
+        $('upliftPct').textContent = upliftPct;
+        const apply = $('applyUplift').checked;
+        const gross = base;
+        const grossWith = apply ? base * (1 + upliftPct / 100) : base;
 
-          $("gross").textContent = money(gross);
-          $("grossUplift").textContent = money(grossUplift);
-          $("net").textContent = money(net);
-        }
+        $('kpiGross').textContent = fmtMoney(gross);
+        $('kpiUplift').textContent = fmtMoney(grossWith);
+        $('kpiTotal').textContent = fmtMoney(grossWith);
+      }
 
-        document.querySelectorAll(".preset").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const p = btn.dataset.preset;
-            if (p === "retail") {
-              $("spaces").value = 40;
-              $("occ").value = 50;
-              $("hrs").value = 1.5;
-              $("rate").value = 3.00;
-              $("days").value = 30;
-              $("uplift").value = 10; $("upliftVal").textContent = "10%"; $("upliftOn").checked = true;
-            } else if (p === "nights") {
-              $("spaces").value = 60;
-              $("occ").value = 35;
-              $("hrs").value = 1.0;
-              $("rate").value = 5.00;
-              $("days").value = 16;
-              $("uplift").value = 8; $("upliftVal").textContent = "8%"; $("upliftOn").checked = false;
-            } else if (p === "campus") {
-              $("spaces").value = 120;
-              $("occ").value = 55;
-              $("hrs").value = 2.0;
-              $("rate").value = 2.50;
-              $("days").value = 22;
-              $("uplift").value = 15; $("upliftVal").textContent = "15%"; $("upliftOn").checked = true;
-            }
-            calc();
+      const inputs = ['spaces','occ','hoursPerDay','rate','days','uplift','applyUplift'];
+      inputs.forEach(id => $(id)?.addEventListener('input', recalc));
+
+      const presets = {
+        retail: { spaces: 50, occ: 45, hoursPerDay: 1.8, rate: 3.0, days: 30, uplift: 10, applyUplift: true },
+        nights: { spaces: 60, occ: 35, hoursPerDay: 1.0, rate: 5.0, days: 16, uplift: 8, applyUplift: false },
+        campus: { spaces: 120, occ: 55, hoursPerDay: 2.0, rate: 2.5, days: 22, uplift: 15, applyUplift: true }
+      };
+
+      function applyPreset(preset){
+        if (!preset) return;
+        $('spaces').value = preset.spaces;
+        $('occ').value = preset.occ;
+        $('hoursPerDay').value = preset.hoursPerDay;
+        $('rate').value = preset.rate.toFixed(2);
+        $('days').value = preset.days;
+        $('uplift').value = preset.uplift;
+        $('applyUplift').checked = preset.applyUplift;
+        $('upliftPct').textContent = preset.uplift;
+      }
+
+      document.querySelectorAll('.seg-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.dataset.mode;
+          document.querySelectorAll('.seg-btn').forEach((b) => {
+            const isActive = b === btn;
+            b.classList.toggle('is-active', isActive);
+            b.setAttribute('aria-selected', String(isActive));
           });
+          applyPreset(presets[mode]);
+          recalc();
         });
+      });
 
-        calc();
-      })();
-    </script>
+      recalc();
+    });
+  </script>
 </body>
 </html>
