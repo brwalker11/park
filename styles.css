@@ -246,6 +246,12 @@ ul{padding-left:18px;margin:0 0 8px 0}
 .how .timeline-step:first-child{padding-top:20px}
 .how .timeline-badge{margin-bottom:8px}
 
+.how-it-works .step{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff}
+.how-it-works .step-link{display:block;padding:16px 18px;color:inherit;text-decoration:none}
+.how-it-works .step-link:hover{background:#f8fafc}
+.how-it-works h3{margin:0 0 6px 0;font-weight:700}
+.how-it-works p{margin:0}
+
 .section #about .container,
 #about .container{max-width:1100px}
 
