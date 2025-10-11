@@ -12,7 +12,43 @@
 .calc h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
 .calc p { margin-bottom: 12px; }
 .field { display: flex; flex-direction: column; gap: 6px; }
-.field input[type="number"], .field input[type="range"] { padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.field input[type="number"] { padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.field input[type="range"] {
+  width: 100%;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(11,110,253,0.16), rgba(11,110,253,0.16));
+  height: 8px;
+  margin: 4px 0;
+}
+.field input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #dbeafe;
+}
+.field input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0b6efd;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 10px rgba(11,110,253,0.35);
+  margin-top: -5px;
+}
+.field input[type="range"]::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #dbeafe;
+}
+.field input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0b6efd;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 10px rgba(11,110,253,0.35);
+}
 .money, .percent { display: flex; align-items: center; gap: 6px; }
 .results { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 12px; }
 .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; }
@@ -60,7 +96,7 @@
       <p>Adjust the inputs to see a quick estimate. Turn on compliance uplift if you plan to add LPR.</p>
 
       <!-- Presets -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
         <button type="button" class="preset btn" data-preset="retail">Retail</button>
         <button type="button" class="preset btn" data-preset="nights">Nights and Weekends</button>
         <button type="button" class="preset btn" data-preset="campus">Campus</button>
@@ -133,8 +169,8 @@
           </p>
 
           <div class="mt-4 flex gap-3">
-            <a href="/contact.html" class="cta cta--primary">Get Your Free Revenue Assessment</a>
-            <a href="/services.html" class="cta cta--secondary">See How We Implement</a>
+            <a href="contact.html" class="cta">Get Your Free Revenue Assessment</a>
+            <a href="services.html" class="cta">See How We Implement</a>
           </div>
         </div>
       </div>
