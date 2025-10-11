@@ -8,6 +8,23 @@
   <meta name="keywords" content="make money parking lot, monetize parking lot, parking enforcement software, parking revenue">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="styles.css">
+  <style>
+.calc h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.calc p { margin-bottom: 12px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field input[type="number"], .field input[type="range"] { padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.money, .percent { display: flex; align-items: center; gap: 6px; }
+.results { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 12px; }
+.card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; }
+.label { font-size: 12px; color: #6b7280; }
+.value { font-size: 28px; font-weight: 700; }
+.btn { padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 10px; background: #fff; cursor: pointer; }
+.btn:hover { background: #f3f4f6; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; }
+@media (max-width: 768px){
+  .results { position: static; }
+}
+  </style>
   <script defer src="script.js"></script>
   <script type="application/ld+json">{
     "@context":"https://schema.org",
@@ -38,7 +55,7 @@
     <div class="breadcrumb"><a href="index.html">Home</a> / Calculator</div>
     <div class="kicker">Tool</div>
 
-    <section class="calc max-w-3xl mx-auto">
+    <section class="calc max-w-4xl mx-auto">
       <h1>Parking Revenue Calculator</h1>
       <p>Adjust the inputs to see a quick estimate. Turn on compliance uplift if you plan to add LPR.</p>
 
@@ -49,84 +66,77 @@
         <button type="button" class="preset btn" data-preset="campus">Campus</button>
       </div>
 
-      <!-- Inputs -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <label class="field">
-          <span>Number of spaces</span>
-          <input id="spaces" type="number" min="1" value="50" inputmode="numeric">
-        </label>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Inputs -->
+        <div>
+          <div class="grid grid-cols-1 gap-4">
+            <label class="field">
+              <span>Number of spaces</span>
+              <input id="spaces" type="number" min="1" value="50" inputmode="numeric">
+            </label>
 
-        <label class="field">
-          <span>Paid hours per space per day</span>
-          <input id="hoursPerSpace" type="number" min="0" step="0.1" value="2.5">
-        </label>
+            <label class="field">
+              <span>Average occupancy percent</span>
+              <div class="percent">
+                <input id="occ" type="number" min="0" max="100" step="1" value="45">
+                <span>%</span>
+              </div>
+            </label>
 
-        <label class="field">
-          <span>Average rate per hour</span>
-          <div class="money">
-            <span>$</span>
-            <input id="rate" type="number" min="0" step="0.25" value="3.00">
+            <label class="field">
+              <span>Average paid hours per occupied space per day</span>
+              <input id="hrs" type="number" min="0" step="0.1" value="1.8">
+            </label>
+
+            <label class="field">
+              <span>Average rate per hour</span>
+              <div class="money">
+                <span>$</span>
+                <input id="rate" type="number" min="0" step="0.25" value="3.00">
+              </div>
+            </label>
+
+            <label class="field">
+              <span>Chargeable days per month</span>
+              <input id="days" type="number" min="1" max="31" value="30">
+            </label>
+
+            <label class="field">
+              <span>Compliance uplift percent <small>(turn on if you plan to add LPR)</small></span>
+              <input id="uplift" type="range" min="0" max="25" step="1" value="10" oninput="document.getElementById('upliftVal').textContent=this.value + '%'">
+              <div><strong id="upliftVal">10%</strong></div>
+              <label class="toggle">
+                <input id="upliftOn" type="checkbox" checked>
+                <span>Apply uplift</span>
+              </label>
+            </label>
           </div>
-        </label>
+        </div>
 
-        <label class="field">
-          <span>Chargeable days per month</span>
-          <input id="daysPerMonth" type="number" min="1" max="31" value="30">
-        </label>
-
-        <label class="field">
-          <span>Processing fee percent</span>
-          <div class="percent">
-            <input id="processingPct" type="number" min="0" max="25" step="0.25" value="3.0">
-            <span>%</span>
+        <!-- Results -->
+        <div class="results">
+          <div class="card">
+            <div class="label">Monthly gross</div>
+            <div class="value" id="gross">$0</div>
           </div>
-        </label>
-
-        <label class="field">
-          <span>Platform fee percent</span>
-          <div class="percent">
-            <input id="platformPct" type="number" min="0" max="25" step="0.25" value="5.0">
-            <span>%</span>
+          <div class="card">
+            <div class="label">Gross with uplift</div>
+            <div class="value" id="grossUplift">$0</div>
           </div>
-        </label>
+          <div class="card">
+            <div class="label">Estimated monthly total</div>
+            <div class="value" id="net">$0</div>
+          </div>
 
-        <label class="field col-span-1 md:col-span-2">
-          <span>
-            Compliance uplift percent
-            <small>(turn on if you plan to add LPR)</small>
-          </span>
-          <input id="upliftPct" type="range" min="0" max="25" step="1" value="10" oninput="document.getElementById('upliftPctVal').textContent=this.value+'%'">
-          <div><strong id="upliftPctVal">10%</strong></div>
-          <label class="toggle">
-            <input id="upliftEnabled" type="checkbox" checked>
-            <span>Apply uplift</span>
-          </label>
-        </label>
-      </div>
+          <p class="disclaimer">
+            Estimates are illustrative and depend on pricing, demand, rules, signage, and local conditions.
+          </p>
 
-      <!-- Results -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="card">
-          <div class="label">Monthly gross</div>
-          <div class="value" id="gross">$0</div>
+          <div class="mt-4 flex gap-3">
+            <a href="/contact.html" class="cta cta--primary">Get Your Free Revenue Assessment</a>
+            <a href="/services.html" class="cta cta--secondary">See How We Implement</a>
+          </div>
         </div>
-        <div class="card">
-          <div class="label">Gross with uplift</div>
-          <div class="value" id="grossUplift">$0</div>
-        </div>
-        <div class="card">
-          <div class="label">Estimated net</div>
-          <div class="value" id="net">$0</div>
-        </div>
-      </div>
-
-      <p class="disclaimer">
-        Estimates are illustrative and depend on pricing, demand, rules, signage, and local conditions.
-      </p>
-
-      <div class="mt-4 flex gap-3">
-        <a href="/contact.html" class="cta cta--primary">Get Your Free Revenue Assessment</a>
-        <a href="/services.html" class="cta cta--secondary">See How We Implement</a>
       </div>
     </section>
 
@@ -143,5 +153,64 @@
       <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
     </footer>
   </main>
+    <script>
+      (function(){
+        const $ = id => document.getElementById(id);
+        const money = v => v.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+        const ids = ["spaces","occ","hrs","rate","days","uplift","upliftOn"];
+        ids.forEach(id => $(id)?.addEventListener("input", calc));
+
+        function calc(){
+          const spaces = +$("spaces").value || 0;
+          const occPct = (+$("occ").value || 0) / 100;
+          const hrs = +$("hrs").value || 0;
+          const rate = +$("rate").value || 0;
+          const days = +$("days").value || 0;
+          const upliftOn = $("upliftOn").checked;
+          const upliftPct = upliftOn ? ((+$("uplift").value || 0) / 100) : 0;
+
+          const occupiedSpaces = spaces * occPct;
+          const gross = occupiedSpaces * hrs * rate * days;
+          const grossUplift = gross * (1 + upliftPct);
+          const net = grossUplift; // no fee fields
+
+          $("gross").textContent = money(gross);
+          $("grossUplift").textContent = money(grossUplift);
+          $("net").textContent = money(net);
+        }
+
+        document.querySelectorAll(".preset").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const p = btn.dataset.preset;
+            if (p === "retail") {
+              $("spaces").value = 40;
+              $("occ").value = 50;
+              $("hrs").value = 1.5;
+              $("rate").value = 3.00;
+              $("days").value = 30;
+              $("uplift").value = 10; $("upliftVal").textContent = "10%"; $("upliftOn").checked = true;
+            } else if (p === "nights") {
+              $("spaces").value = 60;
+              $("occ").value = 35;
+              $("hrs").value = 1.0;
+              $("rate").value = 5.00;
+              $("days").value = 16;
+              $("uplift").value = 8; $("upliftVal").textContent = "8%"; $("upliftOn").checked = false;
+            } else if (p === "campus") {
+              $("spaces").value = 120;
+              $("occ").value = 55;
+              $("hrs").value = 2.0;
+              $("rate").value = 2.50;
+              $("days").value = 22;
+              $("uplift").value = 15; $("upliftVal").textContent = "15%"; $("upliftOn").checked = true;
+            }
+            calc();
+          });
+        });
+
+        calc();
+      })();
+    </script>
 </body>
 </html>
