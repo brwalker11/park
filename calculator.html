@@ -43,7 +43,7 @@
     </section>
 
     <!-- CALCULATOR BODY -->
-    <section class="calc">
+    <section class="calc" id="calcSection">
       <div class="container">
         <div class="layout">
 
@@ -113,7 +113,7 @@
 
           <!-- RIGHT: STICKY SUMMARY -->
           <aside class="right">
-            <div class="card summary">
+            <div class="card summary" id="summaryCard" aria-live="polite">
               <div class="kpis">
                 <div class="kpi">
                   <div class="kpi-label">Monthly gross</div>
@@ -133,6 +133,8 @@
       </div>
     </section>
 
+    <div id="footerSentinel" aria-hidden="true"></div>
+
     <footer>
       <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
     </footer>
@@ -145,17 +147,19 @@
       --ink:#0f172a; --muted:#6b7280; --bd:#e6e8ee; --bg:#f7f8fb;
       --card:#fff; --radius:14px; --shadow:0 2px 10px rgba(15,23,42,.06);
       --blue:#0b6efd; --blue-600:#005CE6;
+      --stickTop:16px;
     }
     main{--pad:24px; --gap:24px;}
-    main .container{max-width:var(--mx); margin:0 auto; padding:0 var(--pad);}  
+    main .container{max-width:var(--mx); margin:0 auto; padding:0 var(--pad);}
     .page-hero{padding:48px 0 8px; background:#fff;}
     .page-title{font-size:44px; line-height:1.1; font-weight:800; color:var(--ink); margin:0;}
     .page-subtitle{margin-top:10px; color:#3b4151; max-width:70ch}
     .calc{background:var(--bg); padding:8px 0 56px;}
-    .layout{display:grid; grid-template-columns:1.25fr .75fr; gap:var(--gap);}  
-    .left,.right{display:flex; flex-direction:column; gap:var(--gap);}  
+    .layout{display:grid; grid-template-columns:1.25fr .75fr; gap:var(--gap);}
+    .left{display:flex; flex-direction:column; gap:var(--gap);}
+    .right{display:flex; flex-direction:column; gap:var(--gap);}
     .card{background:var(--card); border:1px solid var(--bd); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;}
-    .summary{position:sticky; top:18px;}
+    #summaryCard{position:sticky; top:var(--stickTop);}
     .kpis{display:grid; grid-template-columns:1fr; gap:14px; margin-bottom:12px}
     .kpi-label{color:var(--muted); font-weight:600; margin-bottom:4px}
     .kpi-value{font-size:34px; font-weight:800; letter-spacing:-0.02em; color:#0b1220}
@@ -193,11 +197,40 @@
     @media (max-width: 1024px){
       main{--pad:16px; --gap:16px;}
       .layout{grid-template-columns:1fr;}
-      .summary{position:static}
+      #summaryCard{position:static; top:auto;}
       .page-title{font-size:36px}
       .grid{grid-template-columns:1fr;}
     }
+    .calc, .calc .container, .calc .layout{overflow:visible;}
+    #summaryCard.is-bottomed{
+      position:sticky;
+      top:auto;
+      align-self:flex-start;
+    }
   </style>
+
+  <script>
+(function(){
+  const header = document.querySelector('header, .site-header, .navbar');
+  const root = document.documentElement;
+  function setStickTop(){
+    const hh = header ? header.getBoundingClientRect().height : 0;
+    root.style.setProperty('--stickTop', (hh + 12) + 'px');
+  }
+  setStickTop();
+  window.addEventListener('resize', setStickTop);
+
+  const summary = document.getElementById('summaryCard');
+  const sentinel = document.getElementById('footerSentinel');
+  if (summary && sentinel) {
+    const io = new IntersectionObserver((entries)=>{
+      const entry = entries[0];
+      summary.classList.toggle('is-bottomed', entry.isIntersecting);
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+    io.observe(sentinel);
+  }
+})();
+  </script>
 
   <!-- CALC JS -->
   <script>
