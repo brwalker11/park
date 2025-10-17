@@ -203,7 +203,8 @@ li{max-width:var(--max-text)}
 .resources-hero{padding-top:var(--space-section);padding-bottom:var(--space-block)}
 .resources-hero .subhead{margin-top:0.75rem}
 .resources-list{padding-top:0}
-.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(1.5rem,4vw,2.5rem)}
+.resources-grid{display:flex;flex-wrap:wrap;gap:clamp(1.5rem,4vw,2.5rem)}
+.resources-grid .resource-card{flex:1 1 320px}
 .resource-card{display:flex;flex-direction:column;gap:0.75rem;min-height:100%}
 .resource-card__eyebrow{font-size:.8125rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .resource-card__title a{color:inherit;text-decoration:none}
