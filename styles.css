@@ -66,6 +66,7 @@ nav a.active{color:var(--brand)}
   box-shadow: none;
 }
 
+/* Make sure logo and nav align cleanly */
 .container.header-wrap {
   max-width: 1200px;       /* match Services page left alignment */
   margin: 0 auto;
@@ -76,18 +77,27 @@ nav a.active{color:var(--brand)}
   gap: 16px;
 }
 
-/* Logo */
+/* ---- Logo Styling ---- */
 .logo {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: #0F172A;
-  white-space: nowrap;
+}
+.logo-img {
+  height: 48px;             /* Adjust for header height */
+  width: auto;
+  display: block;
+  transition: transform 0.2s ease;
+}
+.logo-img:hover {
+  transform: scale(1.03);
 }
 
-.logo-accent {
-  color: var(--brand-blue, #0A68FF);
+/* Adjust on mobile for cleaner spacing */
+@media (max-width: 768px) {
+  .logo-img {
+    height: 40px;
+  }
 }
 
 /* Desktop nav */
