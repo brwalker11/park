@@ -20,20 +20,27 @@
   }</script>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="logo">ParkingProfit<span style="color:#111827;font-weight:600"> Solutions</span></div>
-      <nav>
-        <a href="index.html" class="">Home</a>
-        <a href="services.html" class="">Services</a>
-        <a href="about.html" class="">About</a>
-        <a href="resources.html" class="active">Resources</a>
-        <a href="faq.html" class="">FAQ</a>
-        <a href="calculator.html" class="">Calculator</a>
-        <a href="contact.html" class="">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header">
+  <div class="container header-wrap">
+    <a href="index.html" class="logo" aria-label="Go to homepage">Parking Profit Solutions</a>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html" class="contact-btn">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 
   <div class="container two-col">
     <aside class="sidenav card">
@@ -113,5 +120,25 @@
       });
     })();
   </script>
+<script>
+  (function () {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', function () {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close menu when a link is clicked (mobile)
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
 </body>
 </html>
