@@ -86,6 +86,10 @@ nav a.active{color:var(--brand)}
   white-space: nowrap;
 }
 
+.logo-accent {
+  color: var(--brand-blue, #0A68FF);
+}
+
 /* Desktop nav */
 .site-nav { display: block; }
 .nav-list {
