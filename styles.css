@@ -198,6 +198,25 @@ li{max-width:var(--max-text)}
 .card{background:var(--card);padding:clamp(1.5rem,3vw,2.5rem);border-radius:14px;box-shadow:0 6px 22px rgba(15,23,42,0.06);border:1px solid var(--border)}
 .grid3 .card{display:flex;flex-direction:column}
 .grid3 .card .cta{margin-top:auto}
+
+.resources-page main{padding-bottom:var(--space-section)}
+.resources-hero{padding-top:var(--space-section);padding-bottom:var(--space-block)}
+.resources-hero .subhead{margin-top:0.75rem}
+.resources-list{padding-top:0}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(1.5rem,4vw,2.5rem)}
+.resource-card{display:flex;flex-direction:column;gap:0.75rem;min-height:100%}
+.resource-card__eyebrow{font-size:.8125rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.resource-card__title a{color:inherit;text-decoration:none}
+.resource-card__title a:hover{color:var(--brand)}
+.resource-card__summary{color:#334155;margin:0}
+.resource-card__meta{font-size:.9375rem;color:var(--muted);margin-top:auto}
+.resource-card__cta{display:inline-flex;align-items:center;gap:0.4rem;font-weight:600;text-decoration:none;color:var(--brand);padding:0.1rem 0;margin-top:0.75rem}
+.resource-card__cta::after{content:"→";font-size:1rem;transition:transform .2s ease}
+.resource-card__cta:hover::after{transform:translateX(4px)}
+.resource-card--upcoming{background:linear-gradient(180deg,rgba(15,23,42,0.04) 0%,rgba(15,23,42,0.02) 100%);border:1px dashed var(--border);box-shadow:none}
+.resource-card--upcoming .resource-card__meta{margin-top:0}
+.resources-footer{padding:var(--space-block) 0 var(--space-section);}
+.resources-footer .small{margin:0}
 .article-cta{margin-top:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid #e6e8ee;border-radius:14px;padding:16px;box-shadow:0 2px 10px rgba(15,23,42,.06)}
 .article-cta .btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 18px;font-weight:700;border-radius:10px;border:1px solid transparent;text-decoration:none;cursor:pointer}
 .article-cta .btn-primary{background:#1a73e8;color:#fff}
