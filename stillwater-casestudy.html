@@ -38,33 +38,65 @@
     <div class="two-col">
       <aside class="sidenav card">
         <div class="small aside-heading">Related Articles</div>
-        <ul class="menu">
-          <li><a href="mistakes.html">Article 2</a></li>
-          <li><a href="gate-arms.html">5 Reasons Parking Gates Aren’t the Best Option Anymore</a></li>
-          <li><a href="article-ai-vs-gates.html">From Gates to AI: The Future of Parking Access</a></li>
-          <li><a href="case-study.html">Article 5</a></li>
-        </ul>
+        <nav id="article-nav" class="menu">
+          <a href="/stillwater-casestudy.html" class="sidebar-link" data-article="1">Article 1: Stillwater Case Study</a>
+          <a href="mistakes.html" class="sidebar-link" data-article="2">Article 2</a>
+          <a href="gate-arms.html" class="sidebar-link">5 Reasons Parking Gates Aren’t the Best Option Anymore</a>
+          <a href="article-ai-vs-gates.html" class="sidebar-link">From Gates to AI: The Future of Parking Access</a>
+          <a href="case-study.html" class="sidebar-link" data-article="5">Article 5</a>
+        </nav>
       </aside>
       <div>
-        <section class="prose max-w-3xl mx-auto py-8" id="article-body">
-          <div class="kicker">Resources</div>
-          <h2 class="text-3xl font-semibold mb-4">Article 1</h2>
-          <p>We explore how Scan to Pay (QR/mobile web) tools pair with LPR/camera-assisted enforcement so you can capture every payment opportunity without locking into a single vendor.</p>
+        <section id="article-body" class="prose max-w-3xl mx-auto py-8">
+  <h2 class="text-3xl font-semibold mb-4">Case Study: How a Stillwater Property Owner Increased Revenue 300% with a Premium Enforcement Upgrade</h2>
 
-          <div class="article-cta card">
-            <p>
-              Ready to upgrade your access system? Email
-              <a href="mailto:Dwickiser@gmail.com">Dave</a> or
-              <a href="mailto:daxdickson@gmail.com">Dax</a> for a tailored plan.
-            </p>
-            <a class="btn btn-primary" href="contact.html">Book a Free Consultation</a>
-          </div>
-        </section>
+  <p>A property owner in Stillwater, Minnesota began their parking operation with a Scan-to-Pay system. It was simple, reliable, and a great first step toward modernizing their lot. Visitors could easily pay from their phones, compliance was solid, and the owner avoided the high costs of attendants, gates, and old hardware-heavy setups.</p>
+
+  <p>For a while, it worked well. The lot saw steady daily revenue and consistent occupancy. But as demand increased, the owner noticed a growing gap between lot usage and payments. Even with clear signage and user-friendly technology, a portion of visitors simply chose not to pay. This left a significant amount of potential income untapped.</p>
+
+  <h3 class="text-2xl font-semibold mt-6">A Strategic Move to Premium Enforcement</h3>
+  <p>Instead of layering more staff or installing expensive gates, the owner decided to upgrade their enforcement strategy. They transitioned from Scan-to-Pay to a camera-enforced AI License Plate Recognition (LPR) system. This premium solution automatically captured every vehicle entering and exiting, cross-referenced plates with active payment sessions, and issued violations to non-compliant parkers.</p>
+
+  <p>Within 90 days, compliance soared from roughly 35 percent to over 90 percent. Monthly revenue increased by about 300 percent, and what had once been a modest revenue stream became a fully monetized, high-performing asset. The new system provided precision and consistency that manual checks or signage alone could never match.</p>
+
+  <h3 class="text-2xl font-semibold mt-6">Turning Higher NOI into Higher Property Value</h3>
+  <p>For commercial property owners, parking revenue is more than cash flow, it’s a core driver of property value. By dramatically increasing net operating income (NOI), the owner also boosted the capitalization value of the asset.</p>
+
+  <p>The increased NOI translated to roughly $100,000 annually. At a capitalization rate of 8 percent, this represented an estimated $1.25 million increase in property value.</p>
+
+  <p>This kind of value uplift mirrors the approach taken by many premium parking operators who use advanced enforcement to unlock hidden revenue potential.</p>
+
+  <h3 class="text-2xl font-semibold mt-6">Why This Works</h3>
+  <p>Scan-to-Pay remains an excellent entry point for many lots. It’s simple, low-friction, and cost-effective. But for properties with consistent traffic and growth goals, upgrading to a premium enforcement solution like AI-powered LPR can unlock significant gains in both revenue and asset value.</p>
+
+  <p>The Stillwater owner didn’t just upgrade their technology, they transformed their parking lot into an appreciating investment.</p>
+
+  <p class="mt-6">For tailored strategies to increase compliance, boost NOI, and enhance property value with premium enforcement, contact <a href="mailto:Dwickiser@gmail.com">Dave</a> or <a href="mailto:daxdickson@gmail.com">Dax</a> to learn more.</p>
+</section>
         <footer>
           <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
         </footer>
       </div>
     </div>
   </main>
+  <script>
+    (function () {
+      var path = window.location.pathname.replace(/\/+$/, '');
+      document.querySelectorAll('#article-nav a.sidebar-link').forEach(function (link) {
+        var href = link.getAttribute('href') || '';
+        var normalized = href.replace(/\/+$/, '');
+        if (normalized && normalized.charAt(0) !== '/') {
+          normalized = '/' + normalized;
+        }
+        if (normalized === path) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
