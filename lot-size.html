@@ -38,10 +38,12 @@
     <div class="two-col">
       <aside class="sidenav card">
         <div class="small aside-heading">Related Articles</div>
-        <nav id="article-nav" class="space-y-2">
-          <a href="/stillwater-casestudy.html" class="sidebar-link" data-article="1">Article 1: Stillwater Case Study</a>
-          <a href="/article-ai-vs-gates.html" class="sidebar-link" data-article="4">Article 4: Gated vs Gateless</a>
-          <a href="/lot-size.html" class="sidebar-link" data-article="5">Article 5: Lot Size and Profitability</a>
+        <nav id="article-nav" class="menu">
+          <a href="stillwater-casestudy.html" class="sidebar-link" data-article="1">Stillwater 300% Revenue Lift Case Study</a>
+          <a href="mistakes.html" class="sidebar-link" data-article="2">Avoiding Costly Parking Technology Mistakes</a>
+          <a href="gate-arms.html" class="sidebar-link" data-article="3">5 Reasons Parking Gates Aren’t the Best Option Anymore</a>
+          <a href="article-ai-vs-gates.html" class="sidebar-link" data-article="4">From Gates to AI: The Future of Parking Access</a>
+          <a href="lot-size.html" class="sidebar-link" data-article="5">How Big Does a Lot Need to Be to Make Charging for Parking Worth It?</a>
         </nav>
       </aside>
       <div>
@@ -94,6 +96,9 @@
       document.querySelectorAll('#article-nav a.sidebar-link').forEach(function (link) {
         var href = link.getAttribute('href') || '';
         var normalized = href.replace(/\/+$/, '');
+        if (normalized && normalized.charAt(0) !== '/') {
+          normalized = '/' + normalized;
+        }
         if (normalized === path) {
           link.classList.add('active');
           link.setAttribute('aria-current', 'page');
