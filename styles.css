@@ -550,7 +550,7 @@ footer .footer__legal,
   font-weight: 600;
   border-radius: 50px;
   border: 2.5px solid #007bff;
-  color: #007bff;
+  color: #ffffff;
   background: transparent;
   text-decoration: none;
   transition: all 0.25s ease;
@@ -566,6 +566,7 @@ footer .footer__legal,
 .hero-btn.primary,
 .hero-btn.secondary {
   background: transparent;
+  color: #fff;
 }
 
 .hero-btn.primary:hover,
