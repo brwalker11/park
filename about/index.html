@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About | ParkingProfit Solutions</title>
+  <meta name="description" content="Learn more about ParkingProfit Solutions and our mission to help parking lot owners maximize revenue.">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="canonical" href="https://monetize-parking.com/about/">
+  <meta property="og:title" content="About | ParkingProfit Solutions">
+  <meta property="og:description" content="Learn more about ParkingProfit Solutions and our mission to help parking lot owners maximize revenue.">
+  <meta property="og:url" content="https://monetize-parking.com/about/">
+  <meta property="og:image" content="https://monetize-parking.com/images/og-hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+<script defer src="/script.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "ParkingProfit Solutions",
+  "url": "https://monetize-parking.com",
+  "description": "AI-powered parking enforcement and revenue optimization for property owners across the United States.",
+  "logo": "https://monetize-parking.com/images/Logo.svg",
+  "areaServed": "United States",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "email": "daxdickson@gmail.com"
+  }
+}
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LGHS0L5WE8');
+  </script>
+</head>
+<body>
+    <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="brand" aria-label="ParkingProfit Solutions Home">
+        <img src="/images/Logo.svg" alt="ParkingProfit Solutions" class="logo" />
+      </a>
+
+      <nav>
+        <a href="/services/">Services</a>
+        <a href="/about/">About</a>
+        <a href="/resources/">Resources</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/calculator/">Calculator</a>
+        <a href="/contact/" class="contact-btn">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+    <section class="about-header section">
+      <div class="container">
+        <h1>About</h1>
+        <h2>Our Mission</h2>
+        <p>To help parking lot owners unlock new revenue and reclaim their time. We deliver smart, flexible parking solutions tailored to each property, empowering owners to maximize earnings without adding complexity.</p>
+        <hr class="about-divider" />
+      </div>
+    </section>
+
+    <section class="about-owners">
+      <div class="container">
+        <h2>Meet the Team</h2>
+        <div class="owners-grid">
+          <div class="owner-card">
+            <img src="/images/dax.jpg" alt="Dax Dickson" class="owner-photo" />
+            <h3>Dax Dickson</h3>
+            <p>Dax brings years of proven sales expertise to the parking industry. His background in building client relationships and guiding complex deals gives him a unique ability to understand property owners’ needs and match them with the right solutions.</p>
+          </div>
+          <div class="owner-card">
+            <img src="/images/dave.jpg" alt="Dave Wickiser" class="owner-photo" />
+            <h3>Dave Wickiser</h3>
+            <p>Dave’s experience in real estate gives property owners confidence that every partnership is structured for success. He combines deep market knowledge with a practical, results oriented mindset to help close deals efficiently and ensure each project meets the owner’s goals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-trust">
+      <div class="container">
+        <h2>Why Owners Trust ParkingProfit Solutions</h2>
+        <ul class="trust-list">
+          <li>Proven results across private and commercial properties</li>
+          <li>No costly kiosks, gates, or complicated setups</li>
+          <li>Simple, flexible solution built around your lot's needs</li>
+          <li>Real time reporting and visibility into your operations</li>
+          <li>Ongoing support from a team that knows the parking business</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="about-case-study" class="container case-study-section">
+      <div class="cs-wrap">
+        <h2 class="cs-title">Real Results, Real Lots</h2>
+
+        <a href="/stillwater-case-study/" class="cs-card" aria-label="Read the Parking case study" data-analytics="about_case_study_card">
+          <article>
+            <div class="cs-media">
+              <img src="/images/parking_up.jpg" alt="Parking lot with vehicles using AI enforcement">
+            </div>
+
+            <div class="cs-content">
+              <h3 class="cs-heading">Case Study: Stillwater, MN Parking Lot</h3>
+              <p class="cs-text">
+                How a parking lot dramatically increased revenue switching to <strong>AI LPR enforcement</strong>. No gates, no kiosks, just results.
+              </p>
+
+              <div class="cs-cta-row">
+                <span class="cs-cta">Read the Case Study</span>
+              </div>
+            </div>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <section class="about-cta">
+      <div class="container cta-box">
+        <h2>Ready to Unlock Your Lot's Potential?</h2>
+        <p>Let our team show you how easy it is to start earning more with the right set of parking enforcement solutions.</p>
+        <a href="/contact/" class="btn-primary">Book a Free Consultation</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="small">© <span id="year"></span> ParkingProfit Solutions - Built for parking lot owners who want results.</div>
+    </footer>
+  </main>
+<script>
+  (function () {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', function () {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close menu when a link is clicked (mobile)
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+  <script>
+document.addEventListener('click', e => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  const href = link.getAttribute('href') || '';
+  if (href.endsWith('/contact/')) {
+    gtag('event', 'generate_lead', { method: 'Contact CTA' });
+  }
+  if (href.endsWith('/calculator/')) {
+    gtag('event', 'calculator_start', { method: 'Hero CTA' });
+  }
+});
+  </script>
+</body>
+</html>
