@@ -7,6 +7,7 @@
   <meta name="description" content="Guides and articles on monetizing parking lots and boosting revenue.">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/park/css/resources.css">
   <link rel="canonical" href="https://monetize-parking.com/resources/">
   <meta property="og:title" content="Resources | Monetize Parking">
   <meta property="og:description" content="Guides and articles on monetizing parking lots and boosting revenue.">
@@ -53,65 +54,37 @@
 
 
   <main>
-    <section class="resources-hero section">
+    <section class="res-hero">
       <div class="container">
-        <h1>Resources</h1>
-        <p class="subhead">Explore articles, guides, and case studies covering industry trends, success stories, and insights to help you find the right parking solution for your property.</p>
+        <h1 class="res-title">Resources</h1>
+        <p class="res-sub">Explore articles, guides, and case studies covering industry trends, success stories, and insights to help you find the right parking solution for your property.</p>
+
+        <div class="res-controls">
+          <input id="res-search" class="res-search" type="search" placeholder="Search topics like &quot;AI enforcement&quot; or &quot;parking revenue&quot;" aria-label="Search resources" />
+          <div class="res-filters" role="tablist" aria-label="Filter resources">
+            <button class="res-chip is-active" data-filter="All" role="tab">All</button>
+            <button class="res-chip" data-filter="Case Studies" role="tab">Case Studies</button>
+            <button class="res-chip" data-filter="Guides" role="tab">Guides</button>
+            <button class="res-chip" data-filter="Articles" role="tab">Articles</button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="resources-list section">
+    <section id="res-featured" class="res-featured" aria-labelledby="featured-heading">
       <div class="container">
-        <div class="resources-grid">
-          <article class="card resource-card" data-article="1">
-            <div class="resource-card__eyebrow">Case study</div>
-            <h2 class="resource-card__title">
-              <a href="/stillwater-case-study/">Case Study: Stillwater 300% Revenue Lift</a>
-            </h2>
-            <p class="resource-card__summary">How a Stillwater lot tripled revenue after moving from Scan-to-Pay to AI camera enforcement, turning occasional usage into dependable, premium performance.</p>
-            <div class="resource-card__meta">Case study • 3–5 minute read</div>
-            <a class="resource-card__cta" href="/stillwater-case-study/">Read case study</a>
-          </article>
+        <h2 id="featured-heading" class="visually-hidden">Featured</h2>
+        <!-- JS injects a single featured card here if any item has featured: true -->
+      </div>
+    </section>
 
-          <article class="card resource-card" data-article="2">
-            <div class="resource-card__eyebrow">Article</div>
-            <h2 class="resource-card__title">
-              <a href="/parking-management-costs/">The Real Costs of Parking Management Companies</a>
-            </h2>
-            <p class="resource-card__summary">Learn typical costs associated with parking management companies.</p>
-            <div class="resource-card__meta">Guide • 3–4 minute read</div>
-            <a class="resource-card__cta" href="/parking-management-costs/">Read More</a>
-          </article>
-
-          <article class="card resource-card" data-article="3">
-            <div class="resource-card__eyebrow">Article</div>
-            <h2 class="resource-card__title">
-              <a href="/gate-arms/">5 Reasons Parking Gates Aren’t the Best Option Anymore</a>
-            </h2>
-            <p class="resource-card__summary">Understand why modern access solutions outperform traditional parking gate arms across cost, reliability, safety, and security.</p>
-            <div class="resource-card__meta">Article • 4–6 minute read</div>
-            <a class="resource-card__cta" href="/gate-arms/">Read article</a>
-          </article>
-
-          <article class="card resource-card" data-article="4">
-            <div class="resource-card__eyebrow">Article</div>
-            <h2 class="resource-card__title">
-              <a href="/ai-vs-gates/">From Gates to AI: The Future of Parking Access</a>
-            </h2>
-            <p class="resource-card__summary">Discover how AI-powered LPR and Scan-to-Pay solutions replace traditional gated parking systems with faster, more reliable operations.</p>
-            <div class="resource-card__meta">Article • 3–5 minute read</div>
-            <a class="resource-card__cta" href="/ai-vs-gates/">Read article</a>
-          </article>
-
-          <article class="card resource-card" data-article="5">
-            <div class="resource-card__eyebrow">Article</div>
-            <h2 class="resource-card__title">
-              <a href="/lot-size/">How Big Does a Lot Need to Be to Make Charging for Parking Worth It?</a>
-            </h2>
-            <p class="resource-card__summary">Why lot size alone doesn’t determine profitability and how small lots can become strong revenue-generating assets with the right strategy and technology.</p>
-            <div class="resource-card__meta">Article • 3–5 minute read</div>
-            <a class="resource-card__cta" href="/lot-size/">Read article</a>
-          </article>
+    <section class="res-grid-wrap">
+      <div class="container">
+        <div id="res-grid" class="res-grid" aria-live="polite">
+          <!-- JS injects cards here -->
+        </div>
+        <div class="res-load">
+          <button id="res-loadmore" class="btn btn-primary" type="button">Load More</button>
         </div>
       </div>
     </section>
@@ -122,6 +95,7 @@
       </div>
     </footer>
   </main>
+<script defer src="/park/js/resources.js"></script>
 <script>
   (function () {
     const toggle = document.querySelector('.nav-toggle');

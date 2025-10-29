@@ -61,17 +61,11 @@
 
 
   <div class="container two-col">
-    <aside class="sidenav card">
-      <div class="small aside-heading">Related Articles</div>
-      <nav id="article-nav" class="menu">
-        <a href="/stillwater-case-study/" class="sidebar-link" data-article="1">Stillwater 300% Revenue Lift Case Study</a>
-        <a href="/parking-management-costs/" class="sidebar-link" data-article="2">The Real Costs of Parking Management Companies</a>
-        <a href="/gate-arms/" class="sidebar-link" data-article="3">5 Reasons Parking Gates Aren’t the Best Option Anymore</a>
-        <a href="/ai-vs-gates/" class="sidebar-link" data-article="4">From Gates to AI: The Future of Parking Access</a>
-        <a href="/lot-size/" class="sidebar-link" data-article="5">How Big Does a Lot Need to Be to Make Charging for Parking Worth It?</a>
-      </nav>
+    <aside class="sidenav card related-sidebar">
+      <div class="small aside-heading">Related Resources</div>
+      <div id="related-list" class="related-list" aria-live="polite"></div>
     </aside>
-    <main class="article" id="article-body">
+    <main class="article" id="article-body" data-resource-slug="optimal-lot-size-profit" data-resource-tags="lot size,profitability,operations" data-resource-category="Articles">
       <h1>How Big Does a Lot Need to Be to Make It Worth Charging For Parking?</h1>
 
       <p>For many property owners, knowing when to begin charging for parking starts with one critical question: <strong>Is my lot big enough to create a revenue-generating business?</strong> It is easy to fixate on the number of spaces, but that misses the real driver of profitability. What truly determines success is demand, location, and how the lot is managed.</p>
@@ -112,25 +106,7 @@
   <footer class="site-footer">
     <p>© <span id="year"></span> Monetize Parking — Built for parking lot owners who want results.</p>
   </footer>
-  <script>
-    (function () {
-      var path = window.location.pathname.replace(/\/+$/, '');
-      document.querySelectorAll('#article-nav a.sidebar-link').forEach(function (link) {
-        var href = link.getAttribute('href') || '';
-        var normalized = href.replace(/\/+$/, '');
-        if (normalized && normalized.charAt(0) !== '/') {
-          normalized = '/' + normalized;
-        }
-        if (normalized === path) {
-          link.classList.add('active');
-          link.setAttribute('aria-current', 'page');
-        } else {
-          link.classList.remove('active');
-          link.removeAttribute('aria-current');
-        }
-      });
-    })();
-  </script>
+<script defer src="/park/js/related.js"></script>
 <script>
   (function () {
     const toggle = document.querySelector('.nav-toggle');

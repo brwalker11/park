@@ -1,0 +1,178 @@
+[
+  {
+    "slug": "stillwater-300-revenue-lift",
+    "title": "Case Study: Stillwater 300% Revenue Lift",
+    "category": "Case Studies",
+    "tags": ["ai", "enforcement", "lpr", "revenue"],
+    "description": "How a Stillwater lot tripled revenue after moving from Scan-to-Pay to AI camera enforcement.",
+    "readTime": "3–5 min",
+    "date": "2025-09-01",
+    "featured": true,
+    "url": "/stillwater-casestudy.html"
+  },
+  {
+    "slug": "real-costs-parking-management",
+    "title": "The Real Costs of Parking Management Companies",
+    "category": "Guides",
+    "tags": ["costs", "management", "profit"],
+    "description": "Learn typical costs associated with parking management companies.",
+    "readTime": "3–4 min",
+    "date": "2025-08-14",
+    "featured": true,
+    "url": "/parking-management-costs/"
+  },
+  {
+    "slug": "ai-access-vs-gates",
+    "title": "From Gates to AI: The Future of Parking Access",
+    "category": "Articles",
+    "tags": ["ai", "access", "lpr"],
+    "description": "Discover how AI-powered LPR replaces traditional gate systems with faster, more reliable operations.",
+    "readTime": "3–5 min",
+    "date": "2025-07-22",
+    "featured": false,
+    "url": "/ai-vs-gates/"
+  },
+  {
+    "slug": "gate-arm-maintenance-costs",
+    "title": "Hidden Costs of Gate Arm Maintenance",
+    "category": "Articles",
+    "tags": ["maintenance", "hardware", "costs"],
+    "description": "Why recurring gate arm maintenance can quietly erode parking profits.",
+    "readTime": "4–6 min",
+    "date": "2025-07-08",
+    "featured": false,
+    "url": "/gate-arms/"
+  },
+  {
+    "slug": "optimal-lot-size-profit",
+    "title": "How Big Does a Lot Need to Be to Make It Worth Charging for Parking?",
+    "category": "Articles",
+    "tags": ["lot size", "profitability", "operations"],
+    "description": "Why lot size alone doesn’t determine profitability and how small lots can become strong revenue-generating assets with the right strategy and technology.",
+    "readTime": "4–6 min",
+    "date": "2025-07-01",
+    "featured": false,
+    "url": "/lot-size/"
+  },
+  {
+    "slug": "forecasting-parking-demand",
+    "title": "Forecasting Parking Demand with Real-Time Data",
+    "category": "Guides",
+    "tags": ["data", "demand", "pricing"],
+    "description": "Learn how to use live occupancy data to calibrate pricing and staffing.",
+    "readTime": "5–7 min",
+    "date": "2025-06-18",
+    "featured": false,
+    "url": "/resources/forecasting-parking-demand.html"
+  },
+  {
+    "slug": "launching-paid-lot",
+    "title": "Launching Paid Parking in Under 30 Days",
+    "category": "Guides",
+    "tags": ["setup", "operations", "launch"],
+    "description": "Step-by-step framework to transition from free to paid parking quickly.",
+    "readTime": "6–8 min",
+    "date": "2025-05-27",
+    "featured": false,
+    "url": "/resources/launching-paid-lot.html"
+  },
+  {
+    "slug": "maximize-revenue-2025",
+    "title": "7 Ways to Maximize Parking Revenue in 2025",
+    "category": "Articles",
+    "tags": ["revenue", "pricing", "marketing"],
+    "description": "Quick wins to capture more drive-up and reservation revenue this year.",
+    "readTime": "4–5 min",
+    "date": "2025-05-05",
+    "featured": false,
+    "url": "/resources/maximize-revenue-2025.html"
+  },
+  {
+    "slug": "data-insights-enforcement",
+    "title": "Using Data Insights to Improve Enforcement",
+    "category": "Articles",
+    "tags": ["data", "ai", "enforcement"],
+    "description": "How analytics reveal underperforming locations and optimize patrols.",
+    "readTime": "3–4 min",
+    "date": "2025-04-16",
+    "featured": false,
+    "url": "/resources/data-insights-enforcement.html"
+  },
+  {
+    "slug": "seasonal-pricing-tactics",
+    "title": "Seasonal Pricing Tactics for Event-Heavy Markets",
+    "category": "Guides",
+    "tags": ["events", "pricing", "demand"],
+    "description": "Align rates with event calendars to keep occupancy high year-round.",
+    "readTime": "5–6 min",
+    "date": "2025-03-22",
+    "featured": false,
+    "url": "/resources/seasonal-pricing.html"
+  },
+  {
+    "slug": "campus-parking-transformation",
+    "title": "Campus Parking Transformation in 90 Days",
+    "category": "Case Studies",
+    "tags": ["campus", "operations", "technology"],
+    "description": "See how a university replaced decals and gates with mobile-first enforcement.",
+    "readTime": "6–8 min",
+    "date": "2025-03-01",
+    "featured": false,
+    "url": "/resources/campus-parking-transformation.html"
+  },
+  {
+    "slug": "airport-parking-ai",
+    "title": "How Airports Use AI to Eliminate Parking Bottlenecks",
+    "category": "Case Studies",
+    "tags": ["airport", "ai", "throughput"],
+    "description": "An airport operator increased throughput 40% with license plate recognition.",
+    "readTime": "5–7 min",
+    "date": "2025-02-12",
+    "featured": false,
+    "url": "/resources/airport-parking-ai.html"
+  },
+  {
+    "slug": "hospital-parking-experience",
+    "title": "Designing Stress-Free Hospital Parking",
+    "category": "Articles",
+    "tags": ["hospital", "experience", "patients"],
+    "description": "Wayfinding, payment, and enforcement tips tailored to healthcare campuses.",
+    "readTime": "4–5 min",
+    "date": "2025-01-28",
+    "featured": false,
+    "url": "/resources/hospital-parking-experience.html"
+  },
+  {
+    "slug": "ai-parking-analytics",
+    "title": "AI Analytics Every Parking Operator Should Track",
+    "category": "Articles",
+    "tags": ["ai", "analytics", "dashboards"],
+    "description": "Key metrics to monitor performance and enforcement productivity.",
+    "readTime": "3–4 min",
+    "date": "2025-01-04",
+    "featured": false,
+    "url": "/resources/ai-parking-analytics.html"
+  },
+  {
+    "slug": "lpr-compliance-checklist",
+    "title": "LPR Compliance Checklist for Property Owners",
+    "category": "Guides",
+    "tags": ["compliance", "lpr", "privacy"],
+    "description": "Privacy, signage, and data retention rules to review before launch.",
+    "readTime": "6–7 min",
+    "date": "2024-12-10",
+    "featured": false,
+    "url": "/resources/lpr-compliance-checklist.html"
+  },
+  {
+    "slug": "dynamic-pricing-case-study",
+    "title": "Dynamic Pricing Drives a 45% Revenue Lift",
+    "category": "Case Studies",
+    "tags": ["pricing", "revenue", "automation"],
+    "description": "A downtown garage used AI to balance occupancy and premium pricing.",
+    "readTime": "5–6 min",
+    "date": "2024-11-20",
+    "featured": false,
+    "url": "/resources/dynamic-pricing-case-study.html"
+  }
+]
