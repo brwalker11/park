@@ -61,17 +61,11 @@
 
 
   <div class="container two-col">
-    <aside class="sidenav card">
-      <div class="small aside-heading">Related Articles</div>
-      <nav id="article-nav" class="menu">
-        <a href="/stillwater-case-study/" class="sidebar-link" data-article="1">Stillwater 300% Revenue Lift Case Study</a>
-        <a href="/parking-management-costs/" class="sidebar-link" data-article="2">The Real Costs of Parking Management Companies</a>
-        <a href="/gate-arms/" class="sidebar-link" data-article="3">5 Reasons Parking Gates Aren’t the Best Option Anymore</a>
-        <a href="/ai-vs-gates/" class="sidebar-link" data-article="4">From Gates to AI: The Future of Parking Access</a>
-        <a href="/lot-size/" class="sidebar-link" data-article="5">How Big Does a Lot Need to Be to Make Charging for Parking Worth It?</a>
-      </nav>
+    <aside class="sidenav card related-sidebar">
+      <div class="small aside-heading">Related Resources</div>
+      <div id="related-list" class="related-list" aria-live="polite"></div>
     </aside>
-    <main class="article" id="article-body">
+    <main class="article" id="article-body" data-resource-slug="stillwater-300-revenue-lift" data-resource-tags="ai,enforcement,lpr,revenue" data-resource-category="Case Studies">
       <h1>Case Study: How a Stillwater Property Owner Increased Revenue 300% with a Premium Enforcement Upgrade</h1>
 
       <p>A property owner in Stillwater, Minnesota began their parking operation with a Scan-to-Pay system. It was simple, reliable, and a great first step toward modernizing their lot. Visitors could easily pay from their phones, compliance was solid, and the owner avoided the high costs of attendants, gates, and old hardware-heavy setups.</p>
@@ -104,25 +98,7 @@
   <footer class="site-footer">
     <p>© <span id="year"></span> Monetize Parking — Built for parking lot owners who want results.</p>
   </footer>
-  <script>
-    (function () {
-      var path = window.location.pathname.replace(/\/+$/, '');
-      document.querySelectorAll('#article-nav a.sidebar-link').forEach(function (link) {
-        var href = link.getAttribute('href') || '';
-        var normalized = href.replace(/\/+$/, '');
-        if (normalized && normalized.charAt(0) !== '/') {
-          normalized = '/' + normalized;
-        }
-        if (normalized === path) {
-          link.classList.add('active');
-          link.setAttribute('aria-current', 'page');
-        } else {
-          link.classList.remove('active');
-          link.removeAttribute('aria-current');
-        }
-      });
-    })();
-  </script>
+<script defer src="/park/js/related.js"></script>
 <script>
   (function () {
     const toggle = document.querySelector('.nav-toggle');
