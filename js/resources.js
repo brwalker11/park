@@ -1,5 +1,5 @@
 (function () {
-  const DATA_URL = '/park/data/resources.json';
+  const DATA_URL = '/data/resources.json';
   const DEFAULT_IMAGES = createFallbacks();
   const PAGE_SIZE = 9;
 
