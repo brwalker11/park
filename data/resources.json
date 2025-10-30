@@ -9,6 +9,7 @@
       "lpr",
       "revenue"
     ],
+    "image": "/images/stillwater.jpg",
     "description": "How a Stillwater lot tripled revenue after moving from Scan-to-Pay to AI camera enforcement.",
     "readTime": "3–5 min",
     "date": "2025-09-01",
@@ -24,6 +25,7 @@
       "management",
       "profit"
     ],
+    "image": "/images/park_mana.jpg",
     "description": "Learn typical costs associated with parking management companies.",
     "readTime": "3–4 min",
     "date": "2025-08-14",
@@ -39,6 +41,7 @@
       "access",
       "lpr"
     ],
+    "image": "/images/ai_camera.jpg",
     "description": "Discover how AI-powered LPR replaces traditional gate systems with faster, more reliable operations.",
     "readTime": "3–5 min",
     "date": "2025-07-22",
@@ -54,6 +57,7 @@
       "hardware",
       "costs"
     ],
+    "image": "/images/gate_arms.jpg",
     "description": "Why recurring gate arm maintenance can quietly erode parking profits.",
     "readTime": "4–6 min",
     "date": "2025-07-08",
