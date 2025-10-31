@@ -9,12 +9,12 @@
       "lpr",
       "revenue"
     ],
-    "image": "/park/images/stillwater.jpg",
+    "image": "/images/stillwater.jpg",
     "description": "How a Stillwater lot tripled revenue after moving from Scan-to-Pay to AI camera enforcement.",
     "readTime": "3–5 min",
     "date": "2025-09-01",
     "featured": true,
-    "url": "/park/stillwater-case-study/"
+    "url": "/stillwater-case-study/"
   },
   {
     "slug": "real-costs-parking-management",
@@ -25,12 +25,12 @@
       "management",
       "profit"
     ],
-    "image": "/park/images/park_mana.jpg",
+    "image": "/images/park_mana.jpg",
     "description": "Learn typical costs associated with parking management companies.",
     "readTime": "3–4 min",
     "date": "2025-08-14",
     "featured": true,
-    "url": "/park/parking-management-costs/"
+    "url": "/parking-management-costs/"
   },
   {
     "slug": "ai-access-vs-gates",
@@ -41,12 +41,12 @@
       "access",
       "lpr"
     ],
-    "image": "/park/images/ai_camera.png",
+    "image": "/images/ai_camera.png",
     "description": "Discover how AI-powered LPR replaces traditional gate systems with faster, more reliable operations.",
     "readTime": "3–5 min",
     "date": "2025-07-22",
     "featured": false,
-    "url": "/park/ai-vs-gates/"
+    "url": "/ai-vs-gates/"
   },
   {
     "slug": "gate-arm-maintenance-costs",
@@ -57,12 +57,12 @@
       "hardware",
       "costs"
     ],
-    "image": "/park/images/gate_arms.jpg",
+    "image": "/images/gate_arms.jpg",
     "description": "Why recurring gate arm maintenance can quietly erode parking profits.",
     "readTime": "4–6 min",
     "date": "2025-07-08",
     "featured": false,
-    "url": "/park/gate-arms/"
+    "url": "/gate-arms/"
   },
   {
     "slug": "optimal-lot-size-profit",
@@ -73,11 +73,11 @@
       "profitability",
       "operations"
     ],
-    "image": "/park/images/lot_size.jpg",
+    "image": "/images/lot_size.jpg",
     "description": "Why lot size alone doesn’t determine profitability and how small lots can become strong revenue-generating assets with the right strategy and technology.",
     "readTime": "4–6 min",
     "date": "2025-07-01",
     "featured": false,
-    "url": "/park/lot-size/"
+    "url": "/lot-size/"
   }
 ]
