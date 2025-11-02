@@ -79,5 +79,24 @@
     "date": "2025-07-01",
     "featured": false,
     "url": "/lot-size/"
+  },
+  {
+    "slug": "when-to-start-charging-parking",
+    "title": "When to Start Charging for Parking: Finding the True Break-Even Point",
+    "category": "Guides",
+    "tags": [
+      "pricing",
+      "break-even",
+      "scan-to-pay",
+      "ai",
+      "enforcement",
+      "Articles"
+    ],
+    "image": "/images/default-guide.jpg",
+    "description": "Use a simple formula to find your lot’s true break-even point, compare Scan-to-Pay vs AI enforcement, and know when to start charging.",
+    "readTime": "3–4 min",
+    "date": "2025-11-02",
+    "featured": false,
+    "url": "/when-to-start-charging-parking/"
   }
 ]
