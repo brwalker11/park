@@ -1,5 +1,42 @@
 [
   {
+    "slug": "you-didnt-buy-a-parking-lot-to-babysit-it",
+    "title": "You Didn’t Buy a Parking Lot to Babysit It",
+    "category": "Articles",
+    "tags": [
+      "automation",
+      "scan-to-pay",
+      "AI enforcement",
+      "time",
+      "owner-ops"
+    ],
+    "image": "/park/images/time-freedom.jpg",
+    "description": "Use a simple formula to find your lot’s true break-even point, compare Scan-to-Pay vs AI enforcement, and know when to start charging.",
+    "readTime": "4–6 min",
+    "date": "2025-11-02",
+    "featured": false,
+    "url": "/resources/you-didnt-buy-a-parking-lot-to-babysit-it/"
+  },
+  {
+    "slug": "when-to-start-charging-parking",
+    "title": "When to Start Charging for Parking: Finding the True Break-Even Point",
+    "category": "Guides",
+    "tags": [
+      "pricing",
+      "break-even",
+      "scan-to-pay",
+      "ai",
+      "enforcement",
+      "Articles"
+    ],
+    "image": "/images/default-guide.jpg",
+    "description": "Use a simple formula to find your lot’s true break-even point, compare Scan-to-Pay vs AI enforcement, and know when to start charging.",
+    "readTime": "3–4 min",
+    "date": "2025-11-02",
+    "featured": false,
+    "url": "/when-to-start-charging-parking/"
+  },
+  {
     "slug": "stillwater-300-revenue-lift",
     "title": "Stillwater, MN 300% Revenue Lift",
     "category": "Case Studies",
@@ -79,24 +116,5 @@
     "date": "2025-07-01",
     "featured": false,
     "url": "/lot-size/"
-  },
-  {
-    "slug": "when-to-start-charging-parking",
-    "title": "When to Start Charging for Parking: Finding the True Break-Even Point",
-    "category": "Guides",
-    "tags": [
-      "pricing",
-      "break-even",
-      "scan-to-pay",
-      "ai",
-      "enforcement",
-      "Articles"
-    ],
-    "image": "/images/default-guide.jpg",
-    "description": "Use a simple formula to find your lot’s true break-even point, compare Scan-to-Pay vs AI enforcement, and know when to start charging.",
-    "readTime": "3–4 min",
-    "date": "2025-11-02",
-    "featured": false,
-    "url": "/when-to-start-charging-parking/"
   }
 ]
