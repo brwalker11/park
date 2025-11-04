@@ -6,16 +6,20 @@
     "tags": [
       "automation",
       "scan-to-pay",
-      "AI enforcement",
-      "time",
-      "owner-ops"
+      "ai enforcement",
+      "time management",
+      "owner-operators"
     ],
-    "image": "/images/default-guide.jpg",
-    "description": "Manual monitoring steals your time. Learn how Scan-to-Pay and AI enforcement give parking owners freedom without sacrificing revenue.",
-    "readTime": "4–6 min",
     "date": "2025-11-02",
-    "featured": false,
-    "url": "/resources/you-didnt-buy-a-parking-lot-to-babysit-it/"
+    "lastmod": "2025-11-02",
+    "description": "Manual monitoring steals your time. Learn how Scan-to-Pay and AI enforcement free parking owners without sacrificing revenue.",
+    "excerpt": "How AI enforcement and Scan-to-Pay help parking owners reclaim time while protecting revenue.",
+    "image": "/images/default-guide.jpg",
+    "imageAlt": "Parking lot owner reviewing automated enforcement reports on a tablet.",
+    "thumbnail": "/images/default-guide.jpg",
+    "content": "/articles/you-didnt-buy-a-parking-lot-to-babysit-it.html",
+    "readTime": "4–6 min",
+    "author": "Monetize Parking"
   },
   {
     "slug": "when-to-start-charging-parking",
@@ -25,65 +29,80 @@
       "pricing",
       "break-even",
       "scan-to-pay",
-      "ai",
-      "enforcement",
-      "Articles"
+      "ai enforcement",
+      "revenue strategy"
     ],
-    "image": "/images/default-guide.jpg",
-    "description": "Use a simple formula to find your lot’s true break-even point, compare Scan-to-Pay vs AI enforcement, and know when to start charging.",
-    "readTime": "3–4 min",
     "date": "2025-11-02",
-    "featured": false,
-    "url": "/when-to-start-charging-parking/"
+    "lastmod": "2025-11-02",
+    "description": "Use a simple formula to find your lot’s true break-even point, compare Scan-to-Pay vs AI enforcement, and know when to start charging.",
+    "excerpt": "Calculate when charging for parking pays off by comparing Scan-to-Pay and AI enforcement scenarios.",
+    "image": "/images/default-guide.jpg",
+    "imageAlt": "Spreadsheet showing parking revenue break-even analysis.",
+    "thumbnail": "/images/default-guide.jpg",
+    "content": "/articles/when-to-start-charging-parking.html",
+    "readTime": "3–4 min",
+    "author": "Monetize Parking"
   },
   {
     "slug": "stillwater-300-revenue-lift",
     "title": "Stillwater, MN 300% Revenue Lift",
     "category": "Case Studies",
     "tags": [
-      "ai",
-      "enforcement",
-      "lpr",
-      "revenue"
+      "ai enforcement",
+      "license plate recognition",
+      "revenue growth",
+      "downtown lots"
     ],
-    "image": "/images/stillwater.jpg",
-    "description": "How a Stillwater Minnesota lot tripled revenue after moving from Scan-to-Pay to AI camera enforcement.",
-    "readTime": "3–5 min",
     "date": "2025-09-01",
-    "featured": true,
-    "url": "/stillwater-case-study/"
+    "lastmod": "2025-10-15",
+    "description": "See how a downtown Stillwater lot tripled revenue after moving from Scan-to-Pay to AI camera enforcement and automation.",
+    "excerpt": "A Minnesota operator tripled revenue by replacing Scan-to-Pay with AI camera enforcement.",
+    "image": "/images/stillwater.jpg",
+    "imageAlt": "Downtown Stillwater parking lot with river views at sunset.",
+    "thumbnail": "/images/stillwater.jpg",
+    "content": "/articles/stillwater-300-revenue-lift.html",
+    "readTime": "3–5 min",
+    "author": "Monetize Parking"
   },
   {
     "slug": "real-costs-parking-management",
     "title": "The Real Costs of Parking Management Companies",
     "category": "Guides",
     "tags": [
-      "costs",
-      "management",
-      "profit"
+      "operating costs",
+      "outsourcing",
+      "profit margins"
     ],
-    "image": "/images/park_mana.jpg",
-    "description": "Learn typical costs associated with parking management companies.",
-    "readTime": "3–4 min",
     "date": "2025-08-14",
-    "featured": true,
-    "url": "/parking-management-costs/"
+    "lastmod": "2025-09-20",
+    "description": "Break down the true costs of hiring a parking management company and when owners should consider staying independent.",
+    "excerpt": "Uncover hidden fees and margin impacts when outsourcing to a parking management company.",
+    "image": "/images/park_mana.jpg",
+    "imageAlt": "Parking management team reviewing lot maintenance expenses.",
+    "thumbnail": "/images/park_mana.jpg",
+    "content": "/articles/real-costs-parking-management.html",
+    "readTime": "3–4 min",
+    "author": "Monetize Parking"
   },
   {
     "slug": "ai-access-vs-gates",
     "title": "From Gates to AI: The Future of Parking Access",
     "category": "Articles",
     "tags": [
-      "ai",
-      "access",
+      "ai enforcement",
+      "access control",
       "lpr"
     ],
-    "image": "/images/ai_camera.png",
-    "description": "Discover how AI-powered LPR replaces traditional gate systems with faster, more reliable operations.",
-    "readTime": "3–5 min",
     "date": "2025-07-22",
-    "featured": false,
-    "url": "/ai-vs-gates/"
+    "lastmod": "2025-09-01",
+    "description": "Discover how AI-powered LPR replaces traditional gate systems with faster, more reliable parking operations and better guest experiences.",
+    "excerpt": "Why AI-powered LPR beats mechanical gates for modern parking access.",
+    "image": "/images/ai_camera.png",
+    "imageAlt": "AI camera watching an open parking lot entrance.",
+    "thumbnail": "/images/ai_camera.png",
+    "content": "/articles/ai-access-vs-gates.html",
+    "readTime": "3–5 min",
+    "author": "Monetize Parking"
   },
   {
     "slug": "gate-arm-maintenance-costs",
@@ -92,14 +111,18 @@
     "tags": [
       "maintenance",
       "hardware",
-      "costs"
+      "operational efficiency"
     ],
-    "image": "/images/gate_arms.jpg",
-    "description": "Why recurring gate arm maintenance can quietly erode parking profits.",
-    "readTime": "4–6 min",
     "date": "2025-07-08",
-    "featured": false,
-    "url": "/gate-arms/"
+    "lastmod": "2025-08-20",
+    "description": "Why recurring gate arm maintenance and breakdowns quietly erode parking profits and how AI enforcement eliminates the burden.",
+    "excerpt": "Recurring gate arm repairs drain parking profits—see the smarter alternative.",
+    "image": "/images/gate_arms.jpg",
+    "imageAlt": "Technician repairing a broken parking gate arm.",
+    "thumbnail": "/images/gate_arms.jpg",
+    "content": "/articles/gate-arm-maintenance-costs.html",
+    "readTime": "4–6 min",
+    "author": "Monetize Parking"
   },
   {
     "slug": "optimal-lot-size-profit",
@@ -110,11 +133,15 @@
       "profitability",
       "operations"
     ],
-    "image": "/images/lot_size.jpg",
-    "description": "Why lot size alone doesn’t determine profitability and how small lots can become strong revenue-generating assets with the right strategy and technology.",
-    "readTime": "4–6 min",
     "date": "2025-07-01",
-    "featured": false,
-    "url": "/lot-size/"
+    "lastmod": "2025-07-15",
+    "description": "Lot size alone doesn’t determine profitability—see how even small lots become strong revenue drivers with modern parking tech.",
+    "excerpt": "Lot size isn’t everything. Modern tools make even small parking assets profitable.",
+    "image": "/images/lot_size.jpg",
+    "imageAlt": "Overhead view of a small paid parking lot with full occupancy.",
+    "thumbnail": "/images/lot_size.jpg",
+    "content": "/articles/optimal-lot-size-profit.html",
+    "readTime": "4–6 min",
+    "author": "Monetize Parking"
   }
 ]
