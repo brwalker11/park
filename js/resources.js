@@ -29,6 +29,7 @@
       state.items = normaliseItems(items);
       state.items.sort(sortByDate);
       state.featuredSlug = renderFeatured(state.items);
+      hydrateFilterFromQuery();
       updateActiveFilter();
       applyFilters();
     })
@@ -66,13 +67,16 @@
     return items.map((item) => {
       const clone = Object.assign({}, item);
       const category = clone.category && DEFAULT_IMAGES[clone.category] ? clone.category : 'Articles';
-      if (!clone.image) {
-        clone.image = DEFAULT_IMAGES[category];
-      }
+      clone.category = category;
+      const image = normaliseImage(clone.thumbnail || clone.image, category);
+      clone.thumbnail = image;
+      clone.image = normaliseImage(clone.image, category);
       clone.category = category;
       clone.tags = Array.isArray(clone.tags) ? clone.tags : [];
-      clone._searchBlob = [clone.title, clone.description, clone.tags.join(' ')].join(' ').toLowerCase();
+      clone.excerpt = clone.excerpt || clone.description || '';
+      clone._searchBlob = [clone.title, clone.description, clone.excerpt, clone.tags.join(' ')].join(' ').toLowerCase();
       clone._dateValue = clone.date ? Date.parse(clone.date) || 0 : 0;
+      clone.url = buildArticleUrl(clone.slug);
       return clone;
     });
   }
@@ -158,7 +162,7 @@
 
     const img = document.createElement('img');
     img.loading = 'lazy';
-    img.src = item.image;
+    img.src = item.thumbnail;
     img.alt = item.title;
     linkWrapper.appendChild(img);
 
@@ -179,7 +183,7 @@
 
     const excerpt = document.createElement('p');
     excerpt.className = 'res-excerpt';
-    excerpt.textContent = item.description;
+    excerpt.textContent = item.excerpt || item.description;
 
     const meta = document.createElement('div');
     meta.className = 'res-meta';
@@ -252,5 +256,26 @@
       acc[key] = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
       return acc;
     }, {});
+  }
+
+  function normaliseImage(path, category) {
+    if (path && path.startsWith('/images/')) return path;
+    if (path && path.startsWith('http')) return path;
+    if (path) return `/images/${path.replace(/^\/+/, '')}`;
+    return DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
+  }
+
+  function buildArticleUrl(slug) {
+    return `/article.html?slug=${encodeURIComponent(slug)}`;
+  }
+
+  function hydrateFilterFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    if (!category) return;
+    const match = filterButtons.find((btn) => (btn.getAttribute('data-filter') || '').toLowerCase() === category.toLowerCase());
+    if (match) {
+      state.filter = match.getAttribute('data-filter') || 'All';
+    }
   }
 })();
