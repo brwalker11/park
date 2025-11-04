@@ -266,7 +266,7 @@
   }
 
   function buildArticleUrl(slug) {
-    return `/article.html?slug=${encodeURIComponent(slug)}`;
+    return `/articles/${encodeURIComponent(slug)}/`;
   }
 
   function hydrateFilterFromQuery() {
