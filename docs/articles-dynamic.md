@@ -1,6 +1,6 @@
 # Dynamic Article System
 
-This site now renders every resource article through the shared [`/article.html`](../article.html) template. Article content, metadata, and SEO signals are driven from `data/resources.json`, so updating that file is the single source of truth.
+This site now renders every resource article through the shared [`templates/article-index.html`](../templates/article-index.html) layout. Article content, metadata, and SEO signals are driven from `data/resources.json`, so updating that file is the single source of truth. The helper script [`tools/generate-article-pages.js`](../tools/generate-article-pages.js) copies the template into `/articles/{slug}/index.html` for every record in the JSON file so the pretty URLs resolve on GitHub Pages.
 
 ## Adding or Updating an Article
 1. **Create the body file** under [`/articles/`](../articles/) using HTML fragments (no `<html>` wrapper). Name it after the slug, e.g. `/articles/my-new-article.html`.
@@ -12,13 +12,15 @@ This site now renders every resource article through the shared [`/article.html`
    - `content` (path to the body file)
    - `readTime`, `author`, optional `canonicalOverride`
 3. **Keep image paths canonical.** Every image reference must start with `/images/`. Upload new assets there and reuse them for both hero and thumbnail sizes if unique artwork is not available.
-4. Commit both the JSON update and the new article body.
+4. Run `node tools/generate-article-pages.js` to refresh the `/articles/{slug}/index.html` files.
+5. Commit the JSON update, body fragment, and regenerated index pages.
 
 The template will automatically pull in the hero image, author line, summary, body markup, inline CTA, and bottom CTAs.
 
 ## URL & Canonical Behaviour
-- Primary article URLs use the query-string pattern: `/article.html?slug={slug}`.
-- Legacy static pages under `/resources/...` and topic folders redirect to the dynamic route and advertise a canonical to the query-string URL.
+- Primary article URLs now live at `/articles/{slug}/` and resolve to `/articles/{slug}/index.html`.
+- [`article.html`](../article.html) is retained only as a compatibility shim. It reads `?slug=` links, sets a canonical to the pretty URL, and redirects to `/articles/{slug}/`.
+- Legacy static pages under `/resources/...` and topic folders redirect to the new pretty URL and declare its canonical.
 - If a specific article must point elsewhere, set `canonicalOverride` in the JSON entry. The template will respect it for `<link rel="canonical">`, Open Graph, Twitter tags, and JSON-LD.
 
 ## Inline & Bottom CTAs
@@ -47,5 +49,5 @@ node tools/update-sitemap.js
 The script regenerates [`sitemap.xml`](../sitemap.xml) using all top-level routes plus every article URL with its `lastmod` date. `robots.txt` already references this sitemap.
 
 ## GA4 Tracking
-The template records a `page_view` for the resolved article URL (query-string form by default). Inline and bottom CTAs send GA4 events using the existing naming conventions so reporting remains consistent.
+The template records a `page_view` for the resolved pretty article URL. Inline and bottom CTAs send GA4 events using the existing naming conventions so reporting remains consistent.
 

@@ -30,7 +30,7 @@ function loadArticles() {
 
 function buildUrl(slug, canonicalOverride) {
   if (canonicalOverride) return canonicalOverride;
-  return `${SITE_ORIGIN}/article.html?slug=${encodeURIComponent(slug)}`;
+  return `${SITE_ORIGIN}/articles/${encodeURIComponent(slug)}/`;
 }
 
 function xmlEscape(value) {

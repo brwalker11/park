@@ -10,6 +10,7 @@
     calculator: { name: 'calculator_start', params: { method: 'Article Bottom CTA' } },
     inline: { name: 'generate_lead', params: { method: 'Article Inline CTA' } }
   };
+  let ctaTrackingAttached = false;
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -37,13 +38,11 @@
   }
 
   function getSlug() {
-    const url = new URL(window.location.href);
-    let slug = url.searchParams.get('slug');
+    const pathMatch = window.location.pathname.match(/\/articles\/([^/]+)\/?/);
+    let slug = pathMatch ? pathMatch[1] : '';
     if (!slug) {
-      const match = window.location.pathname.match(/\/articles\/([^/]+)\/?$/);
-      if (match) {
-        slug = match[1];
-      }
+      const url = new URL(window.location.href);
+      slug = url.searchParams.get('slug') || '';
     }
     return slug ? decodeURIComponent(slug) : '';
   }
@@ -93,8 +92,9 @@
     const robots = document.querySelector('meta[name="robots"]');
 
     container.dataset.articleSlug = article.slug;
-    hero.style.backgroundImage = `url('${article.image}')`;
-    heroImage.src = article.image;
+    const heroImageUrl = absolute(article.image);
+    hero.style.backgroundImage = `url('${heroImageUrl}')`;
+    heroImage.src = heroImageUrl;
     heroImage.alt = article.imageAlt;
     heroImage.loading = 'eager';
     heroImage.decoding = 'async';
@@ -109,6 +109,7 @@
     bodyEl.innerHTML = bodyHtml;
     enhanceBody(bodyEl);
 
+    const prettyUrl = absolute(`/articles/${article.slug}/`);
     const canonicalUrl = computeCanonical(article);
     const imageUrl = absolute(article.image);
     const publishDate = isoDate(article.date);
@@ -121,7 +122,7 @@
 
     renderBreadcrumb(article);
     renderRelated(article, allArticles);
-    trackPageView(canonicalUrl);
+    trackPageView(prettyUrl);
     attachCtaTracking();
   }
 
@@ -175,21 +176,26 @@
     if (!list) return;
     list.innerHTML = '';
 
+    const maxCandidates = Math.min(5, Math.max(0, allArticles.length - 1));
     const items = allArticles
       .filter((item) => item.slug !== article.slug)
       .map((item) => ({
         article: item,
-        score: scoreArticle(article, item),
-        recency: Date.parse(item.date || '') || 0
+        tagOverlap: overlapCount(article.tags, item.tags),
+        sameCategory: item.category === article.category,
+        recency: Date.parse(item.lastmod || item.date || '') || 0
       }))
-      .filter((entry) => entry.score > 0 || entry.recency)
       .sort((a, b) => {
-        if (b.score !== a.score) return b.score - a.score;
+        if (b.tagOverlap !== a.tagOverlap) return b.tagOverlap - a.tagOverlap;
+        if (b.sameCategory !== a.sameCategory) return (b.sameCategory ? 1 : 0) - (a.sameCategory ? 1 : 0);
         return b.recency - a.recency;
       })
-      .slice(0, 5);
+      .slice(0, maxCandidates);
 
-    if (!items.length) {
+    const minimum = Math.min(5, Math.max(3, items.length));
+    const selection = items.slice(0, minimum);
+
+    if (!selection.length) {
       const empty = document.createElement('p');
       empty.className = 'related-empty';
       empty.textContent = 'Check back soon for more related resources.';
@@ -197,21 +203,14 @@
       return;
     }
 
-    items.forEach(({ article: item }) => {
+    selection.forEach(({ article: item }) => {
       list.appendChild(buildRelatedCard(item));
     });
   }
 
-  function scoreArticle(base, candidate) {
-    let score = 0;
-    const sharedTags = candidate.tags.filter((tag) => base.tags.includes(tag)).length;
-    score += sharedTags * 5;
-    if (candidate.category === base.category) {
-      score += 3;
-    }
-    const recencyBoost = Date.parse(candidate.date || '') ? 1 : 0;
-    score += recencyBoost;
-    return score;
+  function overlapCount(baseTags, candidateTags) {
+    if (!Array.isArray(baseTags) || !Array.isArray(candidateTags)) return 0;
+    return candidateTags.filter((tag) => baseTags.includes(tag)).length;
   }
 
   function buildRelatedCard(item) {
@@ -257,10 +256,7 @@
     if (article.canonicalOverride) {
       return article.canonicalOverride;
     }
-    const origin = window.location.origin;
-    const pretty = `${origin}/articles/${article.slug}/`;
-    const fallback = `${origin}/article.html?slug=${encodeURIComponent(article.slug)}`;
-    return window.location.pathname.startsWith('/articles/') ? pretty : fallback;
+    return absolute(`/articles/${article.slug}/`);
   }
 
   function setDocumentMeta(article, canonicalUrl, imageUrl, publishDate, modifiedDate) {
@@ -418,7 +414,7 @@
   }
 
   function buildArticleUrl(slug) {
-    return `/article.html?slug=${encodeURIComponent(slug)}`;
+    return `/articles/${encodeURIComponent(slug)}/`;
   }
 
   function setRobots(value) {
@@ -443,6 +439,8 @@
   }
 
   function attachCtaTracking() {
+    if (ctaTrackingAttached) return;
+    ctaTrackingAttached = true;
     document.addEventListener('click', (event) => {
       const button = event.target.closest('[data-cta]');
       if (!button) return;
