@@ -167,5 +167,18 @@
     "content": "/articles/optimal-lot-size-profit.html",
     "readTime": "4–6 min",
     "author": "Monetize Parking"
+  },
+  {
+    "title": "Small Lots Earn Big Returns Through Automation",
+    "slug": "parking-today-small-lots",
+    "category": "Articles",
+    "type": "external",
+    "source": "Parking Today",
+    "excerpt": "Even modest parking assets can achieve impressive ROI through automation. Parking Today highlights how Municipal Parking Services (MPS) is helping small lots thrive through smart enforcement and automation.",
+    "cta": {
+      "text": "Read on Parking Today →",
+      "url": "https://parkingtoday.com/segments/medical/small-lots-earn-big-returns-through-automation/",
+      "external": true
+    }
   }
 ]
