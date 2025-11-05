@@ -17,8 +17,7 @@
 - [`robots.txt`](../robots.txt) already advertises the sitemap and requires no changes for this migration.
 
 ## Redirects and canonicals
-- [`article.html`](../article.html) remains online to catch `?slug=` links, immediately setting the canonical to `/articles/{slug}/` and redirecting visitors.
-- Legacy landing pages (for example [`ai-vs-gates/index.html`](../ai-vs-gates/index.html)) issue a refresh redirect and canonical to the matching pretty article URL.
+- Only the `/articles/{slug}/` routes are published now that the migration is complete.
 - If an article needs a bespoke canonical, set `canonicalOverride` in the JSON; the runtime will apply it across `<link rel="canonical">`, Open Graph, Twitter, and JSON-LD tags.
 
 ## Image path rules

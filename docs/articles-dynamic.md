@@ -19,8 +19,7 @@ The template will automatically pull in the hero image, author line, summary, bo
 
 ## URL & Canonical Behaviour
 - Primary article URLs now live at `/articles/{slug}/` and resolve to `/articles/{slug}/index.html`.
-- [`article.html`](../article.html) is retained only as a compatibility shim. It reads `?slug=` links, sets a canonical to the pretty URL, and redirects to `/articles/{slug}/`.
-- Legacy static pages under `/resources/...` and topic folders redirect to the new pretty URL and declare its canonical.
+- Legacy compatibility shims have been removed; the pretty URLs are now the only published routes for resources.
 - If a specific article must point elsewhere, set `canonicalOverride` in the JSON entry. The template will respect it for `<link rel="canonical">`, Open Graph, Twitter tags, and JSON-LD.
 
 ## Inline & Bottom CTAs
