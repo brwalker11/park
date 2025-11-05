@@ -73,10 +73,21 @@
       clone.image = normaliseImage(clone.image, category);
       clone.category = category;
       clone.tags = Array.isArray(clone.tags) ? clone.tags : [];
+      clone.type = clone.type || 'internal';
+      clone.cta = clone.cta && typeof clone.cta === 'object' ? clone.cta : {};
       clone.excerpt = clone.excerpt || clone.description || '';
-      clone._searchBlob = [clone.title, clone.description, clone.excerpt, clone.tags.join(' ')].join(' ').toLowerCase();
+      clone.source = clone.source || '';
+      clone.readTime = clone.readTime || '';
+      clone.isExternal = clone.type === 'external' || Boolean(clone.cta.external);
+      clone.url = buildItemUrl(clone, clone.isExternal);
+      clone.ctaText = clone.cta.text || '';
+      clone._searchBlob = [clone.title, clone.description, clone.excerpt, clone.tags.join(' '), clone.source]
+        .join(' ')
+        .toLowerCase();
       clone._dateValue = clone.date ? Date.parse(clone.date) || 0 : 0;
-      clone.url = buildArticleUrl(clone.slug);
+      if (!clone.url && !clone.isExternal) {
+        clone.url = buildArticleUrl(clone.slug);
+      }
       return clone;
     });
   }
@@ -157,14 +168,22 @@
 
     const linkWrapper = document.createElement('a');
     linkWrapper.className = 'res-thumb';
-    linkWrapper.href = item.url;
+    linkWrapper.href = item.url || '#';
     linkWrapper.setAttribute('aria-label', item.title);
+    decorateLink(linkWrapper, item);
 
     const img = document.createElement('img');
     img.loading = 'lazy';
     img.src = item.thumbnail;
     img.alt = item.title;
     linkWrapper.appendChild(img);
+
+    if (item.isExternal) {
+      const badge = document.createElement('span');
+      badge.className = 'res-badge res-badge-external';
+      badge.textContent = 'External Feature';
+      linkWrapper.appendChild(badge);
+    }
 
     const body = document.createElement('div');
     body.className = 'res-body';
@@ -177,8 +196,9 @@
     heading.className = 'res-card-title';
 
     const titleLink = document.createElement('a');
-    titleLink.href = item.url;
+    titleLink.href = item.url || '#';
     titleLink.textContent = item.title;
+    decorateLink(titleLink, item);
     heading.appendChild(titleLink);
 
     const excerpt = document.createElement('p');
@@ -188,21 +208,31 @@
     const meta = document.createElement('div');
     meta.className = 'res-meta';
 
-    const read = document.createElement('span');
-    read.className = 'res-read';
-    read.textContent = item.readTime;
-    meta.appendChild(read);
+    if (item.readTime) {
+      const read = document.createElement('span');
+      read.className = 'res-read';
+      read.textContent = item.readTime;
+      meta.appendChild(read);
+    }
 
     const cta = document.createElement('a');
     cta.className = 'res-link';
-    cta.href = item.url;
-    const ctaCopy = item.category === 'Case Studies' ? 'Read Case Study' : item.category === 'Guides' ? 'Read Guide' : 'Read Article';
-    cta.textContent = ctaCopy;
+    cta.href = item.url || '#';
+    cta.textContent = getCtaCopy(item);
+    decorateLink(cta, item);
 
     body.appendChild(tag);
     body.appendChild(heading);
     body.appendChild(excerpt);
-    body.appendChild(meta);
+    if (item.source) {
+      const source = document.createElement('p');
+      source.className = 'res-source';
+      source.textContent = `Published on ${item.source}`;
+      body.appendChild(source);
+    }
+    if (meta.childElementCount) {
+      body.appendChild(meta);
+    }
     body.appendChild(cta);
 
     article.appendChild(linkWrapper);
@@ -265,8 +295,38 @@
     return DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
   }
 
+  function buildItemUrl(item, isExternal) {
+    if (isExternal) {
+      if (item.cta && item.cta.url) return item.cta.url;
+      if (typeof item.url === 'string' && item.url.startsWith('http')) return item.url;
+      if (item.externalUrl) return item.externalUrl;
+      if (item.content && item.content.startsWith('http')) return item.content;
+      return '';
+    }
+    if (typeof item.url === 'string' && item.url.startsWith('/')) return item.url;
+    if (item.content && item.content.startsWith('http')) return item.content;
+    return buildArticleUrl(item.slug);
+  }
+
   function buildArticleUrl(slug) {
     return `/articles/${encodeURIComponent(slug)}/`;
+  }
+
+  function getCtaCopy(item) {
+    if (item.ctaText) return item.ctaText;
+    if (item.isExternal && item.source) return `Read on ${item.source} →`;
+    if (item.isExternal) return 'Read External Article';
+    if (item.category === 'Case Studies') return 'Read Case Study';
+    if (item.category === 'Guides') return 'Read Guide';
+    return 'Read Article';
+  }
+
+  function decorateLink(link, item) {
+    if (!link) return;
+    if (item && item.isExternal) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
   }
 
   function hydrateFilterFromQuery() {

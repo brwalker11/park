@@ -147,6 +147,25 @@
   display: block;
 }
 
+.res-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.82);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+}
+
+.res-badge-external {
+  background: rgba(13, 110, 253, 0.95);
+}
+
 .res-body {
   display: flex;
   flex-direction: column;
@@ -186,6 +205,12 @@
 .res-excerpt {
   margin: 0;
   color: var(--res-muted);
+}
+
+.res-source {
+  margin: -0.15rem 0 0;
+  font-size: 0.85rem;
+  color: #475569;
 }
 
 .res-meta {
