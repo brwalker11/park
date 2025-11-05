@@ -1,4 +1,27 @@
-[
+[ 
+  {
+    "slug": "occupancy-vs-compliance",
+    "title": "Why 100% Occupancy Isn’t the Goal. 100% Compliance Is",
+    "category": "Articles",
+    "tags": [
+      "compliance",
+      "enforcement",
+      "automation",
+      "profit"
+    ],
+    "date": "2025-11-04",
+    "lastmod": "2025-11-04",
+    "description": "Why chasing full lots doesn’t equal profit and how compliance automation actually drives revenue.",
+    "excerpt": "Why chasing full lots doesn’t equal profit and how compliance automation actually drives revenue.",
+    "image": "/images/default-guide.jpg",
+    "imageAlt": "Why 100% Occupancy Isn’t the Goal. 100% Compliance Is",
+    "thumbnail": "/images/default-guide.jpg",
+    "content": "/articles/occupancy-vs-compliance.html",
+    "readTime": "3–4 min",
+    "author": "Monetize Parking",
+    "featured": false,
+    "url": "/articles/occupancy-vs-compliance/"
+  },
   {
     "slug": "you-didnt-buy-a-parking-lot-to-babysit-it",
     "title": "You Didn’t Buy a Parking Lot to Babysit It",
