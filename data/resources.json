@@ -174,11 +174,14 @@
     "category": "Articles",
     "type": "external",
     "source": "Parking Today",
-    "excerpt": "Even modest parking assets can achieve impressive ROI through automation. Parking Today highlights how Municipal Parking Services (MPS) is helping small lots thrive through smart enforcement and automation.",
+    "thumbnail": "/images/small-lots-main.jpg",
+    "excerpt": "Even modest parking assets can achieve impressive ROI through automation. Parking Today highlights how one of our partners, Municipal Parking Services (MPS), is helping small lots thrive through smart enforcement and automation.",
     "cta": {
       "text": "Read on Parking Today →",
       "url": "https://parkingtoday.com/segments/medical/small-lots-earn-big-returns-through-automation/",
       "external": true
-    }
+    },
+    "is_featured": true,
+    "priority": 100
   }
 ]
