@@ -79,6 +79,9 @@
       clone.source = clone.source || '';
       clone.readTime = clone.readTime || '';
       clone.isExternal = clone.type === 'external' || Boolean(clone.cta.external);
+      clone.priority = typeof clone.priority === 'number' ? clone.priority : 0;
+      clone.is_featured = Boolean(clone.is_featured || clone.featured);
+      clone.featured = clone.is_featured;
       clone.url = buildItemUrl(clone, clone.isExternal);
       clone.ctaText = clone.cta.text || '';
       clone._searchBlob = [clone.title, clone.description, clone.excerpt, clone.tags.join(' '), clone.source]
@@ -96,6 +99,12 @@
     return (b._dateValue || 0) - (a._dateValue || 0);
   }
 
+  function sortByFeaturedPriority(a, b) {
+    const priorityDiff = (b.priority || 0) - (a.priority || 0);
+    if (priorityDiff !== 0) return priorityDiff;
+    return (b._dateValue || 0) - (a._dateValue || 0);
+  }
+
   function handleSearch(event) {
     state.search = (event.target.value || '').trim().toLowerCase();
     state.page = 1;
@@ -109,8 +118,7 @@
     state.filtered = state.items.filter((item) => {
       const matchesCategory = state.filter === 'All' || item.category === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
-      const shouldExcludeFeatured = shouldShowFeatured && item.slug === state.featuredSlug;
-      return matchesCategory && matchesSearch && !shouldExcludeFeatured;
+      return matchesCategory && matchesSearch;
     });
     renderGrid();
     updateLoadMore();
@@ -121,11 +129,16 @@
     const featuredSlot = featuredSection.querySelector('.container');
     if (!featuredSlot) return '';
 
-    const featuredItem = items.find((item) => Boolean(item.featured));
-    if (!featuredItem) {
+    const featuredItems = items.filter((item) => item.is_featured);
+
+    if (!featuredItems.length) {
+      featuredSlot.innerHTML = '';
       featuredSection.classList.add('is-hidden');
       return '';
     }
+
+    featuredItems.sort(sortByFeaturedPriority);
+    const featuredItem = featuredItems[0];
 
     featuredSection.classList.remove('is-hidden');
     featuredSection.classList.remove('is-collapsed');
