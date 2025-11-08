@@ -1,0 +1,40 @@
+{
+  "states": [
+    {
+      "code": "CO",
+      "name": "Colorado",
+      "slug": "colorado",
+      "hasContent": true,
+      "summary": "Mountain resort towns and growing Front Range communities create unique parking challenges and opportunities.",
+      "description": "Colorado's diverse economy—from world-class ski resorts to rapidly expanding metropolitan areas—presents distinct parking management needs. Communities across the state are exploring innovative solutions to balance tourism demands with local accessibility.",
+      "articles": []
+    },
+    {
+      "code": "WI",
+      "name": "Wisconsin",
+      "slug": "wisconsin",
+      "hasContent": true,
+      "summary": "Lakeside communities and historic downtowns throughout the state.",
+      "description": "Wisconsin's charming small towns, waterfront destinations, and college communities are rethinking parking infrastructure to support local businesses and seasonal tourism while maintaining their unique character.",
+      "articles": []
+    },
+    {
+      "code": "MN",
+      "name": "Minnesota",
+      "slug": "minnesota",
+      "hasContent": true,
+      "summary": "Growing metro areas and lakeside resort destinations across the Land of 10,000 Lakes.",
+      "description": "Minnesota communities—from Twin Cities suburbs to northern lake towns—face evolving parking needs as populations grow and seasonal tourism increases. Smart parking solutions help balance year-round resident access with peak visitor demand.",
+      "articles": []
+    },
+    {
+      "code": "TX",
+      "name": "Texas",
+      "slug": "texas",
+      "hasContent": true,
+      "summary": "Rapidly expanding cities and historic downtown districts across the Lone Star State.",
+      "description": "Texas is experiencing unprecedented growth, with communities of all sizes seeking parking solutions that support economic development while preserving local character. From Hill Country towns to Gulf Coast destinations, parking infrastructure is evolving to meet changing needs.",
+      "articles": []
+    }
+  ]
+}
