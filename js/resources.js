@@ -116,10 +116,6 @@
     toggleFeatured(shouldShowFeatured);
 
     state.filtered = state.items.filter((item) => {
-      // Exclude featured items from the grid
-      if (state.featuredSlugs.includes(item.slug)) {
-        return false;
-      }
       const matchesCategory = state.filter === 'All' || item.category === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
       return matchesCategory && matchesSearch;
@@ -373,29 +369,35 @@
   function initCarouselAutoScroll(carousel) {
     if (!carousel) return;
 
-    let scrollInterval;
     let isUserInteracting = false;
-    const scrollSpeed = 1; // pixels per frame
-    const pauseDuration = 3000; // pause at each card for 3 seconds
+    let currentIndex = 0;
+    const pauseDuration = 5000; // Pause on each card for 5 seconds
+    const cards = carousel.querySelectorAll('.res-card');
 
-    function autoScroll() {
+    if (cards.length <= 1) return; // No need to auto-scroll if only one card
+
+    function scrollToCard(index) {
       if (isUserInteracting) return;
 
-      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      const card = cards[index];
+      if (!card) return;
 
-      if (carousel.scrollLeft >= maxScroll) {
-        // Reset to beginning
-        carousel.scrollLeft = 0;
-        // Pause before starting again
-        setTimeout(() => {
-          if (!isUserInteracting) {
-            requestAnimationFrame(autoScroll);
-          }
-        }, pauseDuration);
-      } else {
-        carousel.scrollLeft += scrollSpeed;
-        requestAnimationFrame(autoScroll);
-      }
+      // Smooth scroll to the card
+      card.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start'
+      });
+    }
+
+    function autoAdvance() {
+      if (isUserInteracting) return;
+
+      currentIndex = (currentIndex + 1) % cards.length;
+      scrollToCard(currentIndex);
+
+      // Schedule next advance
+      setTimeout(autoAdvance, pauseDuration);
     }
 
     // Pause auto-scroll when user interacts
@@ -405,21 +407,21 @@
 
     carousel.addEventListener('mouseleave', () => {
       isUserInteracting = false;
-      requestAnimationFrame(autoScroll);
     });
 
     carousel.addEventListener('touchstart', () => {
       isUserInteracting = true;
     });
 
+    let touchEndTimeout;
     carousel.addEventListener('touchend', () => {
-      setTimeout(() => {
+      clearTimeout(touchEndTimeout);
+      touchEndTimeout = setTimeout(() => {
         isUserInteracting = false;
-        requestAnimationFrame(autoScroll);
-      }, pauseDuration);
+      }, 1000);
     });
 
-    // Start auto-scroll
-    requestAnimationFrame(autoScroll);
+    // Start auto-scroll after initial pause
+    setTimeout(autoAdvance, pauseDuration);
   }
 })();
