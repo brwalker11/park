@@ -17,7 +17,7 @@
     page: 1,
     filter: 'All',
     search: '',
-    featuredSlug: ''
+    featuredSlugs: []
   };
 
   fetch(DATA_URL)
@@ -28,7 +28,7 @@
     .then((items) => {
       state.items = normaliseItems(items);
       state.items.sort(sortByDate);
-      state.featuredSlug = renderFeatured(state.items);
+      state.featuredSlugs = renderFeatured(state.items);
       hydrateFilterFromQuery();
       updateActiveFilter();
       applyFilters();
@@ -112,10 +112,14 @@
   }
 
   function applyFilters() {
-    const shouldShowFeatured = Boolean(state.featuredSlug) && state.filter === 'All' && !state.search;
+    const shouldShowFeatured = state.featuredSlugs.length > 0 && state.filter === 'All' && !state.search;
     toggleFeatured(shouldShowFeatured);
 
     state.filtered = state.items.filter((item) => {
+      // Exclude featured items from the grid
+      if (state.featuredSlugs.includes(item.slug)) {
+        return false;
+      }
       const matchesCategory = state.filter === 'All' || item.category === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
       return matchesCategory && matchesSearch;
@@ -125,35 +129,49 @@
   }
 
   function renderFeatured(items) {
-    if (!featuredSection) return '';
+    if (!featuredSection) return [];
     const featuredSlot = featuredSection.querySelector('.container');
-    if (!featuredSlot) return '';
+    if (!featuredSlot) return [];
 
     const featuredItems = items.filter((item) => item.is_featured);
 
     if (!featuredItems.length) {
       featuredSlot.innerHTML = '';
       featuredSection.classList.add('is-hidden');
-      return '';
+      return [];
     }
 
     featuredItems.sort(sortByFeaturedPriority);
-    const featuredItem = featuredItems[0];
 
     featuredSection.classList.remove('is-hidden');
     featuredSection.classList.remove('is-collapsed');
     featuredSlot.innerHTML = '';
+
     const title = document.createElement('h2');
     title.id = 'featured-heading';
     title.className = 'res-featured-title';
     title.textContent = 'Featured';
 
-    const card = buildCard(featuredItem, true);
+    const carouselWrapper = document.createElement('div');
+    carouselWrapper.className = 'res-carousel-wrapper';
 
+    const carousel = document.createElement('div');
+    carousel.className = 'res-carousel';
+    carousel.id = 'res-carousel';
+
+    featuredItems.forEach((item) => {
+      const card = buildCard(item, true);
+      carousel.appendChild(card);
+    });
+
+    carouselWrapper.appendChild(carousel);
     featuredSlot.appendChild(title);
-    featuredSlot.appendChild(card);
+    featuredSlot.appendChild(carouselWrapper);
 
-    return featuredItem.slug;
+    // Initialize auto-scroll after a short delay
+    setTimeout(() => initCarouselAutoScroll(carousel), 2000);
+
+    return featuredItems.map((item) => item.slug);
   }
 
   function renderGrid() {
@@ -274,7 +292,7 @@
 
   function toggleFeatured(shouldShow) {
     if (!featuredSection) return;
-    if (!state.featuredSlug) {
+    if (state.featuredSlugs.length === 0) {
       featuredSection.classList.add('is-hidden');
       return;
     }
@@ -350,5 +368,58 @@
     if (match) {
       state.filter = match.getAttribute('data-filter') || 'All';
     }
+  }
+
+  function initCarouselAutoScroll(carousel) {
+    if (!carousel) return;
+
+    let scrollInterval;
+    let isUserInteracting = false;
+    const scrollSpeed = 1; // pixels per frame
+    const pauseDuration = 3000; // pause at each card for 3 seconds
+
+    function autoScroll() {
+      if (isUserInteracting) return;
+
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+      if (carousel.scrollLeft >= maxScroll) {
+        // Reset to beginning
+        carousel.scrollLeft = 0;
+        // Pause before starting again
+        setTimeout(() => {
+          if (!isUserInteracting) {
+            requestAnimationFrame(autoScroll);
+          }
+        }, pauseDuration);
+      } else {
+        carousel.scrollLeft += scrollSpeed;
+        requestAnimationFrame(autoScroll);
+      }
+    }
+
+    // Pause auto-scroll when user interacts
+    carousel.addEventListener('mouseenter', () => {
+      isUserInteracting = true;
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      isUserInteracting = false;
+      requestAnimationFrame(autoScroll);
+    });
+
+    carousel.addEventListener('touchstart', () => {
+      isUserInteracting = true;
+    });
+
+    carousel.addEventListener('touchend', () => {
+      setTimeout(() => {
+        isUserInteracting = false;
+        requestAnimationFrame(autoScroll);
+      }, pauseDuration);
+    });
+
+    // Start auto-scroll
+    requestAnimationFrame(autoScroll);
   }
 })();
