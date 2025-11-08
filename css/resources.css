@@ -303,44 +303,58 @@
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
-.state-insights-cta {
-  padding: clamp(3rem, 6vw, 4.5rem) 0;
-  background: linear-gradient(135deg, rgba(13, 110, 253, 0.05) 0%, rgba(13, 110, 253, 0.02) 100%);
-  border-top: 1px solid rgba(148, 163, 184, 0.12);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-}
-
-.state-cta-content {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.state-cta-content h2 {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--res-bg);
-}
-
-.state-cta-content p {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--res-muted);
-  margin-bottom: 2rem;
-}
-
-.state-cta-content .btn {
-  padding: 1rem 2.5rem;
-  font-size: 1.05rem;
+/* Floating State Insights Button */
+.floating-state-btn {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: #0b6efd;
+  color: #fff;
+  text-decoration: none;
   border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(11, 110, 253, 0.4);
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  z-index: 1000;
 }
 
-.state-cta-content .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(13, 110, 253, 0.3);
+.floating-state-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(11, 110, 253, 0.5);
+  background: #0958d9;
+}
+
+.floating-state-btn svg {
+  flex-shrink: 0;
+}
+
+.floating-btn-text {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .floating-state-btn {
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .floating-btn-text {
+    display: none;
+  }
+
+  .floating-state-btn {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 960px) {
