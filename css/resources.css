@@ -292,6 +292,46 @@
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
+.state-insights-cta {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.05) 0%, rgba(13, 110, 253, 0.02) 100%);
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.state-cta-content {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.state-cta-content h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--res-bg);
+}
+
+.state-cta-content p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--res-muted);
+  margin-bottom: 2rem;
+}
+
+.state-cta-content .btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.05rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.state-cta-content .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(13, 110, 253, 0.3);
+}
+
 @media (max-width: 960px) {
   .res-featured .res-card {
     grid-template-columns: 1fr;
