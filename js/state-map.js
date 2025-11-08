@@ -3,10 +3,10 @@
 
   // State configuration
   const STATES = {
-    colorado: { abbr: 'CO', name: 'Colorado', url: '/resources/states/colorado.html' },
-    wisconsin: { abbr: 'WI', name: 'Wisconsin', url: '/resources/states/wisconsin.html' },
-    minnesota: { abbr: 'MN', name: 'Minnesota', url: '/resources/states/minnesota.html' },
-    texas: { abbr: 'TX', name: 'Texas', url: '/resources/states/texas.html' }
+    colorado: { abbr: 'CO', name: 'Colorado', url: '/resources/states/colorado/' },
+    wisconsin: { abbr: 'WI', name: 'Wisconsin', url: '/resources/states/wisconsin/' },
+    minnesota: { abbr: 'MN', name: 'Minnesota', url: '/resources/states/minnesota/' },
+    texas: { abbr: 'TX', name: 'Texas', url: '/resources/states/texas/' }
   };
 
   // Initialize on DOM ready
