@@ -32,9 +32,413 @@
     gtag('js', new Date());
     gtag('config', 'G-LGHS0L5WE8');
   </script>
+  <style>
+    /* Hero Section */
+    .hero-section {
+      padding: 80px 0 100px;
+      background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%);
+    }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-section h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 24px 0;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .hero-subheadline {
+      font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0 0 40px 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-visual {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      margin: 40px auto 0;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 1.125rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.125rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(11, 110, 253, 0.3);
+    }
+
+    /* Key Benefits Section */
+    .benefits-section {
+      padding: 100px 0;
+      background: #fff;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    .benefit-card {
+      text-align: center;
+    }
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .benefit-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+      color: var(--ink);
+    }
+    .benefit-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Solution Comparison Section */
+    .comparison-section {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+    .comparison-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+    .comparison-intro h2 {
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 700;
+      margin: 0 0 20px 0;
+    }
+    .comparison-intro p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .comparison-divider {
+        order: 2;
+      }
+    }
+    .solution-card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      height: 100%;
+    }
+    .solution-icon {
+      font-size: 3rem;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .solution-card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: var(--ink);
+    }
+    .solution-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 24px 0 12px 0;
+    }
+    .solution-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .solution-card li {
+      padding: 8px 0 8px 28px;
+      position: relative;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .solution-card li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .comparison-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+    .combine-callout {
+      background: var(--brand);
+      color: #fff;
+      padding: 24px 32px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 200px;
+    }
+    .combine-callout strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+    .combine-callout p {
+      font-size: 0.875rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Consultation Process Section */
+    .consultation-section {
+      padding: 100px 0;
+      background: #fff;
+    }
+    .consultation-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+    .consultation-intro h2 {
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 700;
+      margin: 0 0 20px 0;
+    }
+    .consultation-intro p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .factors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    .factor-card {
+      padding: 32px;
+      background: var(--bg);
+      border-radius: 8px;
+    }
+    .factor-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .factor-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+      color: var(--ink);
+    }
+    .factor-card p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Customization Section */
+    .customization-section {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+    .customization-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+    .customization-intro h2 {
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 700;
+      margin: 0 0 20px 0;
+    }
+    .customization-intro p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .customization-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    .customization-card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+    }
+    .customization-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .customization-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      color: var(--ink);
+    }
+    .customization-card p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Implementation Section */
+    .implementation-section {
+      padding: 100px 0;
+      background: #fff;
+    }
+    .implementation-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+    .implementation-intro h2 {
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 700;
+      margin: 0 0 20px 0;
+    }
+    .implementation-intro p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .implementation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .implementation-card {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--bg);
+      border-radius: 8px;
+    }
+    .implementation-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .implementation-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      color: var(--ink);
+    }
+    .implementation-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    .implementation-card li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .implementation-card li:before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    /* Final CTA Section */
+    .final-cta-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #0b6efd 0%, #0856c9 100%);
+      color: #fff;
+    }
+    .final-cta-content {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .final-cta-section h2 {
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      color: #fff;
+    }
+    .final-cta-section p {
+      font-size: 1.25rem;
+      margin: 0 0 40px 0;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+    .final-cta-button {
+      display: inline-block;
+      padding: 18px 48px;
+      background: #fff;
+      color: var(--brand);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 20px;
+    }
+    .final-cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    }
+    .final-cta-secondary {
+      display: block;
+      color: #fff;
+      font-size: 1.125rem;
+      opacity: 0.9;
+      margin-top: 16px;
+    }
+    .final-cta-secondary a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <header class="site-header">
+  <header class="site-header">
     <div class="header-inner">
       <a href="/" class="brand" aria-label="Monetize Parking Home">
         <img src="/images/Logo.svg" alt="Monetize Parking" class="logo" />
@@ -51,164 +455,315 @@
     </div>
   </header>
 
-
-  <main class="container">
-
-<h1>Services</h1>
-<h2 id="setup" class="visually-hidden">Fast Setup</h2>
-
-<!-- Services Subnav -->
-<nav class="services-subnav" aria-label="Services subsections">
-  <div class="container services-subnav__inner">
-    <a href="#core-platform" class="pill" aria-current="true">Core Platform</a>
-    <a href="#which-fits" class="pill">Which Fits My Lot</a>
-    <a href="#customizations" class="pill">Customization</a>
-    <a href="/contact/" class="pill pill-cta">Book a Free Consultation</a>
-  </div>
-</nav>
-
-  <div class="services-list">
-    <section id="core-platform" class="service-card card">
-        <span class="pill">Core Platform</span>
-        <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>Parking Enforcement Software</h2>
-        <p class="small">We build modern parking solutions designed to fit your lot’s unique needs. Whether it’s Scan to Pay for fast, frictionless payments or License Plate Recognition (LPR) for automated enforcement, we match each property with the right approach to maximize revenue and minimize hassle. Everything runs through a single platform, making it easy to track activity, manage payments, and grow your bottom line.</p>
-      <ul>
-        <li>Scan to Pay and LPR in one platform for flexible options matched to your property</li>
-        <li>Tailored setup built around your lot’s layout, traffic flow, and goals</li>
-        <li>Frictionless payments that work on any smartphone</li>
-        <li>Automated enforcement with real time photo evidence when needed</li>
-        <li>Smart alerts and reporting for complete visibility and control</li>
-        <li>Simple management without extra hardware or complex systems</li>
-      </ul>
-    </section>
-
-    <section id="which-fits" class="service-card card which-fits">
-      <span class="pill">Which Fits My Lot</span>
-      <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/><path d="M12 15V3"/><path d="M19 21H5"/></svg>Which Fits My Lot</h2>
-      <div class="which-fits__columns">
-        <article class="which-fits__panel">
-          <h3>Scan to Pay</h3>
-          <ul>
-            <li>Quick launch and low upfront cost</li>
-            <li>Customers pay on any phone</li>
-            <li>Clear rules and grace periods</li>
-            <li>Simple audits through payment history</li>
-          </ul>
-        </article>
-        <article class="which-fits__panel">
-          <h3>LPR</h3>
-          <ul>
-            <li>Automated compliance with photo evidence</li>
-            <li>Useful for high turnover or chronic abuse</li>
-            <li>Consistent rules and fewer manual checks</li>
-            <li>Clear audit trail and reporting</li>
-          </ul>
-        </article>
-      </div>
-      <div class="which-fits__details">
-        <article class="which-fits__panel">
-          <h3>How we decide with you</h3>
-          <ul>
-            <li>Layout and traffic patterns</li>
-            <li>Typical stay, length, and turnover</li>
-            <li>Abuse or freeloading rate</li>
-            <li>Budget and timeline</li>
-            <li>Staffing needs</li>
-            <li>Local rules and signage</li>
-          </ul>
-        </article>
-        <article class="which-fits__panel">
-          <h3>What we handle</h3>
-          <ul>
-            <li>QR codes and signage guidance</li>
-            <li>Appeals and dispute workflow setup</li>
-            <li>Reporting and revenue reviews</li>
-            <li>Owner training and ongoing support</li>
-          </ul>
-        </article>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Modern parking solutions built for your property's unique needs.</h1>
+          <p class="hero-subheadline">
+            Partnering with industry-leading technology providers, our team delivers
+            Scan to Pay and License Plate Recognition (LPR) systems that maximize
+            revenue while minimizing operational hassle.
+          </p>
+          <a href="#comparison" class="hero-cta">Find Your Solution</a>
+          <div class="hero-visual">
+            [Hero Image: Split-screen showing Scan to Pay (phone with QR) and LPR (camera + license plate)]
+          </div>
+        </div>
       </div>
     </section>
-    <hr class="service-divider">
 
-    <section id="customizations" class="service-card card">
-        <span class="pill">Customizations</span>
-        <h2><svg xmlns="http://www.w3.org/2000/svg" class="svc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M9 3v3"/><path d="M15 3v3"/><path d="M5 6h14"/><path d="M7 9h10v4a5 5 0 0 1-10 0V9Z"/></svg>Customization</h2>
-        <p class="small">Customization and control for every property.</p>
-        <p class="small">Every property operates differently, which is why the platform makes it simple to customize parking rules, user access, and exemptions. Owners can easily exempt employee or tenant license plates for free parking and define custom free parking hours to match business schedules or customer needs.</p>
-      <ul>
-        <li>Monthly pass and event parking management</li>
-        <li>Employee and tenant whitelist capabilities</li>
-        <li>Custom time based free parking windows</li>
-        <li>White glove onboarding and staff training</li>
-      </ul>
-      <a class="cta" href="/contact/">Get a Free Parking Revenue Assessment</a>
+    <!-- Key Benefits Section -->
+    <section class="benefits-section">
+      <div class="container">
+        <h2 style="text-align: center; font-size: clamp(2rem, 4vw, 2.625rem); margin-bottom: 16px;">Why Property Owners Choose These Solutions</h2>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <span class="benefit-icon">🔓</span>
+            <h3>Frictionless Payments</h3>
+            <p>Customers pay directly from any smartphone—no app downloads or accounts required.</p>
+          </div>
+
+          <div class="benefit-card">
+            <span class="benefit-icon">📸</span>
+            <h3>Automated Enforcement</h3>
+            <p>License plate recognition with timestamped photo evidence handles compliance automatically.</p>
+          </div>
+
+          <div class="benefit-card">
+            <span class="benefit-icon">📊</span>
+            <h3>Unified Platform</h3>
+            <p>Single dashboard tracks all activity, payments, and violations across your properties.</p>
+          </div>
+
+          <div class="benefit-card">
+            <span class="benefit-icon">🔔</span>
+            <h3>Real-Time Alerts</h3>
+            <p>Instant notifications keep you informed of violations, payments, and system status.</p>
+          </div>
+
+          <div class="benefit-card">
+            <span class="benefit-icon">⚡</span>
+            <h3>Simple Setup</h3>
+            <p>No complex hardware installations or IT infrastructure needed to get started.</p>
+          </div>
+        </div>
+      </div>
     </section>
-  </div>
 
-  <footer>
-    <div class="small">© <span id="year"></span> Monetize Parking - Built for parking lot owners who want results.</div>
-  </footer>
+    <!-- Solution Comparison Section -->
+    <section id="comparison" class="comparison-section">
+      <div class="container">
+        <div class="comparison-intro">
+          <h2>Which Solution Fits Your Property?</h2>
+          <p>
+            Each property is different. Our consultants help you choose between Scan to Pay
+            and LPR based on your specific needs—or implement both for maximum flexibility.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <!-- Scan to Pay Card -->
+          <div class="solution-card">
+            <span class="solution-icon">📱</span>
+            <h3>Scan to Pay</h3>
+
+            <h4>Common Use Cases</h4>
+            <ul>
+              <li>Customer-facing businesses (retail, restaurants, medical offices)</li>
+              <li>Properties with lower historical violation rates</li>
+              <li>Locations requiring quick deployment</li>
+              <li>Budget-conscious initial implementations</li>
+            </ul>
+
+            <h4>Key Features</h4>
+            <ul>
+              <li>Fast launch and minimal investment</li>
+              <li>Works on any smartphone (no app required)</li>
+              <li>Built-in grace periods and clear customer communication</li>
+              <li>Payment history creates instant audit trails</li>
+            </ul>
+          </div>
+
+          <!-- Divider with "OR COMBINE BOTH" -->
+          <div class="comparison-divider">
+            <div class="combine-callout">
+              <strong>OR COMBINE BOTH</strong>
+              <p>Some properties use both solutions: Scan to Pay and LPR</p>
+              <p style="margin-top: 12px; font-weight: 600;">Our consultants help determine the right mix for your property.</p>
+            </div>
+          </div>
+
+          <!-- LPR Card -->
+          <div class="solution-card">
+            <span class="solution-icon">📷</span>
+            <h3>LPR (License Plate Recognition)</h3>
+
+            <h4>Common Use Cases</h4>
+            <ul>
+              <li>Residential or employee parking areas</li>
+              <li>Properties with higher historical violation rates</li>
+              <li>Tow-enforced locations</li>
+              <li>Situations requiring hands-off enforcement</li>
+            </ul>
+
+            <h4>Key Features</h4>
+            <ul>
+              <li>Automated plate capture with photo proof</li>
+              <li>Zero customer interaction needed</li>
+              <li>Consistent enforcement 24/7</li>
+              <li>Complete documentation for disputes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Process Section -->
+    <section class="consultation-section">
+      <div class="container">
+        <div class="consultation-intro">
+          <h2>How the Selection Process Works</h2>
+          <p>
+            Our consultants analyze six key factors to recommend the optimal solution
+            for your property's unique situation.
+          </p>
+        </div>
+
+        <div class="factors-grid">
+          <div class="factor-card">
+            <span class="factor-icon">🏗️</span>
+            <h3>Layout & Traffic Flow</h3>
+            <p>Physical property design, entry/exit points, and typical traffic patterns.</p>
+          </div>
+
+          <div class="factor-card">
+            <span class="factor-icon">⏱️</span>
+            <h3>Duration & Turnover</h3>
+            <p>Average parking duration and how frequently spaces turn over.</p>
+          </div>
+
+          <div class="factor-card">
+            <span class="factor-icon">⚠️</span>
+            <h3>Violation Rate</h3>
+            <p>Current abuse levels, freeloading patterns, and enforcement challenges.</p>
+          </div>
+
+          <div class="factor-card">
+            <span class="factor-icon">💰</span>
+            <h3>Budget & Timeline</h3>
+            <p>Available investment and desired launch timeframe.</p>
+          </div>
+
+          <div class="factor-card">
+            <span class="factor-icon">👥</span>
+            <h3>Staffing Resources</h3>
+            <p>Available personnel for monitoring and enforcement support.</p>
+          </div>
+
+          <div class="factor-card">
+            <span class="factor-icon">📋</span>
+            <h3>Local Requirements</h3>
+            <p>Municipal regulations, signage laws, and compliance needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customization Section -->
+    <section class="customization-section">
+      <div class="container">
+        <div class="customization-intro">
+          <h2>Customization & Control</h2>
+          <p>Every platform deployment is tailored to your property's operational requirements.</p>
+        </div>
+
+        <div class="customization-grid">
+          <div class="customization-card">
+            <span class="customization-icon">⚙️</span>
+            <h3>Flexible Rules</h3>
+            <p>Set custom parking hours, pricing tiers, and time limits that match your business schedule.</p>
+          </div>
+
+          <div class="customization-card">
+            <span class="customization-icon">🚗</span>
+            <h3>Easy Exemptions</h3>
+            <p>Add employee or tenant license plates for automatic free parking access.</p>
+          </div>
+
+          <div class="customization-card">
+            <span class="customization-icon">🕐</span>
+            <h3>Dynamic Hours</h3>
+            <p>Define different rules for weekdays vs. weekends, business hours vs. after-hours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation & Support Section -->
+    <section class="implementation-section">
+      <div class="container">
+        <div class="implementation-intro">
+          <h2>Implementation & Ongoing Support</h2>
+          <p>
+            From deployment through daily operations, our team handles the details
+            so you can focus on revenue growth.
+          </p>
+        </div>
+
+        <div class="implementation-grid">
+          <div class="implementation-card">
+            <span class="implementation-icon">📋</span>
+            <h3>Strategic Planning</h3>
+            <ul>
+              <li>Site assessment and solution recommendation</li>
+              <li>Signage strategy and placement optimization</li>
+              <li>Integration with existing systems</li>
+            </ul>
+          </div>
+
+          <div class="implementation-card">
+            <span class="implementation-icon">🚀</span>
+            <h3>Deployment</h3>
+            <ul>
+              <li>Partner coordination and installation management</li>
+              <li>QR code design and placement</li>
+              <li>Initial testing and calibration</li>
+            </ul>
+          </div>
+
+          <div class="implementation-card">
+            <span class="implementation-icon">📚</span>
+            <h3>Training & Handoff</h3>
+            <ul>
+              <li>Owner and staff training sessions</li>
+              <li>Dashboard walkthrough and reporting setup</li>
+              <li>Documentation and best practices guide</li>
+            </ul>
+          </div>
+
+          <div class="implementation-card">
+            <span class="implementation-icon">🔧</span>
+            <h3>Ongoing Partnership</h3>
+            <ul>
+              <li>Revenue tracking and performance reviews</li>
+              <li>Appeals workflow and dispute resolution support</li>
+              <li>System updates and optimization recommendations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta-section">
+      <div class="container">
+        <div class="final-cta-content">
+          <h2>Ready to Maximize Your Parking Revenue?</h2>
+          <p>Schedule a free property consultation to discuss which solution fits your needs.</p>
+          <a href="/contact/" class="final-cta-button">Schedule Consultation</a>
+          <div class="final-cta-secondary">
+            Or call us directly at <a href="tel:+1234567890">(XXX) XXX-XXXX</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="small" style="text-align: center; padding: 40px 0;">© <span id="year"></span> Monetize Parking - Built for parking lot owners who want results.</div>
+      </div>
+    </footer>
   </main>
 
-<script>
-// Smooth scroll for in-page links
-document.querySelectorAll('.services-subnav a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const target = document.querySelector(id);
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-// Scroll-spy to set aria-current on the active pill
-const sections = ['#core-platform', '#which-fits', '#customizations'].map(s => document.querySelector(s)).filter(Boolean);
-const pills = Array.from(document.querySelectorAll('.services-subnav .pill')).filter(p => p.getAttribute('href')?.startsWith('#'));
-const setActive = id => {
-  pills.forEach(p => p.removeAttribute('aria-current'));
-  const active = pills.find(p => p.getAttribute('href') === id);
-  if (active) active.setAttribute('aria-current', 'true');
-};
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) setActive('#' + entry.target.id);
-  });
-}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-sections.forEach(sec => obs.observe(sec));
-</script>
-<script>
-  (function () {
-    const toggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('.site-nav');
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener('click', function () {
-      const isOpen = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
 
-    // Close menu when a link is clicked (mobile)
-    nav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+    // Track CTA clicks
+    document.addEventListener('click', e => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+      if (href.endsWith('/contact/')) {
+        gtag('event', 'generate_lead', { method: 'Contact CTA' });
+      }
+      if (href.endsWith('/calculator/')) {
+        gtag('event', 'calculator_start', { method: 'Hero CTA' });
       }
     });
-  })();
-</script>
-  <script>
-document.addEventListener('click', e => {
-  const link = e.target.closest('a');
-  if (!link) return;
-  const href = link.getAttribute('href') || '';
-  if (href.endsWith('/contact/')) {
-    gtag('event', 'generate_lead', { method: 'Contact CTA' });
-  }
-  if (href.endsWith('/calculator/')) {
-    gtag('event', 'calculator_start', { method: 'Hero CTA' });
-  }
-});
   </script>
 </body>
 </html>
