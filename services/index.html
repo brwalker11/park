@@ -33,71 +33,146 @@
     gtag('config', 'G-LGHS0L5WE8');
   </script>
   <style>
-    /* Hero Section */
+    /* Hero Section - Split Layout */
     .hero-section {
-      padding: 80px 0 100px;
-      background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%);
-    }
-    .hero-content {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .hero-section h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 700;
-      margin: 0 0 24px 0;
-      line-height: 1.15;
-      color: var(--ink);
-    }
-    .hero-subheadline {
-      font-size: clamp(1.125rem, 2.5vw, 1.375rem);
-      line-height: 1.6;
-      color: var(--muted);
-      margin: 0 0 40px 0;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-visual {
-      width: 100%;
-      max-width: 900px;
-      margin: 40px auto 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      border-radius: 12px;
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: stretch;
       overflow: hidden;
     }
-    .hero-visual img {
+
+    .hero-split-container {
+      display: flex;
       width: 100%;
-      height: 400px;
-      object-fit: cover;
-      display: block;
+      max-width: 1400px;
+      margin: 0 auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     }
-    @media (max-width: 768px) {
-      .hero-visual {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .hero-visual img {
-        height: 300px;
-      }
+
+    /* Left Side - Text Content */
+    .hero-text-side {
+      flex: 0 0 45%;
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+      padding: 80px 60px;
+      position: relative;
     }
+
+    .hero-text-side::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.08) 20%,
+        rgba(0, 0, 0, 0.08) 80%,
+        transparent 100%);
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .hero-text-content {
+      max-width: 520px;
+    }
+
+    .hero-section h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      margin: 0 0 28px 0;
+      line-height: 1.2;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-section p {
+      font-size: clamp(1rem, 1.8vw, 1.125rem);
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 36px 0;
+    }
+
     .hero-cta {
       display: inline-block;
-      padding: 16px 40px;
+      padding: 16px 36px;
       background: var(--brand);
       color: #fff;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 1.125rem;
+      font-size: 1.0625rem;
       transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(11, 110, 253, 0.2);
     }
+
     .hero-cta:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(11, 110, 253, 0.3);
+      box-shadow: 0 8px 24px rgba(11, 110, 253, 0.35);
+    }
+
+    /* Right Side - Image */
+    .hero-image-side {
+      flex: 0 0 55%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      object-position: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 968px) {
+      .hero-section {
+        min-height: auto;
+      }
+
+      .hero-split-container {
+        flex-direction: column;
+      }
+
+      .hero-text-side {
+        flex: 1;
+        padding: 60px 40px;
+      }
+
+      .hero-text-side::after {
+        display: none;
+      }
+
+      .hero-text-content {
+        max-width: 100%;
+      }
+
+      .hero-image-side {
+        flex: 1;
+        min-height: 400px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-text-side {
+        padding: 50px 24px;
+      }
+
+      .hero-section h1 {
+        margin-bottom: 20px;
+      }
+
+      .hero-section p {
+        margin-bottom: 28px;
+      }
+
+      .hero-image-side {
+        min-height: 320px;
+      }
     }
 
     /* Key Benefits Section */
@@ -503,19 +578,25 @@
   <main>
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Modern parking solutions built for your property's unique needs.</h1>
-          <p class="hero-subheadline">
-            Partnering with industry-leading technology providers, our team delivers
-            Scan to Pay and License Plate Recognition (LPR) systems that maximize
-            revenue while minimizing operational hassle.
-          </p>
-          <a href="#comparison" class="hero-cta">Find Your Solution</a>
-          <div class="hero-visual">
-            <img src="/images/scan.jpg" alt="Scan to Pay - Customer scanning QR code for parking payment">
-            <img src="/images/camera_lot.jpg" alt="License Plate Recognition - Automated parking enforcement camera">
+      <div class="hero-split-container">
+        <!-- Left Side: Text Content -->
+        <div class="hero-text-side">
+          <div class="hero-text-content">
+            <h1>Modern Parking Solutions Built for Your Property</h1>
+            <p>
+              Partnering with industry-leading technology providers, our team delivers
+              Scan to Pay and License Plate Recognition (LPR) systems that maximize
+              revenue while minimizing operational hassle. Everything runs through a
+              single platform, making it easy to track activity, manage payments,
+              and grow your bottom line.
+            </p>
+            <a href="#comparison" class="hero-cta">Learn More</a>
           </div>
+        </div>
+
+        <!-- Right Side: Image -->
+        <div class="hero-image-side">
+          <img src="/images/services.jpg" alt="Modern parking facility with professional management technology">
         </div>
       </div>
     </section>
