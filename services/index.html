@@ -139,48 +139,111 @@
       padding: 100px 0;
       background: var(--bg);
     }
-    .comparison-intro {
+
+    /* Banner Header with Overlay */
+    .comparison-banner {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 60px;
+    }
+    .comparison-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .comparison-banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(11, 110, 253, 0.85) 0%, rgba(8, 86, 201, 0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      max-width: 800px;
-      margin: 0 auto 60px;
+      padding: 40px 20px;
     }
-    .comparison-intro h2 {
-      font-size: clamp(2rem, 4vw, 2.625rem);
+    .comparison-banner-overlay h2 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 700;
-      margin: 0 0 20px 0;
+      color: #fff;
+      margin: 0 0 16px 0;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
-    .comparison-intro p {
-      font-size: 1.125rem;
-      color: var(--muted);
-      line-height: 1.6;
+    .comparison-banner-overlay p {
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      color: rgba(255, 255, 255, 0.95);
+      margin: 0;
+      max-width: 600px;
     }
+
+    @media (max-width: 768px) {
+      .comparison-banner {
+        height: 300px;
+      }
+    }
+
+    /* Two-Column Grid */
     .comparison-grid {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 40px;
       align-items: start;
     }
     @media (max-width: 900px) {
       .comparison-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .comparison-divider {
-        order: 2;
+        gap: 32px;
       }
     }
+
+    /* Solution Cards */
     .solution-card {
       background: #fff;
-      padding: 40px;
-      border-radius: 12px;
+      border-radius: 16px;
       border: 2px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
+    .solution-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .solution-card-image {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+    }
+    .solution-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .solution-card-content {
+      padding: 32px;
+      flex: 1;
+    }
+
     .solution-card h3 {
-      font-size: 1.75rem;
+      font-size: 1.875rem;
       font-weight: 700;
-      margin: 0 0 12px 0;
+      margin: 0 0 24px 0;
       color: var(--ink);
+      border-bottom: 3px solid var(--brand);
+      padding-bottom: 12px;
     }
     .solution-card h4 {
       font-size: 1rem;
@@ -188,7 +251,7 @@
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin: 24px 0 12px 0;
+      margin: 24px 0 16px 0;
     }
     .solution-card ul {
       list-style: none;
@@ -196,41 +259,27 @@
       margin: 0;
     }
     .solution-card li {
-      padding: 8px 0 8px 28px;
+      padding: 10px 0 10px 32px;
       position: relative;
-      line-height: 1.6;
+      line-height: 1.7;
       color: var(--ink);
+      font-size: 0.9375rem;
     }
     .solution-card li:before {
       content: "✓";
       position: absolute;
       left: 0;
+      top: 10px;
       color: var(--brand);
       font-weight: 700;
-    }
-    .comparison-divider {
+      font-size: 1.25rem;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px 0;
-    }
-    .combine-callout {
-      background: var(--brand);
-      color: #fff;
-      padding: 24px 32px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 200px;
-    }
-    .combine-callout strong {
-      display: block;
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-    }
-    .combine-callout p {
-      font-size: 0.875rem;
-      margin: 0;
-      line-height: 1.5;
+      background: rgba(11, 110, 253, 0.1);
+      border-radius: 50%;
     }
 
     /* Consultation Process Section */
@@ -508,64 +557,67 @@
     <!-- Solution Comparison Section -->
     <section id="comparison" class="comparison-section">
       <div class="container">
-        <div class="comparison-intro">
-          <h2>Which Solution Fits Your Property?</h2>
-          <p>
-            Each property is different. Our consultants help you choose between Scan to Pay
-            and LPR based on your specific needs, or implement both for maximum flexibility.
-          </p>
+        <!-- Banner Header with Combined Photo -->
+        <div class="comparison-banner">
+          <img src="/images/scan_lpr.jpg" alt="Scan to Pay and License Plate Recognition Solutions">
+          <div class="comparison-banner-overlay">
+            <h2>One Platform, Two Solutions</h2>
+            <p>Flexible Options for Every Property</p>
+          </div>
         </div>
 
+        <!-- Two-Column Layout -->
         <div class="comparison-grid">
           <!-- Scan to Pay Card -->
           <div class="solution-card">
-            <h3>Scan to Pay</h3>
+            <div class="solution-card-image">
+              <img src="/images/scan.jpg" alt="Scan to Pay - Customer scanning QR code for parking payment">
+            </div>
+            <div class="solution-card-content">
+              <h3>Scan to Pay</h3>
 
-            <h4>Common Use Cases</h4>
-            <ul>
-              <li>Customer-facing businesses (retail, restaurants, medical offices)</li>
-              <li>Properties with lower historical violation rates</li>
-              <li>Locations requiring quick deployment</li>
-              <li>Budget-conscious initial implementations</li>
-            </ul>
+              <h4>Common Use Cases</h4>
+              <ul>
+                <li>Customer-facing businesses (retail, restaurants, medical offices)</li>
+                <li>Properties with lower historical violation rates</li>
+                <li>Locations requiring quick deployment</li>
+                <li>Budget-conscious initial implementations</li>
+              </ul>
 
-            <h4>Key Features</h4>
-            <ul>
-              <li>Fast launch and minimal investment</li>
-              <li>Works on any smartphone (no app required)</li>
-              <li>Built-in grace periods and clear customer communication</li>
-              <li>Payment history creates instant audit trails</li>
-            </ul>
-          </div>
-
-          <!-- Divider with "OR COMBINE BOTH" -->
-          <div class="comparison-divider">
-            <div class="combine-callout">
-              <strong>OR COMBINE BOTH</strong>
-              <p>Some properties use both solutions: Scan to Pay and LPR</p>
-              <p style="margin-top: 12px; font-weight: 600;">Our consultants help determine the right mix for your property.</p>
+              <h4>Key Features</h4>
+              <ul>
+                <li>Fast launch and minimal investment</li>
+                <li>Works on any smartphone (no app required)</li>
+                <li>Built-in grace periods and clear customer communication</li>
+                <li>Payment history creates instant audit trails</li>
+              </ul>
             </div>
           </div>
 
           <!-- LPR Card -->
           <div class="solution-card">
-            <h3>LPR (License Plate Recognition)</h3>
+            <div class="solution-card-image">
+              <img src="/images/camera_lot.jpg" alt="License Plate Recognition - Automated parking enforcement camera">
+            </div>
+            <div class="solution-card-content">
+              <h3>LPR (License Plate Recognition)</h3>
 
-            <h4>Common Use Cases</h4>
-            <ul>
-              <li>Residential or employee parking areas</li>
-              <li>Properties with higher historical violation rates</li>
-              <li>Tow-enforced locations</li>
-              <li>Situations requiring hands-off enforcement</li>
-            </ul>
+              <h4>Common Use Cases</h4>
+              <ul>
+                <li>Residential or employee parking areas</li>
+                <li>Properties with higher historical violation rates</li>
+                <li>Tow-enforced locations</li>
+                <li>Situations requiring hands-off enforcement</li>
+              </ul>
 
-            <h4>Key Features</h4>
-            <ul>
-              <li>Automated plate capture with photo proof</li>
-              <li>Zero customer interaction needed</li>
-              <li>Consistent enforcement 24/7</li>
-              <li>Complete documentation for disputes</li>
-            </ul>
+              <h4>Key Features</h4>
+              <ul>
+                <li>Automated plate capture with photo proof</li>
+                <li>Zero customer interaction needed</li>
+                <li>Consistent enforcement 24/7</li>
+                <li>Complete documentation for disputes</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
