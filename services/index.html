@@ -61,17 +61,28 @@
     }
     .hero-visual {
       width: 100%;
-      max-width: 800px;
-      height: 400px;
+      max-width: 900px;
       margin: 40px auto 0;
-      background: #fff;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       border-radius: 12px;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 1.125rem;
+      overflow: hidden;
+    }
+    .hero-visual img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .hero-visual {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .hero-visual img {
+        height: 300px;
+      }
     }
     .hero-cta {
       display: inline-block;
@@ -102,11 +113,13 @@
     }
     .benefit-card {
       text-align: center;
+      padding: 32px 24px;
+      background: var(--bg);
+      border-radius: 8px;
+      transition: transform 0.2s;
     }
-    .benefit-icon {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-      display: block;
+    .benefit-card:hover {
+      transform: translateY(-4px);
     }
     .benefit-card h3 {
       font-size: 1.25rem;
@@ -162,11 +175,6 @@
       border-radius: 12px;
       border: 2px solid var(--border);
       height: 100%;
-    }
-    .solution-icon {
-      font-size: 3rem;
-      margin-bottom: 24px;
-      display: block;
     }
     .solution-card h3 {
       font-size: 1.75rem;
@@ -254,11 +262,7 @@
       padding: 32px;
       background: var(--bg);
       border-radius: 8px;
-    }
-    .factor-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-      display: block;
+      border-left: 4px solid var(--brand);
     }
     .factor-card h3 {
       font-size: 1.25rem;
@@ -304,11 +308,6 @@
       border-radius: 12px;
       border: 2px solid var(--border);
     }
-    .customization-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      display: block;
-    }
     .customization-card h3 {
       font-size: 1.5rem;
       font-weight: 600;
@@ -353,16 +352,13 @@
       background: var(--bg);
       border-radius: 8px;
     }
-    .implementation-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      display: block;
-    }
     .implementation-card h3 {
       font-size: 1.25rem;
       font-weight: 600;
       margin: 0 0 16px 0;
       color: var(--ink);
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--brand);
     }
     .implementation-card ul {
       list-style: none;
@@ -468,7 +464,8 @@
           </p>
           <a href="#comparison" class="hero-cta">Find Your Solution</a>
           <div class="hero-visual">
-            [Hero Image: Split-screen showing Scan to Pay (phone with QR) and LPR (camera + license plate)]
+            <img src="/images/scan.jpg" alt="Scan to Pay - Customer scanning QR code for parking payment">
+            <img src="/images/camera_lot.jpg" alt="License Plate Recognition - Automated parking enforcement camera">
           </div>
         </div>
       </div>
@@ -481,31 +478,26 @@
 
         <div class="benefits-grid">
           <div class="benefit-card">
-            <span class="benefit-icon">🔓</span>
             <h3>Frictionless Payments</h3>
             <p>Customers pay directly from any smartphone—no app downloads or accounts required.</p>
           </div>
 
           <div class="benefit-card">
-            <span class="benefit-icon">📸</span>
             <h3>Automated Enforcement</h3>
             <p>License plate recognition with timestamped photo evidence handles compliance automatically.</p>
           </div>
 
           <div class="benefit-card">
-            <span class="benefit-icon">📊</span>
             <h3>Unified Platform</h3>
             <p>Single dashboard tracks all activity, payments, and violations across your properties.</p>
           </div>
 
           <div class="benefit-card">
-            <span class="benefit-icon">🔔</span>
             <h3>Real-Time Alerts</h3>
             <p>Instant notifications keep you informed of violations, payments, and system status.</p>
           </div>
 
           <div class="benefit-card">
-            <span class="benefit-icon">⚡</span>
             <h3>Simple Setup</h3>
             <p>No complex hardware installations or IT infrastructure needed to get started.</p>
           </div>
@@ -527,7 +519,6 @@
         <div class="comparison-grid">
           <!-- Scan to Pay Card -->
           <div class="solution-card">
-            <span class="solution-icon">📱</span>
             <h3>Scan to Pay</h3>
 
             <h4>Common Use Cases</h4>
@@ -558,7 +549,6 @@
 
           <!-- LPR Card -->
           <div class="solution-card">
-            <span class="solution-icon">📷</span>
             <h3>LPR (License Plate Recognition)</h3>
 
             <h4>Common Use Cases</h4>
@@ -594,37 +584,31 @@
 
         <div class="factors-grid">
           <div class="factor-card">
-            <span class="factor-icon">🏗️</span>
             <h3>Layout & Traffic Flow</h3>
             <p>Physical property design, entry/exit points, and typical traffic patterns.</p>
           </div>
 
           <div class="factor-card">
-            <span class="factor-icon">⏱️</span>
             <h3>Duration & Turnover</h3>
             <p>Average parking duration and how frequently spaces turn over.</p>
           </div>
 
           <div class="factor-card">
-            <span class="factor-icon">⚠️</span>
             <h3>Violation Rate</h3>
             <p>Current abuse levels, freeloading patterns, and enforcement challenges.</p>
           </div>
 
           <div class="factor-card">
-            <span class="factor-icon">💰</span>
             <h3>Budget & Timeline</h3>
             <p>Available investment and desired launch timeframe.</p>
           </div>
 
           <div class="factor-card">
-            <span class="factor-icon">👥</span>
             <h3>Staffing Resources</h3>
             <p>Available personnel for monitoring and enforcement support.</p>
           </div>
 
           <div class="factor-card">
-            <span class="factor-icon">📋</span>
             <h3>Local Requirements</h3>
             <p>Municipal regulations, signage laws, and compliance needs.</p>
           </div>
@@ -642,19 +626,16 @@
 
         <div class="customization-grid">
           <div class="customization-card">
-            <span class="customization-icon">⚙️</span>
             <h3>Flexible Rules</h3>
             <p>Set custom parking hours, pricing tiers, and time limits that match your business schedule.</p>
           </div>
 
           <div class="customization-card">
-            <span class="customization-icon">🚗</span>
             <h3>Easy Exemptions</h3>
             <p>Add employee or tenant license plates for automatic free parking access.</p>
           </div>
 
           <div class="customization-card">
-            <span class="customization-icon">🕐</span>
             <h3>Dynamic Hours</h3>
             <p>Define different rules for weekdays vs. weekends, business hours vs. after-hours.</p>
           </div>
@@ -675,7 +656,6 @@
 
         <div class="implementation-grid">
           <div class="implementation-card">
-            <span class="implementation-icon">📋</span>
             <h3>Strategic Planning</h3>
             <ul>
               <li>Site assessment and solution recommendation</li>
@@ -685,7 +665,6 @@
           </div>
 
           <div class="implementation-card">
-            <span class="implementation-icon">🚀</span>
             <h3>Deployment</h3>
             <ul>
               <li>Partner coordination and installation management</li>
@@ -695,7 +674,6 @@
           </div>
 
           <div class="implementation-card">
-            <span class="implementation-icon">📚</span>
             <h3>Training & Handoff</h3>
             <ul>
               <li>Owner and staff training sessions</li>
@@ -705,7 +683,6 @@
           </div>
 
           <div class="implementation-card">
-            <span class="implementation-icon">🔧</span>
             <h3>Ongoing Partnership</h3>
             <ul>
               <li>Revenue tracking and performance reviews</li>
