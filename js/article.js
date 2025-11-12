@@ -402,7 +402,7 @@
   }
 
   function normaliseImage(path) {
-    if (!path) return '/images/default-guide.jpg';
+    if (!path) return '/images/default-guide.webp';
     if (path.startsWith('http')) return path;
     return path.startsWith('/images/') ? path : `/images/${path.replace(/^\/+/, '')}`;
   }
