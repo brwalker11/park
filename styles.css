@@ -14,6 +14,16 @@
   --h2:clamp(1.75rem,3.5vw,2.25rem);
   --h3:clamp(1.25rem,2.5vw,1.625rem);
 }
+
+/* Font display strategy for web fonts */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter'), local('Inter-Regular');
+}
+
 *{box-sizing:border-box}
 html{font-size:16px}
 body{
@@ -405,7 +415,7 @@ li{max-width:var(--max-text)}
 .benefits-grid{gap:24px;margin-top:var(--space-block)}
 .benefit-card{padding:28px 26px;text-align:center;align-items:center;gap:14px}
 .benefit-icon{width:56px;height:56px;border-radius:50%;background:rgba(11,110,253,0.12);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
-.benefit-icon svg{width:28px;height:28px}
+.benefit-icon svg{width:28px;height:28px;fill:none;stroke:currentColor}
 ul{padding-left:18px;margin:0 0 8px 0}
 .features .feature-grid{display:grid;gap:20px}
 @media (min-width:768px){
