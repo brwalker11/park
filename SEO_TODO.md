@@ -12,12 +12,40 @@ This document tracks remaining SEO optimization tasks to implement for monetize-
 - [x] Updated sitemap with new lastmod dates
 
 ### Phase 2: Organization & Video Schema
-- [x] Added Organization schema to homepage with LinkedIn link
+- [x] Added Organization schema to homepage
 - [x] Added VideoObject schema for homepage hero video
+- [ ] Add social media links to Organization schema (when available)
 
 ---
 
 ## 🔜 Remaining Tasks (High Impact)
+
+### 0. Add Social Media Links to Organization Schema (When Ready)
+**Priority:** 🟢 LOW (Nice to have, do when social profiles are created)
+**Estimated Time:** 2 minutes
+**Impact:** Links social media profiles to website entity in Google
+
+#### Implementation:
+Once you have social media profiles set up (LinkedIn, Facebook, Twitter, etc.), add them to the Organization schema on `index.html`:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Monetize Parking",
+  "url": "https://monetize-parking.com",
+  ...
+  "sameAs": [
+    "https://www.linkedin.com/company/monetize-parking",
+    "https://www.facebook.com/monetizeparking",
+    "https://twitter.com/monetizeparking"
+  ]
+}
+```
+
+**Where to add:** In `index.html` around line 45, after the `contactPoint` property.
+
+---
 
 ### 1. Image Optimization - WebP Conversion
 **Priority:** 🔴 HIGH (Biggest performance gain)
