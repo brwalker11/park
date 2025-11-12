@@ -2,6 +2,37 @@
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Navigation toggle for mobile menu
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close menu when a link is clicked (mobile)
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+});
+
+// Analytics tracking for contact and calculator CTAs
+document.addEventListener('click', e => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  const href = link.getAttribute('href') || '';
+  if (href.endsWith('/contact/')) {
+    gtag('event', 'generate_lead', { method: 'Contact CTA' });
+  }
+  if (href.endsWith('/calculator/')) {
+    gtag('event', 'calculator_start', { method: 'Hero CTA' });
+  }
 });
 
 function submitForm(e){
