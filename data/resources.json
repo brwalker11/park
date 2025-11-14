@@ -1,4 +1,28 @@
-[ 
+[
+  {
+    "slug": "flexible-parking-rules",
+    "title": "Flexible Parking Rules: Take Control of Who Pays and When",
+    "category": "Articles",
+    "tags": [
+      "parking management",
+      "employee parking",
+      "dynamic pricing",
+      "license plate exemption",
+      "automation"
+    ],
+    "date": "2025-11-14",
+    "lastmod": "2025-11-14",
+    "description": "Learn how to monetize visitor parking while exempting employees, set custom operating hours, and implement dynamic pricing that adapts to real demand.",
+    "excerpt": "Take full control of who pays, when they pay, and how much with flexible parking rules.",
+    "image": "/images/rules.webp",
+    "imageAlt": "Flexible parking management rules dashboard showing license plate exemptions and custom pricing schedules.",
+    "thumbnail": "/images/rules.webp",
+    "content": "/articles/flexible-parking-rules.html",
+    "readTime": "5–7 min",
+    "author": "Monetize Parking",
+    "featured": false,
+    "url": "/articles/flexible-parking-rules/"
+  },
   {
     "slug": "occupancy-vs-compliance",
     "title": "Why 100% Occupancy Isn’t the Goal. 100% Compliance Is",
