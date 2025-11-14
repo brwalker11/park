@@ -91,6 +91,30 @@
     "author": "Monetize Parking"
   },
   {
+    "slug": "dynamic-pricing-guide",
+    "title": "Dynamic Pricing 101: When and How to Adjust Parking Rates",
+    "category": "Guides",
+    "tags": [
+      "dynamic pricing",
+      "pricing strategy",
+      "revenue optimization",
+      "automation",
+      "parking management"
+    ],
+    "date": "2025-11-14",
+    "lastmod": "2025-11-14",
+    "description": "Learn when and how to implement dynamic pricing for parking to maximize revenue by 12-35% with time-based, demand-based, and event-based strategies.",
+    "excerpt": "Boost parking revenue 12-35% with dynamic pricing strategies that adjust rates based on real-time demand.",
+    "image": "/images/pricing.webp",
+    "imageAlt": "Dynamic pricing dashboard showing real-time parking rate adjustments",
+    "thumbnail": "/images/pricing.webp",
+    "content": "/articles/dynamic-pricing-guide.html",
+    "readTime": "12–15 min",
+    "author": "Monetize Parking",
+    "featured": false,
+    "url": "/articles/dynamic-pricing-guide/"
+  },
+  {
     "slug": "stillwater-300-revenue-lift",
     "title": "Stillwater, MN 300% Revenue Lift",
     "category": "Case Studies",
