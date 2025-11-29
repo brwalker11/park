@@ -4,24 +4,54 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Texas Parking Insights | Monetize Parking</title>
-  <meta name="description" content="Explore parking investment opportunities and market insights in Texas communities.">
+  <meta name="description" content="Comprehensive guides and insights for parking monetization in Texas. From property types to year-round revenue strategies, explore approaches tailored for Austin, Waco, and Corpus Christi markets.">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/css/state-map.css">
-  <link rel="canonical" href="https://monetize-parking.com/resources/states/texas.html">
+  <link rel="stylesheet" href="/css/resources.css">
+  <link rel="canonical" href="https://monetize-parking.com/resources/states/texas/">
   <meta property="og:title" content="Texas Parking Insights | Monetize Parking">
-  <meta property="og:description" content="Market insights and opportunities for parking investment in Texas.">
-  <meta property="og:url" content="https://monetize-parking.com/resources/states/texas.html">
+  <meta property="og:description" content="Comprehensive guides and insights for parking monetization in Texas markets.">
+  <meta property="og:url" content="https://monetize-parking.com/resources/states/texas/">
   <meta property="og:image" content="https://monetize-parking.com/images/og-hero.jpg">
   <meta property="og:site_name" content="Monetize Parking">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Texas Parking Insights | Monetize Parking">
 <script defer src="/script.js"></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Texas Parking Insights | Monetize Parking",
-  "description": "Market insights and opportunities for parking investment in Texas communities."
+  "@type": "CollectionPage",
+  "name": "Texas Parking Insights",
+  "description": "Comprehensive guides and insights for parking monetization in Texas markets.",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://monetize-parking.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Resources",
+        "item": "https://monetize-parking.com/resources/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "States",
+        "item": "https://monetize-parking.com/resources/states/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Texas",
+        "item": "https://monetize-parking.com/resources/states/texas/"
+      }
+    ]
+  }
 }
   </script>
   <!-- Google tag (gtag.js) -->
@@ -32,8 +62,53 @@
     gtag('js', new Date());
     gtag('config', 'G-LGHS0L5WE8');
   </script>
+  <style>
+    .breadcrumb {
+      padding: 1rem 0 0.5rem;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    .breadcrumb a {
+      color: #0b6efd;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      margin: 0 0.5rem;
+    }
+    .state-hero-custom {
+      padding: clamp(2rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem);
+      background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(13, 110, 253, 0) 70%);
+    }
+    .state-hero-custom .back-link {
+      display: inline-flex;
+      align-items: center;
+      color: #0b6efd;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      transition: color 0.2s ease;
+    }
+    .state-hero-custom .back-link:hover {
+      color: #0958d9;
+    }
+    .state-title-custom {
+      font-size: clamp(2.25rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .state-sub-custom {
+      max-width: 720px;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: #64748b;
+      margin: 0;
+    }
+  </style>
 </head>
-<body class="state-page state-detail">
+<body class="resources-page">
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="brand" aria-label="Monetize Parking Home">
@@ -52,20 +127,132 @@
   </header>
 
   <main>
-    <section class="state-hero">
+    <section class="state-hero-custom">
       <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span>›</span>
+          <a href="/resources/">Resources</a>
+          <span>›</span>
+          <a href="/resources/states/">States</a>
+          <span>›</span>
+          <strong>Texas</strong>
+        </nav>
         <a href="/resources/states/" class="back-link">← Back to State Selection</a>
-        <h1 class="state-title">Texas</h1>
-        <p class="state-sub">Rapidly expanding cities and historic downtown districts across the Lone Star State. Texas is experiencing unprecedented growth, with communities seeking parking solutions that support economic development while preserving local character.</p>
+        <h1 class="state-title-custom">Texas Parking Insights</h1>
+        <p class="state-sub-custom">Comprehensive guides and insights for parking monetization in Texas's fast-growing markets. From untapped revenue opportunities to year-round strategies, explore practical approaches tailored for the Lone Star State's dynamic urban and suburban markets.</p>
       </div>
     </section>
 
-    <section class="state-content">
+    <section class="res-grid-wrap">
       <div class="container">
-        <div class="empty-state">
-          <h2>Content Coming Soon</h2>
-          <p>We're currently developing in-depth articles and insights about Texas's parking landscape. Check back soon for market analysis, success stories, and investment opportunities.</p>
-          <a href="/resources/" class="btn">Browse All Resources</a>
+        <div class="res-grid" aria-live="polite">
+
+          <!-- Card 1: Untapped Opportunity -->
+          <article class="res-card">
+            <a href="/resources/states/texas/untapped-opportunity/" class="res-thumb" aria-label="Why Texas Property Owners Are Leaving Money on the Table">
+              <img src="/images/texas-untapped.jpg" alt="Texas property owners missing parking revenue opportunities" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad1%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad1)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Guides</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/untapped-opportunity/">Why Texas Property Owners Are Leaving Money on the Table</a>
+              </h3>
+              <p class="res-excerpt">How Texas property owners miss revenue opportunities from underutilized parking assets in growing markets</p>
+              <a href="/resources/states/texas/untapped-opportunity/" class="res-link">Read Guide</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Market Overview -->
+          <article class="res-card">
+            <a href="/resources/states/texas/market-overview/" class="res-thumb" aria-label="Texas Parking Market Overview">
+              <img src="/images/texas-market.jpg" alt="Texas parking market landscape" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad2%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad2)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Articles</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/market-overview/">Texas Parking Market Overview</a>
+              </h3>
+              <p class="res-excerpt">Understanding parking opportunities across Austin, Waco, and Corpus Christi markets</p>
+              <a href="/resources/states/texas/market-overview/" class="res-link">Read Article</a>
+            </div>
+          </article>
+
+          <!-- Card 3: Property Types -->
+          <article class="res-card">
+            <a href="/resources/states/texas/property-types/" class="res-thumb" aria-label="Property Types with Strong Parking Revenue Potential in Texas">
+              <img src="/images/texas-properties.jpg" alt="Texas property types for parking revenue" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad3%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad3)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Guides</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/property-types/">Property Types with Strong Parking Revenue Potential in Texas</a>
+              </h3>
+              <p class="res-excerpt">Which Texas property types generate the strongest parking revenue returns in urban and suburban markets</p>
+              <a href="/resources/states/texas/property-types/" class="res-link">Read Guide</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Technology Solutions -->
+          <article class="res-card">
+            <a href="/resources/states/texas/technology-solutions/" class="res-thumb" aria-label="Technology Solutions for Texas Properties">
+              <img src="/images/texas-technology.jpg" alt="Parking technology solutions for Texas" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad4%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad4)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Guides</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/technology-solutions/">Technology Solutions for Texas Properties</a>
+              </h3>
+              <p class="res-excerpt">Combining Scan to Pay and LPR systems to match Texas property characteristics and development patterns</p>
+              <a href="/resources/states/texas/technology-solutions/" class="res-link">Read Guide</a>
+            </div>
+          </article>
+
+          <!-- Card 5: Seasonal Considerations -->
+          <article class="res-card">
+            <a href="/resources/states/texas/seasonal-considerations/" class="res-thumb" aria-label="Year-Round Revenue in Texas Markets">
+              <img src="/images/texas-seasonal.jpg" alt="Texas year-round parking revenue" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad5%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad5)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Articles</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/seasonal-considerations/">Year-Round Revenue in Texas Markets</a>
+              </h3>
+              <p class="res-excerpt">Maximizing parking revenue across Texas's extended operating season and mild climate advantages</p>
+              <a href="/resources/states/texas/seasonal-considerations/" class="res-link">Read Article</a>
+            </div>
+          </article>
+
+          <!-- Card 6: Financial Impact -->
+          <article class="res-card">
+            <a href="/resources/states/texas/financial-impact/" class="res-thumb" aria-label="Financial Impact on Texas Property Values">
+              <img src="/images/texas-financial.jpg" alt="Parking revenue impact on Texas property values" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad6%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad6)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Articles</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/financial-impact/">Financial Impact on Texas Property Values</a>
+              </h3>
+              <p class="res-excerpt">How parking revenue increases NOI and property valuations in fast-growing Texas markets</p>
+              <a href="/resources/states/texas/financial-impact/" class="res-link">Read Article</a>
+            </div>
+          </article>
+
+          <!-- Card 7: Owner FAQs -->
+          <article class="res-card">
+            <a href="/resources/states/texas/owner-faqs/" class="res-thumb" aria-label="Common Questions Texas Property Owners Ask">
+              <img src="/images/texas-faqs.jpg" alt="Texas property owner parking questions" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad7%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.95%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%233b3a3f%22 stop-opacity=%220.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221200%22 height=%22800%22 fill=%22url(%23grad7)%22/%3E%3Ctext x=%2250%25%22 y=%2252%25%22 fill=%22white%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-weight=%22600%22 font-size=%2296%22 text-anchor=%22middle%22%3EArticle%3C/text%3E%3Ctext x=%2250%25%22 y=%2264%25%22 fill=%22white%22 fill-opacity=%220.7%22 font-family=%22Inter, Helvetica Neue, Arial, sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22%3EMonetize Parking%3C/text%3E%3C/svg%3E'">
+            </a>
+            <div class="res-body">
+              <span class="res-tag">Guides</span>
+              <h3 class="res-card-title">
+                <a href="/resources/states/texas/owner-faqs/">Common Questions Texas Property Owners Ask</a>
+              </h3>
+              <p class="res-excerpt">Addressing concerns about tenant relations, implementation costs, technology reliability, and weather considerations</p>
+              <a href="/resources/states/texas/owner-faqs/" class="res-link">Read Guide</a>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
