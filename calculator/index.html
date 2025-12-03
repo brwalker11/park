@@ -61,8 +61,8 @@
     <!-- PAGE HERO -->
     <section class="page-hero">
       <div class="container">
-        <h1 class="page-title">Calculator</h1>
-        <p class="page-subtitle">Get a ballpark monthly revenue estimate. Toggle uplift if you plan to add LPR.</p>
+        <h1 class="page-title">Discover Your Parking's Revenue Potential</h1>
+        <p class="page-subtitle">Property owners across the United States are turning underutilized parking into $3,000-$8,000+ monthly revenue streams. See what your property could earn in 60 seconds.</p>
       </div>
     </section>
 
@@ -75,12 +75,20 @@
           <div class="left">
             <!-- Mode switch -->
             <div class="card">
-              <div class="segmented" role="tablist" aria-label="Calculator mode" aria-describedby="modeHelp">
-                <button class="seg is-active" data-mode="retail" role="tab" aria-selected="true" tabindex="0" type="button">Retail</button>
-                <button class="seg" data-mode="nights" role="tab" aria-selected="false" tabindex="-1" type="button">Nights &amp; Weekends</button>
-                <button class="seg" data-mode="campus" role="tab" aria-selected="false" tabindex="-1" type="button">Campus</button>
+              <div class="segmented" role="tablist" aria-label="Calculator mode">
+                <button class="seg is-active" data-mode="retail" role="tab" aria-selected="true" tabindex="0" type="button">
+                  <span class="seg-title">Retail</span>
+                  <span class="seg-desc">Cafes, shops, restaurants</span>
+                </button>
+                <button class="seg" data-mode="nights" role="tab" aria-selected="false" tabindex="-1" type="button">
+                  <span class="seg-title">Nights &amp; Weekends</span>
+                  <span class="seg-desc">Office parks, business districts</span>
+                </button>
+                <button class="seg" data-mode="campus" role="tab" aria-selected="false" tabindex="-1" type="button">
+                  <span class="seg-title">Campus</span>
+                  <span class="seg-desc">Student housing, university areas</span>
+                </button>
               </div>
-              <p id="modeHelp" class="muted small">Retail: steady daytime demand.</p>
             </div>
 
             <!-- Inputs -->
@@ -100,7 +108,7 @@
                 </div>
 
                 <div class="field">
-                  <label for="hours">Avg paid hours per occupied space/day</label>
+                  <label for="hours">Average parking duration per space (hours)</label>
                   <input id="hours" name="hours" type="number" min="0" step="0.1" value="1.8" />
                 </div>
 
@@ -118,13 +126,25 @@
                 </div>
 
                 <div class="field field--uplift">
-                  <label for="uplift">Compliance uplift percent</label>
+                  <label for="uplift">
+                    Compliance uplift percent
+                    <span class="tooltip-icon" aria-label="More information about compliance uplift">
+                      ⓘ
+                      <span class="tooltip-text">How much more revenue you earn when violators can't avoid payment</span>
+                    </span>
+                  </label>
                   <div class="uplift-controls">
                     <input id="uplift" name="uplift" type="range" min="0" max="40" step="1" value="10" />
                     <div class="uplift-readout" aria-live="polite"><span id="upliftPct">10</span>%</div>
                     <label class="check uplift-check">
                       <input id="applyUplift" type="checkbox" checked />
-                      <span>Apply uplift (for LPR / stricter compliance)</span>
+                      <span>
+                        Apply uplift (for LPR / stricter compliance)
+                        <span class="tooltip-icon" aria-label="More information about LPR" style="margin-left:4px">
+                          ⓘ
+                          <span class="tooltip-text">License Plate Recognition - automates enforcement and increases compliance</span>
+                        </span>
+                      </span>
                     </label>
                   </div>
                 </div>
@@ -140,15 +160,28 @@
             <div class="card summary" id="summaryCard" aria-live="polite">
               <div class="kpis">
                 <div class="kpi">
-                  <div class="kpi-label">Monthly gross</div>
+                  <div class="kpi-label">Without LPR</div>
                   <div class="kpi-value" id="kpiGross" aria-live="polite">$0</div>
+                  <div class="kpi-annual" id="kpiGrossAnnual">($0 annually)</div>
+                  <!-- Visual bar for base revenue -->
+                  <div class="revenue-bar">
+                    <div class="revenue-bar-fill" id="barGross" style="width: 100%"></div>
+                  </div>
                 </div>
                 <div class="kpi" id="gross-with-uplift-line">
-                  <div class="kpi-label">Gross with uplift</div>
-                  <div class="kpi-value" id="kpiUplift" aria-live="polite">$0</div>
+                  <div class="kpi-label">With LPR Enhancement</div>
+                  <div class="kpi-value kpi-value-enhanced" id="kpiUplift" aria-live="polite">$0</div>
+                  <div class="kpi-annual" id="kpiUpliftAnnual">($0 annually)</div>
+                  <!-- Visual bar for uplift revenue -->
+                  <div class="revenue-bar revenue-bar-enhanced">
+                    <div class="revenue-bar-fill revenue-bar-fill-enhanced" id="barUplift" style="width: 100%"></div>
+                  </div>
                 </div>
               </div>
-              <a class="btn btn-primary btn-block" href="/contact/">Book a free assessment</a>
+              <div class="revenue-context" id="revenueContext">
+                That's <span id="contextAnnual">$0</span> annually - enough to cover property taxes, fund improvements, or increase property value
+              </div>
+              <a class="btn btn-primary btn-block btn-cta-enhanced" href="/contact/">Book a free assessment</a>
             </div>
           </aside>
 
@@ -187,18 +220,36 @@
     .right{display:flex; flex-direction:column; gap:var(--gap);}
     .card{background:var(--card); border:1px solid var(--bd); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;}
     #summaryCard{position:sticky; top:var(--stickTop);}
-    .kpis{display:grid; grid-template-columns:1fr; gap:14px; margin-bottom:12px}
-    .kpi-label{color:var(--muted); font-weight:600; margin-bottom:4px}
-    .kpi-value{font-size:34px; font-weight:800; letter-spacing:-0.02em; color:#0b1220}
+    .kpis{display:grid; grid-template-columns:1fr; gap:28px; margin-bottom:20px}
+    .kpi{background:#f8fafc; padding:18px; border-radius:12px; border:2px solid #e2e8f0}
+    .kpi-label{color:var(--muted); font-weight:700; margin-bottom:8px; font-size:14px; text-transform:uppercase; letter-spacing:0.5px}
+    .kpi-value{font-size:56px; font-weight:900; letter-spacing:-0.03em; color:#0b1220; line-height:1; margin-bottom:6px}
+    .kpi-value-enhanced{color:#0b6efd}
+    .kpi-annual{color:#64748b; font-size:15px; font-weight:600; margin-bottom:12px}
     .btn{display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 18px; border-radius:10px; font-weight:700; border:1px solid transparent; text-decoration:none; cursor:pointer; transition:background .2s ease, border-color .2s ease;}
     .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(10,104,255,.25);}
     .btn-block{width:100%}
     .btn-primary{background:var(--blue); color:#fff}
     .btn-primary:hover{background:var(--blue-600)}
-    .segmented{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
-    .seg{height:40px; border:1px solid var(--bd); border-radius:10px; background:#f3f5f9; font-weight:700; cursor:pointer; color:var(--ink);}
-    .seg.is-active{background:#e6efff; border-color:#bcd4ff}
+    .btn-cta-enhanced{height:52px; font-size:16px; box-shadow:0 4px 12px rgba(11,110,253,0.3); margin-top:8px}
+    .btn-cta-enhanced:hover{box-shadow:0 6px 16px rgba(11,110,253,0.4); transform:translateY(-1px)}
+    .revenue-bar{height:8px; background:#e2e8f0; border-radius:999px; overflow:hidden; margin-top:4px}
+    .revenue-bar-fill{height:100%; background:linear-gradient(90deg, #3b82f6, #2563eb); border-radius:999px; transition:width 0.3s ease}
+    .revenue-bar-enhanced .revenue-bar-fill-enhanced{background:linear-gradient(90deg, #10b981, #059669)}
+    .revenue-context{background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:14px; font-size:14px; line-height:1.5; color:#0c4a6e; font-weight:600; margin-bottom:12px}
+    .revenue-context span{color:#0369a1; font-weight:700}
+    .tooltip-icon{display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:#e0e7ff; color:#4f46e5; font-size:11px; font-weight:700; cursor:help; margin-left:6px; position:relative}
+    .tooltip-icon:hover{background:#c7d2fe}
+    .tooltip-text{visibility:hidden; position:absolute; bottom:125%; left:50%; transform:translateX(-50%); background:#1e293b; color:#fff; padding:8px 12px; border-radius:6px; font-size:13px; font-weight:500; white-space:nowrap; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .tooltip-icon:hover .tooltip-text{visibility:visible}
+    .tooltip-text::after{content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:#1e293b}
+    .segmented{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    .seg{height:auto; min-height:70px; border:2px solid var(--bd); border-radius:12px; background:#f3f5f9; font-weight:700; cursor:pointer; color:var(--ink); padding:12px 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; transition:all 0.2s ease}
+    .seg:hover{border-color:#bcd4ff; background:#f0f5ff}
+    .seg.is-active{background:#e6efff; border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
     .seg:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(10,104,255,.35);}
+    .seg-title{font-size:15px; font-weight:700; line-height:1.2}
+    .seg-desc{font-size:12px; font-weight:500; color:#64748b; line-height:1.2; text-align:center}
     .muted{color:var(--muted)}
     .small{font-size:13px}
     .grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap)}
@@ -225,8 +276,15 @@
       main{--pad:16px; --gap:16px;}
       .layout{grid-template-columns:1fr;}
       #summaryCard{position:static; top:auto;}
-      .page-title{font-size:36px}
+      .page-title{font-size:32px}
+      .page-subtitle{font-size:15px}
       .grid{grid-template-columns:1fr;}
+      .kpi-value{font-size:42px}
+      .segmented{gap:8px}
+      .seg{min-height:65px; padding:10px 6px}
+      .seg-title{font-size:13px}
+      .seg-desc{font-size:11px}
+      .tooltip-text{font-size:12px; white-space:normal; max-width:200px; text-align:center}
     }
     .calc, .calc .container, .calc .layout{overflow:visible;}
     #summaryCard.is-bottomed{
@@ -266,11 +324,6 @@
       const segs = Array.from(document.querySelectorAll('.segmented .seg'));
       const upliftLine = document.getElementById('gross-with-uplift-line');
       const fmtMoney = (n)=> (Number.isFinite(n)?n:0).toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:0});
-      const modeDescriptions = {
-        retail: 'Retail: steady daytime demand.',
-        nights: 'Nights & Weekends: event-driven peaks.',
-        campus: 'Campus: class-block patterns.'
-      };
       const modeOrder = segs.map(btn=>btn.dataset.mode);
       let currentMode = document.querySelector('.seg.is-active')?.dataset.mode || 'retail';
 
@@ -287,8 +340,6 @@
           btn.setAttribute('aria-selected', String(isActive));
           btn.setAttribute('tabindex', isActive ? '0' : '-1');
         });
-        const help = $('modeHelp');
-        if(help){ help.textContent = modeDescriptions[currentMode]; }
       }
 
       function applyMode(mode){
@@ -322,8 +373,29 @@
         const gross = base;
         const grossWith = apply ? base * (1 + up/100) : base;
 
+        // Update monthly values
         $('kpiGross').textContent = fmtMoney(gross);
         $('kpiUplift').textContent = fmtMoney(grossWith);
+
+        // Update annual projections
+        const annualGross = gross * 12;
+        const annualWith = grossWith * 12;
+        $('kpiGrossAnnual').textContent = '(' + fmtMoney(annualGross) + ' annually)';
+        $('kpiUpliftAnnual').textContent = '(' + fmtMoney(annualWith) + ' annually)';
+
+        // Update contextual copy
+        const contextAnnual = apply ? annualWith : annualGross;
+        $('contextAnnual').textContent = fmtMoney(contextAnnual);
+
+        // Update revenue bars (relative widths)
+        const maxRevenue = Math.max(gross, grossWith);
+        if (maxRevenue > 0) {
+          const grossWidth = (gross / maxRevenue) * 100;
+          const withWidth = (grossWith / maxRevenue) * 100;
+          $('barGross').style.width = grossWidth + '%';
+          $('barUplift').style.width = withWidth + '%';
+        }
+
         updateUpliftVisibility(apply);
       }
 
