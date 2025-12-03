@@ -370,28 +370,33 @@
     if (!carousel) return;
 
     let isUserInteracting = false;
+    let isPageScrolling = false;
     let currentIndex = 0;
+    let pageScrollTimeout;
     const pauseDuration = 5000; // Pause on each card for 5 seconds
     const cards = carousel.querySelectorAll('.res-card');
 
     if (cards.length <= 1) return; // No need to auto-scroll if only one card
 
     function scrollToCard(index) {
-      if (isUserInteracting) return;
+      if (isUserInteracting || isPageScrolling) return;
 
       const card = cards[index];
       if (!card) return;
 
-      // Smooth scroll to the card
-      card.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start'
+      // Get the carousel's scroll position and card position
+      const cardLeft = card.offsetLeft;
+
+      // Scroll the carousel container directly instead of using scrollIntoView
+      // This prevents the page itself from scrolling
+      carousel.scrollTo({
+        left: cardLeft,
+        behavior: 'smooth'
       });
     }
 
     function autoAdvance() {
-      if (isUserInteracting) return;
+      if (isUserInteracting || isPageScrolling) return;
 
       currentIndex = (currentIndex + 1) % cards.length;
       scrollToCard(currentIndex);
@@ -400,7 +405,7 @@
       setTimeout(autoAdvance, pauseDuration);
     }
 
-    // Pause auto-scroll when user interacts
+    // Pause auto-scroll when user interacts with carousel
     carousel.addEventListener('mouseenter', () => {
       isUserInteracting = true;
     });
@@ -420,6 +425,17 @@
         isUserInteracting = false;
       }, 1000);
     });
+
+    // Pause auto-scroll when user scrolls the page
+    function handlePageScroll() {
+      isPageScrolling = true;
+      clearTimeout(pageScrollTimeout);
+      pageScrollTimeout = setTimeout(() => {
+        isPageScrolling = false;
+      }, 2000); // Resume auto-scroll 2 seconds after user stops scrolling
+    }
+
+    window.addEventListener('scroll', handlePageScroll, { passive: true });
 
     // Start auto-scroll after initial pause
     setTimeout(autoAdvance, pauseDuration);
