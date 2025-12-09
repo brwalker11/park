@@ -27,6 +27,7 @@
     "slug": "license-plate-whitelisting-guide",
     "title": "License Plate Whitelisting: The Complete Guide to Parking Exemptions",
     "category": "Articles",
+    "hidden": true,
     "tags": [
       "license plate exemption",
       "parking management",
@@ -51,6 +52,7 @@
     "slug": "custom-operating-hours-strategy",
     "title": "Custom Operating Hours: When to Charge (and When Not To)",
     "category": "Articles",
+    "hidden": true,
     "tags": [
       "parking management",
       "operating hours",
@@ -75,6 +77,7 @@
     "slug": "dynamic-pricing-strategies",
     "title": "Dynamic Pricing Strategies: Maximizing Revenue Through Time-Based Rates",
     "category": "Articles",
+    "hidden": true,
     "tags": [
       "dynamic pricing",
       "pricing strategy",
@@ -99,6 +102,7 @@
     "slug": "balancing-revenue-relationships",
     "title": "Balancing Revenue and Relationships: Parking Policies That Don't Alienate Your Team",
     "category": "Articles",
+    "hidden": true,
     "tags": [
       "parking management",
       "employee parking",

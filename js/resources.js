@@ -116,6 +116,7 @@
     toggleFeatured(shouldShowFeatured);
 
     state.filtered = state.items.filter((item) => {
+      if (item.hidden) return false; // Skip hidden articles
       const matchesCategory = state.filter === 'All' || item.category === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
       return matchesCategory && matchesSearch;
@@ -129,7 +130,7 @@
     const featuredSlot = featuredSection.querySelector('.container');
     if (!featuredSlot) return [];
 
-    const featuredItems = items.filter((item) => item.is_featured);
+    const featuredItems = items.filter((item) => item.is_featured && !item.hidden);
 
     if (!featuredItems.length) {
       featuredSlot.innerHTML = '';
