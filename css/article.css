@@ -37,18 +37,52 @@
   line-height: 1.2;
   margin: var(--space-6) 0 var(--space-2);
   font-size: clamp(1.5rem, 2.8vw, 2rem);
+  color: var(--clr-text);
+  letter-spacing: -0.02em;
 }
 .article h3{
-  font-weight: 700;
+  font-weight: 600;
   margin: var(--space-4) 0 var(--space-2);
-  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-  color: var(--clr-text);
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  color: var(--clr-muted);
+  letter-spacing: 0;
 }
 
 /* Body content */
 .article p{ margin: 0 0 var(--space-3); }
-.article ul, .article ol{ margin: 0 0 var(--space-3) var(--space-3); }
-.article li{ margin: 0 0 .6rem; }
+.article ul, .article ol{
+  margin: 0 0 var(--space-3) var(--space-3);
+  padding-left: var(--space-2);
+}
+.article li{
+  margin: 0 0 .75rem;
+  line-height: 1.7;
+}
+.article li strong{
+  color: var(--clr-text);
+}
+
+/* Horizontal rule section breaks */
+.article hr{
+  border: none;
+  border-top: 1px solid var(--clr-border);
+  margin: var(--space-6) 0;
+}
+
+/* Callout/tip box */
+.article .callout,
+.article .tip{
+  margin: var(--space-4) 0;
+  padding: var(--space-3);
+  background: #f0f9ff;
+  border-left: 4px solid var(--clr-accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--clr-text);
+}
+.article .callout p:last-child,
+.article .tip p:last-child{
+  margin-bottom: 0;
+}
 .article em{ font-style: italic; }
 .article strong{ font-weight: 800; }
 .article blockquote{
