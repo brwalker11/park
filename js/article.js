@@ -134,7 +134,7 @@
       }
     });
 
-    insertInlineCta(bodyEl);
+    // Mid-article CTA removed - only bottom CTA should appear
   }
 
   function insertInlineCta(bodyEl) {
