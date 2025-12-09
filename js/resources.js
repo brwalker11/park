@@ -3,11 +3,29 @@
   const DEFAULT_IMAGES = createFallbacks();
   const PAGE_SIZE = 9;
 
+  // Series configuration - easily add more series here
+  const SERIES_CONFIG = [
+    {
+      id: 'flexible-parking-rules',
+      name: 'Flexible Parking Rules',
+      description: 'Master the art of parking monetization with smart exemptions, custom hours, and dynamic pricing.',
+      mainSlug: 'flexible-parking-rules',
+      articles: [
+        { slug: 'license-plate-whitelisting-guide', part: 1 },
+        { slug: 'custom-operating-hours-strategy', part: 2 },
+        { slug: 'dynamic-pricing-strategies', part: 3 },
+        { slug: 'balancing-revenue-relationships', part: 4 }
+      ]
+    }
+    // Add more series here as needed
+  ];
+
   const searchInput = document.getElementById('res-search');
   const filterButtons = Array.from(document.querySelectorAll('.res-chip'));
   const grid = document.getElementById('res-grid');
   const loadMoreBtn = document.getElementById('res-loadmore');
   const featuredSection = document.getElementById('res-featured');
+  const seriesSection = document.getElementById('res-series');
 
   if (!grid) return;
 
@@ -29,6 +47,7 @@
       state.items = normaliseItems(items);
       state.items.sort(sortByDate);
       state.featuredSlugs = renderFeatured(state.items);
+      renderSeries(state.items);
       hydrateFilterFromQuery();
       updateActiveFilter();
       applyFilters();
@@ -169,6 +188,183 @@
     setTimeout(() => initCarouselAutoScroll(carousel), 2000);
 
     return featuredItems.map((item) => item.slug);
+  }
+
+  function renderSeries(items) {
+    if (!seriesSection) return;
+    const seriesSlot = seriesSection.querySelector('.container');
+    if (!seriesSlot) return;
+
+    // Build lookup map for items by slug
+    const itemsBySlug = {};
+    items.forEach((item) => {
+      itemsBySlug[item.slug] = item;
+    });
+
+    // Clear existing content
+    seriesSlot.innerHTML = '';
+
+    // Render each series
+    SERIES_CONFIG.forEach((series) => {
+      const mainItem = itemsBySlug[series.mainSlug];
+      if (!mainItem) return; // Skip if main article doesn't exist
+
+      const container = buildSeriesContainer(series, mainItem, itemsBySlug);
+      if (container) {
+        seriesSlot.appendChild(container);
+      }
+    });
+
+    // Show/hide section based on content
+    if (seriesSlot.children.length === 0) {
+      seriesSection.classList.add('is-hidden');
+    } else {
+      seriesSection.classList.remove('is-hidden');
+    }
+  }
+
+  function buildSeriesContainer(series, mainItem, itemsBySlug) {
+    const container = document.createElement('div');
+    container.className = 'res-series-container';
+    container.setAttribute('data-series', series.id);
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'res-series-header';
+
+    const badge = document.createElement('span');
+    badge.className = 'res-series-badge';
+    badge.textContent = 'Article Series';
+
+    const title = document.createElement('h3');
+    title.className = 'res-series-title';
+    title.textContent = series.name;
+
+    const description = document.createElement('p');
+    description.className = 'res-series-description';
+    description.textContent = series.description;
+
+    header.appendChild(badge);
+    header.appendChild(title);
+    header.appendChild(description);
+
+    // Main article card
+    const mainCardWrap = document.createElement('div');
+    mainCardWrap.className = 'res-series-main';
+    const mainCard = buildSeriesMainCard(mainItem);
+    mainCardWrap.appendChild(mainCard);
+
+    // Sub-articles
+    const subCardsWrap = document.createElement('div');
+    subCardsWrap.className = 'res-series-sub-cards';
+
+    series.articles.forEach((articleConfig) => {
+      const item = itemsBySlug[articleConfig.slug];
+      if (!item) return;
+
+      const subCard = buildSeriesSubCard(item, articleConfig.part);
+      subCardsWrap.appendChild(subCard);
+    });
+
+    container.appendChild(header);
+    container.appendChild(mainCardWrap);
+    container.appendChild(subCardsWrap);
+
+    return container;
+  }
+
+  function buildSeriesMainCard(item) {
+    const card = document.createElement('article');
+    card.className = 'res-card res-series-main-card';
+
+    const linkWrapper = document.createElement('a');
+    linkWrapper.className = 'res-thumb';
+    linkWrapper.href = item.url || '#';
+    linkWrapper.setAttribute('aria-label', item.title);
+
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.src = item.thumbnail;
+    img.alt = item.title;
+    linkWrapper.appendChild(img);
+
+    const mainBadge = document.createElement('span');
+    mainBadge.className = 'res-main-badge';
+    mainBadge.textContent = 'Main Article';
+    linkWrapper.appendChild(mainBadge);
+
+    const body = document.createElement('div');
+    body.className = 'res-body';
+
+    const tag = document.createElement('span');
+    tag.className = 'res-tag';
+    tag.textContent = item.category;
+
+    const heading = document.createElement('h3');
+    heading.className = 'res-card-title';
+
+    const titleLink = document.createElement('a');
+    titleLink.href = item.url || '#';
+    titleLink.textContent = item.title;
+    heading.appendChild(titleLink);
+
+    const excerpt = document.createElement('p');
+    excerpt.className = 'res-excerpt';
+    excerpt.textContent = item.excerpt || item.description;
+
+    const meta = document.createElement('div');
+    meta.className = 'res-meta';
+
+    if (item.readTime) {
+      const read = document.createElement('span');
+      read.className = 'res-read';
+      read.textContent = item.readTime;
+      meta.appendChild(read);
+    }
+
+    const cta = document.createElement('a');
+    cta.className = 'res-link';
+    cta.href = item.url || '#';
+    cta.textContent = 'Start Here →';
+
+    body.appendChild(tag);
+    body.appendChild(heading);
+    body.appendChild(excerpt);
+    if (meta.childElementCount) {
+      body.appendChild(meta);
+    }
+    body.appendChild(cta);
+
+    card.appendChild(linkWrapper);
+    card.appendChild(body);
+
+    return card;
+  }
+
+  function buildSeriesSubCard(item, partNumber) {
+    const card = document.createElement('a');
+    card.className = 'res-series-sub-card';
+    card.href = item.url || '#';
+
+    const badge = document.createElement('span');
+    badge.className = 'res-part-badge';
+    badge.textContent = 'Part ' + partNumber;
+
+    const title = document.createElement('h4');
+    title.className = 'res-series-sub-title';
+    title.textContent = item.title;
+
+    const readTime = document.createElement('span');
+    readTime.className = 'res-series-sub-meta';
+    readTime.textContent = item.readTime || '';
+
+    card.appendChild(badge);
+    card.appendChild(title);
+    if (item.readTime) {
+      card.appendChild(readTime);
+    }
+
+    return card;
   }
 
   function renderGrid() {
