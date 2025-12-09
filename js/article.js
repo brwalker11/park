@@ -12,6 +12,35 @@
   };
   let ctaTrackingAttached = false;
 
+  // Series configuration for contextual sidebar navigation
+  const SERIES_CONFIG = {
+    'flexible-parking-rules': {
+      name: 'Flexible Parking Rules',
+      mainSlug: 'flexible-parking-rules',
+      articles: [
+        { slug: 'license-plate-whitelisting-guide', title: 'License Plate Whitelisting Guide', part: 1 },
+        { slug: 'custom-operating-hours-strategy', title: 'Custom Operating Hours Strategy', part: 2 },
+        { slug: 'dynamic-pricing-strategies', title: 'Dynamic Pricing Strategies', part: 3 },
+        { slug: 'balancing-revenue-relationships', title: 'Balancing Revenue & Relationships', part: 4 }
+      ]
+    }
+  };
+
+  function getSeriesForSlug(slug) {
+    // Check if slug is a main series article
+    if (SERIES_CONFIG[slug]) {
+      return { series: SERIES_CONFIG[slug], isMain: true };
+    }
+    // Check if slug is a sub-article in any series
+    for (const [mainSlug, series] of Object.entries(SERIES_CONFIG)) {
+      const found = series.articles.find(a => a.slug === slug);
+      if (found) {
+        return { series, isMain: false, currentArticle: found };
+      }
+    }
+    return null;
+  }
+
   document.addEventListener('DOMContentLoaded', init);
 
   async function init() {
@@ -176,6 +205,14 @@
     if (!list) return;
     list.innerHTML = '';
 
+    // Check if this article is part of a series
+    const seriesInfo = getSeriesForSlug(article.slug);
+    if (seriesInfo) {
+      renderSeriesSidebar(list, seriesInfo, article.slug);
+      return;
+    }
+
+    // Default related articles behavior
     const maxCandidates = Math.min(5, Math.max(0, allArticles.length - 1));
     const items = allArticles
       .filter((item) => item.slug !== article.slug)
@@ -206,6 +243,59 @@
     selection.forEach(({ article: item }) => {
       list.appendChild(buildRelatedCard(item));
     });
+  }
+
+  function renderSeriesSidebar(container, seriesInfo, currentSlug) {
+    const { series, isMain } = seriesInfo;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'sidebar-series';
+
+    // Update sidebar heading
+    const asideHeading = document.querySelector('.aside-heading');
+    if (asideHeading) {
+      asideHeading.textContent = isMain ? 'Articles in This Series' : `${series.name} Series`;
+    }
+
+    // If viewing a sub-article, show link to main article
+    if (!isMain) {
+      const mainLink = document.createElement('a');
+      mainLink.className = 'sidebar-series-main';
+      mainLink.href = buildArticleUrl(series.mainSlug);
+      mainLink.innerHTML = '<span class="icon">📖</span> Main Article: ' + series.name;
+      wrapper.appendChild(mainLink);
+
+      const subHeader = document.createElement('div');
+      subHeader.className = 'sidebar-series-header';
+      subHeader.textContent = 'Series Articles';
+      subHeader.style.marginTop = '1rem';
+      wrapper.appendChild(subHeader);
+    }
+
+    // List all series articles
+    const articleList = document.createElement('ul');
+    articleList.className = 'sidebar-series-list';
+
+    series.articles.forEach((art) => {
+      const li = document.createElement('li');
+      li.className = 'sidebar-series-item';
+
+      const link = document.createElement('a');
+      link.className = 'sidebar-series-link';
+      link.href = buildArticleUrl(art.slug);
+
+      if (art.slug === currentSlug) {
+        link.classList.add('is-current');
+        link.innerHTML = '<span class="check">✓</span> ' + art.title;
+      } else {
+        link.textContent = art.title;
+      }
+
+      li.appendChild(link);
+      articleList.appendChild(li);
+    });
+
+    wrapper.appendChild(articleList);
+    container.appendChild(wrapper);
   }
 
   function overlapCount(baseTags, candidateTags) {
