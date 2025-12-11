@@ -194,6 +194,7 @@
     "slug": "dynamic-pricing-guide",
     "title": "Dynamic Pricing 101: When and How to Adjust Parking Rates",
     "category": "Guides",
+    "hidden": true,
     "tags": [
       "dynamic pricing",
       "pricing strategy",
