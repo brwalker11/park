@@ -134,8 +134,13 @@
     const shouldShowFeatured = state.featuredSlugs.length > 0 && state.filter === 'All' && !state.search;
     toggleFeatured(shouldShowFeatured);
 
+    // Get all main series slugs to exclude from grid (they're shown in series section)
+    const mainSeriesSlugs = SERIES_CONFIG.map((s) => s.mainSlug);
+
     state.filtered = state.items.filter((item) => {
       if (item.hidden) return false; // Skip hidden articles
+      // Skip main series articles from grid (they appear in series section above)
+      if (mainSeriesSlugs.includes(item.slug)) return false;
       const matchesCategory = state.filter === 'All' || item.category === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
       return matchesCategory && matchesSearch;

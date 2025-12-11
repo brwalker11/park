@@ -208,7 +208,7 @@
     // Check if this article is part of a series
     const seriesInfo = getSeriesForSlug(article.slug);
     if (seriesInfo) {
-      renderSeriesSidebar(list, seriesInfo, article.slug);
+      renderSeriesSidebar(list, seriesInfo, article.slug, allArticles);
       return;
     }
 
@@ -245,57 +245,49 @@
     });
   }
 
-  function renderSeriesSidebar(container, seriesInfo, currentSlug) {
+  function renderSeriesSidebar(container, seriesInfo, currentSlug, allArticles) {
     const { series, isMain } = seriesInfo;
-    const wrapper = document.createElement('div');
-    wrapper.className = 'sidebar-series';
+
+    // Build lookup map for article data (to get thumbnails)
+    const articlesBySlug = {};
+    allArticles.forEach((a) => {
+      articlesBySlug[a.slug] = a;
+    });
 
     // Update sidebar heading
     const asideHeading = document.querySelector('.aside-heading');
     if (asideHeading) {
-      asideHeading.textContent = isMain ? 'Articles in This Series' : `${series.name} Series`;
+      asideHeading.textContent = 'Related Resources';
     }
 
-    // If viewing a sub-article, show link to main article
-    if (!isMain) {
-      const mainLink = document.createElement('a');
-      mainLink.className = 'sidebar-series-main';
-      mainLink.href = buildArticleUrl(series.mainSlug);
-      mainLink.innerHTML = '<span class="icon">📖</span> Main Article: ' + series.name;
-      wrapper.appendChild(mainLink);
-
-      const subHeader = document.createElement('div');
-      subHeader.className = 'sidebar-series-header';
-      subHeader.textContent = 'Series Articles';
-      subHeader.style.marginTop = '1rem';
-      wrapper.appendChild(subHeader);
+    // If viewing a sub-article, show link to main article (unless main article is current)
+    if (!isMain && series.mainSlug !== currentSlug) {
+      const mainArticle = articlesBySlug[series.mainSlug];
+      if (mainArticle) {
+        container.appendChild(buildRelatedCard(mainArticle));
+      }
     }
 
-    // List all series articles
-    const articleList = document.createElement('ul');
-    articleList.className = 'sidebar-series-list';
-
+    // List series articles, excluding the current one
     series.articles.forEach((art) => {
-      const li = document.createElement('li');
-      li.className = 'sidebar-series-item';
-
-      const link = document.createElement('a');
-      link.className = 'sidebar-series-link';
-      link.href = buildArticleUrl(art.slug);
-
+      // Skip the current article - don't show it in the sidebar
       if (art.slug === currentSlug) {
-        link.classList.add('is-current');
-        link.innerHTML = '<span class="check">✓</span> ' + art.title;
-      } else {
-        link.textContent = art.title;
+        return;
       }
 
-      li.appendChild(link);
-      articleList.appendChild(li);
+      const articleData = articlesBySlug[art.slug];
+      if (articleData) {
+        container.appendChild(buildRelatedCard(articleData));
+      }
     });
 
-    wrapper.appendChild(articleList);
-    container.appendChild(wrapper);
+    // If no articles were added (shouldn't happen), show empty message
+    if (container.children.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'related-empty';
+      empty.textContent = 'Check back soon for more related resources.';
+      container.appendChild(empty);
+    }
   }
 
   function overlapCount(baseTags, candidateTags) {
