@@ -23,6 +23,16 @@
         { slug: 'dynamic-pricing-strategies', title: 'Dynamic Pricing Strategies', part: 3 },
         { slug: 'balancing-revenue-relationships', title: 'Balancing Revenue & Relationships', part: 4 }
       ]
+    },
+    'dynamic-pricing-guide': {
+      name: 'Dynamic Pricing 101',
+      mainSlug: 'dynamic-pricing-guide',
+      articles: [
+        { slug: 'choosing-pricing-strategy', title: 'Choosing Your Pricing Strategy', part: 1 },
+        { slug: 'dynamic-pricing-technology', title: 'Technology Stack for Dynamic Pricing', part: 2 },
+        { slug: 'pricing-by-property-type', title: 'Pricing by Property Type', part: 3 },
+        { slug: 'dynamic-pricing-mistakes', title: 'Common Pricing Mistakes', part: 4 }
+      ]
     }
   };
 
