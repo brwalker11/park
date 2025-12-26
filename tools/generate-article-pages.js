@@ -28,7 +28,18 @@ function main() {
     const dir = path.join(OUTPUT_ROOT, slug);
     ensureDir(dir);
     const dest = path.join(dir, 'index.html');
-    fs.writeFileSync(dest, template, 'utf8');
+    // Replace placeholder canonical and og:url with actual article URL
+    const articleUrl = `https://monetize-parking.com/articles/${slug}/`;
+    let html = template
+      .replace(
+        /<link rel="canonical" href="https:\/\/monetize-parking\.com\/articles\/">/,
+        `<link rel="canonical" href="${articleUrl}">`
+      )
+      .replace(
+        /<meta property="og:url" content="https:\/\/monetize-parking\.com\/articles\/">/,
+        `<meta property="og:url" content="${articleUrl}">`
+      );
+    fs.writeFileSync(dest, html, 'utf8');
     console.log(`Wrote ${dest}`);
   });
 }
