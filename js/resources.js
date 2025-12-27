@@ -11,7 +11,7 @@
       description: 'Master the art of parking monetization with smart exemptions, custom hours, and dynamic pricing.',
       mainSlug: 'flexible-parking-rules',
       articles: [
-        { slug: 'license-plate-whitelisting-guide', part: 1 },
+        { slug: 'license-plate-allow-listing-guide', part: 1 },
         { slug: 'custom-operating-hours-strategy', part: 2 },
         { slug: 'dynamic-pricing-strategies', part: 3 },
         { slug: 'balancing-revenue-relationships', part: 4 }
