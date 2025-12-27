@@ -24,8 +24,8 @@
     "url": "/articles/flexible-parking-rules/"
   },
   {
-    "slug": "license-plate-whitelisting-guide",
-    "title": "License Plate Whitelisting: The Complete Guide to Parking Exemptions",
+    "slug": "license-plate-allow-listing-guide",
+    "title": "License Plate Allow Listing: The Complete Guide to Parking Exemptions",
     "category": "Articles",
     "hidden": true,
     "tags": [
@@ -33,7 +33,7 @@
       "parking management",
       "employee parking",
       "automation",
-      "whitelisting"
+      "allow listing"
     ],
     "date": "2025-12-09",
     "lastmod": "2025-12-09",
@@ -42,11 +42,11 @@
     "image": "/images/rules.webp",
     "imageAlt": "License plate recognition system automatically exempting employee vehicles from parking fees.",
     "thumbnail": "/images/rules.webp",
-    "content": "/articles/license-plate-whitelisting-guide.html",
+    "content": "/articles/license-plate-allow-listing-guide.html",
     "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/license-plate-whitelisting-guide/"
+    "url": "/articles/license-plate-allow-listing-guide/"
   },
   {
     "slug": "custom-operating-hours-strategy",

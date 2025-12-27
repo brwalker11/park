@@ -18,7 +18,7 @@
       name: 'Flexible Parking Rules',
       mainSlug: 'flexible-parking-rules',
       articles: [
-        { slug: 'license-plate-whitelisting-guide', title: 'License Plate Whitelisting Guide', part: 1 },
+        { slug: 'license-plate-allow-listing-guide', title: 'License Plate Allow Listing Guide', part: 1 },
         { slug: 'custom-operating-hours-strategy', title: 'Custom Operating Hours Strategy', part: 2 },
         { slug: 'dynamic-pricing-strategies', title: 'Dynamic Pricing Strategies', part: 3 },
         { slug: 'balancing-revenue-relationships', title: 'Balancing Revenue & Relationships', part: 4 }
