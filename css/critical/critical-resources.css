@@ -1,0 +1,53 @@
+/* Critical Resources CSS - Inlined for above-the-fold rendering */
+/* Resources-specific: hero, search controls, filters, featured title */
+
+:root{
+  --res-bg:#0f172a;
+  --res-muted:#64748b;
+  --res-chip:#e2e8f0;
+  --res-chip-active:#0b6efd;
+  --res-card-radius:18px;
+}
+
+/* Resources hero section */
+.res-hero{
+  padding:clamp(3rem,6vw,5rem) 0;
+  background:linear-gradient(135deg,rgba(13,110,253,0.08) 0%,rgba(13,110,253,0) 70%);
+}
+.res-title{font-size:clamp(2.25rem,4vw,3rem);font-weight:800;margin-bottom:0.75rem}
+.res-sub{
+  max-width:720px;font-size:1.125rem;line-height:1.7;
+  color:var(--res-muted);margin:0 0 clamp(1.5rem,4vw,2.5rem);
+}
+
+/* Search and filter controls */
+.res-controls{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.res-search{
+  flex:1 1 320px;min-width:240px;padding:0.9rem 1.2rem;
+  border-radius:999px;border:1px solid #cbd5f5;background:#fff;
+  font-size:1rem;line-height:1.4;color:var(--res-bg);
+  box-shadow:0 10px 30px rgba(15,23,42,0.08);
+}
+.res-search:focus{outline:3px solid rgba(13,110,253,0.25);outline-offset:2px}
+
+/* Filter chips */
+.res-filters{display:inline-flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+.res-chip{
+  border:1px solid var(--res-chip);background:#fff;color:var(--res-bg);
+  padding:0.55rem 1.35rem;border-radius:999px;font-weight:600;font-size:0.95rem;
+  cursor:pointer;transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.res-chip:hover{border-color:rgba(13,110,253,0.4)}
+.res-chip.is-active{background:var(--res-chip-active);border-color:var(--res-chip-active);color:#fff}
+
+/* Featured section */
+.res-featured{padding:0 0 clamp(2.5rem,6vw,4rem)}
+.res-featured.is-hidden,.res-featured.is-collapsed{display:none}
+.res-featured-title{font-size:clamp(1.5rem,3vw,2rem);margin:0 0 1.25rem;font-weight:700}
+
+/* Responsive */
+@media(max-width:680px){
+  .res-controls{flex-direction:column;align-items:stretch}
+  .res-search{width:100%}
+  .res-filters{justify-content:flex-start}
+}

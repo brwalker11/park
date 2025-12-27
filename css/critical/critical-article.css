@@ -1,0 +1,78 @@
+/* Critical Article CSS - Inlined for above-the-fold rendering */
+/* Article-specific: container, headings, breadcrumb, hero, summary */
+
+:root{
+  --font-sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Noto Sans",sans-serif;
+  --max-w-article:70ch;
+  --space-2:1rem;
+  --space-3:1.5rem;
+  --space-4:2rem;
+  --space-6:3rem;
+  --clr-text:#0f172a;
+  --clr-muted:#475569;
+  --clr-accent:#2563eb;
+  --clr-border:#e2e8f0;
+  --radius:14px;
+}
+
+/* Article container */
+.article{
+  font-family:var(--font-sans);color:var(--clr-text);
+  margin:0 auto;max-width:var(--max-w-article);
+  padding:var(--space-4) var(--space-2) var(--space-6);line-height:1.6;
+}
+
+/* Article headings */
+.article h1{
+  font-weight:800;line-height:1.15;margin:0 0 var(--space-3);
+  font-size:clamp(2rem,3.5vw,2.6rem);
+}
+.article h2{
+  font-weight:800;line-height:1.2;margin:var(--space-6) 0 var(--space-2);
+  font-size:clamp(1.5rem,2.8vw,2rem);color:var(--clr-text);letter-spacing:-0.02em;
+}
+.article h3{
+  font-weight:600;margin:var(--space-4) 0 var(--space-2);
+  font-size:clamp(1.1rem,2vw,1.25rem);color:var(--clr-muted);
+}
+
+/* Breadcrumb navigation */
+.breadcrumb{font-size:.9rem;margin-bottom:var(--space-2);color:var(--clr-muted)}
+.breadcrumb ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.breadcrumb li::after{content:'/';margin-left:.35rem;color:var(--clr-border)}
+.breadcrumb li:last-child::after{content:''}
+.breadcrumb-link{color:inherit;text-decoration:none}
+.breadcrumb-link:hover{color:var(--clr-accent)}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-weight:600;color:var(--clr-accent);text-decoration:none;margin-bottom:var(--space-2);
+}
+.back-link:hover{text-decoration:underline}
+
+/* Article summary */
+.article-summary{font-size:1.1rem;color:var(--clr-muted);margin-bottom:var(--space-3)}
+
+/* Article hero header */
+.article-hero{
+  background-size:cover;background-position:center;border-radius:16px;
+  min-height:320px;display:grid;align-items:end;margin:24px 0;
+  color:#fff;position:relative;overflow:hidden;
+}
+.article-hero img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+}
+.article-hero::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.45));
+}
+.article-hero .hero-inner{position:relative;padding:40px 32px;z-index:1}
+.article-hero .eyebrow{
+  text-transform:uppercase;letter-spacing:.08em;opacity:.95;font-weight:600;font-size:.85rem;
+}
+.article-hero h1{margin:.25rem 0 0;line-height:1.12}
+.article-hero .meta{opacity:.95;font-size:.95rem;margin-top:.5rem}
+
+/* Basic paragraph */
+.article p{margin:0 0 var(--space-3)}
