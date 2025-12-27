@@ -4,7 +4,9 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_PATH = path.join(ROOT, 'data', 'resources.json');
+const STATE_DATA_PATH = path.join(ROOT, 'data', 'state-resources.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const STATES_DIR = path.join(ROOT, 'resources', 'states');
 const SITE_ORIGIN = 'https://monetize-parking.com';
 
 const STATIC_ROUTES = [
@@ -28,6 +30,65 @@ function loadArticles() {
   }));
 }
 
+function getFileModifiedDate(filePath) {
+  try {
+    const stats = fs.statSync(filePath);
+    return stats.mtime.toISOString().split('T')[0];
+  } catch (error) {
+    return '';
+  }
+}
+
+function findStatePages() {
+  const statePages = [];
+
+  // Add main states index
+  const statesIndexPath = path.join(STATES_DIR, 'index.html');
+  if (fs.existsSync(statesIndexPath)) {
+    statePages.push({
+      url: '/resources/states/',
+      lastmod: getFileModifiedDate(statesIndexPath)
+    });
+  }
+
+  // Find all state directories
+  if (fs.existsSync(STATES_DIR)) {
+    const states = fs.readdirSync(STATES_DIR, { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(dirent => dirent.name);
+
+    states.forEach(state => {
+      const statePath = path.join(STATES_DIR, state);
+
+      // Add main state page
+      const stateIndexPath = path.join(statePath, 'index.html');
+      if (fs.existsSync(stateIndexPath)) {
+        statePages.push({
+          url: `/resources/states/${state}/`,
+          lastmod: getFileModifiedDate(stateIndexPath)
+        });
+      }
+
+      // Find all sub-pages
+      const subDirs = fs.readdirSync(statePath, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name);
+
+      subDirs.forEach(subDir => {
+        const subPagePath = path.join(statePath, subDir, 'index.html');
+        if (fs.existsSync(subPagePath)) {
+          statePages.push({
+            url: `/resources/states/${state}/${subDir}/`,
+            lastmod: getFileModifiedDate(subPagePath)
+          });
+        }
+      });
+    });
+  }
+
+  return statePages;
+}
+
 function buildUrl(slug, canonicalOverride) {
   if (canonicalOverride) return canonicalOverride;
   return `${SITE_ORIGIN}/articles/${encodeURIComponent(slug)}/`;
@@ -46,12 +107,22 @@ function formatDate(value) {
 
 function buildSitemap() {
   const articles = loadArticles();
+  const statePages = findStatePages();
   const parts = [];
   parts.push('<?xml version="1.0" encoding="UTF-8"?>');
   parts.push('<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">');
 
   STATIC_ROUTES.forEach((route) => {
     parts.push(`  <url><loc>${SITE_ORIGIN}${route}</loc></url>`);
+  });
+
+  statePages.forEach((page) => {
+    const loc = xmlEscape(`${SITE_ORIGIN}${page.url}`);
+    if (page.lastmod) {
+      parts.push(`  <url><loc>${loc}</loc><lastmod>${page.lastmod}</lastmod></url>`);
+    } else {
+      parts.push(`  <url><loc>${loc}</loc></url>`);
+    }
   });
 
   articles.forEach((article) => {
