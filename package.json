@@ -1,0 +1,15 @@
+{
+  "name": "monetize-parking",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static marketing website for Monetize Parking",
+  "scripts": {
+    "generate:articles": "node tools/generate-article-pages.js",
+    "generate:sitemap": "node tools/update-sitemap.js",
+    "generate:thumbnails": "node tools/generate-thumbnails.js",
+    "build": "npm run generate:thumbnails && npm run generate:articles && npm run generate:sitemap"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}

@@ -218,6 +218,35 @@
   aspect-ratio: 16/9;
 }
 
+/* CLS Prevention: Reserve space for related sidebar */
+.related-sidebar {
+  min-height: 580px; /* ~5 cards × 108px + heading */
+}
+
+/* CLS Prevention: Reserve space for article body */
+#article-body {
+  min-height: 400px;
+}
+
+#article-body:not(:empty) {
+  min-height: auto; /* Remove constraint once content loads */
+}
+
+/* CLS Prevention: Smooth visibility for summary */
+.article-summary.is-hidden {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .related-sidebar {
+    min-height: auto; /* Don't reserve on mobile where sidebar reflows below */
+  }
+}
+
 .related-sidebar{
   display:flex;
   flex-direction:column;
