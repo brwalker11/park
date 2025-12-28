@@ -204,6 +204,20 @@
   margin-bottom:var(--space-3);
 }
 
+/* CLS Prevention: Reserve consistent hero dimensions */
+.article-hero {
+  aspect-ratio: 21/9;
+  min-height: 280px; /* Fallback for browsers without aspect-ratio support */
+}
+
+.article-hero .hero-inner {
+  min-height: 160px; /* Reserve space for eyebrow + title (2-3 lines) + meta */
+}
+
+.article-hero img {
+  aspect-ratio: 16/9;
+}
+
 .related-sidebar{
   display:flex;
   flex-direction:column;
