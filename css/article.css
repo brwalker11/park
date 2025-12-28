@@ -245,6 +245,20 @@
   .related-sidebar {
     min-height: auto; /* Don't reserve on mobile where sidebar reflows below */
   }
+
+  /* Larger min-height on mobile to prevent article body expansion shifts */
+  #article-body {
+    min-height: 1200px;
+  }
+
+  #article-body:not(:empty) {
+    min-height: auto;
+  }
+}
+
+/* Prevent layout shifts from propagating outside article */
+.article {
+  contain: layout style;
 }
 
 .related-sidebar{
