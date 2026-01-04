@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://monetize-parking.com/</loc><lastmod>2026-01-04</lastmod></url>
-  <url><loc>https://monetize-parking.com/about/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/</loc></url>
+  <url><loc>https://monetize-parking.com/about/</loc></url>
   <url><loc>https://monetize-parking.com/calculator/</loc></url>
-  <url><loc>https://monetize-parking.com/contact/</loc><lastmod>2026-01-04</lastmod></url>
-  <url><loc>https://monetize-parking.com/faq/</loc><lastmod>2026-01-04</lastmod></url>
-  <url><loc>https://monetize-parking.com/resources/</loc><lastmod>2026-01-04</lastmod></url>
-  <url><loc>https://monetize-parking.com/services/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/contact/</loc></url>
+  <url><loc>https://monetize-parking.com/faq/</loc></url>
+  <url><loc>https://monetize-parking.com/resources/</loc></url>
+  <url><loc>https://monetize-parking.com/services/</loc></url>
   <url><loc>https://monetize-parking.com/resources/states/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/colorado/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/colorado/financial-impact/</loc><lastmod>2026-01-04</lastmod></url>
@@ -23,7 +23,7 @@
   <url><loc>https://monetize-parking.com/resources/states/minnesota/property-types/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/minnesota/seasonal-considerations/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/minnesota/technology-solutions/</loc><lastmod>2026-01-04</lastmod></url>
-  <url><loc>https://monetize-parking.com/resources/states/minnesota/value-add-strategy/</loc><lastmod>2025-12-27</lastmod></url>
+  <url><loc>https://monetize-parking.com/resources/states/minnesota/value-add-strategy/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/texas/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/texas/financial-impact/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/texas/market-overview/</loc><lastmod>2026-01-04</lastmod></url>
@@ -40,6 +40,12 @@
   <url><loc>https://monetize-parking.com/resources/states/wisconsin/seasonal-considerations/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/wisconsin/technology-solutions/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/wisconsin/untapped-opportunity/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/articles/apartment-parking-revenue/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/articles/ev-charging-parking-revenue/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/articles/event-parking-revenue/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/articles/parking-lot-insurance-requirements/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/articles/hotel-parking-revenue/</loc><lastmod>2026-01-04</lastmod></url>
+  <url><loc>https://monetize-parking.com/articles/handling-parking-violations-disputes/</loc><lastmod>2026-01-04</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/restaurant-paid-parking/</loc><lastmod>2025-12-27</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/parking-enforcement-modernization/</loc><lastmod>2025-12-27</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/parking-problems-mean-success/</loc><lastmod>2025-12-27</lastmod></url>
