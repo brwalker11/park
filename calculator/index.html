@@ -291,6 +291,40 @@
 
     <div id="footerSentinel" aria-hidden="true"></div>
 
+    <!-- EMAIL REPORT MODAL -->
+    <div id="emailModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+      <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
+        <h2 id="modalTitle" class="modal-heading">Get Your Free Revenue Report</h2>
+        <p class="modal-subtext">We'll email your personalized estimate and follow up with next steps.</p>
+        <form id="emailReportForm" action="https://formspree.io/f/xdkwwvdz" method="POST" novalidate>
+          <div class="modal-field">
+            <label for="reportEmail">Email address</label>
+            <input id="reportEmail" name="_replyto" type="email" autocomplete="email" required placeholder="you@company.com" />
+            <small class="modal-err" id="err-reportEmail" hidden>Please enter a valid email address</small>
+          </div>
+          <input type="hidden" name="_subject" id="emailSubject" value="Calculator Report Request" />
+          <input type="hidden" name="property_type" id="hiddenPropertyType" />
+          <input type="hidden" name="spaces" id="hiddenSpaces" />
+          <input type="hidden" name="occupancy" id="hiddenOccupancy" />
+          <input type="hidden" name="hours" id="hiddenHours" />
+          <input type="hidden" name="rate" id="hiddenRate" />
+          <input type="hidden" name="days" id="hiddenDays" />
+          <input type="hidden" name="uplift_percent" id="hiddenUplift" />
+          <input type="hidden" name="lpr_enabled" id="hiddenLprEnabled" />
+          <input type="hidden" name="monthly_without_lpr" id="hiddenMonthlyWithout" />
+          <input type="hidden" name="monthly_with_lpr" id="hiddenMonthlyWith" />
+          <input type="hidden" name="annual_without_lpr" id="hiddenAnnualWithout" />
+          <input type="hidden" name="annual_with_lpr" id="hiddenAnnualWith" />
+          <input type="text" name="_gotcha" class="hp" autocomplete="off" tabindex="-1" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary btn-block modal-submit" id="modalSubmitBtn">Send My Report</button>
+        </form>
+        <div id="modalError" class="modal-alert" role="alert" hidden>
+          Something went wrong. Please try again.
+        </div>
+      </div>
+    </div>
+
     <footer>
       <div class="small">
         © <span id="year"></span> Monetize Parking - Built for parking lot owners who want results.
@@ -416,6 +450,124 @@
       position:sticky;
       top:auto;
       align-self:flex-start;
+    }
+    /* Modal Styles */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:2000;
+      padding:20px;
+      opacity:1;
+      transition:opacity 0.2s ease;
+    }
+    .modal-overlay[hidden]{display:none}
+    .modal-content{
+      background:#fff;
+      border-radius:var(--radius);
+      box-shadow:0 20px 40px rgba(15,23,42,0.2);
+      max-width:440px;
+      width:100%;
+      padding:32px;
+      position:relative;
+      animation:modalSlideIn 0.25s ease;
+    }
+    @keyframes modalSlideIn{
+      from{opacity:0;transform:translateY(-20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:36px;
+      height:36px;
+      border:none;
+      background:#f1f5f9;
+      border-radius:50%;
+      font-size:24px;
+      line-height:1;
+      color:#64748b;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background 0.2s, color 0.2s;
+    }
+    .modal-close:hover{background:#e2e8f0;color:#1e293b}
+    .modal-close:focus{outline:none;box-shadow:0 0 0 3px rgba(10,104,255,0.25)}
+    .modal-heading{
+      font-size:24px;
+      font-weight:800;
+      color:var(--ink);
+      margin:0 0 8px 0;
+      padding-right:40px;
+    }
+    .modal-subtext{
+      color:#64748b;
+      font-size:15px;
+      margin:0 0 24px 0;
+      line-height:1.5;
+    }
+    .modal-field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:20px;
+    }
+    .modal-field label{
+      font-weight:600;
+      color:#283042;
+      font-size:14px;
+    }
+    .modal-field input[type="email"]{
+      width:100%;
+      height:48px;
+      border:2px solid var(--bd);
+      border-radius:10px;
+      padding:0 14px;
+      font-size:16px;
+      background:#fff;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .modal-field input[type="email"]:focus{
+      outline:none;
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(10,104,255,0.15);
+    }
+    .modal-field input[type="email"].is-invalid{
+      border-color:#dc2626;
+    }
+    .modal-err{
+      color:#dc2626;
+      font-size:13px;
+      font-weight:500;
+    }
+    .modal-submit{
+      height:52px;
+      font-size:16px;
+      margin-top:4px;
+    }
+    .modal-submit[disabled]{
+      opacity:0.65;
+      cursor:wait;
+    }
+    .modal-alert{
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:8px;
+      background:#fef2f2;
+      color:#991b1b;
+      font-size:14px;
+      font-weight:500;
+    }
+    .hp{position:absolute;left:-9999px;opacity:0}
+    @media (max-width: 500px){
+      .modal-content{padding:24px 20px}
+      .modal-heading{font-size:20px}
     }
   </style>
 
@@ -559,16 +711,218 @@
       updateModeUI();
       recalc();
 
-      // Email Report button handler
-      const emailBtn = document.getElementById('emailReportBtn');
-      if(emailBtn){
-        emailBtn.addEventListener('click', function(){
-          // Track event
+      // Helper to get all current calculator values
+      function getCalcValues(){
+        const spaces = +$('spaces').value || 0;
+        const occ = +$('occ').value || 0;
+        const hours = +$('hours').value || 0;
+        const rate = +$('rate').value || 0;
+        const days = +$('days').value || 0;
+        const uplift = +$('uplift').value || 0;
+        const applyUplift = $('applyUplift').checked;
+        const gross = spaces * (occ/100) * hours * rate * days;
+        const grossWith = applyUplift ? gross * (1 + uplift/100) : gross;
+        return {
+          property_type: currentMode,
+          spaces: spaces,
+          occupancy: occ,
+          hours: hours,
+          rate: rate,
+          days: days,
+          uplift_percent: uplift,
+          lpr_enabled: applyUplift,
+          monthly_without_lpr: Math.round(gross),
+          monthly_with_lpr: Math.round(grossWith),
+          annual_without_lpr: Math.round(gross * 12),
+          annual_with_lpr: Math.round(grossWith * 12)
+        };
+      }
+
+      // GA4 tracking for "Get Your Custom Revenue Plan" button
+      const revenuePlanBtn = document.querySelector('.btn-cta-enhanced[href="/contact/"]');
+      if(revenuePlanBtn){
+        revenuePlanBtn.addEventListener('click', function(e){
+          const vals = getCalcValues();
           if(typeof gtag !== 'undefined'){
-            gtag('event', 'email_report_click', { method: 'Calculator CTA' });
+            gtag('event', 'calculator_cta_revenue_plan', {
+              'property_type': vals.property_type,
+              'spaces': vals.spaces,
+              'occupancy': vals.occupancy,
+              'hours': vals.hours,
+              'rate': vals.rate,
+              'days': vals.days,
+              'monthly_base': vals.monthly_without_lpr,
+              'monthly_with_lpr': vals.monthly_with_lpr,
+              'annual_projection': vals.lpr_enabled ? vals.annual_with_lpr : vals.annual_without_lpr
+            });
           }
-          // Redirect to contact page
-          window.location.href = '/contact/';
+        });
+      }
+
+      // Modal Elements
+      const modal = $('emailModal');
+      const modalContent = modal ? modal.querySelector('.modal-content') : null;
+      const modalCloseBtn = modal ? modal.querySelector('.modal-close') : null;
+      const emailForm = $('emailReportForm');
+      const emailInput = $('reportEmail');
+      const emailErr = $('err-reportEmail');
+      const modalSubmitBtn = $('modalSubmitBtn');
+      const modalError = $('modalError');
+      let previouslyFocused = null;
+
+      function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+      function openModal(){
+        if(!modal) return;
+        previouslyFocused = document.activeElement;
+
+        // Populate hidden fields with current calculator values
+        const vals = getCalcValues();
+        $('hiddenPropertyType').value = vals.property_type;
+        $('hiddenSpaces').value = vals.spaces;
+        $('hiddenOccupancy').value = vals.occupancy + '%';
+        $('hiddenHours').value = vals.hours;
+        $('hiddenRate').value = vals.rate;
+        $('hiddenDays').value = vals.days;
+        $('hiddenUplift').value = vals.uplift_percent + '%';
+        $('hiddenLprEnabled').value = vals.lpr_enabled ? 'Yes' : 'No';
+        $('hiddenMonthlyWithout').value = fmtMoney(vals.monthly_without_lpr);
+        $('hiddenMonthlyWith').value = fmtMoney(vals.monthly_with_lpr);
+        $('hiddenAnnualWithout').value = fmtMoney(vals.annual_without_lpr);
+        $('hiddenAnnualWith').value = fmtMoney(vals.annual_with_lpr);
+        $('emailSubject').value = 'Calculator Report Request - ' + vals.spaces + ' spaces ' + vals.property_type;
+
+        // Reset form state
+        emailForm.reset();
+        emailInput.classList.remove('is-invalid');
+        emailErr.hidden = true;
+        modalError.hidden = true;
+        modalSubmitBtn.disabled = false;
+
+        // Show modal
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+
+        // Focus the email input
+        setTimeout(function(){ emailInput.focus(); }, 50);
+
+        // Track modal open
+        if(typeof gtag !== 'undefined'){
+          gtag('event', 'email_report_modal_open', { method: 'Calculator CTA' });
+        }
+      }
+
+      function closeModal(){
+        if(!modal) return;
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        if(previouslyFocused && previouslyFocused.focus){
+          previouslyFocused.focus();
+        }
+      }
+
+      // Email Report button - opens modal
+      const emailBtn = $('emailReportBtn');
+      if(emailBtn){
+        emailBtn.addEventListener('click', openModal);
+      }
+
+      // Close modal handlers
+      if(modalCloseBtn){
+        modalCloseBtn.addEventListener('click', closeModal);
+      }
+
+      if(modal){
+        // Click outside to close
+        modal.addEventListener('click', function(e){
+          if(e.target === modal){
+            closeModal();
+          }
+        });
+
+        // Escape key to close
+        modal.addEventListener('keydown', function(e){
+          if(e.key === 'Escape'){
+            closeModal();
+          }
+        });
+
+        // Focus trap
+        modal.addEventListener('keydown', function(e){
+          if(e.key !== 'Tab') return;
+          const focusableEls = modal.querySelectorAll('button, input:not([type="hidden"]):not([tabindex="-1"])');
+          const firstEl = focusableEls[0];
+          const lastEl = focusableEls[focusableEls.length - 1];
+          if(e.shiftKey && document.activeElement === firstEl){
+            e.preventDefault();
+            lastEl.focus();
+          } else if(!e.shiftKey && document.activeElement === lastEl){
+            e.preventDefault();
+            firstEl.focus();
+          }
+        });
+      }
+
+      // Form submission
+      if(emailForm){
+        emailForm.addEventListener('submit', async function(e){
+          e.preventDefault();
+          modalError.hidden = true;
+
+          const email = emailInput.value.trim();
+          if(!validEmail(email)){
+            emailInput.classList.add('is-invalid');
+            emailErr.hidden = false;
+            emailInput.focus();
+            return;
+          }
+          emailInput.classList.remove('is-invalid');
+          emailErr.hidden = true;
+
+          modalSubmitBtn.disabled = true;
+
+          try {
+            const data = new FormData(emailForm);
+            const res = await fetch(emailForm.action, {
+              method: 'POST',
+              headers: { 'Accept': 'application/json' },
+              body: data
+            });
+
+            if(res.ok){
+              // Get values for redirect and GA4
+              const vals = getCalcValues();
+
+              // Fire GA4 event
+              if(typeof gtag !== 'undefined'){
+                gtag('event', 'calculator_report_submitted', {
+                  'property_type': vals.property_type,
+                  'spaces': vals.spaces,
+                  'monthly_projection': vals.lpr_enabled ? vals.monthly_with_lpr : vals.monthly_without_lpr
+                });
+              }
+
+              // Redirect to thank-you page with parameters
+              const monthly = vals.lpr_enabled ? vals.monthly_with_lpr : vals.monthly_without_lpr;
+              const annual = vals.lpr_enabled ? vals.annual_with_lpr : vals.annual_without_lpr;
+              const lprFlag = vals.lpr_enabled ? '1' : '0';
+              window.location.href = '/calculator/report/?spaces=' + vals.spaces + '&type=' + vals.property_type + '&monthly=' + monthly + '&annual=' + annual + '&lpr=' + lprFlag;
+            } else {
+              modalError.hidden = false;
+              modalSubmitBtn.disabled = false;
+            }
+          } catch(_){
+            modalError.hidden = false;
+            modalSubmitBtn.disabled = false;
+          }
+        });
+      }
+
+      // Clear validation state on input
+      if(emailInput){
+        emailInput.addEventListener('input', function(){
+          emailInput.classList.remove('is-invalid');
+          emailErr.hidden = true;
         });
       }
     })();
