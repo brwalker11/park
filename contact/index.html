@@ -134,9 +134,6 @@
         </div>
       </form>
 
-      <div id="formSuccess" class="alert success" role="status" hidden>
-        Thanks — we’ve got your message and will reply shortly.
-      </div>
       <div id="formError" class="alert error" role="status" hidden>
         Hmm, something went wrong. Please try again or email <a href="mailto:info@mps.com">info@mps.com</a>.
       </div>
@@ -183,7 +180,6 @@
 <script>
   const form = document.getElementById('contactForm');
   const btn  = document.getElementById('submitBtn');
-  const ok   = document.getElementById('formSuccess');
   const err  = document.getElementById('formError');
   const f = id => document.getElementById(id);
 
@@ -192,7 +188,7 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    ok.hidden = true; err.hidden = true;
+    err.hidden = true;
 
     const name = f('name').value.trim();
     const email = f('email').value.trim();
@@ -208,14 +204,13 @@
       const data = new FormData(form);
       const res = await fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: data });
       if (res.ok) {
-        form.reset();
-        ok.hidden = false;
+        window.location.href = '/contact/thank-you/';
       } else {
         err.hidden = false;
+        btn.disabled = false;
       }
     } catch (_) {
       err.hidden = false;
-    } finally {
       btn.disabled = false;
     }
   });
