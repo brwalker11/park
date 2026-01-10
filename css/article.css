@@ -208,14 +208,47 @@
 .article-hero {
   aspect-ratio: 21/9;
   min-height: 280px; /* Fallback for browsers without aspect-ratio support */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark gradient overlay for text readability on light images */
+.article-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 1;
 }
 
 .article-hero .hero-inner {
   min-height: 160px; /* Reserve space for eyebrow + title (2-3 lines) + meta */
+  position: relative;
+  z-index: 2; /* Above the overlay */
+}
+
+/* Hero title text shadow for readability */
+.article-hero h1 {
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .article-hero img {
-  aspect-ratio: 16/9;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
 }
 
 /* CLS Prevention: Reserve space for related sidebar */
