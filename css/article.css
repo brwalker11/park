@@ -249,6 +249,10 @@
   object-fit: cover;
   object-position: center;
   z-index: 0;
+  /* Override .article img rules that would conflict */
+  aspect-ratio: unset;
+  margin: 0;
+  border-radius: 0;
 }
 
 /* CLS Prevention: Reserve space for related sidebar */
