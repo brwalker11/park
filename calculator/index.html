@@ -799,8 +799,6 @@
         $('hiddenAnnualWith').value = fmtMoney(vals.annual_with_lpr);
         $('emailSubject').value = 'Calculator Report Request - ' + vals.spaces + ' spaces ' + vals.property_type;
 
-        console.log('[Email Report] Modal opened with values:', vals);
-
         // Show modal
         modal.hidden = false;
         document.body.style.overflow = 'hidden';
@@ -869,7 +867,6 @@
       if(emailForm){
         emailForm.addEventListener('submit', async function(e){
           e.preventDefault();
-          console.log('[Email Report] Form submit triggered');
           modalError.hidden = true;
 
           const email = emailInput.value.trim();
@@ -877,7 +874,6 @@
             emailInput.classList.add('is-invalid');
             emailErr.hidden = false;
             emailInput.focus();
-            console.log('[Email Report] Invalid email, submission blocked');
             return;
           }
           emailInput.classList.remove('is-invalid');
@@ -888,20 +884,11 @@
           try {
             const data = new FormData(emailForm);
 
-            // Log form data being sent
-            console.log('[Email Report] Submitting to:', emailForm.action);
-            console.log('[Email Report] Form data:');
-            for (let [key, value] of data.entries()) {
-              console.log('  ' + key + ':', value);
-            }
-
             const res = await fetch(emailForm.action, {
               method: 'POST',
               headers: { 'Accept': 'application/json' },
               body: data
             });
-
-            console.log('[Email Report] Response status:', res.status, res.ok ? 'OK' : 'FAILED');
 
             if(res.ok){
               // Get values for redirect and GA4
