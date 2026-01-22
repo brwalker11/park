@@ -22,12 +22,15 @@ const STATIC_ROUTES = [
 function loadArticles() {
   const raw = fs.readFileSync(DATA_PATH, 'utf8');
   const data = JSON.parse(raw);
-  return data.map((item) => ({
-    slug: item.slug,
-    lastmod: item.lastmod || item.date,
-    date: item.date,
-    canonicalOverride: item.canonicalOverride || ''
-  }));
+  // Filter out hidden articles from sitemap
+  return data
+    .filter((item) => !item.hidden)
+    .map((item) => ({
+      slug: item.slug,
+      lastmod: item.lastmod || item.date,
+      date: item.date,
+      canonicalOverride: item.canonicalOverride || ''
+    }));
 }
 
 function getFileModifiedDate(filePath) {

@@ -1,0 +1,42 @@
+# Cloudflare Pages Redirects
+# Format: source destination [status]
+
+# Main pages - .html to directory
+/about.html /about/ 301
+/services.html /services/ 301
+/calculator.html /calculator/ 301
+
+# Old article URLs - redirect to correct slugs
+/ai-vs-gates/ /articles/ai-access-vs-gates/ 301
+/ai-vs-gates/* /articles/ai-access-vs-gates/ 301
+/article-ai-vs-gates.html /articles/ai-access-vs-gates/ 301
+
+/stillwater-case-study/ /articles/stillwater-300-revenue-lift/ 301
+/stillwater-case-study/* /articles/stillwater-300-revenue-lift/ 301
+/stillwater-casestudy.html /articles/stillwater-300-revenue-lift/ 301
+
+/lot-size/ /articles/optimal-lot-size-profit/ 301
+/lot-size/* /articles/optimal-lot-size-profit/ 301
+/lot-size.html /articles/optimal-lot-size-profit/ 301
+
+/gate-arms/ /articles/gate-arm-maintenance-costs/ 301
+/gate-arms/* /articles/gate-arm-maintenance-costs/ 301
+/gate-arms.html /articles/gate-arm-maintenance-costs/ 301
+
+/mistakes.html /articles/dynamic-pricing-mistakes/ 301
+
+/parking-management-costs/ /articles/real-costs-parking-management/ 301
+/parking-management-costs/* /articles/real-costs-parking-management/ 301
+
+# State pages - .html to directory
+/resources/states/minnesota.html /resources/states/minnesota/ 301
+/resources/states/wisconsin.html /resources/states/wisconsin/ 301
+/resources/states/texas.html /resources/states/texas/ 301
+/resources/states/colorado.html /resources/states/colorado/ 301
+
+# Old directory paths
+/states/ /resources/states/ 301
+/states/* /resources/states/ 301
+
+# Articles index redirect to resources
+/articles/ /resources/ 301

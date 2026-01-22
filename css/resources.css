@@ -73,6 +73,12 @@
   border-color: rgba(13, 110, 253, 0.4);
 }
 
+.res-chip:focus,
+.res-chip:focus-visible {
+  outline: 2px solid var(--res-chip-active);
+  outline-offset: 2px;
+}
+
 .res-chip.is-active {
   background: var(--res-chip-active);
   border-color: var(--res-chip-active);
@@ -316,6 +322,12 @@
   transform: translateY(-4px);
   box-shadow: 0 12px 32px rgba(11, 110, 253, 0.5);
   background: #0958d9;
+}
+
+.floating-state-btn:focus,
+.floating-state-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 .floating-state-btn svg {
