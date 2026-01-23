@@ -900,8 +900,9 @@ html{scroll-behavior:smooth}
 
 .social-proof__header {
   text-align: center;
-  margin-top: 24px;
-  margin-bottom: 32px;
+  width: 100%;
+  margin: 24px auto 32px;
+  display: block;
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
