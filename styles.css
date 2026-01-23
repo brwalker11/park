@@ -900,7 +900,9 @@ html{scroll-behavior:smooth}
 
 .social-proof__header {
   text-align: center;
-  margin-bottom: 32px;
+  width: 100%;
+  margin: 24px auto 32px;
+  display: block;
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -968,7 +970,7 @@ html{scroll-behavior:smooth}
 @media (max-width: 768px) {
   .social-proof { padding: 48px 0; }
   .social-proof::before { height: 60px; }
-  .social-proof__header { margin-bottom: 24px; }
+  .social-proof__header { margin-top: 16px; margin-bottom: 24px; }
   .social-proof__grid { gap: 32px; }
   .social-proof__divider { display: none; }
   .social-proof__stat { flex: 1 1 100%; max-width: none; }
