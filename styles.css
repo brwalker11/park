@@ -1197,3 +1197,19 @@ html{scroll-behavior:smooth}
 .footer-links a:hover {
   color: var(--brand);
 }
+
+/* ===== Homepage Section Spacing Adjustments ===== */
+.section.how + .approach-section {
+  margin-top: 32px;
+}
+
+/* ===== Footer CTA Button Size Increase ===== */
+.footer-cta__btn {
+  padding: 18px 40px;
+  font-size: 1.1875rem;
+}
+
+/* ===== Featured Resources Header Alignment ===== */
+.featured-resources__header {
+  align-items: baseline;
+}
