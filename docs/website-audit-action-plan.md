@@ -457,14 +457,14 @@ document.querySelectorAll('[data-contact-cta]').forEach(el => {
 - `article-ai-vs-gates.html`
 - `gate-arms.html`
 - `lot-size.html`
-- `stillwater-casestudy.html`
+- `stillwater-casestudy.html` (redirect to eau-claire-revenue-increase)
 - `ai-vs-gates/index.html`
 - `articles/index.html`
 - `gate-arms/index.html`
 - `lot-size/index.html`
 - `parking-management-costs/index.html`
 - `states/index.html`
-- `stillwater-case-study/index.html`
+- `stillwater-case-study/index.html` (redirect to eau-claire-revenue-increase)
 
 **Fix:** Add to each:
 ```html
@@ -538,11 +538,11 @@ document.querySelectorAll('[data-contact-cta]').forEach(el => {
 /lot-size.html /articles/optimal-lot-size-profit/ 301
 /gate-arms.html /articles/gate-arm-maintenance-costs/ 301
 /article-ai-vs-gates.html /articles/ai-access-vs-gates/ 301
-/stillwater-casestudy.html /articles/stillwater-300-revenue-lift/ 301
+/stillwater-casestudy.html /articles/eau-claire-revenue-increase/ 301
 /ai-vs-gates/* /articles/ai-access-vs-gates/ 301
 /parking-management-costs/* /articles/real-costs-parking-management/ 301
 /states/* /resources/states/ 301
-/stillwater-case-study/* /articles/stillwater-300-revenue-lift/ 301
+/stillwater-case-study/* /articles/eau-claire-revenue-increase/ 301
 /lot-size/* /articles/optimal-lot-size-profit/ 301
 /gate-arms/* /articles/gate-arm-maintenance-costs/ 301
 /articles /resources/ 301

@@ -60,7 +60,7 @@ Large images (2MB+ each) need compression and WebP conversion:
 - `images/park_mana.jpg` (2.0MB) → 500KB WebP
 - `images/default-guide.jpg` (1.3MB) → 350KB WebP
 - `images/break.jpg` (1.5MB) → 400KB WebP
-- `images/stillwater.jpg` (5MB) → 1.2MB WebP
+- `images/eau-claire.jpg` (5MB) → 1.2MB WebP
 - `images/lot_size.jpg` (3.9MB) → 1MB WebP
 
 #### Steps:
@@ -174,7 +174,7 @@ Add FAQPage schema to `services/index.html` with questions like:
 Add unique content for each state:
 - State-specific parking regulations and laws
 - Local market statistics
-- Case studies from that state (e.g., Stillwater for Minnesota)
+- Case studies from that state (e.g., Eau Claire for Wisconsin)
 - State-specific pricing strategies
 - City-by-city breakdowns for major metros
 
@@ -186,14 +186,14 @@ gate arms, seasonal tourism creates fluctuating demand, and cities like
 Minneapolis and St. Paul have strict enforcement regulations.</p>
 
 <h2>Success Stories</h2>
-<p>See how a <a href="/articles/stillwater-300-revenue-lift/">downtown Stillwater
-lot tripled revenue</a> by switching from gates to AI enforcement.</p>
+<p>See how a <a href="/articles/eau-claire-revenue-increase/">downtown Eau Claire
+lot increased revenue</a> by switching to integrated enforcement.</p>
 
 <h2>Minnesota Cities We Serve</h2>
 <ul>
   <li>Minneapolis</li>
   <li>St. Paul</li>
-  <li>Stillwater</li>
+  <li>Eau Claire</li>
   <li>Rochester</li>
   <li>Duluth</li>
 </ul>
