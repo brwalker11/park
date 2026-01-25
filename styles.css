@@ -1334,7 +1334,7 @@ html{scroll-behavior:smooth}
 }
 
 .video-summary {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--muted);
   line-height: 1.6;
   margin: 0 20px 16px;
