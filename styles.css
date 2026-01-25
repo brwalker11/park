@@ -469,6 +469,8 @@ ul{padding-left:18px;margin:0 0 8px 0}
 
 footer,
 .footer{padding:24px 0;border-top:1px solid rgba(0,0,0,0.08);color:var(--muted);text-align:center}
+footer .container,
+.footer .container{display:flex;flex-direction:column;align-items:center}
 footer .footer-note,
 .footer .footer-note,
 footer .footer__legal,
