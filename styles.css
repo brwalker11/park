@@ -1256,44 +1256,19 @@ html{scroll-behavior:smooth}
   margin-bottom: 32px;
 }
 
+/* Video grid - inherits from res-grid, these are fallback/override styles */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.25rem);
 }
 
-@media (max-width: 1169px) {
-  .video-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* Video cards now use res-card as base - these styles extend it for video-specific needs */
 
-@media (max-width: 767px) {
-  .video-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.video-card {
-  background: var(--card);
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.video-card:hover {
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
-  transform: translateY(-4px);
-}
-
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
+/* Video wrapper within res-thumb - override padding-based aspect ratio */
+.res-thumb.video-wrapper {
+  padding-bottom: 0;
+  height: auto;
   background-color: #1e293b;
 }
 
@@ -1316,7 +1291,7 @@ html{scroll-behavior:smooth}
 }
 
 /* When videos are added, iframe will use this: */
-.video-wrapper iframe {
+.res-thumb.video-wrapper iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -1325,7 +1300,30 @@ html{scroll-behavior:smooth}
   border: 0;
 }
 
-.video-card h3 {
+/* Legacy video-card styles - kept for backward compatibility if needed elsewhere */
+.video-card:not(.res-card) {
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.video-card:not(.res-card):hover {
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+  transform: translateY(-4px);
+}
+
+.video-card:not(.res-card) .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-card:not(.res-card) h3 {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.35;
