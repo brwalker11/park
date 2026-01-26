@@ -1,5 +1,5 @@
 (function () {
-  const DATA_URL = '/park/data/resources.json';
+  const DATA_URL = '/data/resources.json';
   const DEFAULT_IMAGES = createFallbacks();
   const MIN_RESULTS = 3;
   const MAX_RESULTS = 5;

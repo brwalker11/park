@@ -32,6 +32,23 @@ body{
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   scroll-padding-top:120px;
 }
+
+/* Skip navigation link for keyboard accessibility (WCAG 2.1 Level A) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: var(--brand);
+  color: #fff;
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 .section{padding:64px 0}
 @media (max-width:640px){
   .section{padding:40px 0}
