@@ -88,14 +88,14 @@
         <div class="grid">
           <div class="field">
             <label for="name">Your name <span class="required-indicator">*</span></label>
-            <input id="name" name="name" type="text" autocomplete="name" required />
-            <small class="err" id="err-name" hidden>Please enter your name</small>
+            <input id="name" name="name" type="text" autocomplete="name" aria-describedby="err-name" required />
+            <small class="err" id="err-name" role="alert" hidden>Please enter your name</small>
           </div>
 
           <div class="field">
             <label for="email">Email <span class="required-indicator">*</span></label>
-            <input id="email" name="_replyto" type="email" autocomplete="email" required />
-            <small class="err" id="err-email" hidden>Please enter a valid email</small>
+            <input id="email" name="_replyto" type="email" autocomplete="email" aria-describedby="err-email" required />
+            <small class="err" id="err-email" role="alert" hidden>Please enter a valid email</small>
           </div>
 
           <div class="field">
@@ -120,8 +120,8 @@
 
           <div class="field field-full">
             <label for="message">How can we help? <span class="required-indicator">*</span></label>
-            <textarea id="message" name="message" rows="6" required></textarea>
-            <small class="err" id="err-message" hidden>Please add a short message</small>
+            <textarea id="message" name="message" rows="6" aria-describedby="err-message" required></textarea>
+            <small class="err" id="err-message" role="alert" hidden>Please add a short message</small>
           </div>
 
           <!-- Hidden fields -->

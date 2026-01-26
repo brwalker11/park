@@ -21,6 +21,7 @@
 ## 1. Critical Issues (Breaking/Blocking)
 
 ### 1.1 Broken Related Articles Data URL
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Related articles sidebar fails to load due to incorrect path
 **Files:** `js/related.js:2`
 **Fix:**
@@ -35,6 +36,7 @@ const DATA_URL = '/data/resources.json';
 ---
 
 ### 1.2 Hidden Articles in Sitemap
+**Status:** ⏸️ SHELVED - Investigate further at a later time
 **Issue:** 9 articles marked `hidden: true` appear in sitemap, causing SEO duplicate content issues
 **Files:** `tools/update-sitemap.js`, `sitemap.xml`
 **Affected Articles:**
@@ -56,6 +58,7 @@ const visibleArticles = articles.filter(a => !a.hidden);
 ```
 Then run: `node tools/update-sitemap.js`
 **Complexity:** Quick fix + regenerate sitemap
+**Note:** Needs further investigation to determine if hidden articles should be in sitemap for SEO purposes or if they should be excluded entirely.
 
 ---
 
@@ -102,6 +105,7 @@ Cloudflare Pages automatically serves `404.html` for not-found routes.
 ---
 
 ### 1.5 No Security Headers Configured
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Site vulnerable to XSS, clickjacking, MIME sniffing attacks
 **Files:** Create new `_headers`
 **Fix:** Create `/_headers` file in repo root:
@@ -121,6 +125,7 @@ Cloudflare Pages automatically serves `404.html` for not-found routes.
 ---
 
 ### 1.6 Broken Anchor Link on Homepage
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Link to `/contact/#assessment` - anchor doesn't exist
 **Files:** `index.html:151`
 **Fix Option A:** Change link to existing anchor:
@@ -160,6 +165,7 @@ Key files to update:
 ---
 
 ### 1.8 Missing Image Dimensions (CLS Issue)
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Image missing width/height causes Cumulative Layout Shift
 **Files:** `about/index.html:97`
 **Fix:**
@@ -175,6 +181,7 @@ Key files to update:
 ---
 
 ### 1.9 Form Errors Not Announced to Screen Readers
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Validation errors not accessible - screen reader users miss feedback
 **Files:** `contact/index.html:91,97,123`
 **Fix:** Add `role="alert"` to error elements:
