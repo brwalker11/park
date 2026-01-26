@@ -269,7 +269,7 @@ li{max-width:var(--max-text)}
   box-shadow:0 10px 32px rgba(15,23,42,0.12)
 }
 .cta:hover{background-color:#005CE6}
-.cta:focus{outline:none;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
+.cta:focus-visible{outline:2px solid var(--brand);outline-offset:2px;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
 .cta--primary{
   background:#fff;
   color:#0B5FFF;
@@ -303,8 +303,8 @@ li{max-width:var(--max-text)}
 .btn-primary:hover,
 .cta-button:hover{background-color:#005CE6}
 
-.btn-primary:focus,
-.cta-button:focus{outline:none;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
+.btn-primary:focus-visible,
+.cta-button:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
 .cta.secondary{background:#1118270d;color:var(--brand);border:2px solid var(--border)}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:var(--space-block)}
 .card{background:var(--card);padding:clamp(1.5rem,3vw,2.5rem);border-radius:14px;box-shadow:0 6px 22px rgba(15,23,42,0.06);border:1px solid var(--border)}
