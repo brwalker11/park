@@ -22,7 +22,9 @@
   <meta property="og:url" content="https://monetize-parking.com/resources/">
   <meta property="og:image" content="https://monetize-parking.com/images/og-hero.jpg">
   <meta property="og:site_name" content="Monetize Parking">
+  <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://monetize-parking.com/images/og-hero.webp">
   <meta name="twitter:title" content="Parking Revenue Resources | Guides, Articles & Tools">
   <meta name="twitter:description" content="Expert guides on parking monetization, dynamic pricing, enforcement technology, and state-specific insights. Free resources for property owners.">
 <script defer src="/script.js"></script>
@@ -128,38 +130,5 @@
     <span class="floating-btn-text">State Insights</span>
   </a>
 <script defer src="/js/resources.js"></script>
-<script>
-  (function () {
-    const toggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('.site-nav');
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener('click', function () {
-      const isOpen = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    // Close menu when a link is clicked (mobile)
-    nav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  })();
-</script>
-  <script>
-document.addEventListener('click', e => {
-  const link = e.target.closest('a');
-  if (!link) return;
-  const href = link.getAttribute('href') || '';
-  if (href.endsWith('/contact/')) {
-    gtag('event', 'generate_lead', { method: 'Contact CTA' });
-  }
-  if (href.endsWith('/calculator/')) {
-    gtag('event', 'calculator_start', { method: 'Hero CTA' });
-  }
-});
-  </script>
 </body>
 </html>
