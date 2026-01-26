@@ -144,7 +144,9 @@
 
   function applyFilters() {
     const shouldShowFeatured = state.featuredSlugs.length > 0 && state.filter === 'All' && !state.search;
+    const shouldShowSeries = state.filter === 'All' && !state.search;
     toggleFeatured(shouldShowFeatured);
+    toggleSeries(shouldShowSeries);
 
     // Get all main series slugs to exclude from grid (they're shown in series section)
     const mainSeriesSlugs = SERIES_CONFIG.map((s) => s.mainSlug);
@@ -507,6 +509,12 @@
       return;
     }
     featuredSection.classList.toggle('is-collapsed', !shouldShow);
+  }
+
+  function toggleSeries(shouldShow) {
+    if (!seriesSection) return;
+    // Hide series section when filter is not 'All' or when searching
+    seriesSection.classList.toggle('is-collapsed', !shouldShow);
   }
 
   function createFallbacks() {

@@ -388,6 +388,10 @@
   display: none;
 }
 
+.res-series.is-collapsed {
+  display: none;
+}
+
 .res-series-container {
   background: linear-gradient(135deg, rgba(13, 110, 253, 0.04) 0%, rgba(13, 110, 253, 0) 70%);
   border: 1px solid rgba(13, 110, 253, 0.12);
