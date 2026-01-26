@@ -63,6 +63,7 @@ Then run: `node tools/update-sitemap.js`
 ---
 
 ### 1.3 Missing Skip Navigation Links
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Keyboard users cannot skip repetitive navigation - WCAG 2.1 Level A failure
 **Files:** All 98 HTML pages
 **Fix:** Add to every page after opening `<body>` tag:
@@ -91,6 +92,7 @@ Ensure all `<main>` elements have `id="main"`.
 ---
 
 ### 1.4 Missing 404 Error Page
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** No custom 404 page - users see generic error
 **Files:** Create new `404.html`
 **Fix:** Create `/404.html` with:
@@ -142,6 +144,7 @@ Cloudflare Pages automatically serves `404.html` for not-found routes.
 ---
 
 ### 1.7 Footer Incorrectly Inside Main Element
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Semantic HTML violation - footer should be sibling of main, not child
 **Files:** 78 HTML files (all except contact/index.html and services/index.html)
 **Fix:** In each affected file, move `</main>` before `<footer>`:
@@ -201,6 +204,7 @@ Also add `aria-describedby` to inputs:
 ---
 
 ### 1.10 Missing aria-selected on Filter Tabs
+**Status:** ✅ FIXED (Jan 2026)
 **Issue:** Screen readers can't identify active filter on resources page
 **Files:** `resources/index.html:74-78`, `js/resources.js`
 **Fix in HTML:**
