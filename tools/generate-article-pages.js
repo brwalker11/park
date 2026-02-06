@@ -43,6 +43,7 @@ function main() {
   articles.forEach((article) => {
     const slug = article.slug;
     if (!slug) return;
+    if (article.type === 'external') return;
 
     const dir = path.join(OUTPUT_ROOT, slug);
     ensureDir(dir);

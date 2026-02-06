@@ -9,9 +9,12 @@ const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const STATES_DIR = path.join(ROOT, 'resources', 'states');
 const SITE_ORIGIN = 'https://monetize-parking.com';
 
+const VIDEOS_DIR = path.join(ROOT, 'resources', 'videos');
+
 const STATIC_ROUTES = [
   '/',
   '/about/',
+  '/ask-the-experts.html',
   '/calculator/',
   '/contact/',
   '/faq/',
@@ -22,12 +25,14 @@ const STATIC_ROUTES = [
 function loadArticles() {
   const raw = fs.readFileSync(DATA_PATH, 'utf8');
   const data = JSON.parse(raw);
-  return data.map((item) => ({
-    slug: item.slug,
-    lastmod: item.lastmod || item.date,
-    date: item.date,
-    canonicalOverride: item.canonicalOverride || ''
-  }));
+  return data
+    .filter((item) => item.type !== 'external')
+    .map((item) => ({
+      slug: item.slug,
+      lastmod: item.lastmod || item.date,
+      date: item.date,
+      canonicalOverride: item.canonicalOverride || ''
+    }));
 }
 
 function getFileModifiedDate(filePath) {
@@ -89,6 +94,26 @@ function findStatePages() {
   return statePages;
 }
 
+function findVideoPages() {
+  const videoPages = [];
+  if (fs.existsSync(VIDEOS_DIR)) {
+    const dirs = fs.readdirSync(VIDEOS_DIR, { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(dirent => dirent.name);
+
+    dirs.forEach(dir => {
+      const indexPath = path.join(VIDEOS_DIR, dir, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        videoPages.push({
+          url: `/resources/videos/${dir}/`,
+          lastmod: getFileModifiedDate(indexPath)
+        });
+      }
+    });
+  }
+  return videoPages;
+}
+
 function buildUrl(slug, canonicalOverride) {
   if (canonicalOverride) return canonicalOverride;
   return `${SITE_ORIGIN}/articles/${encodeURIComponent(slug)}/`;
@@ -108,6 +133,7 @@ function formatDate(value) {
 function buildSitemap() {
   const articles = loadArticles();
   const statePages = findStatePages();
+  const videoPages = findVideoPages();
   const parts = [];
   parts.push('<?xml version="1.0" encoding="UTF-8"?>');
   parts.push('<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">');
@@ -117,6 +143,15 @@ function buildSitemap() {
   });
 
   statePages.forEach((page) => {
+    const loc = xmlEscape(`${SITE_ORIGIN}${page.url}`);
+    if (page.lastmod) {
+      parts.push(`  <url><loc>${loc}</loc><lastmod>${page.lastmod}</lastmod></url>`);
+    } else {
+      parts.push(`  <url><loc>${loc}</loc></url>`);
+    }
+  });
+
+  videoPages.forEach((page) => {
     const loc = xmlEscape(`${SITE_ORIGIN}${page.url}`);
     if (page.lastmod) {
       parts.push(`  <url><loc>${loc}</loc><lastmod>${page.lastmod}</lastmod></url>`);
