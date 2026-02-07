@@ -56,7 +56,7 @@
   async function init() {
     const slug = getSlug();
     if (!slug) {
-      renderNotFound('We couldn’t find that article.');
+      renderNotFound('We couldn’t find that article.', { noindex: true });
       return;
     }
 
@@ -64,7 +64,7 @@
       const articles = await loadArticles();
       const current = articles.find((item) => item.slug === slug);
       if (!current) {
-        renderNotFound('We couldn’t find that article.');
+        renderNotFound('We couldn’t find that article.', { noindex: true });
         return;
       }
 
@@ -447,11 +447,14 @@
     document.head.appendChild(script);
   }
 
-  function renderNotFound(message) {
+  function renderNotFound(message, options) {
+    var shouldNoindex = options && options.noindex;
     document.title = 'Article Not Found | Monetize Parking';
-    const robots = document.querySelector('meta[name="robots"]');
-    if (robots) {
-      robots.setAttribute('content', 'noindex,follow');
+    if (shouldNoindex) {
+      var robots = document.querySelector('meta[name="robots"]');
+      if (robots) {
+        robots.setAttribute('content', 'noindex,follow');
+      }
     }
     setLinkCanonical(`${window.location.origin}/resources/`);
     const container = document.getElementById('article');
