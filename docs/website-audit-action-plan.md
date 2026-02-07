@@ -539,26 +539,14 @@ document.querySelectorAll('[data-contact-cta]').forEach(el => {
 ---
 
 ### 3.7 Convert Redirect Pages to Cloudflare _redirects
+**Status:** ✅ FIXED (Feb 2026)
 **Issue:** JavaScript redirects less efficient than server-side
-**Files:** Create `_redirects`, delete old redirect HTML files
-**Fix:** Create `/_redirects`:
-```
-/about.html /about/ 301
-/services.html /services/ 301
-/calculator.html /calculator/ 301
-/lot-size.html /articles/optimal-lot-size-profit/ 301
-/gate-arms.html /articles/gate-arm-maintenance-costs/ 301
-/article-ai-vs-gates.html /articles/ai-access-vs-gates/ 301
-/stillwater-casestudy.html /articles/eau-claire-revenue-increase/ 301
-/ai-vs-gates/* /articles/ai-access-vs-gates/ 301
-/parking-management-costs/* /articles/real-costs-parking-management/ 301
-/states/* /resources/states/ 301
-/stillwater-case-study/* /articles/eau-claire-revenue-increase/ 301
-/lot-size/* /articles/optimal-lot-size-profit/ 301
-/gate-arms/* /articles/gate-arm-maintenance-costs/ 301
-/articles /resources/ 301
-```
-Then delete the old HTML redirect files.
+**Files:** Created `_redirects`, deleted 19 old redirect HTML files
+**What was done:**
+- Created `/_redirects` with all 301 server-side redirect rules for Cloudflare Pages
+- Deleted all 19 client-side redirect stub files (meta refresh + JS `window.location.replace`)
+- Deleted files: `about.html`, `services.html`, `calculator.html`, `article-ai-vs-gates.html`, `gate-arms.html`, `lot-size.html`, `stillwater-casestudy.html`, `ai-vs-gates/`, `parking-management-costs/`, `stillwater-case-study/`, `lot-size/`, `gate-arms/`, `states/`, `articles/index.html`, `articles/stillwater-300-revenue-lift/`, `resources/states/{colorado,minnesota,texas,wisconsin}.html`
+- This resolves Google Search Console "page with redirect" warnings for `/parking-management-costs/` and similar URLs
 **Complexity:** Requires work
 
 ---

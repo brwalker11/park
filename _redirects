@@ -1,0 +1,33 @@
+# Cloudflare Pages server-side redirects
+# Replaces old client-side meta-refresh/JS redirect stub files
+
+# Old .html URLs → pretty URLs
+/about.html /about/ 301
+/services.html /services/ 301
+/calculator.html /calculator/ 301
+
+# Old article slugs → new article paths
+/lot-size.html /articles/optimal-lot-size-profit/ 301
+/gate-arms.html /articles/gate-arm-maintenance-costs/ 301
+/article-ai-vs-gates.html /articles/ai-access-vs-gates/ 301
+/stillwater-casestudy.html /articles/eau-claire-revenue-increase/ 301
+
+# Old directory paths → new article paths
+/ai-vs-gates/* /articles/ai-access-vs-gates/ 301
+/parking-management-costs/* /articles/real-costs-parking-management/ 301
+/stillwater-case-study/* /articles/eau-claire-revenue-increase/ 301
+/lot-size/* /articles/optimal-lot-size-profit/ 301
+/gate-arms/* /articles/gate-arm-maintenance-costs/ 301
+/articles/stillwater-300-revenue-lift/* /articles/eau-claire-revenue-increase/ 301
+
+# Old state .html files → pretty URLs
+/resources/states/colorado.html /resources/states/colorado/ 301
+/resources/states/minnesota.html /resources/states/minnesota/ 301
+/resources/states/texas.html /resources/states/texas/ 301
+/resources/states/wisconsin.html /resources/states/wisconsin/ 301
+
+# States path redirect
+/states/* /resources/states/ 301
+
+# Articles listing redirect
+/articles /resources/ 301
