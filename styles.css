@@ -494,6 +494,8 @@ footer .footer__legal,
 .footer .footer__legal,
 footer .small,
 .footer .small{opacity:0.7;font-size:0.9rem;text-align:center}
+.footer-social{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:12px;margin-top:8px;opacity:0.7}
+.footer-social a{color:inherit;display:inline-flex;align-items:center}
 /* Services layout */
 .two-col{display:grid;grid-template-columns:300px 1fr;gap:24px}
 .sidenav{align-self:start}
