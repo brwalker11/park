@@ -16,18 +16,6 @@
         { slug: 'dynamic-pricing-strategies', part: 3 },
         { slug: 'balancing-revenue-relationships', part: 4 }
       ]
-    },
-    {
-      id: 'dynamic-pricing-101',
-      name: 'Dynamic Pricing 101',
-      description: 'Master dynamic pricing strategies to boost parking revenue by 12-35% with the right approach for your property.',
-      mainSlug: 'dynamic-pricing-guide',
-      articles: [
-        { slug: 'choosing-pricing-strategy', part: 1 },
-        { slug: 'dynamic-pricing-technology', part: 2 },
-        { slug: 'pricing-by-property-type', part: 3 },
-        { slug: 'dynamic-pricing-mistakes', part: 4 }
-      ]
     }
     // Add more series here as needed
   ];
