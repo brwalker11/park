@@ -29,5 +29,11 @@
 # States path redirect
 /states/* /resources/states/ 301
 
+# Dynamic pricing series consolidation → main guide
+/articles/choosing-pricing-strategy/* /articles/dynamic-pricing-guide/ 301
+/articles/dynamic-pricing-technology/* /articles/dynamic-pricing-guide/ 301
+/articles/pricing-by-property-type/* /articles/dynamic-pricing-guide/ 301
+/articles/dynamic-pricing-mistakes/* /articles/dynamic-pricing-guide/ 301
+
 # Articles listing redirect
 /articles /resources/ 301
