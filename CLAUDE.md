@@ -73,7 +73,7 @@ Articles never recommend themselves. Up to 5 related articles are shown.
 
 ### Article Series Navigation
 
-Multi-part article series (e.g., "Flexible Parking Rules", "Dynamic Pricing 101") are configured in both:
+Multi-part article series (e.g., "Flexible Parking Rules") are configured in both:
 - `/js/article.js` - `SERIES_CONFIG` object maps series to their articles
 - `/js/resources.js` - `SERIES_CONFIG` array for the resources page
 
