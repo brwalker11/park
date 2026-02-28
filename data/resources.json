@@ -14,11 +14,11 @@
     "lastmod": "2026-02-08",
     "description": "Maximize parking revenue on game days and concert nights near stadiums and arenas. Dynamic pricing strategies, traffic management, season pass programs, and venue partnership opportunities.",
     "excerpt": "Parking lots within walking distance of stadiums and arenas generate most of their annual revenue during 50-80 event days rather than 365 days of steady traffic. This concentrated demand creates opportunities for premium pricing.",
-    "image": "/images/event.webp",
-    "imageAlt": "Stadium event parking lot with vehicles arriving before a game.",
-    "thumbnail": "/images/event.webp",
+    "image": "/images/stadium.webp",
+    "imageAlt": "Stadium parking lot filling with vehicles before a major event.",
+    "thumbnail": "/images/stadium.webp",
     "content": "/articles/stadium-arena-event-parking.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/stadium-arena-event-parking/"
@@ -38,11 +38,11 @@
     "lastmod": "2026-02-08",
     "description": "Maintain parking revenue during construction or renovation when available spaces decrease. Communication strategies, alternative arrangements, pricing adjustments, and recovery plans.",
     "excerpt": "Construction and renovation projects temporarily reduce parking capacity just when maintaining revenue becomes most critical. Smart operators minimize revenue impact through pricing adjustments and creative space management.",
-    "image": "/images/break.webp",
-    "imageAlt": "Parking lot under construction with reduced available spaces.",
-    "thumbnail": "/images/break.webp",
+    "image": "/images/construction.webp",
+    "imageAlt": "Parking lot with reduced spaces during nearby construction and renovation work.",
+    "thumbnail": "/images/construction.webp",
     "content": "/articles/parking-during-construction-renovation.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-during-construction-renovation/"
@@ -62,11 +62,11 @@
     "lastmod": "2026-02-08",
     "description": "Essential ADA requirements for paid parking lots including accessible space counts, van-accessible spaces, signage, payment systems, and enforcement considerations that protect you from violations.",
     "excerpt": "ADA compliance is not optional for parking lots open to the public, and violations carry penalties ranging from $75,000 for first offenses to $150,000 for subsequent violations. Property owners must meet federal accessibility requirements.",
-    "image": "/images/rules.webp",
-    "imageAlt": "Accessible parking space with ADA compliant signage in a paid lot.",
-    "thumbnail": "/images/rules.webp",
+    "image": "/images/ada.webp",
+    "imageAlt": "ADA compliant accessible parking space with required signage and markings in a paid lot.",
+    "thumbnail": "/images/ada.webp",
     "content": "/articles/ada-compliance-paid-parking.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/ada-compliance-paid-parking/"
@@ -86,11 +86,11 @@
     "lastmod": "2026-02-08",
     "description": "Optimize parking lot striping and layout to maximize capacity and revenue. Compact vs standard spaces, angle vs perpendicular parking, traffic flow design, and when to re-stripe for more spaces.",
     "excerpt": "Parking lot striping determines how many revenue-generating spaces fit in your available square footage. Optimized striping can increase capacity by 15-30% on the same footprint, directly impacting revenue.",
-    "image": "/images/empty_lot.webp",
-    "imageAlt": "Freshly striped parking lot with optimized layout for maximum spaces.",
-    "thumbnail": "/images/empty_lot.webp",
+    "image": "/images/striping.webp",
+    "imageAlt": "Freshly striped parking lot with optimized layout design for maximum revenue.",
+    "thumbnail": "/images/striping.webp",
     "content": "/articles/parking-lot-striping-layout-revenue.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-lot-striping-layout-revenue/"
@@ -110,11 +110,11 @@
     "lastmod": "2026-02-08",
     "description": "Maintain parking revenue through winter with smart snow removal policies, liability protection, seasonal pricing adjustments, and clear weather-related communication that keeps customers informed.",
     "excerpt": "Winter weather reduces parking lot revenue through decreased utilization, increased operating costs, and weather-related closures. Property owners in snow regions need strategies that maintain income while managing expenses.",
-    "image": "/images/park_problems.webp",
-    "imageAlt": "Snow-covered parking lot requiring winter maintenance and plowing.",
-    "thumbnail": "/images/park_problems.webp",
+    "image": "/images/winter.webp",
+    "imageAlt": "Snow-covered parking lot facing winter revenue and maintenance challenges.",
+    "thumbnail": "/images/winter.webp",
     "content": "/articles/winter-parking-revenue-strategies.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/winter-parking-revenue-strategies/"
@@ -134,11 +134,11 @@
     "lastmod": "2026-02-26",
     "description": "Most lot owners pick one pricing model and leave money on the table. Learn when monthly passes guarantee stable income, when hourly rates maximize revenue, and how to use both.",
     "excerpt": "Most parking lot owners think they need to choose between monthly passes and hourly rates. That binary thinking leaves money on the table. The best revenue strategy uses both.",
-    "image": "/images/pricing.webp",
-    "imageAlt": "Parking lot owner comparing monthly pass and hourly rate pricing strategies.",
-    "thumbnail": "/images/pricing.webp",
+    "image": "/images/pass.webp",
+    "imageAlt": "Parking lot comparing monthly pass and hourly rate pricing models.",
+    "thumbnail": "/images/pass.webp",
     "content": "/articles/monthly-passes-vs-hourly-rates.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/monthly-passes-vs-hourly-rates/"
@@ -158,11 +158,11 @@
     "lastmod": "2026-02-08",
     "description": "Stop tracking vanity metrics. Learn which parking analytics actually drive revenue decisions: utilization rates, compliance patterns, peak demand timing, and warning signs.",
     "excerpt": "Total monthly revenue tells you almost nothing about how well your parking operation actually performs. The right metrics reveal pricing opportunities, operational problems, and capacity issues before they cost you money.",
-    "image": "/images/monitor.webp",
-    "imageAlt": "Parking lot analytics dashboard showing utilization rates and revenue metrics.",
-    "thumbnail": "/images/monitor.webp",
+    "image": "/images/analytics.webp",
+    "imageAlt": "Parking revenue analytics dashboard displaying key performance metrics and data.",
+    "thumbnail": "/images/analytics.webp",
     "content": "/articles/parking-revenue-analytics.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-revenue-analytics/"
@@ -182,11 +182,11 @@
     "lastmod": "2026-02-08",
     "description": "Learn how to monetize parking in mixed-use developments with retail, residential, and office tenants. Time-sharing strategies, validation programs, and revenue allocation models.",
     "excerpt": "Mixed-use developments create parking revenue opportunities that single-use properties cannot match. The same spaces serve office workers during weekdays, retail customers on weekends, and residential visitors in evenings.",
-    "image": "/images/office.webp",
-    "imageAlt": "Mixed-use development with retail, office, and residential tenants sharing parking facilities.",
-    "thumbnail": "/images/office.webp",
+    "image": "/images/mixed.webp",
+    "imageAlt": "Mixed-use development parking facility serving retail, office, and residential tenants.",
+    "thumbnail": "/images/mixed.webp",
     "content": "/articles/mixed-use-development-parking.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/mixed-use-development-parking/"
@@ -206,11 +206,11 @@
     "lastmod": "2026-02-08",
     "description": "Monetize parking for breweries, bars, and nightlife venues while managing liability. Evening pricing strategies, rideshare partnerships, and overnight policies that protect revenue.",
     "excerpt": "Parking lots near breweries, bars, and restaurants generate strong evening revenue when office lots sit empty. But establishments serving alcohol create liability concerns that require different policies than standard commercial parking.",
-    "image": "/images/rest_park.webp",
-    "imageAlt": "Parking lot near brewery and bar district during evening hours.",
-    "thumbnail": "/images/rest_park.webp",
+    "image": "/images/brew.webp",
+    "imageAlt": "Brewery and bar parking lot during evening hours with late-night patrons.",
+    "thumbnail": "/images/brew.webp",
     "content": "/articles/brewery-bar-parking-revenue.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/brewery-bar-parking-revenue/"
@@ -230,11 +230,11 @@
     "lastmod": "2026-02-08",
     "description": "Compete with official airport parking by offering cheaper long-term rates with shuttle service. Pricing strategies, security requirements, and operational models for airport proximity lots.",
     "excerpt": "Parking lots within 2-3 miles of airports compete directly with official airport parking by offering lower rates for travelers willing to take a short shuttle ride. Property owners near airports can generate consistent revenue from multi-day parking.",
-    "image": "/images/park_sign.webp",
-    "imageAlt": "Off-site airport parking lot with shuttle service signage.",
-    "thumbnail": "/images/park_sign.webp",
+    "image": "/images/airport.webp",
+    "imageAlt": "Airport proximity parking lot with vehicles parked for long-term traveler use.",
+    "thumbnail": "/images/airport.webp",
     "content": "/articles/airport-proximity-parking-revenue.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/airport-proximity-parking-revenue/"
@@ -258,7 +258,7 @@
     "imageAlt": "Property owner reviewing parking monetization options for an underused parking lot.",
     "thumbnail": "/images/monetize.webp",
     "content": "/articles/what-is-parking-monetization.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/what-is-parking-monetization/"
@@ -282,7 +282,7 @@
     "imageAlt": "Modern municipal parking lot with scan-to-pay and automated enforcement technology.",
     "thumbnail": "/images/city.webp",
     "content": "/articles/municipal-parking-solutions.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/municipal-parking-solutions/"
@@ -306,7 +306,7 @@
     "imageAlt": "Property owner calculating the hidden costs of offering free parking.",
     "thumbnail": "/images/free.webp",
     "content": "/articles/free-parking-true-cost.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/free-parking-true-cost/"
@@ -330,7 +330,7 @@
     "imageAlt": "Driver scanning a QR code to pay for parking with their smartphone.",
     "thumbnail": "/images/thumbs/scan.webp",
     "content": "/articles/qr-code-parking-payments.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/qr-code-parking-payments/"
@@ -354,7 +354,7 @@
     "imageAlt": "Parking lot with security cameras and LED lighting for safety.",
     "thumbnail": "/images/thumbs/camera_lot.webp",
     "content": "/articles/parking-lot-security.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-lot-security/"
@@ -760,7 +760,7 @@
     "imageAlt": "Comparison of Scan-to-Pay QR code and LPR camera parking technologies.",
     "thumbnail": "/images/thumbs/scan_lpr.webp",
     "content": "/articles/scan-to-pay-vs-lpr.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/scan-to-pay-vs-lpr/"
@@ -784,7 +784,7 @@
     "imageAlt": "Timeline showing the first 90 days of implementing paid parking.",
     "thumbnail": "/images/thumbs/90_paid.webp",
     "content": "/articles/first-90-days-paid-parking.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/first-90-days-paid-parking/"
@@ -808,7 +808,7 @@
     "imageAlt": "Parking lot signage showing payment instructions and enforcement rules.",
     "thumbnail": "/images/thumbs/park_sign.webp",
     "content": "/articles/parking-signage-guide.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-signage-guide/"
@@ -832,7 +832,7 @@
     "imageAlt": "Office building parking garage with revenue optimization opportunities.",
     "thumbnail": "/images/thumbs/office.webp",
     "content": "/articles/office-building-parking-revenue.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/office-building-parking-revenue/"
@@ -857,7 +857,7 @@
     "imageAlt": "Upscale urban restaurant district where customers pay for parking to access quality dining.",
     "thumbnail": "/images/thumbs/rest_park.webp",
     "content": "/articles/restaurant-paid-parking.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/restaurant-paid-parking/"
@@ -882,7 +882,7 @@
     "imageAlt": "Modern automated parking enforcement system with LPR cameras replacing manual methods.",
     "thumbnail": "/images/thumbs/stone.webp",
     "content": "/articles/parking-enforcement-modernization.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-enforcement-modernization/"
@@ -907,7 +907,7 @@
     "imageAlt": "Busy commercial district with high parking demand indicating economic vitality.",
     "thumbnail": "/images/thumbs/park_problems.webp",
     "content": "/articles/parking-problems-mean-success.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-problems-mean-success/"
@@ -932,7 +932,7 @@
     "imageAlt": "Downtown municipal land being reclaimed from parking for parks and housing development.",
     "thumbnail": "/images/thumbs/private.webp",
     "content": "/articles/private-parking-frees-municipal-land.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/private-parking-frees-municipal-land/"
@@ -957,7 +957,7 @@
     "imageAlt": "Empty parking lot during off-peak hours available for shared parking agreements.",
     "thumbnail": "/images/thumbs/empty_lot.webp",
     "content": "/articles/shared-parking-agreements-revenue.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/shared-parking-agreements-revenue/"
@@ -982,7 +982,7 @@
     "imageAlt": "Historic downtown district with limited parking and high demand from visitors and businesses.",
     "thumbnail": "/images/thumbs/historic.webp",
     "content": "/articles/historic-district-parking-profit.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/historic-district-parking-profit/"
@@ -1007,7 +1007,7 @@
     "imageAlt": "Seasonal parking lot in a ski town or beach destination during peak tourist season.",
     "thumbnail": "/images/thumbs/beach.webp",
     "content": "/articles/paid-parking-seasonal-destinations.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/paid-parking-seasonal-destinations/"
@@ -1031,7 +1031,7 @@
     "imageAlt": "Flexible parking management rules dashboard showing license plate exemptions and custom pricing schedules.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/flexible-parking-rules.html",
-    "readTime": "5–7 min",
+    "readTime": "5\u20137 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/flexible-parking-rules/"
@@ -1056,7 +1056,7 @@
     "imageAlt": "License plate recognition system automatically exempting employee vehicles from parking fees.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/license-plate-allow-listing-guide.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/license-plate-allow-listing-guide/"
@@ -1081,7 +1081,7 @@
     "imageAlt": "Parking lot operating hours schedule showing peak and off-peak enforcement times.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/custom-operating-hours-strategy.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/custom-operating-hours-strategy/"
@@ -1106,7 +1106,7 @@
     "imageAlt": "Dynamic parking pricing dashboard showing time-based rate adjustments.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/dynamic-pricing-strategies.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/dynamic-pricing-strategies/"
@@ -1131,7 +1131,7 @@
     "imageAlt": "Parking policy diagram showing employee exemptions and visitor payment zones.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/balancing-revenue-relationships.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/balancing-revenue-relationships/"
@@ -1154,14 +1154,14 @@
     "imageAlt": "Why 100% Occupancy Isn't the Goal. 100% Compliance Is",
     "thumbnail": "/images/thumbs/default-guide.webp",
     "content": "/articles/occupancy-vs-compliance.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/occupancy-vs-compliance/"
   },
   {
     "slug": "you-didnt-buy-a-parking-lot-to-babysit-it",
-    "title": "You Didn’t Buy a Parking Lot to Babysit It",
+    "title": "You Didn\u2019t Buy a Parking Lot to Babysit It",
     "category": "Articles",
     "tags": [
       "automation",
@@ -1178,7 +1178,7 @@
     "imageAlt": "Parking lot owner reviewing automated enforcement reports on a tablet.",
     "thumbnail": "/images/thumbs/monitor.webp",
     "content": "/articles/you-didnt-buy-a-parking-lot-to-babysit-it.html",
-    "readTime": "4–6 min",
+    "readTime": "4\u20136 min",
     "author": "Monetize Parking"
   },
   {
@@ -1200,7 +1200,7 @@
     "imageAlt": "Spreadsheet showing parking revenue break-even analysis.",
     "thumbnail": "/images/thumbs/break.webp",
     "content": "/articles/when-to-start-charging-parking.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking"
   },
   {
@@ -1248,7 +1248,7 @@
     "imageAlt": "Dynamic pricing strategy comparison showing time-based, demand-based, and event-based options.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/choosing-pricing-strategy.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/choosing-pricing-strategy/"
@@ -1273,7 +1273,7 @@
     "imageAlt": "Parking technology stack showing sensors, software dashboard, and payment systems.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/dynamic-pricing-technology.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/dynamic-pricing-technology/"
@@ -1298,7 +1298,7 @@
     "imageAlt": "Dynamic pricing strategies customized for different property types including office, retail, and hotel.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/pricing-by-property-type.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/pricing-by-property-type/"
@@ -1323,7 +1323,7 @@
     "imageAlt": "Common dynamic pricing mistakes to avoid for parking lot operators.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/dynamic-pricing-mistakes.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/dynamic-pricing-mistakes/"
@@ -1347,7 +1347,7 @@
     "imageAlt": "Downtown Eau Claire parking lot with professional enforcement system.",
     "thumbnail": "/images/thumbs/parking_up.webp",
     "content": "/articles/eau-claire-revenue-increase.html",
-    "readTime": "3–5 min",
+    "readTime": "3\u20135 min",
     "author": "Monetize Parking"
   },
   {
@@ -1367,7 +1367,7 @@
     "imageAlt": "Parking management team reviewing lot maintenance expenses.",
     "thumbnail": "/images/thumbs/park_mana.webp",
     "content": "/articles/real-costs-parking-management.html",
-    "readTime": "3–4 min",
+    "readTime": "3\u20134 min",
     "author": "Monetize Parking"
   },
   {
@@ -1387,7 +1387,7 @@
     "imageAlt": "AI camera watching an open parking lot entrance.",
     "thumbnail": "/images/thumbs/ai_camera.webp",
     "content": "/articles/ai-access-vs-gates.html",
-    "readTime": "3–5 min",
+    "readTime": "3\u20135 min",
     "author": "Monetize Parking"
   },
   {
@@ -1402,12 +1402,12 @@
     "date": "2025-07-08",
     "lastmod": "2025-08-20",
     "description": "Why recurring gate arm maintenance and breakdowns quietly erode parking profits. See how AI enforcement eliminates the maintenance burden and boosts revenue.",
-    "excerpt": "Recurring gate arm repairs drain parking profits—see the smarter alternative.",
+    "excerpt": "Recurring gate arm repairs drain parking profits\u2014see the smarter alternative.",
     "image": "/images/gate_arms.webp",
     "imageAlt": "Technician repairing a broken parking gate arm.",
     "thumbnail": "/images/thumbs/gate_arms.webp",
     "content": "/articles/gate-arm-maintenance-costs.html",
-    "readTime": "4–6 min",
+    "readTime": "4\u20136 min",
     "author": "Monetize Parking"
   },
   {
@@ -1427,7 +1427,7 @@
     "imageAlt": "Overhead view of a small paid parking lot with full occupancy.",
     "thumbnail": "/images/thumbs/lot_size.webp",
     "content": "/articles/optimal-lot-size-profit.html",
-    "readTime": "4–6 min",
+    "readTime": "4\u20136 min",
     "author": "Monetize Parking"
   },
   {
@@ -1439,7 +1439,7 @@
     "thumbnail": "/images/thumbs/small-lots-main.webp",
     "excerpt": "Even modest parking assets can achieve impressive ROI through automation. Parking Today highlights how one of our partners, Municipal Parking Services (MPS), is helping small lots thrive through smart enforcement and automation.",
     "cta": {
-      "text": "Read on Parking Today →",
+      "text": "Read on Parking Today \u2192",
       "url": "https://parkingtoday.com/segments/medical/small-lots-earn-big-returns-through-automation/",
       "external": true
     },
