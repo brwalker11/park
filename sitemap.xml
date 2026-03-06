@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://monetize-parking.com/</loc><lastmod>2026-03-06</lastmod><priority>1.0</priority></url>
-  <url><loc>https://monetize-parking.com/about/</loc></url>
-  <url><loc>https://monetize-parking.com/ask-the-experts.html</loc></url>
-  <url><loc>https://monetize-parking.com/calculator/</loc></url>
-  <url><loc>https://monetize-parking.com/contact/</loc></url>
-  <url><loc>https://monetize-parking.com/faq/</loc></url>
-  <url><loc>https://monetize-parking.com/resources/</loc></url>
-  <url><loc>https://monetize-parking.com/services/</loc></url>
+  <url><loc>https://monetize-parking.com/about/</loc><lastmod>2026-03-06</lastmod><priority>0.7</priority></url>
+  <url><loc>https://monetize-parking.com/ask-the-experts.html</loc><lastmod>2026-03-06</lastmod><priority>0.8</priority></url>
+  <url><loc>https://monetize-parking.com/calculator/</loc><lastmod>2026-03-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://monetize-parking.com/contact/</loc><lastmod>2026-03-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://monetize-parking.com/faq/</loc><lastmod>2026-03-06</lastmod><priority>0.7</priority></url>
+  <url><loc>https://monetize-parking.com/resources/</loc><lastmod>2026-03-06</lastmod><priority>0.8</priority></url>
+  <url><loc>https://monetize-parking.com/services/</loc><lastmod>2026-03-06</lastmod><priority>0.9</priority></url>
   <url><loc>https://monetize-parking.com/resources/states/</loc><lastmod>2026-03-05</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/colorado/</loc><lastmod>2026-03-05</lastmod></url>
   <url><loc>https://monetize-parking.com/resources/states/colorado/financial-impact/</loc><lastmod>2026-03-05</lastmod></url>
@@ -126,10 +126,6 @@
   <url><loc>https://monetize-parking.com/articles/you-didnt-buy-a-parking-lot-to-babysit-it/</loc><lastmod>2025-11-02</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/when-to-start-charging-parking/</loc><lastmod>2025-11-02</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/dynamic-pricing-guide/</loc><lastmod>2026-02-21</lastmod></url>
-  <url><loc>https://monetize-parking.com/articles/choosing-pricing-strategy/</loc><lastmod>2025-12-11</lastmod></url>
-  <url><loc>https://monetize-parking.com/articles/dynamic-pricing-technology/</loc><lastmod>2025-12-11</lastmod></url>
-  <url><loc>https://monetize-parking.com/articles/pricing-by-property-type/</loc><lastmod>2025-12-11</lastmod></url>
-  <url><loc>https://monetize-parking.com/articles/dynamic-pricing-mistakes/</loc><lastmod>2025-12-11</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/eau-claire-revenue-increase/</loc><lastmod>2025-10-15</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/real-costs-parking-management/</loc><lastmod>2025-09-20</lastmod></url>
   <url><loc>https://monetize-parking.com/articles/ai-access-vs-gates/</loc><lastmod>2025-09-01</lastmod></url>
