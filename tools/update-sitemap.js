@@ -12,21 +12,21 @@ const SITE_ORIGIN = 'https://monetize-parking.com';
 const VIDEOS_DIR = path.join(ROOT, 'resources', 'videos');
 
 const STATIC_ROUTES = [
-  '/',
-  '/about/',
-  '/ask-the-experts.html',
-  '/calculator/',
-  '/contact/',
-  '/faq/',
-  '/resources/',
-  '/services/'
+  { route: '/', priority: '1.0' },
+  { route: '/about/', priority: '0.7' },
+  { route: '/ask-the-experts.html', priority: '0.8' },
+  { route: '/calculator/', priority: '0.9' },
+  { route: '/contact/', priority: '0.9' },
+  { route: '/faq/', priority: '0.7' },
+  { route: '/resources/', priority: '0.8' },
+  { route: '/services/', priority: '0.9' }
 ];
 
 function loadArticles() {
   const raw = fs.readFileSync(DATA_PATH, 'utf8');
   const data = JSON.parse(raw);
   return data
-    .filter((item) => item.type !== 'external')
+    .filter((item) => item.type !== 'external' && !item.redirected)
     .map((item) => ({
       slug: item.slug,
       lastmod: item.lastmod || item.date,
@@ -138,8 +138,9 @@ function buildSitemap() {
   parts.push('<?xml version="1.0" encoding="UTF-8"?>');
   parts.push('<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">');
 
-  STATIC_ROUTES.forEach((route) => {
-    parts.push(`  <url><loc>${SITE_ORIGIN}${route}</loc></url>`);
+  const today = new Date().toISOString().split('T')[0];
+  STATIC_ROUTES.forEach(({ route, priority }) => {
+    parts.push(`  <url><loc>${SITE_ORIGIN}${route}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`);
   });
 
   statePages.forEach((page) => {
