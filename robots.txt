@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /consultation/
 Sitemap: https://monetize-parking.com/sitemap.xml
