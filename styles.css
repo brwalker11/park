@@ -200,7 +200,7 @@ body{
     display: flex;
   }
 
-  .site-nav {
+  .site-header .site-nav {
     display: none;
     position: absolute;
     top: 100%;
@@ -215,7 +215,7 @@ body{
     z-index: 999;
   }
 
-  .site-nav.open {
+  .site-header .site-nav.open {
     display: flex;
   }
 
