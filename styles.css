@@ -1378,6 +1378,23 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 
 /* Video cards now use res-card as base - these styles extend it for video-specific needs */
 
+/* Ask the Experts hero overrides */
+.ask-experts-hero {
+  background: linear-gradient(135deg, #0b6efd 0%, #0856c9 100%);
+}
+
+.ask-experts-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ask-experts-hero p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Video wrapper within res-thumb - override padding-based aspect ratio */
 .res-thumb.video-wrapper {
   padding-bottom: 0;

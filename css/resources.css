@@ -178,6 +178,7 @@
 
 .res-thumb {
   display: block;
+  text-decoration: none;
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -249,6 +250,16 @@
 .res-excerpt {
   margin: 0;
   color: var(--res-muted);
+}
+
+.res-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  margin-top: 0.5rem;
 }
 
 .res-source {
