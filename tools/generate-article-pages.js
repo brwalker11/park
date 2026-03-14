@@ -93,7 +93,7 @@ function main() {
         `<meta property="og:url" content="${articleUrl}">`
       )
       .replace(
-        /<meta property="og:image" content="https:\/\/monetize-parking\.com\/images\/default-guide\.webp">/,
+        /<meta property="og:image" content="https:\/\/monetize-parking\.com\/images\/og-image\.png">/,
         `<meta property="og:image" content="${heroImageUrl}">`
       )
       // Pre-populate Twitter tags
@@ -106,7 +106,7 @@ function main() {
         `<meta name="twitter:description" content="${escapeHtml(description)}">`
       )
       .replace(
-        /<meta name="twitter:image" content="https:\/\/monetize-parking\.com\/images\/default-guide\.webp">/,
+        /<meta name="twitter:image" content="https:\/\/monetize-parking\.com\/images\/og-image\.png">/,
         `<meta name="twitter:image" content="${heroImageUrl}">`
       )
       // Pre-populate hero image src and alt (LCP discovery)
