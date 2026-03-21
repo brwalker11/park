@@ -19,3 +19,15 @@
 
 /data/*
   Cache-Control: public, max-age=3600
+
+/styles.css
+  Cache-Control: public, max-age=86400
+
+/styles.min.css
+  Cache-Control: public, max-age=86400
+
+/script.js
+  Cache-Control: public, max-age=86400
+
+/script.min.js
+  Cache-Control: public, max-age=86400
