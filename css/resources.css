@@ -373,6 +373,10 @@
 
   .res-search {
     width: 100%;
+    border-radius: 10px;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 16px;
   }
 
   .res-filters {
