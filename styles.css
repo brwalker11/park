@@ -1413,6 +1413,40 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
   border: 0;
 }
 
+/* Ask the Experts hero overrides */
+.ask-experts-hero {
+  background: linear-gradient(135deg, #0b6efd 0%, #0856c9 100%);
+}
+
+.ask-experts-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ask-experts-hero p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Thumbnail links */
+.res-thumb a {
+  display: block;
+  text-decoration: none;
+}
+
+/* Watch Video CTA */
+.res-read {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  margin-top: .5rem;
+}
+
 /* Legacy video-card styles - kept for backward compatibility if needed elsewhere */
 .video-card:not(.res-card) {
   background: var(--card);
