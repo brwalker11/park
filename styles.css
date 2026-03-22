@@ -319,27 +319,36 @@ li{max-width:var(--max-text)}
 }
 .hero .btn-primary{margin-top:14px}
 .sub{color:var(--muted);margin-top:.75rem;max-width:60ch}
-.cta{
+/* Shared button base styles for .cta and .btn-primary */
+.cta,
+.btn-primary{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   padding:14px 24px;
   border-radius:12px;
-  border-width:2px;
-  border-style:solid;
+  border:2px solid transparent;
   font-size:16px;
   font-weight:600;
   line-height:1;
   white-space:nowrap;
-  box-sizing:border-box;
-  background:var(--brand);
   color:#fff;
   text-decoration:none;
-  border-color:transparent;
   box-shadow:0 10px 32px rgba(15,23,42,0.12)
 }
-.cta:hover{background-color:#005CE6}
+.cta{
+  box-sizing:border-box;
+  background:var(--brand)
+}
+.btn-primary{
+  background-color:#0A68FF
+}
+.cta:hover,
+.btn-primary:hover,
+.cta-button:hover{background-color:#005CE6}
 .cta:focus-visible{outline:2px solid var(--brand);outline-offset:2px;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
+.btn-primary:focus-visible,
+.cta-button:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
 .cta--primary{
   background:#fff;
   color:#0B5FFF;
@@ -354,27 +363,6 @@ li{max-width:var(--max-text)}
 }
 .cta--secondary:hover{background:rgba(255,255,255,0.1)}
 .cta--secondary:focus{box-shadow:0 0 0 4px rgba(213,227,255,0.35)}
-.btn-primary{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:14px 24px;
-  font-size:16px;
-  font-weight:600;
-  line-height:1;
-  white-space:nowrap;
-  background-color:#0A68FF;
-  color:#fff;
-  border-radius:12px;
-  text-decoration:none;
-  border:2px solid transparent;
-  box-shadow:0 10px 32px rgba(15,23,42,0.12)
-}
-.btn-primary:hover,
-.cta-button:hover{background-color:#005CE6}
-
-.btn-primary:focus-visible,
-.cta-button:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px rgba(10,104,255,0.25)}
 .cta.secondary{background:#1118270d;color:var(--brand);border:2px solid var(--border)}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:var(--space-block)}
 .card{background:var(--card);padding:clamp(1.5rem,3vw,2.5rem);border-radius:14px;box-shadow:0 6px 22px rgba(15,23,42,0.06);border:1px solid var(--border)}
@@ -918,31 +906,14 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 }
 
 /* Resources page header (matches Services/About) */
-.resources-header.section { text-align: left; padding: 4rem 1rem 2.5rem; }
-.resources-header h1 {
-  font-size: 3.25rem;   /* same as Services & About */
-  font-weight: 800;
-  color: #0f172a;
-  margin: 0 0 0.5rem 0;
-}
-.resources-header .subhead {
-  font-size: 1.125rem;
-  line-height: 1.65;
-  opacity: 0.9;
-  max-width: 780px;
-}
-
-/* Match Services header alignment */
-.resources-header.section { padding: 4rem 0 2.5rem; }
+.resources-header.section { text-align: left; padding: 4rem 0 2.5rem; }
 .resources-header .container { text-align: left; }
 .resources-header h1 {
-  font-size: 3.25rem;   /* same as Services/About */
+  font-size: 3.25rem;
   font-weight: 800;
   color: #0f172a;
   margin: 0 0 .5rem 0;
 }
-
-/* Override global paragraph centering for this header */
 .resources-header .container > p,
 .resources-header .subhead {
   max-width: 740px;
@@ -1186,7 +1157,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 .featured-resources__header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 28px;
   flex-wrap: wrap;
   gap: 12px;
@@ -1297,8 +1268,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 32px;
-  font-size: 1.0625rem;
+  padding: 18px 40px;
+  font-size: 1.1875rem;
   font-weight: 600;
   background: #fff;
   color: #2563eb;
@@ -1342,17 +1313,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 /* ===== Homepage Section Spacing Adjustments ===== */
 .section.how + .approach-section {
   margin-top: 32px;
-}
-
-/* ===== Footer CTA Button Size Increase ===== */
-.footer-cta__btn {
-  padding: 18px 40px;
-  font-size: 1.1875rem;
-}
-
-/* ===== Featured Resources Header Alignment ===== */
-.featured-resources__header {
-  align-items: baseline;
 }
 
 /* ===== Ask the Experts Video Library ===== */
