@@ -599,6 +599,118 @@
       font-weight: 700;
     }
 
+    /* Beyond Paid Parking Section */
+    .beyond-section {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+    .beyond-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+    .beyond-intro h2 {
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 700;
+      margin: 0 0 20px 0;
+    }
+    .beyond-intro p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: none;
+    }
+    .beyond-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    @media (max-width: 768px) {
+      .beyond-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    .beyond-card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .beyond-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    .beyond-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      color: var(--ink);
+    }
+    .beyond-card p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .beyond-closing {
+      text-align: center;
+      max-width: 800px;
+      margin: 60px auto 40px;
+    }
+    .beyond-closing p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: none;
+    }
+    .beyond-cta {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .beyond-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.0625rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(11, 110, 253, 0.2);
+    }
+    .beyond-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(11, 110, 253, 0.35);
+    }
+    .beyond-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px;
+      background: #fff;
+      color: var(--brand);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.0625rem;
+      border: 2px solid var(--brand);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    }
+    .beyond-cta-secondary:hover {
+      background: var(--brand);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(11, 110, 253, 0.35);
+    }
+
     /* Final CTA Section */
     .final-cta-section {
       padding: 100px 0;
@@ -935,6 +1047,47 @@
               <li>System updates and optimization recommendations</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beyond Paid Parking Section -->
+    <section class="beyond-section">
+      <div class="container">
+        <div class="beyond-intro">
+          <h2>Paid Parking Is Just the Starting Point</h2>
+          <p>Monetize Parking is a parking revenue consultancy, not a technology vendor. That means the goal is never to sell a single product. It is to identify every revenue opportunity a parking asset can support and connect property owners with the right partners to capture it.</p>
+        </div>
+
+        <div class="beyond-grid">
+          <div class="beyond-card">
+            <h3>Paid Parking Solutions</h3>
+            <p>Scan-to-Pay and License Plate Recognition systems matched to each property's layout, traffic patterns, and tenant needs. No one-size-fits-all recommendations. Every lot gets a tailored approach based on demand, competitive pricing, and how the property operates today.</p>
+          </div>
+
+          <div class="beyond-card">
+            <h3>EV Charging</h3>
+            <p>Electric vehicle adoption is accelerating, and parking lots are the natural home for charging infrastructure. Property owners can generate per-session charging revenue while attracting a growing segment of drivers who actively seek out EV-friendly locations. The right charging partner handles installation and maintenance with no upfront cost to the property owner.</p>
+          </div>
+
+          <div class="beyond-card">
+            <h3>Digital Advertising</h3>
+            <p>Parking lots see hundreds or thousands of vehicles daily. That foot and vehicle traffic has value. Digital signage, on-site displays, and location-based advertising partnerships can turn visibility into a recurring revenue stream without affecting parking operations.</p>
+          </div>
+
+          <div class="beyond-card">
+            <h3>Operational Consulting</h3>
+            <p>Revenue is not just about adding income. It is also about reducing waste. Parking studies, signage strategy, vendor contract reviews, and compliance audits help property owners stop overpaying and start operating more efficiently. Small operational fixes often unlock thousands in annual savings.</p>
+          </div>
+        </div>
+
+        <div class="beyond-closing">
+          <p>Every parking property is different. A church, an office building, a retail center, and an apartment complex all have different traffic patterns, tenant relationships, and revenue potential. That is exactly why independent consulting matters. No vendor ties. No conflicts of interest. Just a clear-eyed assessment of what each property can earn and the best way to get there.</p>
+        </div>
+
+        <div class="beyond-cta">
+          <a href="/calculator/" class="beyond-cta-primary">Estimate Your Revenue</a>
+          <a href="/contact/" class="beyond-cta-secondary">Book a Free Consultation</a>
         </div>
       </div>
     </section>
