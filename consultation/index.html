@@ -15,18 +15,16 @@
   <meta name="twitter:image" content="https://monetize-parking.com/images/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --navy: #0f1c2e;
       --navy-light: #1a2d45;
-      --blue: #2563eb;
-      --blue-hover: #1d4ed8;
-      --green: #10b981;
-      --green-light: #d1fae5;
-      --green-dark: #059669;
+      --blue: #0b6efd;
+      --blue-hover: #0a5ed4;
+      --blue-light: rgba(11, 110, 253, 0.1);
       --gray-50: #f8fafc;
       --gray-100: #f1f5f9;
       --gray-200: #e2e8f0;
@@ -35,8 +33,8 @@
       --gray-700: #334155;
       --gray-900: #0f172a;
       --white: #ffffff;
-      --font-display: 'Fraunces', serif;
-      --font-body: 'DM Sans', sans-serif;
+      --font-display: 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -106,7 +104,7 @@
       right: -20%;
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(11, 110, 253, 0.12) 0%, transparent 70%);
       border-radius: 50%;
     }
     .hero::after {
@@ -116,7 +114,7 @@
       left: -10%;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(11, 110, 253, 0.08) 0%, transparent 70%);
       border-radius: 50%;
     }
     .hero__inner {
@@ -130,9 +128,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--green);
+      background: rgba(11, 110, 253, 0.15);
+      border: 1px solid rgba(11, 110, 253, 0.3);
+      color: var(--blue);
       font-size: 13px;
       font-weight: 600;
       padding: 6px 16px;
@@ -147,7 +145,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--green);
+      background: var(--blue);
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
@@ -165,7 +163,7 @@
       animation: fadeDown 0.6s 0.1s ease both;
     }
     .hero__title span {
-      color: var(--green);
+      color: var(--blue);
     }
     .hero__sub {
       font-size: clamp(17px, 2.2vw, 20px);
@@ -186,7 +184,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--green);
+      background: var(--blue);
       color: var(--white);
       font-family: var(--font-body);
       font-size: 17px;
@@ -195,12 +193,12 @@
       border-radius: 12px;
       text-decoration: none;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 4px 20px rgba(11, 110, 253, 0.35);
     }
     .btn-primary:hover {
-      background: var(--green-dark);
+      background: var(--blue-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(16, 185, 129, 0.45);
+      box-shadow: 0 6px 28px rgba(11, 110, 253, 0.45);
     }
     .btn-primary svg { transition: transform 0.25s; }
     .btn-primary:hover svg { transform: translateX(3px); }
@@ -240,7 +238,7 @@
     .trust-bar__icon {
       width: 20px;
       height: 20px;
-      color: var(--green);
+      color: var(--blue);
       flex-shrink: 0;
     }
 
@@ -283,8 +281,8 @@
       transition: all 0.3s ease;
     }
     .vp-card:hover {
-      border-color: var(--green);
-      box-shadow: 0 4px 24px rgba(16, 185, 129, 0.1);
+      border-color: var(--blue);
+      box-shadow: 0 4px 24px rgba(11, 110, 253, 0.1);
       transform: translateY(-3px);
     }
     .vp-card__icon {
@@ -296,10 +294,10 @@
       justify-content: center;
       margin-bottom: 20px;
     }
-    .vp-card__icon--green { background: var(--green-light); color: var(--green-dark); }
-    .vp-card__icon--blue { background: #dbeafe; color: var(--blue); }
-    .vp-card__icon--navy { background: #e0e7ff; color: #4338ca; }
-    .vp-card__icon--amber { background: #fef3c7; color: #d97706; }
+    .vp-card__icon--green,
+    .vp-card__icon--blue,
+    .vp-card__icon--navy,
+    .vp-card__icon--amber { background: rgba(11, 110, 253, 0.1); color: var(--blue); }
     .vp-card h3 {
       font-family: var(--font-display);
       font-size: 20px;
@@ -343,8 +341,8 @@
       border-radius: 12px;
       padding: 28px 24px;
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      gap: 16px;
     }
     .who-item__icon {
       width: 40px;
@@ -356,6 +354,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      margin-bottom: 14px;
     }
     .who-item h4 {
       font-size: 15px;
@@ -798,7 +797,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
           <h3>No Upfront Costs</h3>
-          <p>We set up and manage everything at no cost to you. Our partners cover the technology, installation, and maintenance so you never pay out of pocket.</p>
+          <p>We set up and manage everything at no cost to you. Our technology partners cover the equipment and installation so you never pay out of pocket.</p>
         </div>
         <div class="vp-card">
           <div class="vp-card__icon vp-card__icon--blue">
@@ -833,46 +832,36 @@
           <div class="who-item__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           </div>
-          <div>
-            <h4>Office Buildings & Business Parks</h4>
-            <p>Monetize after-hours and weekend parking that otherwise goes unused.</p>
-          </div>
+          <h4>Office Buildings & Business Parks</h4>
+          <p>Monetize after-hours and weekend parking that otherwise goes unused.</p>
         </div>
         <div class="who-item">
           <div class="who-item__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/></svg>
           </div>
-          <div>
-            <h4>Retail Centers & Strip Malls</h4>
-            <p>Generate revenue from underused lots during off-peak hours and holidays.</p>
-          </div>
+          <h4>Retail Centers & Strip Malls</h4>
+          <p>Generate revenue from underused lots during off-peak hours and holidays.</p>
         </div>
         <div class="who-item">
           <div class="who-item__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M2 20v-6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6"/><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><path d="M10 9h4"/></svg>
           </div>
-          <div>
-            <h4>Hotels & Hospitality</h4>
-            <p>Guest parking, valet areas, and overflow lots can generate revenue during off-peak hours and seasons.</p>
-          </div>
+          <h4>Hotels & Hospitality</h4>
+          <p>Guest parking, valet areas, and overflow lots can generate revenue during off-peak hours and seasons.</p>
         </div>
         <div class="who-item">
           <div class="who-item__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
-          <div>
-            <h4>Event Venues & Stadiums</h4>
-            <p>Capture peak-demand revenue from events, games, and concerts nearby.</p>
-          </div>
+          <h4>Event Venues & Stadiums</h4>
+          <p>Capture peak-demand revenue from events, games, and concerts nearby.</p>
         </div>
         <div class="who-item">
           <div class="who-item__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <div>
-            <h4>Churches & Places of Worship</h4>
-            <p>Empty lots most of the week can generate steady income for your community.</p>
-          </div>
+          <h4>Churches & Places of Worship</h4>
+          <p>Empty lots most of the week can generate steady income for your community.</p>
         </div>
       </div>
       <p class="who-catchall">Don't see your property type? We work with lots of all sizes, from 5-space microlots to 500+ space facilities. Every lot is different, and that is exactly why we start with a conversation.</p>
@@ -935,7 +924,7 @@
           <div class="social-proof__stat-label">property value lift from increased NOI</div>
         </div>
       </div>
-      <a href="/articles/eau-claire-parking-lot-case-study/" class="social-proof__link">Read the Full Eau Claire Case Study &rarr;</a>
+      <a href="https://monetize-parking.com/articles/eau-claire-revenue-increase/" class="social-proof__link">Read the Full Eau Claire Case Study &rarr;</a>
     </div>
   </section>
 
@@ -955,7 +944,7 @@
       <div class="callback-section__divider">or</div>
       <h3>Prefer We Reach Out to You?</h3>
       <p>Drop your info below and we will call you within one business day.</p>
-      <form class="callback-form" id="callbackForm" action="https://formspree.io/f/FORMSPREE_ID" method="POST">
+      <form class="callback-form" id="callbackForm" action="https://formspree.io/f/mqegwawp" method="POST">
         <input type="hidden" name="_subject" value="PPC Landing Page Callback Request" />
         <div class="callback-form__group">
           <label class="callback-form__label">Name <span class="required">*</span></label>
@@ -979,15 +968,6 @@
             <option value="Event Venue">Event Venue</option>
             <option value="Church/Place of Worship">Church/Place of Worship</option>
             <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="callback-form__group callback-form__group--full">
-          <label class="callback-form__label">Best time to call</label>
-          <select name="preferred_time" class="callback-form__input">
-            <option value="" disabled selected>Select one...</option>
-            <option value="Morning (8am-12pm)">Morning (8am-12pm)</option>
-            <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
-            <option value="Anytime">Anytime</option>
           </select>
         </div>
         <button type="submit" class="btn-callback">
