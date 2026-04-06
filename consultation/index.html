@@ -941,7 +941,6 @@
       <p>Drop your info below and we will call you within one business day.</p>
       <form class="callback-form" id="callbackForm" action="https://formspree.io/f/mqegwawp" method="POST">
         <input type="hidden" name="_subject" value="PPC Landing Page Callback Request" />
-        <input type="hidden" name="_next" value="https://monetize-parking.com/consultation/thank-you/" />
         <div class="callback-form__group">
           <label class="callback-form__label">Name <span class="required">*</span></label>
           <input type="text" name="name" class="callback-form__input" placeholder="Your name" required />
@@ -978,6 +977,43 @@
   <footer class="lp-footer">
     &copy; 2026 Monetize Parking. All rights reserved. &nbsp;|&nbsp; <a href="https://monetize-parking.com" target="_blank" rel="noopener noreferrer">Visit our website</a>
   </footer>
+
+  <script>
+    (function(){
+      var form = document.getElementById('callbackForm');
+      if(!form) return;
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalText = submitBtn.innerHTML;
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+          var data = new FormData(form);
+          var res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: data
+          });
+
+          if(res.ok){
+            window.location.href = 'https://monetize-parking.com/consultation/thank-you/';
+          } else {
+            alert('Something went wrong. Please try again or call us at the number above.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          }
+        } catch(err){
+          console.error('[Callback Form] Fetch error:', err);
+          alert('Something went wrong. Please try again or call us at the number above.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
