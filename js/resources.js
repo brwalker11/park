@@ -509,7 +509,8 @@
     const entries = [
       ['Case Studies', '#273d9a', 'Case Study'],
       ['Guides', '#0a7c6b', 'Guide'],
-      ['Articles', '#3b3a3f', 'Article']
+      ['Articles', '#3b3a3f', 'Article'],
+      ['EV Charging', '#0b6efd', 'EV Charging']
     ];
 
     return entries.reduce((acc, [key, color, label]) => {

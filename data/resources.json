@@ -2,7 +2,7 @@
   {
     "slug": "level-2-vs-dc-fast-charging-property-owners",
     "title": "Choosing Between Level 2 and DC Fast Charging for Your Property",
-    "category": "Articles",
+    "category": "EV Charging",
     "tags": [
       "EV charging",
       "Level 2 vs DC fast charging",
@@ -26,7 +26,7 @@
   {
     "slug": "hidden-costs-ev-charging-installation",
     "title": "The Hidden Costs of EV Charging Installation Property Owners Miss",
-    "category": "Articles",
+    "category": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging installation cost",
@@ -51,7 +51,7 @@
   {
     "slug": "ev-charging-revenue-share-vs-ownership",
     "title": "Revenue Share vs Ownership: Which EV Charging Model Pays More",
-    "category": "Articles",
+    "category": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging revenue share",
@@ -76,7 +76,7 @@
   {
     "slug": "ev-charging-idle-fees-session-limits",
     "title": "How Idle Fees and Session Limits Protect Your EV Charging Revenue",
-    "category": "Articles",
+    "category": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging idle fees",
@@ -101,7 +101,7 @@
   {
     "slug": "questions-before-signing-ev-charging-contract",
     "title": "What Property Owners Should Ask Before Signing an EV Charging Contract",
-    "category": "Articles",
+    "category": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging contract questions",
@@ -142,7 +142,7 @@
     "imageAlt": "Tax implications of parking lot revenue for property owners.",
     "thumbnail": "/images/tax-parking.webp",
     "content": "/articles/parking-lot-revenue-tax-implications.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-lot-revenue-tax-implications/"
@@ -166,7 +166,7 @@
     "imageAlt": "How paid parking increases commercial property value.",
     "thumbnail": "/images/commercial-property.webp",
     "content": "/articles/paid-parking-increases-property-value.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/paid-parking-increases-property-value/"
@@ -190,7 +190,7 @@
     "imageAlt": "Gym and fitness center parking lot revenue strategy.",
     "thumbnail": "/images/gym-parking.webp",
     "content": "/articles/gym-fitness-center-parking-revenue.html",
-    "readTime": "5–6 min",
+    "readTime": "5\u20136 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/gym-fitness-center-parking-revenue/"
@@ -214,7 +214,7 @@
     "imageAlt": "Overnight and 24-hour parking revenue strategies.",
     "thumbnail": "/images/overnight-parking.webp",
     "content": "/articles/overnight-24-hour-parking-revenue.html",
-    "readTime": "4–5 min",
+    "readTime": "4\u20135 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/overnight-24-hour-parking-revenue/"
@@ -844,7 +844,7 @@
   {
     "slug": "ev-charging-parking-revenue",
     "title": "EV Charging + Paid Parking: Double Your Revenue Opportunity",
-    "category": "Articles",
+    "category": "EV Charging",
     "tags": [
       "EV charging",
       "electric vehicle",
