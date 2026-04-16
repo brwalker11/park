@@ -1,5 +1,30 @@
 [
   {
+    "slug": "ev-charging-property-value-noi",
+    "title": "How EV Charging Increases Property Value for Parking Lot Owners",
+    "category": "EV Charging",
+    "tags": [
+      "EV charging",
+      "EV charging property value",
+      "EV charging NOI",
+      "parking lot property value",
+      "EV charger commercial property",
+      "EV charging cap rate"
+    ],
+    "date": "2026-04-15",
+    "lastmod": "2026-04-15",
+    "description": "EV charging stations increase commercial property value by boosting net operating income. Learn how charging revenue affects NOI, cap rates, and property appraisals.",
+    "excerpt": "EV charging stations increase commercial property value by boosting net operating income. Learn how charging revenue impacts NOI, cap rates, and appraisals.",
+    "image": "/images/ev_charge.webp",
+    "imageAlt": "EV charging station at a commercial parking lot increasing property value.",
+    "thumbnail": "/images/thumbs/ev_charge.webp",
+    "content": "/articles/ev-charging-property-value-noi.html",
+    "readTime": "6 min",
+    "author": "Monetize Parking",
+    "featured": false,
+    "url": "/articles/ev-charging-property-value-noi/"
+  },
+  {
     "slug": "hotel-ev-charging-guest-revenue",
     "title": "Why Hotel Owners Are Adding EV Charging to Their Parking Lots",
     "category": "EV Charging",
