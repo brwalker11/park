@@ -1002,6 +1002,7 @@
       <p>Drop your info below and we will call you within one business day.</p>
       <form class="callback-form" id="callbackForm" action="https://formspree.io/f/mqegwawp" method="POST">
         <input type="hidden" name="_subject" value="PPC Landing Page Callback Request" />
+        <input type="hidden" name="_next" value="https://monetize-parking.com/consultation/thank-you/" />
         <div class="callback-form__group">
           <label class="callback-form__label">Name <span class="required">*</span></label>
           <input type="text" name="name" class="callback-form__input" placeholder="Your name" required />
@@ -1077,6 +1078,19 @@
   </script>
 
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <!-- Calendly booking conversion tracking -->
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.origin === 'https://calendly.com' &&
+          e.data.event === 'calendly.event_scheduled') {
+        gtag('event', 'calendly_booking', {
+          event_category: 'conversion',
+          event_label: 'ppc_consultation'
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
