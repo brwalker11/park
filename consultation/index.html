@@ -1083,11 +1083,8 @@
   <script>
     window.addEventListener('message', function(e) {
       if (e.origin === 'https://calendly.com' &&
-          e.data.event === 'calendly.event_scheduled') {
-        gtag('event', 'calendly_booking', {
-          event_category: 'conversion',
-          event_label: 'ppc_consultation'
-        });
+          e.data.event && e.data.event === 'calendly.event_scheduled') {
+        window.location.href = '/consultation/thank-you/';
       }
     });
   </script>
