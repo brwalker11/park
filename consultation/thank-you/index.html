@@ -411,7 +411,7 @@
 
   <script>
     window.addEventListener('load', function() {
-      if (typeof gtag === 'function') {
+      if (typeof gtag === 'function' && !window.location.search.includes('source=calendly')) {
         gtag('event', 'ppc_callback_conversion', {
           'event_category': 'PPC',
           'event_label': 'Callback Form Submitted'
