@@ -153,6 +153,23 @@
           </div>
 
           <div class="field field-full">
+            <label for="how_heard">How did you hear about us? <span class="required-indicator">*</span></label>
+            <select id="how_heard" name="how_heard" aria-describedby="err-how_heard" required>
+              <option value="" disabled selected>Select one...</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Google Ads">Google Ads</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="YouTube">YouTube</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Referral">Referral</option>
+              <option value="Other">Other</option>
+            </select>
+            <small class="err" id="err-how_heard" role="alert" hidden>Please select an option</small>
+          </div>
+
+          <div class="field field-full">
             <label for="message">How can we help? <span class="required-indicator">*</span></label>
             <textarea id="message" name="message" rows="6" aria-describedby="err-message" required></textarea>
             <small class="err" id="err-message" role="alert" hidden>Please add a short message</small>
@@ -195,10 +212,10 @@
   .field{display:flex; flex-direction:column; gap:8px}
   .field-full{grid-column:1 / -1}
   label{font-weight:600; color:#283042}
-  input, textarea{
+  input, textarea, select{
     width:100%; border:1px solid var(--card-bd); border-radius:10px; padding:10px 12px; font-size:16px; background:#fff;
   }
-  input:focus, textarea:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(26,115,232,.15)}
+  input:focus, textarea:focus, select:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(26,115,232,.15)}
   .err{color:#b42318; font-size:13px}
   .hp{position:absolute; left:-9999px; opacity:0}
   .actions{display:flex; align-items:center; gap:16px; grid-column:1 / -1}
@@ -232,10 +249,12 @@
     const name = f('name').value.trim();
     const email = f('email').value.trim();
     const message = f('message').value.trim();
+    const howHeard = f('how_heard').value;
     let bad = false;
     showError('name', !name); bad = bad || !name;
     showError('email', !validEmail(email)); bad = bad || !validEmail(email);
     showError('message', !message); bad = bad || !message;
+    showError('how_heard', !howHeard); bad = bad || !howHeard;
     if (bad) return;
 
     btn.disabled = true;
