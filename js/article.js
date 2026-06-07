@@ -58,7 +58,9 @@
         return;
       }
 
-      const bodyHtml = await loadArticleBody(current.content);
+      const existingBodyEl = document.getElementById('article-body');
+      const bodyAlreadyRendered = existingBodyEl && existingBodyEl.textContent.trim().length > 0;
+      const bodyHtml = bodyAlreadyRendered ? null : await loadArticleBody(current.content);
       renderArticle(current, articles, bodyHtml);
     } catch (error) {
       console.error(error);
@@ -131,11 +133,15 @@
 
     titleEl.textContent = article.title;
     metaEl.textContent = buildMetaLine(article);
-    summaryEl.textContent = article.excerpt;
-    summaryEl.style.display = article.excerpt ? '' : 'none';
+    if (!summaryEl.textContent || summaryEl.textContent.trim().length === 0) {
+      summaryEl.textContent = article.excerpt;
+      summaryEl.style.display = article.excerpt ? '' : 'none';
+    }
     footerCopy.textContent = 'Ready to turn this strategy into new parking revenue? Let’s build the plan together.';
 
-    bodyEl.innerHTML = bodyHtml;
+    if (bodyHtml != null && (!bodyEl.innerHTML || bodyEl.textContent.trim().length === 0)) {
+      bodyEl.innerHTML = bodyHtml;
+    }
     enhanceBody(bodyEl);
 
     const prettyUrl = absolute(`/articles/${article.slug}/`);
@@ -203,6 +209,7 @@
   function renderRelated(article, allArticles) {
     const list = document.getElementById('related-list');
     if (!list) return;
+    if (list.querySelector('a')) return;
     list.innerHTML = '';
 
     // Check if this article is part of a series
@@ -406,6 +413,17 @@
   }
 
   function injectJsonLd(article, canonicalUrl, imageUrl, publishDate, modifiedDate) {
+    const existingLdScripts = document.querySelectorAll('script[type="application/ld+json"]:not([data-dynamic="article"])');
+    for (const node of existingLdScripts) {
+      try {
+        const parsed = JSON.parse(node.textContent || '{}');
+        const nodes = Array.isArray(parsed) ? parsed : (parsed['@graph'] || [parsed]);
+        const hasArticle = nodes.some((n) => n && (n['@type'] === 'Article' || n['@type'] === 'BlogPosting'));
+        if (hasArticle) return;
+      } catch (e) {
+        // Fail safe: malformed JSON-LD means we run the existing path.
+      }
+    }
     document.querySelectorAll('script[type="application/ld+json"][data-dynamic="article"]').forEach((node) => node.remove());
     const data = {
       '@context': 'https://schema.org',
