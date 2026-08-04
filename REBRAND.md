@@ -130,7 +130,8 @@ These must stay until merge day. Do not remove without me asking.
 
 ## Merge day checklist
 
-- [ ] Remove analytics hostname gating
+- [ ] Revert commit `187bfbd` to remove analytics hostname gating (149 pages
+  plus `js/article.js`, see guardrails above)
 - [ ] Remove noindex gating
 - [ ] Confirm Ads bidding already switched off Maximize Clicks
 - [ ] Merge `rebrand` into `main` via pull request
