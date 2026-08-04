@@ -123,7 +123,28 @@ These must stay until merge day. Do not remove without me asking.
   page's `<head>` will complicate that revert. If a conflict arises, the target
   state is `function gtag(){dataLayer.push(arguments);}` with no wrapper and no
   else branch.
-- `noindex` meta tag active on any non-production hostname
+- Noindex safeguard (commit `3596d3d`). Inline `<head>` script on all 150 pages,
+  placed immediately above the gtag gate block, that creates or updates
+  `meta[name="robots"]` to `noindex, nofollow` when the hostname is not
+  `monetize-parking.com`. Covers 150 pages plus `js/article.js:149`. Each block
+  carries the marker `<!-- Preview noindex guard - remove on merge day -->`.
+
+  On production the script does nothing at all: no tag creation, no attribute
+  writes, no DOM reads beyond the hostname comparison.
+
+  `js/article.js:149` previously forced `index,follow` on every successful
+  article render, which would have overwritten the guard on all 73 article
+  pages. It is now gated to production. The value it sets is unchanged.
+
+  The four pages that already carry a static `noindex, nofollow`
+  (`consultation/index.html`, `consultation/thank-you/index.html`,
+  `contact/thank-you/index.html`, `calculator/report/index.html`) are
+  overwritten with the identical value off-production and are untouched on
+  production. No static robots meta value was changed anywhere.
+
+  Merge day: revert commit `3596d3d`. Like the analytics gating this is a
+  150-page revert, not a one-line change, and the same conflict warning applies
+  to any rebrand commit that touches a gated page's `<head>`.
 - Cloudflare Access password on the preview URL
 - `/consultation/` visual changes on hold until Google Ads bidding is switched
   off Maximize Clicks
@@ -132,7 +153,8 @@ These must stay until merge day. Do not remove without me asking.
 
 - [ ] Revert commit `187bfbd` to remove analytics hostname gating (149 pages
   plus `js/article.js`, see guardrails above)
-- [ ] Remove noindex gating
+- [ ] Revert commit `3596d3d` to remove the noindex safeguard (150 pages plus
+  `js/article.js`, see guardrails above)
 - [ ] Confirm Ads bidding already switched off Maximize Clicks
 - [ ] Merge `rebrand` into `main` via pull request
 - [ ] Annotate deploy date in GA4 and Google Ads
