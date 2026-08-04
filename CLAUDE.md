@@ -1,215 +1,325 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code when working in this repository.
+
+## Session start
+
+1. Run `git branch --show-current` and report the result. If it is not
+   `rebrand`, STOP and tell me before doing anything else. Do not work on
+   `main` under any circumstances.
+2. Read `REBRAND.md` in the repo root. It holds current rebrand decisions and
+   pass status and changes frequently. This file holds only durable rules.
 
 ## Project Overview
 
-This is a static marketing website for Monetize Parking, a parking lot revenue optimization service. The site is deployed via GitHub Pages and uses vanilla HTML/CSS/JavaScript with a dynamic article system.
+Static marketing website for Monetize Parking, a parking lot revenue
+optimization service. Vanilla HTML/CSS/JavaScript with a dynamic article system.
 
 **Domain**: https://monetize-parking.com
 
-## Development Commands
+**Deployment**: Cloudflare Pages, connected to this GitHub repo.
+- `main` branch deploys to production
+- `rebrand` branch deploys to a Cloudflare preview URL
 
-### Article Generation
+The site was previously on GitHub Pages. It is not anymore. `_headers` and
+`_redirects` are Cloudflare Pages formats and are live. There is no CNAME file.
+
+## Build
+
 ```bash
-# Generate/update article index pages from data/resources.json
-node tools/generate-article-pages.js
+npm install          # required once; node_modules is not committed
 
-# Update sitemap.xml with latest articles
-node tools/update-sitemap.js
+npm run build        # thumbnails -> articles -> sitemap, in that order
 ```
 
-After adding or modifying articles in `data/resources.json`, you must run both commands in sequence.
+Individual scripts:
+- `npm run generate:thumbnails` - 400px WebP thumbnails (quality 80) from
+  `/images/` into `/images/thumbs/`, skipping logos, icons, favicons, and
+  `default-guide*`. Uses sharp.
+- `npm run generate:articles` - copies `templates/article-index.html` to
+  `/articles/{slug}/index.html` for every entry in `data/resources.json`
+- `npm run generate:sitemap` - regenerates `sitemap.xml` from article data
 
-### Local Testing
-Since this is a static site for GitHub Pages, use any local server:
+`tools/build.js`, `tools/compress-images.js`, and `tools/seo-audit.js` exist but
+are not wired to any npm script. Do not run them without asking.
+
+**Generated output is committed to the repo.** After any change to
+`templates/article-index.html`, run `npm run build` and commit the regenerated
+pages in the same commit.
+
+## Local Testing
+
 ```bash
 python3 -m http.server 8000
-# or
-npx serve .
 ```
+
+Do not open HTML files directly via `file://`. Root-relative paths break.
 
 ## Architecture
 
 ### Dynamic Article System
 
-The site uses a template-based article system where content is driven by JSON data rather than individual static HTML files.
+Content is driven by JSON rather than individual static HTML files.
 
-**Key Files**:
-- `/data/resources.json` - Single source of truth for all article metadata, SEO, and content paths
-- `/templates/article-index.html` - Shared template for all article pages
+**Key files**:
+- `/data/resources.json` - single source of truth for article metadata, SEO,
+  and content paths
+- `/templates/article-index.html` - shared template for ALL article pages
 - `/articles/{slug}.html` - HTML body fragments (content only, no wrapper)
-- `/js/article.js` - Runtime that loads article data and renders the template
-- `/tools/generate-article-pages.js` - Copies template to `/articles/{slug}/index.html` for each article
+- `/js/article.js` - runtime that loads article data and renders the template
+- `/tools/generate-article-pages.js` - generates `/articles/{slug}/index.html`
 
-**How it works**:
-1. Article metadata lives in `data/resources.json` with fields like `slug`, `title`, `description`, `tags`, `category`, `image`, `content` (path to body fragment), etc.
-2. The `generate-article-pages.js` script copies the template to `/articles/{slug}/index.html` for every entry
-3. At runtime, `js/article.js` extracts the slug from the URL path, fetches `data/resources.json`, finds the matching article, loads the body HTML from the `content` path, and renders everything dynamically
-4. SEO tags (title, meta description, canonical, Open Graph, Twitter, JSON-LD) are all generated client-side from the JSON data
+**How it works**: the generate script copies the template to each article
+directory. At runtime `js/article.js` extracts the slug from the URL, fetches
+`data/resources.json`, finds the matching article, loads the body HTML from the
+`content` path, and renders it. SEO tags (title, meta description, canonical,
+Open Graph, Twitter, JSON-LD) are generated client-side from the JSON.
 
-**Adding a New Article**:
-1. Create the body HTML fragment at `/articles/my-new-article.html` (no `<html>` wrapper, just content)
-2. Add a complete entry to `data/resources.json` with all required fields
-3. Run `node tools/generate-article-pages.js` to create `/articles/my-new-article/index.html`
-4. Run `node tools/update-sitemap.js` to add the new URL to sitemap
-5. Commit the JSON update, body fragment, generated index page, and sitemap together
+**Rebrand implication**: all article page chrome lives in ONE template. A header
+or footer change is a single file edit plus a rebuild, not 147 edits.
+
+**Adding a new article**:
+1. Create the body fragment at `/articles/my-new-article.html`
+2. Add a complete entry to `data/resources.json`
+3. Run `npm run generate:articles`
+4. Run `npm run generate:sitemap`
+5. Commit the JSON, fragment, generated index page, and sitemap together
+
+### Hiding Articles
+
+To hide an article from listings while keeping it reachable, set
+`"hidden": true` in its `data/resources.json` entry. The article stays
+accessible by direct URL but does not appear in the resources grid or in
+related articles. Several articles currently use this flag. Do not clear it on
+an existing entry without asking.
 
 ### State Resources
 
-State-specific landing pages use a similar pattern:
-- `/data/state-resources.json` - Metadata for state pages (Colorado, Minnesota, Texas, Wisconsin)
-- `/resources/states/{state}/` - State landing pages with sub-sections
-- `/js/state-map.js` - Interactive state map on `/resources/` page
+- `/data/state-resources.json` - metadata for Colorado, Minnesota, Texas,
+  Wisconsin
+- `/resources/states/{state}/` - state landing pages
+- `/js/state-map.js` - interactive map on `/resources/`
 
-### Related Articles Algorithm
+### Related Articles
 
-Related articles in the sidebar are ranked by:
-1. **Shared tags** (highest weight)
-2. **Matching category**
-3. **Recency** (newer articles float up)
-
-Articles never recommend themselves. Up to 5 related articles are shown.
+Ranked by shared tags (highest weight), then matching category, then recency.
+Articles never recommend themselves. Up to 5 shown. Implemented in
+`/js/related.js`.
 
 ### Article Series Navigation
 
-Multi-part article series (e.g., "Flexible Parking Rules") are configured in both:
-- `/js/article.js` - `SERIES_CONFIG` object maps series to their articles
-- `/js/resources.js` - `SERIES_CONFIG` array for the resources page
-
-When viewing a series article, a contextual sidebar navigation appears showing all parts.
+Series config is duplicated in two places and must stay in sync:
+- `/js/article.js` - `SERIES_CONFIG` object
+- `/js/resources.js` - `SERIES_CONFIG` array
 
 ### Image Path Rules
 
-**All image references must start with `/images/`**. This applies to:
-- Hero images (`image` field in JSON)
-- Thumbnails (`thumbnail` field)
-- Inline images in article body HTML
-- Open Graph and Twitter card images
+All image references must start with `/images/`. Applies to hero images
+(`image`), thumbnails (`thumbnail`), inline body images, and social card images.
+The runtime converts relative paths to absolute URLs for social meta tags.
 
-The article runtime converts relative paths to absolute URLs for social meta tags.
+Convert JPGs to WebP locally, quality ~85, under 200KB. Never commit raw JPGs.
+Always include `width`, `height`, and `alt`. Use `loading="lazy"` below the fold.
 
 ### URL Structure
 
-- **Homepage**: `/`
-- **Articles**: `/articles/{slug}/` → `/articles/{slug}/index.html`
-- **State pages**: `/resources/states/{state}/`
-- **Other pages**: `/services/`, `/about/`, `/faq/`, `/calculator/`, `/contact/`
+- Homepage `/`
+- Articles `/articles/{slug}/`
+- State pages `/resources/states/{state}/`
+- Other `/services/`, `/about/`, `/faq/`, `/calculator/`, `/contact/`,
+  `/consultation/`
 
-All article URLs are pretty URLs (no `.html` extension visible). The build script ensures each article has an `index.html` in its directory for GitHub Pages routing.
-
-### Analytics Tracking
-
-GA4 tracking is integrated via Google Tag Manager (ID: `G-LGHS0L5WE8`). Key events:
-- `page_view` - Automatic for all pages
-- `generate_lead` - Contact form submissions and consultation CTAs
-- `calculator_start` - Revenue calculator clicks
-
-Event tracking is handled in:
-- `/script.js` - Global CTA tracking
-- `/js/article.js` - Article-specific inline and footer CTAs
-
-### Inline CTAs
-
-Article inline CTAs are automatically inserted **before the third sub-heading** (`h2` or `h3`) by `js/article.js`. The CTA markup and copy are defined in the `INLINE_CTA_COPY` constant.
-
-Bottom CTAs are always rendered with two buttons: primary consultation CTA and secondary calculator CTA.
-
-### Structured Data (JSON-LD)
-
-The site uses extensive schema.org markup:
-- **Organization** schema on homepage (`index.html`)
-- **VideoObject** schema for hero video (`index.html`)
-- **Article** and **BreadcrumbList** schema dynamically generated for each article (`js/article.js`)
-
-FAQPage schema can be added to pages with Q&A content (see `SEO_TODO.md`).
-
-## File Organization
-
-```
-/
-├── index.html              # Homepage
-├── styles.css              # Main global stylesheet
-├── script.js               # Global JS (navigation, analytics)
-├── data/
-│   ├── resources.json      # Article metadata (single source of truth)
-│   └── state-resources.json # State landing page data
-├── templates/
-│   └── article-index.html  # Shared article template
-├── articles/
-│   ├── {slug}.html         # Article body fragments
-│   └── {slug}/
-│       └── index.html      # Generated from template
-├── css/
-│   ├── article.css         # Article-specific styles
-│   ├── resources.css       # Resources page styles
-│   └── state-map.css       # Interactive map styles
-├── js/
-│   ├── article.js          # Article runtime (loads data, renders content)
-│   ├── resources.js        # Resources listing page logic
-│   ├── related.js          # Related articles algorithm
-│   └── state-map.js        # Interactive state map
-├── images/                 # All images (WebP preferred for performance)
-├── tools/
-│   ├── generate-article-pages.js  # Build script for articles
-│   └── update-sitemap.js   # Sitemap generator
-├── services/index.html     # Services page
-├── about/index.html        # About page
-├── faq/index.html          # FAQ page
-├── calculator/index.html   # Revenue calculator
-├── contact/index.html      # Contact form
-├── resources/              # Resource hub and state pages
-├── sitemap.xml             # Auto-generated from data/resources.json
-├── robots.txt              # Search engine directives
-└── docs/                   # Development documentation
-    ├── articles-dynamic.md # Article system documentation
-    └── url-migration.md    # URL structure notes
-```
-
-## Important Patterns
-
-### When Editing Articles
-
-1. **Never edit `/articles/{slug}/index.html` directly** - it's auto-generated from the template
-2. **Edit the body fragment** at `/articles/{slug}.html` instead
-3. **Update metadata** in `data/resources.json`
-4. **Regenerate** with `node tools/generate-article-pages.js`
-
-### When Adding Images
-
-1. Place images in `/images/` directory
-2. Use WebP format when possible (see `SEO_TODO.md` for conversion guidance)
-3. Always include `width`, `height`, and `alt` attributes
-4. Use `loading="lazy"` for images below the fold
-5. Reference with absolute paths starting with `/images/`
+All pretty URLs. Each article directory needs an `index.html` for routing.
 
 ### Canonical URLs
 
-By default, canonical URLs follow the pattern: `https://monetize-parking.com/articles/{slug}/`
+By default canonical URLs follow `https://monetize-parking.com/articles/{slug}/`.
 
-To override, set `canonicalOverride` in the article's JSON entry. The runtime applies it to:
+To override, set `canonicalOverride` in the article's `data/resources.json`
+entry. The override propagates to all four places:
 - `<link rel="canonical">`
 - Open Graph `og:url`
 - Twitter card metadata
 - JSON-LD schema
 
-### Hiding Articles
+It is read by `js/article.js` at runtime and by `tools/update-sitemap.js` when
+building `sitemap.xml`, so a change affects both the page and the sitemap.
 
-To hide an article from listings while keeping it accessible:
-- Set `"hidden": true` in the article's JSON entry
-- The article will still be accessible via direct URL
-- It won't appear in the resources grid or related articles
+### Analytics
+
+GA4 `G-LGHS0L5WE8` via Google Tag Manager. Google Ads `AW-18066534348`.
+
+Events: `page_view`, `generate_lead` (contact form and consultation CTAs),
+`calculator_start`.
+
+Tracking code lives in `/script.js` (global CTA tracking) and `/js/article.js`
+(article inline and footer CTAs).
+
+### Inline CTAs
+
+Article inline CTAs are inserted before the third sub-heading (h2 or h3) by
+`js/article.js`. Markup and copy are in the `INLINE_CTA_COPY` constant. Bottom
+CTAs always render two buttons: primary consultation, secondary calculator.
+
+### Structured Data
+
+Organization and VideoObject schema on `index.html`. Article and BreadcrumbList
+generated per-article in `js/article.js`.
+
+FAQPage schema can be added to pages with Q&A content. See `SEO_TODO.md`.
+
+### Headers and Redirects
+
+`_headers` sets security headers, a Content Security Policy, and cache control.
+`_redirects` holds 301s from legacy URLs.
+
+**CSP constraint**: `style-src` and `script-src` allow only self, inline, and
+Google Tag Manager / Analytics. `connect-src` allows only Google Analytics and
+Formspree. Any new external resource (web fonts, CDN scripts, embeds) requires
+a matching CSP update in `_headers` or it will be silently blocked.
+
+Never edit `_redirects` without asking. Existing 301s protect SEO equity.
+
+## File Organization
+
+Stylesheets and scripts are the files most likely to be touched during the
+rebrand, so they are listed in full.
+
+```
+/
+├── index.html                  # Homepage
+├── 404.html
+├── ask-the-experts.html
+├── styles.css                  # MAIN GLOBAL STYLESHEET, loaded site-wide
+├── script.js                   # Global JS (navigation, analytics)
+├── robots.txt                  # Search engine directives
+├── sitemap.xml                 # Generated from data/resources.json
+├── _headers                    # Cloudflare security headers, CSP, caching
+├── _redirects                  # Cloudflare 301s from legacy URLs
+├── postcss.config.js           # See "Minified and critical CSS"
+├── package.json
+├── css/
+│   ├── article.css             # Article page styles
+│   ├── resources.css           # Resources listing page styles
+│   ├── state-map.css           # Interactive state map styles
+│   ├── style.css
+│   ├── article.min.css         # See "Minified and critical CSS"
+│   ├── resources.min.css       # See "Minified and critical CSS"
+│   ├── state-map.min.css       # See "Minified and critical CSS"
+│   └── critical/               # See "Minified and critical CSS"
+│       ├── critical-base.css
+│       ├── critical-article.css
+│       ├── critical-resources.css
+│       └── critical-state.css
+├── js/
+│   ├── article.js              # Article runtime: loads data, renders template
+│   ├── related.js              # Related-articles ranking implementation
+│   ├── resources.js            # Resources listing page logic
+│   ├── state-map.js            # Interactive state map
+│   └── *.min.js                # See "Minified and critical CSS"
+├── data/
+│   ├── resources.json          # Article metadata, single source of truth
+│   └── state-resources.json    # State landing page data
+├── templates/
+│   └── article-index.html      # Shared template for ALL article pages
+├── articles/
+│   ├── {slug}.html             # Body fragments, edit these
+│   └── {slug}/index.html       # Generated, do not edit
+├── images/                     # WebP preferred; thumbs/ is generated
+├── tools/
+│   ├── generate-article-pages.js
+│   ├── update-sitemap.js
+│   ├── generate-thumbnails.js
+│   ├── build.js                # Not wired to npm, ask before running
+│   ├── compress-images.js      # Not wired to npm, ask before running
+│   └── seo-audit.js            # Not wired to npm, ask before running
+├── services/index.html
+├── about/index.html
+├── faq/index.html
+├── calculator/index.html
+├── contact/index.html
+├── consultation/index.html     # Active ad conversion tracking, do not touch
+├── resources/                  # Resource hub and state pages
+├── docs/
+│   ├── articles-dynamic.md
+│   └── url-migration.md
+└── SEO_TODO.md
+```
+
+## Minified and critical CSS (do not touch)
+
+`css/` and `js/` contain parallel `.min.css` and `.min.js` files. `css/critical/`
+contains four critical-CSS files. `postcss.config.js` exists at the repo root.
+
+No npm script builds any of them.
+
+`index.html` and `templates/article-index.html` load the unminified originals
+(`/styles.css`, `/css/article.css`, `/script.js`, `/js/article.js`), so the
+minified copies appear stale and unused.
+
+The authoritative files to edit are the unminified originals. Do not edit,
+regenerate, or delete the minified or critical files without asking, and do not
+assume they are in sync with the originals.
+
+## Branch and deployment rules
+
+- Never commit directly to `main`. `main` is protected and deploys to production.
+- All rebrand work happens on `rebrand`.
+- Analytics and ad tags must stay gated to hostname `monetize-parking.com` only
+  while the rebrand branch is active.
+- A `noindex` meta tag must apply on any non-production hostname.
+- Do not remove either guardrail without me asking.
+
+## Do not touch without explicit instruction
+
+- `/consultation/` structure, form position, CTA copy, or the Calendly embed.
+  This page carries active ad conversion tracking.
+- The GA4 or Google Ads tags themselves. Gating when they load is fine when
+  asked. Altering or removing them is not.
+- Formspree endpoints.
+- `_redirects`.
+- Any `/articles/{slug}/index.html` file directly. These are generated. Edit
+  the template or the body fragment instead.
+- Minified and critical CSS/JS files. See the section above.
+
+## Working method
+
+- Always run a read-only discovery pass before modifying files. Report findings
+  and wait for confirmation.
+- Treat any "Do NOT Change" section in a prompt as absolute.
+- Bundle related fixes touching the same file into a single change.
+- End every task with a verification step using grep where possible, and report
+  results.
+- Give a prioritized list of what changed, not a narrative walkthrough.
+- If something is ambiguous, ask rather than assume.
+
+## Brand and color
+
+Color values are IN FLUX during the rebrand. Do not treat any hex value found in
+this repo, in git history, or in your own assumptions as authoritative.
+
+Source of truth for color, in order:
+1. CSS custom properties in the tokens file, once it exists
+2. `REBRAND.md`, for decisions not yet implemented
+3. Me. Ask.
+
+Never hardcode a hex value. Always reference a token. If a token you need does
+not exist, stop and ask rather than inventing one.
+
+## Content and copy rules
+
+Applies to all site copy, meta descriptions, and any text you generate:
+
+- No first-person language ("we", "our", "I")
+- No em dashes, in site copy or in your responses to me
+- No superlatives ("best", "leading", "premier", "unmatched")
+- No fabricated statistics. Only verified case study figures (Eau Claire,
+  Stillwater). If you need a number you do not have, ask.
+- Vendor-neutral tone. The company is technology-agnostic.
 
 ## Documentation
 
-See `/docs/` for detailed documentation:
-- `articles-dynamic.md` - Complete article system guide
-- `url-migration.md` - URL structure and routing notes
-
-See `SEO_TODO.md` for pending SEO optimization tasks.
-
-## Deployment
-
-This site deploys automatically via GitHub Pages when pushing to the main branch. No build step is required beyond running the article generation scripts.
-
-**CNAME**: The `CNAME` file contains the custom domain configuration for GitHub Pages.
+- `/docs/articles-dynamic.md` - article system guide
+- `/docs/url-migration.md` - URL structure and routing notes
+- `SEO_TODO.md` - pending SEO tasks
+- `REBRAND.md` - live rebrand decisions and pass status
