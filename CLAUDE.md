@@ -85,6 +85,13 @@ syndicated link with no body fragment). Any bulk operation across
 `articles/*/index.html` must account for this file separately. Do not assume
 every article directory is generated.
 
+**Known issue**, pre-existing and unrelated to the rebrand:
+`articles/parking-today-small-lots/index.html` has no `content` field in its
+`resources.json` entry, so `loadArticleBody(undefined)` fetches a 404 and
+`renderNotFound()` replaces the page content with "We couldn't find that
+resource." This is established by code reading, not by observing the rendered
+page. Needs separate investigation. Do not fix during the rebrand.
+
 **Adding a new article**:
 1. Create the body fragment at `/articles/my-new-article.html`
 2. Add a complete entry to `data/resources.json`
@@ -194,10 +201,18 @@ FAQPage schema can be added to pages with Q&A content. See `SEO_TODO.md`.
 `_headers` sets security headers, a Content Security Policy, and cache control.
 `_redirects` holds 301s from legacy URLs.
 
-**CSP constraint**: `style-src` and `script-src` allow only self, inline, and
-Google Tag Manager / Analytics. `connect-src` allows only Google Analytics and
-Formspree. Any new external resource (web fonts, CDN scripts, embeds) requires
-a matching CSP update in `_headers` or it will be silently blocked.
+**CSP constraint**: `_headers` defines a Content Security Policy, but it is
+scoped to `/*.html` and is NOT enforced on any rendered page. Cloudflare Pages
+308-redirects `.html` paths to pretty URLs and attaches the CSP only to the
+redirect response. Verified live: `/`, `/consultation/`, and every pretty URL
+return 200 with no CSP header.
+
+Consequence: external resources currently load freely. Two pages already load
+Google Fonts from `fonts.googleapis.com` and `fonts.gstatic.com` despite
+`style-src 'self' 'unsafe-inline'`. Do not assume the CSP protects anything, and
+do not assume a new external resource is safe merely because it works. If the
+CSP is ever correctly scoped to `/*`, anything added in the meantime may break.
+Fixing this is a post-Vegas task requiring its own testing cycle.
 
 Never edit `_redirects` without asking. Existing 301s protect SEO equity.
 

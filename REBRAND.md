@@ -159,3 +159,19 @@ These must stay until merge day. Do not remove without me asking.
 - [ ] Merge `rebrand` into `main` via pull request
 - [ ] Annotate deploy date in GA4 and Google Ads
 - [ ] Verify tags firing on production
+
+## Post-Vegas backlog
+
+Not rebrand work. Do not start any of these before the conference.
+
+- CSP scoping fix and testing. `_headers` scopes the policy to `/*.html`, which
+  matches no rendered page. Rescoping to `/*` will start enforcing it for the
+  first time and may break external resources that currently load freely. Needs
+  its own testing cycle.
+- `parking-today-small-lots` rendering bug. The `resources.json` entry has no
+  `content` field, so the article runtime falls into `renderNotFound()`.
+- Stale minified and critical CSS cleanup. `css/` and `js/` carry unused
+  `.min.*` files and `css/critical/`, none built by any npm script and none
+  loaded by any page.
+- `sitemap.xml` lists `https://monetize-parking.com/ask-the-experts.html`, which
+  308-redirects to `/ask-the-experts`.
