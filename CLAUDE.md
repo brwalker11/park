@@ -78,6 +78,13 @@ Open Graph, Twitter, JSON-LD) are generated client-side from the JSON.
 **Rebrand implication**: all article page chrome lives in ONE template. A header
 or footer change is a single file edit plus a rebuild, not 147 edits.
 
+**Generator coverage**: `npm run generate:articles` writes 72 pages, not 73.
+`articles/parking-today-small-lots/index.html` is hand-written and is skipped by
+the generator because its `resources.json` entry is `"type": "external"` (a
+syndicated link with no body fragment). Any bulk operation across
+`articles/*/index.html` must account for this file separately. Do not assume
+every article directory is generated.
+
 **Adding a new article**:
 1. Create the body fragment at `/articles/my-new-article.html`
 2. Add a complete entry to `data/resources.json`
@@ -147,13 +154,27 @@ building `sitemap.xml`, so a change affects both the page and the sitemap.
 
 ### Analytics
 
-GA4 `G-LGHS0L5WE8` via Google Tag Manager. Google Ads `AW-18066534348`.
+GA4 `G-LGHS0L5WE8` and Google Ads `AW-18066534348`, loaded via gtag. Tags are
+duplicated per page with no shared include. 149 of 150 full pages carry their
+own copy in `<head>`; `404.html` has none.
 
-Events: `page_view`, `generate_lead` (contact form and consultation CTAs),
-`calculator_start`.
+The Google Ads tag exists in only three places, all on the consultation path:
+`consultation/index.html` (config), and `consultation/thank-you/index.html`
+(config plus the conversion event, `send_to`
+`AW-18066534348/dpBlCNapw5YcEMzf5aZD`, value 1.0 USD).
 
-Tracking code lives in `/script.js` (global CTA tracking) and `/js/article.js`
-(article inline and footer CTAs).
+Events: `page_view` (automatic), `generate_lead` (contact form and consultation
+CTAs), `calculator_start`, `state_map_click`.
+
+Event calls: 111 inline `gtag('event', ...)` sites across the HTML pages, only 4
+of which have a `typeof gtag` guard. Three fire on page load rather than from a
+click handler: `consultation/thank-you/index.html`,
+`contact/thank-you/index.html`, `calculator/report/index.html`. External JS
+event calls live in `script.js`, `js/article.js`, and `js/state-map.js`, all
+guarded. `js/resources.js` has no analytics code.
+
+During the rebrand these tags are hostname-gated. See `REBRAND.md` for the
+mechanism and the merge-day revert requirement.
 
 ### Inline CTAs
 
@@ -260,6 +281,10 @@ minified copies appear stale and unused.
 The authoritative files to edit are the unminified originals. Do not edit,
 regenerate, or delete the minified or critical files without asking, and do not
 assume they are in sync with the originals.
+
+`js/article.min.js` contains an ungated reference to `G-LGHS0L5WE8`. The
+unminified `js/article.js` was hostname-gated; the minified copy was not and has
+drifted further out of sync. Nothing loads it. Do not gate or edit it.
 
 ## Branch and deployment rules
 

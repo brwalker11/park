@@ -102,7 +102,27 @@ Result:
 
 These must stay until merge day. Do not remove without me asking.
 
-- Analytics and ad tags gated to hostname `monetize-parking.com` only
+- Analytics gating (commit `187bfbd`). Hostname check around the gtag init block
+  only, with a no-op `gtag` defined in the else branch. Covers 149 pages plus
+  `js/article.js:513`.
+
+  Deliberate limitations:
+
+  1. The gtag.js loader tag is NOT gated. It cannot be made conditional in place
+     without dynamic injection. The script still downloads off-production, but
+     no `gtag('js')` or `gtag('config')` is queued, so no measurement hit is
+     created. Residual is a network request carrying the measurement ID.
+  2. Roughly 107 inline `gtag('event', ...)` sites are unguarded and were left
+     untouched. The no-op else is what makes them safe.
+
+  Off-production, gtag calls silently do nothing rather than throwing. The
+  preview is not a perfect behavioral mirror of production.
+
+  Merge day: this is a 149-page revert, not a one-line change. Reverting commit
+  `187bfbd` is the intended mechanism. Any rebrand commit that touches a gated
+  page's `<head>` will complicate that revert. If a conflict arises, the target
+  state is `function gtag(){dataLayer.push(arguments);}` with no wrapper and no
+  else branch.
 - `noindex` meta tag active on any non-production hostname
 - Cloudflare Access password on the preview URL
 - `/consultation/` visual changes on hold until Google Ads bidding is switched
