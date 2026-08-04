@@ -34,6 +34,18 @@
   <meta name="twitter:description" content="Why charge the same rate at 2 PM on Tuesday as you do at 7 PM on Friday? Learn dynamic pricing strategies that match your rates to actual parking demand.">
   <script defer src="/script.js"></script>
   <script defer src="/js/article.js"></script>
+  <!-- Preview noindex guard - remove on merge day -->
+  <script>
+    if (window.location.hostname !== 'monetize-parking.com') {
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, nofollow');
+    }
+  </script>
   <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>

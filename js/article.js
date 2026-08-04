@@ -145,7 +145,7 @@
     const modifiedDate = isoDate(article.lastmod || article.date);
 
     setDocumentMeta(article, canonicalUrl, imageUrl, publishDate, modifiedDate);
-    if (robots) {
+    if (robots && window.location.hostname === 'monetize-parking.com') {
       robots.setAttribute('content', 'index,follow');
     }
 

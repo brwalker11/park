@@ -34,6 +34,18 @@
   <meta name="twitter:description" content="Most lot owners pick one pricing model and leave money on the table. Learn when monthly passes guarantee stable income, when hourly rates maximize revenue, and how to use both.">
   <script defer src="/script.js"></script>
   <script defer src="/js/article.js"></script>
+  <!-- Preview noindex guard - remove on merge day -->
+  <script>
+    if (window.location.hostname !== 'monetize-parking.com') {
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, nofollow');
+    }
+  </script>
   <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>

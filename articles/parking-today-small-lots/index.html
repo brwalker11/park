@@ -34,6 +34,18 @@
   <meta name="twitter:description" content="Even modest parking assets can achieve impressive ROI through automation. Parking Today highlights how one of our partners, Municipal Parking Services (MPS), is helping small lots thrive through smart enforcement and automation.">
   <script defer src="/script.js"></script>
   <script defer src="/js/article.js"></script>
+  <!-- Preview noindex guard - remove on merge day -->
+  <script>
+    if (window.location.hostname !== 'monetize-parking.com') {
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, nofollow');
+    }
+  </script>
   <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>
