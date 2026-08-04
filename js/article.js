@@ -510,7 +510,7 @@
   }
 
   function trackPageView(canonicalUrl) {
-    if (typeof gtag === 'function') {
+    if (window.location.hostname === 'monetize-parking.com' && typeof gtag === 'function') {
       try {
         const url = new URL(canonicalUrl, window.location.origin);
         gtag('config', 'G-LGHS0L5WE8', {

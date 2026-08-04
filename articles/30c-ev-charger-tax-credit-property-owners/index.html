@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>The Section 30C EV Charger Tax Credit Expires June 30, 2026. Here Is What Property Owners Need to Know. | Monetize Parking</title>
   <meta name="description" content="The federal 30C EV charger tax credit expires June 30, 2026. Property owners can claim 6% to 30% of installation costs. Learn eligibility, deadlines, and how to act before time runs out.">
-  <meta property="og:image" content="https://monetize-parking.com/images/ev_charge.webp">
+  <meta property="og:image" content="https://monetize-parking.com/images/ev_sec30.webp">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Monetize Parking - Parking Lot Revenue Solutions for Property Owners">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://monetize-parking.com/images/ev_charge.webp">
+  <meta name="twitter:image" content="https://monetize-parking.com/images/ev_sec30.webp">
   <meta name="robots" content="index,follow">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48.png">
@@ -34,15 +34,19 @@
   <meta name="twitter:description" content="The federal 30C EV charger tax credit expires June 30, 2026. Property owners can claim 6% to 30% of installation costs. Learn eligibility, deadlines, and how to act before time runs out.">
   <script defer src="/script.js"></script>
   <script defer src="/js/article.js"></script>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LGHS0L5WE8');
+    if (window.location.hostname === 'monetize-parking.com') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-LGHS0L5WE8');
+    } else {
+      window.gtag = function gtag(){};
+    }
   </script>
-  <link rel="preload" as="image" href="/images/ev_charge.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/ev_sec30.webp" fetchpriority="high">
 </head>
 <body class="article-page">
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -125,7 +129,7 @@
         </nav>
         <a href="/resources/" class="back-link">← Back to Resources</a>
         <header class="article-hero">
-          <img id="hero-image" src="/images/ev_charge.webp" alt="EV charging station at a commercial property eligible for the Section 30C tax credit." width="1600" height="900" fetchpriority="high" />
+          <img id="hero-image" src="/images/ev_sec30.webp" alt="EV charging station at a commercial property eligible for the Section 30C tax credit." width="1600" height="900" fetchpriority="high" />
           <div class="hero-inner">
             <p class="eyebrow">EV Charging</p>
             <h1 id="article-title">The Section 30C EV Charger Tax Credit Expires June 30, 2026. Here Is What Property Owners Need to Know.</h1>

@@ -34,13 +34,17 @@
   <meta name="twitter:description" content="Manual monitoring steals your time. Learn how Scan-to-Pay and AI enforcement free parking owners from babysitting their lots without sacrificing revenue.">
   <script defer src="/script.js"></script>
   <script defer src="/js/article.js"></script>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LGHS0L5WE8');
+    if (window.location.hostname === 'monetize-parking.com') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-LGHS0L5WE8');
+    } else {
+      window.gtag = function gtag(){};
+    }
   </script>
   <link rel="preload" as="image" href="/images/default-guide.webp" fetchpriority="high">
 </head>
