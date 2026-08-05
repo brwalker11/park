@@ -396,10 +396,13 @@ body[data-hero="c"] .hero-c{ display:block; }
   content:""; width:8px; height:8px; border-radius:50%; background:var(--blue-bright);
 }
 .assess-chip--green::before{ background:var(--green-500); }
-.chip-1{ top:16%; right:-2%; }
-.chip-2{ top:38%; left:-4%; }
-.chip-3{ bottom:24%; right:2%; }
-.chip-4{ bottom:2%; left:12%; }
+/* Each chip is anchored to a drawn feature via a leader line in the SVG:
+   scan -> QR signpost, lpr -> entrance camera, solar -> top perimeter pole,
+   ev -> charging unit at the marked stalls. */
+.chip-scan{ top:22%; left:28%; }
+.chip-lpr{ top:26%; left:-4%; }
+.chip-solar{ top:16%; right:-4%; }
+.chip-ev{ top:57%; right:-4%; }
 
 /* ---------- Variant B: typographic monolith ---------- */
 .hero-b .hero-center{
@@ -774,7 +777,12 @@ html.is-motion .reveal.in{
   .footer-grid{ grid-template-columns:1fr; }
   .hero-actions .btn{ width:100%; }
   .hero-a .hero-visual{ min-height:360px; }
-  .chip-2{ left:-2%; }
+  /* four anchored labels are too dense at phone width: keep LPR enforcement
+     (parking, the primary pillar) and Solar lighting (the green pillar);
+     the scan signage and EV stalls stay drawn, just unlabeled */
+  .chip-scan, .chip-ev{ display:none; }
+  .chip-lpr{ left:-2%; }
+  .chip-solar{ top:24%; right:-2%; }
   .bar-track{ height:160px; }
   .bar{ width:56px; }
   .hero-c .hero-content{ padding-top:clamp(7rem, 18vh, 10rem); }
@@ -879,8 +887,20 @@ html.is-motion .reveal.in{
             <span class="assess-card__title">Site revenue assessment</span>
             <span class="assess-card__meta">Any provider</span>
           </div>
-          <svg viewBox="0 0 520 340" role="img" aria-label="Stylized parking lot site plan with assessment annotations">
+          <svg viewBox="0 0 520 340" role="img" aria-label="Stylized parking lot site plan: a camera at the entrance, solar light poles on the perimeter, EV charging stalls, and payment signage, each labeled">
+            <defs>
+              <radialGradient id="lampGlow" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="#F4F6F9" stop-opacity="0.4"/>
+                <stop offset="0.55" stop-color="#C9D8F0" stop-opacity="0.12"/>
+                <stop offset="1" stop-color="#C9D8F0" stop-opacity="0"/>
+              </radialGradient>
+              <path id="bolt" d="M7 0 0 11h5L4 20l8-12H7l1-8z"/>
+            </defs>
+            <!-- lot boundary with an entrance gap on the left at the drive lane -->
             <rect x="10" y="10" width="500" height="320" rx="18" fill="none" stroke="rgba(143,163,192,0.35)" stroke-width="1.5"/>
+            <rect x="2" y="146" width="16" height="48" fill="#071B38"/>
+            <line x1="10" y1="146" x2="24" y2="146" stroke="rgba(143,163,192,0.35)" stroke-width="1.5"/>
+            <line x1="10" y1="194" x2="24" y2="194" stroke="rgba(143,163,192,0.35)" stroke-width="1.5"/>
             <!-- top stall row -->
             <g stroke="rgba(255,255,255,0.28)" stroke-width="2">
               <line x1="60"  y1="10" x2="60"  y2="80"/><line x1="110" y1="10" x2="110" y2="80"/>
@@ -897,35 +917,62 @@ html.is-motion .reveal.in{
               <line x1="360" y1="260" x2="360" y2="330"/><line x1="410" y1="260" x2="410" y2="330"/>
               <line x1="460" y1="260" x2="460" y2="330"/>
             </g>
-            <!-- drive lane -->
-            <line x1="40" y1="170" x2="480" y2="170" stroke="rgba(77,163,255,0.55)" stroke-width="2" stroke-dasharray="14 12"/>
-            <path d="M462 162 L480 170 L462 178" fill="none" stroke="rgba(77,163,255,0.55)" stroke-width="2"/>
             <!-- occupied stalls (filled) -->
             <g fill="rgba(11,128,249,0.22)">
               <rect x="62" y="12" width="46" height="66" rx="4"/>
               <rect x="162" y="12" width="46" height="66" rx="4"/>
               <rect x="212" y="12" width="46" height="66" rx="4"/>
-              <rect x="362" y="12" width="46" height="66" rx="4"/>
+              <rect x="312" y="12" width="46" height="66" rx="4"/>
               <rect x="112" y="262" width="46" height="66" rx="4"/>
               <rect x="262" y="262" width="46" height="66" rx="4"/>
-              <rect x="412" y="262" width="46" height="66" rx="4"/>
             </g>
-            <!-- LPR camera at entrance with sightline -->
-            <circle cx="28" cy="170" r="7" fill="#0B80F9"/>
-            <path d="M35 165 L120 130 M35 175 L120 210" stroke="rgba(11,128,249,0.35)" stroke-width="1.5" stroke-dasharray="4 5"/>
-            <!-- solar light poles with glow -->
-            <circle cx="260" cy="170" r="26" fill="rgba(109,177,51,0.12)"/>
-            <circle cx="260" cy="170" r="5" fill="#6DB133"/>
-            <circle cx="430" cy="170" r="26" fill="rgba(109,177,51,0.12)"/>
-            <circle cx="430" cy="170" r="5" fill="#6DB133"/>
-            <!-- EV stalls marker -->
-            <path d="M336 288 328 302h7l-1 12 9-14h-7l1-12z" transform="translate(-14 -22)" fill="#6DB133" opacity="0.85"/>
+            <!-- vehicle path: enters at the gap, drives the lane, arrow shows direction -->
+            <line x1="16" y1="170" x2="470" y2="170" stroke="rgba(77,163,255,0.55)" stroke-width="2" stroke-dasharray="14 12"/>
+            <path d="M462 162 L480 170 L462 178" fill="none" stroke="rgba(77,163,255,0.55)" stroke-width="2"/>
+            <rect x="54" y="165" width="18" height="10" rx="3" fill="rgba(77,163,255,0.6)"/>
+            <!-- LPR ENFORCEMENT: camera unit on a post just inside the entrance,
+                 field-of-view wedge covering the gap where vehicles enter -->
+            <circle cx="38" cy="132" r="2.5" fill="#8FA3C0"/>
+            <rect x="31" y="118" width="15" height="9" rx="2.5" fill="#0B80F9"/>
+            <path d="M40 130 L86 162 M40 130 L28 176" stroke="rgba(11,128,249,0.4)" stroke-width="1.5" stroke-dasharray="4 5"/>
+            <!-- SOLAR LIGHTING: two perimeter poles with crossarms and light pools.
+                 Pole 1 on the top boundary, pole 2 on the bottom boundary -->
+            <ellipse cx="380" cy="34" rx="66" ry="36" fill="url(#lampGlow)"/>
+            <line x1="366" y1="12" x2="394" y2="12" stroke="#8FA3C0" stroke-width="2.5"/>
+            <ellipse cx="371" cy="14.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
+            <ellipse cx="389" cy="14.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
+            <circle cx="380" cy="12" r="4.5" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
+            <ellipse cx="150" cy="306" rx="66" ry="36" fill="url(#lampGlow)"/>
+            <line x1="136" y1="328" x2="164" y2="328" stroke="#8FA3C0" stroke-width="2.5"/>
+            <ellipse cx="141" cy="325.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
+            <ellipse cx="159" cy="325.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
+            <circle cx="150" cy="328" r="4.5" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
+            <!-- EV READY: two marked charging stalls bottom-right with a charging
+                 unit at their head, inside the lot boundary -->
+            <rect x="362" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.16)"/>
+            <rect x="412" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.16)"/>
+            <use href="#bolt" x="379" y="284" fill="#6DB133" opacity="0.9"/>
+            <use href="#bolt" x="429" y="284" fill="#6DB133" opacity="0.9"/>
+            <rect x="400" y="243" width="20" height="12" rx="3" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
+            <line x1="410" y1="255" x2="410" y2="262" stroke="#6DB133" stroke-width="1.5"/>
+            <!-- SCAN-TO-PAY ZONE: QR signpost at the head of the top stalls, facing
+                 the drive lane -->
+            <circle cx="150" cy="106" r="2" fill="#8FA3C0"/>
+            <rect x="141" y="88" width="18" height="15" rx="2.5" fill="#004FC8" stroke="#4DA3FF" stroke-width="1"/>
+            <rect x="145" y="91.5" width="8" height="8" rx="1.5" fill="#F4F6F9" opacity="0.85"/>
+            <!-- leader lines from feature to label -->
+            <g stroke="rgba(196,208,226,0.55)" stroke-width="1">
+              <line x1="150" y1="86" x2="150" y2="58"/>
+              <line x1="397" y1="12" x2="424" y2="26"/>
+              <line x1="420" y1="249" x2="452" y2="240"/>
+              <line x1="38" y1="116" x2="38" y2="92"/>
+            </g>
           </svg>
         </div>
-        <span class="assess-chip chip-1">Scan-to-Pay zone</span>
-        <span class="assess-chip chip-2">LPR enforcement</span>
-        <span class="assess-chip assess-chip--green chip-3">Solar lighting</span>
-        <span class="assess-chip assess-chip--green chip-4">EV ready</span>
+        <span class="assess-chip chip-scan">Scan-to-Pay zone</span>
+        <span class="assess-chip chip-lpr">LPR enforcement</span>
+        <span class="assess-chip assess-chip--green chip-solar">Solar lighting</span>
+        <span class="assess-chip assess-chip--green chip-ev">EV ready</span>
       </div>
     </div>
   </div>
