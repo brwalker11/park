@@ -216,6 +216,31 @@ Fixing this is a post-Vegas task requiring its own testing cycle.
 
 Never edit `_redirects` without asking. Existing 301s protect SEO equity.
 
+### Stylesheets
+
+Authoritative stylesheets are `styles.css`, `css/article.css`,
+`css/resources.css`, and `css/state-map.css`. `css/style.css` is an orphan that
+nothing loads.
+
+Additionally, 119 of 150 pages carry inline `<style>` blocks in 15 distinct
+payloads, holding roughly half the site's CSS. `consultation/index.html` alone
+carries 18.3 KB inline. Any CSS change that only edits the four authoritative
+files will miss about half the styling.
+
+The two consultation pages do not load `styles.css` at all. They are fully
+self-contained with their own `:root`, their own font variables, the only Google
+Fonts links on the site, the only Calendly embed, and header and footer markup
+that diverges from the other 148 pages.
+
+### Typography
+
+Font loading is inconsistent. 117 files declare `font-family: Inter`, but the
+Google Fonts stylesheet is loaded from only two files: `consultation/index.html`
+and `consultation/thank-you/index.html`. The other 148 pages fall through to
+`ui-sans-serif`/`system-ui` unless the visitor has Inter installed locally. The
+site renders in the system UI font almost everywhere. This is pre-existing and
+must be resolved deliberately during the rebrand.
+
 ## File Organization
 
 Stylesheets and scripts are the files most likely to be touched during the

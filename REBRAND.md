@@ -10,17 +10,44 @@ Target: Las Vegas conference, mid-September 2026
 
 ## Current pass
 
-**Status:** Pass 1 (color and asset discovery) not yet run
+**Status:** Pass 1 (color and asset discovery) COMPLETE, run on `e9248d1`.
+Findings below. Next up is Pass 2a, blocked on the canonical blue decision.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
 
 ---
 
-## Direction
+## Scope and direction
 
-Hybrid, not full dark. Deep navy is the frame color. Article body content keeps
-light backgrounds.
+This is a full visual overhaul plus content repositioning, not only a color and
+logo rebrand. Four workstreams:
+
+1. **Visual overhaul.** Design direction documented in `docs/design-direction.md`
+   (pending), motion in `docs/motion-spec.md` (pending). Reference points cited:
+   getonyx.ai and airgarage.com.
+2. **Brand asset rollout.** Logo, favicons, OG image.
+3. **Content repositioning** to three co-equal service pillars: parking revenue,
+   solar lighting, EV charging. Solar lighting currently has NO presence on the
+   site. EV has scattered articles and some services mentions. Positioning stays
+   vendor-neutral; ClearWorld is not named as the provider.
+4. **Information architecture.** Evaluating a two-axis nav (what we do / who we
+   serve) modeled on airgarage.com, using existing segment keywords: churches,
+   hotels, offices, stadiums, municipalities.
+
+**Scope rule:** everything being promoted at the Las Vegas conference must have a
+credible page on the site. That is the bar, not an even content split.
+
+Homepage stays parking-weighted through Vegas to protect the Google Ads
+conversion path. Rebalancing happens post-conference once lighting content earns
+traffic.
+
+Lighting page copy is owned by Ben, not Claude Code.
+
+### Visual direction
+
+Hybrid dark confirmed. Not full dark. Deep navy is the frame color. Article body
+content keeps light backgrounds.
 
 Navy applies to: header, footer, homepage hero, CTA bands, calculator, video
 library cards.
@@ -42,6 +69,7 @@ is the source of truth from that point forward.
 |---|---|---|
 | Primary brand | Blue, exact value TBD from logo sampling | Not set |
 | Dark surface | Deep navy, exact value TBD from logo background | Not set |
+| Dark surface (provisional) | `#010d20`, eyedropper-sampled from the logo background. Currently used only as `theme_color` and `background_color` in `images/site.webmanifest`. | **PROVISIONAL** |
 | Body background | Unchanged from current light | Confirmed |
 | Body text | Unchanged | Confirmed |
 | Accent green | Scoped to solar, EV, sustainability, success states ONLY | Confirmed |
@@ -55,46 +83,83 @@ site starts reading as a solar company. When in doubt, use blue.
 backgrounds. Any logo placed on a light surface must use the solid dark variant,
 not the gradient one.
 
+**On the provisional dark surface:** `#010d20` was sampled by eyedropper, not
+programmatically. It must be confirmed or replaced when the design direction pass
+samples the logo files programmatically. Do not tokenize it or use it in CSS
+until then. For reference it is considerably darker than any dark value currently
+in the stylesheets; the closest existing value is `#0f172a`.
+
 ---
 
 ## Logo assets
 
 | Asset | Status |
 |---|---|
-| Horizontal lockup, transparent PNG @3x | Requested |
-| MP mark alone, transparent PNG @3x | Requested |
-| Solid dark variant for light backgrounds | Requested |
-| Tagline lockup | Have PNG, needs transparent version |
-| ClearWorld co-brand lockup | Have PNG, needs transparent version |
-| Favicon set (512, 180, 32, 16) | Not started |
+| Horizontal lockup, transparent PNG | **COMPLETE** - `assets/brand/MP_Logo.png` (1200x480) and `assets/brand/MP_Logo_400.png` (400x160), both real alpha |
+| MP mark alone, transparent PNG | **COMPLETE** - `assets/brand/MP_mark.png` (1024x905) and `assets/brand/mp_mark_512.png` (512x453), both real alpha |
+| Favicon set | **COMPLETE** - files are in `/images/`, NOT yet referenced by any page |
+| Solid dark variant for light backgrounds | Outstanding |
+| Tagline lockup | Outstanding. `assets/brand/MP Logo & tagelines.png` is opaque RGB with no alpha |
+| ClearWorld co-brand lockup | Outstanding. `assets/brand/MP - CW Co-brand.png` is opaque RGB with no alpha |
 | OG image 1200x630 | Not started |
 | Vector (AI/SVG/EPS) for print and embroidery | Freelance redraw, $150-$400 |
 
-Vector is needed for booth graphics, banners, table throws, and embroidery.
-It is NOT needed for the website. High-res transparent PNGs are sufficient
-for web.
+Vector is needed for booth graphics, banners, table throws, and embroidery. It is
+NOT needed for the website. High-res transparent PNGs are sufficient for web.
+
+**`images/Logo.svg` must be replaced.** It is what all 148 pages currently load.
+It is an auto-traced bitmap: 1858 paths, 1250 flat fills, with an opaque
+background baked in as a full-bleed rectangle. It cannot be recolored and is
+307 KB. Replace it with `assets/brand/MP_Logo_400.png` during the header pass.
+The vector redraw is still needed for print and embroidery but is no longer a
+website blocker.
+
+**`images/logo.png`** (1.2 MB, referenced by nothing) is a deletion candidate.
 
 ---
 
-## Pass log
+## Pass 1 findings
 
-Record the outcome of each pass here as it completes.
+Full report run on commit `e9248d1`. Key findings:
 
-### Pass 1: Color and asset discovery (read only)
-Status: Not run
-Result:
+- Three competing brand blues in simultaneous use: `#007bff` (350 uses),
+  `#0a68ff` (232), `#0b6efd` (175). 757 total occurrences of what should be one
+  color. Canonical blue must be decided before any token work.
+- 175 distinct color values, 5310 occurrences. 36 custom properties across four
+  disconnected `:root` blocks, with 301 raw literals bypassing them. Roughly 63
+  percent of color usage ignores existing tokens.
+- Near-duplicate groups: 16 whites (1514 uses), 10 border greys (663), 5 inks
+  (274), 96 distinct shadow values, 20 border-radius values.
+- Header and footer: 148 pages byte-identical, 2 bespoke consultation pages. 78
+  distinct edit points total, not 150.
+- Runtime color literals a CSS-only rebrand would miss: `js/state-map.js:109`
+  hardcodes `rgba(13,110,253,0.08)`. `js/related.js` and `js/resources.js` carry
+  duplicated and drifted category color tables containing `#273d9a`, `#0a7c6b`,
+  `#3b3a3f`, none of which appear in any stylesheet. `#0a7c6b` is a green and
+  must be checked against the green-scoping rule.
+- `INLINE_CTA_COPY` in `js/article.js` uses first-person language, violating the
+  content rules. Flagged, not yet fixed.
+- Six unrationalised breakpoints: 1024, 768, 860, 640, 960, 600.
+- Two competing container widths (1100px and 1300px) and two competing button
+  systems (`.btn` and `.cta`).
 
-### Pass 2: Tokenize colors (no visual change)
-Status: Not started
-Result:
+---
 
-### Pass 3: Apply brand to frame surfaces
-Status: Not started
-Result:
+## Pass plan
 
-### Pass 4: Mobile and conference path
-Status: Not started
-Result:
+- **Pass 2a:** establish the token layer, no visual change. One `:root` in
+  `styles.css` as single source of truth, collapsing the four parallel naming
+  schemes with old names aliased. Verifiable as pixel-identical.
+- **Pass 2b:** consolidate near-duplicates. Resolve three blues to one, 16 whites
+  to three, 10 greys to one, 96 shadows to four, 20 radii to four. Small
+  deliberate visual change, needs sign-off on which blue wins.
+- **Pass 2c:** sweep inline `<style>` across 119 pages. Scriptable for the 45
+  uniform ones, manual for the 4 bespoke.
+- **Consultation pages** deferred to their own pass, after Google Ads bidding is
+  switched off Maximize Clicks.
+
+**Sequencing note:** decide the canonical blue before writing any token, since
+every downstream decision depends on it.
 
 ---
 
@@ -149,29 +214,67 @@ These must stay until merge day. Do not remove without me asking.
 - `/consultation/` visual changes on hold until Google Ads bidding is switched
   off Maximize Clicks
 
+## Environment configuration
+
+- **GitHub:** repo `brwalker11/park`. A ruleset on `main` requires a pull
+  request. Direct pushes are refused with GH013, including for the repo owner.
+  Verified by test on Aug 4 2026.
+- **Cloudflare Pages:** project `monetize-parking`. Production branch `main`,
+  deploying to monetize-parking.com, www.monetize-parking.com, and
+  monetize-parking.pages.dev. Preview branches restricted to `rebrand` only,
+  deploying to rebrand.monetize-parking.pages.dev. No build command is
+  configured; Cloudflare serves committed files as-is. `npm run build` runs
+  locally and generated output is committed.
+- **Cloudflare Zero Trust Access:** a self-hosted application gates
+  rebrand.monetize-parking.pages.dev. Policy allows specific emails only.
+  Per-commit hash preview URLs are NOT covered by this policy and rely on the
+  noindex guard plus obscurity. Do not share a hash URL publicly.
+- **Local:** repo at `/Users/ben/Documents/MP/park`. Auth via macOS keychain,
+  pushes do not prompt.
+
+---
+
 ## Merge day checklist
 
-- [ ] Revert commit `187bfbd` to remove analytics hostname gating (149 pages
-  plus `js/article.js`, see guardrails above)
-- [ ] Revert commit `3596d3d` to remove the noindex safeguard (150 pages plus
-  `js/article.js`, see guardrails above)
-- [ ] Confirm Ads bidding already switched off Maximize Clicks
-- [ ] Merge `rebrand` into `main` via pull request
-- [ ] Annotate deploy date in GA4 and Google Ads
-- [ ] Verify tags firing on production
+- [ ] Revert commit `187bfbd` to remove analytics hostname gating (149 pages plus
+  `js/article.js`)
+- [ ] Revert commit `3596d3d` to remove the noindex guard (150 pages plus
+  `js/article.js:149`)
+- [ ] Confirm Google Ads bidding already switched off Maximize Clicks
+- [ ] Merge `rebrand` into `main` via pull request, since direct push is blocked
+- [ ] Verify production tracking fires: GA4 collect requests and the Ads
+  conversion on `consultation/thank-you/`
+- [ ] Verify production robots meta reads `index,follow`, not `noindex`
+- [ ] Delete the Cloudflare Zero Trust Access application for the preview URL
+- [ ] Fold any still-relevant findings from `REBRAND.md` into `CLAUDE.md` before
+  deleting
+- [ ] Delete `REBRAND.md` from the repo
+- [ ] Annotate the deploy date in GA4 and Google Ads
+
+**Not a revert item:** the favicon `?v=2` cache-busting query stays permanently.
 
 ## Post-Vegas backlog
 
 Not rebrand work. Do not start any of these before the conference.
 
-- CSP scoping fix and testing. `_headers` scopes the policy to `/*.html`, which
-  matches no rendered page. Rescoping to `/*` will start enforcing it for the
-  first time and may break external resources that currently load freely. Needs
-  its own testing cycle.
-- `parking-today-small-lots` rendering bug. The `resources.json` entry has no
-  `content` field, so the article runtime falls into `renderNotFound()`.
-- Stale minified and critical CSS cleanup. `css/` and `js/` carry unused
-  `.min.*` files and `css/critical/`, none built by any npm script and none
-  loaded by any page.
-- `sitemap.xml` lists `https://monetize-parking.com/ask-the-experts.html`, which
-  308-redirects to `/ask-the-experts`.
+- CSP scoping fix. The policy in `_headers` is scoped to `/*.html` and is
+  enforced on no rendered page. Fixing it requires its own testing cycle against
+  Google Fonts, Calendly, Formspree, and YouTube embeds.
+- `articles/parking-today-small-lots/index.html` rendering bug. No `content`
+  field in its `resources.json` entry, so the runtime renders a not-found state
+  over its own content.
+- Stale asset cleanup: nine dead stylesheets (four `.min`, four `critical/`, and
+  `css/style.css`), `postcss.config.js` with no npm script, `tools/build.js`
+  unwired, and `images/logo.png` at 1.2 MB referenced by nothing.
+- `images/Logo.svg` deletion once the header no longer references it.
+- Vector logo redraw for print and embroidery.
+- Transparent versions of the tagline lockup and ClearWorld co-brand lockup.
+- `sitemap.xml` lists `/ask-the-experts.html`, which 308-redirects.
+- `package-lock.json` has three uncommitted `"peer": true` markers from npm
+  11.6.2. Commit separately when a noisy diff does not matter.
+- `INLINE_CTA_COPY` in `js/article.js` uses first-person language against the
+  content rules.
+- Content rebalancing toward genuine three-pillar parity once lighting content
+  earns traffic.
+- Webflow migration evaluation, if in-house editing without a repo becomes a
+  requirement.
