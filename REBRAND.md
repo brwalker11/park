@@ -89,6 +89,12 @@ samples the logo files programmatically. Do not tokenize it or use it in CSS
 until then. For reference it is considerably darker than any dark value currently
 in the stylesheets; the closest existing value is `#0f172a`.
 
+`#010d20` now appears in rendered HTML as `<meta name="theme-color">` on all 150
+pages, as well as `theme_color` and `background_color` in
+`images/site.webmanifest`. If the provisional value changes it must be updated in
+all three places, not just the tokens file. It is browser chrome tint only and
+affects no page rendering.
+
 ---
 
 ## Logo assets
@@ -97,7 +103,7 @@ in the stylesheets; the closest existing value is `#0f172a`.
 |---|---|
 | Horizontal lockup, transparent PNG | **COMPLETE** - `assets/brand/MP_Logo.png` (1200x480) and `assets/brand/MP_Logo_400.png` (400x160), both real alpha |
 | MP mark alone, transparent PNG | **COMPLETE** - `assets/brand/MP_mark.png` (1024x905) and `assets/brand/mp_mark_512.png` (512x453), both real alpha |
-| Favicon set | **COMPLETE** - files are in `/images/`, NOT yet referenced by any page |
+| Favicon set | **COMPLETE and LIVE** - referenced by all 150 pages, plus `images/site.webmanifest` |
 | Solid dark variant for light backgrounds | Outstanding |
 | Tagline lockup | Outstanding. `assets/brand/MP Logo & tagelines.png` is opaque RGB with no alpha |
 | ClearWorld co-brand lockup | Outstanding. `assets/brand/MP - CW Co-brand.png` is opaque RGB with no alpha |
@@ -252,6 +258,8 @@ These must stay until merge day. Do not remove without me asking.
 - [ ] Annotate the deploy date in GA4 and Google Ads
 
 **Not a revert item:** the favicon `?v=2` cache-busting query stays permanently.
+It appears on the icon links, the manifest link, and inside
+`images/site.webmanifest`. Do not strip it on merge day.
 
 ## Post-Vegas backlog
 
@@ -270,6 +278,9 @@ Not rebrand work. Do not start any of these before the conference.
 - Vector logo redraw for print and embroidery.
 - Transparent versions of the tagline lockup and ClearWorld co-brand lockup.
 - `sitemap.xml` lists `/ask-the-experts.html`, which 308-redirects.
+- `docs/website-audit-action-plan.md:609` proposes a superseded `/manifest.json`
+  at the repo root with a conflicting `theme_color: #2563eb`, and would send a
+  reader to a 404. The shipped manifest is `images/site.webmanifest`.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
 - `INLINE_CTA_COPY` in `js/article.js` uses first-person language against the
