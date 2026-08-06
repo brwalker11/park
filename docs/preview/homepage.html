@@ -385,21 +385,19 @@ body[data-hero="c"] .hero-c{ display:block; }
 .assess-card__title{ font-size:var(--type-small); font-weight:600; color:var(--text-inverse-1); }
 .assess-card__meta{ font-size:var(--type-eyebrow); color:var(--text-inverse-3); letter-spacing:.08em; text-transform:uppercase; }
 .assess-card svg{ width:100%; height:auto; flex:1; }
+/* Schematic annotation treatment: small caps with wide tracking, echoing
+   the hero eyebrow, so pills read as plan callouts rather than UI chips */
 .assess-chip{
-  position:absolute; display:inline-flex; align-items:center; gap:8px;
+  position:absolute; display:inline-flex; align-items:center;
   background:var(--navy-800); border:1px solid var(--border-dark);
-  border-radius:var(--radius-full); padding:8px 14px;
-  font-size:var(--type-small); font-weight:600; color:var(--text-inverse-1);
+  border-radius:var(--radius-full); padding:7px 14px;
+  font-size:0.6875rem; font-weight:600; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--text-inverse-1);
   box-shadow:var(--shadow-md); white-space:nowrap;
 }
-.assess-chip::before{
-  content:""; width:8px; height:8px; border-radius:50%; background:var(--blue-bright);
-}
-.assess-chip--green::before{ background:var(--green-500); }
-/* Each chip is anchored to a drawn feature via a leader line in the SVG,
-   and each chip dot matches its feature's drawn color: lpr (blue) -> the
-   blue entrance camera, solar (green) -> the green-capped perimeter pole,
-   ev (green) -> the green charging unit and stalls. */
+/* Each chip is anchored to a drawn feature via a leader line in the SVG:
+   lpr -> the blue entrance camera, solar -> the green-capped perimeter
+   pole, ev -> the green charging unit and stalls. */
 .chip-lpr{ top:26%; left:-4%; }
 .chip-solar{ top:16%; right:-4%; }
 .chip-ev{ top:57%; right:-4%; }
@@ -929,43 +927,38 @@ html.is-motion .reveal.in{
             <!-- vehicle path: enters at the gap, drives the lane, arrow shows direction -->
             <line x1="16" y1="170" x2="470" y2="170" stroke="rgba(77,163,255,0.55)" stroke-width="2" stroke-dasharray="14 12"/>
             <path d="M462 162 L480 170 L462 178" fill="none" stroke="rgba(77,163,255,0.55)" stroke-width="2"/>
-            <rect x="54" y="165" width="18" height="10" rx="3" fill="rgba(77,163,255,0.6)"/>
             <!-- LPR ENFORCEMENT: camera unit on a post just inside the entrance,
                  field-of-view wedge covering the gap where vehicles enter -->
             <circle cx="38" cy="132" r="2.5" fill="#8FA3C0"/>
             <rect x="31" y="118" width="15" height="9" rx="2.5" fill="#0B80F9"/>
             <path d="M40 130 L86 162 M40 130 L28 176" stroke="rgba(11,128,249,0.4)" stroke-width="1.5" stroke-dasharray="4 5"/>
-            <!-- SOLAR LIGHTING: two perimeter poles with crossarms and light pools.
-                 Pole 1 on the top boundary, pole 2 on the bottom boundary -->
+            <!-- SOLAR LIGHTING: one labeled perimeter pole with crossarm and light
+                 pool on the top boundary. A second unlabeled pole read as a stray
+                 artifact, so the fixture is singular by design -->
             <ellipse cx="380" cy="34" rx="66" ry="36" fill="url(#lampGlow)"/>
             <line x1="366" y1="12" x2="394" y2="12" stroke="#8FA3C0" stroke-width="2.5"/>
             <ellipse cx="371" cy="14.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
             <ellipse cx="389" cy="14.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
             <circle cx="380" cy="12" r="4.5" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
-            <ellipse cx="150" cy="306" rx="66" ry="36" fill="url(#lampGlow)"/>
-            <line x1="136" y1="328" x2="164" y2="328" stroke="#8FA3C0" stroke-width="2.5"/>
-            <ellipse cx="141" cy="325.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
-            <ellipse cx="159" cy="325.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
-            <circle cx="150" cy="328" r="4.5" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
             <!-- EV READY: two marked charging stalls bottom-right with a charging
                  unit at their head, inside the lot boundary -->
-            <rect x="362" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.16)"/>
-            <rect x="412" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.16)"/>
-            <use href="#bolt" x="379" y="284" fill="#6DB133" opacity="0.9"/>
-            <use href="#bolt" x="429" y="284" fill="#6DB133" opacity="0.9"/>
+            <rect x="362" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.08)" stroke="rgba(109,177,51,0.75)" stroke-width="1.5"/>
+            <rect x="412" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.08)" stroke="rgba(109,177,51,0.75)" stroke-width="1.5"/>
+            <use href="#bolt" x="379" y="284" fill="#6DB133"/>
+            <use href="#bolt" x="429" y="284" fill="#6DB133"/>
             <rect x="400" y="243" width="20" height="12" rx="3" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
             <line x1="410" y1="255" x2="410" y2="262" stroke="#6DB133" stroke-width="1.5"/>
             <!-- leader lines from feature to label -->
-            <g stroke="rgba(196,208,226,0.55)" stroke-width="1">
-              <line x1="397" y1="12" x2="424" y2="26"/>
-              <line x1="420" y1="249" x2="452" y2="240"/>
-              <line x1="38" y1="116" x2="38" y2="92"/>
+            <g stroke="rgba(196,208,226,0.9)" stroke-width="1.5" stroke-linecap="round">
+              <line x1="397" y1="12" x2="430" y2="28"/>
+              <line x1="420" y1="249" x2="462" y2="238"/>
+              <line x1="38" y1="116" x2="38" y2="82"/>
             </g>
           </svg>
         </div>
         <span class="assess-chip chip-lpr">LPR enforcement</span>
-        <span class="assess-chip assess-chip--green chip-solar">Solar lighting</span>
-        <span class="assess-chip assess-chip--green chip-ev">EV ready</span>
+        <span class="assess-chip chip-solar">Solar lighting</span>
+        <span class="assess-chip chip-ev">EV ready</span>
       </div>
     </div>
   </div>
