@@ -396,8 +396,9 @@ body[data-hero="c"] .hero-c{ display:block; }
   box-shadow:var(--shadow-md); white-space:nowrap;
 }
 /* Each chip is anchored to a drawn feature via a leader line in the SVG:
-   lpr -> the blue entrance camera, solar -> the green-capped perimeter
-   pole, ev -> the green charging unit and stalls. */
+   lpr -> the blue entrance camera, solar -> the top perimeter light
+   fixture (one shared label for the pair), ev -> the green charging unit
+   and stalls. */
 .chip-lpr{ top:26%; left:-4%; }
 .chip-solar{ top:16%; right:-4%; }
 .chip-ev{ top:57%; right:-4%; }
@@ -778,7 +779,7 @@ html.is-motion .reveal.in{
   /* three anchored labels are too dense at phone width: keep LPR enforcement
      (parking, the primary pillar) and Solar lighting (the green pillar);
      the EV stalls stay drawn, just unlabeled */
-  .chip-ev{ display:none; }
+  .chip-ev, .leader-ev{ display:none; }
   .chip-lpr{ left:-2%; }
   .chip-solar{ top:24%; right:-2%; }
   .bar-track{ height:160px; }
@@ -915,15 +916,6 @@ html.is-motion .reveal.in{
               <line x1="360" y1="260" x2="360" y2="330"/><line x1="410" y1="260" x2="410" y2="330"/>
               <line x1="460" y1="260" x2="460" y2="330"/>
             </g>
-            <!-- occupied stalls (filled) -->
-            <g fill="rgba(11,128,249,0.22)">
-              <rect x="62" y="12" width="46" height="66" rx="4"/>
-              <rect x="162" y="12" width="46" height="66" rx="4"/>
-              <rect x="212" y="12" width="46" height="66" rx="4"/>
-              <rect x="312" y="12" width="46" height="66" rx="4"/>
-              <rect x="112" y="262" width="46" height="66" rx="4"/>
-              <rect x="262" y="262" width="46" height="66" rx="4"/>
-            </g>
             <!-- vehicle path: enters at the gap, drives the lane, arrow shows direction -->
             <line x1="16" y1="170" x2="470" y2="170" stroke="rgba(77,163,255,0.55)" stroke-width="2" stroke-dasharray="14 12"/>
             <path d="M462 162 L480 170 L462 178" fill="none" stroke="rgba(77,163,255,0.55)" stroke-width="2"/>
@@ -932,14 +924,19 @@ html.is-motion .reveal.in{
             <circle cx="38" cy="132" r="2.5" fill="#8FA3C0"/>
             <rect x="31" y="118" width="15" height="9" rx="2.5" fill="#0B80F9"/>
             <path d="M40 130 L86 162 M40 130 L28 176" stroke="rgba(11,128,249,0.4)" stroke-width="1.5" stroke-dasharray="4 5"/>
-            <!-- SOLAR LIGHTING: one labeled perimeter pole with crossarm and light
-                 pool on the top boundary. A second unlabeled pole read as a stray
-                 artifact, so the fixture is singular by design -->
+            <!-- SOLAR LIGHTING: two perimeter fixtures placed symmetrically about
+                 the lot center so they read as a lighting system. Each is a
+                 crossarm with two luminaire heads and a light pool; the shape and
+                 the cone carry the reading, no colored marker. One shared label,
+                 anchored to the top fixture -->
             <ellipse cx="380" cy="34" rx="66" ry="36" fill="url(#lampGlow)"/>
             <line x1="366" y1="12" x2="394" y2="12" stroke="#8FA3C0" stroke-width="2.5"/>
             <ellipse cx="371" cy="14.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
             <ellipse cx="389" cy="14.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
-            <circle cx="380" cy="12" r="4.5" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
+            <ellipse cx="140" cy="306" rx="66" ry="36" fill="url(#lampGlow)"/>
+            <line x1="126" y1="328" x2="154" y2="328" stroke="#8FA3C0" stroke-width="2.5"/>
+            <ellipse cx="131" cy="325.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
+            <ellipse cx="149" cy="325.5" rx="4" ry="2.2" fill="#F4F6F9" opacity="0.9"/>
             <!-- EV READY: two marked charging stalls bottom-right with a charging
                  unit at their head, inside the lot boundary -->
             <rect x="362" y="262" width="46" height="66" rx="4" fill="rgba(109,177,51,0.08)" stroke="rgba(109,177,51,0.75)" stroke-width="1.5"/>
@@ -950,9 +947,9 @@ html.is-motion .reveal.in{
             <line x1="410" y1="255" x2="410" y2="262" stroke="#6DB133" stroke-width="1.5"/>
             <!-- leader lines from feature to label -->
             <g stroke="rgba(196,208,226,0.9)" stroke-width="1.5" stroke-linecap="round">
-              <line x1="397" y1="12" x2="430" y2="28"/>
-              <line x1="420" y1="249" x2="462" y2="238"/>
-              <line x1="38" y1="116" x2="38" y2="82"/>
+              <line x1="397" y1="13" x2="448" y2="18"/>
+              <line class="leader-ev" x1="421" y1="249" x2="505" y2="216"/>
+              <line x1="38" y1="116" x2="34" y2="86"/>
             </g>
           </svg>
         </div>
