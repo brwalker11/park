@@ -3,7 +3,7 @@
 This file changes constantly. It holds decisions and status for the rebrand.
 Durable project rules live in `CLAUDE.md`.
 
-Last updated: 2026-08-04
+Last updated: 2026-08-06
 Target: Las Vegas conference, mid-September 2026
 
 ---
@@ -57,6 +57,55 @@ Light stays on: article body content, state pages body content, FAQ body.
 Rationale: 70+ articles on dark backgrounds is a readability and dwell-time
 risk, and every existing inline image and chart in those articles assumes a
 light background.
+
+---
+
+## Approved visual reference
+
+**`docs/preview/homepage.html` is the approved visual reference for the
+rebrand.** Approved 2026-08-06. It is the standard every other page is built
+against.
+
+**Hero variant 1 was selected:** the split layout with the layered site
+assessment diagram. Variants 2 (typographic monolith) and 3 (immersive field
+scene) were rejected and have been deleted, along with the prototype hero
+switcher control, its CSS, and its JS. The file now contains only the approved
+design.
+
+Every other page must be built to match the prototype on four dimensions:
+
+1. **Section rhythm.** The band system and its vertical cadence: alternating
+   page, card, sunken, and navy bands on the `--space-section` scale, with
+   compressed `band--sm` strips used to demote secondary content rather than
+   giving every section equal weight.
+2. **Layering.** Elements that cross band boundaries instead of stacking flat.
+   The prototype has two: the proof card pulled up over the hero's bottom edge,
+   and the data card extending past the navy band onto the light band below.
+   Card-behind-card depth in the hero visual follows the same principle.
+3. **Motion.** Staggered entrance reveals driven by IntersectionObserver, and
+   the stat count-up. Both are gated behind the `is-motion` class that JS adds
+   only when JS runs and reduced motion is not requested, so nothing is ever
+   hidden when JS fails or reduced motion is set. Final values stay in the HTML.
+   Any new motion follows this same never-hide-by-default pattern.
+4. **Component treatment.** The button system with its on-dark gradient primary,
+   the eyebrow with its uppercase tracking, the silver display headings, the
+   card and border and shadow treatments, the icon stroke weight, and the
+   typographic category-color thumbnails that stand in for stock imagery.
+
+The prototype is self-contained by design: it imports nothing from `styles.css`
+and nothing imports it. Token values in its `:root` come from
+`docs/design-direction.md` and remain subject to the color decisions below.
+Treat the prototype as authoritative for layout, rhythm, layering, motion, and
+component treatment, not as the source of truth for color. Color still resolves
+through the tokens file once it exists.
+
+Photography slots are marked inline in the file as `PHOTO SLOT` comments. Each
+one names the designed no-photography fallback currently in place and the shot
+that would replace it. The fallbacks are complete work, not placeholders, so no
+page is blocked on photography.
+
+Inter is loaded from a CDN in the prototype only. The production build
+self-hosts the same variable font.
 
 ---
 
