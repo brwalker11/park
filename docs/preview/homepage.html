@@ -395,10 +395,9 @@ body[data-hero="c"] .hero-c{ display:block; }
   text-transform:uppercase; color:var(--text-inverse-1);
   box-shadow:var(--shadow-md); white-space:nowrap;
 }
-/* Each chip is anchored to a drawn feature via a leader line in the SVG:
-   lpr -> the blue entrance camera, solar -> the top perimeter light
-   fixture (one shared label for the pair), ev -> the green charging unit
-   and stalls. */
+/* Each chip is anchored to a drawn feature by proximity: lpr sits above
+   the blue entrance camera, solar above the top perimeter light fixture
+   (one shared label for the pair), ev beside the green charging stalls. */
 .chip-lpr{ top:26%; left:-4%; }
 .chip-solar{ top:16%; right:-4%; }
 .chip-ev{ top:57%; right:-4%; }
@@ -779,7 +778,7 @@ html.is-motion .reveal.in{
   /* three anchored labels are too dense at phone width: keep LPR enforcement
      (parking, the primary pillar) and Solar lighting (the green pillar);
      the EV stalls stay drawn, just unlabeled */
-  .chip-ev, .leader-ev{ display:none; }
+  .chip-ev{ display:none; }
   .chip-lpr{ left:-2%; }
   .chip-solar{ top:24%; right:-2%; }
   .bar-track{ height:160px; }
@@ -945,12 +944,6 @@ html.is-motion .reveal.in{
             <use href="#bolt" x="429" y="284" fill="#6DB133"/>
             <rect x="400" y="243" width="20" height="12" rx="3" fill="#0E2A52" stroke="#6DB133" stroke-width="1.5"/>
             <line x1="410" y1="255" x2="410" y2="262" stroke="#6DB133" stroke-width="1.5"/>
-            <!-- leader lines from feature to label -->
-            <g stroke="rgba(196,208,226,0.9)" stroke-width="1.5" stroke-linecap="round">
-              <line x1="397" y1="13" x2="448" y2="18"/>
-              <line class="leader-ev" x1="421" y1="249" x2="505" y2="216"/>
-              <line x1="38" y1="116" x2="34" y2="86"/>
-            </g>
           </svg>
         </div>
         <span class="assess-chip chip-lpr">LPR enforcement</span>
