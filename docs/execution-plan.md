@@ -5,6 +5,12 @@ Status: ACTIVE. Written 2026-08-05 (Wednesday) on `rebrand`, against
 documents are inputs and are not modified by this plan. Decisions listed under
 "Settled decisions" below are final and are not reopened here.
 
+Revised 2026-08-06 to match `REBRAND.md`: conference start confirmed Monday
+Sep 14, no solar shoot, and the Google Ads bidding switch recorded as unresolved
+and unlikely before the conference. The two documents agree; where both cover a
+subject, `REBRAND.md` holds the decision and this plan holds the schedule and
+method for carrying it out.
+
 ---
 
 ## Does the plan fit
@@ -20,8 +26,9 @@ two-day reskin instead of a redesign, the inline recolor is bundled into the
 same 148-page sweep as the header and footer so the site is swept once instead
 of twice, and the week of approval latency in the design document's schedule
 disappears because every flagged decision is already settled. Weekends, the
-final Friday, and a defined cut list at the week 3 checkpoint are the buffer.
-Nothing merges to `main` until merge day, Thursday Sep 10.
+final Friday, the two days recovered by the confirmed conference date
+(Sat Sep 12 and Sun Sep 13), and a defined cut list at the week 3 checkpoint
+are the buffer. Nothing merges to `main` until merge day, Thursday Sep 10.
 
 ---
 
@@ -42,8 +49,9 @@ instead: no new EV page, only a nav entry pointing at `/services/#ev` and
 light tidying of the EV block on the services hub. The solar lighting page is
 non-negotiable; it is the conference gap.
 
-Ownership: solar page copy and all photography are Ben. Everything else is
-Claude Code, directed by Ben.
+Ownership: solar page copy is Ben, as is sourcing any field stills. Everything
+else is Claude Code, directed by Ben. No photography is commissioned; see
+Task 1.
 
 Success criterion: the site is live and correct on production by the
 conference. There is no mid-flight demo; the preview URL only needs to be
@@ -53,13 +61,21 @@ presentable at the stakeholder review on Monday Sep 7.
 
 ## Calendar and capacity
 
-Today is Wednesday Aug 5. Assumed conference start: Saturday Sep 12 (5.5 weeks
-out; Ben confirms the exact date this week, decision 1 below). The site must
-be live and verified by Friday Sep 11, so merge day is Thursday Sep 10.
+Written Wednesday Aug 5. **Conference start is confirmed: Monday Sep 14.** The
+site must be live and verified by Friday Sep 11, so merge day is Thursday
+Sep 10. Both are unchanged from the original assumed start of Saturday Sep 12.
+
+The confirmed date recovers two calendar days, Sat Sep 12 and Sun Sep 13, which
+were previously conference days. They are held as schedule slack. Merge day was
+deliberately not moved to Friday Sep 11: a Friday merge would push any fix
+surfaced by the production soak into the weekend immediately before the
+conference, whereas merging Thursday keeps Friday as a working day for those
+fixes and leaves the weekend as genuine buffer. Nothing is scheduled into the
+recovered days.
 
 Working days available Aug 6 through Sep 11: 27. Scheduled implementation: 26
-days. Buffer: the unscheduled remainder of Friday Sep 11, all weekends, and
-the checkpoint cut list (worth 3 recoverable days).
+days. Buffer: the unscheduled remainder of Friday Sep 11, all weekends, the two
+recovered days, and the checkpoint cut list (worth 3 recoverable days).
 
 | Work item | Days |
 |---|---|
@@ -80,8 +96,9 @@ the checkpoint cut list (worth 3 recoverable days).
 | Merge week: fixes, freeze, pre-merge verification, merge, production checks | 3.5 |
 | **Total** | **26** |
 
-Ben's solar copy (2 to 3 days of writing) and all photography run in parallel
-and consume none of these 26 days.
+Ben's solar copy (2 to 3 days of writing) and the sourcing of existing field
+stills run in parallel and consume none of these 26 days. No shoot is scheduled,
+so nothing in the 26 days waits on photography.
 
 ---
 
@@ -122,11 +139,19 @@ This plan's handling, stated explicitly:
 
 ## Task 1: Photography plan
 
-Photography is the critical path with the longest lead time. Sources: the
-45-second field video in the repo (`images/home_video.mp4`, 1080p), the
-Dayton field footage referenced in project history (not in the repo; Ben
-locates and delivers it), and one new solar shoot (nothing in any existing
-footage covers solar lighting).
+**No shoot is planned and no photography is commissioned.** This was the
+longest-lead item in the original plan; that lead time is now gone. Every page
+ships in its designed fallback state, and any image that arrives is a swap-in
+upgrade. Remaining sources are existing material only: the 45-second field video
+in the repo (`images/home_video.mp4`, 1080p) and the Dayton field footage
+referenced in project history (not in the repo; Ben locates and delivers it).
+
+The solar lighting page has no photography dependency at all. It is designed
+typographically and is finished without images. Photos may be requested from
+ClearWorld through leadership, but they are an upgrade to a working page and
+carry two unresolved questions, vendor neutrality and usage rights, recorded in
+`REBRAND.md`. Until both are answered, supplier photography cannot be published,
+so no schedule slot depends on it.
 
 ### Shot list
 
@@ -134,14 +159,15 @@ footage covers solar lighting).
 |---|---|---|---|---|---|
 | 1 | Approach still | Homepage section 6 (approach, two-column) | A real site walk or install in progress on an actual client lot; a person or equipment in frame, not an empty lot | Landscape 16:10, min 1600px wide | Still pull: `home_video.mp4` or Dayton footage. Prefer Dayton, because the same hero video plays two sections above and a repeated frame reads as filler |
 | 2 | Parking pillar hero | `/services/parking-revenue/` hero, reused as a smaller crop on the services hub parking block | A monitored lot: camera, signage, or payment tech visible | 21:9, min 1600px wide | Still pull: `home_video.mp4` or Dayton footage |
-| 3 | Solar pillar hero | `/services/solar-lighting/` hero, reused on the services hub solar block | A solar lighting fixture on a lot pole; dusk or dark-sky framing is ideal because it drops straight into the navy scrim treatment | 21:9 or 16:10, min 1600px wide | **New shoot. No existing footage covers solar.** |
-| 4 | Solar install detail | `/services/solar-lighting/` body | Close or mid detail of the fixture or panel; establishes the service is real, not rendered | Landscape 16:10, min 1200px wide | New shoot, same session as #3 |
+| 3 | Solar pillar hero | `/services/solar-lighting/` hero, reused on the services hub solar block | ~~Solar fixture on a lot pole~~ | n/a | **STRUCK. No shoot. The page ships typographic; see the fallback table** |
+| 4 | Solar install detail | `/services/solar-lighting/` body | ~~Fixture or panel detail~~ | n/a | **STRUCK. Same decision as #3** |
 | 5 | Quote headshot | Homepage section 6, beside the named quote | Head-and-shoulders of the Eau Claire contact | Square, min 480px | Supplied by client; gated on permission |
 | 6 | og-image | Social cards site-wide | Navy `#010D20` field, gradient logo, wordmark | 1200x630 exactly | Built by Claude Code from existing brand assets. No photography needed |
 
-The services hub needs no shots of its own: it reuses crops of #2 and #3, and
-the EV block uses the icon and data-graphic treatment (no EV photography
-exists and none is being commissioned).
+The services hub needs no shots of its own: it reuses a crop of #2, takes the
+solar block from the solar page's typographic treatment, and gives the EV block
+the icon and data-graphic treatment. No EV photography exists and none is being
+commissioned.
 
 ### What existing footage plausibly covers
 
@@ -151,8 +177,8 @@ crop; that is answered this week, not in week 5: on Friday Aug 7 Claude
 exports three candidate frames, processes them through the full pipeline, and
 Ben judges them at size on the preview. The Dayton footage is the better
 source if it is higher quality or steadier; Ben delivers it by Friday Aug 14
-so its frames go through the same evaluation. #3 and #4 cannot come from any
-existing footage.
+so its frames go through the same evaluation. Nothing in either source covers
+solar lighting, which is one reason the solar page is designed to need none.
 
 ### Latest dates
 
@@ -160,7 +186,7 @@ existing footage.
 |---|---|---|
 | #1 Approach still | Fri Aug 28 | Wed Sep 2, end of day (placement day is Thu Sep 3) |
 | #2 Parking hero | Fri Aug 28 | Wed Sep 2, end of day |
-| #3, #4 Solar images | Fri Aug 28 (shoot complete by Thu Aug 27) | Wed Sep 2, end of day |
+| #3, #4 Solar images | **No date. Struck, no shoot** | n/a. If ClearWorld images ever arrive and clear the neutrality and rights questions, they are a post-conference swap |
 | #5 Headshot | Fri Aug 21 (with permission answer) | Wed Sep 2, end of day |
 | #6 og-image | n/a | Built Thu Sep 3 by Claude Code |
 
@@ -176,8 +202,8 @@ in its fallback state first so a missing image looks intentional.
 |---|---|
 | #1 Approach still | A data-graphic card on `--navy-900`: the Eau Claire compliance move (45 to 90 percent) drawn as a simple two-bar comparison with silver stat numerals and the `--gradient-brand` rule. Verified figures only. It does the same credibility job as the photo and matches the proof band visually. |
 | #2 Parking hero | Navy hero with a faint radial `--blue-deep` glow, the 178 percent figure in `--gradient-silver` display treatment, eyebrow and lede over it. Same pattern as the homepage CTA band, so it reads as a system, not a gap. |
-| #3 Solar hero | Same navy hero pattern with the green-scoped eyebrow and a large inline Lucide sun-and-pole icon composition at 15 percent opacity as the background motif. The page is designed dark-typographic-first; the photo upgrades it. |
-| #4 Solar detail | The slot collapses; the benefit grid extends to full width. No empty region remains. |
+| #3 Solar hero | **This is the shipping design, not a fallback.** Navy hero with the green-scoped eyebrow and a large inline Lucide sun-and-pole icon composition at 15 percent opacity as the background motif. Typographic by decision. |
+| #4 Solar detail | **Shipping design.** No slot exists; the benefit grid runs full width. Nothing is reserved for a later image. |
 | #5 Headshot | The quote renders as a typographic quote card with attribution line only; if permission itself is refused, the founder quote replaces it (decided fallback per the design document). No photo slot remains either way. |
 | #6 og-image | None needed; buildable from committed assets. |
 
@@ -209,7 +235,8 @@ Code.
 | Day | Item | Owner | Depends on | Verify | Days |
 |---|---|---|---|---|---|
 | Wed 5 | This plan; decision list issued to Ben | CC | none | n/a | 0 (today) |
-| Wed 5 | Decisions 1 to 3 (conference date, solar shoot, Ads switch request); send quote-permission request; start locating Dayton footage | BW | none | n/a | parallel |
+| Wed 5 | Decisions 1 to 3 issued (conference date, solar shoot, Ads switch request); send quote-permission request; start locating Dayton footage | BW | none | n/a | parallel |
+| Thu 6 | Decisions 1 and 2 answered: conference start confirmed Mon Sep 14; no solar shoot, solar page ships typographic. Decision 3 answered as unresolved: conversions below the 15 to 20 threshold, switch unlikely before the conference | BW | none | n/a | done |
 | Thu 6, Fri 7 | Pass 2a: single `:root` in `styles.css` with the full token set and scales, old names aliased, Inter variable woff2 files added at `assets/fonts/` with `@font-face` | CC | none | A (screenshot diff on 8 pages: pixel-identical except font rendering) + V spot check | 2 |
 | Fri 7 | Still feasibility test: three frames from `home_video.mp4` through the full pipeline, staged on preview for Ben | CC | none | V (Ben judges Mon) | inside 2a days |
 | Fri 7 | Solar copy outline started | BW | none | n/a | parallel |
@@ -242,10 +269,9 @@ Code.
 |---|---|---|---|---|---|
 | Mon 24, Tue 25 | Homepage rebuild days 2 and 3; verify | CC | week 3 | V (375 / 800 / 1280, seam overlap, scrim, proof band) | 2 |
 | Wed 26 | Services hub restructure: three pillar summary blocks, anchors preserved, EV block tidied with curated article links | CC | homepage patterns | V + A (anchor IDs unchanged) | 1 |
-| Thu 27 | Solar lighting page built from Ben's copy, fallback-first hero | CC | solar copy (hard gate Wed Aug 26) | V | 1 |
+| Thu 27 | Solar lighting page built from Ben's copy, typographic hero. Finished state on delivery; no image slot is held open | CC | solar copy (hard gate Wed Aug 26) | V | 1 |
 | Fri 28 | Parking-revenue pillar page (reuses the solar page's pillar pattern); nav items repointed from anchors to the two pillar pages | CC | solar page pattern | V + A (nav href grep across 148 pages) | 1 |
-| Thu 27 | Solar shoot completed | BW | shoot decision (Aug 7) | n/a | parallel |
-| Fri 28 | All photography delivered: solar images, approach still, parking hero selects | BW | shoot, footage evaluation | V | parallel |
+| Fri 28 | Stills delivered: approach still and parking hero selects, pulled from existing footage. No solar images, no shoot | BW | footage evaluation | V | parallel |
 
 ### Week 5: Mon Aug 31 to Fri Sep 4
 
@@ -253,24 +279,26 @@ Code.
 |---|---|---|---|---|---|
 | Mon 31, Tue 1 | Calculator minimal reskin: shared navy chrome already applied by Bundle B; this pass tokens the layout surfaces, navy results panel, report modal brought into the form system. No flow changes | CC | Bundle B | V (full calculator run-through, report page, page-load gtag event untouched) | 2 |
 | Wed 2 | Bundle C: remaining icon sweep (pseudo-element checkmarks, stray emoji outside the homepage) plus motion (single IntersectionObserver: section reveal, nav underline; `prefers-reduced-motion` gate). One template touch, one `npm run build`, 72 pages recommitted | CC | Bundle B | A (rebuild, guard hashes) + V (reduced-motion check) | 1 |
-| Thu 3 | Imagery placement (swap fallbacks for delivered stills), og-image built and verified in meta tags | CC | photography (Wed Sep 2 latest) | V + A (og meta grep) | 1 |
+| Thu 3 | Imagery placement (swap fallbacks for delivered stills, slots #1 and #2 only), og-image built and verified in meta tags. The solar page is not touched by this slot | CC | stills (Wed Sep 2 latest) | V + A (og meta grep) | 1 |
 | Fri 4 | QA day 1: full automated suite (guard hashes, legacy-blue grep, green-scope grep, contrast script over token pairs, alias-leak grep, `node --check`, rebuild determinism, `git diff` on `consultation/` must be empty), Lighthouse on homepage, one article, one state page | CC | all passes | A | 1 |
 | Fri 4 | Solar copy last-resort gate: if copy never arrived, the cut-down solar page (hero, three benefits, CTA band) is locked as shipping content | BW | n/a | n/a | decision |
 
-### Week 6: Mon Sep 7 to Fri Sep 11
+### Week 6: Mon Sep 7 to Fri Sep 11 (conference opens Mon Sep 14)
 
 | Day | Item | Owner | Depends on | Verify | Days |
 |---|---|---|---|---|---|
 | Mon 7 | QA day 2: visual matrix (pages listed in Task 5) at 375 / 800 / 1280, real devices; fix list executed. Stakeholder review opens on the preview URL | CC + BW | QA day 1 | V | 1 |
 | Tue 8 | Review feedback fixes. **Freeze at end of day Tue Sep 8.** After freeze, content-only fixes | CC | review | V | 1 |
-| Wed 9 | Pre-merge verification: guard hash suite final run; dry-run reverts of `187bfbd` and `3596d3d` on a scratch branch to surface `<head>` conflicts a day early; confirm Ads bidding switch status with Ben | CC | freeze | A | 1 |
-| Thu 10 | **Merge day**, per the REBRAND.md checklist: revert `187bfbd`, revert `3596d3d`, confirm Ads bidding, PR `rebrand` into `main`, merge, verify production tracking (GA4 collect, Ads conversion on `consultation/thank-you/`), verify robots meta is `index,follow`, delete the preview Access application, annotate GA4 and Ads | CC + BW | Wed 9 clean | A + V | 1 |
-| Fri 11 | Production soak: spot checks across the visual matrix on the live domain; buffer for anything found | CC | merge | V | 0.5 |
+| Wed 9 | Pre-merge verification: guard hash suite final run; dry-run reverts of `187bfbd` and `3596d3d` on a scratch branch to surface `<head>` conflicts a day early; record Ads bidding status with Ben and confirm which `/consultation/` option was taken | CC | freeze | A | 1 |
+| Thu 10 | **Merge day**, per the REBRAND.md checklist: revert `187bfbd`, revert `3596d3d`, record Ads bidding status (not a blocker), PR `rebrand` into `main`, merge, verify production tracking (GA4 collect, Ads conversion on `consultation/thank-you/`), verify robots meta is `index,follow`, delete the preview Access application, annotate GA4 and Ads | CC + BW | Wed 9 clean | A + V | 1 |
+| Fri 11 | Production soak: spot checks across the visual matrix on the live domain, then a full working day to fix anything the soak surfaces. Site is live, verified, and finished at end of day | CC | merge | V | 0.5 scheduled, full day available |
+| Sat 12, Sun 13 | **Slack. Nothing scheduled.** Recovered by the confirmed Mon Sep 14 start; held for overrun only | n/a | n/a | n/a | 0 |
 
 ### Rules the schedule enforces
 
-- Ben's solar work and all photography are parallel tracks; no CC day waits
-  on them because every dependent page is built fallback-first.
+- Ben's solar work and any still sourcing are parallel tracks; no CC day waits
+  on them because every dependent page is built fallback-first, and the solar
+  page takes no image at all.
 - Template touches happen exactly twice (Bundle B, Bundle C), each followed
   by `npm run build` with the 72 regenerated pages committed alongside.
 - The gtag gate (`187bfbd`) and noindex guard (`3596d3d`) are hash-verified
@@ -278,11 +306,26 @@ Code.
   and footer markup and the inline `<style>` blocks, never on the gated
   `<head>` region. Font preload links insert adjacent to the existing
   stylesheet preload, away from the guard blocks.
-- `/consultation/` is frozen. The unfreeze is a scheduled decision point at
-  the Friday Aug 21 checkpoint: if Google Ads bidding has switched off
-  Maximize Clicks by then, a one-day consultation token alignment MAY be
-  added to Wednesday Sep 2 using float; if not, the pages ship untouched and
-  their pass stays post-conference. No part of this plan assumes the switch.
+- `/consultation/` is frozen and stays frozen for scheduling purposes. The
+  conditional unfreeze that this plan previously attached to the Friday Aug 21
+  checkpoint is withdrawn: it was contingent on Google Ads bidding switching off
+  Maximize Clicks, and conversions are below the 15 to 20 threshold that switch
+  needs, so it is unlikely before the conference. No consultation work is
+  scheduled and no float is reserved for it.
+
+  The freeze decision itself is deferred and belongs to Ben, not to this
+  schedule. Three options are under consideration, recorded in `REBRAND.md`:
+  leave it frozen, rebrand it anyway and accept the data cost, or pause the
+  campaign during the change. Options 2 and 3 are each roughly one day of work
+  on two self-contained pages; if either is chosen before the freeze on Tuesday
+  Sep 8, it comes out of the recovered-day slack or the checkpoint cut list, and
+  the consultation entries in the verification suite (empty `git diff`) change
+  from an assertion to a reviewed diff.
+
+  Weight on the decision, since the schedule treats these pages as low priority
+  by default: `/consultation/` is the sole ad landing page and the only route to
+  a Calendly booking on the site, so leaving it un-rebranded means the one paid
+  landing page still looks like the old company during the conference.
 - Nothing merges to `main` before Thursday Sep 10.
 
 ### The week 3 checkpoint (Friday Aug 21, end of day)
@@ -325,7 +368,7 @@ Page-by-page (groups sum to the site's ~150 rendered pages):
 | Page group | Pages | In minimum? | What a visitor sees at minimum |
 |---|---|---|---|
 | Homepage | 1 | Yes, full rebuild | New chrome, navy hero, proof seam, What We Do cards, real Inter. The solar and EV cards link to `/services/` anchors if the pillar pages were cut |
-| Solar lighting page | 1 (new) | Yes, non-negotiable | At worst the cut-down form: navy hero, three benefits, CTA band. Fallback-first design, so no gaps |
+| Solar lighting page | 1 (new) | Yes, non-negotiable | At worst the cut-down form: navy hero, three benefits, CTA band. Typographic by decision, so no gaps and no photography dependency |
 | Generated articles | 72 | Yes, via sweep | Navy header, nav, footer; new palette and Inter; light article body unchanged. Reads as fully on-brand because chrome and palette carry the brand |
 | Hand-written article (`parking-today-small-lots`) | 1 | Yes, manual sweep edit | Same as generated articles. Its pre-existing rendering bug stays (per CLAUDE.md, not rebrand work) |
 | Video pages (`resources/videos/*`) | 30 | Yes, via sweep | New chrome and palette on the existing layout |
@@ -337,7 +380,7 @@ Page-by-page (groups sum to the site's ~150 rendered pages):
 | Calculator + report | 2 | Yes, reduced | New chrome and recolored payload on the existing layout. The layout underneath is dated; this is the most visible seam in the minimum (see below) |
 | Ask the Experts | 1 | Yes, via sweep | New chrome and recolored cards; page-level redesign was never in scope |
 | 404 | 1 | Yes, via sweep | New chrome |
-| Consultation pages | 2 | **No, by standing rule** | Old branding in full. Reached only by paid ads and direct links (noindex, zero internal links). Deliberate, documented, accepted |
+| Consultation pages | 2 | **No, by standing rule** | Old branding in full. Reached only by paid ads and direct links (noindex, zero internal links). Deliberate and documented, but note this is the sole ad landing page and the only Calendly route; the freeze decision is deferred and could still change this row |
 
 Internal consistency verdict: the minimum is consistent, not half-rebranded,
 because the three things a visitor reads as "the brand" (chrome, palette,
@@ -348,7 +391,10 @@ page shows the old blue next to the new navy. The two honest seams:
    recolored and re-chromed but not reskinned. Acceptable: it is consistent
    in color and chrome, and dated-but-coherent beats inconsistent.
 2. `/consultation/` shows the previous brand entirely. This is the standing
-   freeze and is invisible to organic and conference traffic.
+   freeze. It is invisible to organic traffic, but it is not invisible to paid
+   traffic: it is the only ad landing page and the only Calendly booking route,
+   so anyone arriving from an ad during the conference sees the old brand. That
+   is the substance of the deferred freeze decision.
 
 Neither seam produces the half-rebranded failure mode, so the minimum stands
 without adjustment.
@@ -466,11 +512,12 @@ checked on a real phone, not only in an emulator.
 
 | # | Risk | Trigger | Impact | Mitigation | Decision point |
 |---|---|---|---|---|---|
-| 1 | Photography does not materialise | Files absent at end of day Fri Aug 28 | Homepage approach section and pillar heroes ship typographic; the audit's "still flat, just darker" scenario | Fallback-first build means zero schedule impact; the fallbacks are designed data-graphic components, not empty panels. Feasibility test on Fri Aug 7 converts "will video stills work" from a week 5 surprise into a week 1 answer | Wed Sep 2: fallbacks lock as shipping state; later arrivals go post-conference |
+| 1 | Field stills do not materialise. **Scope narrowed: this no longer covers solar.** The solar page has no photography dependency, so the only exposure is the homepage approach still (#1) and the parking pillar hero (#2) | Files absent at end of day Fri Aug 28 | Homepage approach section and the parking hero ship typographic; the audit's "still flat, just darker" scenario, now limited to two slots | Fallback-first build means zero schedule impact; the fallbacks are designed data-graphic components, not empty panels. Feasibility test on Fri Aug 7 converts "will video stills work" from a week 5 surprise into a week 1 answer | Wed Sep 2: fallbacks lock as shipping state; later arrivals go post-conference |
+| 1b | Supplier photography arrives and cannot be used | ClearWorld sends images at any point | None to the schedule. The solar page is already finished without them | Neither the vendor-neutrality question nor the usage-rights question is resolved (`REBRAND.md`), so nothing is published without both answered and written permission on file. Treat arrivals as post-conference candidates | On arrival: hold. No page is edited to accommodate an image that has not cleared both questions |
 | 2 | Critical CSS defect causes visible regressions | Any payload group fails the styles.css-blocked first-paint check during Bundle B (Tue Aug 18 to Wed Aug 19) | FOUC on up to 119 pages | Recolor deletes nothing and writes literals, not `var()`; per-group verification and per-group revert; tokenization deferred entirely | Wed Aug 19: any failing group reverts and ships with old-value-free recolor retried; if a group cannot pass, it ships un-recolored inline (still coherent, colors then corrected post-conference) |
 | 3 | Solar page copy is late | Not delivered Fri Aug 21 | The single conference-critical new page slips | Grace to Wed Aug 26; then Claude drafts from Ben's outline Mon Aug 24 for Ben to edit; page is built fallback-first so late copy is a paste, not a rebuild | Fri Sep 4: cut-down solar page (hero, three benefits, CTA) locks as shipping content |
-| 4 | A pass breaks the gtag or noindex guards | Guard hash suite mismatch after any commit | Merge-day reverts of `187bfbd` / `3596d3d` conflict; worst case, production launches noindexed or untracked | Sweep scripts anchor on header/footer/inline-style regions, never the gated `<head>` blocks; hash suite after every sweep and Bundle D commit; dry-run reverts on a scratch branch Wed Sep 9 | Immediate on any mismatch: fix before the next commit. Wed Sep 9: dry-run must apply cleanly or Thu Sep 10 is spent resolving, using Fri Sep 11 as the soak day |
-| 5 | Google Ads bidding does not switch off Maximize Clicks | Not switched by Fri Aug 21 (first check) or Wed Sep 9 (final) | `/consultation/` stays frozen and dual-branded through the conference; a merge-day checklist item cannot be ticked | The plan never assumes the switch: consultation work is not scheduled, only optioned into Sep 2 float if the switch lands early. Ben files the request Fri Aug 7 so the lead time is 4 weeks, not 4 days | Fri Aug 21: optional consultation alignment goes in or stays out. Wed Sep 9: if unswitched, merge proceeds anyway with consultation untouched; that is already the accepted trade |
+| 4 | A pass breaks the gtag or noindex guards | Guard hash suite mismatch after any commit | Merge-day reverts of `187bfbd` / `3596d3d` conflict; worst case, production launches noindexed or untracked | Sweep scripts anchor on header/footer/inline-style regions, never the gated `<head>` blocks; hash suite after every sweep and Bundle D commit; dry-run reverts on a scratch branch Wed Sep 9 | Immediate on any mismatch: fix before the next commit. Wed Sep 9: dry-run must apply cleanly or Thu Sep 10 is spent resolving, using Fri Sep 11 as the soak day and the recovered weekend as the outer limit |
+| 5 | **Now the expected case, not a risk.** Google Ads bidding does not switch off Maximize Clicks before the conference, because conversions are below the 15 to 20 threshold the switch needs | Already true as of Thu Aug 6 | If `/consultation/` is left frozen: the sole ad landing page and the only Calendly booking route stays on the old brand through the conference, while every other page carries the new one | The plan never assumed the switch and schedules no consultation work. The residual exposure is a positioning decision, not a schedule one: the three options (leave frozen, rebrand anyway, pause the campaign) are recorded in `REBRAND.md` and belong to Ben | Deferred, no forced date. If an option is chosen it must land before the Tue Sep 8 freeze. Wed Sep 9 records the state; merge proceeds regardless |
 | 6 | Scope creep from leadership | Any new request after Fri Aug 21 | The 26-of-27-day schedule has no room for additions | Standing rule, agreed via this plan: post-checkpoint requests go to the post-conference backlog unless leadership names equal scope to remove. Ben enforces; the homepage comp on Tue Aug 11 exists partly to surface opinions early, while reacting is cheap | At each request, same day. The comp review Tue Aug 11 and the stakeholder review Mon Sep 7 are the two sanctioned feedback windows |
 | 7 | Bundle B overruns | Propagation not verified by end of day Thu Aug 20 | Everything downstream stacks behind the sweep; the checkpoint fails | Bundle B carries the project's only new interactive component (the dropdown), built and tested on two pages before propagation; the propagation itself is scripted against byte-identical chrome, which Pass 1 verified | Fri Aug 21 checkpoint: cut list executes, recovering 3 days |
 
@@ -488,7 +535,7 @@ exists so no cut later reads as an oversight.
 | Pass 2c tokenization, alias removal, duplicate-rule deletion in inline payloads | The inline payloads are critical CSS; tokenizing them structurally requires the deferred inline/linked refactor, and `var()` in critical CSS causes color flash | Backlog: post-conference pass with its own first-paint test harness |
 | Motion beyond section reveal and nav underline (stat count-up, per-child stagger, CTA glow animation) | Decision: one or two patterns. Motion polish is the first thing nobody at a booth misses | Backlog: motion pass with a written spec; `docs/motion-spec.md` is NOT being written before the conference |
 | Calculator redesign (flow, steps, report layout) | Decision: minimal reskin only (chrome, tokens, navy results panel, modal into the form system) | Backlog: calculator UX pass |
-| Consultation redesign | Standing freeze until Ads bidding switches; carries live conversion tracking | Own pass post-switch, reusing the token layer; the audit's open LP design questions get answered then |
+| Consultation redesign | Standing freeze; carries live conversion tracking. The Ads bidding switch that was to lift it is unlikely before the conference, and the freeze decision is deferred with three options open (`REBRAND.md`) | Own pass, reusing the token layer; the audit's open LP design questions get answered then. Brought forward only if Ben chooses to rebrand or to pause the campaign |
 | `ask-the-experts.html` URL migration and page-level redesign | Migration needs a `_redirects` entry (frozen file); the page-level design was never specced. Cards are recolored by the sweep | Backlog, already listed in REBRAND.md |
 | Article body image refresh and per-article OG images | Explicitly deferred by the design direction; dozens of embedded light-background assets | Backlog: content imagery pass |
 | CSP scoping fix | Post-Vegas per REBRAND.md; needs its own test cycle. Self-hosting Inter means typography cannot break when it lands | Backlog, already listed |
@@ -504,17 +551,25 @@ exists so no cut later reads as an oversight.
 
 ## Closing
 
-### Three decisions Ben must make this week
+### Three decisions Ben must make this week: answered Thu Aug 6
 
-1. **Confirm the conference start date**, which fixes merge day (planned
-   Thursday Sep 10) and the whole calendar. Needed by Friday Aug 8.
-2. **Commit to the solar photography plan**: name the shoot date (completing
-   by Thursday Aug 27), or explicitly accept the typographic solar page as
-   the shipping design. Needed by Friday Aug 8, because the shoot has the
-   longest lead time of anything in the plan.
-3. **File the Google Ads bidding-switch request** (off Maximize Clicks) with
-   whoever controls the account, so the four-week lead lands before merge
-   day rather than after it. Needed by Friday Aug 8.
+1. **Conference start date. ANSWERED: Monday Sep 14.** Merge day stays Thursday
+   Sep 10 and the calendar is fixed. The two days this recovers, Sat Sep 12 and
+   Sun Sep 13, are held as slack.
+2. **Solar photography. ANSWERED: no shoot.** The typographic solar page is the
+   shipping design, not a fallback. The longest lead time in the plan is
+   removed. ClearWorld may be asked for photos through leadership, but they are
+   an upgrade and are blocked behind two unresolved questions, vendor neutrality
+   and usage rights.
+3. **Google Ads bidding switch. UNRESOLVED, and unlikely before the
+   conference.** Conversions are below the 15 to 20 threshold the switch needs.
+   Nothing in this plan waits on it.
+
+**One decision remains open and is not on this plan's critical path:** what to
+do about `/consultation/`. Leave it frozen, rebrand it and accept the data cost,
+or pause the campaign during the change. Deferred, owned by Ben, and material
+because that page is the sole ad landing page and the only Calendly route. If
+an option is chosen, it must land before the Tuesday Sep 8 freeze.
 
 (Also due this week but not a decision: send the Eau Claire quote-permission
 request, so the answer exists by the Friday Aug 21 checkpoint.)
@@ -526,9 +581,10 @@ build, propagation, and verification), it contains the only new interactive
 component in the project (a keyboard-accessible dropdown that does not exist
 in today's simple-toggle `script.js`), it touches all 148 pages, the inline
 critical CSS, and the two guard regions in one operation, and every
-downstream pass stacks behind it. Photography is the likeliest thing to
-*slip*, but it has designed fallbacks and costs no schedule; a Bundle B
-overrun consumes the checkpoint cut list and compresses everything after it.
+downstream pass stacks behind it. This is now the only serious schedule risk
+left: photography was the other candidate, and removing the shoot removed it. A
+Bundle B overrun consumes the checkpoint cut list, then the recovered weekend,
+and compresses everything after it.
 That is why it gets the week 3 checkpoint, a tested-before-propagation
 script, and the first claim on weekend buffer.
 

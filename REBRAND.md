@@ -22,33 +22,30 @@ this says a pass is in progress, ask me for the result before proceeding.
 
 **Conference start is confirmed: Monday Sep 14 2026.** The execution plan was
 built on an assumed start of Saturday Sep 12, so the confirmed date recovers two
-calendar days, Sat Sep 12 and Sun Sep 13, which were previously conference days
-and are now pre-conference time.
+calendar days, Sat Sep 12 and Sun Sep 13, which were previously conference days.
+
+**Merge day stays Thursday Sep 10.** The recovered days are held as schedule
+slack, not spent on a later merge or a longer soak.
 
 | Item | Was (assumed Sat Sep 12 start) | Now (confirmed Mon Sep 14 start) |
 |---|---|---|
-| Freeze | End of day Tue Sep 8 | Unchanged, end of day Tue Sep 8 |
-| Pre-merge verification | Wed Sep 9 | Wed Sep 9, plus Thu Sep 10 |
-| **Merge day** | **Thu Sep 10** | **Fri Sep 11** |
-| Production soak | Fri Sep 11, half day | Sat Sep 12 and Sun Sep 13 |
-| Live and verified by | Fri Sep 11 | Sun Sep 13, before travel |
+| Freeze | End of day Tue Sep 8 | Unchanged |
+| Pre-merge verification | Wed Sep 9 | Unchanged |
+| **Merge day** | **Thu Sep 10** | **Unchanged, Thu Sep 10** |
+| Fri Sep 11 | Production soak, half day, last day before the conference | Working day: soak plus the fix window for anything the soak surfaces |
+| Sat Sep 12, Sun Sep 13 | Conference days | **Slack. Unallocated.** |
 
-How the two days are spent: Thursday Sep 10 returns to merge week as a full
-working day for fix-list and pre-merge work, and the soak moves off a half day
-on Friday onto the full weekend of Sep 12 and 13. Nothing earlier in the plan
-moves. Weeks 1 through 5 keep their existing dates, and the week 3 checkpoint
-stays Friday Aug 21.
+Rationale for holding Thursday: a Friday merge would push any fix surfaced by
+the soak into the weekend immediately before the conference. Merging Thursday
+keeps Friday as a working day for those fixes and leaves the weekend as genuine
+buffer rather than as scheduled work.
 
-Tradeoff accepted with the Friday merge: anything found in the soak gets fixed
-over a weekend rather than on a business day. The soak window is longer than
-before, so the exposure is a staffing question, not a time question. If a
-Friday merge is not wanted, the fallback is to keep merge day on Thursday Sep 10
-and bank both recovered days as buffer instead of as working time.
+The slack is not soak time and not a place to add scope. It exists to absorb
+overrun. Nothing is scheduled into Sat Sep 12 or Sun Sep 13, and the site is
+expected live, verified, and finished on Friday Sep 11 exactly as before.
 
-`docs/execution-plan.md` still carries the old assumed Saturday Sep 12 date, a
-Thursday Sep 10 merge day, and the "live and verified by Friday Sep 11" line in
-its Calendar and capacity section and its week 6 table. This file supersedes it
-on dates until that plan is revised.
+Nothing earlier in the plan moves. Weeks 1 through 5 keep their existing dates
+and the week 3 checkpoint stays Friday Aug 21.
 
 ---
 
@@ -58,9 +55,9 @@ on dates until that plan is revised.
 typographically and carries no photography dependency. The `PHOTO SLOT`
 fallbacks in the approved prototype are the shipping state for that page, not
 placeholders waiting on a shoot. Build it, verify it, and consider it finished
-without images. The Thursday Aug 27 shoot slot in `docs/execution-plan.md` is
-cancelled, and risk 1 in that document (photography does not materialise) no
-longer applies to the solar page.
+without images. `docs/execution-plan.md` is reconciled with this decision: the
+shoot slot is removed from its schedule, shots 3 and 4 are struck from its shot
+list, and its risk 1 no longer covers the solar page.
 
 Photos may be requested from ClearWorld through leadership. If any arrive they
 are an upgrade to a page that already works, never a dependency, and never a
