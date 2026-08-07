@@ -43,6 +43,43 @@ Individual scripts:
 `tools/build.js`, `tools/compress-images.js`, and `tools/seo-audit.js` exist but
 are not wired to any npm script. Do not run them without asking.
 
+### The sitemap side effect of `npm run build`
+
+`npm run build` runs `generate:sitemap`, so **every build rewrites
+`sitemap.xml` whether or not any article content changed.** Two separate
+mechanisms, worth knowing apart because only one is content-driven:
+
+1. **8 static routes** (`/`, `/about/`, `/ask-the-experts.html`, `/calculator/`,
+   `/contact/`, `/faq/`, `/resources/`, `/services/`) get `lastmod` set to
+   **today, unconditionally**, from `new Date()` at
+   `tools/update-sitemap.js:141`. These change on every single run.
+2. **State and video pages** derive `lastmod` from the **file mtime**
+   (`getFileModifiedDate`, `tools/update-sitemap.js:41`). Any sweep that
+   rewrites those files, even a one-line `<head>` insertion, moves their
+   `lastmod` to the sweep date.
+3. **Article entries are safe.** They take `lastmod` from the `date` or
+   `lastmod` field in `data/resources.json`, so they only move when the content
+   record moves.
+
+A measured example: the Inter activation pass (`38e017b`) touched 40 static and
+state pages and changed **71 of the 139** `lastmod` values, 8 unconditionally
+and 63 from mtime. The other 68 stayed put.
+
+**Rule during the rebrand:** after any rebuild, revert `sitemap.xml` unless
+article content actually changed.
+
+```bash
+git checkout -- sitemap.xml
+```
+
+The rebrand rewrites the `<head>` of nearly every page without changing what a
+reader sees. Letting that propagate into `lastmod` tells search engines the
+whole site changed on one day, which invites a full recrawl and devalues the
+signal on the pages that genuinely did change. `sitemap.xml` is on the
+do-not-touch list for exactly this reason; the freeze means "not as an
+incidental side effect of a rebuild," not that the file can never be updated
+when article content warrants it.
+
 **Generated output is committed to the repo.** After any change to
 `templates/article-index.html`, run `npm run build` and commit the regenerated
 pages in the same commit.

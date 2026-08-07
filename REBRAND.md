@@ -49,6 +49,40 @@ and the week 3 checkpoint stays Friday Aug 21.
 
 ---
 
+## Typography: COMPLETE
+
+**Inter is self-hosted and active site-wide as of commit `38e017b`.** This was
+the "font loading is inconsistent" problem: 117 files declared Inter, two loaded
+it, and the site rendered in the system UI font almost everywhere.
+
+What shipped:
+
+| Item | State |
+|---|---|
+| Font files | `assets/fonts/inter-v20-latin-roman.woff2` (73,016 bytes) and `inter-v20-latin-italic.woff2` (79,744 bytes). Inter v20 latin subset, `wght 100 900`, `opsz 14 32` |
+| License | `assets/fonts/OFL.txt`, SIL Open Font License 1.1, committed alongside the files as the license requires |
+| `@font-face` | Two rules, roman and italic, at the top of `styles.css`, `font-display: swap`. Replaced a `local()`-only rule that named no file and so resolved only for visitors with Inter already installed |
+| Preload | Roman file preloaded on the 113 pages that load `styles.css` through the async preload-onload pattern. The 34 synchronous pages are deliberately skipped; they discover the rule during the initial CSS parse |
+| `--font-sans` | Inter moved from sixth to first, in `css/article.css` and in **74 inline `:root` blocks** (73 article pages plus `templates/article-index.html`). The inline copy wins at first paint, so both had to move together |
+| Caching | `_headers` gains `/assets/*` at `max-age=31536000, immutable`. Font filenames carry the version, so this is safe. Also closes a gap where the brand PNGs had no cache header |
+
+Verified in a browser, not by grep: article body copy measured at 468.07px in
+the Inter stack against 454.18px in the same stack without Inter, which proves
+glyphs are rasterizing in Inter rather than the cascade merely resolving. One
+font request, confirming `crossorigin` on the preload is correct.
+
+**The two consultation pages are unchanged.** They are frozen, do not load
+`styles.css`, and still load Inter from Google Fonts. They remain the only pages
+on the site permitted to reference `fonts.googleapis.com` or
+`fonts.gstatic.com`. They move to the self-hosted files during their own pass,
+which is bound up with the deferred freeze decision above.
+
+Note for Pass 2b: the variable font makes `font-weight: 850` and `900` render as
+true instances rather than browser synthesis. Both were left in place
+deliberately and still consolidate to 800 in 2b.
+
+---
+
 ## Solar photography
 
 **Decided: no shoot is planned.** The solar lighting page is designed
@@ -431,6 +465,16 @@ Not rebrand work. Do not start any of these before the conference.
 - Vector logo redraw for print and embroidery.
 - Transparent versions of the tagline lockup and ClearWorld co-brand lockup.
 - `sitemap.xml` lists `/ask-the-experts.html`, which 308-redirects.
+- **Decide how `sitemap.xml` should be generated.** Two questions, one pass.
+  First, should `generate:sitemap` stay wired into `npm run build`, given that
+  every rebuild rewrites the file whether or not content changed. Second, and
+  the more substantive one, should `lastmod` be derived per URL from actual
+  content change rather than rewritten wholesale. Today 8 static routes take
+  `lastmod` from `new Date()` on every run and the state and video pages take it
+  from file mtime, so any `<head>` sweep moves dates on pages whose content is
+  untouched. Only the article entries, which read `data/resources.json`, behave
+  correctly. During the rebrand the workaround is to revert the file after each
+  rebuild; see the sitemap section in `CLAUDE.md`.
 - `docs/website-audit-action-plan.md:609` proposes a superseded `/manifest.json`
   at the repo root with a conflicting `theme_color: #2563eb`, and would send a
   reader to a 404. The shipped manifest is `images/site.webmanifest`.
