@@ -4,7 +4,7 @@ This file changes constantly. It holds decisions and status for the rebrand.
 Durable project rules live in `CLAUDE.md`.
 
 Last updated: 2026-08-06
-Target: Las Vegas conference, mid-September 2026
+Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ---
 
@@ -15,6 +15,101 @@ Findings below. Next up is Pass 2a, blocked on the canonical blue decision.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
+
+---
+
+## Schedule
+
+**Conference start is confirmed: Monday Sep 14 2026.** The execution plan was
+built on an assumed start of Saturday Sep 12, so the confirmed date recovers two
+calendar days, Sat Sep 12 and Sun Sep 13, which were previously conference days
+and are now pre-conference time.
+
+| Item | Was (assumed Sat Sep 12 start) | Now (confirmed Mon Sep 14 start) |
+|---|---|---|
+| Freeze | End of day Tue Sep 8 | Unchanged, end of day Tue Sep 8 |
+| Pre-merge verification | Wed Sep 9 | Wed Sep 9, plus Thu Sep 10 |
+| **Merge day** | **Thu Sep 10** | **Fri Sep 11** |
+| Production soak | Fri Sep 11, half day | Sat Sep 12 and Sun Sep 13 |
+| Live and verified by | Fri Sep 11 | Sun Sep 13, before travel |
+
+How the two days are spent: Thursday Sep 10 returns to merge week as a full
+working day for fix-list and pre-merge work, and the soak moves off a half day
+on Friday onto the full weekend of Sep 12 and 13. Nothing earlier in the plan
+moves. Weeks 1 through 5 keep their existing dates, and the week 3 checkpoint
+stays Friday Aug 21.
+
+Tradeoff accepted with the Friday merge: anything found in the soak gets fixed
+over a weekend rather than on a business day. The soak window is longer than
+before, so the exposure is a staffing question, not a time question. If a
+Friday merge is not wanted, the fallback is to keep merge day on Thursday Sep 10
+and bank both recovered days as buffer instead of as working time.
+
+`docs/execution-plan.md` still carries the old assumed Saturday Sep 12 date, a
+Thursday Sep 10 merge day, and the "live and verified by Friday Sep 11" line in
+its Calendar and capacity section and its week 6 table. This file supersedes it
+on dates until that plan is revised.
+
+---
+
+## Solar photography
+
+**Decided: no shoot is planned.** The solar lighting page is designed
+typographically and carries no photography dependency. The `PHOTO SLOT`
+fallbacks in the approved prototype are the shipping state for that page, not
+placeholders waiting on a shoot. Build it, verify it, and consider it finished
+without images. The Thursday Aug 27 shoot slot in `docs/execution-plan.md` is
+cancelled, and risk 1 in that document (photography does not materialise) no
+longer applies to the solar page.
+
+Photos may be requested from ClearWorld through leadership. If any arrive they
+are an upgrade to a page that already works, never a dependency, and never a
+reason to hold the page or leave a gap in the layout.
+
+Two questions are open and both must be answered before any supplier-provided
+photo goes on the site:
+
+1. **Vendor neutrality.** Positioning is technology-agnostic and ClearWorld is
+   not named as the provider. Supplier photography shows identifiable supplier
+   hardware, so publishing it risks reading as a ClearWorld product page even
+   without a credit line. Unresolved.
+2. **Usage rights.** No license, term, territory, or credit requirement has been
+   established for any ClearWorld image. Unresolved. Nothing gets published
+   without written permission on file.
+
+Until both are resolved, treat supplier photos as unusable, whatever arrives and
+whenever it arrives.
+
+---
+
+## Google Ads bidding and the `/consultation/` freeze
+
+**Unresolved.** Conversions are running below the 15 to 20 threshold the bidding
+switch needs, so the switch off Maximize Clicks is unlikely to happen before the
+conference. Every part of the plan that was conditioned on the switch should now
+be treated as not happening rather than as pending.
+
+**The `/consultation/` freeze decision is deferred.** Three options are under
+consideration and none is chosen:
+
+1. **Leave it frozen.** No visual change, no data disruption. The page ships
+   through the conference on the old brand.
+2. **Rebrand it anyway and accept the data cost.** The page matches the rest of
+   the site, at the cost of disturbing the conversion path while bidding is
+   still on Maximize Clicks.
+3. **Pause the campaign during the change.** Rebrand with no live traffic
+   crossing the change, at the cost of paused spend and a gap in the data.
+
+**Why this matters more than a normal frozen page:** `/consultation/` is the
+sole landing page for the ads, and it is the only route to a Calendly booking
+anywhere on the site. Leaving it un-rebranded means the one paid landing page,
+and the only booking path, still looks like the old company while every other
+page carries the new brand. Conference traffic arriving through an ad lands on
+the old design.
+
+Note also that the two consultation pages do not load `styles.css` and are
+fully self-contained, so they will not pick up any part of the rebrand
+incidentally. Whatever is decided has to be done deliberately.
 
 ---
 
@@ -210,8 +305,10 @@ Full report run on commit `e9248d1`. Key findings:
   deliberate visual change, needs sign-off on which blue wins.
 - **Pass 2c:** sweep inline `<style>` across 119 pages. Scriptable for the 45
   uniform ones, manual for the 4 bespoke.
-- **Consultation pages** deferred to their own pass, after Google Ads bidding is
-  switched off Maximize Clicks.
+- **Consultation pages** deferred to their own pass. This was gated on Google Ads
+  bidding switching off Maximize Clicks. That switch is now unlikely before the
+  conference and the freeze decision is deferred. See "Google Ads bidding and the
+  `/consultation/` freeze" above.
 
 **Sequencing note:** decide the canonical blue before writing any token, since
 every downstream decision depends on it.
@@ -266,8 +363,10 @@ These must stay until merge day. Do not remove without me asking.
   150-page revert, not a one-line change, and the same conflict warning applies
   to any rebrand commit that touches a gated page's `<head>`.
 - Cloudflare Access password on the preview URL
-- `/consultation/` visual changes on hold until Google Ads bidding is switched
-  off Maximize Clicks
+- `/consultation/` visual changes remain on hold. The original condition was the
+  Google Ads bidding switch off Maximize Clicks, which is now unlikely before the
+  conference. The hold stands until the freeze decision is made. Do not touch
+  these pages on the assumption that the switch is coming.
 
 ## Environment configuration
 
@@ -295,7 +394,10 @@ These must stay until merge day. Do not remove without me asking.
   `js/article.js`)
 - [ ] Revert commit `3596d3d` to remove the noindex guard (150 pages plus
   `js/article.js:149`)
-- [ ] Confirm Google Ads bidding already switched off Maximize Clicks
+- [ ] Confirm Google Ads bidding status. Do not treat this as a blocker. The
+  switch off Maximize Clicks is unlikely to have happened, and the merge proceeds
+  either way. Record the actual state and whichever `/consultation/` option was
+  taken
 - [ ] Merge `rebrand` into `main` via pull request, since direct push is blocked
 - [ ] Verify production tracking fires: GA4 collect requests and the Ads
   conversion on `consultation/thank-you/`
