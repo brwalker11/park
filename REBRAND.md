@@ -419,9 +419,14 @@ Not rebrand work. Do not start any of these before the conference.
 - `articles/parking-today-small-lots/index.html` rendering bug. No `content`
   field in its `resources.json` entry, so the runtime renders a not-found state
   over its own content.
-- Stale asset cleanup: nine dead stylesheets (four `.min`, four `critical/`, and
-  `css/style.css`), `postcss.config.js` with no npm script, `tools/build.js`
-  unwired, and `images/logo.png` at 1.2 MB referenced by nothing.
+- Stale asset cleanup: eight dead stylesheets (four `.min`, four `critical/`),
+  `postcss.config.js` with no npm script, `tools/build.js` unwired, and
+  `images/logo.png` at 1.2 MB referenced by nothing.
+
+  **Corrected 2026-08-07:** `css/style.css` was previously listed here as a
+  ninth dead stylesheet. It is not dead. `css/article.css:1` pulls it in with
+  `@import url('/css/style.css')`, so it loads on 103 pages. Deleting it would
+  have broken them. Removed from this list.
 - `images/Logo.svg` deletion once the header no longer references it.
 - Vector logo redraw for print and embroidery.
 - Transparent versions of the tagline lockup and ClearWorld co-brand lockup.

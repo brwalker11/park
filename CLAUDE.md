@@ -219,8 +219,15 @@ Never edit `_redirects` without asking. Existing 301s protect SEO equity.
 ### Stylesheets
 
 Authoritative stylesheets are `styles.css`, `css/article.css`,
-`css/resources.css`, and `css/state-map.css`. `css/style.css` is an orphan that
-nothing loads.
+`css/resources.css`, and `css/state-map.css`.
+
+**`css/style.css` is NOT an orphan.** This file previously documented it as one.
+It is pulled in by `@import url('/css/style.css')` at `css/article.css:1`, so it
+loads on the 103 pages that load `css/article.css`, which is every article page
+plus the resources hub. Corrected 2026-08-07 during the Inter activation pass.
+Do not list it as a deletion candidate and do not delete it without first
+removing that import and confirming nothing regresses. Note the `@import` also
+means it is fetched as a second, serialized request after `article.css` parses.
 
 Additionally, 119 of 150 pages carry inline `<style>` blocks in 15 distinct
 payloads, holding roughly half the site's CSS. `consultation/index.html` alone
@@ -234,12 +241,40 @@ that diverges from the other 148 pages.
 
 ### Typography
 
-Font loading is inconsistent. 117 files declare `font-family: Inter`, but the
-Google Fonts stylesheet is loaded from only two files: `consultation/index.html`
-and `consultation/thank-you/index.html`. The other 148 pages fall through to
-`ui-sans-serif`/`system-ui` unless the visitor has Inter installed locally. The
-site renders in the system UI font almost everywhere. This is pre-existing and
-must be resolved deliberately during the rebrand.
+**Inter is self-hosted and active as of 2026-08-07.** Two `@font-face` rules at
+the top of `styles.css` load the Inter variable font (latin subset, roman and
+italic, `wght 100 900`, `font-display: swap`) from `assets/fonts/`. Because 147
+of 149 rendered pages load `styles.css`, this reaches the site without per-page
+font declarations. See `assets/fonts/README.md` for source and license.
+
+What this replaced: `styles.css` previously carried an `@font-face` for Inter
+whose `src` was `local('Inter'), local('Inter-Regular')` only. It named no file,
+so it resolved only for visitors with Inter installed on the OS and was a no-op
+for everyone else. Every page declared Inter and almost none received it. Do not
+reintroduce a `local()`-only `src`.
+
+Two things that must stay true:
+
+1. **Inter must be first in every font stack.** `--font-sans` in
+   `css/article.css` previously listed Inter sixth, behind `ui-sans-serif` and
+   `system-ui`, so article body copy rendered in the system font even with the
+   webfont loaded. That token is duplicated into the inline `:root` of all 73
+   article pages, and the inline copy wins at first paint, so a fix in
+   `css/article.css` alone changes nothing on those pages. Both must move
+   together.
+2. **The consultation pages are exempt.** They are frozen, do not load
+   `styles.css`, and still load Inter from Google Fonts. They are the only pages
+   permitted to reference `fonts.googleapis.com` or `fonts.gstatic.com`. They
+   switch to the self-hosted files during their own deferred pass.
+
+The roman file is preloaded on the 113 pages that load `styles.css` through the
+async preload-onload pattern, where the `@font-face` is not discovered until
+after first paint. The 34 pages that load `styles.css` synchronously get no
+preload; the rule is discovered during the initial CSS parse there.
+
+`css/article.min.css` and `css/critical/critical-article.css` still carry the
+old Inter-sixth `--font-sans`. They are unloaded and out of scope per the
+minified-CSS rule.
 
 ## File Organization
 
@@ -251,7 +286,10 @@ rebrand, so they are listed in full.
 ├── index.html                  # Homepage
 ├── 404.html
 ├── ask-the-experts.html
-├── styles.css                  # MAIN GLOBAL STYLESHEET, loaded site-wide
+├── styles.css                  # MAIN GLOBAL STYLESHEET, loaded site-wide; holds the Inter @font-face
+├── assets/
+│   ├── brand/                  # Logo and mark PNGs
+│   └── fonts/                  # Self-hosted Inter variable woff2; see its README.md
 ├── script.js                   # Global JS (navigation, analytics)
 ├── robots.txt                  # Search engine directives
 ├── sitemap.xml                 # Generated from data/resources.json
@@ -263,7 +301,7 @@ rebrand, so they are listed in full.
 │   ├── article.css             # Article page styles
 │   ├── resources.css           # Resources listing page styles
 │   ├── state-map.css           # Interactive state map styles
-│   ├── style.css
+│   ├── style.css              # Loaded via @import at css/article.css:1. NOT an orphan
 │   ├── article.min.css         # See "Minified and critical CSS"
 │   ├── resources.min.css       # See "Minified and critical CSS"
 │   ├── state-map.min.css       # See "Minified and critical CSS"
