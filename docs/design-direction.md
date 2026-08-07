@@ -209,8 +209,25 @@ One flat scheme, as listed above: `--{family}-{step}` for primitives
 `--space-*`, `--font-*`. No `--mp-` prefix; there is no third-party CSS to
 collide with.
 
-The four existing schemes alias as follows during transition (Pass 2a ships
-these aliases so nothing breaks; they are removed after the Pass 2c sweep):
+**This table describes the post-2b end state, not Pass 2a.** Annotated
+2026-08-07. Read literally it collapses names that currently hold different
+values into a single target: `--brand` (`#0b6efd`), `--brand-blue` (`#0A68FF`),
+`--clr-accent` (`#2563eb`), and `--state-active` (`#0b6efd`) all point at
+`--blue`, whose target is `#004FC8`. Likewise `--state-inactive` (`#cbd5e1`)
+onto `--border-1` (`#E2E8F0`), `--state-hover` (`#0958d9`) onto `--blue-deep`
+(`#0043B3`), and `--radius` (`14px`) onto `--radius-lg` (`16px`). Shipping the
+table as written in 2a would recolour every `var(--brand)` use and the whole
+state map.
+
+Pass 2a is verified as **pixel-identical**, so it defines each new primitive at
+**today's** value and aliases the old names onto it. Where names collapse to one
+target at different values, 2a keeps them distinct behind temporary primitives.
+Pass 2b then retargets values one line at a time, and it is at that point that
+this table's mappings become true. Decision recorded in `REBRAND.md`.
+
+The four existing schemes alias as follows (Pass 2a ships the alias structure so
+nothing breaks; the values arrive in 2b; the aliases are removed after the Pass
+2c sweep):
 
 | Old name | Aliases to |
 |---|---|
@@ -229,6 +246,19 @@ these aliases so nothing breaks; they are removed after the Pass 2c sweep):
 | `--state-inactive` | `--border-1` |
 | `--state-bg` | `--surface-page` |
 | `--radius` (article.css, 14px) | `--radius-lg` (16px, at Pass 2b) |
+
+**Not covered by this table, and needed before 2a can run:** the whole of
+`css/resources.css`. `--res-muted`, `--res-chip`, and `--res-chip-active` map by
+value onto `--text-3`, `--border-1`, and `--blue`. `--res-bg` (`#0f172a`) does
+**not** map to `--text-1` despite the matching value: it is a dark **surface**,
+not text, and the target scheme has no light-scheme equivalent. `--res-card-radius`
+(`18px`) matches no radius step. Also unmapped: every non-colour token
+(`--space-*`, `--h1` to `--h3`, `--max-text`, `--max-w-article`, `--font-sans`),
+which carries across unchanged in 2a; scale rationalisation is 2b.
+
+`--font-sans` is written with `Inter` as the first family, matching the shipped
+`@font-face`. The `'InterVariable'` entry above is inert, since no font is
+served under that family name.
 
 The consultation pages' scheme (`--navy`, `--blue`, `--gray-*`) is NOT
 aliased or touched. Those pages are deferred to their own pass and remain

@@ -11,10 +11,16 @@
   --space-3: 1.5rem; /* 24px */
   --space-4: 2rem;   /* 32px */
   --space-6: 3rem;   /* 48px */
-  --clr-text: #0f172a;      /* slate-900 */
-  --clr-muted: #475569;     /* slate-600 */
-  --clr-accent: #2563eb;    /* blue-600 */
-  --clr-border: #e2e8f0;    /* slate-200 */
+  /* Colour now references the primitives in styles.css (Pass 2a).
+     The literal fallback is mandatory, not decorative: this file can be
+     applied while styles.css has not yet been, and a bare var() to a
+     missing primitive falls back to `inherit`, not to the right colour.
+     Each fallback must stay equal to its primitive; the Pass 2a
+     fallback-integrity check asserts that. */
+  --clr-text: var(--text-1, #0f172a);            /* slate-900 */
+  --clr-muted: var(--text-2, #475569);           /* slate-600 */
+  --clr-accent: var(--blue-accent-tmp, #2563eb); /* blue-600 */
+  --clr-border: var(--border-1, #e2e8f0);        /* slate-200 */
   --radius: 14px;
 }
 

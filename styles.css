@@ -1,12 +1,57 @@
 
+/* ===================================================================
+   TOKEN LAYER (Pass 2a)
+
+   This :root is the single source of truth for colour. The other three
+   stylesheets keep defining the names their own rules consume, but those
+   definitions now reference the primitives below.
+
+   Every primitive holds TODAY'S value. Pass 2a is verified as
+   pixel-identical; Pass 2b retargets values one line at a time.
+
+   Names ending -tmp exist only to keep apart values that the alias table
+   in docs/design-direction.md collapses. `grep -- -tmp` across the four
+   stylesheets returns exactly the set Pass 2b eliminates.
+   =================================================================== */
 :root{
-  --brand:#0b6efd;
-  --brand-blue:#0A68FF;
-  --ink:#0f172a;
-  --muted:#64748b;
-  --card:#ffffff;
-  --bg:#f8fafc;
-  --border:#e2e8f0;
+  /* --- Primitives: blue -------------------------------------------
+     Three distinct blues are in use today. They stay distinct here so
+     this pass changes nothing; 2b collapses them. */
+  --blue-brand:#0b6efd;       /* 2b -> #004FC8. 2c -> rename to --blue, once
+                                 the inline --blue on contact/ and calculator/
+                                 is gone. See REBRAND.md. */
+  --blue-alt-tmp:#0A68FF;     /* 2b -> folds into --blue-brand */
+  --blue-accent-tmp:#2563eb;  /* 2b -> folds into --blue-brand */
+  --blue-deep:#0958d9;        /* 2b -> #0043B3 */
+
+  /* --- Primitives: text ------------------------------------------- */
+  --text-1:#0f172a;
+  --text-2:#475569;
+  --text-3:#64748b;
+
+  /* --- Primitives: surface ---------------------------------------- */
+  --surface-page:#f8fafc;
+  --surface-card:#ffffff;
+  --surface-dark:#0f172a;     /* a dark SURFACE, not text. Same value as
+                                 --text-1 today but a different role, so it is
+                                 kept separate. 2b -> a --navy-* step. */
+
+  /* --- Primitives: border ----------------------------------------- */
+  --border-1:#e2e8f0;
+  --border-2-tmp:#cbd5e1;     /* 2b -> folds into --border-1 */
+
+  /* --- Aliases ----------------------------------------------------
+     Old names, so no selector needs editing in this pass. Same file as
+     the primitives, so no fallback is needed. Removed after Pass 2c. */
+  --brand:var(--blue-brand);
+  --brand-blue:var(--blue-alt-tmp);
+  --ink:var(--text-1);
+  --muted:var(--text-3);
+  --card:var(--surface-card);
+  --bg:var(--surface-page);
+  --border:var(--border-1);
+
+  /* --- Non-colour: carried across unchanged, scale work is Pass 2b - */
   --space-section:clamp(3.5rem,6vw,5.5rem);
   --space-block:clamp(1.25rem,3vw,2rem);
   --max-text:68ch;

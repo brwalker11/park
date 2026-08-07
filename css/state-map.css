@@ -1,11 +1,16 @@
+/* Colour references the primitives in styles.css (Pass 2a), with mandatory
+   literal fallbacks for the window in which this file is applied and
+   styles.css is not. --ink, --muted and --border are redefined here because
+   this file's own rules consume them; they resolve to the same values as the
+   aliases in styles.css. */
 :root {
-  --state-active: #0b6efd;
-  --state-hover: #0958d9;
-  --state-inactive: #cbd5e1;
-  --state-bg: #f8fafc;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
+  --state-active: var(--blue-brand, #0b6efd);
+  --state-hover: var(--blue-deep, #0958d9);
+  --state-inactive: var(--border-2-tmp, #cbd5e1);
+  --state-bg: var(--surface-page, #f8fafc);
+  --ink: var(--text-1, #0f172a);
+  --muted: var(--text-3, #64748b);
+  --border: var(--border-1, #e2e8f0);
 }
 
 /* Hero Section */

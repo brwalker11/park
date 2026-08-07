@@ -306,9 +306,14 @@ Full report run on commit `e9248d1`. Key findings:
 - Three competing brand blues in simultaneous use: `#007bff` (350 uses),
   `#0a68ff` (232), `#0b6efd` (175). 757 total occurrences of what should be one
   color. Canonical blue must be decided before any token work.
-- 175 distinct color values, 5310 occurrences. 36 custom properties across four
-  disconnected `:root` blocks, with 301 raw literals bypassing them. Roughly 63
-  percent of color usage ignores existing tokens.
+- 175 distinct color values, 5310 occurrences. **37** custom properties across
+  four disconnected `:root` blocks, with 301 raw literals bypassing them.
+  Roughly 63 percent of color usage ignores existing tokens.
+
+  **Corrected 2026-08-07:** this line read 36. The verified count is 37:
+  `styles.css` 13, `css/article.css` 12, `css/resources.css` 5,
+  `css/state-map.css` 7. `css/style.css` defines none. All 37 live in `:root`;
+  no stylesheet defines a custom property in any other selector.
 - Near-duplicate groups: 16 whites (1514 uses), 10 border greys (663), 5 inks
   (274), 96 distinct shadow values, 20 border-radius values.
 - Header and footer: 148 pages byte-identical, 2 bespoke consultation pages. 78
@@ -326,11 +331,173 @@ Full report run on commit `e9248d1`. Key findings:
 
 ---
 
+## Pass 2a: what shipped
+
+Twelve primitives in the `styles.css` `:root`, each at today's value:
+`--blue-brand`, `--blue-alt-tmp`, `--blue-accent-tmp`, `--blue-deep`,
+`--text-1`, `--text-2`, `--text-3`, `--surface-page`, `--surface-card`,
+`--surface-dark`, `--border-1`, `--border-2-tmp`. Seven aliases in the same
+file, fifteen cross-file references with literal fallbacks. No selector was
+edited, no inline payload was touched.
+
+### The `-tmp` convention
+
+`grep -- -tmp styles.css css/*.css` returns **exactly the set Pass 2b
+eliminates**, and nothing else. Three names carry it:
+
+| Name | Value | Why it exists | 2b |
+|---|---|---|---|
+| `--blue-alt-tmp` | `#0A68FF` | was `--brand-blue` | folds into `--blue-brand` |
+| `--blue-accent-tmp` | `#2563eb` | was `--clr-accent` | folds into `--blue-brand` |
+| `--border-2-tmp` | `#cbd5e1` | was `--state-inactive` | folds into `--border-1` |
+
+They exist only because the alias table collapses these onto targets that hold
+a different value, which cannot be done while the pass is pixel-identical. When
+the grep returns nothing, that part of 2b is finished.
+
+### Scheduled for 2c: rename `--blue-brand` to `--blue`
+
+The canonical blue could not be named `--blue` in 2a. `contact/index.html`,
+`contact/thank-you/index.html`, and `calculator/report/index.html` define
+`--blue: #1a73e8` in their body-level `<style>`, which permanently outranks
+`styles.css`. Simulated in a browser at the real cascade position: defining
+`--blue` in `styles.css` and aliasing `--brand` to it flipped `--brand` from
+`#0b6efd` to `#1a73e8` on those pages, reaching rendered output through
+`.skip-link` and `.footer-links a:hover`.
+
+**2c task, do not lose this:** when the inline payloads are rewritten and the
+colliding `--blue` definitions are removed, rename `--blue-brand` to `--blue`
+across `styles.css`, `css/resources.css`, and `css/state-map.css`. Until then
+the name stays. This is the one place the shipped token layer deviates from the
+naming scheme in `docs/design-direction.md`.
+
+### Token count goes UP in 2a, and that is expected
+
+2a adds 12 primitives and keeps all 22 old names as aliases, while the inline
+payloads keep every literal they had. Total token count therefore rises, and
+the diff reads as more complexity, not less.
+
+This is the intended shape. The simplification lands later: 2b removes the three
+`-tmp` primitives by collapsing values, and 2c removes the aliases and tokenises
+the inline payloads. Anyone reviewing the 2a diff expecting a reduction should
+read this paragraph first. A pass that reduced the count now would not be
+pixel-identical.
+
+---
+
+## Token layer findings, recorded before Pass 2a
+
+Established by read-only discovery on 2026-08-07, on `dc1b490`. Several of these
+constrain Pass 2a and Pass 2b directly.
+
+### 1. Four pages override `styles.css` permanently, from the body
+
+`contact/index.html`, `contact/thank-you/index.html`, `calculator/index.html`,
+and `calculator/report/index.html` each carry a **second** inline `<style>`
+block in the **body**, far below the `styles.css` link in the head. Being later
+in document order, it wins the cascade permanently. This is not a first-paint
+flash; it is the settled state.
+
+Verified in a browser on `/contact/`: `--muted` resolves to `#6b7280` and
+`--bg` to `#f7f8fb`, not the authoritative `#64748b` and `#f8fafc`.
+
+Consequences:
+
+- **The site renders two different greys today.** Any `styles.css` rule using
+  `var(--muted)` produces `#6b7280` on these four pages and `#64748b`
+  everywhere else. Pre-existing, not introduced by the rebrand.
+- **Pass 2a cannot change these pages by editing `styles.css`.** That is
+  convenient for pixel-identity: they are immune. Do not treat their unchanged
+  rendering as evidence the token layer works.
+- **Pass 2b and 2c must handle them explicitly.** Rewriting `var(--muted)` to
+  `var(--text-3)` inside `styles.css` would escape the inline override, because
+  the body block defines `--muted` but not `--text-3`. Those four pages would
+  silently change colour. Any such rewrite needs these pages checked by hand or
+  the body block updated in the same commit.
+
+### 2. Inline `--blue` is defined at two values under one name
+
+| Value | Pages |
+|---|---|
+| `#1a73e8` | `contact/`, `contact/thank-you/`, `calculator/report/` |
+| `#0b6efd` | `calculator/` |
+
+Both drive `.btn-primary`, so the same component renders in two different blues
+depending on which page it is on. `--blue-600` splits the same way, `#1557b0`
+against `#005CE6`.
+
+This is inline-only and has no authoritative counterpart, so it is not a Pass 2a
+conflict. It matters at **2c**, because `--blue` is also the name of the target
+canonical primitive. When the inline payloads are finally tokenised, these four
+definitions collide with the real `--blue` and must be renamed or removed rather
+than merged.
+
+### 3. Broken `@media` in the inline critical CSS on 39 pages
+
+The `@media` keyword is missing before the 768px breakpoint:
+
+```
+@media(max-width:1024px){...}}(max-width:768px){...}
+```
+
+The parser drops the entire block. Confirmed in a browser on `/contact/`: the
+first inline sheet exposes exactly one media query, `(max-width: 1024px)`, and
+the 768px rules are absent from the CSSOM.
+
+The dropped rules include `.nav-toggle{display:flex}` and the whole mobile nav
+panel, so **on narrow viewports the mobile nav is unstyled until `styles.css`
+arrives**, which on these pages is async.
+
+Affected: 33 state pages, plus `services/`, `resources/`, `faq/`, `contact/`,
+`about/`, and `articles/parking-today-small-lots/`. The 72 generated article
+pages are clean; the template does not carry the defect.
+
+**Assigned to Bundle B**, which already rewrites these payloads. The fix is
+inserting five characters. Pre-existing, and explicitly NOT Pass 2a work.
+
+**Warning for the Pass 2a verification:** the first-paint check with
+`styles.css` blocked will surface this and it will look like a regression the
+pass caused. It is not. Baseline it before 2a starts.
+
+### 4. Cross-file token references need literal fallbacks
+
+Pass 2a makes `styles.css` the single source for shared primitives, with the
+other stylesheets referencing them. That creates a load-order dependency, and
+the dependency is not safe bare.
+
+Measured browser behaviour: a custom property whose value is `var(--undefined)`
+becomes guaranteed-invalid, and the consuming declaration falls back to
+**inherit**, not to anything sensible. A probe with a red parent rendered
+`rgb(200,0,0)` where `#0f172a` was intended. The same probe written
+`var(--text-1, #0f172a)` resolved correctly.
+
+The window is real, and on some pages it is deterministic rather than a race:
+
+- `resources/states/{colorado,minnesota,texas,wisconsin}/index.html` load
+  `css/resources.css` **synchronously** while `styles.css` loads **async**. A
+  sync sheet blocks rendering; the async one applies whenever it lands. So
+  `resources.css` is guaranteed to be applied while `styles.css` may not be, on
+  every single load of those four pages.
+- Elsewhere it is a size race. `styles.css` is 40,661 bytes against
+  `css/article.css` at 13,234, so the smaller file can win on a congested link.
+- If `styles.css` ever fails outright, bare references turn a graceful
+  degradation into a visible colour regression.
+
+**Rule for 2a:** every cross-file reference carries a literal fallback equal to
+today's value, `var(--primitive, #literal)`. The fallback is a degradation
+value, playing the same role the inline critical CSS literals already play, not
+a second source of truth. A verification step asserts every fallback matches its
+primitive's current value so 2b cannot drift them apart silently.
+
+---
+
 ## Pass plan
 
-- **Pass 2a:** establish the token layer, no visual change. One `:root` in
-  `styles.css` as single source of truth, collapsing the four parallel naming
-  schemes with old names aliased. Verifiable as pixel-identical.
+- **Pass 2a:** COMPLETE. Token layer established, no visual change. One `:root`
+  in `styles.css` is the single source of truth for colour; the other three
+  stylesheets keep the names their own rules consume but reference the
+  primitives. 22 colour names collapsed onto 12 primitives, all at today's
+  values. Verified pixel-identical. Details below.
 - **Pass 2b:** consolidate near-duplicates. Resolve three blues to one, 16 whites
   to three, 10 greys to one, 96 shadows to four, 20 radii to four. Small
   deliberate visual change, needs sign-off on which blue wins.

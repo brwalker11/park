@@ -1,9 +1,13 @@
+/* Colour references the primitives in styles.css (Pass 2a). The literal
+   fallbacks are mandatory here in particular: the four state hub pages load
+   this file SYNCHRONOUSLY while styles.css loads async, so this file is
+   guaranteed to be applied while the primitives may not exist yet. */
 :root {
-  --res-bg: #0f172a;
-  --res-muted: #64748b;
-  --res-chip: #e2e8f0;
-  --res-chip-active: #0b6efd;
-  --res-card-radius: 18px;
+  --res-bg: var(--surface-dark, #0f172a);        /* dark surface, NOT --text-1 */
+  --res-muted: var(--text-3, #64748b);
+  --res-chip: var(--border-1, #e2e8f0);
+  --res-chip-active: var(--blue-brand, #0b6efd);
+  --res-card-radius: 18px;                       /* non-colour, unchanged */
 }
 
 .res-hero {
