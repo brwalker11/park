@@ -138,10 +138,18 @@
     container.appendChild(fragment);
   }
   function createFallbacks() {
+    // Category fallback colours, per docs/design-direction.md section 8.
+    // Kept in sync with the identical table in js/resources.js. The gradient
+    // id prefix below deliberately differs between the two files so the two
+    // scripts cannot collide on a DOM id.
+    // #0A7C6B was removed here: it is a teal-green on "Guides", which is not
+    // solar, EV or success content, and so violated the green-scoping rule.
+    // EV Charging is the one category permitted green, and was previously blue.
     const entries = [
-      ['Case Studies', '#273d9a', 'Case Study'],
-      ['Guides', '#0a7c6b', 'Guide'],
-      ['Articles', '#3b3a3f', 'Article']
+      ['Case Studies', '#0043B3', 'Case Study'],
+      ['Guides', '#0E2A52', 'Guide'],
+      ['Articles', '#071B38', 'Article'],
+      ['EV Charging', '#2D7A0E', 'EV Charging']
     ];
 
     return entries.reduce((acc, [key, color, label]) => {
