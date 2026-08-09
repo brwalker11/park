@@ -431,10 +431,146 @@ there would be one, on 113 pages, until Bundle B lands.
 changes colour once. This is a sequencing decision, not a technical dependency:
 2b-b itself is a handful of one-line value changes and could be run in minutes.
 
-Approved 2b-b targets: `--blue-brand` `#0b6efd` to `#004FC8`; `--blue-deep`
-`#0958d9` to `#0043B3`; the hero gradient to `--gradient-brand`; every `-tmp`
-primitive folded into its permanent counterpart and deleted. **A grep for `-tmp`
-must return zero afterwards.**
+### 2b-b scope, exactly
+
+**2b-b changes the value of 15 primitives, deletes 23 by folding, and does
+nothing else.** No literal is touched, no selector is edited, no new primitive is
+added. The lists below are the whole pass. `#004FC8` is `rgb(0,79,200)`, so every
+blue tint keeps its alpha and only changes base.
+
+**A. 15 primitives change value, names stay:**
+
+| Primitive | Old | New |
+|---|---|---|
+| `--blue-brand` | `#0b6efd` | `#004FC8` |
+| `--blue-deep` | `#0958d9` | `#0043B3` |
+| `--ok` | `#22c55e` | `#10B981` |
+| `--blue-tint-0` | `rgba(13,110,253,0)` | `rgba(0,79,200,0)` |
+| `--blue-tint-04` | `rgba(13,110,253,0.04)` | `rgba(0,79,200,0.04)` |
+| `--blue-tint-05` | `rgba(13,110,253,0.05)` | `rgba(0,79,200,0.05)` |
+| `--blue-tint-08` | `rgba(13,110,253,0.08)` | `rgba(0,79,200,0.08)` |
+| `--blue-tint-10` | `rgba(13,110,253,0.1)` | `rgba(0,79,200,0.1)` |
+| `--blue-tint-12` | `rgba(13,110,253,0.12)` | `rgba(0,79,200,0.12)` |
+| `--blue-tint-20` | `rgba(13,110,253,0.2)` | `rgba(0,79,200,0.2)` |
+| `--blue-tint-25` | `rgba(13,110,253,0.25)` | `rgba(0,79,200,0.25)` |
+| `--blue-tint-30` | `rgba(13,110,253,0.3)` | `rgba(0,79,200,0.3)` |
+| `--blue-tint-40` | `rgba(13,110,253,0.4)` | `rgba(0,79,200,0.4)` |
+| `--blue-tint-50` | `rgba(13,110,253,0.5)` | `rgba(0,79,200,0.5)` |
+| `--blue-tint-95` | `rgba(13,110,253,0.95)` | `rgba(0,79,200,0.95)` |
+
+**B. 23 primitives are deleted, every reference repointed:**
+
+The 13 `-tmp` names:
+
+| Deleted | Value now | Folds into |
+|---|---|---|
+| `--blue-alt-tmp` | `#0A68FF` | `--blue-brand` |
+| `--blue-accent-tmp` | `#2563eb` | `--blue-brand` |
+| `--blue-check-tmp` | `#0284c7` | `--blue-brand` |
+| `--blue-cta-tmp` | `#0b5fff` | `--blue-brand` |
+| `--blue-cta-inline-tmp` | `#2f6bff` | `--blue-brand` |
+| `--blue-inline-tmp` | `#1a73e8` | `--blue-brand` |
+| `--blue-ui-tmp` | `#007bff` | `--blue-brand` |
+| `--blue-hover-tmp` | `#005ce6` | `--blue-deep` |
+| `--blue-inline-deep-tmp` | `#1557b0` | `--blue-deep` |
+| `--blue-ask-tmp` | `#0856c9` | `--blue-deep` |
+| `--blue-hero-a-tmp` | `#1d4ed8` | `--gradient-brand` |
+| `--blue-hero-c-tmp` | `#1e40af` | `--gradient-brand` |
+| `--border-2-tmp` | `#cbd5e1` | `--border-1` |
+
+Plus 10 more that the `-tmp` grep does NOT catch (see the warning below):
+
+| Deleted | Value now | Folds into | Authority |
+|---|---|---|---|
+| `--blue-brand-tint-08` | `rgba(11,110,253,0.08)` | `--blue-tint-08` | becomes identical |
+| `--blue-brand-tint-12` | `rgba(11,110,253,0.12)` | `--blue-tint-12` | becomes identical |
+| `--blue-accent-tint-08` | `rgba(37,99,235,0.08)` | `--blue-tint-08` | becomes identical |
+| `--border-grey-2` | `#e5e7eb` | `--border-1` | 10 greys to one |
+| `--border-grey-3` | `#e6e8ee` | `--border-1` | 10 greys to one |
+| `--border-grey-4` | `#e6e9ee` | `--border-1` | 10 greys to one |
+| `--border-grey-5` | `#e6ebf2` | `--border-1` | 10 greys to one |
+| `--border-grey-6` | `#eef1f5` | `--border-1` | 10 greys to one |
+| `--neutral-700` | `#334155` | `--text-2` | design direction |
+| `--neutral-800` | `#1f2937` | `--text-2` | design direction |
+
+**Warning: `grep -- -tmp` is no longer a complete exit test for 2b-b.** It
+catches 13 of the 23 deletions. The three drifted tint tokens become
+byte-identical to their `--blue-tint-*` counterparts once the base moves, and
+the five border greys and two neutrals fold on design-direction authority
+rather than on a temporary-name marker. The exit test for 2b-b is this list,
+not the grep. The grep remains valid as a *necessary* check, not a sufficient
+one.
+
+### 2b-b is not yet fully mechanical: 23 primitives still lack a target
+
+The lists above are decided. These are not, and each needs a value before 2b-b
+can honestly claim to touch nothing outside a fixed list:
+
+- **12 pale blues:** `--blue-pale-2` through `-8`, `--blue-pale-bg`,
+  `--blue-pale-border`, `--blue-wash-1`, `--blue-wash-2`, `--blue-wash-border`.
+  The design direction supplies exactly one target, `--blue-wash` `#EFF6FF`, for
+  twelve current values. Collapsing 12 to 1 is a design decision, not a mapping.
+- **5 soft borders:** `--border-soft-10/18/20/30` and
+  `--border-soft-cbd5e1-70`. Slate alphas; `--border-dark` in the design
+  direction is for dark surfaces and does not apply.
+- **5 neutrals:** `--neutral-400`, `-600`, `-750`, `-850`, `-950`. Only `#334155`
+  and `#1F2937` have approved destinations; these five do not.
+- **`--surface-dark-alt`** `#1e2a3a`. Needs to become a specific `--navy-*` step.
+
+`--surface-sunken` already holds `#f1f5f9`, which matches the design direction
+target exactly, so it needs no change.
+
+The scrims (`--scrim-*`, 11) and slate tints (`--slate-*`, 5) are transparency
+effects, not brand colour, and go to 2b-2 with the shadows. They are correctly
+outside 2b-b.
+
+**So 2b-b as specified covers 15 value changes and 23 deletions. The remaining
+23 primitives need a decision first, or they stay at today's values and get
+picked up in 2b-2.** Either is defensible; leaving them is the smaller change
+and keeps 2b-b mechanical.
+
+### A verification gate silently stopped covering its subject
+
+The fallback-integrity checker written for 2a matched only
+`--name: var(--x, LITERAL)`, that is, custom-property *definitions* carrying a
+fallback. That was the whole surface at the time: 15 cross-file references, all
+of them in `:root`.
+
+2b-a moved the surface. Fallbacks now appear in ordinary declarations
+(`background: var(--blue-wash-1, #f0f9ff)`), and there are **106 of them**. The
+2a checker still ran, still reported PASS, and was **checking 15 of 106, about
+14 percent**. Nothing in its output said so; a passing gate looked like a
+passing gate.
+
+The extended checker covers every `var(--x, LITERAL)` in the four dependent
+files, asserts each fallback equals its primitive, and separately asserts no
+bare cross-file reference exists. It caught three real defects on first run:
+`--scrim-black-30`, `-55` and `-60` were referenced but never defined, which
+would have broken two gradients. Those came from hand edits made after the
+conversion script ran, exactly the case a script-only check misses.
+
+**Rule going forward: a gate written against a moving target must be
+re-verified against the new surface, not reused.** Before trusting any gate
+carried over from an earlier pass, confirm what it actually matches and print
+the count it checked. A gate that cannot say how much it inspected cannot be
+distinguished from one that inspected nothing.
+
+### Pre-existing bug found and fixed: EV articles mislabelled
+
+`js/related.js` built its `DEFAULT_IMAGES` table from three categories, omitting
+`EV Charging`, while `js/resources.js` had all four. Both files then run
+`clone.category && DEFAULT_IMAGES[clone.category] ? clone.category : 'Articles'`.
+
+Because `DEFAULT_IMAGES['EV Charging']` was undefined in `related.js`, **all
+nine EV Charging articles were relabelled "Articles"** in the related-articles
+rail on every article page. The category tag rendered wrong and the
+same-category ranking in `pickRelated()` scored them against the wrong bucket.
+
+Fixed in `2d677a1` by adding the missing entry. **Pre-existing and unrelated to
+the rebrand**; it was found only because 2b-a reconciled the two drifted tables.
+The colour half of that reconciliation renders nothing today, since every
+`resources.json` entry has a thumbnail and the fallback SVGs never build, but
+the category half was always visible.
 
 ### What 2b-a deferred rather than decided
 
