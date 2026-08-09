@@ -385,6 +385,72 @@ pixel-identical.
 
 ---
 
+## Pass 2b-a: COMPLETE at `2d677a1`
+
+229 raw colour literals converted to `var()` references across the five
+authoritative stylesheets. **Zero raw colour literals remain in any rule.**
+Every primitive holds the exact value its literal held, so the pass is verified
+pixel-identical; 2b-b moves the values.
+
+The `styles.css` `:root` grows from 12 primitives to 98. That is the intended
+shape and it reverses later: 12 names end in `-tmp` and are deleted at 2b-b when
+values collapse; the aliases go at 2c.
+
+**Out of scope by design:** `box-shadow` and `text-shadow` colours, 52
+declarations, all byte-identical to the previous commit. They move with the rest
+of the geometry work in 2b-2.
+
+### Pass 1 undercounted the blues by a factor of four
+
+Pass 1 recorded three brand blues. **The real count is eleven** solid blues:
+`#0b6efd`, `#007bff`, `#0a68ff`, `#2563eb`, `#0958d9`, `#005ce6`, `#0b5fff`,
+`#1d4ed8`, `#1e40af`, `#0856c9`, `#2f6bff`, plus `#1a73e8` and `#1557b0` in
+`styles.css` and a dead `#0B63F6` (now removed).
+
+**The largest single group is `rgba(13,110,253,…)` at 25 occurrences across 12
+alpha steps, and it has no solid counterpart anywhere on the site.** It is
+Bootstrap blue surviving only in transparency. A second, drifted base
+`rgba(11,110,253,…)` accounts for 6 more. Neither would have been found by
+grepping for the three solid blues Pass 1 named.
+
+All of them are now tokens, which is what makes 2b-b a value-only edit.
+
+### 2b-b is BLOCKED on Bundle B, not on anything technical
+
+**1,208 old-blue occurrences live in inline `<style>` payloads across 118
+pages.** Against 88 in the stylesheets, that means 2b-a and 2b-b together reach
+roughly 7 percent of the site's blue. The rest is critical CSS and is
+unreachable until Bundle B's scripted literal recolor.
+
+Because the inline payloads are what paints first, retargeting the primitives
+now would make every async page paint old blue and then repaint to new blue on
+every load. Today the two agree and there is no colour flash; after 2b-b alone
+there would be one, on 113 pages, until Bundle B lands.
+
+**So 2b-b ships in the same session as Bundle B's inline recolor.** The site
+changes colour once. This is a sequencing decision, not a technical dependency:
+2b-b itself is a handful of one-line value changes and could be run in minutes.
+
+Approved 2b-b targets: `--blue-brand` `#0b6efd` to `#004FC8`; `--blue-deep`
+`#0958d9` to `#0043B3`; the hero gradient to `--gradient-brand`; every `-tmp`
+primitive folded into its permanent counterpart and deleted. **A grep for `-tmp`
+must return zero afterwards.**
+
+### What 2b-a deferred rather than decided
+
+`#0284c7`, `#94a3b8`, `#4a5568`, `#374151`, `#0b0b0b`, `#1e2a3a` and the white
+and black alpha scrims have no approved target in `docs/design-direction.md`.
+They were tokenised at their current values under descriptive names rather than
+folded into brand colours on a value match. The naming records the intent
+(`--blue-check-tmp` folds into `--blue-brand`; `--neutral-*` and `--scrim-*`
+await 2b-2). No brand value was invented.
+
+`--surface-dark` and `--text-1` remain separate despite both holding `#0f172a`;
+the conversion routes `#0f172a` by role, to `--surface-dark` on background,
+fill, border and outline, and to `--text-1` on text.
+
+---
+
 ## Token layer findings, recorded before Pass 2a
 
 Established by read-only discovery on 2026-08-07, on `dc1b490`. Several of these
@@ -498,9 +564,14 @@ primitive's current value so 2b cannot drift them apart silently.
   stylesheets keep the names their own rules consume but reference the
   primitives. 22 colour names collapsed onto 12 primitives, all at today's
   values. Verified pixel-identical. Details below.
-- **Pass 2b:** consolidate near-duplicates. Resolve three blues to one, 16 whites
-  to three, 10 greys to one, 96 shadows to four, 20 radii to four. Small
-  deliberate visual change, needs sign-off on which blue wins.
+- **Pass 2b:** split into three, because colour is verifiable by resolved value
+  while geometry moves layout on 150 pages and the two cannot be told apart if
+  bundled.
+  - **2b-a: COMPLETE at `2d677a1`.** Convert colour literals to tokens, values
+    unchanged, pixel-identical.
+  - **2b-b: BLOCKED, not started.** Retarget the values. See below.
+  - **2b-2:** geometry. Shadows, radii, container widths, breakpoints, and the
+    neutral-scale decisions 2b-a deferred.
 - **Pass 2c:** sweep inline `<style>` across 119 pages. Scriptable for the 45
   uniform ones, manual for the 4 bespoke.
 - **Consultation pages** deferred to their own pass. This was gated on Google Ads
