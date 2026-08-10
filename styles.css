@@ -147,6 +147,31 @@
   --slate-tint-10:rgba(15,23,42,0.1);
   --slate-tint-82:rgba(15,23,42,0.82);
 
+  /* --- Chrome primitives, at their settled design-direction values ---
+     Additive. Every name here is new, so none of these touch the Pass 2b-b
+     list of 15 retargets and 23 deletions; that list is unchanged.
+
+     The chrome therefore ships at its FINAL colour in this commit while the
+     rest of the site is still on the old blue until commits 3 and 4. That
+     mismatch is expected and never deploys: commits 2, 3 and 4 push
+     together. */
+  --navy-950:#010D20;
+  --navy-900:#071B38;
+  --navy-800:#0E2A52;
+  --text-inverse-1:#F8FAFC;
+  --text-inverse-2:#C4D0E2;
+  --text-inverse-3:#8FA3C0;
+  --border-dark:rgba(143,163,192,0.22);
+  --blue-bright:#0B80F9;
+  --blue-sky:#4DA3FF;
+  --green-500:#6DB133;
+  --green-700:#2D7A0E;
+  --gradient-brand:linear-gradient(135deg,#0B80F9 0%,#004FC8 60%,#0043B3 100%);
+  --scrim-white-08:rgba(255,255,255,0.08);
+  --scrim-white-35:rgba(255,255,255,0.35);
+  --shadow-lg:0 4px 12px rgba(1,13,32,0.08),0 16px 40px rgba(1,13,32,0.14);
+  --shadow-brand:0 8px 24px rgba(0,79,200,0.28);
+
   /* --- Aliases ----------------------------------------------------
      Old names, so no selector needs editing in this pass. Same file as
      the primitives, so no fallback is needed. Removed after Pass 2c. */
@@ -198,7 +223,7 @@ body{
   font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   margin:0;background:var(--bg);color:var(--ink);line-height:1.75;
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-  scroll-padding-top:120px;
+  scroll-padding-top:88px;
 }
 
 /* Skip navigation link for keyboard accessibility (WCAG 2.1 Level A) */
@@ -247,95 +272,226 @@ body{
   margin-left:auto;
   margin-right:auto;
 }
-/* ===== Base Header & Navigation ===== */
+/* ===== Site chrome: navy header and nav =====
+   Built to docs/preview/homepage.html, the approved visual reference.
+   The first-paint subset of these rules is duplicated into the inline
+   critical payload on the 114 pages that carry one; this file holds the
+   full set, including hover, focus and the disclosure panels. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--surface-card);
-  box-shadow: 0 1px 0 rgba(0,0,0,.08);
+  background: var(--navy-950);
+  border-bottom: 1px solid var(--border-dark);
 }
 
 .site-header .header-inner {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
-  height: 120px;
-  padding: 0 40px;
+  height: 72px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 32px;
+}
+
+@media (min-width: 769px) {
+  .site-header .header-inner { padding: 0 24px; }
 }
 
 .site-header .brand {
   display: inline-flex;
   align-items: center;
+  flex: none;
 }
 
 .site-header .logo {
-  height: 90px;
+  height: 44px;
   width: auto;
   display: block;
 }
 
-.site-header nav {
+/* Inline SVG icon system, used by the nav chevrons */
+.site-header .icon,
+.site-footer .icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.site-header .icon--sm,
+.site-footer .icon--sm { width: 14px; height: 14px; }
+
+/* ===== Primary nav ===== */
+.site-header .site-nav {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 8px;
+  margin-right: auto;
 }
 
-.site-header nav a {
-  font-size: 18px;
-  color: var(--neutral-950);
-  text-decoration: none;
+.site-header .nav-item { position: relative; }
+
+.site-header .nav-link,
+.site-header .nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  position: relative;
+  font-family: inherit;
+  font-size: 1rem;
   font-weight: 500;
+  color: var(--text-inverse-2);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.site-header nav a:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.site-header .nav-link::after,
+.site-header .nav-trigger::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+  height: 2px;
+  background: var(--gradient-brand);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
 }
 
-.site-header nav a.contact-btn {
-  border: 3px solid var(--blue-ui-tmp);
-  color: var(--blue-ui-tmp);
-  background: var(--surface-card);
-  padding: 10px 26px;
+.site-header .nav-link:hover,
+.site-header .nav-trigger:hover,
+.site-header .nav-trigger[aria-expanded="true"] { color: var(--text-inverse-1); }
+
+.site-header .nav-link:hover::after,
+.site-header .nav-trigger:hover::after,
+.site-header .nav-trigger[aria-expanded="true"]::after { transform: scaleX(1); }
+
+.site-header .nav-trigger .icon--sm { transition: transform .2s ease; }
+.site-header .nav-trigger[aria-expanded="true"] .icon--sm { transform: rotate(180deg); }
+
+/* ===== Disclosure panels =====
+   `hidden` is both the closed state and the no-JS state, so the attribute
+   selector has to beat every display rule that precedes it. */
+.site-header .nav-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 280px;
+  padding: 12px;
+  background: var(--navy-900);
+  border: 1px solid var(--border-dark);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  z-index: 1001;
+}
+
+.site-header .nav-panel[hidden] { display: none; }
+
+.site-header .nav-panel a {
+  display: block;
+  padding: 10px 12px;
   border-radius: 12px;
+  color: var(--text-inverse-2);
+  text-decoration: none;
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.site-header .nav-panel a:hover,
+.site-header .nav-panel a:focus-visible {
+  background: var(--navy-800);
+  color: var(--text-inverse-1);
+}
+
+.site-header .nav-panel a.scope-green:hover,
+.site-header .nav-panel a.scope-green:focus-visible { color: var(--green-500); }
+
+/* ===== Header and footer buttons =====
+   Scoped to the chrome on purpose. The site has two competing button systems
+   already (.btn-primary and .cta); this third one is not being let loose into
+   page bodies during the rebrand. */
+.site-header .btn,
+.site-footer .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
   font-weight: 600;
-  transition: background .25s, color .25s, box-shadow .25s;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease,
+              box-shadow .15s ease, background-position .3s ease;
 }
 
-.site-header nav a.contact-btn:hover {
-  background: var(--blue-ui-tmp);
+.site-header .btn--sm,
+.site-footer .btn--sm { height: 40px; padding: 0 16px; font-size: .9375rem; }
+
+.site-header .btn--primary,
+.site-footer .btn--primary {
+  background-image: var(--gradient-brand);
+  background-size: 150% 150%;
+  background-position: 0% 0%;
   color: var(--surface-card);
-  box-shadow: 0 2px 10px rgba(0,123,255,.25);
+  box-shadow: var(--shadow-brand);
 }
 
-/* Responsive polish */
-@media (max-width: 1024px) {
-  .site-header .header-inner {
-    height: 100px;
-    padding: 0 24px;
-  }
-  .site-header .logo { height: 75px; }
-  .site-header nav { gap: 28px; }
+.site-header .btn--primary:hover,
+.site-footer .btn--primary:hover { background-position: 100% 100%; }
+
+.site-header .btn--secondary,
+.site-footer .btn--secondary {
+  background: transparent;
+  color: var(--surface-card);
+  border: 1.5px solid var(--scrim-white-35);
 }
 
-@media (max-width: 768px) {
-  .site-header .header-inner {
-    height: auto;
-    padding: 16px 20px;
-  }
-  .site-header .logo { height: 64px; }
+.site-header .btn--secondary:hover,
+.site-footer .btn--secondary:hover { background: var(--scrim-white-08); }
+
+.site-header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
 }
 
-/* ===== Hamburger Toggle Button ===== */
+/* Focus rings on the navy chrome need the light treatment */
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline: 2px solid var(--surface-card);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== Hamburger toggle ===== */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
+  margin-left: auto;
   z-index: 1001;
   flex-direction: column;
   justify-content: center;
@@ -346,7 +502,7 @@ body{
   display: block;
   width: 24px;
   height: 2.5px;
-  background: var(--ink);
+  background: var(--text-inverse-1);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -362,52 +518,79 @@ body{
   transform: translateY(-7.5px) rotate(-45deg);
 }
 
-/* ===== Mobile Navigation ===== */
+/* 769 to 1024: keep the bar, drop the Calculator button */
+@media (max-width: 1024px) {
+  .site-header .header-actions .btn--calc { display: none; }
+}
+
+/* The desktop-only CTA row inside the mobile sheet */
+@media (min-width: 769px) {
+  .site-header .mobile-actions { display: none; }
+}
+
+/* ===== Mobile navigation ===== */
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: flex;
-  }
+  .nav-toggle { display: flex; }
+
+  .site-header .header-inner { height: 64px; position: relative; }
+  .site-header .logo { height: 38px; }
 
   .site-header .site-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--surface-card);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
-    flex-direction: column;
-    padding: 16px 20px 24px;
-    gap: 0;
-    border-top: 1px solid var(--border);
+    position: fixed;
+    inset: 64px 0 0 0;
     z-index: 999;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 24px 20px 48px;
+    overflow-y: auto;
+    background: var(--navy-950);
   }
 
-  .site-header .site-nav.open {
-    display: flex;
-  }
+  .site-header .site-nav.open { display: flex; }
 
-  .site-nav a {
-    padding: 12px 0;
+  .site-header .nav-item { border-bottom: 1px solid var(--border-dark); }
+
+  .site-header .nav-link,
+  .site-header .nav-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px 4px;
     font-size: 1.0625rem;
-    border-bottom: 1px solid var(--border);
   }
 
-  .site-nav a:last-child {
-    border-bottom: none;
+  .site-header .nav-link::after,
+  .site-header .nav-trigger::after { display: none; }
+
+  /* Panels render inline as an accordion rather than absolutely positioned.
+     Hover never opens them at this width; the JS does not bind it. */
+  .site-header .nav-panel {
+    position: static;
+    min-width: 0;
+    padding: 0 0 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .site-nav a.contact-btn {
-    margin-top: 12px;
-    border: 2px solid var(--blue-ui-tmp);
-    border-bottom: 2px solid var(--blue-ui-tmp);
-    text-align: center;
-    padding: 12px 24px;
+  .site-header .nav-panel a:hover { background: var(--navy-900); }
+
+  .site-header .header-actions { display: none; }
+
+  .site-header .site-nav .mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 32px;
   }
 
-  .site-header .header-inner {
-    position: relative;
-  }
+  .site-header .site-nav .mobile-actions .btn { width: 100%; }
+
+  body.nav-open { overflow: hidden; }
 }
 h1{font-size:var(--h1);line-height:1.15;margin:0 0 1.25rem 0;letter-spacing:-.02em}
 h2{font-size:var(--h2);line-height:1.25;margin:0 0 1rem 0}
@@ -710,18 +893,123 @@ ul{padding-left:18px;margin:0 0 8px 0}
 #contact input,#contact select,#contact textarea{width:100%;padding:12px 12px}
 #contact .btn-primary{margin-top:12px}
 
-footer,
+/* The bare `footer` element selector was dropped when the chrome sweep
+   renamed every site footer from .footer to .site-footer. It would otherwise
+   apply to the new navy footer and fight it on padding, colour and alignment.
+   The .footer class rules stay for any page-body footer that still uses it. */
 .footer{padding:24px 0;border-top:1px solid var(--scrim-black-08);color:var(--muted);text-align:center}
-footer .container,
 .footer .container{display:flex;flex-direction:column;align-items:center}
-footer .footer-note,
 .footer .footer-note,
-footer .footer__legal,
 .footer .footer__legal,
-footer .small,
 .footer .small{opacity:0.7;font-size:0.9rem;text-align:center}
-.footer-social{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:12px;margin-top:8px;opacity:0.7}
-.footer-social a{color:inherit;display:inline-flex;align-items:center}
+
+/* ===== Site chrome: navy footer ===== */
+.site-footer {
+  background: var(--navy-950);
+  color: var(--text-inverse-2);
+  border-top: 1px solid var(--border-dark);
+  padding: 96px 0 48px;
+}
+
+.site-footer .footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  gap: 48px;
+}
+
+.site-footer .footer-brand img {
+  height: 36px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.site-footer .footer-brand p {
+  font-size: .9375rem;
+  color: var(--text-inverse-3);
+  max-width: 30ch;
+  margin: 0;
+}
+
+.site-footer .footer-col h3 {
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-inverse-3);
+  margin: 0 0 16px;
+}
+
+.site-footer .footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.site-footer .footer-col li { max-width: none; }
+
+.site-footer .footer-col a {
+  color: var(--text-inverse-2);
+  text-decoration: none;
+  font-size: .9375rem;
+  font-weight: 500;
+}
+
+.site-footer .footer-col a:hover {
+  color: var(--text-inverse-1);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.site-footer .footer-col .btn { margin-top: 8px; }
+
+.site-footer .footer-note {
+  font-size: .9375rem;
+  color: var(--text-inverse-3);
+  margin: 12px 0 0;
+  max-width: 26ch;
+}
+
+.site-footer .footer-social {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.site-footer .footer-social a {
+  color: var(--text-inverse-3);
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.site-footer .footer-social a:hover { color: var(--text-inverse-1); }
+.site-footer .footer-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+.site-footer .footer-bottom {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-dark);
+  font-size: .9375rem;
+  color: var(--text-inverse-3);
+}
+
+@media (max-width: 1024px) {
+  .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .site-footer { padding: 64px 0 40px; }
+  .site-footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* Legacy footer social, still used by any .footer that remains */
+.footer .footer-social{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:12px;margin-top:8px;opacity:0.7}
+.footer .footer-social a{color:inherit;display:inline-flex;align-items:center}
 /* Services layout */
 .two-col{display:grid;grid-template-columns:300px 1fr;gap:24px}
 .sidenav{align-self:start}
@@ -731,7 +1019,7 @@ footer .small,
 .sidenav a{display:block;padding:12px 14px;border-radius:12px;background:var(--surface-sunken);text-decoration:none;color:var(--ink);font-weight:600;border:1px solid var(--border)}
 .sidenav a:hover{background:var(--blue-pale-8)}
 .sidenav .cta{display:block;width:100%;text-align:center;margin-top:1.25rem}
-.service-card{padding:clamp(1.75rem,3vw,2.75rem);margin-bottom:36px;scroll-margin-top:100px}
+.service-card{padding:clamp(1.75rem,3vw,2.75rem);margin-bottom:36px;scroll-margin-top:88px}
 .services-list .service-card:nth-of-type(even){background:var(--bg)}
 .service-divider{border:none;border-top:1px solid var(--border);margin:40px 0}
 .services-list h2{font-size:var(--h2);line-height:1.25;margin:0 0 1rem 0;display:flex;align-items:center;gap:8px}
