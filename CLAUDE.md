@@ -84,6 +84,38 @@ when article content warrants it.
 `templates/article-index.html`, run `npm run build` and commit the regenerated
 pages in the same commit.
 
+## Guard integrity check
+
+`tools/guards.js` hashes the two rebrand guardrails on every page and compares
+them against a committed baseline. Both are reverted on merge day, so any sweep
+that disturbs them turns a clean revert into a conflict.
+
+```bash
+node tools/guards.js capture
+```
+
+```bash
+node tools/guards.js verify
+```
+
+Run `capture` **before the first edit of a pass**, and `verify` after every
+sweep commit. Both print the number of files scanned and the number of blocks
+found; `verify` prints the number of hashes compared and exits non-zero listing
+every difference on any mismatch.
+
+The baseline lives at `tools/guards.baseline.json` and is committed. Both the
+script and the baseline used to be session-local scratchpad files and were lost
+when a container was recycled, which left no way to tell an already-edited tree
+from a clean one. Recapture only when a guard block changes for a real, stated
+reason, in the same commit as that change.
+
+**The counts are 150 noindex and 149 gtag, and both include
+`templates/article-index.html`.** There are only 149 rendered pages; the
+template is the 150th file carrying the blocks. `404.html` is the one guarded
+file with no gtag gate. A checker that enumerates rendered pages only reports
+149/148 and looks like a regression. The expected totals are asserted in the
+script, not merely reported, so an enumeration bug fails loudly.
+
 ## Local Testing
 
 ```bash
