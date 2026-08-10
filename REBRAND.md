@@ -385,6 +385,160 @@ pixel-identical.
 
 ---
 
+## NEXT SESSION STARTS HERE: Bundle B commit 2 of 4
+
+**State:** commit 1 of 4 is complete and pushed at `3c81447`. Commits 2, 3 and 4
+are outstanding. **Scope is intact. No cuts have been taken.** The dropdowns and
+the nav restructure are both still in.
+
+Read first, in this order:
+
+1. This section, then "Bundle B: the four commits" below.
+2. "Bundle B: approved dropdown implementation" below. It is approved as written
+   and does not need re-deciding.
+3. "Pass 2b-b scope, exactly" in the 2b-a section, which is commit 4.
+4. `docs/preview/homepage.html`, the approved visual reference for the chrome.
+5. `docs/execution-plan.md` Task 4, Bundle B, for the sequencing rationale.
+
+The guard baseline lives at
+`scratchpad/guards.json` (session-local; if absent, recapture with
+`node guards.js capture` **before the first edit of the session**).
+`node guards.js verify` compares against it.
+
+**The documented guard counts are 150 noindex and 149 gtag, and both include
+`templates/article-index.html`.** There are only 149 rendered pages; the
+template is the 150th file carrying the blocks. A guard script that enumerates
+rendered pages only will report 149/148 and look like a regression. This cost
+one false alarm already.
+
+### Bundle B: the four commits
+
+| # | Contents | State |
+|---|---|---|
+| 1 | `@media` keyword fix (39 pages) + `.nav-toggle` specificity fix (114 pages) | **DONE, pushed `3c81447`** |
+| 2 | Navy chrome, header/footer markup on 147 pages, logo swap with `width`/`height`, nav restructure with dropdowns, three `/services/` anchors, scroll-offset move, mobile panel to navy | outstanding |
+| 3 | Inline payload recolor (9 head payloads, hex literals only) + `--blue` to `--btn-blue` rename in the 4 body blocks + `--blue-brand` to `--blue` | outstanding |
+| 4 | Pass 2b-b primitive retarget | outstanding |
+
+Commits 2 to 4 are pushed together. Rules that still apply: every scripted edit
+anchored whitespace-insensitively with an exact expected-count assertion that
+fails loudly; every gate prints the count it checked; the first-paint gate is
+**rewritten as a deliberate-diff gate**, never reused from 2a.
+
+**The 8-page indentation variance is live.** `index.html`, `about/`, `faq/`,
+`resources/`, `contact/`, `contact/thank-you/`, `calculator/`,
+`calculator/report/` indent `<header class="site-header">` with four spaces; the
+other 139 use two. A script anchored on the literal two-space form silently
+skips the homepage.
+
+### Bundle B: approved dropdown implementation
+
+Approved as specified. The prototype's own version is **not** the contract: it
+ships bare `<button class="nav-trigger">` elements, so with JS off both menus
+are dead controls and `/services/` is unreachable from the nav.
+
+**Markup shipped to 147 pages, which is itself the no-JS fallback:**
+
+```html
+<div class="nav-item">
+  <a class="nav-trigger" href="/services/" data-nav-panel="panelWhat">
+    What We Do
+    <svg class="icon icon--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+  </a>
+  <div class="nav-panel" id="panelWhat" hidden>
+    <a href="/services/">All Services</a>
+    <a href="/services/#parking">Parking Revenue &amp; Management</a>
+    <a href="/services/#solar" class="scope-green">Solar Lighting</a>
+    <a href="/services/#ev" class="scope-green">EV Charging</a>
+  </div>
+</div>
+```
+
+A real `<a href>`, upgraded in place by JS, **not** a `<button>` and **not**
+swapped at runtime. Rationale: element surgery on 147 pages risks a load-time
+layout shift and leaves a window where the control is neither; upgrading in
+place means that if `script.js` throws anywhere before the nav block, the
+trigger degrades to a working link. `hidden` is toggled rather than a class, so
+the no-JS state and the closed state are the same mechanism and panel links stay
+out of the tab order when closed. The `All Services` row exists so the parent
+page stays reachable once JS intercepts the trigger.
+
+On init each `.nav-trigger` gets `aria-expanded="false"`, `aria-controls`,
+`aria-haspopup="true"`.
+
+| Input | Behaviour |
+|---|---|
+| Click / `Enter` | `preventDefault()`, toggle panel, focus stays on trigger |
+| `Space` | `preventDefault()` to stop scroll, toggle |
+| `ArrowDown` on trigger | open, move focus to first panel link |
+| `ArrowUp` / `ArrowDown` in panel | move between links, wrapping |
+| `Home` / `End` in panel | first / last link |
+| `Escape` | close, return focus to the trigger |
+| `focusout` of `.nav-item` | close, handles Tab-out |
+| Click outside `.nav-item` | close |
+| Hover | open, **gated to `(hover:hover) and (min-width:769px)`**, 150ms close delay |
+
+One panel open at a time. At **≤768px the panels render inline as an accordion**
+rather than absolutely positioned, and the hover handlers are **not bound**.
+
+Lives in `script.js`, which is loaded `defer` by **147 of 149** pages; the two
+that do not are the frozen consultation pages, which have no dropdown. Roughly
+60 lines. `script.js` today is 44 lines with no focus, key or disclosure
+handling of any kind, so this is entirely net-new.
+
+**Verification.** Automated: `aria-expanded` flips, `hidden` toggles, exactly
+one panel open at a time, every trigger has a matching panel id, `node --check`.
+Manual: keyboard-only traversal of both menus, `Escape` from an open panel,
+Tab-out, and **the no-JS case tested by blocking `/script.js`**, where the
+trigger must navigate to `/services/`.
+
+Cut line 1 if the pass overruns, per the standing cut order.
+
+### Finding: `.nav-toggle` was hidden by source order, on 114 pages
+
+Fixed in `3c81447`. Recorded because the mechanism is not obvious and the same
+shape may recur elsewhere in the payloads.
+
+In the inline critical CSS the base rule `.nav-toggle{display:none;…}` sits at
+byte 2072, **after** the `@media(max-width:768px)` block at byte 1615 that sets
+`display:flex`. Both selectors are `(0,1,0)`, so the later one won and the
+hamburger never appeared at first paint. `styles.css` has the correct order,
+which is why the bug was first-paint only and invisible once the async
+stylesheet landed.
+
+**Fixed by specificity, not reordering:** `.site-header .nav-toggle{display:flex}`
+is `(0,2,0)` and wins regardless of position. Reordering the payload would have
+been a much larger and riskier diff.
+
+**It was masked by the malformed `@media`** and only became visible once that was
+fixed: with the block being dropped entirely, the ordering never mattered. It
+affected **all 114 pages carrying the rule, zero were correct**, not just the 39
+with the malformed keyword. The expected-count assertion caught the difference,
+which is the argument for asserting counts rather than trusting a regex.
+
+### Blocked on `assets/brand/MP_Logo_dark.png`
+
+Ben is producing the solid dark variant and committing it separately. Until it
+lands, both of these stay as they are, deliberately:
+
+- **`about/index.html:47` JSON-LD still points at `images/Logo.svg`.** This is
+  the Organization `logo` value, consumed by search engines and rendered **on
+  white**. `MP_Logo_400.png` is a silver gradient on transparent and is close to
+  invisible on white, so repointing it there would be worse than leaving it.
+  The prototype's own logo note reasons only about placements on that page and
+  concludes the dark variant does not block the web build; that is correct for
+  the page and wrong for structured data.
+- **`images/Logo.svg` is NOT deleted**, because the JSON-LD still references it.
+
+Once the asset is committed: repoint the JSON-LD to the absolute production URL
+for the new file, then delete `Logo.svg`, then confirm zero remaining
+references. Small follow-up commit.
+
+**If Bundle B is otherwise complete and the asset has not landed, say so rather
+than working around it.**
+
+---
+
 ## Pass 2b-a: COMPLETE at `2d677a1`
 
 229 raw colour literals converted to `var()` references across the five
