@@ -373,3 +373,189 @@ window.MPMotion = (function () {
     get stats() { return { armed: armedCount, counters: countedCount }; }
   };
 })();
+
+/* ------------------------------------------------------------------
+   ARTICLE READING AIDS  (window.MPArticle)
+
+   Table of contents and scrollspy. Inert on
+   every page that has no #article-body, which is all 149 pages except the
+   73 article pages. This file is loaded by 147 of 149 pages, so "does
+   nothing here" is the common case and is checked first.
+
+   WHY THIS LIVES IN script.js AND NOT IN js/article.js
+   js/article.js assigns #article-body.innerHTML after a fetch, long after
+   DOMContentLoaded, so a table of contents built at parse time would find
+   zero headings. The obvious place to build it is inside that runtime, but
+   js/article.js carries BOTH the gtag hostname gate and the noindex guard,
+   and every edit there complicates the merge-day reverts. Same reasoning
+   that put the motion system here.
+
+   A MutationObserver on #article-body itself is enough, and is narrower
+   than the motion system's observer on document.body. `innerHTML =`
+   replaces the element's children, not the element, so the node identity is
+   stable and one observe() at parse time survives every swap.
+
+   The approved preview also carried a reading-progress rule. It is NOT
+   ported: it lived inside .site-header, and the Bundle B header is frozen.
+   Shipping the JS for an element that does not exist would just be more dead
+   code, so it is left out entirely rather than left dormant. The scrollspy's
+   active-section highlight is the position signal instead.
+
+   Verified against the real page before this shipped: two rapid innerHTML
+   assignments coalesced into ONE build, a later third assignment built
+   again, and the element identity held throughout.
+
+   A timer, not requestAnimationFrame, for the coalescer. rAF does not fire
+   in a hidden or background tab, and a latched pending flag would then
+   ignore every later mutation even after the tab became visible. Same trap
+   the motion system documents.
+   ------------------------------------------------------------------ */
+window.MPArticle = (function () {
+  'use strict';
+
+  var body = document.getElementById('article-body');
+  if (!body) return { active: false };
+
+  var toc = document.getElementById('toc');
+  var tocList = document.getElementById('tocList');
+
+  /* A contents list shorter than the first section is noise, so a short
+     article does not get one at all. */
+  var MIN_HEADINGS = 4;
+
+  var headings = [];
+  var links = [];
+  var builds = 0;
+
+  var wide = window.matchMedia ? window.matchMedia('(min-width:901px)') : null;
+  var tocTouched = false;
+
+  function slugify(s) {
+    return s.toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .slice(0, 60);
+  }
+
+  /* Open in the rail, collapsed on a phone. Only forced while the reader has
+     not touched it; once they toggle it by hand their choice stands. */
+  function syncTocOpen() {
+    if (!toc || tocTouched || !wide) return;
+    toc.open = wide.matches;
+  }
+
+  function buildToc() {
+    if (!toc || !tocList) return 0;
+
+    /* The .series-cards-header h2 introduces a card grid, not a section of
+       the argument, and is always last. Excluded. */
+    headings = Array.prototype.filter.call(
+      body.querySelectorAll('h2'),
+      function (h) { return !h.classList.contains('series-cards-header'); }
+    );
+
+    if (headings.length < MIN_HEADINGS) {
+      toc.hidden = true;
+      links = [];
+      return 0;
+    }
+
+    tocList.innerHTML = '';
+    links = headings.map(function (h, i) {
+      if (!h.id) h.id = 'section-' + (slugify(h.textContent) || i);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.className = 'toc-link';
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.trim();
+      li.appendChild(a);
+      tocList.appendChild(li);
+      return a;
+    });
+
+    toc.hidden = false;
+    syncTocOpen();
+    builds++;
+    spy();
+    return links.length;
+  }
+
+  /* Positions read on scroll rather than observed: the current section is the
+     one whose heading is last above the fold, which is what the reader
+     actually has on screen. An IntersectionObserver reports the wrong section
+     whenever two headings are visible at once. */
+  function spy() {
+    if (!links.length) return;
+    var mark = window.pageYOffset + 140;
+    var current = 0;
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].getBoundingClientRect().top + window.pageYOffset <= mark) current = i;
+      else break;
+    }
+    for (var j = 0; j < links.length; j++) {
+      links[j].classList.toggle('is-current', j === current);
+      if (j === current) links[j].setAttribute('aria-current', 'true');
+      else links[j].removeAttribute('aria-current');
+    }
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      spy();
+    });
+  }
+
+  var rebuildTimer = 0;
+  function queueRebuild() {
+    if (rebuildTimer) clearTimeout(rebuildTimer);
+    rebuildTimer = setTimeout(function () {
+      rebuildTimer = 0;
+      buildToc();
+    }, 50);
+  }
+
+  function start() {
+    if (toc) {
+      toc.addEventListener('toggle', function () {
+        /* Ignore the programmatic writes syncTocOpen makes. */
+        if (wide && toc.open !== wide.matches) tocTouched = true;
+      });
+      if (wide) {
+        if (wide.addEventListener) wide.addEventListener('change', syncTocOpen);
+        else if (wide.addListener) wide.addListener(syncTocOpen);
+      }
+    }
+
+    buildToc();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    /* syncTocOpen is also driven by a matchMedia change listener, but that did
+       not fire on a programmatic viewport resize during testing, which left the
+       panel collapsed on a wide screen. Syncing here too costs nothing. */
+    window.addEventListener('resize', function () { syncTocOpen(); onScroll(); }, { passive: true });
+
+    if (!('MutationObserver' in window)) return;
+    new MutationObserver(function (records) {
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].addedNodes && records[i].addedNodes.length) { queueRebuild(); return; }
+      }
+    }).observe(body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+
+  return {
+    active: true,
+    rebuild: buildToc,
+    get stats() { return { builds: builds, headings: headings.length, links: links.length }; }
+  };
+})();

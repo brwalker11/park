@@ -10,13 +10,17 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: homepage rebuilt from the approved prototype.** Bundle B (all four
-commits) and Pass 2b-b are complete and pushed. The homepage now runs on the
-reusable section and motion systems described below, which the services hub and
-the article template inherit next.
+**Status: article pages ported from the approved preview.** Bundle B (all four
+commits), Pass 2b-b, the homepage rebuild and now the 73 article pages are
+complete and pushed. Article pages run on the same section and motion systems
+as the homepage.
 
 Next up is the services hub restructure, which also owes `/services/` its
-`#solar` block and anchor.
+`#solar` block and anchor. The 30 video pages under `resources/videos/` are the
+cheapest follow-on: they already load `css/article.css` and already use
+`.article` markup, so they inherit the reading typography by adding
+`article-read` to their body class and dropping the legacy class names. That is
+a separate pass and was not done here.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -728,11 +732,54 @@ the same container armed the replacement too.
 
 ---
 
-## Article pages: approved preview and decisions
+## Article pages: PORTED
 
-`docs/preview/article.html` is the approved design for the article reading
-experience, approved 2026-08-11. Same status as the homepage prototype: it
-imports nothing and nothing imports it.
+**`docs/preview/article.html` is the approved visual reference for article
+pages.** Approved 2026-08-11, ported the same day. It holds the same status for
+the 73 article pages that `docs/preview/homepage.html` holds for the homepage:
+the standard the pages are built against, authoritative for layout, rhythm,
+typography and component treatment, not for colour. Colour resolves through the
+`styles.css` primitives.
+
+Same self-contained rule as the homepage prototype: it imports nothing and
+nothing imports it. Keep it that way, and update it first when the article
+design changes.
+
+`docs/preview/article-snapshot.html` is the evidence it was designed against and
+stays with it.
+
+### What shipped
+
+| File | Change |
+|---|---|
+| `templates/article-index.html` | new `<main>`, new body class, article half of the inline payload rewritten. Head, both guards, Bundle B header and footer byte-identical |
+| `css/article.css` | append only, everything new scoped under `.article-read` |
+| `script.js` | append only, `window.MPArticle` for the table of contents |
+| `articles/{slug}/index.html` | 72 regenerated, plus `parking-today-small-lots` hand-ported |
+
+`styles.css`, `css/style.css`, `js/article.js`, every body fragment,
+`data/resources.json` and `sitemap.xml` were not touched.
+
+### Decisions and constraints from the port
+
+Three permanent constraints came out of this and are recorded in `CLAUDE.md`
+rather than here, because they outlive the rebrand: `.article-hero` must stay
+inside `#article`, nothing may live inside `#article-meta`, and the
+`background-image: none !important` on the hero is load-bearing.
+
+Two more, specific to this pass:
+
+- **The reading-progress rule was not ported.** It lived inside `.site-header`
+  in the preview, and the Bundle B header is frozen. Shipping the JS for an
+  element that does not exist would have been more dead code, so it was left
+  out entirely. The scrollspy's active-section highlight is the position signal
+  instead. Revisit if the header is ever reopened.
+- **The bottom CTA still renders first-person copy.** `js/article.js:136`
+  overwrites `#article-footer-copy` at runtime, so the compliant copy in the
+  template never appears. Deliberate: that file is not edited for copy alone.
+  Already on the post-Vegas backlog.
+
+### The original preview record
 
 `docs/preview/article-snapshot.html` is the evidence it was built on. Article
 markup exists in no source file, so the preview was designed against a settled

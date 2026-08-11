@@ -180,16 +180,63 @@ or footer change is a single file edit plus a rebuild, not 147 edits.
 runtime. The middle stage is easy to miss because its output is committed and
 looks hand-written.
 
-`tools/generate-article-pages.js` performs **14 build-time substitutions** on
+`tools/generate-article-pages.js` performs **17 build-time substitutions** on
 the template per article: canonical, a `<link rel="preload" as="image">` for
 the hero injected before `</head>`, `<title>`, meta description, `og:title`,
 `og:description`, `og:url`, `og:image`, `twitter:title`, `twitter:description`,
 `twitter:image`, hero `src` and `alt`, the `.eyebrow` category, the hero `h1`,
 the breadcrumb title, and `data-article-slug`.
 
-**Its anchors are brittle.** Several match literal strings rather than
-structure, so a cosmetic template edit silently stops the substitution and the
-generator still exits 0:
+> **Corrected 2026-08-11: the count is 17, not 14.** This file said 14 when the
+> section was first written, from a miscount of the `.replace()` chain rather
+> than from a change in the code. Nothing in the generator changed. The number
+> is recorded here rather than quietly edited, because 14 is in the commit
+> history at `3fdbb24` and would otherwise look authoritative later. Recount
+> with the command below, which scopes the count to the template chain. A bare
+> `grep -c '\.replace('` over the whole file returns 23, because `escapeHtml`
+> uses five and `normaliseImage` one.
+>
+> ```bash
+> sed -n '/let html = template/,/fs.writeFileSync/p' tools/generate-article-pages.js | grep -c '\.replace('
+> ```
+
+### Three hard constraints on the article template
+
+These are architectural, not rebrand details. Anyone restructuring
+`templates/article-index.html` will hit them, and two of the three fail
+silently or catastrophically.
+
+**1. `.article-hero` MUST stay inside `#article`.**
+`js/article.js:114` finds the hero with `container.querySelector('.article-hero')`
+where `container` is `#article`, then writes to `hero.style` at line 125 with no
+null check. Move the hero outside `#article` and the lookup returns `null`, line
+125 throws `TypeError: Cannot read properties of null (reading 'style')`, and
+`init()`'s `try/catch` converts that into `renderNotFound()`. **Every article
+page renders "We couldn't load this article right now."** The hero may be a
+full-width band; it just has to be a descendant. `#article` is currently the
+outer wrapper for exactly this reason.
+
+**2. Nothing may be placed inside `#article-meta`.**
+`js/article.js:133` does `metaEl.textContent = buildMetaLine(article)`, which
+destroys every child of that element on every render. Icons or markup put
+inside it disappear. A **sibling** outside the element survives, which is how
+the clock icon in the meta row works.
+
+**3. `background-image: none !important` on `.article-hero` is load-bearing.**
+`js/article.js:125` writes `hero.style.backgroundImage` unconditionally. That is
+an inline style, so a normal declaration cannot beat it and the article
+photograph paints as a full-bleed backdrop behind the navy hero. The
+`!important` in `css/article.css` and in the inline payload suppresses it. **Do
+not remove it as a stray `!important` during a cleanup.** The redesign uses the
+image as a contained panel instead, and the only alternatives are editing
+`js/article.js`, which carries both guards, or shipping the defect.
+
+All three exist because `js/article.js` is deliberately not edited. See the
+rebrand guardrails.
+
+**The generator's anchors are brittle.** Several match literal strings rather
+than structure, so a cosmetic template edit silently stops the substitution and
+the generator still exits 0:
 
 - `src="/images/default-guide.webp"`
 - `alt="Parking lot revenue guide"`
@@ -204,6 +251,18 @@ character and that field goes unpopulated on all 72 generated pages with no
 error. **Any template change must satisfy the generator, the runtime, and the
 CSS.** After editing the template, rebuild and diff a generated page to confirm
 every field still populated, rather than trusting the exit code.
+
+`<p class="eyebrow">Resource</p>` is the anchor most likely to be lost, because
+it is a whole element rather than an attribute and a redesign may not want a
+category kicker. It survives in the current design as the category tag on the
+hero image panel. If a future design genuinely has no place for it, change the
+generator in the same commit rather than deleting the element.
+
+**Substitutions 12 and 13 are first-match.** `String.replace` with a non-global
+regex replaces the first occurrence only, so `src="/images/default-guide.webp"`
+and `alt="Parking lot revenue guide"` must belong to the hero image and the hero
+image must stay the first `<img>` in the document. Adding any image above it in
+the markup silently redirects both substitutions to the wrong element.
 
 **Generator coverage**: `npm run generate:articles` writes 72 pages, not 73.
 `articles/parking-today-small-lots/index.html` is hand-written and is skipped by
@@ -378,10 +437,28 @@ Corrected 2026-08-11. `grep -rl "css/article.css" --include="*.html" .`:
 | 30 | `resources/videos/{slug}/index.html` |
 | 1 | `templates/article-index.html` |
 
-`resources/index.html` does **not** load `css/article.css` and never did. The
-30 video pages do, and they also use `.article` and `.article-footer` markup,
-so anything done to article body typography lands on them too. That is useful
-when intended and a surprise when not.
+`resources/index.html` does **not** load `css/article.css` and never did.
+
+**The 30 video pages share more than the stylesheet.** They also carry
+`<body class="article-page">` and use `.article`, `.article-summary`,
+`.article-footer`, `.cta-actions`, `.breadcrumb` and `.back-link`. So neither
+the body class nor any of those class names can be used to target article
+pages, and restyling any of them bare silently restyles the video library.
+
+**Article pages carry a second body class, `article-read`, and that is the
+scoping hook.** Everything in the article reading design is scoped under it.
+The rules above that block in `css/article.css` belong to the video pages and
+must stay byte-identical. Classes that are genuinely article-only, and safe to
+restyle freely, are `.article-hero`, `#article`, `#hero-image`,
+`#related-list`, `.aside-heading` and the `.related-*` family.
+
+The article template deliberately does **not** use `class="article"`,
+`class="article-summary"`, `class="article-footer"` or `class="cta-actions"`,
+so the legacy rules never match rather than being fought with overrides. One
+consequence worth knowing: `renderNotFound()` writes a bare `h1` and two
+paragraphs into `#article`, which used to inherit a measure from `.article`.
+`css/article.css` styles `#article > h1` and `#article > p` to cover that, and
+those selectors match only in the not-found state.
 
 Additionally, 119 of 150 pages carry inline `<style>` blocks in 15 distinct
 payloads, holding roughly half the site's CSS. `consultation/index.html` alone
