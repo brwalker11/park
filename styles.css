@@ -162,6 +162,31 @@
   --band-y-sm:clamp(2.5rem,5vw,4rem);
   --band-w:1200px;
 
+  /* Reading surface. Additive, new names only, so the Pass 2b-b list of 15
+     retargets and 23 deletions is untouched. Nothing consumes these yet;
+     they land ahead of the article port so the port is CSS only.
+
+     Deliberately NOT --max-text or --max-w-article. Both of those are ch
+     based, and ch lies here: Inter's zero glyph is wide enough that the
+     live article at 672px/16px measures 87 REAL characters per line, and a
+     68ch column at 18px measures 81. Counted by walking the text node and
+     recording where the line top changes, not by trusting the unit.
+     Approved from docs/preview/article.html on 2026-08-11.
+
+     --read-size     18px. The one surface on the site where 16px is small.
+     --read-lh       1.72. The .article rule currently overrides the
+                     styles.css body value of 1.75 DOWN to 1.6, on the one
+                     surface that needed it least.
+     --read-measure  624px, which lands at 72 to 74 characters.
+     --read-wide     736px. Prose sits at the measure; tables, figures,
+                     code, formulas and the series boxes break out to this.
+     --read-rhythm   8px. Every vertical gap in the body is a multiple. */
+  --read-size:1.125rem;
+  --read-lh:1.72;
+  --read-measure:39rem;
+  --read-wide:46rem;
+  --read-rhythm:8px;
+
   /* --- Aliases ----------------------------------------------------
      Old names, so no selector needs editing in this pass. Same file as
      the primitives, so no fallback is needed. Removed after Pass 2c. */

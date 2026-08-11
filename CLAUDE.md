@@ -176,6 +176,35 @@ Open Graph, Twitter, JSON-LD) are generated client-side from the JSON.
 **Rebrand implication**: all article page chrome lives in ONE template. A header
 or footer change is a single file edit plus a rebuild, not 147 edits.
 
+**This is a THREE-stage pipeline, not two.** Template, then generator, then
+runtime. The middle stage is easy to miss because its output is committed and
+looks hand-written.
+
+`tools/generate-article-pages.js` performs **14 build-time substitutions** on
+the template per article: canonical, a `<link rel="preload" as="image">` for
+the hero injected before `</head>`, `<title>`, meta description, `og:title`,
+`og:description`, `og:url`, `og:image`, `twitter:title`, `twitter:description`,
+`twitter:image`, hero `src` and `alt`, the `.eyebrow` category, the hero `h1`,
+the breadcrumb title, and `data-article-slug`.
+
+**Its anchors are brittle.** Several match literal strings rather than
+structure, so a cosmetic template edit silently stops the substitution and the
+generator still exits 0:
+
+- `src="/images/default-guide.webp"`
+- `alt="Parking lot revenue guide"`
+- `<p class="eyebrow">Resource</p>`
+- `<h1 id="article-title">Loading…</h1>` (note the ellipsis character)
+- `<li id="breadcrumb-title" aria-current="page">Loading…</li>`
+- `<title>Loading article… | Monetize Parking</title>`
+- `data-article-slug=""`
+
+Change the alt text, the eyebrow word, the placeholder copy, or the ellipsis
+character and that field goes unpopulated on all 72 generated pages with no
+error. **Any template change must satisfy the generator, the runtime, and the
+CSS.** After editing the template, rebuild and diff a generated page to confirm
+every field still populated, rather than trusting the exit code.
+
 **Generator coverage**: `npm run generate:articles` writes 72 pages, not 73.
 `articles/parking-today-small-lots/index.html` is hand-written and is skipped by
 the generator because its `resources.json` entry is `"type": "external"` (a
@@ -283,9 +312,22 @@ mechanism and the merge-day revert requirement.
 
 ### Inline CTAs
 
-Article inline CTAs are inserted before the third sub-heading (h2 or h3) by
-`js/article.js`. Markup and copy are in the `INLINE_CTA_COPY` constant. Bottom
-CTAs always render two buttons: primary consultation, secondary calculator.
+**There is no inline CTA on any article page.** This file previously said one is
+inserted before the third sub-heading. Corrected 2026-08-11.
+
+`insertInlineCta()` at `js/article.js:169` still builds that markup, but nothing
+calls it. `enhanceBody()` at line 158 sets lazy loading and backfills `alt`, and
+carries the comment "Mid-article CTA removed - only bottom CTA should appear".
+`INLINE_CTA_COPY`, the `inline` key in `CTA_EVENTS`, and the `.cta-inline` rules
+at `css/style.css:50-76` are all reachable only through that dead function.
+`setRobots()` at line 505 is dead the same way; the robots meta is set inline at
+line 149 and in `renderNotFound()`.
+
+Removing any of it means editing the file that carries both rebrand guards, so
+it is deferred. See the post-Vegas backlog in `REBRAND.md`.
+
+Bottom CTAs always render two buttons: primary consultation, secondary
+calculator.
 
 ### Structured Data
 
@@ -321,11 +363,25 @@ Authoritative stylesheets are `styles.css`, `css/article.css`,
 
 **`css/style.css` is NOT an orphan.** This file previously documented it as one.
 It is pulled in by `@import url('/css/style.css')` at `css/article.css:1`, so it
-loads on the 103 pages that load `css/article.css`, which is every article page
-plus the resources hub. Corrected 2026-08-07 during the Inter activation pass.
-Do not list it as a deletion candidate and do not delete it without first
-removing that import and confirming nothing regresses. Note the `@import` also
-means it is fetched as a second, serialized request after `article.css` parses.
+loads everywhere `css/article.css` does. Corrected 2026-08-07 during the Inter
+activation pass. Do not list it as a deletion candidate and do not delete it
+without first removing that import and confirming nothing regresses. Note the
+`@import` also means it is fetched as a second, serialized request after
+`article.css` parses.
+
+**The reach is 104 files, not 103, and the resources hub is not one of them.**
+Corrected 2026-08-11. `grep -rl "css/article.css" --include="*.html" .`:
+
+| Count | What |
+|---|---|
+| 73 | `articles/{slug}/index.html` |
+| 30 | `resources/videos/{slug}/index.html` |
+| 1 | `templates/article-index.html` |
+
+`resources/index.html` does **not** load `css/article.css` and never did. The
+30 video pages do, and they also use `.article` and `.article-footer` markup,
+so anything done to article body typography lands on them too. That is useful
+when intended and a surprise when not.
 
 Additionally, 119 of 150 pages carry inline `<style>` blocks in 15 distinct
 payloads, holding roughly half the site's CSS. `consultation/index.html` alone

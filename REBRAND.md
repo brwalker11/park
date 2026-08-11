@@ -3,7 +3,7 @@
 This file changes constantly. It holds decisions and status for the rebrand.
 Durable project rules live in `CLAUDE.md`.
 
-Last updated: 2026-08-10
+Last updated: 2026-08-11
 Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ---
@@ -726,6 +726,99 @@ Verified against the real article shape: an `innerHTML` assignment into an
 off-screen container armed both new elements, and a second `innerHTML` swap into
 the same container armed the replacement too.
 
+---
+
+## Article pages: approved preview and decisions
+
+`docs/preview/article.html` is the approved design for the article reading
+experience, approved 2026-08-11. Same status as the homepage prototype: it
+imports nothing and nothing imports it.
+
+`docs/preview/article-snapshot.html` is the evidence it was built on. Article
+markup exists in no source file, so the preview was designed against a settled
+DOM captured from `/articles/flexible-parking-rules/` after `js/article.js`
+finished its fetch and its `innerHTML` assignment. That article was chosen
+because it is the only one that exercises the series path, `.series-box`,
+`.series-cards`, `hr`, `ol`, `ul`, `strong`, `br` and the related-card markup
+at once. Two more were captured for coverage: `dynamic-pricing-guide` for the
+default five-card rail and the longest page, `when-to-start-charging-parking`
+for `.formula`, `pre`/`code` and the no-image fallback.
+
+### The pipeline is three stages, not two
+
+See the generator section in `CLAUDE.md`. Any template change has to satisfy
+the generator's 14 literal-string substitutions, the runtime, AND the CSS.
+
+### Five reading tokens added, additive
+
+`--read-size` `1.125rem`, `--read-lh` `1.72`, `--read-measure` `39rem`,
+`--read-wide` `46rem`, `--read-rhythm` `8px`. New names only, so the Pass 2b-b
+list of 15 retargets and 23 deletions is untouched. Nothing consumes them yet;
+they land ahead of the port so the port itself is CSS only. No new colour was
+introduced by the article design.
+
+**`ch` is not a reliable measure unit with Inter.** Both `--max-text` (68ch)
+and `--max-w-article` (70ch) are ch-based and both lie: the live article at
+672px/16px measures **87 real characters per line**, and a 68ch column at 18px
+measures 81. Counted by walking the text node and recording where the line top
+changes. `--read-measure` is a rem length for that reason and lands at 72 to
+74 characters. Do not "simplify" it back to a ch value.
+
+### Approved structural changes
+
+| Change | Why |
+|---|---|
+| Related articles move OUT of the rail into a full-width band after the CTA | The rail was `position:static` and 1307px tall against a 9527px article on `dynamic-pricing-guide`, leaving roughly 8000px of dead gutter. A sticky rail full of dead space is worse than no rail |
+| The rail carries a table of contents instead | Genuinely useful on long articles. `dynamic-pricing-guide` is 9527px with 9 `h2` sections and no way to see its shape |
+| Article moves FIRST in the DOM, rail second and to the right | Also fixes a screen-reader defect: today the aside is the first grid child, so five related-article cards are announced before the headline |
+| Hero becomes navy chrome, type first, image a contained 16:10 panel | Title legibility no longer depends on the stock photograph underneath it, and first body text moves from y=650 to y=539 in a 900px viewport |
+| `h3` becomes ink, not `--clr-muted` | Today `h3` renders at 20px/600 in `#475569`, lighter than the 16px body text it introduces. A hierarchy inversion |
+
+Moving `#related-list` needs **no** `js/article.js` change: the runtime finds
+it by id, and `renderSeriesSidebar()` and `renderRelated()` both emit through
+the same `buildRelatedCard()`.
+
+### What the port still owes
+
+- **The TOC builder belongs in `script.js`, not `js/article.js`.** It has to
+  run after the runtime writes `#article-body`, and `script.js` already runs a
+  MutationObserver for the motion system. Same reasoning as the motion system:
+  `js/article.js` carries both guards and every edit there complicates the
+  merge-day reverts.
+- **`#article-meta` gets one joined string** from `buildMetaLine()`. The design
+  reads it as discrete facts. Deferred; the joined string is accepted for now
+  rather than editing `js/article.js` for presentation.
+- **`#article-footer-copy` first-person copy stays for now.** Already on the
+  post-Vegas backlog. Bundle it with the TOC builder work only if that pass is
+  touching `script.js` anyway. **Do not touch `js/article.js` solely for copy.**
+
+### Motion on articles: deliberately almost none
+
+Eight `[data-reveal]` targets, all past the end of the prose: the CTA band's
+four children through `data-reveal-group`, and the four related cards. Nothing
+on any heading, paragraph, list, the hero, the rail, the TOC or the series
+boxes. A reading page that animates while it is being read is an irritation.
+
+### Extends to video pages for free, not to state pages
+
+The 30 pages under `resources/videos/` already use `.article` and
+`.article-footer` and already load `css/article.css`, so they inherit the body
+typography with no extra work. State subpages use `.state-content` with their
+own 7,167-byte inline payload across 33 pages; the reading column, TOC and rail
+port cleanly but that payload has to be rewritten.
+
+### Hero double-image defect
+
+`js/article.js:125-126` sets the hero image **twice**, once as
+`hero.style.backgroundImage` and once as `heroImage.src`. The `<img>` sits at
+`z-index:0` and covers the element completely, so the `background-image` never
+renders at all. Same URL, so it costs no extra request, but the inline style is
+dead weight and the `background-size`/`background-position` rules in
+`css/style.css:3-4` and the inline payload style nothing. The redesign drops
+the background entirely. Do not preserve it when porting.
+
+---
+
 ### Homepage payload group: unchanged at six files
 
 `index.html` shares a 4757-byte critical payload with `about/`, `calculator/`,
@@ -1246,8 +1339,10 @@ Not rebrand work. Do not start any of these before the conference.
 
   **Corrected 2026-08-07:** `css/style.css` was previously listed here as a
   ninth dead stylesheet. It is not dead. `css/article.css:1` pulls it in with
-  `@import url('/css/style.css')`, so it loads on 103 pages. Deleting it would
-  have broken them. Removed from this list.
+  `@import url('/css/style.css')`, so it loads on 104 files: 73 article pages,
+  30 video pages, and the template. Deleting it would have broken them. Removed
+  from this list. **Count corrected 2026-08-11**, from 103 and "the resources
+  hub", which does not load it.
 - `images/Logo.svg` deletion once the header no longer references it.
 - Vector logo redraw for print and embroidery.
 - Transparent versions of the tagline lockup and ClearWorld co-brand lockup.
@@ -1268,7 +1363,20 @@ Not rebrand work. Do not start any of these before the conference.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
 - `INLINE_CTA_COPY` in `js/article.js` uses first-person language against the
-  content rules.
+  content rules. So does the string written into `#article-footer-copy` at
+  `js/article.js:136`. Both need the same pass. Do not touch that file for copy
+  alone; fold it into a pass that has another reason to be there.
+- **Dead code in `js/article.js`.** `insertInlineCta()` at line 169 is never
+  called: `enhanceBody()` at line 158 only sets lazy loading and backfills
+  `alt`, and carries the comment "Mid-article CTA removed - only bottom CTA
+  should appear". `setRobots()` at line 505 is also never called; the robots
+  meta is set inline at line 149 and in `renderNotFound()`. Removing either
+  means editing the file that carries both guards, so this waits until after
+  merge day. Note `INLINE_CTA_COPY` and the `inline` key in `CTA_EVENTS` are
+  only reachable through the dead `insertInlineCta()`, so the first-person copy
+  above is currently unreachable at runtime and cosmetic. It still goes.
+- The `.cta-inline` rules in `css/style.css:50-76` style only what the dead
+  `insertInlineCta()` would have produced. They go with it.
 - Content rebalancing toward genuine three-pillar parity once lighting content
   earns traffic.
 - Webflow migration evaluation, if in-house editing without a repo becomes a
