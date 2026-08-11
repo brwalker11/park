@@ -3,15 +3,19 @@
 This file changes constantly. It holds decisions and status for the rebrand.
 Durable project rules live in `CLAUDE.md`.
 
-Last updated: 2026-08-06
+Last updated: 2026-08-10
 Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ---
 
 ## Current pass
 
-**Status:** Pass 1 (color and asset discovery) COMPLETE, run on `e9248d1`.
-Findings below. Next up is Pass 2a, blocked on the canonical blue decision.
+**Status: Bundle B COMPLETE, all four commits.** Pass 2b-b landed with it, so
+the whole site is on the new blue and the chrome is live on all 148 files.
+Verified in a browser: the inline critical CSS and `styles.css` resolve to the
+same blue on every payload group, so there is no colour flash on any page.
+
+Next up is the homepage rebuild, then the services hub restructure.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -385,40 +389,58 @@ pixel-identical.
 
 ---
 
-## NEXT SESSION STARTS HERE: Bundle B commit 2 of 4
+## NEXT SESSION STARTS HERE: the homepage rebuild
 
-**State:** commit 1 of 4 is complete and pushed at `3c81447`. Commits 2, 3 and 4
-are outstanding. **Scope is intact. No cuts have been taken.** The dropdowns and
-the nav restructure are both still in.
+**State: Bundle B is COMPLETE and pushed. Pass 2b-b went with it.** Scope was
+held in full; no cuts were taken. The dropdowns and the nav restructure both
+shipped.
+
+Next scheduled work is the homepage rebuild, then the services hub restructure
+(which owes `/services/` its `#solar` block and anchor).
 
 Read first, in this order:
 
-1. This section, then "Bundle B: the four commits" below.
-2. "Bundle B: approved dropdown implementation" below. It is approved as written
-   and does not need re-deciding.
-3. "Pass 2b-b scope, exactly" in the 2b-a section, which is commit 4.
-4. `docs/preview/homepage.html`, the approved visual reference for the chrome.
-5. `docs/execution-plan.md` Task 4, Bundle B, for the sequencing rationale.
+1. This section, then "Bundle B: the four commits" below for what shipped.
+2. `docs/preview/homepage.html`, the approved visual reference.
+3. `docs/execution-plan.md` weeks 3 and 4.
 
-The guard baseline lives at
-`scratchpad/guards.json` (session-local; if absent, recapture with
-`node guards.js capture` **before the first edit of the session**).
-`node guards.js verify` compares against it.
+**Tooling now lives in the repo, not the scratchpad.** `tools/guards.js` with
+its committed baseline at `tools/guards.baseline.json`, and the per-pass sweep
+and gate scripts in `tools/rebrand/`. Run
+`node tools/guards.js capture` **before the first edit of a session** only if a
+guard block is being changed deliberately; otherwise run
+`node tools/guards.js verify` after every commit. See `CLAUDE.md` for the
+sweep-script conventions and the deliberate-diff gate pattern.
 
-**The documented guard counts are 150 noindex and 149 gtag, and both include
+**The guard counts are 150 noindex and 149 gtag, and both include
 `templates/article-index.html`.** There are only 149 rendered pages; the
-template is the 150th file carrying the blocks. A guard script that enumerates
-rendered pages only will report 149/148 and look like a regression. This cost
-one false alarm already.
+template is the 150th file carrying the blocks. A checker that enumerates
+rendered pages only reports 149/148 and looks like a regression. This cost one
+false alarm already, so the totals are now asserted in the script rather than
+merely printed.
 
 ### Bundle B: the four commits
 
 | # | Contents | State |
 |---|---|---|
-| 1 | `@media` keyword fix (39 pages) + `.nav-toggle` specificity fix (114 pages) | **DONE, pushed `3c81447`** |
-| 2 | Navy chrome, header/footer markup on 147 pages, logo swap with `width`/`height`, nav restructure with dropdowns, three `/services/` anchors, scroll-offset move, mobile panel to navy | outstanding |
-| 3 | Inline payload recolor (9 head payloads, hex literals only) + `--blue` to `--btn-blue` rename in the 4 body blocks + `--blue-brand` to `--blue` | outstanding |
-| 4 | Pass 2b-b primitive retarget | outstanding |
+| 1 | `@media` keyword fix (39 pages) + `.nav-toggle` specificity fix (114 pages) | **DONE `3c81447`** |
+| 2 | Navy chrome, header/footer markup on 148 files, logo swap with `width`/`height`, nav restructure with dropdowns, `/services/` anchors, scroll-offset move, mobile panel to navy | **DONE `fe0d420`** |
+| 3 | Inline payload recolor (886 literals, 117 pages, hex only) + `--blue` to `--btn-blue` in the 4 body blocks + `--blue-brand` to `--blue` | **DONE `4cac959`** |
+| 4 | Pass 2b-b primitive retarget: 15 values changed, 23 primitives deleted | **DONE** |
+
+Counts that differed from what this file predicted, all reconciled:
+
+- **Header, footer and nav markup were byte-identical across all 148 files**,
+  one hash group each, so each was a single substitution rather than a
+  per-group sweep. The inline header rules were likewise one contiguous
+  1675-byte region identical across all four payload groups.
+- **7 head payloads, not 9.** The nine counts the two frozen consultation
+  payloads, which are out of scope. Commit 3 touched seven.
+- **`--blue-brand` had 17 occurrences, 3 of them in comments.** Code-only count
+  is 14.
+- **37 references were repointed in 2b-b, not 34.** 38 references exist to the
+  21 flat folded names; one is a `--blue-accent-tmp` stop inside the hero
+  gradient and is consumed by the gradient fold, leaving 37.
 
 Commits 2 to 4 are pushed together. Rules that still apply: every scripted edit
 anchored whitespace-insensitively with an exact expected-count assertion that
@@ -614,21 +636,26 @@ grepping for the three solid blues Pass 1 named.
 
 All of them are now tokens, which is what makes 2b-b a value-only edit.
 
-### 2b-b is BLOCKED on Bundle B, not on anything technical
+### 2b-b: COMPLETE, shipped with Bundle B commit 4
 
-**1,208 old-blue occurrences live in inline `<style>` payloads across 118
-pages.** Against 88 in the stylesheets, that means 2b-a and 2b-b together reach
-roughly 7 percent of the site's blue. The rest is critical CSS and is
-unreachable until Bundle B's scripted literal recolor.
+It was never blocked on anything technical, only on sequencing: 1,208 old-blue
+occurrences lived in inline `<style>` payloads across 118 pages, so retargeting
+the primitives first would have made every async page paint old blue and then
+repaint on every load. The recolor therefore shipped as commit 3 and the
+retarget as commit 4, in the same session and the same push. The site changed
+colour exactly once.
 
-Because the inline payloads are what paints first, retargeting the primitives
-now would make every async page paint old blue and then repaint to new blue on
-every load. Today the two agree and there is no colour flash; after 2b-b alone
-there would be one, on 113 pages, until Bundle B lands.
+Verified in a browser with a freshness assertion on every measurement: on the
+homepage, services, an article, a state page and the resources hub, the inline
+critical CSS and `styles.css` resolve to the same blue, so there is no flash.
 
-**So 2b-b ships in the same session as Bundle B's inline recolor.** The site
-changes colour once. This is a sequencing decision, not a technical dependency:
-2b-b itself is a handful of one-line value changes and could be run in minutes.
+**Residue deliberately left to 2b-2:** 24 blue-tinted `box-shadow` declarations
+across `styles.css`, `css/article.css`, `css/resources.css`,
+`calculator/index.html` and `contact/index.html`, plus one
+`scrollbar-color: rgba(13,110,253,0.3)` in `css/resources.css`. Shadows were
+always out of 2b-b scope. **The scrollbar one is not a shadow and is a genuine
+2b-a miss**: that pass reported zero raw colour literals in any rule, and this
+is one. It is a single declaration and a one-line fix whenever 2b-2 runs.
 
 ### 2b-b scope, exactly
 
@@ -904,7 +931,8 @@ primitive's current value so 2b cannot drift them apart silently.
   bundled.
   - **2b-a: COMPLETE at `2d677a1`.** Convert colour literals to tokens, values
     unchanged, pixel-identical.
-  - **2b-b: BLOCKED, not started.** Retarget the values. See below.
+  - **2b-b: COMPLETE**, shipped with Bundle B commit 4. 15 values changed,
+    23 primitives deleted. See below.
   - **2b-2:** geometry. Shadows, radii, container widths, breakpoints, and the
     neutral-scale decisions 2b-a deferred.
 - **Pass 2c:** sweep inline `<style>` across 119 pages. Scriptable for the 45

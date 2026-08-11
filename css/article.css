@@ -19,7 +19,7 @@
      fallback-integrity check asserts that. */
   --clr-text: var(--text-1, #0f172a);            /* slate-900 */
   --clr-muted: var(--text-2, #475569);           /* slate-600 */
-  --clr-accent: var(--blue-accent-tmp, #2563eb); /* blue-600 */
+  --clr-accent: var(--blue, #004FC8); /* blue-600 */
   --clr-border: var(--border-1, #e2e8f0);        /* slate-200 */
   --radius: 14px;
 }
@@ -163,7 +163,7 @@
   border-color:var(--clr-accent);
 }
 .btn-secondary:hover{
-  background:var(--blue-accent-tint-08, rgba(37,99,235,0.08));
+  background:var(--blue-tint-08, rgba(0,79,200,0.08));
 }
 
 /* Site footer spacing so CTA never overlaps copyright */
@@ -617,7 +617,7 @@
   font-weight: 700;
 }
 .sidebar-series-link .check{
-  color: var(--ok, #22c55e);
+  color: var(--ok, #10B981);
   font-weight: 700;
 }
 
