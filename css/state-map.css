@@ -4,7 +4,7 @@
    this file's own rules consume them; they resolve to the same values as the
    aliases in styles.css. */
 :root {
-  --state-active: var(--blue-brand, #0b6efd);
+  --state-active: var(--blue, #0b6efd);
   --state-hover: var(--blue-deep, #0958d9);
   --state-inactive: var(--border-2-tmp, #cbd5e1);
   --state-bg: var(--surface-page, #f8fafc);

@@ -17,11 +17,9 @@
   /* --- Primitives: blue -------------------------------------------
      Three distinct blues are in use today. They stay distinct here so
      this pass changes nothing; 2b collapses them. */
-  --blue-brand:#0b6efd;       /* 2b -> #004FC8. 2c -> rename to --blue, once
-                                 the inline --blue on contact/ and calculator/
-                                 is gone. See REBRAND.md. */
-  --blue-alt-tmp:#0A68FF;     /* 2b -> folds into --blue-brand */
-  --blue-accent-tmp:#2563eb;  /* 2b -> folds into --blue-brand */
+  --blue:#0b6efd;       /* 2b -> #004FC8 */
+  --blue-alt-tmp:#0A68FF;     /* 2b -> folds into --blue */
+  --blue-accent-tmp:#2563eb;  /* 2b -> folds into --blue */
   --blue-deep:#0958d9;        /* 2b -> #0043B3 */
 
   /* --- Primitives: text ------------------------------------------- */
@@ -51,7 +49,7 @@
      the design direction approves no target for them; that decision is
      deferred to 2b-2 rather than invented here.
      ================================================================= */
-  /* --- Blue family: solids. All fold into --blue-brand or --blue-deep at 2b-b. */
+  /* --- Blue family: solids. All fold into --blue or --blue-deep at 2b-b. */
   --blue-ask-tmp:#0856c9;
   --blue-check-tmp:#0284c7;
   --blue-cta-inline-tmp:#2f6bff;
@@ -175,7 +173,7 @@
   /* --- Aliases ----------------------------------------------------
      Old names, so no selector needs editing in this pass. Same file as
      the primitives, so no fallback is needed. Removed after Pass 2c. */
-  --brand:var(--blue-brand);
+  --brand:var(--blue);
   --brand-blue:var(--blue-alt-tmp);
   --ink:var(--text-1);
   --muted:var(--text-3);
@@ -1393,9 +1391,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 .faq-a.open { padding: 0 20px 18px 20px; opacity: 1; }
 .faq-a p { margin: 0; color: var(--neutral-750); max-width: none; font-size: 1rem; line-height: 1.7; }
 .faq-a ul, .faq-a ol { color: var(--neutral-750); font-size: 1rem; line-height: 1.7; }
-.faq-a a { color: var(--blue-brand); text-decoration: none; font-weight: 500; }
+.faq-a a { color: var(--blue); text-decoration: none; font-weight: 500; }
 .faq-a a:hover { text-decoration: underline; }
-.faq-category { background: transparent; color: var(--neutral-800); font-weight: 700; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding: 14px 0 14px 14px; border-left: 4px solid var(--blue-brand); border-radius: 0; margin-top: 32px; margin-bottom: 12px; font-size: 1.125rem; }
+.faq-category { background: transparent; color: var(--neutral-800); font-weight: 700; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding: 14px 0 14px 14px; border-left: 4px solid var(--blue); border-radius: 0; margin-top: 32px; margin-bottom: 12px; font-size: 1.125rem; }
 .faq-category:first-of-type { margin-top: 0; }
 .faq-a.open p { margin-top: 18px; }
 .faq-a.open p + p { margin-top: 12px; }
@@ -1836,7 +1834,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 
 /* Ask the Experts hero overrides */
 .ask-experts-hero {
-  background: linear-gradient(135deg, var(--blue-brand) 0%, var(--blue-ask-tmp) 100%);
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-ask-tmp) 100%);
 }
 
 .ask-experts-hero .container {
