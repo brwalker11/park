@@ -116,6 +116,35 @@ file with no gtag gate. A checker that enumerates rendered pages only reports
 149/148 and looks like a regression. The expected totals are asserted in the
 script, not merely reported, so an enumeration bug fails loudly.
 
+## Rebrand sweep and gate scripts
+
+`tools/rebrand/` holds the per-pass sweep and verification scripts, with their
+fixtures in `tools/rebrand/fixtures/`. They are committed for the same reason
+the guard baseline is: a scratchpad copy is lost when the container is
+recycled, and re-deriving one from an already-edited tree is not the same
+thing.
+
+Every sweep script follows the same shape and any new one should too:
+
+- **Anchor on a regex, never on leading whitespace.** Eight pages indent
+  `<header class="site-header">` with four spaces and the other 139 with two;
+  an edit anchored on the literal two-space form silently skips the homepage.
+- **Hash-verify each matched block before replacing it**, so a block that has
+  drifted fails instead of being rewritten.
+- **Assert exact expected counts and abort before writing anything** if any
+  count is off.
+- **Dry run by default**, apply only with `--write`.
+
+The headline verification is the **deliberate-diff gate**: it reverses the
+pass's intended substitutions on every touched file and requires the result to
+equal the file at `HEAD` byte for byte. Anything that moved outside the
+intended edit fails it. Write a new one per pass against that pass's actual
+surface. Do not reuse a gate from an earlier pass: the 2a fallback checker was
+reused after the surface moved under it and silently went from covering 15
+declarations to 15 of 106, still reporting PASS. Every gate must print the
+count it checked, so a gate that inspected nothing cannot be mistaken for one
+that passed.
+
 ## Local Testing
 
 ```bash

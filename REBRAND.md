@@ -494,6 +494,35 @@ trigger must navigate to `/services/`.
 
 Cut line 1 if the pass overruns, per the standing cut order.
 
+### `What We Do` is a deliberate exception to the first-person rule
+
+**Decided. Do not flag this again.** The nav label `What We Do` contains "We"
+and so reads as a violation of the no-first-person content rule in `CLAUDE.md`.
+It is not. That rule targets body copy; `What We Do` is a menu label, not prose,
+and it is the wording in the approved prototype and in the approved dropdown
+markup above. It ships as written, in the header nav and in the footer column
+heading.
+
+The rule is otherwise unchanged and still applies to every piece of body copy,
+meta description, and generated text.
+
+### Known soft link: `/services/#solar` has no target yet
+
+**Accepted, with a deadline.** The What We Do panel and the footer both link to
+`/services/#solar`. There is no solar content anywhere on the site, so no
+element carries `id="solar"` and the link lands on the top of `/services/`
+instead of scrolling. It is a soft failure, not a dead link: the page loads and
+nothing is broken.
+
+`#parking` and `#ev` are real and were added to the existing "Paid Parking
+Systems" and "EV Charging" cards in Bundle B commit 2, both with
+`scroll-margin-top: 88px`.
+
+**Deadline: the services hub restructure**, scheduled Wednesday Aug 26, which
+adds the solar block. Lighting copy is Ben's, so the anchor could not be
+created in commit 2 without inventing vendor copy. When that block lands, give
+it `id="solar"` and this entry can be deleted.
+
 ### Finding: `.nav-toggle` was hidden by source order, on 114 pages
 
 Fixed in `3c81447`. Recorded because the mechanism is not obvious and the same
@@ -521,18 +550,34 @@ which is the argument for asserting counts rather than trusting a regex.
 Ben is producing the solid dark variant and committing it separately. Until it
 lands, both of these stay as they are, deliberately:
 
-- **`about/index.html:47` JSON-LD still points at `images/Logo.svg`.** This is
-  the Organization `logo` value, consumed by search engines and rendered **on
-  white**. `MP_Logo_400.png` is a silver gradient on transparent and is close to
-  invisible on white, so repointing it there would be worse than leaving it.
-  The prototype's own logo note reasons only about placements on that page and
-  concludes the dark variant does not block the web build; that is correct for
-  the page and wrong for structured data.
+- **JSON-LD still points at `images/Logo.svg` on 33 pages, not one.** This entry
+  previously named `about/index.html:47` only. That was an undercount, found
+  during Bundle B commit 2 when a gate asserted the wrong number and failed.
+  The full set:
+
+  | Pages | Schema field |
+  |---|---|
+  | `about/index.html` | `LocalBusiness` → `logo` |
+  | `ask-the-experts.html` | `publisher` → `logo` |
+  | `contact/index.html` | `logo` |
+  | 30 pages under `resources/videos/*/index.html` | `Organization` → `logo` → `ImageObject` → `url` |
+
+  Every one is a structured-data value consumed by search engines and rendered
+  **on white**. `MP_Logo_400.png` is a silver gradient on transparent and is
+  close to invisible on white, so repointing any of them would be worse than
+  leaving it. The prototype's own logo note reasons only about placements on
+  that page and concludes the dark variant does not block the web build; that is
+  correct for the page and wrong for structured data.
 - **`images/Logo.svg` is NOT deleted**, because the JSON-LD still references it.
 
-Once the asset is committed: repoint the JSON-LD to the absolute production URL
-for the new file, then delete `Logo.svg`, then confirm zero remaining
-references. Small follow-up commit.
+**Every rendered reference is already gone.** Bundle B commit 2 swapped the
+header and footer to `MP_Logo_400.png` on all 148 files. The only surviving
+`<img>` references to `Logo.svg` are the two frozen consultation pages.
+
+Once the asset is committed: repoint the JSON-LD on all 33 pages to the
+absolute production URL for the new file, then delete `Logo.svg`, then confirm
+zero remaining references. This is a 33-page sweep, not the one-line edit this
+section used to imply.
 
 **If Bundle B is otherwise complete and the asset has not landed, say so rather
 than working around it.**
