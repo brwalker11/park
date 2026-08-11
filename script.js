@@ -203,3 +203,173 @@ function adjustAnchor(){
 }
 window.addEventListener('load', adjustAnchor);
 window.addEventListener('hashchange', adjustAnchor);
+
+/* ------------------------------------------------------------------
+   MOTION SYSTEM  (window.MPMotion)
+
+   Opt in from markup, on any page:
+     data-reveal              entrance reveal on this element
+     data-reveal-group        stagger this element's [data-reveal] children
+     data-count-to="178"      count a number up to its final value
+
+   Never-invisible technique: there is no global hiding class. Elements are
+   armed one at a time, and ONLY when they are currently off screen. An
+   element already in the viewport is marked done and is never hidden. So if
+   JS never runs, runs late, or throws, nothing is ever hidden; and if
+   styles.css has not arrived when an element is armed, that element is off
+   screen anyway. Only opacity and transform are animated.
+
+   Late-arriving content: js/article.js replaces #article-body.innerHTML after
+   a fetch, long after DOMContentLoaded, so anything registered at parse time
+   would miss it. A MutationObserver on document.body, coalesced with
+   requestAnimationFrame, picks up subtrees added at any time. This needs no
+   change to js/article.js, which matters because that file carries both the
+   gtag gate and the noindex guard.
+   ------------------------------------------------------------------ */
+window.MPMotion = (function () {
+  'use strict';
+
+  var reduced = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : { matches: false };
+  var supported = 'IntersectionObserver' in window;
+
+  var handled = typeof WeakSet === 'function' ? new WeakSet() : null;
+  var revealIO = null;
+  var countIO = null;
+  var armedCount = 0;
+  var countedCount = 0;
+
+  function enabled() { return supported && !reduced.matches && handled !== null; }
+
+  function offScreen(el) {
+    var r = el.getBoundingClientRect();
+    // A zero-size box is display:none or not laid out yet. Treat it as off
+    // screen: it is not visible, so arming it cannot cause a visible flash.
+    if (r.width === 0 && r.height === 0) return true;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    return r.top >= vh || r.bottom <= 0;
+  }
+
+  function makeRevealIO() {
+    return new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealIO.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+  }
+
+  function makeCountIO() {
+    return new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        countIO.unobserve(entry.target);
+        run(entry.target);
+      });
+    }, { threshold: 0.4 });
+  }
+
+  function run(el) {
+    var end = parseInt(el.getAttribute('data-count-to'), 10);
+    if (isNaN(end)) return;
+    var start = null;
+    var DUR = 900;
+    function tick(ts) {
+      if (start === null) start = ts;
+      var t = Math.min((ts - start) / DUR, 1);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(end * eased));
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = String(end);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* Register any not-yet-handled motion targets inside `root`.
+     Safe to call repeatedly; returns the number of elements newly armed. */
+  function scan(root) {
+    if (!enabled()) return 0;
+    root = root || document;
+    if (!root.querySelectorAll) return 0;
+
+    if (!revealIO) revealIO = makeRevealIO();
+    if (!countIO) countIO = makeCountIO();
+
+    // stagger delays first, so an element's delay is set before it is armed
+    var groups = root.querySelectorAll('[data-reveal-group]');
+    Array.prototype.forEach.call(groups, function (group) {
+      var kids = group.querySelectorAll('[data-reveal]');
+      Array.prototype.forEach.call(kids, function (el, i) {
+        if (!el.style.getPropertyValue('--reveal-delay')) {
+          el.style.setProperty('--reveal-delay', Math.min(i * 70, 420) + 'ms');
+        }
+      });
+    });
+
+    var armed = 0;
+    var targets = root.querySelectorAll('[data-reveal]');
+    Array.prototype.forEach.call(targets, function (el) {
+      if (handled.has(el)) return;
+      handled.add(el);
+      // Already on screen: leave it alone permanently. Never hide something
+      // the visitor can currently see.
+      if (!offScreen(el)) return;
+      el.classList.add('is-armed');
+      revealIO.observe(el);
+      armed++;
+    });
+    armedCount += armed;
+
+    var counters = root.querySelectorAll('[data-count-to]');
+    Array.prototype.forEach.call(counters, function (el) {
+      if (handled.has(el)) return;
+      handled.add(el);
+      countIO.observe(el);
+      countedCount++;
+    });
+
+    return armed;
+  }
+
+  // Held in module scope, not inside start(), so neither the observer nor the
+  // coalescing timer can be collected while the page is alive.
+  var mutationObserver = null;
+  var rescanTimer = 0;
+
+  function queueRescan() {
+    // A timer, not requestAnimationFrame: rAF does not fire in a hidden or
+    // background tab, so an rAF-coalesced rescan stalls there, and a latched
+    // "pending" flag would then ignore every later mutation even after the tab
+    // became visible. clearTimeout/setTimeout is self-healing and still
+    // coalesces a burst of mutations into one scan.
+    if (rescanTimer) clearTimeout(rescanTimer);
+    rescanTimer = setTimeout(function () { rescanTimer = 0; scan(document); }, 50);
+  }
+
+  function start() {
+    scan(document);
+
+    // Late-arriving content, for the article runtime and anything like it.
+    if (!('MutationObserver' in window)) return;
+    mutationObserver = new MutationObserver(function (records) {
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].addedNodes && records[i].addedNodes.length) { queueRescan(); return; }
+      }
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+
+  return {
+    scan: scan,
+    get enabled() { return enabled(); },
+    get stats() { return { armed: armedCount, counters: countedCount }; }
+  };
+})();

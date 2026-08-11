@@ -147,6 +147,21 @@
   --shadow-lg:0 4px 12px rgba(1,13,32,0.08),0 16px 40px rgba(1,13,32,0.14);
   --shadow-brand:0 8px 24px rgba(0,79,200,0.28);
 
+  /* --- Section-system primitives, settled design-direction values -----
+     Additive, like the chrome block above. New names only, so the Pass
+     2b-b list of 15 retargets and 23 deletions is untouched. */
+  --blue-wash:#EFF6FF;
+  --gradient-silver:linear-gradient(180deg,#F4F6F9 0%,#C9CFDA 55%,#AEB6C4 100%);
+  --shadow-sm:0 1px 2px rgba(1,13,32,0.06),0 1px 3px rgba(1,13,32,0.08);
+  --shadow-md:0 2px 4px rgba(1,13,32,0.05),0 6px 16px rgba(1,13,32,0.08);
+
+  /* Band rhythm. Deliberately NOT --space-section: that token is consumed
+     by the .resources-* rules on the resources hub, so changing its value
+     would move another page's spacing. */
+  --band-y:clamp(4rem,8vw,7rem);
+  --band-y-sm:clamp(2.5rem,5vw,4rem);
+  --band-w:1200px;
+
   /* --- Aliases ----------------------------------------------------
      Old names, so no selector needs editing in this pass. Same file as
      the primitives, so no fallback is needed. Removed after Pass 2c. */
@@ -1925,4 +1940,490 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
   max-width: 600px;
   margin: 0 auto 24px;
   color: var(--ink);
+}
+
+/* ============================================================================
+   SECTION SYSTEM
+   Reusable across page types. Every rule is scoped to `.band` on purpose.
+
+   Why scoped: `.eyebrow` is already rendered by templates/article-index.html
+   on all 73 article pages, `.stat` by services/index.html, bare `.icon` by the
+   calculator, contact and FAQ pages, and `.btn` by the calculator and contact
+   inline payloads. A bare global rule for any of those names would restyle
+   pages this pass is not allowed to touch. Scoping to `.band` is collision
+   free because `.band` is a new class with no existing consumers.
+
+   A page opts in by wrapping a section:
+       <section class="band band--page">
+         <div class="band__inner"> ... </div>
+       </section>
+
+   `.band__inner` is the 1200px container. It is deliberately not `.container`,
+   which is 1100px site-wide and consumed by every other page.
+   ============================================================================ */
+.band { padding-block: var(--band-y); }
+.band--sm { padding-block: var(--band-y-sm); }
+.band--page   { background: var(--surface-page); }
+.band--card   { background: var(--surface-card); }
+.band--sunken { background: var(--surface-sunken); }
+.band--navy   { background: var(--navy-950); color: var(--text-inverse-1); }
+
+.band__inner {
+  max-width: var(--band-w);
+  margin: 0 auto;
+  padding-inline: 20px;
+}
+@media (min-width: 769px) { .band__inner { padding-inline: 24px; } }
+
+/* ---------- Typography inside a band ---------- */
+.band .eyebrow {
+  display: block;
+  margin-bottom: 16px;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.band--navy .eyebrow { color: var(--blue-sky); }
+.band .eyebrow--green { color: var(--green-700); }
+.band--navy .eyebrow--green { color: var(--green-500); }
+
+.band .h2 { font-size: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+.band .h3 { font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem); line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+.band .h4 { font-size: 1.125rem; line-height: 1.4; font-weight: 700; margin: 0; }
+
+.band .lede {
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 60ch;
+  margin: 0;
+}
+.band--navy .lede { color: var(--text-inverse-2); }
+
+.band .section-head { max-width: 720px; margin-bottom: 48px; }
+.band .section-head .lede { margin-top: 16px; }
+
+/* Silver display treatment. Solid inverse colour first so the text is never
+   invisible if background-clip is unsupported. */
+.band .silver { color: var(--text-inverse-1); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .band .silver {
+    background: var(--gradient-silver);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* Focus ring for band content. The chrome has its own in the Bundle B
+   block; without this, band links and buttons fall back to the UA ring,
+   which is not reliably visible on the navy surfaces. */
+.band :focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.band--navy :focus-visible { outline-color: var(--surface-card); }
+
+/* ---------- Icons inside a band ---------- */
+.band .icon {
+  width: 24px; height: 24px;
+  stroke: currentColor; stroke-width: 1.75; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
+  flex: none;
+}
+.band .icon--sm { width: 18px; height: 18px; }
+
+/* ---------- Buttons inside a band ---------- */
+.band .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding-inline: 24px;
+  border: 0; border-radius: 12px;
+  font-family: inherit; font-size: 1rem; font-weight: 600; line-height: 1;
+  white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color .15s ease, color .15s ease,
+              box-shadow .15s ease, background-position .3s ease;
+}
+.band .btn--lg { height: 56px; padding-inline: 32px; }
+.band .btn--primary {
+  background-image: var(--gradient-brand);
+  background-size: 150% 150%; background-position: 0% 0%;
+  color: var(--surface-card);
+  box-shadow: var(--shadow-brand);
+}
+.band .btn--primary:hover { background-position: 100% 100%; }
+.band .btn--secondary {
+  background: transparent; color: var(--blue);
+  border: 1.5px solid var(--blue);
+}
+.band .btn--secondary:hover { background: var(--blue-tint-08); }
+.band--navy .btn--secondary { color: var(--surface-card); border-color: var(--scrim-white-35); }
+.band--navy .btn--secondary:hover { background: var(--scrim-white-08); }
+.band .btn--ghost {
+  height: auto; padding: 4px 2px; background: none;
+  color: var(--blue); border-radius: 4px; box-shadow: none;
+}
+.band .btn--ghost:hover { text-decoration: underline; text-underline-offset: 4px; }
+.band .btn--ghost .icon--sm { transition: transform .15s ease; }
+.band .btn--ghost:hover .icon--sm { transform: translateX(4px); }
+.band--navy .btn--ghost { color: var(--blue-sky); }
+
+/* ---------- Stat display ---------- */
+.band .stat-num {
+  display: block;
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-1);
+}
+.band--navy .stat-num { color: var(--text-inverse-1); }
+.band .stat-rule {
+  display: block; width: 32px; height: 3px;
+  background: var(--gradient-brand); border-radius: 2px;
+  margin: 12px 0;
+}
+.band .stat-label { font-size: .9375rem; color: var(--text-2); max-width: 26ch; display: block; }
+.band--navy .stat-label { color: var(--text-inverse-3); }
+
+/* ---------- Tile: the shared card treatment ---------- */
+.band .tile {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--surface-card);
+  border: 1px solid var(--border-1);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: 32px;
+  text-decoration: none; color: inherit;
+  overflow: hidden;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.band a.tile:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.band .tile--flush { padding: 0; }
+.band--navy .tile { background: var(--navy-900); border-color: var(--border-dark); }
+
+/* ---------- Grids ---------- */
+.band .band-grid { display: grid; gap: 24px; }
+.band .band-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.band .band-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.band .band-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1024px) {
+  .band .band-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .band .band-grid--2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .band .band-grid--3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .band .band-grid--4 { grid-template-columns: 1fr; }
+}
+
+/* ============================================================================
+   MOTION SYSTEM
+   Opt in with data-reveal on any element, data-reveal-group on an ancestor to
+   stagger its children, and data-count-to on a number.
+
+   Never-invisible technique: there is NO global hiding class. JS arms elements
+   one at a time, and only ever arms an element that is currently OFF SCREEN.
+   An element already in the viewport is marked done and never hidden. So:
+     - JS absent, blocked or slow  -> nothing is ever armed, nothing is hidden
+     - styles.css late             -> armed elements are off screen anyway
+     - reduced motion              -> JS arms nothing at all
+   Only transform and opacity are animated.
+   ============================================================================ */
+[data-reveal].is-armed {
+  opacity: 0;
+  transform: translateY(16px);
+}
+[data-reveal].is-armed.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal].is-armed,
+  [data-reveal].is-armed.is-visible {
+    opacity: 1; transform: none; transition: none;
+  }
+}
+
+/* ============================================================================
+   HOMEPAGE
+   Everything here is scoped to .page-home on <body>. These are compositions
+   specific to this page (the hero split, the assessment diagram, the two band
+   overlaps). The reusable parts live in the SECTION SYSTEM block above.
+
+   `.home-hero` is deliberately not `.hero`: styles.css already defines `.hero`
+   as the old blue gradient hero, which ask-the-experts.html still uses.
+   ============================================================================ */
+.page-home .home-hero {
+  position: relative;
+  background: var(--navy-950);
+  color: var(--text-inverse-1);
+  overflow: hidden;
+  /* .band supplies padding-block; the hero drives its own top padding from
+     the grid and needs extra bottom room for the proof card overlap */
+  padding-top: 0;
+  padding-bottom: calc(var(--band-y) + 64px);
+}
+.page-home .home-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 10fr) minmax(0, 9fr);
+  gap: 64px;
+  align-items: center;
+  padding-top: var(--band-y);
+  min-height: 600px;
+}
+.page-home .home-hero h1 {
+  font-size: clamp(2.25rem, 1.8rem + 2.25vw, 3rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.page-home .home-hero .lede { margin-top: 24px; color: var(--text-inverse-2); }
+.page-home .home-hero__actions {
+  display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px;
+}
+
+/* ---------- Assessment diagram: the designed no-photography hero visual ---- */
+.page-home .hero-visual { position: relative; min-height: 460px; }
+.page-home .assess-card-back {
+  position: absolute; inset: 8% -4% -4% 10%;
+  background: var(--navy-800); opacity: .45;
+  border: 1px solid var(--border-dark); border-radius: 24px;
+  transform: rotate(3deg);
+}
+.page-home .assess-card {
+  position: absolute; inset: 0 6% 6% 0;
+  background: var(--navy-900);
+  border: 1px solid var(--border-dark);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  padding: 32px;
+  display: flex; flex-direction: column;
+}
+.page-home .assess-card__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; margin-bottom: 16px;
+}
+.page-home .assess-card__title { font-size: .9375rem; font-weight: 600; color: var(--text-inverse-1); }
+.page-home .assess-card__meta {
+  font-size: .8125rem; color: var(--text-inverse-3);
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.page-home .assess-card svg { width: 100%; height: auto; flex: 1; }
+.page-home .assess-chip {
+  position: absolute; display: inline-flex; align-items: center;
+  background: var(--navy-800); border: 1px solid var(--border-dark);
+  border-radius: 9999px; padding: 7px 14px;
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-inverse-1);
+  box-shadow: var(--shadow-md); white-space: nowrap;
+}
+.page-home .chip-lpr   { top: 26%; left: -4%; }
+.page-home .chip-solar { top: 16%; right: -4%; }
+.page-home .chip-ev    { top: 57%; right: -4%; }
+
+/* ---------- Proof seam: overlap 1, pulled up over the hero edge ---------- */
+.page-home .proof-seam { position: relative; z-index: 2; }
+.page-home .proof-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-1);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  margin-top: calc(-1 * var(--band-y));
+  padding: 48px 48px 32px;
+}
+.page-home .proof-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 32px;
+}
+.page-home .proof-head .eyebrow { margin-bottom: 8px; }
+
+/* ---------- Pillars ---------- */
+.page-home .pillar::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--gradient-brand); opacity: 0; transition: opacity .2s ease;
+}
+.page-home .pillar--primary::before { opacity: 1; }
+.page-home .pillar:hover::before { opacity: 1; }
+.page-home .pillar--solar::before,
+.page-home .pillar--ev::before {
+  background: linear-gradient(135deg, var(--green-500), var(--green-700));
+}
+.page-home .pillar-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--blue-tint-08); color: var(--blue); margin-bottom: 24px;
+}
+.page-home .pillar--solar .pillar-icon,
+.page-home .pillar--ev .pillar-icon {
+  background: rgba(45,122,14,0.08); color: var(--green-700);
+}
+.page-home .pillar p { color: var(--text-2); margin: 12px 0 0; flex: 1; max-width: none; }
+.page-home .pillar-metric {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--border-1);
+  font-size: .9375rem; font-weight: 600; color: var(--text-1);
+}
+.page-home .pillar-metric .icon--sm { color: var(--blue); }
+.page-home .pillar-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 24px; font-weight: 600; font-size: .9375rem; color: var(--blue);
+}
+.page-home .pillar-cta .icon--sm { transition: transform .15s ease; }
+.page-home .pillar:hover .pillar-cta .icon--sm { transform: translateX(4px); }
+
+/* ---------- Evidence band ---------- */
+.page-home .evidence { position: relative; overflow: hidden; }
+.page-home .evidence::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(700px 420px at 85% 20%, rgba(0,67,179,0.35), transparent 70%);
+}
+.page-home .evidence .band__inner { position: relative; }
+.page-home .evidence-grid {
+  display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 64px; align-items: center;
+}
+.page-home .checklist { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 24px; }
+.page-home .checklist li { display: flex; gap: 16px; align-items: flex-start; max-width: none; }
+.page-home .checklist .icon { color: var(--blue-bright); margin-top: 2px; }
+.page-home .checklist strong {
+  display: block; color: var(--text-inverse-1);
+  font-size: 1.125rem; font-weight: 700; margin-bottom: 4px;
+}
+.page-home .checklist p { color: var(--text-inverse-2); margin: 0; max-width: 46ch; }
+
+/* Compliance data-graphic: overlap 2, extends past the navy band edge */
+.page-home .data-card {
+  background: var(--navy-900); border: 1px solid var(--border-dark);
+  border-radius: 24px; box-shadow: var(--shadow-lg); padding: 32px;
+  margin-bottom: calc(-1 * (var(--band-y) + 64px));
+  position: relative; z-index: 2;
+}
+.page-home .data-card__head { margin-bottom: 32px; }
+.page-home .data-card__title { font-size: 1.125rem; font-weight: 700; color: var(--text-inverse-1); margin: 0; }
+.page-home .data-card__sub { font-size: .9375rem; color: var(--text-inverse-3); margin: 4px 0 0; }
+.page-home .bars { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; }
+.page-home .bar-group { text-align: center; }
+.page-home .bar-track {
+  height: 220px; display: flex; align-items: flex-end; justify-content: center;
+  border-bottom: 1px solid var(--border-dark); margin-bottom: 16px;
+}
+.page-home .bar { width: 72px; border-radius: 8px 8px 0 0; }
+.page-home .bar--before {
+  height: 50%; background: var(--navy-800);
+  border: 1px solid var(--border-dark); border-bottom: 0;
+}
+.page-home .bar--after { height: 100%; background: var(--gradient-brand); box-shadow: var(--shadow-brand); }
+.page-home .bar-num {
+  display: block; font-size: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.page-home .bar-label { display: block; font-size: .9375rem; color: var(--text-inverse-3); margin-top: 4px; }
+.page-home .data-card__rule {
+  width: 32px; height: 3px; background: var(--gradient-brand);
+  border-radius: 2px; margin: 24px auto 0;
+}
+.page-home .data-card__source { text-align: center; margin: 16px 0 0; font-size: .9375rem; }
+.page-home .data-card__source a { color: var(--blue-sky); }
+
+/* ---------- How it works strip ---------- */
+.page-home .band--how { padding-top: calc(var(--band-y) + 64px); }
+.page-home .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+.page-home .step { display: flex; gap: 16px; align-items: flex-start; }
+.page-home .step-badge {
+  flex: none; width: 40px; height: 40px; border-radius: 9999px;
+  background: var(--blue); color: var(--surface-card);
+  font-weight: 700; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.page-home .step p { color: var(--text-2); font-size: .9375rem; margin: 4px 0 0; }
+.page-home .step a {
+  display: inline-block; margin-top: 8px; font-weight: 600;
+  font-size: .9375rem; color: var(--blue); text-decoration: none;
+}
+.page-home .step a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- Resource cards ---------- */
+.page-home .res-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap; margin-bottom: 48px;
+}
+.page-home .res-thumb {
+  aspect-ratio: 16/9; position: relative; display: flex;
+  align-items: center; justify-content: center; overflow: hidden;
+}
+.page-home .res-thumb--case    { background: linear-gradient(135deg, #0043B3, #010D20 130%); }
+.page-home .res-thumb--guide   { background: linear-gradient(135deg, #0E2A52, #010D20 130%); }
+.page-home .res-thumb--article { background: linear-gradient(135deg, #071B38, #010D20 140%); }
+.page-home .res-thumb .icon { width: 56px; height: 56px; color: var(--surface-card); opacity: .28; stroke-width: 1.25; }
+.page-home .res-tag {
+  position: absolute; left: 12px; bottom: 12px;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-inverse-2);
+  background: rgba(1,13,32,0.55); border: 1px solid var(--border-dark);
+  padding: 4px 10px; border-radius: 9999px;
+}
+.page-home .res-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.page-home .res-body p { color: var(--text-2); font-size: .9375rem; margin: 8px 0 0; flex: 1; max-width: none; }
+.page-home .res-more {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+  font-size: .9375rem; font-weight: 600; color: var(--blue);
+}
+.page-home a.res-card:hover .res-more { text-decoration: underline; text-underline-offset: 4px; }
+.page-home .res-card--video { background: var(--navy-900); border-color: var(--border-dark); }
+.page-home .res-card--video .res-thumb { background: linear-gradient(160deg, #0E2A52, #010D20 120%); }
+.page-home .res-card--video .h4 { color: var(--text-inverse-1); }
+.page-home .res-card--video .res-body p { color: var(--text-inverse-3); }
+.page-home .res-card--video .res-more { color: var(--blue-sky); }
+.page-home .play-glyph {
+  width: 56px; height: 56px; border-radius: 50%; background: var(--surface-card);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-md); transition: transform .2s ease;
+}
+.page-home .play-glyph svg { width: 20px; height: 20px; fill: var(--blue); stroke: none; margin-left: 3px; }
+.page-home a.res-card:hover .play-glyph { transform: scale(1.06); }
+
+/* ---------- Closing CTA band ---------- */
+.page-home .cta-band { position: relative; text-align: center; overflow: hidden; }
+.page-home .cta-band::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(640px 360px at 50% 110%, rgba(0,67,179,0.45), transparent 70%);
+}
+.page-home .cta-band .band__inner { position: relative; max-width: 760px; }
+.page-home .cta-band .lede { margin: 16px auto 0; }
+.page-home .cta-band .home-hero__actions { justify-content: center; margin-top: 48px; }
+
+/* ---------- Homepage responsive ---------- */
+@media (max-width: 1024px) {
+  .page-home .home-hero__grid {
+    grid-template-columns: 1fr; gap: 48px; min-height: 0; padding-top: 64px;
+  }
+  .page-home .hero-visual { min-height: 420px; max-width: 640px; }
+  .page-home .evidence-grid { grid-template-columns: 1fr; gap: 48px; }
+  .page-home .data-card { margin-bottom: 0; max-width: 560px; }
+  .page-home .band--how { padding-top: var(--band-y); }
+}
+@media (max-width: 768px) {
+  .page-home .steps { grid-template-columns: 1fr; gap: 24px; }
+  .page-home .proof-card { padding: 32px 24px; margin-top: calc(-1 * 64px); }
+  .page-home .home-hero { padding-bottom: calc(64px + 48px); }
+}
+@media (max-width: 640px) {
+  .page-home .home-hero__actions .btn { width: 100%; }
+  .page-home .hero-visual { min-height: 360px; }
+  /* three anchored labels are too dense at phone width: keep LPR enforcement
+     and Solar lighting; the EV stalls stay drawn, just unlabelled */
+  .page-home .chip-ev { display: none; }
+  .page-home .chip-lpr { left: -2%; }
+  .page-home .chip-solar { top: 24%; right: -2%; }
+  .page-home .bar-track { height: 160px; }
+  .page-home .bar { width: 56px; }
 }

@@ -20,8 +20,8 @@ working days against roughly 27 available. This plan schedules 26 working days
 of implementation between Thursday Aug 6 and Friday Sep 11 by making the
 following changes: the EV consolidation page is cut entirely (nav entry and
 light tidying only), Pass 2c shrinks to a scripted literal recolor with all
-tokenization deferred post-conference, motion reduces to two patterns (section
-reveal and nav underline; the stat count-up is cut), the calculator gets a
+tokenization deferred post-conference, motion reduces to three patterns (section
+reveal with per-child stagger, nav underline, and the stat count-up), the calculator gets a
 two-day reskin instead of a redesign, the inline recolor is bundled into the
 same 148-page sweep as the header and footer so the site is swept once instead
 of twice, and the week of approval latency in the design document's schedule
@@ -533,7 +533,7 @@ exists so no cut later reads as an oversight.
 | EV consolidation page (`/services/ev-charging/`) | Cut by decision: EV gets a nav entry to `/services/#ev` and a tidied hub block only. Writing a real consolidation hub competes with solar for the same window | Backlog: build when EV earns a content investment; nav repoint is then one Bundle-B-style sweep |
 | Who We Serve axis and 5 segment pages | Capacity call (writing time) plus the segment keywords land on frozen `/consultation/`. Nav reserves the slot | Backlog, already recorded in the design direction |
 | Pass 2c tokenization, alias removal, duplicate-rule deletion in inline payloads | The inline payloads are critical CSS; tokenizing them structurally requires the deferred inline/linked refactor, and `var()` in critical CSS causes color flash | Backlog: post-conference pass with its own first-paint test harness |
-| Motion beyond section reveal and nav underline (stat count-up, per-child stagger, CTA glow animation) | Decision: one or two patterns. Motion polish is the first thing nobody at a booth misses | Backlog: motion pass with a written spec; `docs/motion-spec.md` is NOT being written before the conference |
+| Motion beyond section reveal, per-child stagger, nav underline and stat count-up (CTA glow animation, parallax, any further effects) | Decision: the four shipped patterns are the whole set. Motion polish beyond them is the first thing nobody at a booth misses | Backlog: motion pass with a written spec; `docs/motion-spec.md` is NOT being written before the conference |
 | Calculator redesign (flow, steps, report layout) | Decision: minimal reskin only (chrome, tokens, navy results panel, modal into the form system) | Backlog: calculator UX pass |
 | Consultation redesign | Standing freeze; carries live conversion tracking. The Ads bidding switch that was to lift it is unlikely before the conference, and the freeze decision is deferred with three options open (`REBRAND.md`) | Own pass, reusing the token layer; the audit's open LP design questions get answered then. Brought forward only if Ben chooses to rebrand or to pause the campaign |
 | `ask-the-experts.html` URL migration and page-level redesign | Migration needs a `_redirects` entry (frozen file); the page-level design was never specced. Cards are recolored by the sweep | Backlog, already listed in REBRAND.md |
@@ -601,11 +601,16 @@ script, and the first claim on weekend buffer.
    would break first paint. The conference-scope sweep writes new hex
    literals in place and removes nothing. Alias removal ("removed after the
    Pass 2c sweep") therefore also moves post-conference.
-4. **Sections 4 and 7: motion shrinks.** Only the section reveal and the nav
-   underline ship. The stat count-up (section 7, proof band; section 5, stat
-   card), per-child stagger, and any further effects are cut, and
-   `docs/motion-spec.md` will not be written before the conference; the two
-   shipped patterns are specified by one paragraph in this plan.
+4. **Sections 4 and 7: motion shrinks, but the count-up ships.** CORRECTED
+   2026-08-10. This item previously cut the stat count-up and the per-child
+   stagger. That contradicted `REBRAND.md`, whose approved-visual-reference
+   section names the staggered reveal AND the stat count-up as the two required
+   patterns, and `REBRAND.md` holds the decision where the two documents
+   disagree. Both shipped in the homepage rebuild, together with the nav
+   underline delivered in Bundle B. What remains cut is everything beyond
+   those: the CTA glow animation and any further effects.
+   `docs/motion-spec.md` is still not being written before the conference;
+   the shipped system is specified in `REBRAND.md`.
 5. **Section 9 schedule superseded.** The week-1 approval latency no longer
    exists (decisions settled), the header/footer sweep and the inline recolor
    merge into one pass, and the calculator reskin (absent from the design

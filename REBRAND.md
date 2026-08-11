@@ -10,12 +10,13 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: Bundle B COMPLETE, all four commits.** Pass 2b-b landed with it, so
-the whole site is on the new blue and the chrome is live on all 148 files.
-Verified in a browser: the inline critical CSS and `styles.css` resolve to the
-same blue on every payload group, so there is no colour flash on any page.
+**Status: homepage rebuilt from the approved prototype.** Bundle B (all four
+commits) and Pass 2b-b are complete and pushed. The homepage now runs on the
+reusable section and motion systems described below, which the services hub and
+the article template inherit next.
 
-Next up is the homepage rebuild, then the services hub restructure.
+Next up is the services hub restructure, which also owes `/services/` its
+`#solar` block and anchor.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -389,7 +390,7 @@ pixel-identical.
 
 ---
 
-## NEXT SESSION STARTS HERE: the homepage rebuild
+## NEXT SESSION STARTS HERE: the services hub restructure
 
 **State: Bundle B is COMPLETE and pushed. Pass 2b-b went with it.** Scope was
 held in full; no cuts were taken. The dropdowns and the nav restructure both
@@ -603,6 +604,191 @@ section used to imply.
 
 **If Bundle B is otherwise complete and the asset has not landed, say so rather
 than working around it.**
+
+---
+
+## Homepage rebuild: the reusable systems
+
+The homepage was ported from `docs/preview/homepage.html` on 2026-08-10. The
+port itself matters less than the two systems it establishes. Both are built to
+be inherited by the services hub, the article template and the state pages.
+Anything still homepage-specific is scoped to `.page-home` and is expected to
+be rewritten or promoted later.
+
+### Why everything is scoped, and what that buys
+
+Nothing in either system is a bare global class. That is not stylistic caution,
+it is a hard constraint discovered during discovery:
+
+| Class | Already used by | A bare global rule would |
+|---|---|---|
+| `.eyebrow` | `templates/article-index.html:176`, so all 73 article pages | restyle every article hero eyebrow |
+| `.stat` | `services/index.html` | restyle the services stats |
+| `.icon` | 12 bare uses on calculator, contact/thank-you, calculator/report | resize existing icons |
+| `.btn` | calculator and contact inline payloads | add height and padding their blocks do not override |
+
+So the section system is scoped to `.band`, which is a new class with zero
+existing consumers, and the motion system keys off `data-*` attributes, which
+collide with nothing.
+
+### Section system: how a page opts in
+
+```html
+<section class="band band--page">
+  <div class="band__inner">
+    <span class="eyebrow">Section label</span>
+    <h2 class="h2">Heading</h2>
+    <p class="lede">Supporting sentence.</p>
+  </div>
+</section>
+```
+
+| Class | What it is |
+|---|---|
+| `.band` | the section wrapper and the opt-in. Vertical rhythm from `--band-y` |
+| `.band--sm` | compressed rhythm, `--band-y-sm`, for demoted sections |
+| `.band--page` `.band--card` `.band--sunken` `.band--navy` | the four surfaces |
+| `.band__inner` | the 1200px container. **Not** `.container`, which is 1100px and consumed by every other page |
+| `.eyebrow` `.eyebrow--green` | uppercase tracked label. Green variant is scoped to solar and EV per the green rule |
+| `.h2` `.h3` `.h4` `.lede` `.section-head` | type scale inside a band |
+| `.silver` | the silver gradient display treatment, with a solid inverse fallback first so text is never invisible |
+| `.stat-num` `.stat-rule` `.stat-label` | the stat display |
+| `.tile` `.tile--flush` | the shared card treatment. `a.tile` lifts on hover |
+| `.band-grid` `--2` `--3` `--4` | responsive grids, collapsing at 1024, 768 and 640 |
+| `.btn` `--primary` `--secondary` `--ghost` `--lg` | the button system, band-scoped |
+| `.icon` `.icon--sm` | inline SVG sizing |
+
+`.band--navy` automatically re-tints the eyebrow, lede, stat label, secondary
+button and focus ring for a dark surface, so a navy section needs no extra
+classes.
+
+**Focus rings.** `.band :focus-visible` gives a 2px ring, blue on light
+surfaces and white on `.band--navy`. Bundle B covers the chrome separately.
+Without this rule band content fell back to the UA ring, which is not reliably
+visible on navy.
+
+### Motion system: effects, opt-in, and where it lives
+
+Code lives in `script.js` (loaded `defer` by 147 of 149 pages) and `styles.css`.
+Nothing is inline on any page. Exported as `window.MPMotion`.
+
+| Attribute | Effect |
+|---|---|
+| `data-reveal` | entrance reveal: fades and rises 16px into place |
+| `data-reveal-group` | staggers the `[data-reveal]` children beneath it, `i * 70ms` capped at 420ms |
+| `data-count-to="178"` | counts a number up to its final value over 900ms at 40% visibility |
+
+Only `opacity` and `transform` are animated.
+
+**The never-invisible technique. There is no global hiding class.** The
+prototype added `is-motion` to `<html>` and hid every `.reveal` beneath it,
+which means that on a slow connection content paints visible, then gets hidden,
+then fades in. Instead, JS arms elements one at a time and **only ever arms an
+element that is currently off screen**. An element already in the viewport is
+marked handled and is never hidden. The consequences:
+
+- JS absent, blocked, slow or throwing: nothing is ever armed, so nothing is
+  ever hidden. Verified by loading the page in a sandboxed frame with scripts
+  blocked: 27 reveal targets, 0 armed, 0 at zero opacity, counters showing
+  their final values.
+- `styles.css` arriving late: an armed element is off screen anyway, so the
+  hiding rule cannot produce a visible flash.
+- `prefers-reduced-motion: reduce`: JS arms nothing, and a CSS media query
+  neutralises the armed state as a second line of defence.
+
+Count-up targets carry their final value as text in the HTML, so a JS failure
+shows the real number.
+
+### Late-arriving content, which is what the article pass needs
+
+`js/article.js` runs `init()` on `DOMContentLoaded`, then awaits a fetch, then
+assigns `#article-body.innerHTML`. Anything registered at parse time sees zero
+targets on an article page, and any node observed inside `#article-body` is
+destroyed by the swap.
+
+The mechanism is a **MutationObserver on `document.body`** (`childList`,
+`subtree`), coalesced with a 50ms timer, which rescans for unhandled
+`[data-reveal]` and `[data-count-to]`. Plus `window.MPMotion.scan(root)` for an
+explicit call.
+
+**It requires no change to `js/article.js`**, which is the property that
+matters: that file carries both the gtag gate and the noindex guard, and any
+edit there complicates the merge-day reverts. The article template opts in by
+adding `data-reveal` to its markup and nothing else.
+
+**Use a timer, not `requestAnimationFrame`, for the coalescer.** The first
+implementation used rAF and stalled: rAF does not fire in a hidden or
+background tab, and the `pending` flag latched, so every later mutation was
+ignored even after the tab became visible. Caught in verification when injected
+content was never armed. `clearTimeout`/`setTimeout` is self-healing.
+
+Verified against the real article shape: an `innerHTML` assignment into an
+off-screen container armed both new elements, and a second `innerHTML` swap into
+the same container armed the replacement too.
+
+### Homepage payload group: unchanged at six files
+
+`index.html` shares a 4757-byte critical payload with `about/`, `calculator/`,
+`contact/`, `faq/` and `services/`. **That block was not touched.** The homepage
+carries a **second** `<style>` block of 3462 bytes for its own critical CSS,
+exactly as `services/index.html` already does with its 8088-byte block.
+
+The group therefore still spans the same six files, and a future chrome sweep
+still needs one anchor and one count assertion rather than two. Diverging the
+shared block would have split it permanently.
+
+The homepage block is hex literals only, asserted by a gate. A `var()` there
+would resolve only once the async `styles.css` lands, which is the exact flash
+the payload exists to prevent.
+
+### Four tokens added, additive
+
+`--blue-wash` `#EFF6FF`, `--gradient-silver`, `--shadow-sm` and `--shadow-md`,
+all settled `docs/design-direction.md` values. New names only, so the Pass 2b-b
+list of 15 retargets and 23 deletions is untouched.
+
+**`--space-section` was deliberately NOT redefined.** The prototype wants
+`clamp(4rem, 8vw, 7rem)`; the token holds `clamp(3.5rem, 6vw, 5.5rem)` and is
+consumed by the `.resources-*` rules on the resources hub, so changing it would
+have moved another page's spacing. The band rhythm uses new `--band-y` and
+`--band-y-sm` instead. **Standing rule: do not redefine a token another page
+consumes. Add a new name.**
+
+### Two content decisions recorded so they stop being re-flagged
+
+1. **The quote card is not built.** The approved prototype carries a named
+   client quote card in the approach band, containing placeholder text
+   (`[Named client quote pending permission...]`). No quote and no permission
+   exist, and placeholder text does not ship. The slot is real and the design
+   accommodates it; build it when a genuine quote and written permission exist.
+   Do not invent a founder quote.
+2. **"$3,000 to $8,000 or more per month" stays.** It is current production
+   copy, live in the hero and in the homepage meta description, and it is a
+   stated earnings range rather than a case-study statistic. The
+   no-fabricated-statistics rule targets invented case results. **The source is
+   unverified and is worth substantiating post-conference.**
+
+Every other figure on the page is an Eau Claire figure: 178 percent revenue
+increase, 45 to 90 percent compliance, $240,000 property value lift.
+
+### Image slots on the homepage
+
+Three `PHOTO SLOT` comments mark them inline. All three ship in their designed
+fallback state; none is a placeholder.
+
+| Slot | Ships as | Intended photograph |
+|---|---|---|
+| Hero visual | layered SVG site plan with LPR, solar and EV callouts | shot #2, 21:9 monitored-lot still, or a frame from `home_video.mp4` |
+| Approach | two-bar compliance graphic, 45 to 90 percent | shot #1, site walk or install in progress, 16:10, min 1600px |
+| Resource thumbs | typographic category-colour gradients | existing generated thumbnails, once the imagery refresh lands |
+
+### What the old homepage lost
+
+The hero `<video>` and its bespoke loading script, `camera_lot.webp`, and the
+three emoji icons in the approach section. The `.hero-bg__*` rules in
+`styles.css` are now dead: nothing references them. They were left in place
+rather than deleted, since stale-asset cleanup is a post-Vegas item, but they
+are safe to remove whenever that pass runs.
 
 ---
 
