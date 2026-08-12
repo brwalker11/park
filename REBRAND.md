@@ -10,19 +10,17 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: article pages ported, state subpage reading typography ported.**
-Bundle B (all four commits), Pass 2b-b, the homepage rebuild, the 73 article
-pages and the 28 state subpages are complete and pushed.
+**Status: every reading surface is now addressed.** Bundle B (all four
+commits), Pass 2b-b, the homepage rebuild, the 73 article pages, the 28 state
+subpages and the 30 video pages are complete and pushed.
+
+The video pages got the measure fix only, not the full treatment, because
+their content does not support one: 94 words of prose per page and no
+transcripts. See the video section below for the reasoning and the trigger for
+revisiting.
 
 Next up is the services hub restructure, which also owes `/services/` its
 `#solar` block and anchor.
-
-The 30 video pages under `resources/videos/` are the remaining reading surface.
-They already load `css/article.css` and carry `<body class="article-page">`, but
-their content sits as direct children of `.article` with no `#article-body`, so
-adding `article-read` would apply the hero and layout rules to markup that has
-neither. They need their own scoped block, the same shape as the
-`.state-detail` block just added. Not done here.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -918,6 +916,109 @@ the background entirely. Do not preserve it when porting.
 
 ---
 
+## Video pages: measure fixed, reading treatment deferred
+
+Done 2026-08-11. **One token changed in each of the 30 files** under
+`resources/videos/`, and nothing else.
+
+### What shipped
+
+The container carried an inline `max-width:70ch`, which measured **80.8 real
+characters per line** at 1024 and above. Same `ch` error the article port
+diagnosed: with Inter the zero glyph is wide enough that a ch-based measure
+always overstates how much text fits.
+
+    max-width:70ch   ->  max-width:38rem
+    704px container      608px
+    672px prose          576px
+    80.8 characters      69.7 characters
+
+**38rem was chosen by measurement, not arithmetic.** Candidates were rendered
+on a real page and every wrapping paragraph walked to find where the line top
+changes: 41rem gave 77.3, 39rem gave 72.6, 38rem gave 69.7, 37rem gave 68.9.
+
+**This is deliberately NOT the article's 39rem.** Video prose renders at 16px
+and article prose at 18px, so the same rem value yields more characters here.
+38rem at 16px matches the article surface's measured 69 to 74. Matching the
+result, not the token.
+
+It is an inline style, so no stylesheet could override it without
+`!important`. That is why it was edited in place rather than in CSS.
+
+### 1. The full reading treatment was considered and deferred
+
+Measured across all 30: **82 to 106 words of prose per page, median 94, in 3
+paragraphs.** The single longest text block on the page measured is 33 words.
+Structure is uniform: 3 `h2` sections, 3 related links, one 47-word summary.
+The embed is 622px tall against a 1,771px article, so the video is the page and
+the text around it is caption length.
+
+An 18px/1.72 treatment exists to make thousands of words comfortable. Here it
+would restyle roughly 90 words.
+
+**There is also no scoping hook.** `<body class="article-page">` is shared with
+the 73 article pages, and every other class on the page (`.article`,
+`.article-summary`, `.back-link`, `.breadcrumb`, `.cta-actions`, `.res-tag`) is
+shared with another family. A hook would have to be added to all 30 files by
+hand, since there is no template and no generator: `tools/` has nothing for
+videos and `data/` has no video file. Thirty hand-maintained files, same
+position as the state subpages.
+
+**Revisit if the transcripts are ever filled.** That is the one change that
+would turn these into genuine long-form pages.
+
+### 2. All 30 transcripts are placeholders
+
+Every one reads "Transcript will be available once the video is published."
+Zero of 30 carry a real transcript.
+
+**This is a content and SEO gap, not a design gap.** These pages currently
+offer roughly 94 words of indexable text each against a full page of chrome,
+and the section meant to carry the substance is empty everywhere. Transcripts
+would also make the video content accessible to anyone not watching, and would
+be the single highest-value content addition available on these pages.
+
+### 3. The only content pages with no inline payload
+
+The 30 video pages carry **no `<style>` block at all**, the only content pages
+on the site without one, and they load both stylesheets render-blocking:
+
+```html
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/css/article.css">
+```
+
+No critical-CSS payload, no `rel="preload" onload` pattern, and therefore no
+copy of the shared 4,757-byte chrome block. **A performance difference, not a
+defect:** render-blocking CSS means no flash of unstyled content, at the cost
+of a slower first paint. Worth knowing before anyone assumes every page follows
+the async pattern. They do `preconnect` to youtube.com and googletagmanager.
+
+### What reaches them from css/article.css
+
+27 rules, enumerated from the live CSSOM: `:root`, `.article`,
+`.article h1/h2/p/ul,ol/li/em`, `.article-summary`, `.article-footer`,
+`.cta-actions`, `.btn`, `.btn-primary`, `.btn-secondary`, `.breadcrumb*`,
+`.back-link*`, `.site-footer`. All legacy, all pre-port.
+
+**Zero `.article-read` rules reach them**, verified by matching every rule in
+both stylesheets against the live DOM. The article port is fully isolated, and
+the 27 legacy rules are exactly why `css/article.css` could not be restyled in
+place during that pass.
+
+### The embed is untouchable from CSS
+
+The YouTube embed is styled entirely by inline attributes: a 350px wrapper, a
+`padding-bottom:177.78%` aspect box (9:16 vertical Shorts, all 30), and
+`position:absolute; inset:0` on the iframe. Exactly one stylesheet rule
+anywhere targets an iframe, `.res-thumb.video-wrapper iframe` in `styles.css`,
+and it does not apply here: that selector belongs to the cards on
+`ask-the-experts.html`.
+
+Verified unchanged at 375, 768, 1024 and 1440 after the measure change.
+
+---
+
 ## State pages: reading typography ported, TOC and rail deferred
 
 Done 2026-08-11. **CSS only. No state page markup was edited.**
@@ -1528,6 +1629,27 @@ Not rebrand work. Do not start any of these before the conference.
   reader to a 404. The shipped manifest is `images/site.webmanifest`.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
+- **Content pass over the 30 video pages.** Found 2026-08-11 while fixing the
+  measure. Two items, both copy only:
+
+  **First person: 46 occurrences across 22 of the 30 pages.** Mostly the CTA
+  line, which is unique per page but almost always phrased "Let's talk",
+  "Let's run the numbers", "Let's discuss your options". Also "our parking
+  technology" and "our cameras" in several summaries. Same treatment as the
+  article CTA pass: rewrite to second person against the house style the EV
+  articles use.
+
+  **All 30 transcripts are placeholders.** See the video section above. Filling
+  them is the highest-value content work available on these pages and it also
+  unblocks the deferred reading treatment.
+
+  **NOT a violation: the "$2,500" referral figure** on
+  `resources/videos/parking-referral-program/` ("Know someone with a parking
+  lot? Refer them and earn up to $2,500."). **Confirmed accurate by Ben,
+  2026-08-11.** It is a real programme figure, not a fabricated statistic, and
+  it is deliberately recorded here so it does not get re-flagged by the next
+  audit that greps for currency amounts. Leave it as written.
+
 - **Five Texas state subpages have no body headings, and one is close to
   empty.** A content gap, not a design gap: the reading typography now applied
   to these pages has almost nothing to work on. Found 2026-08-11 while porting.
