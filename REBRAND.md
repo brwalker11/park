@@ -785,42 +785,47 @@ Two more, specific to this pass:
   cost of editing the file carrying both guards. Not worth it on a reading page.
   Revisit only if that file is being opened for another reason.
 
-### OPEN QUESTION: the 21 standalone CTA paragraphs in the fragments
+### RESOLVED: the standalone CTA paragraphs in the fragments
 
-**This is a content decision and needs an answer before the fragments are
-touched.** Not a styling problem: they render correctly.
+Decided and done 2026-08-11. **Delete the `/contact/` ones, keep and normalise
+the `/calculator/` ones.**
 
-21 body fragments end a section with a plain paragraph whose whole job is a call
-to action, for example:
+Rationale: the contact ask is already made twice on every article, by the sticky
+rail and the navy CTA band, so a third copy in the prose was redundant. The
+calculator paragraphs are the only body-level path to the calculator, which is
+otherwise reachable only from the header and the CTA band, so they earn their
+place.
 
-> Want to see what your lot could earn? [Try our free parking revenue
-> calculator](/calculator/).
+| | Before | After |
+|---|---|---|
+| Standalone `/contact/` CTA paragraphs | 10 | **0** |
+| Standalone `/calculator/` CTA paragraphs | 12 | **12** |
+| Of those, using first person | 13 of 21 | **0** |
 
-They carry no class and no wrapper, so they read as ordinary body prose. 12 link
-to `/calculator/` and 10 to `/contact/`. On
-`articles/dynamic-pricing-guide.html` two of them sit directly above the navy
-CTA band, which makes the same two asks as buttons, and the sticky rail carries
-a third copy of the assessment ask. Three versions of one request inside a
-screen and a half.
+Nine were clean whole-paragraph deletions. **One could not be deleted:**
+`articles/what-is-parking-monetization.html` carried both links in a single
+sentence ("Use our parking revenue calculator ... **or** schedule a
+consultation"), so removing the paragraph would have taken out a calculator CTA
+that was meant to stay. The contact clause was dropped and the calculator half
+kept.
 
-Three options, all of them content work rather than CSS:
+Checked before deleting, and clean in all nine cases: none carried a
+cross-article link, and every one was preceded by a paragraph that stands on its
+own, so no section was left empty and no transition sentence was left dangling.
+Three of the nine were the last line of their file with a blank line above, so
+the trailing blank was reclaimed to keep the single-newline EOF.
 
-1. **Delete them where the rail and the band already cover the same ask.** The
-   likeliest right answer for the `/contact/` ones, which the band duplicates
-   exactly. Reduces 73 fragments by a paragraph each at most.
-2. **Keep them and restyle as a distinct inline component.** Would need a class
-   added to 21 fragments, which is the expensive option, and reintroduces the
-   mid-article interruption the runtime deliberately stopped rendering when
-   `insertInlineCta()` was disconnected.
-3. **Keep them as prose.** They do work as contextual links; the objection is
-   only that they repeat what the chrome already says.
+The 12 calculator paragraphs were rewritten against the house style the 8
+compliant EV articles already used: no first person, second-person framing, a
+specific next step. Mostly "our" to "the". Two got more: the
+`paid-parking-seasonal-destinations` copy lost "based on comparable seasonal
+markets", which described a calculator method that is not verified anywhere,
+and `dynamic-pricing-guide` gained the specificity its one-line version lacked.
 
-The `/calculator/` ones are the stronger of the two groups: the calculator is
-not otherwise linked from the article body, only from the header and the CTA
-band. The `/contact/` ones are the more redundant.
-
-Bundle any decision here with the content pass below, since 13 of the 21 also
-break the copy rules.
+**Option 2 from the original question, restyling them as a distinct inline
+component, was not taken and should stay untaken.** It would mean adding a class
+to 12 fragments and would reintroduce the mid-article interruption that
+disconnecting `insertInlineCta()` removed.
 
 ### The original preview record
 
@@ -1452,23 +1457,22 @@ Not rebrand work. Do not start any of these before the conference.
   reader to a 404. The shipped manifest is `images/site.webmanifest`.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
-- **Content pass over the 73 article body fragments.** These are hand-written
-  and predate the content rules. Inventory taken 2026-08-11 across
-  `articles/*.html`; the redesign did not touch any of it.
+- **Content pass over the 73 article body fragments.** Hand-written, predating
+  the content rules. Inventory taken 2026-08-11 across `articles/*.html`.
 
-  **First person, 13 of the 21 standalone CTA paragraphs.** Twelve use "our"
-  ("Use **our** revenue calculator"), one uses "us" ("Contact **us** for a free,
-  no-obligation consultation"). At least 8 more cross-article paragraphs use
-  "our guide". Files: `dynamic-pricing-guide` (x2), `free-parking-true-cost`,
-  `historic-district-parking-profit`, `office-building-parking-revenue`,
-  `paid-parking-seasonal-destinations`, `parking-enforcement-modernization`,
-  `parking-lot-revenue-potential`, `parking-problems-mean-success`,
-  `private-parking-frees-municipal-land`, `scan-to-pay-vs-lpr`,
-  `shared-parking-agreements-revenue`, `what-is-parking-monetization`.
+  **The CTA paragraphs are DONE**, see the resolved section in the article
+  chapter above: 10 contact CTAs removed, 12 calculator CTAs normalised, first
+  person gone from all of them. What remains:
 
-  The 8 compliant CTAs are all EV articles using "Schedule a consultation",
-  which reads as a later batch written once the rules existed. **Use that
-  phrasing as the model for the rewrite.**
+  **First person in the cross-link paragraphs.** At least 8 use "our guide" or
+  "see our guide to X": `announce-paid-parking-guide`,
+  `church-parking-revenue-guide`, `college-town-parking-revenue`,
+  `dynamic-pricing-guide`, `first-90-days-paid-parking` (x2),
+  `handling-parking-violations-disputes`, `how-to-start-charging-for-parking`,
+  `medical-facility-parking-revenue`, `office-building-parking-revenue`,
+  `parking-lot-insurance-requirements`. Mechanical fix: "our guide" to "the
+  guide". Lower priority than the CTAs were, since these are mid-prose and read
+  as editorial voice rather than as a sales ask.
 
   **Superlatives, 4.** "parking signage **best** practices"
   (`announce-paid-parking-guide`), "the **best** revenue share deals"
@@ -1482,11 +1486,8 @@ Not rebrand work. Do not start any of these before the conference.
   **10 to 15%** occupancy improvement", "**80-90%** compliance", "**25%** in
   most major cities". Each needs a source or needs to go. The Section 30C "30%
   of installation costs" figure is statutory and is the one likely to survive
-  as written.
-
-  Do this as one pass with the two items below and with the standalone-CTA
-  decision recorded in the article section above, since they touch the same
-  paragraphs.
+  as written. **This is the substantive half of the remaining work** and needs
+  Ben, not a mechanical sweep: every figure is either sourceable or not.
 
 - `INLINE_CTA_COPY` in `js/article.js` uses first-person language against the
   content rules. So does the string written into `#article-footer-copy` at
