@@ -309,3 +309,279 @@
     transition: none;
   }
 }
+
+/* ============================================================================
+   STATE SUBPAGE READING SURFACE
+   Ported from the article treatment, 2026-08-11. CSS only: no state page
+   markup was edited, and there is no template or generator behind these 28
+   files, so every markup change would cost 28 hand edits.
+
+   SCOPED TO `.state-detail`, which is on the <body> of the 28 subpages and
+   nowhere else. That scope is not optional:
+
+     - `.state-hero`, `.state-title` and `.state-sub` are ALSO used by
+       resources/states/index.html, the map page. Restyling them bare would
+       move the map page.
+     - `.article-body` is ALSO used by the 73 article pages. Restyling it bare
+       would collide with the article design. (The reverse is already safe:
+       every article rule is scoped under `.article-read`, and no state page
+       loads css/article.css.)
+
+   TWO MARKUP VARIANTS, both targeted throughout:
+     `.content-body`  Colorado and Wisconsin, 14 pages
+     `.article-body`  Minnesota and Texas, 14 pages, which also carry an
+                      `.article-cta` block that `.content-body` pages lack.
+   `.article-cta` is used by those 14 subpages and nothing else on the site,
+   so it is safe to restyle here.
+
+   Values match css/article.css: 18px / 1.72, prose at 39rem, container at
+   46rem, vertical gaps on an 8px rhythm. The tokens live in styles.css with
+   literal fallbacks, per this file's existing convention, because this file
+   can be applied while styles.css has not been.
+   ============================================================================ */
+
+.state-detail .content-body,
+.state-detail .article-body {
+  font-size: var(--read-size, 1.125rem);
+  line-height: var(--read-lh, 1.72);
+  color: var(--ink);
+  max-width: var(--read-wide, 46rem);
+}
+
+/* Prose is pulled in to the measure; wider blocks keep the container width so
+   they read as exhibits rather than more column. */
+.state-detail .content-body > p,
+.state-detail .article-body > p,
+.state-detail .content-body > ul,
+.state-detail .article-body > ul,
+.state-detail .content-body > ol,
+.state-detail .article-body > ol,
+.state-detail .content-body > dl,
+.state-detail .article-body > dl,
+.state-detail .content-body > blockquote,
+.state-detail .article-body > blockquote,
+.state-detail .content-body > h2,
+.state-detail .article-body > h2,
+.state-detail .content-body > h3,
+.state-detail .article-body > h3,
+.state-detail .content-body > h4,
+.state-detail .article-body > h4 {
+  max-width: var(--read-measure, 39rem);
+}
+
+/* ---------- Headings ---------- */
+.state-detail .content-body h2,
+.state-detail .article-body h2 {
+  font-size: clamp(1.5rem, 1.35rem + .75vw, 1.875rem);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin: 56px 0 16px;
+  scroll-margin-top: 96px;
+}
+.state-detail .content-body h2:first-child,
+.state-detail .article-body h2:first-child { margin-top: 0; }
+
+.state-detail .content-body h3,
+.state-detail .article-body h3 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin: 40px 0 12px;
+  scroll-margin-top: 96px;
+}
+.state-detail .content-body h4,
+.state-detail .article-body h4 {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 32px 0 8px;
+}
+
+/* ---------- Prose and inline ---------- */
+.state-detail .content-body p,
+.state-detail .article-body p {
+  margin: 0 0 24px;
+  max-width: var(--read-measure, 39rem);
+}
+.state-detail .content-body strong,
+.state-detail .article-body strong { font-weight: 700; color: var(--ink); }
+.state-detail .content-body em,
+.state-detail .article-body em { font-style: italic; }
+.state-detail .content-body a,
+.state-detail .article-body a {
+  color: var(--state-active);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--blue-tint-40, rgba(0,79,200,0.4));
+}
+.state-detail .content-body a:hover,
+.state-detail .article-body a:hover { text-decoration-color: var(--state-active); }
+
+/* ---------- Lists ----------
+   Counted across the 28 subpages: 93 ul, 319 li, 0 ol. The ol rules are
+   defensive, matching the article treatment so the two surfaces do not drift
+   if an editor adds one. */
+.state-detail .content-body ul,
+.state-detail .article-body ul,
+.state-detail .content-body ol,
+.state-detail .article-body ol {
+  margin: 0 0 24px;
+  padding-left: 1.4em;
+}
+.state-detail .content-body li,
+.state-detail .article-body li {
+  margin: 0 0 12px;
+  line-height: var(--read-lh, 1.72);
+  padding-left: .2em;
+}
+.state-detail .content-body li:last-child,
+.state-detail .article-body li:last-child { margin-bottom: 0; }
+
+.state-detail .content-body ul,
+.state-detail .article-body ul { list-style: none; padding-left: 1.6em; }
+.state-detail .content-body ul > li,
+.state-detail .article-body ul > li { position: relative; }
+.state-detail .content-body ul > li::before,
+.state-detail .article-body ul > li::before {
+  content: "";
+  position: absolute; left: -1.1em; top: .62em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--state-active); opacity: .65;
+}
+.state-detail .content-body ol,
+.state-detail .article-body ol { counter-reset: mp-ol; list-style: none; padding-left: 2.2em; }
+.state-detail .content-body ol > li,
+.state-detail .article-body ol > li { counter-increment: mp-ol; position: relative; }
+.state-detail .content-body ol > li::before,
+.state-detail .article-body ol > li::before {
+  content: counter(mp-ol);
+  position: absolute; left: -2.2em; top: .1em;
+  width: 1.65em; height: 1.65em; border-radius: 9999px;
+  background: var(--blue-wash, #EFF6FF);
+  color: var(--blue-deep, #0043B3);
+  font-size: .82em; font-weight: 700; font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; justify-content: center;
+}
+.state-detail .content-body li > ul,
+.state-detail .article-body li > ul,
+.state-detail .content-body li > ol,
+.state-detail .article-body li > ol { margin-top: 8px; margin-bottom: 0; }
+
+/* ---------- Defensive: markup no subpage uses today ----------
+   0 tables, 0 blockquotes, 0 hr, 0 content images across the 28 files. Styled
+   anyway so the surface does not degrade the first time an editor adds one,
+   and so it degrades the same way the article surface does. */
+.state-detail .content-body hr,
+.state-detail .article-body hr {
+  border: 0; height: 1px; background: var(--border); margin: 48px 0;
+}
+.state-detail .content-body hr + h2,
+.state-detail .article-body hr + h2 { margin-top: 24px; }
+.state-detail .content-body blockquote,
+.state-detail .article-body blockquote {
+  margin: 32px 0; padding: 24px 32px;
+  border-left: 3px solid var(--state-active);
+  background: var(--surface-card, #ffffff);
+  border-radius: 0 12px 12px 0;
+  color: var(--muted); font-size: 1.0625rem;
+}
+.state-detail .content-body table,
+.state-detail .article-body table {
+  width: 100%; border-collapse: collapse; font-size: 1rem; margin: 32px 0;
+}
+.state-detail .content-body th, .state-detail .article-body th,
+.state-detail .content-body td, .state-detail .article-body td {
+  text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);
+}
+.state-detail .content-body th,
+.state-detail .article-body th {
+  font-size: .9375rem; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .06em;
+  background: var(--surface-sunken, #f1f5f9);
+}
+.state-detail .content-body img,
+.state-detail .article-body img {
+  width: 100%; height: auto;
+  border-radius: 12px; border: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* ---------- The inline CTA on the Minnesota and Texas subpages ----------
+   `.article-cta` is styled by a bare global at styles.css:833 as a flex row.
+   That rule predates the rebrand and is used by these 14 subpages and nothing
+   else, so it is restyled here rather than left to fight the reading column.
+   Full container width on purpose: it is not prose, so it sits outside the
+   measure and reads as a distinct block. */
+.state-detail .article-cta {
+  display: block;
+  max-width: var(--read-wide, 46rem);
+  margin: 56px 0 0;
+  padding: 32px;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(1,13,32,0.06), 0 1px 3px rgba(1,13,32,0.08));
+}
+.state-detail .article-cta h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem; line-height: 1.35; font-weight: 700;
+  letter-spacing: -.01em; color: var(--ink);
+  max-width: none;
+}
+.state-detail .article-cta p {
+  margin: 0 0 20px;
+  font-size: 1rem; line-height: 1.6; color: var(--muted);
+  max-width: none;
+}
+.state-detail .article-cta .btn-primary { margin: 0; }
+
+/* ---------- Hero ----------
+   Scoped so the map page keeps its own hero.
+
+   `.state-title` had no max-width, so a 48px heading ran the full 1100px
+   container. Titles here reach 65 characters ("Property Types with Strong
+   Parking Revenue Potential in Wisconsin"), which is a very long line at that
+   size. Capped to the container width the body uses, so the hero and the
+   reading column share a right edge.
+
+   The column stays LEFT aligned rather than centred, deliberately: the hero
+   and the body then share a left edge, and the empty right side is where a
+   rail would go if the deferred rail work ever happens. Centring the body
+   would misalign it against the hero. */
+.state-detail .state-title {
+  max-width: var(--read-wide, 46rem);
+}
+.state-detail .state-sub {
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
+/* ---------- Focus rings ----------
+   styles.css covers .site-header, .site-footer and `.band` content. The state
+   reading column is none of those, so without this its links fall back to the
+   UA ring. Same values as the band system, and as the article surface. */
+.state-detail .state-content :focus-visible,
+.state-detail .state-hero :focus-visible {
+  outline: 2px solid var(--state-active);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Narrow screens ----------
+   18px over a ~335px column measures 38 characters per line, below the
+   comfortable floor. 17px brings it back without making the type small. */
+@media (max-width: 430px) {
+  .state-detail .content-body,
+  .state-detail .article-body { font-size: 1.0625rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .state-detail .content-body a,
+  .state-detail .article-body a { transition: none; }
+}

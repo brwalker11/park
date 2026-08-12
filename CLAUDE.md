@@ -465,6 +465,38 @@ payloads, holding roughly half the site's CSS. `consultation/index.html` alone
 carries 18.3 KB inline. Any CSS change that only edits the four authoritative
 files will miss about half the styling.
 
+**The 4,757-byte chrome block is the most widely shared payload on the site.**
+It is a prefix of the inline `<style>` on **114 files**: 73 article pages, 28
+state subpages, the map page, the 4 state hubs, 7 top-level pages, and
+`templates/article-index.html`. Its hash is `00f299a9`.
+
+Every pass that touches a payload must keep it byte-identical, and must assert
+that rather than assume it. Diverging it would split an 114-file group
+permanently and leave a future chrome sweep with no single anchor. Both the
+article port and the state pass carry a gate for exactly this.
+
+```bash
+node -e "const fs=require('fs'),c=require('crypto');const s=fs.readFileSync(process.argv[1],'utf8');const m=s.match(/<style[^>]*>([\s\S]*?)<\/style>/);console.log(c.createHash('sha1').update(m[1].slice(0,4757)).digest('hex').slice(0,8))" <file>
+```
+
+### Two shared-CSS landmines
+
+**`css/state-map.css` redefines three `styles.css` aliases in its own
+`:root`:** `--ink`, `--muted` and `--border`. It loads after `styles.css`, so
+it wins on the 29 pages that load it. The values resolve identically today
+(`var(--text-1)`, `var(--text-3)`, `var(--border-1)`) and the file says so in a
+comment, so nothing is visibly wrong. **It breaks silently if either side
+moves**: retarget the alias in `styles.css` and the state pages keep the old
+value, or edit the state-map copy and only those pages change. Change both or
+neither.
+
+**`.back-link` is defined in two files and is not private to either.**
+`css/article.css:200` and `css/state-map.css:22` both style it, and it is used
+by 63 pages: the map page, the 4 state hubs, the 28 state subpages, and all 30
+video pages. Article pages no longer use it; the redesign dropped it as a
+duplicate of the first breadcrumb crumb. Do not treat either definition as
+file-private, and do not delete either without checking all 63.
+
 The two consultation pages do not load `styles.css` at all. They are fully
 self-contained with their own `:root`, their own font variables, the only Google
 Fonts links on the site, the only Calendly embed, and header and footer markup

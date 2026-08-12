@@ -10,17 +10,19 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: article pages ported from the approved preview.** Bundle B (all four
-commits), Pass 2b-b, the homepage rebuild and now the 73 article pages are
-complete and pushed. Article pages run on the same section and motion systems
-as the homepage.
+**Status: article pages ported, state subpage reading typography ported.**
+Bundle B (all four commits), Pass 2b-b, the homepage rebuild, the 73 article
+pages and the 28 state subpages are complete and pushed.
 
 Next up is the services hub restructure, which also owes `/services/` its
-`#solar` block and anchor. The 30 video pages under `resources/videos/` are the
-cheapest follow-on: they already load `css/article.css` and already use
-`.article` markup, so they inherit the reading typography by adding
-`article-read` to their body class and dropping the legacy class names. That is
-a separate pass and was not done here.
+`#solar` block and anchor.
+
+The 30 video pages under `resources/videos/` are the remaining reading surface.
+They already load `css/article.css` and carry `<body class="article-page">`, but
+their content sits as direct children of `.article` with no `#article-body`, so
+adding `article-read` would apply the hero and layout rules to markup that has
+neither. They need their own scoped block, the same shape as the
+`.state-detail` block just added. Not done here.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -914,6 +916,75 @@ the background entirely. Do not preserve it when porting.
 
 ---
 
+---
+
+## State pages: reading typography ported, TOC and rail deferred
+
+Done 2026-08-11. **CSS only. No state page markup was edited.**
+
+### What shipped
+
+| File | Change |
+|---|---|
+| `css/state-map.css` | append only, everything new scoped under `.state-detail` |
+| 28 state subpages | inline payload rewritten: map CSS out, reading CSS in |
+
+The 4 state hubs, the map page, `js/state-map.js` and `styles.css` were not
+touched.
+
+Both markup variants are handled: `.content-body` on Colorado and Wisconsin,
+`.article-body` on Minnesota and Texas. The Minnesota and Texas pages also
+carry an `.article-cta` block, used by those 14 subpages and nothing else on
+the site, which is restyled as a card rather than left to fight the reading
+column.
+
+### The subpage payload lost the map
+
+The 7,167-byte payload was the shared 4,757-byte chrome block plus a
+2,410-byte state half, and that half carried the **entire map layout**:
+`.state-map-section`, `.state-layout`, `.map-container`, `.state-selection`,
+`.selection-desc`, `.state-grid`, `.state-pill`, `.state-abbr`, `.state-name`,
+two media queries for them, and `--state-inactive` / `--state-bg` which only
+those rules consumed. None of it exists on a subpage.
+
+    7,167 -> 6,633 bytes per subpage
+    chrome block  4,757  unchanged, hash 00f299a9
+    state half    2,410 ->  1,876
+    map CSS out   1,687 bytes/page, 47 KB across the 28
+    reading in    1,153 bytes/page
+
+`.state-content` was **added** to the payload. It had lived only in
+`css/state-map.css`, which loads async, so the content section had no padding
+at first paint.
+
+The map page and the 4 hubs keep the old 7,167-byte block, so the payload now
+splits three ways under `resources/states/`: 28 subpages on the new block, 5
+pages on the old one, 4 hubs additionally carrying their own 1,070-byte block.
+
+### TOC and rail: considered, deferred
+
+Both were evaluated against the article design and neither is worth doing on
+these pages yet.
+
+**TOC.** Only **22 of 28** subpages have the 4 or more `h2` the builder needs.
+Five Texas subpages have **zero** body headings, and `minnesota/value-add-strategy`
+has three. `MPArticle` also keys off `document.getElementById('article-body')`,
+and these pages have `class="article-body"` on 14 of them, `class="content-body"`
+on the other 14, and no id anywhere, so it needs a different hook. Worth
+revisiting only after the content gap below is closed.
+
+**Rail.** It depends on a hero image and a category, and state subpages have
+neither. Their hero is a light gradient with a back-link, an `h1` and a
+one-line summary. There is also no breadcrumb on any of the 28.
+
+**The reason both are expensive: there is no template and no generator for
+state pages.** `templates/` holds only `article-index.html`. Every markup
+change costs 28 hand edits with no `npm run build` to verify against, which is
+why this pass was scoped to CSS. Any future markup work here should probably
+start by building a generator.
+
+---
+
 ### Homepage payload group: unchanged at six files
 
 `index.html` shares a 4757-byte critical payload with `about/`, `calculator/`,
@@ -1457,6 +1528,26 @@ Not rebrand work. Do not start any of these before the conference.
   reader to a 404. The shipped manifest is `images/site.webmanifest`.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
+- **Five Texas state subpages have no body headings, and one is close to
+  empty.** A content gap, not a design gap: the reading typography now applied
+  to these pages has almost nothing to work on. Found 2026-08-11 while porting.
+
+  `texas/financial-impact`, `texas/market-overview`, `texas/property-types`,
+  `texas/seasonal-considerations` and `texas/technology-solutions` contain **no
+  `h2` at all**. Their only heading below the `h1` is the `h3` inside the
+  `.article-cta` block, which is CTA copy rather than a section, so the document
+  outline jumps `h1` to `h3` and the body has no structure.
+
+  `texas/financial-impact` is the thinnest: **1,503 bytes, five paragraphs, no
+  headings, no lists.** For comparison the equivalent
+  `colorado/financial-impact` runs eight `h2` sections.
+
+  `minnesota/value-add-strategy` has three `h2`, just under the threshold a
+  table of contents would need.
+
+  This is a writing job, not a sweep. It also blocks the state TOC, which is
+  why that was deferred rather than built.
+
 - **Content pass over the 73 article body fragments.** Hand-written, predating
   the content rules. Inventory taken 2026-08-11 across `articles/*.html`.
 
@@ -1504,6 +1595,14 @@ Not rebrand work. Do not start any of these before the conference.
   above is currently unreachable at runtime and cosmetic. It still goes.
 - The `.cta-inline` rules in `css/style.css:50-76` style only what the dead
   `insertInlineCta()` would have produced. They go with it.
+- **Four dead classes in `css/state-map.css`**, used by zero pages, verified by
+  matching every class in the file against every HTML file on the site:
+  `.article-placeholder` (and its `h3` and `p` rules), `.empty-state` (and its
+  `h2`, `p`, `.btn` and `.btn:hover` rules), `.state-article-card` (and its
+  `:hover`), and `.state-articles-grid`. Roughly 50 lines. Same situation as
+  `.cta-inline` above and worth removing in the same pass, since both are
+  "styles for markup that no longer exists" rather than genuinely orphaned
+  files.
 - Content rebalancing toward genuine three-pillar parity once lighting content
   earns traffic.
 - Webflow migration evaluation, if in-house editing without a repo becomes a
