@@ -962,9 +962,31 @@
   background: none; border: 0; padding: 0;
   font-size: .9375rem; color: var(--clr-text); white-space: pre-wrap;
 }
-/* .kicker: one fragment. A standfirst above the first heading. */
+/* .kicker: one fragment, articles/you-didnt-buy-a-parking-lot-to-babysit-it.html,
+   whose text is the short label "Resource Insight".
+
+   EVERY property that styles.css:1170 sets is set again here, on purpose. That
+   rule is a bare global `.kicker` and it still applies on article pages. An
+   earlier version of this block set only font-size, colour and margin, so the
+   two rules combined into a 19px uppercase label tracked at 3.42px, larger and
+   louder than the 18px body text it introduces. The bug was the partial
+   override, not the values.
+
+   If you edit this, keep the list complete: font-size, font-weight,
+   letter-spacing, text-transform, colour and margin. Dropping one hands that
+   property back to the global rule.
+
+   Metrics match the design system's eyebrow. Colour stays muted rather than
+   accent so it does not compete with the category eyebrow already in the
+   hero. */
 .article-read .article-body .kicker{
-  font-size: 1.1875rem; line-height: 1.6; color: var(--clr-muted); margin: 0 0 24px;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--muted, #64748b);
+  margin: 0 0 16px;
 }
 
 /* DEFENSIVE from here: no fragment uses these today. */

@@ -778,6 +778,49 @@ Two more, specific to this pass:
   overwrites `#article-footer-copy` at runtime, so the compliant copy in the
   template never appears. Deliberate: that file is not edited for copy alone.
   Already on the post-Vegas backlog.
+- **Related cards do not animate, by decision.** `buildRelatedCard()` never adds
+  `data-reveal`, so the `data-reveal-group` on `#related-list` had zero targets.
+  The attribute was removed rather than adding `data-reveal` in `js/article.js`.
+  Adding it there buys a staggered fade on four cards below the CTA band, at the
+  cost of editing the file carrying both guards. Not worth it on a reading page.
+  Revisit only if that file is being opened for another reason.
+
+### OPEN QUESTION: the 21 standalone CTA paragraphs in the fragments
+
+**This is a content decision and needs an answer before the fragments are
+touched.** Not a styling problem: they render correctly.
+
+21 body fragments end a section with a plain paragraph whose whole job is a call
+to action, for example:
+
+> Want to see what your lot could earn? [Try our free parking revenue
+> calculator](/calculator/).
+
+They carry no class and no wrapper, so they read as ordinary body prose. 12 link
+to `/calculator/` and 10 to `/contact/`. On
+`articles/dynamic-pricing-guide.html` two of them sit directly above the navy
+CTA band, which makes the same two asks as buttons, and the sticky rail carries
+a third copy of the assessment ask. Three versions of one request inside a
+screen and a half.
+
+Three options, all of them content work rather than CSS:
+
+1. **Delete them where the rail and the band already cover the same ask.** The
+   likeliest right answer for the `/contact/` ones, which the band duplicates
+   exactly. Reduces 73 fragments by a paragraph each at most.
+2. **Keep them and restyle as a distinct inline component.** Would need a class
+   added to 21 fragments, which is the expensive option, and reintroduces the
+   mid-article interruption the runtime deliberately stopped rendering when
+   `insertInlineCta()` was disconnected.
+3. **Keep them as prose.** They do work as contextual links; the objection is
+   only that they repeat what the chrome already says.
+
+The `/calculator/` ones are the stronger of the two groups: the calculator is
+not otherwise linked from the article body, only from the header and the CTA
+band. The `/contact/` ones are the more redundant.
+
+Bundle any decision here with the content pass below, since 13 of the 21 also
+break the copy rules.
 
 ### The original preview record
 
@@ -1409,6 +1452,42 @@ Not rebrand work. Do not start any of these before the conference.
   reader to a 404. The shipped manifest is `images/site.webmanifest`.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
+- **Content pass over the 73 article body fragments.** These are hand-written
+  and predate the content rules. Inventory taken 2026-08-11 across
+  `articles/*.html`; the redesign did not touch any of it.
+
+  **First person, 13 of the 21 standalone CTA paragraphs.** Twelve use "our"
+  ("Use **our** revenue calculator"), one uses "us" ("Contact **us** for a free,
+  no-obligation consultation"). At least 8 more cross-article paragraphs use
+  "our guide". Files: `dynamic-pricing-guide` (x2), `free-parking-true-cost`,
+  `historic-district-parking-profit`, `office-building-parking-revenue`,
+  `paid-parking-seasonal-destinations`, `parking-enforcement-modernization`,
+  `parking-lot-revenue-potential`, `parking-problems-mean-success`,
+  `private-parking-frees-municipal-land`, `scan-to-pay-vs-lpr`,
+  `shared-parking-agreements-revenue`, `what-is-parking-monetization`.
+
+  The 8 compliant CTAs are all EV articles using "Schedule a consultation",
+  which reads as a later batch written once the rules existed. **Use that
+  phrasing as the model for the rewrite.**
+
+  **Superlatives, 4.** "parking signage **best** practices"
+  (`announce-paid-parking-guide`), "the **best** revenue share deals"
+  (`ev-charging-revenue-share-vs-ownership`), "**top** amenity"
+  (`hotel-ev-charging-guest-revenue`, `hidden-costs-ev-charging-installation`).
+
+  **Unverified statistics.** None are Eau Claire or Stillwater figures, so none
+  are covered by the case-study exemption. Headline examples: "revenue increases
+  of **12 to 35%**" in the `dynamic-pricing-guide` lede, "**26%**",
+  "**40 to 60%**", "**30%**" (EV articles), "**15 to 25%** revenue increase,
+  **10 to 15%** occupancy improvement", "**80-90%** compliance", "**25%** in
+  most major cities". Each needs a source or needs to go. The Section 30C "30%
+  of installation costs" figure is statutory and is the one likely to survive
+  as written.
+
+  Do this as one pass with the two items below and with the standalone-CTA
+  decision recorded in the article section above, since they touch the same
+  paragraphs.
+
 - `INLINE_CTA_COPY` in `js/article.js` uses first-person language against the
   content rules. So does the string written into `#article-footer-copy` at
   `js/article.js:136`. Both need the same pass. Do not touch that file for copy

@@ -448,11 +448,23 @@ window.MPArticle = (function () {
   function buildToc() {
     if (!toc || !tocList) return 0;
 
-    /* The .series-cards-header h2 introduces a card grid, not a section of
-       the argument, and is always last. Excluded. */
+    /* Two exclusions.
+
+       .series-cards-header introduces a card grid, not a section of the
+       argument, and is always last.
+
+       A heading whose text is "Table of Contents" is a fragment-authored
+       contents list. Listing it produces a rail entry called "Table of
+       Contents" pointing at another table of contents. articles/
+       dynamic-pricing-guide.html had one and it has been removed, so nothing
+       hits this today; it is here so the next fragment that does the same
+       thing degrades quietly instead of shipping the nonsense entry. */
     headings = Array.prototype.filter.call(
       body.querySelectorAll('h2'),
-      function (h) { return !h.classList.contains('series-cards-header'); }
+      function (h) {
+        if (h.classList.contains('series-cards-header')) return false;
+        return h.textContent.trim().toLowerCase() !== 'table of contents';
+      }
     );
 
     if (headings.length < MIN_HEADINGS) {

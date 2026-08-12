@@ -189,7 +189,12 @@
           <span class="eyebrow">Keep reading</span>
           <h2 class="h2 aside-heading">Related Resources</h2>
         </div>
-        <div id="related-list" class="related-list" aria-live="polite" data-reveal-group>
+        <!-- No data-reveal-group here. buildRelatedCard() in js/article.js does
+             not add data-reveal to the cards it creates, so the group had zero
+             targets and staggered nothing. Adding the attribute there would mean
+             editing the file that carries the gtag gate and the noindex guard,
+             which is not worth a fade on four cards below the CTA band. -->
+        <div id="related-list" class="related-list" aria-live="polite">
           <div class="skeleton-card" aria-hidden="true">
             <div class="skeleton-thumb"></div>
             <div class="skeleton-content">
