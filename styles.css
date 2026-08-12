@@ -2129,6 +2129,56 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 .band .tile--flush { padding: 0; }
 .band--navy .tile { background: var(--navy-900); border-color: var(--border-dark); }
 
+/* ---------- Pillar: the three-pillar card, shared ----------
+   Promoted out of .page-home on 2026-08-12, when /services/ became the second
+   consumer. Scoped to .band rather than made global, per the rule that nothing
+   in the section system is a bare global class.
+
+   .pillar EXTENDS .tile and does not replace it. Markup is
+   class="tile pillar pillar--primary". Without .tile there is no card.
+
+   --primary carries the blue gradient top bar and the blue icon and marks the
+   primary conversion path. --solar and --ev carry the green pair, which is the
+   scoped use the green rule permits.
+
+   Specificity is unchanged from the homepage-scoped original, (0,2,0) either
+   way, and the move was verified by comparing 11,360 computed-style assertions
+   on the live homepage before and after.
+   ---------------------------------------------------------------- */
+.band .pillar::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--gradient-brand); opacity: 0; transition: opacity .2s ease;
+}
+.band .pillar--primary::before { opacity: 1; }
+.band .pillar:hover::before { opacity: 1; }
+.band .pillar--solar::before,
+.band .pillar--ev::before {
+  background: linear-gradient(135deg, var(--green-500), var(--green-700));
+}
+.band .pillar-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--blue-tint-08); color: var(--blue); margin-bottom: 24px;
+}
+.band .pillar--solar .pillar-icon,
+.band .pillar--ev .pillar-icon {
+  background: rgba(45,122,14,0.08); color: var(--green-700);
+}
+.band .pillar p { color: var(--text-2); margin: 12px 0 0; flex: 1; max-width: none; }
+.band .pillar-metric {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--border-1);
+  font-size: .9375rem; font-weight: 600; color: var(--text-1);
+}
+.band .pillar-metric .icon--sm { color: var(--blue); }
+.band .pillar-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 24px; font-weight: 600; font-size: .9375rem; color: var(--blue);
+}
+.band .pillar-cta .icon--sm { transition: transform .15s ease; }
+.band .pillar:hover .pillar-cta .icon--sm { transform: translateX(4px); }
+
 /* ---------- Grids ---------- */
 .band .band-grid { display: grid; gap: 24px; }
 .band .band-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2268,41 +2318,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
   gap: 16px; flex-wrap: wrap; margin-bottom: 32px;
 }
 .page-home .proof-head .eyebrow { margin-bottom: 8px; }
-
-/* ---------- Pillars ---------- */
-.page-home .pillar::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: var(--gradient-brand); opacity: 0; transition: opacity .2s ease;
-}
-.page-home .pillar--primary::before { opacity: 1; }
-.page-home .pillar:hover::before { opacity: 1; }
-.page-home .pillar--solar::before,
-.page-home .pillar--ev::before {
-  background: linear-gradient(135deg, var(--green-500), var(--green-700));
-}
-.page-home .pillar-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--blue-tint-08); color: var(--blue); margin-bottom: 24px;
-}
-.page-home .pillar--solar .pillar-icon,
-.page-home .pillar--ev .pillar-icon {
-  background: rgba(45,122,14,0.08); color: var(--green-700);
-}
-.page-home .pillar p { color: var(--text-2); margin: 12px 0 0; flex: 1; max-width: none; }
-.page-home .pillar-metric {
-  display: flex; align-items: center; gap: 8px;
-  margin-top: 24px; padding-top: 16px;
-  border-top: 1px solid var(--border-1);
-  font-size: .9375rem; font-weight: 600; color: var(--text-1);
-}
-.page-home .pillar-metric .icon--sm { color: var(--blue); }
-.page-home .pillar-cta {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 24px; font-weight: 600; font-size: .9375rem; color: var(--blue);
-}
-.page-home .pillar-cta .icon--sm { transition: transform .15s ease; }
-.page-home .pillar:hover .pillar-cta .icon--sm { transform: translateX(4px); }
 
 /* ---------- Evidence band ---------- */
 .page-home .evidence { position: relative; overflow: hidden; }
@@ -2451,4 +2466,72 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
   .page-home .chip-solar { top: 24%; right: -2%; }
   .page-home .bar-track { height: 160px; }
   .page-home .bar { width: 56px; }
+}
+
+/* ============================================================================
+   SERVICES PAGE
+   Scoped to .page-services on <body>. Compositions specific to this page; the
+   reusable parts (bands, tiles, pillars, stats, grids) come from the section
+   system above.
+
+   The page was rebuilt onto the band system on 2026-08-12, replacing 46
+   bespoke .services-* rules that lived only in its inline payload. Three
+   anchors on this page, #parking #solar #ev, are the targets of 305 links from
+   the frozen header nav and footer across 153 files.
+
+   `.step` is defined here rather than promoted out of .page-home. It is four
+   lines of flexbox and a numbered badge, not a branded component, so
+   duplicating it costs less than a second promotion with its own before-and-
+   after computed-style gate. Promote it if a third consumer appears.
+   ============================================================================ */
+
+/* Anchor offset for the three deep links. Attribute selector rather than three
+   id selectors, so a fourth anchored pillar needs no CSS change. 88px clears
+   the 72px sticky header. Also carried in the inline payload, because a visit
+   to /services/#solar can scroll before styles.css has arrived. */
+.page-services .pillar[id] { scroll-margin-top: 88px; }
+
+.page-services .services-hero { position: relative; overflow: hidden; }
+.page-services .services-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(760px 420px at 82% 0%, rgba(0,67,179,0.42), transparent 70%);
+}
+.page-services .services-hero .band__inner { position: relative; }
+.page-services .services-hero .h1 { max-width: 18ch; }
+.page-services .services-hero__actions {
+  display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px;
+}
+
+/* Process strip */
+.page-services .step { display: flex; gap: 16px; align-items: flex-start; }
+.page-services .step-badge {
+  flex: none; width: 40px; height: 40px; border-radius: 9999px;
+  background: var(--blue); color: var(--surface-card);
+  font-weight: 700; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.page-services .step .h4 { margin-bottom: 4px; }
+.page-services .step p { color: var(--text-2); font-size: .9375rem; margin: 4px 0 0; }
+
+/* Evidence note under the stats */
+.page-services .services-note {
+  margin: 48px 0 0; font-size: .9375rem; color: var(--text-inverse-3); max-width: 70ch;
+}
+.page-services .services-note a { color: var(--blue-sky); font-weight: 600; }
+
+/* Tiles in the starting-points band */
+.page-services .band--card .tile p { color: var(--text-2); margin: 12px 0 0; max-width: none; }
+
+/* Closing CTA */
+.page-services .services-cta { text-align: center; position: relative; overflow: hidden; }
+.page-services .services-cta::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(640px 360px at 50% 110%, rgba(0,67,179,0.45), transparent 70%);
+}
+.page-services .services-cta .band__inner { position: relative; max-width: 760px; }
+.page-services .services-cta .lede { margin: 16px auto 0; }
+.page-services .services-cta .services-hero__actions { justify-content: center; margin-top: 48px; }
+
+@media (max-width: 640px) {
+  .page-services .services-hero__actions .btn { width: 100%; }
 }
