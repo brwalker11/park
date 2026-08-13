@@ -46,8 +46,19 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
 
 // Expected totals. These are asserted, not merely reported, so an enumeration
 // bug fails loudly instead of quietly shrinking the covered set.
-const EXPECT_NOINDEX = 150;
-const EXPECT_GTAG = 149;
+//
+// Raised from 150/149 on 2026-08-12, when services/solar-lighting/index.html
+// was added. That is the FIRST file addition of the rebrand: every pass before
+// it edited existing files, so the totals had never legitimately moved. They
+// are 151 noindex and 150 gtag because the new page carries both guard blocks,
+// copied byte-identically from services/index.html rather than authored.
+//
+// The recapture that accompanied this was gated on the new baseline differing
+// from the old in exactly one added entry, with all 150 pre-existing hashes
+// unchanged, so the recapture could not launder a drift elsewhere. Any future
+// change to these numbers deserves the same check.
+const EXPECT_NOINDEX = 151;
+const EXPECT_GTAG = 150;
 
 const NOINDEX_MARKER = '<!-- Preview noindex guard - remove on merge day -->';
 const GTAG_NEEDLE = "window.location.hostname === 'monetize-parking.com'";

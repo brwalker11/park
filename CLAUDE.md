@@ -109,12 +109,42 @@ when a container was recycled, which left no way to tell an already-edited tree
 from a clean one. Recapture only when a guard block changes for a real, stated
 reason, in the same commit as that change.
 
-**The counts are 150 noindex and 149 gtag, and both include
-`templates/article-index.html`.** There are only 149 rendered pages; the
-template is the 150th file carrying the blocks. `404.html` is the one guarded
-file with no gtag gate. A checker that enumerates rendered pages only reports
-149/148 and looks like a regression. The expected totals are asserted in the
-script, not merely reported, so an enumeration bug fails loudly.
+**The counts are 151 noindex and 150 gtag, and both include
+`templates/article-index.html`.** There are 150 rendered pages; the template is
+the 151st file carrying the blocks. `404.html` is the one guarded file with no
+gtag gate. A checker that enumerates rendered pages only reports 150/149 and
+looks like a regression. The expected totals are asserted in the script, not
+merely reported, so an enumeration bug fails loudly.
+
+> **Corrected 2026-08-12: the counts were 150/149 and are now 151/150.** This
+> file previously stated 150/149 as a fixed fact, which was true for every pass
+> up to that point because every pass edited existing files. Adding
+> `services/solar-lighting/index.html` was the **first file addition of the
+> rebrand**, so the totals moved legitimately for the first time.
+>
+> A file addition is the only situation in which raising these numbers is
+> correct. If they move for any other reason, a guard block has been disturbed
+> and the right response is to find out why, not to recapture.
+
+### Recapturing the baseline after adding a page
+
+`node tools/guards.js capture` rewrites the whole baseline, so on its own it
+would happily absorb an unrelated drift in some other file. The recapture must
+therefore be gated, not just run:
+
+1. `verify` first, to prove the tree is clean before anything changes.
+2. Copy the guard blocks into the new page from an existing page rather than
+   authoring them, so they are byte-identical by construction.
+3. Update `EXPECT_NOINDEX` and `EXPECT_GTAG`.
+4. `capture`.
+5. **Diff the new baseline against the old and require exactly one added entry,
+   zero removed, and zero changed hashes among the pre-existing files.** This is
+   the check that makes the recapture safe; without it the baseline is being
+   taken on trust.
+6. Commit the page, the constants and the baseline together, with the reason.
+
+That sequence was followed for the solar page: 150 pre-existing hashes compared,
+all identical, one entry added.
 
 ## Rebrand sweep and gate scripts
 

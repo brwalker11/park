@@ -1,13 +1,13 @@
 {
-  "capturedAt": "2026-08-10T21:48:59.203Z",
+  "capturedAt": "2026-08-13T03:07:26.855Z",
   "expect": {
-    "noindex": 150,
-    "gtag": 149
+    "noindex": 151,
+    "gtag": 150
   },
   "counts": {
-    "guardedFiles": 150,
-    "noindex": 150,
-    "gtag": 149
+    "guardedFiles": 151,
+    "noindex": 151,
+    "gtag": 150
   },
   "entries": {
     "404.html": {
@@ -603,6 +603,10 @@
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },
     "services/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "services/solar-lighting/index.html": {
       "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },

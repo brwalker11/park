@@ -10,17 +10,13 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: every reading surface is now addressed.** Bundle B (all four
-commits), Pass 2b-b, the homepage rebuild, the 73 article pages, the 28 state
-subpages and the 30 video pages are complete and pushed.
+**Status: services restructure and the solar page are complete and pushed.**
+Bundle B, Pass 2b-b, the homepage, the 73 article pages, the 28 state subpages,
+the 30 video pages, `/services/` and `/services/solar-lighting/` are all done.
+Solar now has a real page, so the three pillars are genuinely co-equal in the
+navigation for the first time.
 
-The video pages got the measure fix only, not the full treatment, because
-their content does not support one: 94 words of prose per page and no
-transcripts. See the video section below for the reasoning and the trigger for
-revisiting.
-
-Next up is the services hub restructure, which also owes `/services/` its
-`#solar` block and anchor.
+Next up is the calculator reskin, week 5 in the execution plan.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -417,12 +413,17 @@ guard block is being changed deliberately; otherwise run
 `node tools/guards.js verify` after every commit. See `CLAUDE.md` for the
 sweep-script conventions and the deliberate-diff gate pattern.
 
-**The guard counts are 150 noindex and 149 gtag, and both include
-`templates/article-index.html`.** There are only 149 rendered pages; the
-template is the 150th file carrying the blocks. A checker that enumerates
-rendered pages only reports 149/148 and looks like a regression. This cost one
-false alarm already, so the totals are now asserted in the script rather than
-merely printed.
+**The guard counts are 151 noindex and 150 gtag, and both include
+`templates/article-index.html`.** There are 150 rendered pages; the template is
+the 151st file carrying the blocks. A checker that enumerates rendered pages
+only reports 150/149 and looks like a regression. This cost one false alarm
+already, so the totals are asserted in the script rather than merely printed.
+
+Raised from 150/149 on 2026-08-12 when `services/solar-lighting/index.html` was
+added, the first file addition of the rebrand. See the recapture procedure in
+`CLAUDE.md`; the short version is that `capture` must be gated on a diff showing
+exactly one added entry and zero changed hashes, or it will quietly absorb an
+unrelated drift.
 
 ### Bundle B: the four commits
 
@@ -533,22 +534,13 @@ heading.
 The rule is otherwise unchanged and still applies to every piece of body copy,
 meta description, and generated text.
 
-### Known soft link: `/services/#solar` has no target yet
+### Known soft link: `/services/#solar` CLOSED
 
-**Accepted, with a deadline.** The What We Do panel and the footer both link to
-`/services/#solar`. There is no solar content anywhere on the site, so no
-element carries `id="solar"` and the link lands on the top of `/services/`
-instead of scrolling. It is a soft failure, not a dead link: the page loads and
-nothing is broken.
-
-`#parking` and `#ev` are real and were added to the existing "Paid Parking
-Systems" and "EV Charging" cards in Bundle B commit 2, both with
-`scroll-margin-top: 88px`.
-
-**Deadline: the services hub restructure**, scheduled Wednesday Aug 26, which
-adds the solar block. Lighting copy is Ben's, so the anchor could not be
-created in commit 2 without inventing vendor copy. When that block lands, give
-it `id="solar"` and this entry can be deleted.
+**Resolved 2026-08-12.** The services restructure gave the solar pillar card
+`id="solar"` with `scroll-margin-top: 88px`, and `/services/solar-lighting/`
+now exists behind it. All three anchors verified behaviourally. This entry is
+kept rather than deleted so the history of the deadline is legible; the issue
+itself is closed.
 
 ### Finding: `.nav-toggle` was hidden by source order, on 114 pages
 
@@ -913,6 +905,95 @@ dead weight and the `background-size`/`background-position` rules in
 the background entirely. Do not preserve it when porting.
 
 ---
+
+---
+
+## Services restructure and the solar page
+
+Done 2026-08-12, in two commits so the halves stay separately revertible. The
+restructure was the higher-risk half: 305 links point at that page.
+
+### `/services/` rebuilt on the band system
+
+The last major page on the old bespoke design language. Six sections mapped to
+bands in the homepage rhythm: navy hero, page (three pillars), compressed
+sunken (process), navy (evidence), card (starting points), navy (CTA).
+
+The five-card Revenue Streams grid became **three co-equal pillars**. Digital
+Advertising and Operational Consulting moved into the starting-points band.
+Nothing was deleted. Parking stays the primary conversion path by being first,
+by being the only `.pillar--primary`, and by being the only card with a metric.
+
+"How We Work" became "How an engagement runs". The nav-label exception for
+first person covers menu labels, not body copy, so an `h2` had to change.
+
+**The hero photograph is gone.** `/images/services.webp` was a 3992px generic
+stock lot and the only photograph on an otherwise typographic site. It is a
+deletion candidate on the post-Vegas list, not deleted yet.
+
+Payload 8,088 to 4,064 bytes, all 46 bespoke `.services-*` selectors retired.
+
+### The pillar component was promoted
+
+`.page-home .pillar*` became `.band .pillar*`. Scoped to `.band`, not global,
+per the rule that nothing in the section system is a bare global class.
+Specificity is identical either way, so cascade order could not shift, and the
+block moved to sit after `.band .tile`, which is what it extends.
+
+**Proven inert on the homepage by 11,360 computed-style assertions**, 10
+elements by 568 properties by 2 (element and `::before`), comparing a page
+loading the old stylesheet against one loading the new. Zero differences,
+bounding rects identical, `index.html` byte-identical.
+
+**A false alarm worth knowing about.** An early run of that gate reported three
+`box-shadow` differences. They were a settle artifact on the 0.2s `box-shadow`
+transition, not a cascade change: the two iframes were sampled at different
+points in their transitions. Comparing both under identical settle conditions
+resolved it to zero. If this gate is ever rerun, wait long enough.
+
+**`.step` was deliberately NOT promoted.** Four lines of flexbox and a numbered
+badge is not a branded component, so `/services/` defines its own. Promoting it
+would have cost a second before-and-after gate for almost no reuse. Promote it
+if a third consumer appears.
+
+### `/services/solar-lighting/`
+
+Built from Ben's approved copy with the three agreed edits: the multi-day
+reserve claim kept and its VERIFY marker removed, the smart-applications list
+kept with no pricing added, and no incentives claim anywhere on the page.
+
+Seven bands. The enforcement section, the one part no competitor's solar page
+can carry because it depends on already running parking operations, gets a navy
+band so it reads as the turn in the argument rather than another feature list.
+
+Prose sits at 624px and 72 characters per line, matching the article surface.
+
+The page is `<body class="page-services page-solar">`, inheriting the services
+hero, CTA and button compositions and adding only prose rules. It was built by
+copying `services/index.html` as a structural donor, so the head, both guard
+blocks, the chrome block, the Bundle B header and the footer are byte-identical
+by construction rather than by care.
+
+**Claims held out, as the copy's verification notes require:** the 180 MPH
+hurricane rating, the 12-year battery life, the carbon offset figures, the
+Dallas deployment numbers, and the eleven years of testing. A gate checks all
+eight excluded patterns on every build. ClearWorld is never named.
+
+**The copy suggests moving the enforcement section directly after the hero.**
+Not done: the copy was approved in its delivered order and reordering it was not
+one of the three agreed edits. Worth revisiting with Ben.
+
+**A case study would be worth more than the entire capability section.** The
+copy says so and it is right. If any client has a solar installation in the
+ground, a short account of what it replaced and what it now costs to run should
+replace or precede the capability content.
+
+### `#solar` now exists
+
+The known soft link is closed. All three anchors carry `scroll-margin-top: 88px`
+and were verified behaviourally: navigating to each hash lands the target at
+top=88 against a 73px sticky header, with the heading visible. The 305 links per
+anchor across 153 files are unchanged, 915 total.
 
 ---
 
@@ -1610,6 +1691,10 @@ Not rebrand work. Do not start any of these before the conference.
   30 video pages, and the template. Deleting it would have broken them. Removed
   from this list. **Count corrected 2026-08-11**, from 103 and "the resources
   hub", which does not load it.
+- `images/services.webp` and `images/services.jpg`, the old /services/ hero
+  photograph, referenced by nothing since the services restructure on
+  2026-08-12. Generic stock and the last photograph on an otherwise
+  typographic site. Deletion candidates.
 - `images/Logo.svg` deletion once the header no longer references it.
 - Vector logo redraw for print and embroidery.
 - Transparent versions of the tagline lockup and ClearWorld co-brand lockup.
