@@ -35,7 +35,6 @@
   /* --- Primitives: border ----------------------------------------- */
   --border-1:#e2e8f0;
 
-
   /* ==== Pass 2b-a: primitives absorbed from raw literals ============
      Every value below is the literal it replaced, unchanged. This pass is
      verified pixel-identical; 2b-b retargets values.
@@ -761,80 +760,6 @@ li{max-width:var(--max-text)}
 .grid3 .card .cta{margin-top:auto}
 
 /* Case Study Card Styles */
-.container.case-study-section { padding: 3rem 1rem; }
-.cs-wrap { max-width: 1040px; margin: 0 auto; }
-
-.cs-title{
-  font-size: clamp(1.5rem, 2.2vw, 2rem);
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.cs-card{
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.cs-card article{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  border: 1px solid var(--border-1);
-  background: var(--surface-card);
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 6px 14px rgba(16,24,40,.04);
-  transition: box-shadow .2s ease, transform .2s ease;
-}
-
-.cs-card:hover article{
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(16,24,40,.08);
-}
-
-.cs-media img{
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid var(--border-1);
-}
-
-.cs-heading{
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
-  font-weight: 600;
-  margin: .25rem 0 .5rem 0;
-}
-
-
-.cs-text{ color: var(--neutral-600); margin-bottom: .75rem; }
-
-.cs-cta-row{
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-}
-
-.cs-cta{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: .6rem 1rem;
-  border-radius: 12px;
-  background: var(--brand-blue);
-  color: var(--surface-card);
-  font-weight: 600;
-}
-
-@media (min-width: 860px){
-  .cs-card article{
-    grid-template-columns: 14rem 1fr;
-    padding: 1.25rem 1.5rem;
-    gap: 1.25rem;
-  }
-  .cs-media img{ height: 9.5rem; }
-}
 
 .resources-page main{padding-bottom:var(--space-section)}
 .resources-hero{padding-top:var(--space-section);padding-bottom:var(--space-block)}
@@ -1221,34 +1146,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
   border:0
 }
 
-.owner-content{display:flex;gap:20px;align-items:center}
-.owner-image{width:150px;height:150px;border-radius:50%;object-fit:cover}
-@media(max-width:600px){
-  .owner-content{flex-direction:column;text-align:center}
-}
-
 /* Card container for About MPS */
-.card.about-card {
-  background: var(--surface-card);
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-  padding: 32px 28px;
-  margin: 8px auto 4px;
-  max-width: 920px;
-}
-.about-card h2 { margin-bottom: 8px; }
-.about-card .subhead {
-  margin-bottom: 14px;
-  opacity: 0.85;
-}
-.about-card p { margin: 0 0 16px 0; }
-.card.about-card p:last-of-type { margin-bottom: 14px; }
-.card.about-card .btn-primary { margin-top: 6px; }
 
 /* Mobile tweaks */
-@media (max-width: 640px) {
-  .card.about-card { padding: 24px 18px; border-radius: 12px; }
-}
 /* Services subnav (pills) */
 .services-subnav { position: sticky; top: 0; z-index: 20; background: var(--scrim-white-85); backdrop-filter: saturate(1.2) blur(6px); border-bottom: 1px solid var(--scrim-black-06); }
 .services-subnav__inner { display: flex; gap: 10px; align-items: center; justify-content: center; padding: 12px 0; }
@@ -1293,21 +1193,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 @media (max-width: 640px) {
   .services-subnav__inner { justify-content: flex-start; overflow-x: auto; padding: 10px 12px; }
 }
-.about-hero, .about-mission, .about-owners, .about-trust, .about-cta { margin-bottom: 60px; }
-.about-mission {
-  text-align: center;
-  padding-top: 3rem;
-  padding-bottom: 2.5rem;
-}
-
-.about-mission p {
-  max-width: 740px;
-  margin: 0.75rem auto;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-.owners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 30px; }
-.owner-card { background: var(--surface-card); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
 
 /* Utility classes for calculator */
 .max-w-3xl{max-width:56rem}
@@ -1375,50 +1260,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 .calc .cta{min-width:0}
 .calc .toggle{display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;color:var(--ink);margin-top:0.5rem}
 .calc .toggle input{width:auto}
-.owner-photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; }
-.trust-list { list-style: none; padding: 0; display: grid; gap: 12px; margin-top: 20px; }
-.trust-list li::before { content: "✓ "; color: var(--blue); font-weight: bold; }
 .cta-box { background: var(--blue-wash-2); text-align: center; padding: 50px; border-radius: 16px; }
-.about-cta p {
-  max-width: 640px;
-  margin: 12px auto 28px;
-  text-align: center;
-}
 
 /* Match Services header alignment and spacing */
-.about-header.section {
-  padding: 4rem 0 3rem;   /* same vertical rhythm as Services */
-}
-.about-header .container {
-  /* inherits site-wide container padding so h1 aligns with logo */
-  text-align: left;
-}
-.about-header h1 {
-  font-size: 3.25rem;     /* same as Services h1 */
-  font-weight: 800;
-  margin: 0 0 .75rem 0;
-  color: var(--text-1);
-}
-.about-header h2 {
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin: 0 0 1rem 0;
-  color: var(--neutral-850);
-}
-.about-header p {
-  max-width: 740px;
-  margin: .5rem 0;        /* left-aligned like Services intro */
-  line-height: 1.6;
-  font-size: 1.05rem;
-  opacity: .9;
-  color: var(--text-2);
-}
-.about-divider {
-  width: 100%;
-  margin: 2rem 0 0 0;
-  border: none;
-  border-top: 1px solid var(--border-soft-cbd5e1-70);
-}
 
 /* Resources page header (matches Services/About) */
 .resources-header.section { text-align: left; padding: 4rem 0 2.5rem; }
