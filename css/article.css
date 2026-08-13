@@ -1394,3 +1394,37 @@
 .article-read #article > .article-hero :focus-visible{
   outline-color: var(--surface-card, #ffffff);
 }
+
+/* ===================================================================
+   VIDEO PAGES: prose link colour
+   ===================================================================
+   The 30 pages under /resources/videos/ carry <body class="article-page">
+   and wrap their content in <article class="article">. Nothing in
+   styles.css or in this file styled a bare <a>, so the three "Related
+   Resources" links on every one of those pages fell through to the
+   browser's default #0000EE, underlined. 90 links across 30 pages,
+   measured 2026-08-13. They predate the rebrand and were never a token,
+   a literal, or a stale reference: they were never styled at all.
+
+   `.article` is the correct hook: it is on the 30 video pages and on
+   nothing else the site ships. The 73 article pages share
+   `article-page` on the body but deliberately do not use `class="article"`,
+   so they cannot be caught by this.
+
+   `:not([class])` is load-bearing for the same reason it is in
+   css/state-map.css. `.article-footer` sits INSIDE `.article` and holds
+   .btn-primary and .btn-secondary, so a bare `.article a` rule would put
+   link colour on 60 buttons and reproduce exactly the invisible-label bug
+   this pass just fixed on the state subpages. Measured: 150 anchors inside
+   .article across the 30 pages, 90 unclassed and 60 classed.
+
+   Values are copied from the .article-read reading surface above rather
+   than re-derived, so the two reading surfaces cannot drift. */
+.article-page .article a:not([class]){
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--blue-tint-40, rgba(0,79,200,0.4));
+}
+.article-page .article a:not([class]):hover{ text-decoration-color: var(--clr-accent); }
