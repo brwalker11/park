@@ -431,6 +431,12 @@ body{
   color: var(--text-inverse-1);
 }
 
+/* The two green-scoped services read green at rest, not only under the
+   pointer. Written as one rule covering all three states because the
+   :hover rule above it sets color too, at equal specificity: without the
+   :hover and :focus-visible selectors here, hovering a green item would
+   flip it to white. --green-500 on the panel is 6.53:1. */
+.site-header .nav-panel a.scope-green,
 .site-header .nav-panel a.scope-green:hover,
 .site-header .nav-panel a.scope-green:focus-visible { color: var(--green-500); }
 

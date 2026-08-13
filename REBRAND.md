@@ -1012,6 +1012,46 @@ and were verified behaviourally: navigating to each hash lands the target at
 top=88 against a 73px sticky header, with the heading visible. The 305 links per
 anchor across 153 files are unchanged, 915 total.
 
+### `.scope-green` was inert at rest
+
+Done 2026-08-13. One rule in `styles.css`, no markup change.
+
+Reported as "Solar Lighting and EV Charging both carry `.scope-green` but only
+EV Charging renders green". Measured in the browser, the asymmetry did not
+exist: **at rest all four dropdown links rendered `#C4D0E2`**, and on hover
+**both** green-scoped links rendered `#6DB133`, identically. The likely origin
+of the report is a pointer resting on EV Charging, which is the last row and the
+one a mouse travelling down the panel stops on.
+
+The real defect is that the class did nothing until hovered. A CSSOM enumeration
+of every loaded sheet found exactly **one** rule mentioning `scope-green`, and
+it was `:hover, :focus-visible` only. The class existed solely to override the
+white that `.nav-panel a:hover` sets, so the green scoping was invisible in the
+state the nav spends all of its time in.
+
+Fixed by adding the base selector to that rule. It has to stay one rule listing
+all three states: `.site-header .nav-panel a:hover` also sets `color` and sits
+at equal specificity earlier in the file, so a bare `.scope-green` rule would be
+beaten on hover and the item would flip to white under the pointer.
+
+Contrast, measured: **6.53:1** on the desktop panel (`--navy-900`), **5.43:1**
+on the hovered row (`--navy-800`), **7.4:1** in the mobile drawer, where the
+panel is transparent and the backdrop is `#010D20`. Contrast was never the
+reason the rule was hover-scoped.
+
+Not touched: the Bundle B panel markup, which is byte-identical across 150 files
+and needs none of this. The inline chrome payload carries `.nav-panel a` but no
+`scope-green` rule; it does not need one either, because the panel is `hidden`
+until `styles.css` has long since loaded, so there is no first-paint flash.
+
+### The dedicated solar page is reachable from one link
+
+`/services/solar-lighting/` is linked from exactly one place on the site: the
+`.pillar-cta` inside the `#solar` tile on `/services/`. The nav dropdown's
+"Solar Lighting" points at `/services/#solar`, the anchor, not the page. All
+four "What We Do" items target `/services/`. Recorded, not changed: the markup
+is Bundle B frozen chrome.
+
 ---
 
 ## Video pages: measure fixed, reading treatment deferred
