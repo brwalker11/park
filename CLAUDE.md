@@ -192,6 +192,54 @@ python3 -m http.server 8000
 
 Do not open HTML files directly via `file://`. Root-relative paths break.
 
+## Measuring rendered CSS in a browser
+
+`python3 -m http.server` sends no `Cache-Control`, so the browser serves a
+stale stylesheet after any edit and a measurement taken against it is wrong
+while looking completely normal.
+
+**Do not verify by re-injecting stylesheets into the live document.** Removing
+the `<link>` elements and appending cache-busted copies has produced wrong
+readings **three times in this project, in both directions**, and every failure
+was silent:
+
+1. A footer CTA on `/about/` read `#0000EE`, the browser default link colour,
+   while two matching author rules declared valid colours. On a clean load it
+   was `#C4D0E2`.
+2. A secondary CTA on `/calculator/` read a `#cbd5f5` border mid-swap. The
+   settled value was `#e6e8ee`.
+3. A whole-page blue audit reported 62 elements at the UA default that were not.
+
+The failure mode is reading during the window where the old sheet has been
+detached and the new one has not applied. It does not throw, it does not warn,
+and the numbers look plausible.
+
+**The standard:**
+
+1. Write a temporary copy of the target page with cache-busted subresource
+   URLs, inside the target directory so any path-derived logic still matches:
+   `cp page.html __verify.html` with `/styles.css` rewritten to
+   `/styles.css?v=<timestamp>`.
+2. Load that copy as a real document and measure there.
+3. Delete it, and run `node tools/guards.js verify` to prove it is gone. The
+   copy carries the guard blocks, so a forgotten one inflates the counts and
+   fails loudly. That is the point.
+
+**Assert control elements alongside whatever changed.** The method is not what
+makes a measurement trustworthy; unrelated values proving they did not move is.
+Pick several elements the change must not affect, read them in the same pass,
+and state them in the commit. Every real defect found in this project was
+confirmed by a control disagreeing with an expectation, and every false reading
+was caught the same way.
+
+Contrast figures reported in commits must be computed from **rendered** colours
+read out of `getComputedStyle`, never from the values in the stylesheet.
+
+Two known quirks of the in-app browser pane, neither of them page bugs:
+`document.hidden` is `true`, so `IntersectionObserver` never fires and
+fragment auto-scroll does not happen; and screenshots come back blank at scroll
+positions above 0, so measure tall pages with a tall viewport instead.
+
 ## Architecture
 
 ### Dynamic Article System

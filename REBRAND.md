@@ -1705,6 +1705,39 @@ Consequences:
   silently change colour. Any such rewrite needs these pages checked by hand or
   the body block updated in the same commit.
 
+#### The payload `var()` convention is inconsistent, and both halves are correct
+
+Recorded 2026-08-13, during the calculator reskin. **This is not a bug and not
+a precedent. It is two different situations that happen to look like one.**
+
+| Payload | Level | `var()` count |
+|---|---|---|
+| `services/index.html` | head | **0** |
+| `services/solar-lighting/index.html` | head | **0** |
+| `services/ev-charging/index.html` | head | **0** |
+| `calculator/index.html` | **body** | **29** |
+
+**The pillar-page payloads are hex-literals-only because they are head-level.**
+They exist to paint correctly before the async `styles.css` lands. A `var()`
+reference there resolves to nothing until the stylesheet arrives, which is the
+exact flash the payload exists to prevent. Their comments say so.
+
+**The calculator's block carries 29 `var()` references and that is safe,
+because it is body-level.** It is parsed after the `styles.css` link, so every
+token it references is already defined by the time it is applied. Same
+mechanism that makes it override `styles.css` permanently, read the other way.
+
+**The rule to take from this:** the deciding factor is head or body, not page
+or payload. `var()` in a head-level payload is a first-paint bug. `var()` in a
+body-level payload is fine. Do not "fix" the calculator to match the pillar
+pages, and do not copy the calculator's approach into a head-level payload.
+
+One caveat that bit during the reskin: **the head chrome payload defines only
+13 tokens** (`--brand`, `--brand-blue`, `--ink`, `--muted`, `--card`, `--bg`,
+`--border`, `--space-section`, `--space-block`, `--max-text`, `--h1`, `--h2`,
+`--h3`). Anything outside that list, `--ok` included, is unavailable at first
+paint no matter which block references it.
+
 ### 2. Inline `--blue` is defined at two values under one name
 
 | Value | Pages |
