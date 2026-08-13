@@ -1705,6 +1705,21 @@ Consequences:
   silently change colour. Any such rewrite needs these pages checked by hand or
   the body block updated in the same commit.
 
+**Two of the four are now off the list.** Updated 2026-08-13.
+
+| Page | `:root` override | Status |
+|---|---|---|
+| `calculator/index.html` | removed | **off**, in the reskin at `03707ae` |
+| `calculator/report/index.html` | removed | **off**, in the reskin below |
+| `contact/index.html` | `--muted`, `--ink`, `--bg` and others | still on |
+| `contact/thank-you/index.html` | same | still on |
+
+Both calculator pages now take the authoritative token values, so they render
+`#64748b` where they used to render `#6b7280`. The remaining two are the
+contact pair, and they are the only pages left where a `styles.css` token
+rewrite can silently change colour. When the contact pass runs, that is the
+thing to check first.
+
 #### The payload `var()` convention is inconsistent, and both halves are correct
 
 Recorded 2026-08-13, during the calculator reskin. **This is not a bug and not

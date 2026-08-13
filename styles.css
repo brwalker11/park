@@ -91,6 +91,13 @@
   --danger-deep:#991b1b;
   --danger-wash:#fef2f2;
 
+  /* Success family completed 2026-08-13 for the report page's LPR note.
+     --ok-wash is the tinted surface, --ok-deep-text the readable green on it;
+     --ok-deep stays the gradient partner. Values unchanged from what was
+     already rendering. */
+  --ok-wash:#ecfdf5;
+  --ok-deep-text:#065f46;
+
   /* --- Neutrals. Descriptive names at current values; 2b-2 decides the scale. */
   --neutral-400:#94a3b8;
   --neutral-600:#4a5568;
