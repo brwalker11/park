@@ -682,15 +682,16 @@
 .page-calculator .modal-subtext{ margin:0 0 20px; font-size:.9375rem; line-height:1.5; color:var(--text-3); max-width:none; }
 .page-calculator .modal-field{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
 .page-calculator .modal-field label{ font-size:.9375rem; font-weight:600; color:var(--text-1); }
-/* No --danger family exists in styles.css, so these three reds stay literals
-   rather than pretending a token is there via a var() fallback. Carried
-   forward unchanged from the previous payload; flagged, not invented. */
-.page-calculator .modal-field input[type="email"].is-invalid{ border-color:#dc2626; }
-.page-calculator .modal-err{ font-size:.8125rem; color:#dc2626; }
+/* The --danger family was added to styles.css on 2026-08-13. These three
+   resolve from it now. Safe as var() for the same reason as the rest of this
+   block: body-level, parsed after styles.css. They are validation states shown
+   only after interaction, so first paint never needs them. */
+.page-calculator .modal-field input[type="email"].is-invalid{ border-color:var(--danger); }
+.page-calculator .modal-err{ font-size:.8125rem; color:var(--danger); }
 .page-calculator .modal-submit{ height:52px; margin-top:4px; }
 .page-calculator .modal-submit[disabled]{ opacity:.6; cursor:not-allowed; transform:none; }
 .page-calculator .modal-alert{ margin-top:14px; padding:12px 14px; font-size:.875rem;
-  color:#991b1b; background:#fef2f2; border-radius:10px; }
+  color:var(--danger-deep); background:var(--danger-wash); border-radius:10px; }
 .page-calculator .hp{ position:absolute; left:-9999px; opacity:0; }
 
 /* ---------- Responsive. Breakpoints match the band system in styles.css. ---------- */
