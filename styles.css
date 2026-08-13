@@ -76,8 +76,12 @@
   --blue-wash-2:#e0f2fe;
   --blue-wash-border:#bae6fd;
 
-  /* --- Semantic. */
+  /* --- Semantic. Paired like every other family: base and deep. --ok-deep
+     added 2026-08-13 for the calculator's revenue uplift bar, which had been
+     carrying #059669 as a stranded literal with no partner to drift against.
+     Value unchanged from what was already rendering. */
   --ok:#10B981;
+  --ok-deep:#059669;
 
   /* --- Neutrals. Descriptive names at current values; 2b-2 decides the scale. */
   --neutral-400:#94a3b8;
