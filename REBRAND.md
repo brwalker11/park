@@ -1052,6 +1052,52 @@ until `styles.css` has long since loaded, so there is no first-paint flash.
 four "What We Do" items target `/services/`. Recorded, not changed: the markup
 is Bundle B frozen chrome.
 
+### DECIDED 2026-08-13: no `/services/parking-revenue/` page. Do not revisit.
+
+`/services/ev-charging/` is approved and will be built. A parallel parking
+revenue pillar page was considered against it and **rejected**. This entry
+exists so the question stops being reopened every time the dropdown looks
+lopsided.
+
+**`/services/` is already the parking page.** Its `<title>` is "Parking Revenue
+Consultancy | Monetize Parking Services" and its meta description leads with
+parking. Splitting parking onto its own URL does not create a page; it takes the
+substance out of one that already ranks and moves it to one that does not, and
+leaves `/services/` as a table of contents holding a 0.9 sitemap priority.
+
+**The two cases are not symmetrical, and the asymmetry is the point.** Solar got
+a page because no solar content existed anywhere, so the page created something.
+EV gets a page because 9 articles and 7,502 words are scattered with no centre,
+so the page consolidates something. Parking has neither problem: 64 non-EV
+articles, 28 state subpages, 30 videos and the calculator are already reachable
+through `/resources/?category=Articles`, and a page whose only job is to link to
+them duplicates the resources index.
+
+**The SEO argument is the decisive one.** `/services/` receives **309 internal
+links from 155 files**, the most-linked page on the site after the homepage. A
+new parking URL would start at zero and target the identical query, which is
+textbook keyword cannibalisation: the old page keeps ranking on its link equity,
+the new page ranks on nothing, and the split costs months for no gain. The EV
+page has the opposite profile. It targets terms `/services/` barely competes for
+(revenue share against ownership, idle fees, Level 2 against DC fast) and it
+gives the 9 EV articles somewhere internal to point.
+
+**Actual ranking data was not available and is not what this rests on.** There
+is no Search Console or analytics export in the repo and `gtag` is hostname
+gated off outside production, so no claim about current rankings was made. If
+this is ever reopened, the thing that would settle it is a Search Console query
+and page export for `/services/` over 90 days, not another round of reasoning.
+
+Note that `docs/design-direction.md:708` reached the same conclusion
+independently: it lists `/services/parking-revenue/` as "conference-desirable"
+and names it "the one to cut" if week 4 is tight, with the `#parking` anchor as
+the stated fallback. That fallback is now the permanent answer, not a stopgap.
+
+**Consequence, accepted deliberately.** The dropdown ends up mixed: two items
+pointing at pages, one at an anchor, one at the hub. Ben accepted this trade
+explicitly. An inconsistent dropdown is cheaper than a page that competes with
+`/services/` for its own query.
+
 ---
 
 ## Video pages: measure fixed, reading treatment deferred
@@ -1731,6 +1777,46 @@ It appears on the icon links, the manifest link, and inside
 ## Post-Vegas backlog
 
 Not rebrand work. Do not start any of these before the conference.
+
+- **Dated-claims audit.** Opened 2026-08-13, out of the 30C pass. Every finding
+  below is a statutory, regulatory, or incentive claim carrying a date or a rate
+  that may have lapsed or changed. **None of these were fixed.** They are
+  recorded because a claim of this kind is only ever caught by someone happening
+  to read the sentence, which is exactly how 30C survived six weeks past expiry
+  on the homepage.
+
+  **The structural finding, which matters more than any single item: the site
+  has no mechanism for dated claims.** Nothing carries a "verified as of"
+  marker, no review cadence exists, and `resources.json` records a publish date
+  but nothing about whether the content is still true. Two articles hold **nine
+  rate-pinned figures between them**, and neither has been re-read since it was
+  written. Any fix worth doing here is a process, not a sweep.
+
+  Highest risk, specific figures stated as settled fact:
+
+  | File and line | Claim | Why it decays |
+  |---|---|---|
+  | `articles/ada-compliance-paid-parking.html:1` | "penalties ranging from **$75,000** for first offenses to **$150,000** for subsequent violations" | DOJ Title III civil penalty maxima are inflation-adjusted **annually** under 28 CFR 36.504. These are the 2014-era figures. Current maxima are materially higher. Stated as fixed. |
+  | `articles/parking-lot-revenue-tax-implications.html:16` | "Minnesota taxes nonresidential parking at **6.875%**. Texas applies **6.25%** at the state level, with local additions bringing the total to **8.25%** in most major cities. Wisconsin charges **5%** statewide. Colorado has a **2.9%** state rate" | Four state rates in one sentence. The state figures look right, but the sentence omits Minnesota metro transit taxes and Milwaukee city and county additions, so the effective rates it implies are low. Highest-count decay surface on the site. |
+  | `articles/parking-lot-revenue-tax-implications.html:5` | "no self-employment tax (**currently 15.3%**)" | Correct today. "Currently" is a decay word with no review date attached to it. |
+  | `articles/parking-lot-revenue-tax-implications.html:21` | "Even after UBIT (at the **21% corporate rate**)" | Correct today. Rate-pinned. |
+  | `articles/parking-lot-revenue-tax-implications.html:13` | "**Bonus depreciation** or **Section 179** expensing may let you accelerate" | Written against pre-OBBBA rules. Bonus depreciation was restored by the same act that killed 30C. The hedge survives; the article has not been re-read. |
+  | `articles/parking-lot-revenue-tax-implications.html:24` | "the Qualified Business Income deduction under **Section 199A**" | Was scheduled to expire after 2025 and was made permanent by OBBBA. Hedged with "potentially", so it survives, but for the wrong reason. |
+  | `articles/ada-compliance-paid-parking.html:27` | "**ADA does not require free parking** for people with disabilities." | Correct federally, stated unqualified. Several states and municipalities do mandate free or extended parking for placard holders. Aimed directly at owners setting enforcement policy. |
+  | `articles/ev-charging-parking-revenue.html:11` | "Level 2 chargers cost **$2,000 to $5,000** per unit installed" | Not statutory, same decay class, and it is the sentence the 30–50% incentive claim used to sit beside. |
+
+  Checked and found **appropriately hedged**, listed so they are not re-flagged:
+  `articles/is-it-legal-to-charge-for-parking.html` (all jurisdictional);
+  `faq/index.html:539` (note each answer exists **twice**, once in the
+  `FAQPage` JSON-LD and once in the visible accordion, so any edit is two
+  places per answer); `articles/church-parking-revenue-guide.html:23` (UBI,
+  "consult your accountant"); `articles/how-to-start-charging-for-parking.html:21`
+  ("often legally required"); `resources/states/colorado/owner-faqs/index.html:275`
+  (sign ordinances).
+
+  One superlative found in passing that the existing superlative entry above
+  does not list: `articles/ev-charging-parking-revenue.html:15`, the heading
+  "Where EV Charging Parking Works **Best**". That makes five, not four.
 
 - CSP scoping fix. The policy in `_headers` is scoped to `/*.html` and is
   enforced on no rendered page. Fixing it requires its own testing cycle against
