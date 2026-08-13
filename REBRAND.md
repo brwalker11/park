@@ -10,7 +10,7 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: the EV charging page is complete and pushed. The nav and footer sweep is next.**
+**Status: the nav and footer sweep is complete and pushed. The What We Do menu is finished.**
 Bundle B, Pass 2b-b, the homepage, the 73 article pages, the 28 state subpages,
 the 30 video pages, `/services/`, `/services/solar-lighting/` and
 `/services/ev-charging/` are all done. All three pillars now have real pages or
@@ -20,13 +20,11 @@ permanently by decision.
 The 30C tax credit claims are removed site-wide. The credit expired June 30
 2026 and the article at that URL is now a retrospective.
 
-**Next: the nav and footer sweep.** Repoint Solar and EV at their pages, leave
-`#parking` as an anchor, keep all three IDs. One scripted pass across the 150
-byte-identical chrome files plus `tools/rebrand/sweep-commit2.js` and the two
-`docs/preview/` copies. It was held back deliberately so it runs once rather
-than twice.
+The nav and footer sweep has run. All four What We Do destinations are settled:
+three pages and one anchor, every surface agreeing. See the settled-destinations
+table in the services section.
 
-Then the calculator reskin, week 5 in the execution plan.
+**Next: the calculator reskin**, week 5 in the execution plan.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -1022,6 +1020,13 @@ and were verified behaviourally: navigating to each hash lands the target at
 top=88 against a 73px sticky header, with the heading visible. The 305 links per
 anchor across 153 files are unchanged, 915 total.
 
+> **Superseded 2026-08-13 for `#solar` and `#ev`.** The nav and footer sweep
+> repointed both at their pillar pages, so those two anchors now have **zero**
+> inbound links. The IDs and the `scroll-margin-top` rule stay: they cost
+> nothing, they cover inbound external links and bookmarks, and removing them
+> would break silently. `#parking` keeps all 309 of its links. See the sweep
+> entry below for the current figures.
+
 ### `.scope-green` was inert at rest
 
 Done 2026-08-13. One rule in `styles.css`, no markup change.
@@ -1121,6 +1126,63 @@ of 150 frozen-chrome files for one outcome.
 
 **Worth more than bands 3 through 5 combined:** a completed client EV
 installation, if one ever exists. The page should be restructured around it.
+
+### SETTLED 2026-08-13: all four "What We Do" destinations
+
+The nav and footer sweep ran, and the What We Do menu is now finished. Three
+pages and one anchor. Nothing here is pending.
+
+| Item | Destination | Kind |
+|---|---|---|
+| All Services | `/services/` | hub |
+| Parking Revenue and Management | `/services/#parking` | **anchor, permanently** |
+| Solar Lighting | `/services/solar-lighting/` | page |
+| EV Charging | `/services/ev-charging/` | page |
+
+**Why the state is mixed, and why that is correct rather than unfinished.**
+Solar got a page because no solar content existed, so the page created
+something. EV got a page because 9 articles and 7,502 words were scattered with
+no centre, so the page consolidates something. Parking has neither problem, and
+a parking page would compete with `/services/` for its own query. See the
+decision entry below. Anyone reading the dropdown later and seeing three pages
+and one anchor should read this table, not assume a page is missing.
+
+**Every surface now agrees.** Nav panel, footer column, homepage pillar cards
+and the `/services/` tile CTAs all point to the same four destinations. The one
+deliberate exception: the `/services/` parking tile CTA still reads "Read the
+parking guides" and points at `/resources/?category=Articles`, because there is
+no parking page for it to point at. The EV tile CTA moved off the same resources
+category onto the new page and now reads "Explore EV charging", matching the
+solar tile.
+
+**Link counts, measured before and after:**
+
+| href | Before | After |
+|---|---|---|
+| `/services/#parking` | 309 | **309, unchanged** |
+| `/services/#solar` | 309 | **0** |
+| `/services/#ev` | 309 | **0** |
+| `/services/solar-lighting/` | 1 | **310** |
+| `/services/ev-charging/` | 0 | **310** |
+| `/services/` | 313 | **313, unchanged** |
+
+620 links in, 620 out. Solar: 309 anchors lost plus the 1 pre-existing tile CTA.
+EV: 309 lost plus the 1 tile CTA the sweep created.
+
+**All three anchor IDs survive on `/services/`** with `scroll-margin-top: 88px`,
+even though two of them now have no inbound links anywhere on the site. They are
+kept for inbound external links, bookmarks and anything already indexed with a
+fragment. Fragments are not separately indexed, so keeping them costs no SEO and
+removing them would fail silently. Verified: all three still land at exactly
+top=88 against the 73px sticky header with the heading fully visible.
+
+**Scope, corrected.** The sweep was scoped as "the 150 byte-identical chrome
+files". It was **151** by the time it ran, because the EV page added one. Two
+blocks moved in lockstep across those 151 files: the nav panel
+(`84c536c5` to `eb24d21d`) and the footer What We Do column (`73456eb4` to
+`f1eef8cf`). 156 files in total, including the two `docs/preview/` copies with
+their own indentation, `tools/rebrand/fixtures/main.html` alongside the homepage,
+and the literals in `tools/rebrand/sweep-commit2.js`.
 
 ### DECIDED 2026-08-13: no `/services/parking-revenue/` page. Do not revisit.
 
