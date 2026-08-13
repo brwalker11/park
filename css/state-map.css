@@ -412,16 +412,33 @@
 .state-detail .article-body strong { font-weight: 700; color: var(--ink); }
 .state-detail .content-body em,
 .state-detail .article-body em { font-style: italic; }
-.state-detail .content-body a,
-.state-detail .article-body a {
+/* Prose links only. `:not([class])` is load-bearing, not decoration.
+
+   Without it this rule reads `.state-detail .article-body a` at (0,2,1), which
+   beats `.article-cta .btn-primary`'s own `color` declaration at (0,2,0) in
+   styles.css. That put #004FC8 text on a #004FC8 button across the 14 Minnesota
+   and Texas subpages: contrast 1:1, the label invisible. Regression introduced
+   by the state reading-typography pass, found 2026-08-13.
+
+   Scoped here rather than fixed by raising the button's specificity, because
+   the defect is a link rule reaching further than it should. Every component
+   anchor in these bodies carries a class; prose links do not.
+
+   Measured while fixing: across all 28 subpages this selector matched exactly
+   14 anchors and all 14 were that button. There are currently ZERO prose links
+   on the state subpages, so the rule styles nothing today and is kept for the
+   prose links it was written for. Do not delete it as dead code without
+   checking that again. */
+.state-detail .content-body a:not([class]),
+.state-detail .article-body a:not([class]) {
   color: var(--state-active);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   text-decoration-color: var(--blue-tint-40, rgba(0,79,200,0.4));
 }
-.state-detail .content-body a:hover,
-.state-detail .article-body a:hover { text-decoration-color: var(--state-active); }
+.state-detail .content-body a:not([class]):hover,
+.state-detail .article-body a:not([class]):hover { text-decoration-color: var(--state-active); }
 
 /* ---------- Lists ----------
    Counted across the 28 subpages: 93 ul, 319 li, 0 ol. The ol rules are
@@ -582,6 +599,7 @@
   .state-detail .article-body { font-size: 1.0625rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .state-detail .content-body a,
-  .state-detail .article-body a { transition: none; }
+  /* Same scoping as the prose link rule above, so the two cannot drift. */
+  .state-detail .content-body a:not([class]),
+  .state-detail .article-body a:not([class]) { transition: none; }
 }
