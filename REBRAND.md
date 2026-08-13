@@ -979,9 +979,26 @@ hurricane rating, the 12-year battery life, the carbon offset figures, the
 Dallas deployment numbers, and the eleven years of testing. A gate checks all
 eight excluded patterns on every build. ClearWorld is never named.
 
-**The copy suggests moving the enforcement section directly after the hero.**
-Not done: the copy was approved in its delivered order and reordering it was not
-one of the three agreed edits. Worth revisiting with Ben.
+**The enforcement section sits directly after the hero**, per the copy's own
+verification notes. Approved and moved 2026-08-12.
+
+It is `band--card`, not `band--navy`. It had been navy so it would read as the
+turn in the argument, but directly after a navy hero a second navy band merges
+into it with no seam. White against navy is the hardest edge on the page, so the
+section keeps its emphasis, and being read second is now doing the work colour
+was doing. Band rhythm after the move, with no two adjacent surfaces alike:
+
+    navy      #010D20   hero
+    card      #FFFFFF   the part most property owners miss
+    page      #F8FAFC   why lighting gets deferred
+    card      #FFFFFF   how retrofit solar works
+    sunken    #F1F5F9   what it changes for the property
+    card      #FFFFFF   how the recommendation gets made
+    navy      #010D20   closing CTA
+
+Moving it to a light surface improved its prose contrast from 12.47:1 to
+17.85:1. It is now above the fold at 1280x900, so its styling matters at first
+paint; the payload already carried it.
 
 **A case study would be worth more than the entire capability section.** The
 copy says so and it is right. If any client has a solar installation in the
