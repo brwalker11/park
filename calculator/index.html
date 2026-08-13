@@ -90,7 +90,7 @@
     }
   </script>
 </head>
-<body>
+<body class="page-calculator">
   <a href="#main" class="skip-link">Skip to main content</a>
     <header class="site-header">
     <div class="header-inner">
@@ -144,17 +144,29 @@
 
 
   <main id="main">
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-      <div class="container">
-        <h1 class="page-title">Parking Revenue Calculator</h1>
-        <p class="page-subtitle">Property owners across the United States are turning underutilized parking into $3,000-$8,000+ monthly revenue streams. See what your property could earn in 60 seconds.</p>
+
+    <!-- HERO. Navy band, matching every other page. The tool below is
+         deliberately not a band; see the section comment there. -->
+    <section class="band band--navy calc-hero">
+      <div class="band__inner">
+        <span class="eyebrow">Revenue Calculator</span>
+        <h1 class="h1">See what your lot could earn</h1>
+        <p class="lede">Property owners across the United States are turning underutilized parking into recurring monthly revenue. Enter your numbers and the estimate updates as you type.</p>
       </div>
     </section>
 
-    <!-- CALCULATOR BODY -->
+    <!-- THE TOOL. NOT a .band, on purpose.
+
+         A band is a full-width slab with a centred inner. This is a
+         two-column grid whose right rail is sticky against an offset computed
+         from live header height, and which releases at #footerSentinel. That
+         is a different layout relationship and the band system has no
+         vocabulary for it. It also carries no data-reveal: revealing form
+         controls on scroll would delay the one thing this page exists to do.
+
+         Everything the JS touches lives inside here and is unchanged. -->
     <section class="calc" id="calcSection">
-      <div class="container">
+      <div class="calc__inner">
         <div class="layout">
 
           <!-- LEFT: FORM -->
@@ -249,78 +261,6 @@
 
               <p class="muted small">Estimates are illustrative; actuals depend on demand, rules, signage, and local conditions.</p>
             </form>
-
-            <!-- How This Estimate Works Section -->
-            <div class="card how-it-works-card">
-              <h2 class="how-it-works-heading">How This Parking Revenue Estimate Works</h2>
-              <p>This calculator uses real-world data from parking operations across the country to estimate what your lot could generate. Enter your number of spaces, average occupancy, hourly rate, and typical parking duration to see projected monthly and annual revenue.</p>
-              <p>The base estimate reflects what a standard Scan-to-Pay setup can produce. The LPR enhancement estimate shows the additional revenue gained through license plate recognition technology, which improves compliance rates by catching unpaid parkers automatically.</p>
-              <p>Every property is different. A 30-space church lot earning weekday revenue will look different from a 200-space event venue charging premium rates on game nights. That is why we offer free, no-obligation consultations to walk through your specific situation and recommend the right approach for your property type, location, and goals.</p>
-              <p>Your actual parking lot revenue depends on factors like local demand, nearby competition, signage, and pricing strategy. This estimate gives you a reliable starting point to decide whether parking monetization makes sense for your property.</p>
-            </div>
-
-            <!-- Social Proof Section -->
-            <div class="card social-proof-card">
-              <h3 class="social-proof-heading">Properties Like Yours Are Earning...</h3>
-              <div class="example-cards">
-                <div class="example-card">
-                  <svg class="example-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="9" y1="3" x2="9" y2="21"></line>
-                  </svg>
-                  <div class="example-spaces">50-space retail lot</div>
-                  <div class="example-revenue">$3,800/month</div>
-                </div>
-                <div class="example-card">
-                  <svg class="example-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                  </svg>
-                  <div class="example-spaces">75-space apartment complex</div>
-                  <div class="example-revenue">$5,200/month</div>
-                </div>
-                <div class="example-card">
-                  <svg class="example-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                  </svg>
-                  <div class="example-spaces">100-space office park</div>
-                  <div class="example-revenue">$6,500/month</div>
-                </div>
-              </div>
-
-              <div class="trust-badges">
-                <div class="trust-badge">
-                  <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                  <span>Vendor-Neutral Consultants</span>
-                </div>
-                <div class="trust-badge">
-                  <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                  </svg>
-                  <span>No Expensive Hardware</span>
-                </div>
-                <div class="trust-badge">
-                  <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                  </svg>
-                  <span>Nationwide Service</span>
-                </div>
-                <div class="trust-badge">
-                  <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                  <span>Low-Friction Adoption</span>
-                </div>
-              </div>
-            </div>
-
           </div>
 
           <!-- RIGHT: STICKY SUMMARY -->
@@ -378,7 +318,108 @@
 
         </div>
       </div>
+
+        </div>
+      </div>
     </section>
+
+    <!-- HOW IT WORKS. Lifted out of .left so the tool column holds only the
+         tool. Prose belongs on a band. -->
+    <section class="band band--card">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">Method</span>
+          <h2 class="h2">How this estimate works</h2>
+        </div>
+        <div class="prose">
+          <p>This calculator uses real-world data from parking operations across the country to estimate what your lot could generate. Enter your number of spaces, average occupancy, hourly rate, and typical parking duration to see projected monthly and annual revenue.</p>
+          <p>The base estimate reflects what a standard Scan-to-Pay setup can produce. The LPR enhancement estimate shows the additional revenue gained through license plate recognition technology, which improves compliance rates by catching unpaid parkers automatically.</p>
+          <p>Every property is different. A 30-space church lot earning weekday revenue will look different from a 200-space event venue charging premium rates on game nights. That is why we offer free, no-obligation consultations to walk through your specific situation and recommend the right approach for your property type, location, and goals.</p>
+          <p>Your actual parking lot revenue depends on factors like local demand, nearby competition, signage, and pricing strategy. This estimate gives you a reliable starting point to decide whether parking monetization makes sense for your property.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKED EXAMPLES AND TRUST. Also lifted out of .left. -->
+    <section class="band band--sunken">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">For Comparison</span>
+          <h2 class="h2">Properties like yours are earning</h2>
+        </div>
+          <div class="example-cards">
+            <div class="example-card">
+              <svg class="example-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+              </svg>
+              <div class="example-spaces">50-space retail lot</div>
+              <div class="example-revenue">$3,800/month</div>
+            </div>
+            <div class="example-card">
+              <svg class="example-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <div class="example-spaces">75-space apartment complex</div>
+              <div class="example-revenue">$5,200/month</div>
+            </div>
+            <div class="example-card">
+              <svg class="example-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              <div class="example-spaces">100-space office park</div>
+              <div class="example-revenue">$6,500/month</div>
+            </div>
+          </div>
+
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span>Vendor-Neutral Consultants</span>
+            </div>
+            <div class="trust-badge">
+              <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              <span>No Expensive Hardware</span>
+            </div>
+            <div class="trust-badge">
+              <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span>Nationwide Service</span>
+            </div>
+            <div class="trust-badge">
+              <svg class="trust-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span>Low-Friction Adoption</span>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- CLOSING CTA. Matches the homepage and the pillar pages. -->
+    <section class="band band--navy services-cta" data-reveal-group>
+      <div class="band__inner">
+        <span class="eyebrow" data-reveal>Next Step</span>
+        <h2 class="h2" data-reveal>An estimate is a starting point, not a plan</h2>
+        <p class="lede" data-reveal>A site assessment covers parking revenue, lighting and EV charging together, because they compete for the same stalls and the same budget. It takes one conversation and carries no obligation.</p>
+        <div class="services-hero__actions" data-reveal>
+          <a href="/contact/" class="btn btn--primary">Get a Free Site Assessment</a>
+          <a href="/services/" class="btn btn--secondary">See all services</a>
+        </div>
+      </div>
+    </section>
+
 
     <div id="footerSentinel" aria-hidden="true"></div>
 
@@ -467,243 +508,211 @@
 
   <!-- PAGE-SCOPED STYLES -->
   <style>
-    :root{
-      --mx:1200px;
-      --ink:#0f172a; --muted:#6b7280; --bd:#e6e8ee; --bg:#f7f8fb;
-      --card:#fff; --radius:14px; --shadow:0 2px 10px rgba(15,23,42,.06);
-      --btn-blue:#004FC8; --blue-600:#0043B3;
-      --stickTop:16px;
-    }
-    main{--pad:24px; --gap:24px;}
-    main .container{max-width:var(--mx); margin:0 auto; padding:0 var(--pad);}
-    .page-hero{padding:48px 0 8px; background:#fff;}
-    .page-title{font-size:44px; line-height:1.1; font-weight:800; color:var(--ink); margin:0;}
-    .page-subtitle{margin-top:10px; color:#3b4151; max-width:70ch}
-    .calc{background:var(--bg); padding:8px 0 56px;}
-    .layout{display:grid; grid-template-columns:1.25fr .75fr; gap:var(--gap);}
-    .left{display:flex; flex-direction:column; gap:var(--gap);}
-    .right{display:flex; flex-direction:column; gap:var(--gap);}
-    .card{background:var(--card); border:1px solid var(--bd); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;}
-    #summaryCard{position:sticky; top:var(--stickTop);}
-    .kpis{display:grid; grid-template-columns:1fr; gap:28px; margin-bottom:20px}
-    .kpi{background:#f8fafc; padding:18px; border-radius:12px; border:2px solid #e2e8f0}
-    .kpi-label{color:var(--muted); font-weight:700; margin-bottom:8px; font-size:14px; text-transform:uppercase; letter-spacing:0.5px}
-    .kpi-value{font-size:56px; font-weight:900; letter-spacing:-0.03em; color:#0b1220; line-height:1; margin-bottom:6px}
-    .kpi-value-enhanced{color:#004FC8}
-    .kpi-annual{color:#64748b; font-size:15px; font-weight:600; margin-bottom:12px}
-    .btn{display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 18px; border-radius:10px; font-weight:700; border:1px solid transparent; text-decoration:none; cursor:pointer; transition:background .2s ease, border-color .2s ease;}
-    .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(10,104,255,.25);}
-    .btn-block{width:100%}
-    .btn-primary{background:var(--btn-blue); color:#fff}
-    .btn-primary:hover{background:var(--blue-600)}
-    .cta-section{display:flex; flex-direction:column; gap:12px}
-    .btn-cta-enhanced{height:54px; font-size:16px; box-shadow:0 4px 12px rgba(11,110,253,0.3)}
-    .btn-cta-enhanced:hover{box-shadow:0 6px 16px rgba(11,110,253,0.4); transform:translateY(-1px)}
-    .btn-secondary{background:#fff; color:var(--ink); border:2px solid var(--bd); height:50px; font-size:15px}
-    .btn-secondary:hover{background:#f8f9fa; border-color:#94a3b8}
-    .trust-indicators{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding-top:8px; font-size:13px; color:#64748b; font-weight:500}
-    .trust-indicators span{display:flex; align-items:center; gap:4px}
-    .revenue-bar{height:8px; background:#e2e8f0; border-radius:999px; overflow:hidden; margin-top:4px}
-    .revenue-bar-fill{height:100%; background:linear-gradient(90deg, #3b82f6, #004FC8); border-radius:999px; transition:width 0.3s ease}
-    .revenue-bar-enhanced .revenue-bar-fill-enhanced{background:linear-gradient(90deg, #10b981, #059669)}
-    .revenue-context{background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:14px; font-size:14px; line-height:1.5; color:#0c4a6e; font-weight:600; margin-bottom:12px}
-    .revenue-context span{color:#0369a1; font-weight:700}
-    .tooltip-icon{display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:#e0e7ff; color:#4f46e5; font-size:11px; font-weight:700; cursor:help; margin-left:6px; position:relative}
-    .tooltip-icon:hover{background:#c7d2fe}
-    .tooltip-text{visibility:hidden; position:absolute; bottom:125%; left:50%; transform:translateX(-50%); background:#1e293b; color:#fff; padding:8px 12px; border-radius:6px; font-size:13px; font-weight:500; white-space:nowrap; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.15)}
-    .tooltip-icon:hover .tooltip-text{visibility:visible}
-    .tooltip-text::after{content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:#1e293b}
-    .how-it-works-card{background:#fff; border:1px solid var(--bd);}
-    .how-it-works-heading{font-size:22px; font-weight:700; color:#1e293b; margin:0 0 16px 0;}
-    .how-it-works-card p{font-size:15px; color:#374151; line-height:1.75; margin-bottom:14px; max-width:none;}
-    .how-it-works-card p:last-child{margin-bottom:0;}
-    .social-proof-card{background:linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border:2px solid #e2e8f0; margin-top:0}
-    .social-proof-heading{font-size:20px; font-weight:700; color:#1e293b; margin:0 0 20px 0; text-align:center}
-    .example-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px}
-    .example-card{background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:18px; display:flex; flex-direction:column; align-items:center; gap:10px; transition:all 0.2s ease; text-align:center}
-    .example-card:hover{border-color:#e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.06); transform:translateY(-2px)}
-    .example-icon{color:#3b82f6; margin-bottom:4px}
-    .example-spaces{font-size:13px; font-weight:600; color:#64748b; line-height:1.3}
-    .example-revenue{font-size:22px; font-weight:800; color:#0f172a; letter-spacing:-0.02em}
-    .trust-badges{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; padding-top:20px; border-top:1px solid #e2e8f0}
-    .trust-badge{display:flex; align-items:center; gap:10px; padding:10px; background:#fff; border-radius:8px; border:1px solid #e5e7eb}
-    .trust-badge-icon{color:#10b981; flex-shrink:0}
-    .trust-badge span{font-size:13px; font-weight:600; color:#374151}
-    .segmented{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-    .seg{height:auto; min-height:95px; border:2px solid #d1d5db; border-radius:14px; background:#f9fafb; font-weight:700; cursor:pointer; color:var(--ink); padding:16px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; transition:all 0.25s ease; position:relative}
-    .seg:hover{border-color:#93c5fd; background:#f0f7ff; transform:translateY(-2px); box-shadow:0 4px 12px rgba(59,130,246,0.15)}
-    .seg.is-active{background:linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-color:#004FC8; box-shadow:0 0 0 4px rgba(37,99,235,0.15), 0 8px 16px rgba(37,99,235,0.1)}
-    .seg.is-active .seg-icon{color:#004FC8; transform:scale(1.1)}
-    .seg:focus-visible{outline:none; box-shadow:0 0 0 4px rgba(10,104,255,.35);}
-    .seg-icon{color:#6b7280; transition:all 0.25s ease; margin-bottom:4px}
-    .seg:hover .seg-icon{color:#3b82f6}
-    .seg-title{font-size:15px; font-weight:700; line-height:1.2; color:#111827}
-    .seg-desc{font-size:11px; font-weight:500; color:#6b7280; line-height:1.3; text-align:center; margin-top:2px}
-    .muted{color:var(--muted)}
-    .small{font-size:13px}
-    .grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap)}
-    .field{display:flex; flex-direction:column; gap:8px}
-    label{font-weight:600; color:#283042}
-    input[type="number"]{
-      width:100%; height:44px; border:1px solid var(--bd); border-radius:10px; padding:0 12px; font-size:16px; background:#fff;
-    }
-    input[type="range"]{width:100%;}
-    input:focus{outline:none; border-color:var(--btn-blue); box-shadow:0 0 0 3px rgba(10,104,255,.15)}
-    .affix{position:relative}
-    .prefix,.suffix{position:absolute; top:50%; transform:translateY(-50%); color:#6b7280; font-weight:600; pointer-events:none}
-    .prefix{left:12px}
-    .suffix{right:12px}
-    .affix.with-prefix input{padding-left:32px}
-    .affix.with-suffix input{padding-right:36px}
-    .check{display:flex; align-items:center; gap:10px; margin-top:8px; user-select:none}
-    .field--uplift .uplift-controls{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-    .field--uplift input[type="range"]{flex:1 1 220px; min-width:160px}
-    .uplift-readout{display:inline-flex; align-items:center; justify-content:center; min-width:64px; padding:6px 14px; border-radius:999px; background:#eef2ff; color:var(--ink); font-size:18px; font-weight:700; letter-spacing:-0.01em; font-variant-numeric:tabular-nums}
-    .uplift-check{margin-top:0; gap:8px}
-    .uplift-check input{width:18px; height:18px; accent-color:var(--btn-blue)}
-    @media (max-width: 1024px){
-      main{--pad:16px; --gap:16px;}
-      .layout{grid-template-columns:1fr;}
-      #summaryCard{position:static; top:auto;}
-      .page-title{font-size:32px}
-      .page-subtitle{font-size:15px}
-      .grid{grid-template-columns:1fr;}
-      .kpi-value{font-size:42px}
-      .segmented{gap:10px}
-      .seg{min-height:80px; padding:12px 8px}
-      .seg-icon{width:24px; height:24px}
-      .seg-title{font-size:14px}
-      .seg-desc{font-size:11px}
-      .tooltip-text{font-size:12px; white-space:normal; max-width:200px; text-align:center}
-      .example-cards{grid-template-columns:1fr; gap:12px}
-      .trust-badges{grid-template-columns:1fr; gap:10px}
-      .trust-indicators{font-size:12px; gap:8px}
-      .social-proof-heading{font-size:18px}
-    }
-    .calc, .calc .container, .calc .layout{overflow:visible;}
-    #summaryCard.is-bottomed{
-      position:sticky;
-      top:auto;
-      align-self:flex-start;
-    }
-    /* Modal Styles */
-    .modal-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(15,23,42,0.6);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:2000;
-      padding:20px;
-      opacity:1;
-      transition:opacity 0.2s ease;
-    }
-    .modal-overlay[hidden]{display:none}
-    .modal-content{
-      background:#fff;
-      border-radius:var(--radius);
-      box-shadow:0 20px 40px rgba(15,23,42,0.2);
-      max-width:440px;
-      width:100%;
-      padding:32px;
-      position:relative;
-      animation:modalSlideIn 0.25s ease;
-    }
-    @keyframes modalSlideIn{
-      from{opacity:0;transform:translateY(-20px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-    .modal-close{
-      position:absolute;
-      top:16px;
-      right:16px;
-      width:36px;
-      height:36px;
-      border:none;
-      background:#f1f5f9;
-      border-radius:50%;
-      font-size:24px;
-      line-height:1;
-      color:#64748b;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:background 0.2s, color 0.2s;
-    }
-    .modal-close:hover{background:#e2e8f0;color:#1e293b}
-    .modal-close:focus{outline:none;box-shadow:0 0 0 3px rgba(10,104,255,0.25)}
-    .modal-heading{
-      font-size:24px;
-      font-weight:800;
-      color:var(--ink);
-      margin:0 0 8px 0;
-      padding-right:40px;
-    }
-    .modal-subtext{
-      color:#64748b;
-      font-size:15px;
-      margin:0 0 24px 0;
-      line-height:1.5;
-    }
-    .modal-field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      margin-bottom:20px;
-    }
-    .modal-field label{
-      font-weight:600;
-      color:#283042;
-      font-size:14px;
-    }
-    .modal-field input[type="email"]{
-      width:100%;
-      height:48px;
-      border:2px solid var(--bd);
-      border-radius:10px;
-      padding:0 14px;
-      font-size:16px;
-      background:#fff;
-      transition:border-color 0.2s, box-shadow 0.2s;
-    }
-    .modal-field input[type="email"]:focus{
-      outline:none;
-      border-color:var(--btn-blue);
-      box-shadow:0 0 0 3px rgba(10,104,255,0.15);
-    }
-    .modal-field input[type="email"].is-invalid{
-      border-color:#dc2626;
-    }
-    .modal-err{
-      color:#dc2626;
-      font-size:13px;
-      font-weight:500;
-    }
-    .modal-submit{
-      height:52px;
-      font-size:16px;
-      margin-top:4px;
-    }
-    .modal-submit[disabled]{
-      opacity:0.65;
-      cursor:wait;
-    }
-    .modal-alert{
-      margin-top:16px;
-      padding:12px 14px;
-      border-radius:8px;
-      background:#fef2f2;
-      color:#991b1b;
-      font-size:14px;
-      font-weight:500;
-    }
-    .hp{position:absolute;left:-9999px;opacity:0}
-    @media (max-width: 500px){
-      .modal-content{padding:24px 20px}
-      .modal-heading{font-size:20px}
-    }
+/* ============================================================
+   CALCULATOR PAGE PAYLOAD
+   ============================================================
+   Body-level on purpose, and var() is used freely here on purpose.
+   This block is parsed after the styles.css link, so every token it
+   references is already defined by the time it applies. That is the same
+   mechanism that lets it win the cascade at equal specificity. A head-level
+   payload could not do this; see the payload convention note in REBRAND.md.
+
+   Two exceptions, and only two: #10B981 and #059669 are written as literals
+   because they map to --ok and --ok-deep, and --ok is NOT among the 13 tokens
+   the head chrome payload defines. Everything else resolves from styles.css.
+
+   Everything is scoped under .page-calculator. The previous block was
+   unscoped and redefined --ink, --muted, --bg and --card at :root, which is
+   why this page rendered a different grey from the rest of the site. Those
+   overrides are gone; the page now takes the authoritative values.
+
+   --stickTop is written onto documentElement by the sticky IIFE. It is read
+   here with a fallback rather than declared at :root, so no token override
+   survives on this page.
+   ============================================================ */
+
+.page-calculator .calc{ background:var(--surface-page); padding:0 0 clamp(3rem,6vw,4.5rem); }
+.page-calculator .calc__inner{ max-width:1200px; margin:0 auto; padding-inline:20px; }
+@media(min-width:769px){ .page-calculator .calc__inner{ padding-inline:24px; } }
+
+.page-calculator .layout{ display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:24px; align-items:start; padding-top:32px; }
+.page-calculator .left{ display:grid; gap:20px; min-width:0; }
+.page-calculator .right{ min-width:0; }
+
+.page-calculator .card{ background:var(--surface-card); border:1px solid var(--border-1); border-radius:16px;
+  box-shadow:var(--shadow-sm); padding:24px; }
+
+/* ---------- Segmented mode switch ---------- */
+.page-calculator .segmented{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.page-calculator .seg{ display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center;
+  padding:18px 12px; background:var(--surface-page); border:1px solid var(--border-1); border-radius:12px;
+  font-family:inherit; cursor:pointer; transition:border-color .18s, background .18s, box-shadow .18s; }
+.page-calculator .seg:hover{ border-color:var(--blue); background:var(--surface-card); }
+.page-calculator .seg.is-active{ border-color:var(--blue); border-width:2px; padding:17px 11px;
+  background:var(--blue-wash); box-shadow:var(--shadow-sm); }
+.page-calculator .seg:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
+.page-calculator .seg-icon{ width:26px; height:26px; color:var(--text-3); stroke-width:1.75; }
+.page-calculator .seg:hover .seg-icon,
+.page-calculator .seg.is-active .seg-icon{ color:var(--blue); }
+.page-calculator .seg-title{ font-size:.9375rem; font-weight:700; color:var(--text-1); }
+/* --text-2, not --text-3: on the active segment's --blue-wash tint, 13px
+   --text-3 measured 4.37:1, below the 4.5 floor for small text. */
+.page-calculator .seg-desc{ font-size:.8125rem; line-height:1.4; color:var(--text-2); }
+
+/* ---------- Form ---------- */
+.page-calculator .grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 24px; }
+.page-calculator .field{ display:flex; flex-direction:column; gap:8px; min-width:0; }
+.page-calculator .field label{ font-size:.9375rem; font-weight:600; color:var(--text-1); }
+.page-calculator input[type="number"],
+.page-calculator .modal-field input[type="email"]{ width:100%; height:46px; padding:0 14px;
+  font-family:inherit; font-size:1rem; color:var(--text-1); background:var(--surface-card);
+  border:1px solid var(--border-1); border-radius:10px; transition:border-color .18s, box-shadow .18s; }
+.page-calculator input[type="number"]:focus,
+.page-calculator .modal-field input[type="email"]:focus{ outline:none; border-color:var(--blue);
+  box-shadow:0 0 0 3px var(--blue-tint-20); }
+.page-calculator .affix{ position:relative; display:flex; align-items:center; }
+.page-calculator .affix .prefix,
+.page-calculator .affix .suffix{ position:absolute; font-size:.9375rem; color:var(--text-3); pointer-events:none; }
+.page-calculator .affix .prefix{ left:14px; }
+.page-calculator .affix .suffix{ right:14px; }
+.page-calculator .affix.with-prefix input{ padding-left:30px; }
+.page-calculator .affix.with-suffix input{ padding-right:34px; }
+.page-calculator .small{ font-size:.875rem; color:var(--text-3); }
+.page-calculator .muted{ color:var(--text-3); }
+
+.page-calculator .field--uplift .uplift-controls{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.page-calculator input[type="range"]{ flex:1 1 220px; min-width:160px; accent-color:var(--blue); height:6px; }
+.page-calculator input[type="range"]:focus-visible{ outline:2px solid var(--blue); outline-offset:4px; }
+.page-calculator .uplift-readout{ min-width:58px; padding:5px 10px; text-align:center;
+  font-size:.9375rem; font-weight:700; color:var(--blue); background:var(--blue-tint-08); border-radius:999px; }
+.page-calculator .check{ display:flex; align-items:center; gap:10px; font-size:.9375rem; color:var(--text-1); }
+.page-calculator .uplift-check{ flex:1 0 100%; margin-top:4px; }
+.page-calculator .uplift-check input{ width:18px; height:18px; accent-color:var(--blue); }
+/* The checkbox was the one interactive surface in the tool with no focus
+   rule. Every other control had one; this closes the set. */
+.page-calculator .uplift-check input:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
+
+/* ---------- Tooltip ---------- */
+.page-calculator .tooltip-icon{ position:relative; display:inline-flex; align-items:center; justify-content:center;
+  width:16px; height:16px; margin-left:4px; border-radius:50%; background:var(--blue-tint-12); color:var(--blue);
+  font-size:11px; font-weight:700; cursor:help; }
+.page-calculator .tooltip-text{ position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%);
+  width:230px; max-width:min(230px, calc(100vw - 48px)); padding:10px 12px; background:var(--navy-900); color:var(--text-inverse-1);
+  font-size:.8125rem; font-weight:400; line-height:1.45; text-align:left; border-radius:10px;
+  box-shadow:var(--shadow-lg); opacity:0; visibility:hidden; transition:opacity .15s; z-index:20; }
+.page-calculator .tooltip-icon:hover .tooltip-text,
+.page-calculator .tooltip-icon:focus-visible .tooltip-text{ opacity:1; visibility:visible; }
+.page-calculator .tooltip-text::after{ content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+  border:6px solid transparent; border-top-color:var(--navy-900); }
+
+/* ---------- Summary rail ---------- */
+.page-calculator #summaryCard{ position:sticky; top:var(--stickTop,88px); display:grid; gap:18px; padding:24px; }
+.page-calculator #summaryCard.is-bottomed{ position:static; }
+.page-calculator .kpis{ display:grid; gap:16px; }
+.page-calculator .kpi{ padding:18px; background:var(--surface-page); border:1px solid var(--border-1); border-radius:14px; }
+.page-calculator .kpi-label{ font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:6px; }
+.page-calculator .kpi-value{ font-size:clamp(2.25rem, 1.6rem + 2vw, 3rem); font-weight:800; letter-spacing:-.03em;
+  line-height:1.05; color:var(--text-1); }
+.page-calculator .kpi-value-enhanced{ color:var(--blue); }
+.page-calculator .kpi-annual{ font-size:.9375rem; color:var(--text-3); margin-top:4px; }
+
+.page-calculator .revenue-bar{ height:8px; margin-top:12px; background:var(--border-1); border-radius:999px; overflow:hidden; }
+.page-calculator .revenue-bar-fill{ height:100%; border-radius:999px;
+  background:linear-gradient(90deg, var(--blue-bright), var(--blue)); transition:width .3s ease; }
+/* #10B981 and #059669 are --ok and --ok-deep. Written literally because --ok
+   is not one of the 13 tokens the head chrome payload defines, so a var()
+   here would be unresolved for any paint that beats styles.css. The uplift
+   bar is a success state, which is inside the green scoping rule. */
+.page-calculator .revenue-bar-enhanced .revenue-bar-fill-enhanced{
+  background:linear-gradient(90deg, #10B981, #059669); }
+
+.page-calculator .revenue-context{ padding:14px 16px; background:var(--blue-wash); border-radius:12px;
+  font-size:.9375rem; line-height:1.5; color:var(--text-2); }
+.page-calculator .revenue-context span{ font-weight:700; color:var(--blue); }
+
+.page-calculator .cta-section{ display:grid; gap:12px; }
+.page-calculator .trust-indicators{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 16px;
+  font-size:.8125rem; color:var(--text-3); }
+
+/* ---------- Buttons, page-local variants ---------- */
+.page-calculator .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  height:48px; padding:0 20px; border:1px solid transparent; border-radius:12px; font-family:inherit;
+  font-size:1rem; font-weight:600; line-height:1; white-space:nowrap; text-decoration:none; cursor:pointer;
+  transition:background .18s, box-shadow .18s, transform .18s; }
+.page-calculator .btn:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
+.page-calculator .btn-block{ width:100%; }
+.page-calculator .btn-primary{ background-image:var(--gradient-brand); color:var(--surface-card);
+  box-shadow:var(--shadow-sm); }
+.page-calculator .btn-primary:hover{ box-shadow:var(--shadow-md); transform:translateY(-1px); }
+.page-calculator .btn-secondary{ background:var(--surface-card); color:var(--text-1); border-color:var(--border-1); }
+.page-calculator .btn-secondary:hover{ background:var(--surface-page); border-color:var(--blue); }
+.page-calculator .btn-cta-enhanced{ height:54px; }
+
+/* ---------- Prose bands ---------- */
+.page-calculator .prose{ max-width:var(--read-wide,46rem); }
+.page-calculator .prose p{ font-size:1.0625rem; line-height:1.7; color:var(--text-2); margin:0 0 20px; max-width:none; }
+.page-calculator .prose p:last-child{ margin-bottom:0; }
+
+.page-calculator .example-cards{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.page-calculator .example-card{ padding:28px 24px; text-align:center; background:var(--surface-card);
+  border:1px solid var(--border-1); border-radius:16px; box-shadow:var(--shadow-sm); }
+.page-calculator .example-icon{ width:30px; height:30px; color:var(--blue); margin-bottom:10px; stroke-width:1.75; }
+.page-calculator .example-spaces{ font-size:.9375rem; color:var(--text-3); margin-bottom:6px; }
+.page-calculator .example-revenue{ font-size:1.75rem; font-weight:800; letter-spacing:-.02em; color:var(--text-1); }
+
+.page-calculator .trust-badges{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:40px; }
+.page-calculator .trust-badge{ display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; }
+/* --ok, literal for the reason given above. Trust ticks are a success state. */
+.page-calculator .trust-badge-icon{ width:24px; height:24px; color:#10B981; flex-shrink:0; stroke-width:1.75; }
+.page-calculator .trust-badge span{ font-size:.875rem; font-weight:600; color:var(--text-2); }
+
+/* ---------- Modal ---------- */
+.page-calculator .modal-overlay{ position:fixed; inset:0; z-index:2000; display:flex; align-items:center;
+  justify-content:center; padding:20px; background:rgba(1,13,32,.6); }
+.page-calculator .modal-overlay[hidden]{ display:none; }
+.page-calculator .modal-content{ position:relative; width:100%; max-width:440px; padding:32px;
+  background:var(--surface-card); border-radius:16px; box-shadow:var(--shadow-lg); }
+.page-calculator .modal-close{ position:absolute; top:12px; right:14px; width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center; font-size:26px; line-height:1;
+  color:var(--text-3); background:none; border:0; border-radius:8px; cursor:pointer; }
+.page-calculator .modal-close:hover{ background:var(--surface-page); color:var(--text-1); }
+.page-calculator .modal-close:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
+.page-calculator .modal-heading{ margin:0 0 6px; font-size:1.375rem; font-weight:800; letter-spacing:-.02em; color:var(--text-1); }
+.page-calculator .modal-subtext{ margin:0 0 20px; font-size:.9375rem; line-height:1.5; color:var(--text-3); max-width:none; }
+.page-calculator .modal-field{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.page-calculator .modal-field label{ font-size:.9375rem; font-weight:600; color:var(--text-1); }
+/* No --danger family exists in styles.css, so these three reds stay literals
+   rather than pretending a token is there via a var() fallback. Carried
+   forward unchanged from the previous payload; flagged, not invented. */
+.page-calculator .modal-field input[type="email"].is-invalid{ border-color:#dc2626; }
+.page-calculator .modal-err{ font-size:.8125rem; color:#dc2626; }
+.page-calculator .modal-submit{ height:52px; margin-top:4px; }
+.page-calculator .modal-submit[disabled]{ opacity:.6; cursor:not-allowed; transform:none; }
+.page-calculator .modal-alert{ margin-top:14px; padding:12px 14px; font-size:.875rem;
+  color:#991b1b; background:#fef2f2; border-radius:10px; }
+.page-calculator .hp{ position:absolute; left:-9999px; opacity:0; }
+
+/* ---------- Responsive. Breakpoints match the band system in styles.css. ---------- */
+@media(max-width:1024px){
+  .page-calculator .layout{ grid-template-columns:1fr; }
+  .page-calculator #summaryCard{ position:static; }
+  .page-calculator .trust-badges{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:768px){
+  .page-calculator .grid{ grid-template-columns:1fr; }
+  .page-calculator .example-cards{ grid-template-columns:1fr; }
+  .page-calculator .segmented{ grid-template-columns:1fr; }
+  .page-calculator .seg{ flex-direction:row; justify-content:flex-start; text-align:left; gap:12px; padding:14px 16px; }
+  .page-calculator .seg.is-active{ padding:13px 15px; }
+  .page-calculator .seg-desc{ display:none; }
+}
+@media(max-width:500px){
+  .page-calculator .trust-badges{ grid-template-columns:1fr; }
+  .page-calculator .tooltip-text{ left:auto; right:-4px; transform:none; }
+  .page-calculator .tooltip-text::after{ left:auto; right:12px; transform:none; }
+  .page-calculator .modal-content{ padding:24px 20px; }
+}
   </style>
 
   <script>
