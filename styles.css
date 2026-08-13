@@ -1326,9 +1326,28 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 .calc .money input,
 .calc .percent input{flex:1}
 .calc input[type=range]{accent-color:var(--brand)}
-.calc .btn{background:var(--border-1);border:1px solid var(--blue-pale-3);color:var(--ink);border-radius:999px;padding:0.55rem 1rem;font-weight:600;cursor:pointer;transition:background 0.2s,color 0.2s,box-shadow 0.2s}
-.calc .btn:hover{background:var(--blue-pale-bg)}
-.calc .btn.active{background:var(--brand);color:var(--surface-card);box-shadow:0 8px 20px rgba(11,110,253,0.2)}
+/* The :not() pair is load-bearing. Without it this reads `.calc .btn` at
+   (0,2,0), which beats `.btn-primary` at (0,1,0) wherever that is declared,
+   including the calculator's own body-level payload. The result was both
+   summary-card CTAs painted #e2e8f0 on #0f172a at a 999px radius: "Get Your
+   Custom Revenue Plan" and "Email Me This Report", the primary conversion
+   controls on the conversion page, reading as disabled. The modal's submit
+   button, carrying the identical btn btn-primary classes, rendered correctly
+   blue because it sits outside .calc. Same classes, two results, one page.
+
+   Scoped rather than fixed by raising the buttons' specificity, because the
+   defect is this rule's reach.
+
+   These three rules were written for an earlier calculator markup whose mode
+   toggles were bare .btn with an .active state. That markup is gone. Measured
+   while fixing: `.calc .btn` matched exactly 2 elements and both were the
+   CTAs it was breaking, `.calc .btn.active` matched 0, and after scoping the
+   set is empty. They are kept for the bare buttons they were written for.
+   16 of the 24 `.calc` selectors in this block already match nothing; see the
+   post-Vegas backlog before deleting any of them. */
+.calc .btn:not(.btn-primary):not(.btn-secondary){background:var(--border-1);border:1px solid var(--blue-pale-3);color:var(--ink);border-radius:999px;padding:0.55rem 1rem;font-weight:600;cursor:pointer;transition:background 0.2s,color 0.2s,box-shadow 0.2s}
+.calc .btn:not(.btn-primary):not(.btn-secondary):hover{background:var(--blue-pale-bg)}
+.calc .btn:not(.btn-primary):not(.btn-secondary).active{background:var(--brand);color:var(--surface-card);box-shadow:0 8px 20px rgba(11,110,253,0.2)}
 .calc .card{box-shadow:none;border:1px solid var(--border);text-align:center;padding:1.5rem;border-radius:14px}
 .calc .label{font-size:0.95rem;color:var(--muted);margin-bottom:0.4rem}
 .calc .value{font-size:2rem;font-weight:700;color:var(--ink)}
