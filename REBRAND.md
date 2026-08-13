@@ -1705,20 +1705,22 @@ Consequences:
   silently change colour. Any such rewrite needs these pages checked by hand or
   the body block updated in the same commit.
 
-**Two of the four are now off the list.** Updated 2026-08-13.
+**All four are now off the list.** Updated 2026-08-13.
+
+No page on the site overrides a `styles.css` token from an inline block any
+more, so a token rewrite can no longer silently change colour anywhere. The
+landmine is closed.
+
 
 | Page | `:root` override | Status |
 |---|---|---|
 | `calculator/index.html` | removed | **off**, in the reskin at `03707ae` |
 | `calculator/report/index.html` | removed | **off**, in the reskin below |
-| `contact/index.html` | `--muted`, `--ink`, `--bg` and others | still on |
-| `contact/thank-you/index.html` | same | still on |
+| `contact/index.html` | removed | **off**, in the reskin at `564a0bb` |
+| `contact/thank-you/index.html` | removed | **off**, same commit |
 
-Both calculator pages now take the authoritative token values, so they render
-`#64748b` where they used to render `#6b7280`. The remaining two are the
-contact pair, and they are the only pages left where a `styles.css` token
-rewrite can silently change colour. When the contact pass runs, that is the
-thing to check first.
+All four now take the authoritative token values, so they render `#64748b`
+where they used to render `#6b7280`.
 
 #### The payload `var()` convention is inconsistent, and both halves are correct
 
@@ -1957,6 +1959,39 @@ It appears on the icon links, the manifest link, and inside
 ## Post-Vegas backlog
 
 Not rebrand work. Do not start any of these before the conference.
+
+- **Contact form: two things pending Dave and Dax.** Opened 2026-08-13 with
+  the form improvement pass. Neither is a defect; both change what arrives in
+  their inbox, so neither is mine to decide.
+
+  **1. City and State, recommended for removal, NOT done.** They are two of
+  the six grid fields and neither is needed to reply to an enquiry. A property
+  address is a conversation-two detail. Removing them would take the form from
+  eight fields to six and from three rows to two, which is the single largest
+  friction reduction still available on the page.
+
+  **They were kept because removing them permanently changes what Dave and Dax
+  receive.** Every notification would lose two lines. That is a standing
+  operational change, not a design tweak, and it needs their agreement rather
+  than a designer's judgement. If they say yes it is a fifteen minute change.
+
+  **2. Field order changed, and it changes the notification email.** `message`
+  now sits above `how_heard`, because the message is what the visitor came to
+  write and the attribution dropdown is administrative. Formspree renders
+  fields in submission order, so the email body order changed with it:
+
+      before   name, email, phone, company, city, state, how_heard, message
+      after    name, email, phone, company, city, state, message, how_heard
+
+  Flagged so nobody thinks the template broke. It is an improvement, the
+  message now sits directly under the contact details rather than below a
+  dropdown, and it is reversible by moving one block back.
+
+  **Also worth knowing: `how_heard` is now optional, and when left blank it is
+  omitted from the email entirely rather than arriving empty.** The placeholder
+  option is `disabled`, so a select with nothing chosen contributes no entry at
+  all. Verified against a live submission. If Dave and Dax would rather see an
+  explicit "not answered", that needs a non-disabled placeholder with a value.
 
 - **Dated-claims audit.** Opened 2026-08-13, out of the 30C pass. Every finding
   below is a statutory, regulatory, or incentive claim carrying a date or a rate

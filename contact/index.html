@@ -174,13 +174,13 @@
         <div class="grid">
           <div class="field">
             <label for="name">Your name <span class="required-indicator">*</span></label>
-            <input id="name" name="name" type="text" autocomplete="name" aria-describedby="err-name" required />
+            <input id="name" name="name" type="text" autocomplete="name" aria-describedby="err-name" aria-invalid="false" required />
             <small class="err" id="err-name" role="alert" hidden>Please enter your name</small>
           </div>
 
           <div class="field">
             <label for="email">Email <span class="required-indicator">*</span></label>
-            <input id="email" name="_replyto" type="email" autocomplete="email" aria-describedby="err-email" required />
+            <input id="email" name="_replyto" type="email" autocomplete="email" aria-describedby="err-email" aria-invalid="false" required />
             <small class="err" id="err-email" role="alert" hidden>Please enter a valid email</small>
           </div>
 
@@ -204,9 +204,16 @@
             <input id="state" name="state" type="text" autocomplete="address-level1" />
           </div>
 
+
           <div class="field field-full">
-            <label for="how_heard">How did you hear about us? <span class="required-indicator">*</span></label>
-            <select id="how_heard" name="how_heard" aria-describedby="err-how_heard" required>
+            <label for="message">How can we help? <span class="required-indicator">*</span></label>
+            <textarea id="message" name="message" rows="6" aria-describedby="err-message" aria-invalid="false" required></textarea>
+            <small class="err" id="err-message" role="alert" hidden>Please add a short message</small>
+          </div>
+
+          <div class="field field-full">
+            <label for="how_heard">How did you hear about us? <span class="optional-note">(optional)</span></label>
+            <select id="how_heard" name="how_heard">
               <option value="" disabled selected>Select one...</option>
               <option value="Google Search">Google Search</option>
               <option value="Google Ads">Google Ads</option>
@@ -218,13 +225,6 @@
               <option value="Referral">Referral</option>
               <option value="Other">Other</option>
             </select>
-            <small class="err" id="err-how_heard" role="alert" hidden>Please select an option</small>
-          </div>
-
-          <div class="field field-full">
-            <label for="message">How can we help? <span class="required-indicator">*</span></label>
-            <textarea id="message" name="message" rows="6" aria-describedby="err-message" required></textarea>
-            <small class="err" id="err-message" role="alert" hidden>Please add a short message</small>
           </div>
 
           <!-- Hidden fields -->
@@ -239,6 +239,7 @@
           <p class="required-note">* Required fields</p>
         </div>
       </form>
+          <div id="formStatus" class="visually-hidden" role="status" aria-live="polite"></div>
           <div id="formError" class="alert error" role="status" hidden>
                   Hmm, something went wrong. Please try again or email <a href="mailto:info@mps.com">info@mps.com</a>.
                 </div>
@@ -283,6 +284,7 @@
   .page-contact select[aria-invalid="true"]{ border-color:var(--danger); }
   .page-contact .err{ font-size:.8125rem; font-weight:500; color:var(--danger); }
   .page-contact .required-indicator{ margin-left:2px; font-weight:700; color:var(--danger); }
+  .page-contact .optional-note{ margin-left:4px; font-weight:400; color:var(--text-3); }
   .page-contact .required-note{ grid-column:1 / -1; margin:0; font-size:.8125rem; color:var(--text-3); }
   .page-contact .hp{ position:absolute; left:-9999px; opacity:0; }
   .page-contact .actions{ grid-column:1 / -1; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
@@ -312,6 +314,7 @@
   const form = document.getElementById('contactForm');
   const btn  = document.getElementById('submitBtn');
   const err  = document.getElementById('formError');
+  const status = document.getElementById('formStatus');
   const f = id => document.getElementById(id);
 
   function showError(id, show){ const el = f('err-' + id); if (el) el.hidden = !show; }
@@ -321,16 +324,30 @@
     e.preventDefault();
     err.hidden = true;
 
-    const name = f('name').value.trim();
-    const email = f('email').value.trim();
-    const message = f('message').value.trim();
-    const howHeard = f('how_heard').value;
-    let bad = false;
-    showError('name', !name); bad = bad || !name;
-    showError('email', !validEmail(email)); bad = bad || !validEmail(email);
-    showError('message', !message); bad = bad || !message;
-    showError('how_heard', !howHeard); bad = bad || !howHeard;
-    if (bad) return;
+    const checks = [
+      ['name',    !f('name').value.trim()],
+      ['email',   !validEmail(f('email').value.trim())],
+      ['message', !f('message').value.trim()]
+    ];
+    let firstBad = null;
+    for (const [id, isBad] of checks) {
+      showError(id, isBad);
+      f(id).setAttribute('aria-invalid', String(isBad));
+      if (isBad && !firstBad) firstBad = id;
+    }
+    if (firstBad) {
+      // Move focus to the first invalid field rather than leaving the reader
+      // to hunt for the message. Announce the count in a live region, because
+      // unhiding an existing role="alert" node is not reliably spoken.
+      const n = checks.filter(function(c){ return c[1]; }).length;
+      status.textContent = n === 1
+        ? 'There is 1 problem with the form. Focus has moved to it.'
+        : 'There are ' + n + ' problems with the form. Focus has moved to the first.';
+      f(firstBad).focus();
+      f(firstBad).scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return;
+    }
+    status.textContent = '';
 
     btn.disabled = true;
     try {
