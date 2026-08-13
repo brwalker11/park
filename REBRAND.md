@@ -1839,10 +1839,32 @@ Not rebrand work. Do not start any of these before the conference.
   of **12 to 35%**" in the `dynamic-pricing-guide` lede, "**26%**",
   "**40 to 60%**", "**30%**" (EV articles), "**15 to 25%** revenue increase,
   **10 to 15%** occupancy improvement", "**80-90%** compliance", "**25%** in
-  most major cities". Each needs a source or needs to go. The Section 30C "30%
-  of installation costs" figure is statutory and is the one likely to survive
-  as written. **This is the substantive half of the remaining work** and needs
+  most major cities". Each needs a source or needs to go.
+  **This is the substantive half of the remaining work** and needs
   Ben, not a mechanical sweep: every figure is either sourceable or not.
+
+  **CORRECTION, 2026-08-13.** This entry previously read: *"The Section 30C
+  '30% of installation costs' figure is statutory and is the one likely to
+  survive as written."* That was wrong twice, and it is recorded rather than
+  silently deleted because it is the kind of error that repeats.
+
+  Wrong the first time on the number. 30% was never the rate for commercial
+  property as such. The base credit was **6%** of eligible costs, capped at
+  $100,000 per item; 30% was an enhanced rate available only where the project
+  met prevailing wage **and** registered apprenticeship requirements, and only
+  in an eligible census tract. Two articles quoted a bare "up to 30%" and one
+  quoted a flat "30% to 50%" for federal and state incentives combined. Calling
+  the figure statutory treated a conditional ceiling as a rate.
+
+  Wrong the second time on durability. "Statutory" was read as "stable". The
+  credit was terminated early by the One Big Beautiful Bill Act, which moved
+  the expiry from December 31, 2032 to **June 30, 2026**. It was already dead
+  when the note was written.
+
+  The general lesson, which is the reason this correction is kept: **a citation
+  to statute is not a source.** It fixes where a number comes from, not whether
+  the number is current or whether the copy stated it correctly. Statutory
+  figures belong in the dated-claims audit below, not in an exemption from it.
 
 - `INLINE_CTA_COPY` in `js/article.js` uses first-person language against the
   content rules. So does the string written into `#article-footer-copy` at
