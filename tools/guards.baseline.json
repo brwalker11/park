@@ -1,13 +1,13 @@
 {
-  "capturedAt": "2026-08-13T03:07:26.855Z",
+  "capturedAt": "2026-08-13T20:06:28.483Z",
   "expect": {
-    "noindex": 151,
-    "gtag": 150
+    "noindex": 152,
+    "gtag": 151
   },
   "counts": {
-    "guardedFiles": 151,
-    "noindex": 151,
-    "gtag": 150
+    "guardedFiles": 152,
+    "noindex": 152,
+    "gtag": 151
   },
   "entries": {
     "404.html": {
@@ -599,6 +599,10 @@
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },
     "resources/videos/tourist-town-parking-abuse/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "services/ev-charging/index.html": {
       "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },

@@ -24,7 +24,10 @@ const STATIC_ROUTES = [
   // written in order. Every route here takes lastmod from new Date() on each
   // run, so after a build the sitemap must be reverted to leave only the
   // intended change. See the sitemap section in CLAUDE.md.
-  { route: '/services/solar-lighting/', priority: '0.8' }
+  { route: '/services/solar-lighting/', priority: '0.8' },
+  // Added 2026-08-13. Same priority as the solar page: both are pillar pages
+  // under /services/, which stays at 0.9 as the hub.
+  { route: '/services/ev-charging/', priority: '0.8' }
 ];
 
 function loadArticles() {

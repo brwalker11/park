@@ -57,8 +57,15 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
 // from the old in exactly one added entry, with all 150 pre-existing hashes
 // unchanged, so the recapture could not launder a drift elsewhere. Any future
 // change to these numbers deserves the same check.
-const EXPECT_NOINDEX = 151;
-const EXPECT_GTAG = 150;
+//
+// Raised again to 152/151 on 2026-08-13, when services/ev-charging/index.html
+// was added. Second file addition of the rebrand, same shape as the first: the
+// new page was built from services/solar-lighting/index.html as a structural
+// donor, so both guard blocks are byte-identical to the donor's by
+// construction rather than by care. Same gated recapture: exactly one entry
+// added, zero removed, all 151 pre-existing hashes byte-identical.
+const EXPECT_NOINDEX = 152;
+const EXPECT_GTAG = 151;
 
 const NOINDEX_MARKER = '<!-- Preview noindex guard - remove on merge day -->';
 const GTAG_NEEDLE = "window.location.hostname === 'monetize-parking.com'";

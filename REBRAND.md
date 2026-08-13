@@ -10,13 +10,23 @@ Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
 
 ## Current pass
 
-**Status: services restructure and the solar page are complete and pushed.**
+**Status: the EV charging page is complete and pushed. The nav and footer sweep is next.**
 Bundle B, Pass 2b-b, the homepage, the 73 article pages, the 28 state subpages,
-the 30 video pages, `/services/` and `/services/solar-lighting/` are all done.
-Solar now has a real page, so the three pillars are genuinely co-equal in the
-navigation for the first time.
+the 30 video pages, `/services/`, `/services/solar-lighting/` and
+`/services/ev-charging/` are all done. All three pillars now have real pages or
+a settled answer: solar and EV have pages, parking keeps the `#parking` anchor
+permanently by decision.
 
-Next up is the calculator reskin, week 5 in the execution plan.
+The 30C tax credit claims are removed site-wide. The credit expired June 30
+2026 and the article at that URL is now a retrospective.
+
+**Next: the nav and footer sweep.** Repoint Solar and EV at their pages, leave
+`#parking` as an anchor, keep all three IDs. One scripted pass across the 150
+byte-identical chrome files plus `tools/rebrand/sweep-commit2.js` and the two
+`docs/preview/` copies. It was held back deliberately so it runs once rather
+than twice.
+
+Then the calculator reskin, week 5 in the execution plan.
 
 Update this line at the end of every pass. If you are starting a session and
 this says a pass is in progress, ask me for the result before proceeding.
@@ -1051,6 +1061,66 @@ until `styles.css` has long since loaded, so there is no first-paint flash.
 "Solar Lighting" points at `/services/#solar`, the anchor, not the page. All
 four "What We Do" items target `/services/`. Recorded, not changed: the markup
 is Bundle B frozen chrome.
+
+### `/services/ev-charging/`
+
+Added 2026-08-13 from Ben's copy. Second file addition of the rebrand.
+
+**Ben's copy reframed two of the five bands, and the reframe is the important
+part of this page.** The spec asked for band 4 "how the deal is structured" and
+band 5 "what it changes on the operating statement". Neither could be written
+honestly: Monetize Parking does not structure EV agreements and holds no
+operating data from any completed installation. Copy in those slots would have
+described a service that is not delivered, which is the exact failure the
+vendor-neutral position exists to prevent, and the kind of claim that collapses
+in a conversation at a booth.
+
+So this is a **qualification page, not a service page**. It answers "should I do
+this at all", which is the question a property owner arrives with. Revised
+slots: band 4 became "what to ask before signing anything", a question list
+rather than a description of terms the company does not set; band 5 became "what
+the service is", stated narrowly as assessment plus introductions.
+
+That makes it a thinner page than the solar one, deliberately. The alternative
+was overpromising.
+
+**Zero incentive claims, by construction.** Written as though the incentive
+column is zero, because after 30C expired it is. Gated on 7 incentive patterns,
+6 pricing patterns, a named-provider pattern and a statistic pattern, all 0
+hits. There are no figures on the page at all.
+
+**The state count was left as "some states."** The copy's verification note says
+one source puts it at thirteen states with enacted EV charging installation
+requirements, but the figure moves and was not independently confirmed. The
+`[VERIFY]` marker did not ship. Do not replace the phrase with a number unless
+the number is checked. The accessibility framing is deliberately "generally
+treated as" rather than a flat compliance statement; do not tighten it without
+advice.
+
+**Structure.** Seven bands, navy hero, card, page, card, compressed sunken,
+card, navy CTA. No two adjacent bands share a surface. Built from
+`services/solar-lighting/index.html` as a structural donor, so both guard
+blocks, the 4757-byte chrome payload (`00f299a9`), the Bundle B header and the
+footer are byte-identical by construction rather than by care.
+
+**`.page-ev` duplicates `.page-solar`.** The solar block is generic pillar-page
+prose styling; nothing in it is solar-specific except the green eyebrow, which
+EV is equally entitled to. It was duplicated rather than promoted to a shared
+hook because these payloads are per-page inline: promotion saves no bytes and
+would mean editing a page that shipped four days ago. **Recorded as a Pass 2c
+consolidation candidate.** The only addition is list styling, which solar had no
+need of.
+
+**Guard constants raised 151/150 to 152/151.** Same gated recapture as the solar
+page: exactly one entry added, zero removed, all 151 pre-existing hashes
+byte-identical, and the new page's guard hashes equal the donor's exactly.
+
+**Not yet linked from anywhere.** The nav and footer sweep is the next pass and
+was deliberately held: repointing Solar now and EV later would mean two sweeps
+of 150 frozen-chrome files for one outcome.
+
+**Worth more than bands 3 through 5 combined:** a completed client EV
+installation, if one ever exists. The page should be restructured around it.
 
 ### DECIDED 2026-08-13: no `/services/parking-revenue/` page. Do not revisit.
 

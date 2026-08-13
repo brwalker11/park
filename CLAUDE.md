@@ -109,22 +109,28 @@ when a container was recycled, which left no way to tell an already-edited tree
 from a clean one. Recapture only when a guard block changes for a real, stated
 reason, in the same commit as that change.
 
-**The counts are 151 noindex and 150 gtag, and both include
-`templates/article-index.html`.** There are 150 rendered pages; the template is
-the 151st file carrying the blocks. `404.html` is the one guarded file with no
-gtag gate. A checker that enumerates rendered pages only reports 150/149 and
+**The counts are 152 noindex and 151 gtag, and both include
+`templates/article-index.html`.** There are 151 rendered pages; the template is
+the 152nd file carrying the blocks. `404.html` is the one guarded file with no
+gtag gate. A checker that enumerates rendered pages only reports 151/150 and
 looks like a regression. The expected totals are asserted in the script, not
 merely reported, so an enumeration bug fails loudly.
 
-> **Corrected 2026-08-12: the counts were 150/149 and are now 151/150.** This
-> file previously stated 150/149 as a fixed fact, which was true for every pass
-> up to that point because every pass edited existing files. Adding
-> `services/solar-lighting/index.html` was the **first file addition of the
-> rebrand**, so the totals moved legitimately for the first time.
+> **These numbers have now moved twice, and both moves were file additions.**
+> Do not read the current values as permanent; read the rule under them.
 >
-> A file addition is the only situation in which raising these numbers is
-> correct. If they move for any other reason, a guard block has been disturbed
-> and the right response is to find out why, not to recapture.
+> - **2026-08-12: 150/149 to 151/150.** `services/solar-lighting/index.html`
+>   added. This file had stated 150/149 as a fixed fact, which was true only
+>   because every pass up to then edited existing files.
+> - **2026-08-13: 151/150 to 152/151.** `services/ev-charging/index.html`
+>   added, built from the solar page as a structural donor so both guard blocks
+>   are byte-identical to it by construction.
+>
+> **A file addition is the only situation in which raising these numbers is
+> correct.** If they move for any other reason, a guard block has been disturbed
+> and the right response is to find out why, not to recapture. Follow the gated
+> recapture below every time, including the diff assertion: it is what makes a
+> recapture safe rather than merely convenient.
 
 ### Recapturing the baseline after adding a page
 
@@ -143,8 +149,11 @@ therefore be gated, not just run:
    taken on trust.
 6. Commit the page, the constants and the baseline together, with the reason.
 
-That sequence was followed for the solar page: 150 pre-existing hashes compared,
-all identical, one entry added.
+That sequence was followed for the solar page (150 pre-existing hashes compared,
+all identical, one entry added) and again for the EV charging page (151
+compared, all identical, one added). In both cases the new page's guard hashes
+were additionally asserted equal to the donor page's, which is the check that
+proves the blocks were copied rather than authored.
 
 ## Rebrand sweep and gate scripts
 
