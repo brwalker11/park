@@ -649,6 +649,8 @@
       background: var(--gray-200);
     }
 
+    .hp{ position:absolute; left:-9999px; opacity:0; }
+
     /* Callback Form */
     .callback-section {
       background: var(--gray-50);
@@ -812,7 +814,7 @@
 
   <header class="lp-header">
     <span class="lp-header__logo" aria-label="Monetize Parking">
-      <img src="/images/Logo.svg" alt="Monetize Parking" class="lp-header__logo-img" />
+      <img src="/assets/brand/MP_Logo_400.png" alt="Monetize Parking" class="lp-header__logo-img" width="400" height="160" />
     </span>
     <a href="tel:+16122454025" class="lp-header__phone">Questions? Call (612) 245-4025</a>
   </header>
@@ -1025,6 +1027,7 @@
       <form class="callback-form" id="callbackForm" action="https://formspree.io/f/mqegwawp" method="POST">
         <input type="hidden" name="_subject" value="PPC Landing Page Callback Request" />
         <input type="hidden" name="_next" value="https://monetize-parking.com/consultation/thank-you/" />
+        <input type="text" name="_gotcha" class="hp" autocomplete="off" tabindex="-1" aria-hidden="true" /> <!-- honeypot -->
         <div class="callback-form__group">
           <label class="callback-form__label">Name <span class="required">*</span></label>
           <input type="text" name="name" class="callback-form__input" placeholder="Your name" required />
@@ -1035,7 +1038,7 @@
         </div>
         <div class="callback-form__group">
           <label class="callback-form__label">Email</label>
-          <input type="email" name="email" class="callback-form__input" placeholder="you@email.com" />
+          <input type="email" name="_replyto" class="callback-form__input" placeholder="you@email.com" />
         </div>
         <div class="callback-form__group">
           <label class="callback-form__label">Property Type</label>
@@ -1094,6 +1097,22 @@
           alert('Something went wrong. Please try again or call us at the number above.');
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
+        }
+      });
+    })();
+  </script>
+
+  <!-- Phone click conversion tracking -->
+  <script>
+    (function(){
+      var tel = document.querySelector('a[href^="tel:"]');
+      if(!tel) return;
+      tel.addEventListener('click', function(){
+        if(typeof gtag !== 'undefined'){
+          gtag('event', 'ppc_phone_click', {
+            event_category: 'conversion',
+            event_label: 'ppc_consultation'
+          });
         }
       });
     })();
