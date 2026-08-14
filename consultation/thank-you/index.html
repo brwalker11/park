@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -19,9 +19,35 @@
   <meta name="theme-color" content="#010d20" />
   <meta name="apple-mobile-web-app-title" content="MonetizeParking" />
   <link rel="manifest" href="/images/site.webmanifest?v=2" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Resource hints for faster third-party connections -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+  <!-- Critical CSS inlined for fast first paint. Hex literals only: this block
+       paints before the async styles.css link resolves, so var() references to
+       tokens defined there would not resolve at first paint. -->
+  <style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{font-size:16px}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:#F8FAFC;color:#0f172a;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}img{max-width:100%}.skip-link{position:absolute;top:-40px;left:0;padding:8px 16px;background:#004FC8;color:#fff;z-index:9999;text-decoration:none;font-weight:600}.skip-link:focus{top:0}
+.page-consultation .lp-header{background:#010D20;border-bottom:1px solid rgba(143,163,192,0.22);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.page-consultation .lp-header__logo{display:flex;align-items:center}.page-consultation .lp-header__logo-img{height:44px;width:auto;display:block}
+.page-consultation .band{padding-block:clamp(4rem,8vw,7rem)}.page-consultation .band--sm{padding-block:clamp(2.5rem,5vw,4rem)}.page-consultation .band--page{background:#F8FAFC}.page-consultation .band--card{background:#FFFFFF}.page-consultation .band--sunken{background:#F1F5F9}.page-consultation .band--navy{background:#010D20;color:#F8FAFC}.page-consultation .band__inner{max-width:1200px;margin:0 auto;padding-inline:20px}@media(min-width:769px){.page-consultation .band__inner{padding-inline:24px}}
+.page-consultation .eyebrow{display:block;margin-bottom:16px;font-size:.8125rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#004FC8}.page-consultation .band--navy .eyebrow{color:#4DA3FF}
+.page-consultation .h1{font-size:clamp(2.25rem,1.8rem + 2.25vw,3rem);line-height:1.12;font-weight:800;letter-spacing:-.025em;margin:0}.page-consultation .h2{font-size:clamp(1.75rem,1.5rem + 1.25vw,2.25rem);line-height:1.2;font-weight:800;letter-spacing:-.02em;margin:0}.page-consultation .h3{font-size:clamp(1.25rem,1.15rem + .5vw,1.5rem);line-height:1.3;font-weight:700;letter-spacing:-.01em;margin:0}.page-consultation .lede{font-size:1.1875rem;line-height:1.6;color:#475569;max-width:60ch;margin:0}.page-consultation .band--navy .lede{color:#C4D0E2}
+.page-consultation .icon{width:24px;height:24px;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}.page-consultation .icon--sm{width:18px;height:18px}
+.page-consultation .band-grid{display:grid;gap:24px}.page-consultation .band-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}.page-consultation .tile{display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:16px;box-shadow:0 1px 2px rgba(1,13,32,0.06),0 1px 3px rgba(1,13,32,0.08);padding:28px;text-decoration:none;color:inherit}.page-consultation .tile p{color:#475569;margin:10px 0 0;font-size:.9375rem;line-height:1.6}
+.page-consultation .section-head{max-width:720px;margin-bottom:40px}
+/* Confirmation hero. The green tick is the site's --ok token as a hex literal,
+   the same value the old payload carried as --success. */
+.page-consultation .ty-hero{padding-block:clamp(3rem,6vw,4.5rem);text-align:center}.page-consultation .ty-hero__inner{max-width:760px;margin:0 auto}.page-consultation .ty-hero__icon{display:flex;align-items:center;justify-content:center;width:72px;height:72px;margin:0 auto 24px;border-radius:50%;background:rgba(16,185,129,0.12);color:#10B981}.page-consultation .ty-hero__icon svg{width:40px;height:40px;stroke:currentColor;stroke-width:2.25;fill:none;stroke-linecap:round;stroke-linejoin:round}.page-consultation .ty-hero .lede{margin:20px auto 0}.page-consultation .ty-hero__note{margin-top:16px;font-size:.9375rem;font-weight:600;color:#4DA3FF}
+.page-consultation .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.page-consultation .step__num{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(0,79,200,0.08);color:#004FC8;font-weight:800;font-size:1.0625rem;margin-bottom:20px}.page-consultation .step p{color:#475569;margin:10px 0 0;font-size:1rem;line-height:1.65}
+.page-consultation .tile__icon{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(0,79,200,0.08);color:#004FC8;margin-bottom:18px}.page-consultation .tile__cta{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:.9375rem;font-weight:600;color:#004FC8}
+.page-consultation .lp-footer{background:#010D20;border-top:1px solid rgba(143,163,192,0.22);padding:24px;text-align:center;font-size:.875rem;color:#8FA3C0}
+@media(max-width:1024px){.page-consultation .band-grid--3,.page-consultation .steps{grid-template-columns:1fr}}
+@media(max-width:768px){.page-consultation .lp-header{padding:12px 20px}.page-consultation .lp-header__logo-img{height:38px}}</style>
+
+  <!-- Deferred full CSS loading -->
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/styles.css"></noscript>
 
   <!-- Preview noindex guard - remove on merge day -->
   <script>
@@ -57,281 +83,10 @@
       'currency': 'USD'
     });
   </script>
-
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --navy: #0f1c2e;
-      --navy-light: #1a2d45;
-      --blue: #0b6efd;
-      --blue-hover: #0a5ed4;
-      --blue-light: rgba(11, 110, 253, 0.1);
-      --gray-50: #f8fafc;
-      --gray-100: #f1f5f9;
-      --gray-200: #e2e8f0;
-      --gray-400: #94a3b8;
-      --gray-600: #475569;
-      --gray-700: #334155;
-      --gray-900: #0f172a;
-      --white: #ffffff;
-      --success: #10b981;
-      --font-display: 'Inter', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      color: var(--gray-700);
-      line-height: 1.6;
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Minimal Header */
-    .lp-header {
-      background: var(--navy);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .lp-header__logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .lp-header__logo-img {
-      height: 48px;
-      width: auto;
-      display: block;
-    }
-
-    /* Hero Section */
-    .ty-hero {
-      background: linear-gradient(170deg, var(--navy) 0%, var(--navy-light) 55%, #1e3a5f 100%);
-      padding: 80px 24px 72px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .ty-hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(11, 110, 253, 0.12) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .ty-hero__inner {
-      max-width: 700px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .ty-hero__icon {
-      color: var(--success);
-      margin-bottom: 24px;
-    }
-    .ty-hero__icon svg {
-      display: inline-block;
-    }
-    .ty-hero__title {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .ty-hero__sub {
-      font-size: clamp(16px, 2vw, 19px);
-      color: var(--gray-400);
-      max-width: 560px;
-      margin: 0 auto 16px;
-      line-height: 1.6;
-    }
-    .ty-hero__reassurance {
-      font-size: 14px;
-      color: var(--blue);
-      font-weight: 500;
-      font-style: italic;
-    }
-
-    /* Steps Section */
-    .steps-section {
-      padding: 72px 24px;
-      background: var(--white);
-    }
-    .steps-section__inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .steps-section__heading {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .steps-section__heading h2 {
-      font-family: var(--font-display);
-      font-size: clamp(24px, 3.5vw, 32px);
-      font-weight: 700;
-      color: var(--gray-900);
-    }
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .step {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-      position: relative;
-    }
-    .step__indicator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .step__number {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--blue);
-      color: var(--white);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .step__line {
-      width: 2px;
-      flex: 1;
-      background: var(--gray-200);
-      min-height: 32px;
-    }
-    .step:last-child .step__line {
-      display: none;
-    }
-    .step__content {
-      padding-bottom: 40px;
-    }
-    .step:last-child .step__content {
-      padding-bottom: 0;
-    }
-    .step__title {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 6px;
-      line-height: 44px;
-    }
-    .step__desc {
-      font-size: 15px;
-      color: var(--gray-600);
-      line-height: 1.6;
-    }
-
-    /* While You Wait Section */
-    .explore-section {
-      padding: 72px 24px;
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-    }
-    .explore-section__inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .explore-section__heading {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .explore-section__heading h2 {
-      font-family: var(--font-display);
-      font-size: clamp(24px, 3.5vw, 32px);
-      font-weight: 700;
-      color: var(--gray-900);
-    }
-    .explore-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-    .explore-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 16px;
-      padding: 28px 24px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.3s ease;
-      display: block;
-    }
-    .explore-card:hover {
-      border-color: var(--blue);
-      box-shadow: 0 4px 24px rgba(11, 110, 253, 0.1);
-      transform: translateY(-3px);
-    }
-    .explore-card__icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--blue-light);
-      color: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .explore-card__title {
-      font-family: var(--font-display);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 8px;
-    }
-    .explore-card__desc {
-      font-size: 14px;
-      color: var(--gray-600);
-      line-height: 1.55;
-    }
-
-    /* Footer */
-    .lp-footer {
-      background: var(--gray-900);
-      padding: 24px 16px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--gray-400);
-      line-height: 1.6;
-    }
-    .lp-footer a {
-      color: var(--gray-400);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color 0.2s;
-    }
-    .lp-footer a:hover { color: var(--white); }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      .ty-hero { padding: 56px 20px 56px; }
-      .steps-section { padding: 56px 20px; }
-      .explore-section { padding: 56px 20px; }
-      .step__title { line-height: 1.3; padding-top: 10px; }
-    }
-  </style>
 </head>
-<body>
+<body class="page-consultation page-thankyou">
+
+  <a href="#main" class="skip-link">Skip to main content</a>
 
   <header class="lp-header">
     <span class="lp-header__logo" aria-label="Monetize Parking">
@@ -339,92 +94,92 @@
     </span>
   </header>
 
-  <section class="ty-hero">
-    <div class="ty-hero__inner">
-      <div class="ty-hero__icon">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <polyline points="9 12 11.5 14.5 16 9"></polyline>
-        </svg>
-      </div>
-      <h1 class="ty-hero__title">Thank You! We Got Your Info</h1>
-      <p class="ty-hero__sub">A member of our team will reach out within one business day to learn about your lot and discuss how we can help you earn more from it.</p>
-      <p class="ty-hero__reassurance">No sales pitch. Just a real conversation about your parking revenue potential.</p>
-    </div>
-  </section>
+  <main id="main">
 
-  <section class="steps-section">
-    <div class="steps-section__inner">
-      <div class="steps-section__heading">
-        <h2>What to Expect</h2>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step__indicator">
-            <div class="step__number">1</div>
-            <div class="step__line"></div>
+    <section class="band band--navy ty-hero">
+      <div class="band__inner">
+        <div class="ty-hero__inner">
+          <div class="ty-hero__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="9 12 11.5 14.5 16 9"></polyline></svg>
           </div>
-          <div class="step__content">
-            <div class="step__title">We review your submission</div>
-            <p class="step__desc">Our team looks at your property type and situation to prepare for a productive conversation.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__indicator">
-            <div class="step__number">2</div>
-            <div class="step__line"></div>
-          </div>
-          <div class="step__content">
-            <div class="step__title">We call you</div>
-            <p class="step__desc">A parking revenue expert will reach out at the time you requested to discuss your lot.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__indicator">
-            <div class="step__number">3</div>
-          </div>
-          <div class="step__content">
-            <div class="step__title">You get a custom plan</div>
-            <p class="step__desc">We provide a vendor-neutral recommendation tailored to your property with no obligation to move forward.</p>
-          </div>
+          <h1 class="h1">Thank you, the request is in</h1>
+          <p class="lede">Someone will call within one business day to learn about your lot and what it could earn.</p>
+          <p class="ty-hero__note">No sales pitch. A straight conversation about the property.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="explore-section">
-    <div class="explore-section__inner">
-      <div class="explore-section__heading">
-        <h2>While You Wait</h2>
+    <section class="band band--card">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">What Happens Next</span>
+          <h2 class="h2">Three things, in this order</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step__num">1</div>
+            <h3 class="h3">The request is reviewed</h3>
+            <p>Property type and situation get read first, so the call starts with context rather than basics.</p>
+          </div>
+          <div class="step">
+            <div class="step__num">2</div>
+            <h3 class="h3">The call</h3>
+            <p>A parking revenue specialist calls at the number provided, within one business day.</p>
+          </div>
+          <div class="step">
+            <div class="step__num">3</div>
+            <h3 class="h3">A recommendation</h3>
+            <p>A vendor-neutral recommendation for the property, with no obligation to go any further.</p>
+          </div>
+        </div>
       </div>
-      <div class="explore-grid">
-        <a href="https://monetize-parking.com/calculator/" target="_blank" rel="noopener noreferrer" class="explore-card">
-          <div class="explore-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
-          </div>
-          <div class="explore-card__title">Estimate your revenue</div>
-          <p class="explore-card__desc">Try our free calculator to see what your lot could earn.</p>
-        </a>
-        <a href="https://monetize-parking.com/articles/eau-claire-revenue-increase/" target="_blank" rel="noopener noreferrer" class="explore-card">
-          <div class="explore-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="explore-card__title">Read a success story</div>
-          <p class="explore-card__desc">See how one property owner achieved a 178% revenue increase.</p>
-        </a>
-        <a href="https://monetize-parking.com/articles/how-to-start-charging-for-parking/" target="_blank" rel="noopener noreferrer" class="explore-card">
-          <div class="explore-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <div class="explore-card__title">Learn how it works</div>
-          <p class="explore-card__desc">A step-by-step guide to turning your lot into revenue.</p>
-        </a>
+    </section>
+
+    <section class="band band--sunken">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">While You Wait</span>
+          <h2 class="h2">Three things worth a look</h2>
+        </div>
+        <div class="band-grid band-grid--3">
+          <a href="/calculator/" class="tile">
+            <div class="tile__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="14" y1="11" x2="16" y2="11"/><line x1="8" y1="16" x2="10" y2="16"/><line x1="14" y1="16" x2="16" y2="16"/></svg>
+            </div>
+            <h3 class="h3">Estimate your revenue</h3>
+            <p>The calculator gives a figure for what a lot of your size and occupancy could earn.</p>
+            <span class="tile__cta">Open the calculator
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a href="/articles/eau-claire-revenue-increase/" class="tile">
+            <div class="tile__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 class="h3">Read the Eau Claire case study</h3>
+            <p>One lot in Wisconsin, a 178% revenue increase in 90 days, and what actually changed to get there.</p>
+            <span class="tile__cta">Read the case study
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a href="/articles/how-to-start-charging-for-parking/" class="tile">
+            <div class="tile__icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3 class="h3">How to start charging for parking</h3>
+            <p>A step-by-step guide to turning a free lot into one that produces revenue.</p>
+            <span class="tile__cta">Read the guide
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
   <footer class="lp-footer">
-    &copy; 2026 Monetize Parking. All rights reserved. &nbsp;|&nbsp; <a href="https://monetize-parking.com" target="_blank" rel="noopener noreferrer">Visit our website</a>
+    &copy; 2026 Monetize Parking. All rights reserved.
   </footer>
 
   <script>
