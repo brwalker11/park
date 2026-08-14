@@ -159,7 +159,7 @@
       <div class="band__inner">
         <span class="eyebrow">About</span>
         <h1 class="h1">The people behind the recommendation</h1>
-        <p class="lede">Parking lot owners come here to unlock revenue from an asset they already own, without adding complexity to how the property runs.</p>
+        <p class="lede">Monetize Parking was founded in April 2025 to give property owners advice on parking that is not tied to selling them equipment. Between them, the two people running it have sixty years in real estate and sales.</p>
       </div>
     </section>
 
@@ -169,25 +169,45 @@
       <div class="band__inner">
         <div class="section-head">
           <span class="eyebrow">Who You Deal With</span>
-          <h2 class="h2">Meet the team</h2>
+          <h2 class="h2">Two people, not a call center</h2>
+          <p class="lede">Every assessment and every conversation goes through one of them.</p>
         </div>
         <div class="band-grid band-grid--2">
           <div class="tile team-card">
-            <picture>
-              <source srcset="/images/dax.webp" type="image/webp">
-              <img src="/images/dax.jpg" alt="Dax Dickson" class="team-photo" width="200" height="200" loading="lazy" />
-            </picture>
-            <h3>Dax Dickson</h3>
-            <p>Dax brings years of proven sales expertise to the parking industry. His background in building client relationships and guiding complex deals gives him a unique ability to understand property owners’ needs and match them with the right solutions.</p>
-          </div>
-          <div class="tile team-card">
-            <picture>
+<picture>
               <source srcset="/images/dave.webp" type="image/webp">
               <img src="/images/dave.jpeg" alt="Dave Wickiser" class="team-photo" width="200" height="200" loading="lazy" />
             </picture>
             <h3>Dave Wickiser</h3>
-            <p>Dave’s experience in real estate gives property owners confidence that every partnership is structured for success. He combines deep market knowledge with a practical, results oriented mindset to help close deals efficiently and ensure each project meets the owner’s goals.</p>
+            <p>Thirty years as a real estate agent. That background is the reason this company looks at a parking lot the way an owner does, as part of the asset rather than as a line item. Parking revenue raises net operating income, and net operating income sets what a property is worth. The Eau Claire project is the clearest example: a 178% revenue increase, and a $240,000 lift in property value that followed from it.</p>
           </div>
+          <div class="tile team-card">
+<picture>
+              <source srcset="/images/dax.webp" type="image/webp">
+              <img src="/images/dax.jpg" alt="Dax Dickson" class="team-photo" width="200" height="200" loading="lazy" />
+            </picture>
+            <h3>Dax Dickson</h3>
+            <p>Thirty years in sales, which in this role mostly means knowing when to say no. Most of the calls that come in are not a fit, either because the lot is too small, the demand is not there, or the owner is better served leaving things alone. Saying so is faster than working around it.</p>
+          </div>
+        </div>
+      </section>
+
+    <!-- THE POSITION. band--sunken, not page or card: the band above is page
+         and the band below is card, so both of those would clash. Sunken is
+         the third light surface and gives the same rhythm the services page
+         runs. This is the argument the whole rebrand turns on, and it had
+         never appeared on the page where someone decides whether to trust two
+         named people. -->
+    <section class="band band--sunken">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">The Position</span>
+          <h2 class="h2">No product line to protect</h2>
+        </div>
+        <div class="prose">
+          <p>Most companies offering parking technology sell parking technology. The recommendation and the product are the same thing, so the advice is worth whatever the margin is.</p>
+          <p>This company sells neither. It assesses a property, recommends what fits, and sources it from whichever provider is right, which means there is no equipment to move and no reason to recommend a system that does not suit the lot. Where the answer is that a property should not be doing this, that is the answer.</p>
+          <p>Terms follow from the same position. No upfront cost, month to month, and the results are what keep the contract.</p>
         </div>
       </div>
     </section>
@@ -217,7 +237,12 @@
                 <span class="cs-stat-num">178%</span>
                 <span class="cs-stat-label">revenue increase</span>
               </span>
+              <span class="cs-stat">
+                <span class="cs-stat-num">$240K</span>
+                <span class="cs-stat-label">increase in assessed property value</span>
+              </span>
               <p class="cs-text">What changed was the enforcement, not the lot. <strong>AI license plate recognition</strong> replaced the honour system. No gates, no kiosks.</p>
+              <p class="cs-note">These figures reflect one client engagement and are not industry averages.</p>
               <span class="cs-cta">Read the case study
                 <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
@@ -231,11 +256,11 @@
     <section class="band band--navy services-cta" data-reveal-group>
       <div class="band__inner">
         <span class="eyebrow" data-reveal>Next Step</span>
-        <h2 class="h2" data-reveal>Ready to unlock your lot's potential?</h2>
-        <p class="lede" data-reveal>Find out how easy it is to start earning more with the right set of parking enforcement solutions.</p>
+        <h2 class="h2" data-reveal>Start with a conversation about your lot</h2>
+        <p class="lede" data-reveal>The first call runs about thirty minutes. It covers the property, the area it sits in, and what you are trying to solve or add. There is nothing to prepare and no obligation. If the lot is not a fit, that answer comes on the same call.</p>
         <div class="services-hero__actions" data-reveal>
           <a href="/contact/" class="btn btn--primary">Book a Free Consultation</a>
-          <a href="/calculator/" class="btn btn--secondary">Estimate what your lot earns</a>
+          <a href="/calculator/" class="btn btn--secondary">Try the Revenue Calculator</a>
         </div>
       </div>
     </section>
@@ -274,9 +299,17 @@
   .page-about .cs-heading{ margin:0 0 10px; font-size:1.25rem; font-weight:700;
     letter-spacing:-.01em; color:var(--text-1); }
   .page-about .cs-text{ margin:0; font-size:1rem; line-height:1.65; color:var(--text-2); max-width:none; }
-  .page-about .cs-stat{ display:inline-flex; align-items:baseline; gap:8px; margin-bottom:14px; }
+  /* Stacked, not inline. The two labels together exceed the card content
+     width, so they wrapped, and the sibling margin-left left the second one
+     indented 24px against the first. Each stat gets its own row. */
+  .page-about .cs-stat{ display:flex; align-items:baseline; gap:8px; margin-bottom:8px; }
+  .page-about .cs-stat:last-of-type{ margin-bottom:14px; }
   .page-about .cs-stat-num{ font-size:2rem; font-weight:800; letter-spacing:-.02em; color:var(--blue); line-height:1; }
   .page-about .cs-stat-label{ font-size:.875rem; font-weight:600; color:var(--text-3); }
+  .page-about .cs-note{ margin:14px 0 0; font-size:.8125rem; line-height:1.5; color:var(--text-3); max-width:none; }
+  .page-about .prose{ max-width:var(--read-wide,46rem); }
+  .page-about .prose p{ margin:0 0 20px; font-size:1.0625rem; line-height:1.7; color:var(--text-2); max-width:none; }
+  .page-about .prose p:last-child{ margin-bottom:0; }
   .page-about .cs-cta{ display:inline-flex; align-items:center; gap:6px; margin-top:18px;
     font-size:.9375rem; font-weight:600; color:var(--blue); }
 

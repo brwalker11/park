@@ -1960,6 +1960,31 @@ It appears on the icon links, the manifest link, and inside
 
 Not rebrand work. Do not start any of these before the conference.
 
+- **About page: Dave and Dax should read their own bios.** Opened 2026-08-13
+  with the About content pass. The bios describe how each of them actually
+  works and both thirty-year figures are theirs, so they are the only people
+  who can confirm them.
+
+  **Dax's paragraph is written around qualifying people out rather than
+  closing them.** That is deliberate: a sales bio sitting two bands below a
+  section arguing vendor neutrality would undercut the argument, and the
+  page is stronger if he is the person who says no. **If that is not how he
+  actually works it needs rewriting**, because it should describe the real
+  job rather than the convenient one.
+
+  Also stated on the page and needing confirmation: **the company was founded
+  in April 2025**, and **sixty years between them**. The founding date is
+  deliberately stated rather than implied. Sixteen months is young, and a
+  young company implying a longer history is the first thing a sceptical
+  owner catches. The weight sits on individual experience and one verified
+  result instead.
+
+- **Dax's photograph needs a new source at 800x800.** `images/dax.jpg` and
+  `images/dax.webp` are both 200x200 and render at 140px, so the image is soft
+  on any retina display. `dave.jpg` and `dave.webp` are both 800x800 and are
+  not. There is no larger Dax source in the repo, so this cannot be fixed by
+  re-exporting; it needs a new photograph. Checked 2026-08-13.
+
 - **Contact form: two things pending Dave and Dax.** Opened 2026-08-13 with
   the form improvement pass. Neither is a defect; both change what arrives in
   their inbox, so neither is mine to decide.
