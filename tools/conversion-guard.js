@@ -19,7 +19,7 @@
  *
  * WHAT IS COVERED
  *
- * Four hashed blocks, byte-identical:
+ * Five hashed blocks, byte-identical:
  *   1. consultation/thank-you  Google Ads conversion snippet (send_to, value,
  *                              currency). This is the money block.
  *   2. consultation/thank-you  ppc_callback_conversion load handler.
@@ -27,6 +27,9 @@
  *                              calendly_booking and performs the redirect that
  *                              causes block 1 to run.
  *   4. consultation/           ppc_phone_click handler (added f2b1b14).
+ *   5. consultation/           callback form submit handler. It performs the
+ *                              redirect to thank-you, so a break here silently
+ *                              stops form leads being counted as conversions.
  *
  * Plus an assertion set for strings that must survive but whose surrounding
  * markup is expected to change during the rebrand.
@@ -40,12 +43,13 @@
  * that must never change - the booking path and hide_gdpr_banner - are asserted
  * individually, leaving the colour parameters free.
  *
- * The Formspree callback form is asserted CONDITIONALLY. The rebrand removes
- * the form in favour of Calendly plus a phone number, so "the form exists" is
- * not an invariant. What is invariant: IF a Formspree form is present, it posts
- * to the landing page's own endpoint (not the shared contact one) and carries
- * both the honeypot and the reply-to wiring. That catches a regression without
- * blocking the planned removal.
+ * The Formspree callback form is asserted CONDITIONALLY. It was briefly cut in
+ * 33d7191 and restored as the page's PRIMARY mechanism in b8fa637, so the
+ * conditional shape has already earned its keep once and is kept rather than
+ * hardened. What is invariant: IF a Formspree form is present, it posts to the
+ * landing page's own endpoint (not the shared contact one) and carries both the
+ * honeypot and the reply-to wiring. Its submit HANDLER is hashed unconditionally
+ * as block 5, because that is what fires the conversion.
  *
  * Usage:
  *   node tools/conversion-guard.js capture   # write the baseline
@@ -64,7 +68,13 @@ const TY = 'consultation/thank-you/index.html';
 
 // Asserted, not merely reported, so an extraction bug fails loudly instead of
 // quietly shrinking the covered set. Same discipline as guards.js.
-const EXPECT_BLOCKS = 4;
+//
+// Raised from 4 to 5 on 2026-08-14 to cover the callback form's submit handler.
+// It performs the redirect to /consultation/thank-you/, which is what causes
+// the Ads conversion snippet on that page to run. Break the handler and form
+// submissions stop being counted, exactly as they would if the Calendly
+// listener broke. Gated recapture: one block added, four unchanged.
+const EXPECT_BLOCKS = 5;
 
 /* Each block is anchored on a literal that opens it and a literal that closes
  * it. Whitespace between is part of the hash, so reindentation is caught. */
@@ -89,6 +99,13 @@ const BLOCKS = [
     open: '<!-- Calendly booking conversion tracking -->',
     close: '</script>',
     why: 'Fires calendly_booking and redirects to thank-you, which runs ads-conversion.',
+  },
+  {
+    id: 'callback-submit-handler',
+    file: LP,
+    open: '<!-- Callback form submission -->',
+    close: '</script>',
+    why: 'Redirects to thank-you, which is what runs ads-conversion for form leads.',
   },
   {
     id: 'phone-click',
@@ -121,7 +138,7 @@ const CONDITIONAL = [
       { needle: 'name="_gotcha"', count: 1, why: 'honeypot present on the only form receiving paid traffic' },
       { needle: 'name="_replyto"', count: 1, why: 'replies reach the lead' },
     ],
-    note: 'The rebrand removes this form in favour of Calendly plus a phone number. These checks apply only while a Formspree form is still on the page.',
+    note: 'These checks apply only while a Formspree form is on the page. The form was cut in 33d7191 and restored as the primary mechanism in b8fa637.',
   },
 ];
 

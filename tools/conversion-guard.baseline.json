@@ -1,7 +1,7 @@
 {
-  "capturedAt": "2026-08-14T21:46:51.978Z",
+  "capturedAt": "2026-08-14T22:31:50.037Z",
   "expect": {
-    "blocks": 4
+    "blocks": 5
   },
   "blocks": {
     "ads-conversion": {
@@ -18,6 +18,11 @@
       "file": "consultation/index.html",
       "bytes": 472,
       "hash": "a2e6b044b33977ead6cf3c3bd716339ea4f64ec49aa7420c6b66e023fd14a013"
+    },
+    "callback-submit-handler": {
+      "file": "consultation/index.html",
+      "bytes": 1421,
+      "hash": "d0bc5e116e794dfc4dbc859d050b373c49fc3e406149f9c1f5ded140bd61ff2d"
     },
     "phone-click": {
       "file": "consultation/index.html",
