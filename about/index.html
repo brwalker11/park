@@ -176,7 +176,7 @@
           <div class="tile team-card">
 <picture>
               <source srcset="/images/dave.webp" type="image/webp">
-              <img src="/images/dave.jpeg" alt="Dave Wickiser" class="team-photo" width="200" height="200" loading="lazy" />
+              <img src="/images/dave.jpeg" alt="Dave Wickiser" class="team-photo" width="800" height="800" loading="lazy" />
             </picture>
             <h3>Dave Wickiser</h3>
             <p>Thirty years as a real estate agent. That background is the reason this company looks at a parking lot the way an owner does, as part of the asset rather than as a line item. Parking revenue raises net operating income, and net operating income sets what a property is worth. The Eau Claire project is the clearest example: a 178% revenue increase, and a $240,000 lift in property value that followed from it.</p>
@@ -280,7 +280,12 @@
   .page-about .team-card{ display:flex; flex-direction:column; align-items:center;
     padding:32px 24px; text-align:center; background:var(--surface-card);
     border:1px solid var(--border-1); border-radius:16px; box-shadow:var(--shadow-sm); }
-  .page-about .team-photo{ width:140px; height:140px; margin-bottom:18px;
+  /* 100px, not 140. Dax's source is 200x200 and cannot be re-shot, so 100px
+     is exactly 2x for it and therefore retina-correct; Dave's 800x800 is
+     comfortably above 2x at the same size. THIS SIZE IS CONSTRAINED BY THE
+     ASSET: raising it above 100px makes Dax's photo soft again. See the note
+     in REBRAND.md before changing it. */
+  .page-about .team-photo{ width:100px; height:100px; margin-bottom:18px;
     border-radius:50%; object-fit:cover; }
   .page-about .team-card h3{ margin:0 0 10px; font-size:1.25rem; font-weight:700;
     letter-spacing:-.01em; color:var(--text-1); }

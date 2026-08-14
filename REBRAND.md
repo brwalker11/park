@@ -1979,11 +1979,30 @@ Not rebrand work. Do not start any of these before the conference.
   owner catches. The weight sits on individual experience and one verified
   result instead.
 
-- **Dax's photograph needs a new source at 800x800.** `images/dax.jpg` and
-  `images/dax.webp` are both 200x200 and render at 140px, so the image is soft
-  on any retina display. `dave.jpg` and `dave.webp` are both 800x800 and are
-  not. There is no larger Dax source in the repo, so this cannot be fixed by
-  re-exporting; it needs a new photograph. Checked 2026-08-13.
+- **CLOSED, and now a standing constraint: the team photos render at 100px,
+  and 100px is the ceiling.** `images/dax.jpg` and `images/dax.webp` are both
+  200x200. `dave.jpg` and `dave.webp` are both 800x800. There is no larger Dax
+  source in the repo and the photograph cannot be re-shot, so the resolution
+  mismatch is permanent and the fix is the render size rather than the source.
+  At the old 140px, Dax's 200x200 gave only 1.43x and was soft on any retina
+  display. At 100px it is exactly 2x and therefore retina-correct; Dave's
+  800x800 is 8x at the same size. Measured 2026-08-14 at `devicePixelRatio` 2.
+
+  **Dax's photograph constrains the maximum display size to 100px. Anyone
+  raising `.page-about .team-photo` above 100px reintroduces the soft image.**
+  The rule in `about/index.html` carries a comment saying so and pointing here.
+  If the display size ever needs to grow, the new photograph has to come first.
+
+  The change cost 40px of card height at every width and altered nothing else:
+  375px 585/480 to 545/440, 768px 400/374 to 360/334, 1280px and 1440px 453/453
+  to 413/413. Cards are equal-height wherever they sit side by side, which is
+  the two-column layout at 1024px and above; below that the grid is a single
+  column and each card sizes to its own content, which was true before this
+  change and is not a defect. Verified at all four widths with no overflow.
+
+  Fixed in the same pass: Dave's `<img>` declared `width="200" height="200"`
+  while the file is 800x800. Corrected to the true intrinsic size. Same class
+  of defect as the case study image in `d320799`.
 
 - **Contact form: two things pending Dave and Dax.** Opened 2026-08-13 with
   the form improvement pass. Neither is a defect; both change what arrives in
