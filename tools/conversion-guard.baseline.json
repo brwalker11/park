@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-08-14T21:40:47.360Z",
+  "capturedAt": "2026-08-14T21:46:51.978Z",
   "expect": {
     "blocks": 4
   },
@@ -21,8 +21,8 @@
     },
     "phone-click": {
       "file": "consultation/index.html",
-      "bytes": 426,
-      "hash": "074ea57c8e2ec031c017db079b08dd6394bbf9e83cb3ed3c57de3b9fbab531ab"
+      "bytes": 520,
+      "hash": "c10def4f70553589144d120a68ba7c80f8954b411cb12afa817884b6c4c1c2e6"
     }
   }
 }
