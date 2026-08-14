@@ -155,6 +155,54 @@ compared, all identical, one added). In both cases the new page's guard hashes
 were additionally asserted equal to the donor page's, which is the check that
 proves the blocks were copied rather than authored.
 
+## Conversion integrity check
+
+`tools/conversion-guard.js` is a **separate** checker for the `/consultation/`
+ad landing path. It is separate from `guards.js` on purpose, and the two must
+not be merged.
+
+```bash
+node tools/conversion-guard.js capture
+```
+
+```bash
+node tools/conversion-guard.js verify
+```
+
+`guards.js` protects blocks that are **deleted on merge day**; a failure there
+means a revert will conflict. This one protects blocks that must **survive
+forever**; a failure means Google Ads has stopped counting conversions on the
+only paid landing page on the site. Merging them would mix those two meanings
+and would move the 152 / 151 / 303 totals quoted throughout this file.
+
+Four hashed blocks: the Google Ads conversion snippet and the
+`ppc_callback_conversion` handler on `consultation/thank-you/`, and the Calendly
+`postMessage` listener and `ppc_phone_click` handler on `consultation/`. Plus 11
+substring assertions covering the Ads tag, the conversion label, value and
+currency, the Calendly booking path and `hide_gdpr_banner`.
+
+Two deliberate exemptions, both of which exist so the guard does not block
+intended work:
+
+1. **The Calendly embed `<div>` is not hashed.** Its `data-url` carries
+   `background_color` and `primary_color`, hand-matched to the CSS behind the
+   iframe, so a redesign has to change them or a visible rectangle appears
+   around the widget. The booking path and `hide_gdpr_banner` are asserted
+   individually instead, leaving the colour parameters free.
+2. **The Formspree form is asserted conditionally.** The rebrand replaces it
+   with Calendly plus a phone number, so "a form exists" is not an invariant.
+   IF a Formspree form is present it must use the landing page's own endpoint
+   (`mqegwawp`, not the shared `xdkwwvdz`) and carry both `_gotcha` and
+   `_replyto`. When the form goes, the conditional set skips and says so.
+
+The baseline is `tools/conversion-guard.baseline.json`, captured from `f2b1b14`
+before the `/consultation/` rebrand began, and committed. The checker was
+validated against eight tamper tests: six that must fail (conversion label,
+booking path, honeypot removal, GDPR flag, a whitespace-only edit inside a
+hashed block, conversion value) and two that must still pass (retuning the embed
+colour parameters, removing the form entirely). A guard that has never been
+shown to fail proves nothing.
+
 ## Rebrand sweep and gate scripts
 
 `tools/rebrand/` holds the per-pass sweep and verification scripts, with their
