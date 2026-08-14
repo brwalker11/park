@@ -260,10 +260,15 @@ body{
 }
 
 /* Skip navigation link for keyboard accessibility (WCAG 2.1 Level A) */
+/* Hidden by exactly its own height. The previous rule used top:-40px on a box
+   that computes to 44px (8+8 padding plus a 28px line-height), so 4px of it
+   showed at the top-left of all 152 pages carrying a skip link. A fixed offset
+   drifts whenever the font metrics change; translateY(-100%) cannot. */
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 0;
+  transform: translateY(-100%);
   padding: 8px 16px;
   background: var(--brand);
   color: var(--surface-card);
@@ -272,7 +277,7 @@ body{
   font-weight: 600;
 }
 .skip-link:focus {
-  top: 0;
+  transform: translateY(0);
 }
 
 .section{padding:64px 0}
