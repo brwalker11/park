@@ -454,14 +454,17 @@ body{
   color: var(--text-inverse-1);
 }
 
-/* The two green-scoped services read green at rest, not only under the
-   pointer. Written as one rule covering all three states because the
-   :hover rule above it sets color too, at equal specificity: without the
-   :hover and :focus-visible selectors here, hovering a green item would
-   flip it to white. --green-500 on the panel is 6.53:1. */
-.site-header .nav-panel a.scope-green,
-.site-header .nav-panel a.scope-green:hover,
-.site-header .nav-panel a.scope-green:focus-visible { color: var(--green-500); }
+/* NAVIGATION IS THE ONE PLACE GREEN IS NOT SCOPED.
+   Solar Lighting and EV Charging still carry .scope-green in the markup, and
+   green still applies to them everywhere else on the site. It is deliberately
+   NOT applied inside the nav panel: two coloured items among four read as
+   arbitrary rather than as a scope, because the panel gives no context for what
+   the colour means. They inherit the normal panel colours above.
+
+   The class is intentionally left in the markup. Do NOT "clean it up" by
+   stripping it from the chrome: that is a 151-file sweep across Bundle B frozen
+   chrome, and it would also remove the hook if this decision is ever revisited.
+   Removing the rule here is the whole change. See REBRAND.md. */
 
 /* ===== Header and footer buttons =====
    Scoped to the chrome on purpose. The site has two competing button systems

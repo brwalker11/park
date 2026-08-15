@@ -1956,6 +1956,31 @@ every downstream decision depends on it.
 
 ---
 
+## Green is scoped, with one exception: navigation
+
+**Green (`--green-500`, `--green-700`) is scoped to solar, EV and
+sustainability content everywhere on the site EXCEPT the nav dropdown.**
+
+In the "What We Do" panel, Solar Lighting and EV Charging used to render green
+while All Services and Parking Revenue rendered in the normal panel colour. Two
+coloured items among four read as arbitrary rather than as a scope: the panel
+gives a reader no context for what the colour is signalling, so it looks like
+emphasis or like a mistake instead of like a taxonomy. Removed 2026-08-15.
+
+**The `.scope-green` class is deliberately still in the chrome markup on all 151
+files.** Only the rule in `styles.css` was removed. Do not "tidy up" the class:
+
+- Stripping it is a 151-file sweep across Bundle B frozen chrome, which changes
+  the chrome hash and is a far larger operation than the decision warrants.
+- The class is the hook. If this is ever revisited, restoring green in the panel
+  is one rule, not another 151-file sweep.
+
+Verified after the change: all four panel items compute `rgb(196, 208, 226)`,
+and green still renders on `/services/solar-lighting/` and
+`/services/ev-charging/` (eyebrows at `#6DB133` and `#2D7A0E`).
+
+---
+
 ## Guardrails currently in place
 
 These must stay until merge day. Do not remove without me asking.
