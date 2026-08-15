@@ -660,10 +660,11 @@ Two things that must stay true:
    article pages, and the inline copy wins at first paint, so a fix in
    `css/article.css` alone changes nothing on those pages. Both must move
    together.
-2. **The consultation pages are exempt.** They are frozen, do not load
-   `styles.css`, and still load Inter from Google Fonts. They are the only pages
-   permitted to reference `fonts.googleapis.com` or `fonts.gstatic.com`. They
-   switch to the self-hosted files during their own deferred pass.
+2. **The consultation pages are no longer an exception.** They were rebuilt on
+   `styles.css` and the band system on 2026-08-14 and now use the self-hosted
+   Inter like every other page. **No page on the site references
+   `fonts.googleapis.com` or `fonts.gstatic.com`.** If either string appears,
+   something has regressed.
 
 The roman file is preloaded on the 113 pages that load `styles.css` through the
 async preload-onload pattern, where the `@font-face` is not discovered until
@@ -735,7 +736,9 @@ rebrand, so they are listed in full.
 ├── faq/index.html
 ├── calculator/index.html
 ├── contact/index.html
-├── consultation/index.html     # Active ad conversion tracking, do not touch
+├── consultation/index.html     # Ad landing page. Conversion plumbing is
+│                               # hash-guarded by tools/conversion-guard.js;
+│                               # run it before and after any edit here
 ├── resources/                  # Resource hub and state pages
 ├── docs/
 │   ├── articles-dynamic.md

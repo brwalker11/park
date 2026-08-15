@@ -84,11 +84,12 @@ the Inter stack against 454.18px in the same stack without Inter, which proves
 glyphs are rasterizing in Inter rather than the cascade merely resolving. One
 font request, confirming `crossorigin` on the preload is correct.
 
-**The two consultation pages are unchanged.** They are frozen, do not load
-`styles.css`, and still load Inter from Google Fonts. They remain the only pages
-on the site permitted to reference `fonts.googleapis.com` or
-`fonts.gstatic.com`. They move to the self-hosted files during their own pass,
-which is bound up with the deferred freeze decision above.
+**SUPERSEDED 2026-08-14.** This paragraph used to say the two consultation
+pages were frozen, did not load `styles.css`, and were the only pages permitted
+to reference `fonts.googleapis.com` or `fonts.gstatic.com`. All three are now
+false. Both pages load `styles.css`, both use the self-hosted Inter, and **there
+are now zero Google Fonts references anywhere on the site.** Any check that
+expects to find two is wrong.
 
 Note for Pass 2b: the variable font makes `font-weight: 850` and `900` render as
 true instances rather than browser synthesis. Both were left in place
@@ -126,34 +127,120 @@ whenever it arrives.
 
 ---
 
-## Google Ads bidding and the `/consultation/` freeze
+## Google Ads bidding and the `/consultation/` rebrand
 
-**Unresolved.** Conversions are running below the 15 to 20 threshold the bidding
-switch needs, so the switch off Maximize Clicks is unlikely to happen before the
-conference. Every part of the plan that was conditioned on the switch should now
-be treated as not happening rather than as pending.
+**Bidding: unresolved.** Conversions are running below the 15 to 20 threshold
+the bidding switch needs, so the switch off Maximize Clicks is unlikely to
+happen before the conference. Every part of the plan that was conditioned on the
+switch should be treated as not happening rather than as pending.
 
-**The `/consultation/` freeze decision is deferred.** Three options are under
-consideration and none is chosen:
+**The freeze decision is DECIDED and DONE, 2026-08-14: option 2, rebrand with
+the campaign live.** No pause, no gap in spend. The deploy date is to be
+annotated in both Google Ads and GA4 so the before-and-after is readable later;
+that is on the merge-day checklist below, and it is the only thing that makes
+the data cost recoverable. The three options previously listed here are closed.
 
-1. **Leave it frozen.** No visual change, no data disruption. The page ships
-   through the conference on the old brand.
-2. **Rebrand it anyway and accept the data cost.** The page matches the rest of
-   the site, at the cost of disturbing the conversion path while bidding is
-   still on Maximize Clicks.
-3. **Pause the campaign during the change.** Rebrand with no live traffic
-   crossing the change, at the cost of paused spend and a gap in the data.
+Both pages are now on `styles.css` and the band system. They were the last two
+on the old design, and they carried the last two Google Fonts links on the site;
+there are now zero.
 
-**Why this matters more than a normal frozen page:** `/consultation/` is the
-sole landing page for the ads, and it is the only route to a Calendly booking
-anywhere on the site. Leaving it un-rebranded means the one paid landing page,
-and the only booking path, still looks like the old company while every other
-page carries the new brand. Conference traffic arriving through an ad lands on
-the old design.
+### The page was inverted, and that reversed my own recommendation
 
-Note also that the two consultation pages do not load `styles.css` and are
-fully self-contained, so they will not pick up any part of the rebrand
-incidentally. Whatever is decided has to be done deliberately.
+The audit recommended keeping Calendly and demoting the callback form to a line
+of text, on the reasoning that a booked meeting beats a task in someone's inbox
+and that offering two conversion mechanisms side by side converts worse than
+offering one. The form was cut on that basis in `33d7191`.
+
+**That recommendation was wrong, and it was wrong because it was made without
+conversion data.** The form converts better than Calendly on production. It was
+restored in `b8fa637` as the PRIMARY mechanism, in the hero, with Calendly
+demoted below the proof strip as the alternative for people who would rather
+book a time directly.
+
+The general principle still holds: one primary mechanism, not two competing
+ones. What was wrong was picking which one, from the armchair, when the answer
+was already sitting in the account. **Anyone revisiting this should check the
+conversion data before changing which mechanism leads.**
+
+### Fold positions, measured
+
+The whole point of the restructure. Everything below is measured in a browser,
+not estimated.
+
+| | Before | After |
+|---|---|---|
+| Calendly section, 1440 | 4,332px | **888px** |
+| Calendly section, 375 | 6,091px | 1,280px |
+| Page height, 1440 | 5,917px | 3,874px |
+| Contrast failures | 6 | 0 |
+
+Then the page was inverted, so the number that matters became the form, not
+Calendly. After the inversion and the mobile disclosure:
+
+| Viewport | Form submit button | Fold | Result |
+|---|---|---|---|
+| 1440x900 | 756px | 900 | clears |
+| 768x1024 | 692px | 1024 | clears |
+| 375x812 | 772px | 812 | **clears by 40px** |
+
+At 375 the submit was 148px BELOW the fold before the disclosure. Calendly now
+sits at 1,347px at 1440 and 1,805px at 375, which is the expected cost of
+putting the form first and is not a regression.
+
+### The mobile disclosure
+
+Below 768px the two optional fields, email and property type, collapse behind an
+"Add email or property type" toggle, so the fold shows Name, Phone, Submit.
+Above 768px the toggle is not rendered and all four fields are visible.
+
+**Collapsed fields still submit.** `display:none` suppresses layout, not
+submission; only `disabled` would stop them. Verified by intercepting a submit
+at 375 with the pair collapsed: all seven fields present, `_replyto` and
+`property_type` empty, required fields carrying values. Do not "fix" this by
+adding `disabled`, and do not move the required pair inside the wrapper.
+
+### Copy and keywords
+
+The h1 was "Your Parking Lot Is Sitting on Untapped Revenue", which restated the
+searcher's own premise. It is now "Parking Revenue Consultants for Property
+Owners". Of the 18 phrase-match keywords, five management-intent terms
+(parking consultant, parking lot management company, office/hotel/private lot
+parking management) previously had nothing on the page to match. "Consultants"
+answers them. "Charging for parking" carries the two how-to terms verbatim.
+
+`e33c0a5` added an LPR and enforcement tile: "LPR parking system" and "parking
+enforcement solutions" were being bought against a page where "enforcement"
+appeared once, inside a statistic, and "LPR" appeared not at all. The tile
+states the acronym as well as the expansion, because a phrase-match buy on "LPR
+parking system" does not match "license plate recognition".
+
+First person went from 17 instances to zero. Body copy 542 to roughly 470 words.
+
+### Open items on this page
+
+- **"Nationwide service" is still in the hero trust ticks and is still
+  unsubstantiated.** The only verified case study is one lot in Wisconsin. It
+  was flagged in the audit, was never in scope to cut, and survives every pass
+  so far. It is not gated against, deliberately, so that removing it stays a
+  content decision rather than a gate failure.
+- **There is no revenue share number anywhere on the page.** A skeptical owner
+  asks how the company makes money before anything else, and on a paid landing
+  page that silence is louder than a number would be. The page says "no upfront
+  cost" four times over and never says what the arrangement is. This is the
+  single biggest remaining credibility gap on the page and the number is not
+  mine to invent.
+- **The `_next` relative value is unverified against Formspree.** Both `_next`
+  and the JS redirect were changed from an absolute production URL to
+  `/consultation/thank-you/`, so a preview submission no longer navigates to the
+  live site and fires a real Ads conversion. The JS handles every normal
+  submission, so `_next` only matters with JavaScript disabled. Confirming
+  Formspree accepts a relative value needs a live no-JS submission, which would
+  fire a real conversion, so it has not been done.
+
+Note that the pages no longer stand outside the design system: they load
+`styles.css` like everything else. Their header and footer still diverge from
+the frozen chrome on the other 150 pages, deliberately, because a landing page
+should not offer navigation away from itself.
 
 ---
 
@@ -448,8 +535,10 @@ Counts that differed from what this file predicted, all reconciled:
   one hash group each, so each was a single substitution rather than a
   per-group sweep. The inline header rules were likewise one contiguous
   1675-byte region identical across all four payload groups.
-- **7 head payloads, not 9.** The nine counts the two frozen consultation
-  payloads, which are out of scope. Commit 3 touched seven.
+- **7 head payloads, not 9.** The nine counted the two consultation payloads,
+  out of scope at the time. Commit 3 touched seven. (Both consultation pages
+  were rebuilt on 2026-08-14 and now carry `.page-consultation` payloads; this
+  bullet records the count as it stood for that commit.)
 - **`--blue-brand` had 17 occurrences, 3 of them in comments.** Code-only count
   is 14.
 - **37 references were repointed in 2b-b, not 34.** 38 references exist to the
@@ -518,7 +607,7 @@ One panel open at a time. At **≤768px the panels render inline as an accordion
 rather than absolutely positioned, and the hover handlers are **not bound**.
 
 Lives in `script.js`, which is loaded `defer` by **147 of 149** pages; the two
-that do not are the frozen consultation pages, which have no dropdown. Roughly
+that do not are the two consultation pages, which have no dropdown. Roughly
 60 lines. `script.js` today is 44 lines with no focus, key or disclosure
 handling of any kind, so this is entirely net-new.
 
@@ -597,9 +686,15 @@ lands, both of these stay as they are, deliberately:
   correct for the page and wrong for structured data.
 - **`images/Logo.svg` is NOT deleted**, because the JSON-LD still references it.
 
-**Every rendered reference is already gone.** Bundle B commit 2 swapped the
-header and footer to `MP_Logo_400.png` on all 148 files. The only surviving
-`<img>` references to `Logo.svg` are the two frozen consultation pages.
+**Every `<img>` reference is now gone, including the last two.** Bundle B commit
+2 swapped the header and footer to `MP_Logo_400.png` on all 148 files. The two
+consultation pages were the only survivors and were fixed in `f2b1b14`.
+
+**But `Logo.svg` is still referenced 33 times in JSON-LD**, as the `logo` and
+`url` values on `about/`, `contact/`, `ask-the-experts.html` and 30 video pages.
+Those are structured-data values, not rendered images, and they are the reason
+the asset cannot be deleted yet. Do not read "the img references are gone" as
+"the old logo is gone"; the sweep below is still outstanding.
 
 Once the asset is committed: repoint the JSON-LD on all 33 pages to the
 absolute production URL for the new file, then delete `Logo.svg`, then confirm
@@ -1849,10 +1944,12 @@ primitive's current value so 2b cannot drift them apart silently.
     neutral-scale decisions 2b-a deferred.
 - **Pass 2c:** sweep inline `<style>` across 119 pages. Scriptable for the 45
   uniform ones, manual for the 4 bespoke.
-- **Consultation pages** deferred to their own pass. This was gated on Google Ads
-  bidding switching off Maximize Clicks. That switch is now unlikely before the
-  conference and the freeze decision is deferred. See "Google Ads bidding and the
-  `/consultation/` freeze" above.
+- **Consultation pages: DONE 2026-08-14.** Both rebuilt on `styles.css` and the
+  band system, the last two pages on the old design. This was originally gated on
+  Google Ads bidding switching off Maximize Clicks; that switch did not happen
+  and the pass went ahead anyway, with the campaign live and no pause. See
+  "Google Ads bidding and the `/consultation/` rebrand" above for the decision,
+  the fold measurements, and the open items.
 
 **Sequencing note:** decide the canonical blue before writing any token, since
 every downstream decision depends on it.
@@ -1862,6 +1959,35 @@ every downstream decision depends on it.
 ## Guardrails currently in place
 
 These must stay until merge day. Do not remove without me asking.
+
+**Exception, and read this before assuming everything here is temporary:
+`tools/conversion-guard.js` is NOT a merge-day guardrail and must NOT be removed
+on merge day.** It is a separate tool with the opposite lifecycle to
+`tools/guards.js`, and the two must not be merged:
+
+| | `guards.js` | `conversion-guard.js` |
+|---|---|---|
+| Protects | noindex guard, gtag gate | Ads and GA4 conversion plumbing |
+| Lifetime | deleted on merge day | permanent |
+| A failure means | a revert will conflict | conversions may have stopped counting |
+| Scale | 152 files, 303 hashes | 2 files, 5 blocks, 11 assertions |
+
+It hashes five blocks: the Ads conversion snippet and the
+`ppc_callback_conversion` handler on `consultation/thank-you/`, and the Calendly
+`postMessage` listener, the callback form submit handler and the
+`ppc_phone_click` handler on `consultation/`. The two form handlers are covered
+because each performs the redirect that causes the Ads conversion to fire; break
+either and leads stop being counted with no visible symptom.
+
+Two things are deliberately NOT hashed, so the guard cannot block intended work.
+The Calendly embed `div` is exempt because its `data-url` carries
+`background_color` and `primary_color`, hand-matched to the CSS behind the
+iframe, which any redesign has to change; the booking path and
+`hide_gdpr_banner` are asserted individually instead. The Formspree form is
+asserted conditionally, because it was cut once and restored once already.
+
+Every block was proven with tamper tests before being trusted, including cases
+that must still PASS. A guard that has never been shown to fail proves nothing.
 
 - Analytics gating (commit `187bfbd`). Hostname check around the gtag init block
   only, with a no-op `gtag` defined in the else branch. Covers 149 pages plus
@@ -1940,8 +2066,8 @@ These must stay until merge day. Do not remove without me asking.
   `js/article.js:149`)
 - [ ] Confirm Google Ads bidding status. Do not treat this as a blocker. The
   switch off Maximize Clicks is unlikely to have happened, and the merge proceeds
-  either way. Record the actual state and whichever `/consultation/` option was
-  taken
+  either way. Record the actual state. The `/consultation/` question is already
+  answered: option 2, rebranded with the campaign live, done 2026-08-14
 - [ ] Merge `rebrand` into `main` via pull request, since direct push is blocked
 - [ ] Verify production tracking fires: GA4 collect requests and the Ads
   conversion on `consultation/thank-you/`
@@ -1950,7 +2076,19 @@ These must stay until merge day. Do not remove without me asking.
 - [ ] Fold any still-relevant findings from `REBRAND.md` into `CLAUDE.md` before
   deleting
 - [ ] Delete `REBRAND.md` from the repo
-- [ ] Annotate the deploy date in GA4 and Google Ads
+- [ ] **Annotate the deploy date in BOTH Google Ads and GA4.** Not optional and
+  not cosmetic. `/consultation/` was rebranded with the campaign live and no
+  pause, so there is no gap in the data to mark where the page changed. Without
+  an annotation on both sides, a later reading of conversion rate across
+  2026-08-14 compares two different pages and looks like a performance change.
+  The page was also inverted on the same day, form promoted over Calendly, so
+  the mechanism mix shifts as well
+- [ ] **Create the phone-click conversion action in the Google Ads UI**, then
+  import or map `ppc_phone_click` to it. The event fires today as a GA4 event
+  only, so ad-driven phone calls are invisible to Ads bidding. Creating the
+  conversion action requires the Ads interface and cannot be done from this
+  repo. This matters most while conversions sit below the 15 to 20 threshold:
+  untracked phone conversions are the cheapest ones to recover
 
 **Not a revert item:** the favicon `?v=2` cache-busting query stays permanently.
 It appears on the icon links, the manifest link, and inside
