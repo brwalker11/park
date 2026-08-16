@@ -3,6 +3,7 @@
     "slug": "ev-charging-property-value-noi",
     "title": "How EV Charging Increases Property Value for Parking Lot Owners",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "EV charging property value",
@@ -28,6 +29,7 @@
     "slug": "hotel-ev-charging-guest-revenue",
     "title": "Why Hotel Owners Are Adding EV Charging to Their Parking Lots",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "hotel EV charging",
@@ -53,6 +55,7 @@
     "slug": "30c-ev-charger-tax-credit-property-owners",
     "title": "The Section 30C EV Charger Tax Credit Expired June 30, 2026. What It Covered and What Changes Now.",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "30C tax credit expired",
@@ -78,6 +81,7 @@
     "slug": "level-2-vs-dc-fast-charging-property-owners",
     "title": "Choosing Between Level 2 and DC Fast Charging for Your Property",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "Level 2 vs DC fast charging",
@@ -102,6 +106,7 @@
     "slug": "hidden-costs-ev-charging-installation",
     "title": "The Hidden Costs of EV Charging Installation Property Owners Miss",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging installation cost",
@@ -127,6 +132,7 @@
     "slug": "ev-charging-revenue-share-vs-ownership",
     "title": "Revenue Share vs Ownership: Which EV Charging Model Pays More",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging revenue share",
@@ -152,6 +158,7 @@
     "slug": "ev-charging-idle-fees-session-limits",
     "title": "How Idle Fees and Session Limits Protect Your EV Charging Revenue",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging idle fees",
@@ -177,6 +184,7 @@
     "slug": "questions-before-signing-ev-charging-contract",
     "title": "What Property Owners Should Ask Before Signing an EV Charging Contract",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "ev charging contract questions",
@@ -202,6 +210,7 @@
     "slug": "parking-lot-revenue-tax-implications",
     "title": "Tax Implications of Parking Lot Revenue: What Property Owners Need to Know",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking lot income tax",
       "parking revenue tax deductions",
@@ -226,6 +235,7 @@
     "slug": "paid-parking-increases-property-value",
     "title": "How Paid Parking Increases Your Commercial Property Value",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking revenue property value",
       "parking lot NOI",
@@ -250,6 +260,7 @@
     "slug": "gym-fitness-center-parking-revenue",
     "title": "Gym and Fitness Center Parking: Turning Peak-Hour Demand Into Revenue",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "gym parking revenue",
       "fitness center parking monetization",
@@ -274,6 +285,7 @@
     "slug": "overnight-24-hour-parking-revenue",
     "title": "Overnight and 24-Hour Parking: Revenue Strategies That Work Around the Clock",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "overnight parking revenue",
       "24 hour parking lot income",
@@ -298,6 +310,7 @@
     "slug": "stadium-arena-event-parking",
     "title": "Stadium and Arena Event Parking Premium Pricing Guide",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "stadium parking revenue",
       "arena parking income",
@@ -322,6 +335,7 @@
     "slug": "parking-during-construction-renovation",
     "title": "Managing Parking Revenue When Construction Reduces Your Available Spaces",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking during construction",
       "construction parking management",
@@ -346,6 +360,7 @@
     "slug": "ada-compliance-paid-parking",
     "title": "ADA Compliance Requirements Every Paid Parking Lot Must Follow",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "ADA parking compliance",
       "accessible parking requirements",
@@ -370,6 +385,7 @@
     "slug": "parking-lot-striping-layout-revenue",
     "title": "Parking Lot Striping and Layout Design Decisions That Impact Revenue",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking lot striping",
       "parking lot layout design",
@@ -394,6 +410,7 @@
     "slug": "winter-parking-revenue-strategies",
     "title": "Winter Parking Revenue Challenges from Snow Removal to Liability",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "winter parking revenue",
       "snow removal parking lot",
@@ -418,6 +435,7 @@
     "slug": "monthly-passes-vs-hourly-rates",
     "title": "Monthly Parking Passes vs. Hourly Rates: Which Makes You More Money?",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "monthly parking passes",
       "hourly parking rates",
@@ -442,6 +460,7 @@
     "slug": "parking-revenue-analytics",
     "title": "Parking Revenue Analytics: The Metrics That Actually Matter",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking revenue analytics",
       "parking lot metrics",
@@ -466,6 +485,7 @@
     "slug": "mixed-use-development-parking",
     "title": "Mixed-Use Development Parking: Balancing Multiple Tenant Needs",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "mixed-use development parking",
       "multi-tenant parking revenue",
@@ -490,6 +510,7 @@
     "slug": "brewery-bar-parking-revenue",
     "title": "Brewery and Bar Parking: Late-Night Revenue Without Liability Issues",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "brewery parking revenue",
       "bar parking lot income",
@@ -514,6 +535,7 @@
     "slug": "airport-proximity-parking-revenue",
     "title": "How Airport Proximity Parking Lots Capture Long-Term Traveler Revenue",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "airport proximity parking",
       "off-site airport parking revenue",
@@ -538,6 +560,7 @@
     "slug": "what-is-parking-monetization",
     "title": "What is Parking Monetization? A Property Owner's Guide",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking monetization",
       "monetize parking lot",
@@ -562,6 +585,7 @@
     "slug": "municipal-parking-solutions",
     "title": "Municipal Parking Solutions: How Cities Are Modernizing Public Lots",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "municipal parking solutions",
       "city parking technology",
@@ -586,6 +610,7 @@
     "slug": "free-parking-true-cost",
     "title": "Why Free Parking is Costing You More Than You Think",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "cost of free parking",
       "free parking problems",
@@ -610,6 +635,7 @@
     "slug": "qr-code-parking-payments",
     "title": "QR Code Parking Payments: What Property Owners Need to Know",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "QR code parking payment",
       "scan-to-pay parking",
@@ -634,6 +660,7 @@
     "slug": "parking-lot-security",
     "title": "Parking Lot Security: Do You Need Cameras, Lighting, or Monitoring?",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking lot security",
       "parking lot cameras",
@@ -658,6 +685,7 @@
     "slug": "church-parking-revenue-guide",
     "title": "Turn Your Empty Church Parking Lot Into Weekday Income",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "church parking revenue",
       "religious property parking",
@@ -681,6 +709,7 @@
     "slug": "medical-facility-parking-revenue",
     "title": "Medical Office and Clinic Parking Revenue for Balancing Patient Access with Income",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "medical office parking",
       "healthcare facility parking",
@@ -704,6 +733,7 @@
     "slug": "retail-parking-revenue-guide",
     "title": "Why Smart Retail Store Owners Are Charging for Parking Spaces",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "retail parking revenue",
       "shopping center parking",
@@ -727,6 +757,7 @@
     "slug": "college-town-parking-revenue",
     "title": "How College Town Property Owners Profit from Student Parking Demand",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "college town parking",
       "university parking revenue",
@@ -750,6 +781,7 @@
     "slug": "parking-validation-programs-guide",
     "title": "How Parking Validation Programs Work (And Why They Pay for Themselves)",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking validation program",
       "free parking validation",
@@ -773,6 +805,7 @@
     "slug": "announce-paid-parking-guide",
     "title": "How to Announce Paid Parking Without Losing Customers",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "announce paid parking",
       "parking policy communication",
@@ -796,6 +829,7 @@
     "slug": "is-it-legal-to-charge-for-parking",
     "title": "Is It Legal to Charge for Parking on My Property?",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "is it legal to charge for parking",
       "private parking lot laws",
@@ -821,6 +855,7 @@
     "slug": "why-gateless-parking",
     "title": "Why Gateless Parking Makes Sense for Your Facility",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "gateless parking benefits",
       "gateless parking system",
@@ -846,6 +881,7 @@
     "slug": "how-to-start-charging-for-parking",
     "title": "How to Start Charging for Parking: A Step-by-Step Guide",
     "category": "Guides",
+    "service": "Parking",
     "tags": [
       "how to start paid parking",
       "start charging for parking",
@@ -871,6 +907,7 @@
     "slug": "parking-lot-revenue-potential",
     "title": "How Much Revenue Can a Parking Lot Generate?",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking lot revenue potential",
       "parking revenue calculator",
@@ -896,6 +933,7 @@
     "slug": "apartment-parking-revenue",
     "title": "Most Multifamily Owners Undercharge for Parking by $50 to $200 Per Space",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "apartment parking",
       "multifamily parking",
@@ -920,6 +958,7 @@
     "slug": "ev-charging-parking-revenue",
     "title": "EV Charging + Paid Parking: Double Your Revenue Opportunity",
     "category": "EV Charging",
+    "service": "EV Charging",
     "tags": [
       "EV charging",
       "electric vehicle",
@@ -944,6 +983,7 @@
     "slug": "event-parking-revenue",
     "title": "How to Charge Premium Parking Rates on Game Days and Concerts",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "event parking",
       "concert parking",
@@ -968,6 +1008,7 @@
     "slug": "parking-lot-insurance-requirements",
     "title": "Parking Lot Insurance for Paid Parking: What Owners Must Know",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking insurance",
       "liability coverage",
@@ -992,6 +1033,7 @@
     "slug": "hotel-parking-revenue",
     "title": "Hotel Parking Revenue: Why Free Parking Is Costing You Thousands",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "hotel parking",
       "hospitality parking",
@@ -1016,6 +1058,7 @@
     "slug": "handling-parking-violations-disputes",
     "title": "How to Handle Parking Violations Without Losing Customers",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking violations",
       "dispute resolution",
@@ -1040,6 +1083,7 @@
     "slug": "scan-to-pay-vs-lpr",
     "title": "Scan-to-Pay vs LPR: Which Technology Fits Your Property?",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "scan to pay parking",
       "LPR parking system",
@@ -1064,6 +1108,7 @@
     "slug": "first-90-days-paid-parking",
     "title": "Your First 90 Days of Paid Parking: What to Expect",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "paid parking implementation",
       "parking lot revenue",
@@ -1088,6 +1133,7 @@
     "slug": "parking-signage-guide",
     "title": "Parking Signage That Actually Works: What to Post and Where",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking lot signage",
       "paid parking signs",
@@ -1112,6 +1158,7 @@
     "slug": "office-building-parking-revenue",
     "title": "Office Building Parking Revenue That Property Managers Miss",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "office building parking",
       "commercial property parking",
@@ -1136,6 +1183,7 @@
     "slug": "restaurant-paid-parking",
     "title": "Will Charging for Parking Hurt My Restaurant Business?",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "restaurant parking",
       "valet parking",
@@ -1161,6 +1209,7 @@
     "slug": "parking-enforcement-modernization",
     "title": "Modernize Your Parking: Stop Losing Money to Manual Methods",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "automation",
       "ai enforcement",
@@ -1186,6 +1235,7 @@
     "slug": "parking-problems-mean-success",
     "title": "Parking Problems Signal Commercial District Success",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "commercial districts",
       "urban planning",
@@ -1211,6 +1261,7 @@
     "slug": "private-parking-frees-municipal-land",
     "title": "How Private Parking Frees Municipal Land for Better Uses",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "municipal planning",
       "land use",
@@ -1236,6 +1287,7 @@
     "slug": "shared-parking-agreements-revenue",
     "title": "Shared Parking Agreements: Turn Empty Lots Into Revenue",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "shared parking",
       "revenue optimization",
@@ -1261,6 +1313,7 @@
     "slug": "historic-district-parking-profit",
     "title": "Historic District Parking: Turn Scarcity Into Profit",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "historic districts",
       "downtown parking",
@@ -1286,6 +1339,7 @@
     "slug": "paid-parking-seasonal-destinations",
     "title": "Seasonal Destination Parking: Profit from Peak Traffic",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "seasonal parking",
       "dynamic pricing",
@@ -1311,6 +1365,7 @@
     "slug": "flexible-parking-rules",
     "title": "Flexible Parking Rules: Control Who Pays and When",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "parking management",
       "employee parking",
@@ -1335,6 +1390,7 @@
     "slug": "license-plate-allow-listing-guide",
     "title": "License Plate Allow Lists: Complete Exemption Guide",
     "category": "Articles",
+    "service": "Parking",
     "hidden": true,
     "tags": [
       "license plate exemption",
@@ -1360,6 +1416,7 @@
     "slug": "custom-operating-hours-strategy",
     "title": "Custom Parking Hours: When to Charge and When Not To",
     "category": "Articles",
+    "service": "Parking",
     "hidden": true,
     "tags": [
       "parking management",
@@ -1385,6 +1442,7 @@
     "slug": "dynamic-pricing-strategies",
     "title": "Dynamic Pricing: Match Your Rates to Actual Demand",
     "category": "Articles",
+    "service": "Parking",
     "hidden": true,
     "tags": [
       "dynamic pricing",
@@ -1410,6 +1468,7 @@
     "slug": "balancing-revenue-relationships",
     "title": "Parking Revenue Without Alienating Tenants",
     "category": "Articles",
+    "service": "Parking",
     "hidden": true,
     "tags": [
       "parking management",
@@ -1435,6 +1494,7 @@
     "slug": "occupancy-vs-compliance",
     "title": "100% Occupancy Isn't the Goal. 100% Compliance Is.",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "compliance",
       "enforcement",
@@ -1458,6 +1518,7 @@
     "slug": "you-didnt-buy-a-parking-lot-to-babysit-it",
     "title": "You Didn\u2019t Buy a Parking Lot to Babysit It",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "automation",
       "scan-to-pay",
@@ -1480,6 +1541,7 @@
     "slug": "when-to-start-charging-parking",
     "title": "A Simple Formula to Know When Paid Parking Makes Sense",
     "category": "Guides",
+    "service": "Parking",
     "tags": [
       "pricing",
       "break-even",
@@ -1502,6 +1564,7 @@
     "slug": "dynamic-pricing-guide",
     "title": "Dynamic Parking Pricing: How to Boost Revenue 12-35%",
     "category": "Guides",
+    "service": "Parking",
     "hidden": false,
     "tags": [
       "dynamic pricing",
@@ -1527,6 +1590,7 @@
     "slug": "choosing-pricing-strategy",
     "title": "Time vs Demand vs Event Parking Pricing Strategies",
     "category": "Guides",
+    "service": "Parking",
     "hidden": true,
     "redirected": true,
     "tags": [
@@ -1553,6 +1617,7 @@
     "slug": "dynamic-pricing-technology",
     "title": "Technology Stack for Dynamic Parking Pricing",
     "category": "Guides",
+    "service": "Parking",
     "hidden": true,
     "redirected": true,
     "tags": [
@@ -1579,6 +1644,7 @@
     "slug": "pricing-by-property-type",
     "title": "Dynamic Pricing by Property Type: Tailored Strategies",
     "category": "Guides",
+    "service": "Parking",
     "hidden": true,
     "redirected": true,
     "tags": [
@@ -1605,6 +1671,7 @@
     "slug": "dynamic-pricing-mistakes",
     "title": "7 Dynamic Pricing Mistakes That Kill Parking Revenue",
     "category": "Guides",
+    "service": "Parking",
     "hidden": true,
     "redirected": true,
     "tags": [
@@ -1631,6 +1698,7 @@
     "slug": "eau-claire-revenue-increase",
     "title": "Eau Claire Case Study: 178% Revenue Increase | Monetize Parking",
     "category": "Case Studies",
+    "service": "Parking",
     "featured": true,
     "tags": [
       "ai enforcement",
@@ -1653,6 +1721,7 @@
     "slug": "real-costs-parking-management",
     "title": "Real Costs of Parking Management Companies",
     "category": "Guides",
+    "service": "Parking",
     "tags": [
       "operating costs",
       "outsourcing",
@@ -1673,6 +1742,7 @@
     "slug": "ai-access-vs-gates",
     "title": "AI vs Gate Arms: The Future of Parking Access Control",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "ai enforcement",
       "access control",
@@ -1693,6 +1763,7 @@
     "slug": "gate-arm-maintenance-costs",
     "title": "Hidden Costs of Gate Arm Maintenance",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "maintenance",
       "hardware",
@@ -1713,6 +1784,7 @@
     "slug": "optimal-lot-size-profit",
     "title": "Minimum Lot Size for Profitable Paid Parking",
     "category": "Articles",
+    "service": "Parking",
     "tags": [
       "lot size",
       "profitability",
@@ -1733,6 +1805,7 @@
     "title": "Small Lots Earn Big Returns Through Automation",
     "slug": "parking-today-small-lots",
     "category": "Articles",
+    "service": "Parking",
     "type": "external",
     "source": "Parking Today",
     "thumbnail": "/images/thumbs/small-lots-main.webp",
