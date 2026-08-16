@@ -1956,6 +1956,90 @@ every downstream decision depends on it.
 
 ---
 
+## Resources: split by service, not by content type
+
+**Done 2026-08-15.** The chips were a category error: `All`, `Case Studies`,
+`Guides`, `Articles`, `EV Charging` mixed three FORMAT labels with one TOPIC
+label. They are now a service axis: **All, Parking, Solar Lighting, EV
+Charging**. Content type survives as the card badge and gets no filter.
+
+**`service` is a NEW field, added alongside `category`.** Renaming `category`
+would have collapsed two axes into one field again, which is the error being
+fixed. `category` still means content type and every consumer of it is
+untouched. Backfill: EV-category records became the EV service, everything else
+Parking. 9 EV Charging, 64 Parking across all 73; 9 and 56 among the 65 visible.
+
+**Type is badge-only on purpose.** A type filter would offer chips returning 4
+results (Guides) and 1 (Case Studies). Revisit if Guides passes ten.
+
+**The "All" bucket holds nothing of its own.** Before deciding whether
+cross-cutting content needed a home, the set was measured: of 65 visible
+articles, 49 mention parking, 5 mention EV, 10 mention both, and exactly **one**
+mentions neither (`occupancy-vs-compliance`). Topics that look cross-cutting by
+title, ADA compliance, tax implications, insurance, "is it legal to charge for
+parking", are every one of them scoped to paid parking specifically. There is no
+orphan set, so "All" is a view over everything rather than a home.
+
+### The coercion that had to be fixed first
+
+`js/resources.js` used to do:
+
+```js
+const category = clone.category && DEFAULT_IMAGES[clone.category]
+  ? clone.category : 'Articles';
+```
+
+The image fallback table was the gatekeeper for which category values were
+allowed to exist. Adding `"Solar Lighting"` to a record would have silently
+filed it under Articles, so the Solar chip would have stayed empty forever while
+the article sat in the wrong bucket, with no error anywhere. Fixed in `2e2afb6`
+before anything else: unknown values pass through and warn once per value.
+
+### The Solar empty state, and why it needs no maintenance
+
+Solar has zero articles and ships with a real message plus a link to
+`/services/solar-lighting/` rather than a blank grid. It renders only on the
+`!visible.length` branch, so **the first record carrying
+`service: "Solar Lighting"` removes it automatically.** No code change, no
+config change, no chip change.
+
+Proved rather than asserted: a probe copy of the script differing from the
+shipped one by the data URL and nothing else, pointed at a JSON containing one
+synthetic solar record, rendered a card and no empty state.
+
+### Two cache problems this pass exposed
+
+Both pre-existing. The first would have broken the feature on deploy.
+
+1. **`/js/*` is `max-age=31536000, immutable`** and scripts are referenced with
+   no version query. A returning visitor keeps the old `resources.js` for up to
+   a year, and the old one filters on `category` against chips that now say
+   Parking/Solar/EV, so **every chip except All returns nothing.** Fixed for the
+   one file this pass depends on: `/js/resources.js?v=service-axis`.
+   `js/article.js` is deliberately NOT versioned, because a stale copy emits
+   `?category=` and the alias map absorbs it.
+   **Anyone changing a JS file's behaviour must bump its query or it does not
+   reach returning visitors.** This is the general rule; this pass is the first
+   time it mattered enough to bite.
+2. **`/data/*` is `max-age=3600`**, so for up to an hour after a deploy a
+   visitor runs new JS against JSON with no `service` field. The fallback
+   derives service from category rather than defaulting flat to Parking, which
+   keeps the 9 EV articles in the right bucket during that window.
+
+### One gap, reported not fixed
+
+The `Solar Lighting` fallback image entry added in `2e2afb6` is keyed by
+**category**, because that is what the gradient label represents ("Guide",
+"Article"). Under the service split a solar article will carry
+`category: "Articles"` and `service: "Solar Lighting"`, so it would get the
+Articles gradient, which is the thing that entry was meant to prevent. It is
+currently theoretical: **all 65 visible records have a thumbnail, so the
+fallback gradient is reached zero times today.** The fix is one line, preferring
+`service` over `category` for the fallback lookup, and it was left out rather
+than widening the pass unasked.
+
+---
+
 ## Green is scoped, with one exception: navigation
 
 **Green (`--green-500`, `--green-700`) is scoped to solar, EV and
@@ -2397,6 +2481,35 @@ Not rebrand work. Do not start any of these before the conference.
   `.cta-inline` above and worth removing in the same pass, since both are
   "styles for markup that no longer exists" rather than genuinely orphaned
   files.
+- **Four more dead files, added 2026-08-15 with the resources service split.**
+  Same "worth removing in one pass, not four" situation as `.cta-inline` and the
+  dead `.calc` block above. All verified referenced by **zero** pages:
+  `js/related.js` (the related rail is built by `js/article.js`; `related.js`
+  reads a `data-resource-category` attribute that exists on no page),
+  `js/article.min.js`, `js/resources.min.js`, `js/related.min.js`. The three
+  `.min.js` files also still carry the OLD blue `#0b6efd` palette, so if one
+  were ever wired up it would ship the pre-rebrand colours. `js/related.js` got
+  the same coercion fix as `js/resources.js` in `2e2afb6` so the two copies do
+  not drift while it sits unused. `css/resources.min.css` is likewise
+  unreferenced while `css/resources.css` is live.
+- **`readTime` values contain en dashes.** Stored as the escape `\u2013`, so
+  they render as "5–6 min" on every card. The content rules prohibit en dashes.
+  Roughly 51 records. Deliberately not swept into the `service` backfill commit,
+  because a data commit that also rewrites unrelated values is a commit nobody
+  can review.
+- **The resources filter and search are ANDed, and it is more confusing under a
+  service axis.** `applyFilters()` in `js/resources.js` requires BOTH
+  `matchesService` and `matchesSearch`, so typing a query while a service chip
+  is active silently narrows twice, and the featured carousel and the series
+  block both vanish on any search at all (they are gated on
+  `state.filter === 'All' && !state.search`). Before the split this read as
+  "search within Guides", which is at least guessable. Now it reads as "search
+  within Parking", and a visitor searching for an EV term while Parking is
+  active gets an empty grid with no explanation of why. Left alone deliberately:
+  the search bar was explicitly out of scope for the service split, four weeks
+  from the conference. The fix is a decision, not a bug fix: either searching
+  resets the chip to All, or the empty state says which filter is suppressing
+  the results.
 - Content rebalancing toward genuine three-pillar parity once lighting content
   earns traffic.
 - Webflow migration evaluation, if in-house editing without a repo becomes a
