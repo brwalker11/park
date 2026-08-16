@@ -85,12 +85,21 @@
   function normaliseItems(items) {
     return items.map((item) => {
       const clone = Object.assign({}, item);
-      const category = clone.category && DEFAULT_IMAGES[clone.category] ? clone.category : 'Articles';
+      /* Category is DATA. It used to be coerced to 'Articles' whenever it was
+         not a key of DEFAULT_IMAGES, which made that image table the gatekeeper
+         for which category values were allowed to exist. Adding a new category
+         to a record silently filed it under Articles with no error and no way
+         to notice. Unknown values now pass through, and warn once each. The
+         IMAGE still falls back, in normaliseImage, which is a separate concern
+         from the record's identity. */
+      const category = clone.category || 'Articles';
+      if (clone.category && !DEFAULT_IMAGES[clone.category]) {
+        warnUnknownCategory(clone.category, clone.slug);
+      }
       clone.category = category;
       const image = normaliseImage(clone.thumbnail || clone.image, category);
       clone.thumbnail = image;
       clone.image = normaliseImage(clone.image, category);
-      clone.category = category;
       clone.tags = Array.isArray(clone.tags) ? clone.tags : [];
       clone.type = clone.type || 'internal';
       clone.cta = clone.cta && typeof clone.cta === 'object' ? clone.cta : {};
@@ -518,7 +527,13 @@
       ['Case Studies', '#0043B3', 'Case Study'],
       ['Guides', '#0E2A52', 'Guide'],
       ['Articles', '#071B38', 'Article'],
-      ['EV Charging', '#2D7A0E', 'EV Charging']
+      ['EV Charging', '#2D7A0E', 'EV Charging'],
+      /* Solar Lighting shares --green-700 with EV Charging rather than
+         introducing a new colour. Both are green-scoped services and the label
+         rendered into the gradient distinguishes them. The lighter --green-500
+         (#6DB133) was rejected: white text on it is 2.63:1, which fails even
+         the 3:1 large-text threshold. #2D7A0E is 5.38:1. */
+      ['Solar Lighting', '#2D7A0E', 'Solar Lighting']
     ];
 
     return entries.reduce((acc, [key, color, label]) => {
@@ -532,6 +547,19 @@
       acc[key] = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
       return acc;
     }, {});
+  }
+
+  /* Loud, but once per value, so a data typo is visible in the console
+     without flooding it. This is the signal that used to be swallowed. */
+  const warnedCategories = new Set();
+  function warnUnknownCategory(category, slug) {
+    if (warnedCategories.has(category)) return;
+    warnedCategories.add(category);
+    console.warn(
+      '[resources] Unknown category ' + JSON.stringify(category) + ' (first seen on "' + slug + '"). ' +
+      'It will display and filter correctly, but has no fallback image. ' +
+      'Add it to createFallbacks() in js/resources.js and js/related.js.'
+    );
   }
 
   function normaliseImage(path, category) {
