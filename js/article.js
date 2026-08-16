@@ -428,7 +428,12 @@
         name: 'Monetize Parking',
         logo: {
           '@type': 'ImageObject',
-          url: absolute('/images/Logo.png')
+          /* Solid dark navy on white. Structured-data logos render on a
+             white surface, which is what Google's guidance asks you to check.
+             NOT /images/Logo.png: that path 404s in production, the file is
+             lowercase logo.png. NOT MP_Logo_400.png either: silver gradient on
+             transparent, near-invisible on white. */
+          url: absolute('/assets/brand/MP_Logo_dark.png')
         }
       },
       keywords: article.tags
