@@ -100,6 +100,12 @@
       const image = normaliseImage(clone.thumbnail || clone.image, category);
       clone.thumbnail = image;
       clone.image = normaliseImage(clone.image, category);
+      /* Records predating the service field derive it from the category rather
+         than defaulting flat to Parking. /data/* is cached for an hour, so for
+         up to an hour after a deploy a visitor can run new JS against old JSON;
+         deriving keeps the 9 EV articles in the EV bucket during that window
+         instead of dumping them into Parking. */
+      clone.service = clone.service || (clone.category === 'EV Charging' ? 'EV Charging' : 'Parking');
       clone.tags = Array.isArray(clone.tags) ? clone.tags : [];
       clone.type = clone.type || 'internal';
       clone.cta = clone.cta && typeof clone.cta === 'object' ? clone.cta : {};
@@ -152,9 +158,11 @@
       if (item.hidden) return false; // Skip hidden articles
       // Skip main series articles from grid (they appear in series section above)
       if (mainSeriesSlugs.includes(item.slug)) return false;
-      const matchesCategory = state.filter === 'All' || item.category === state.filter;
+      /* Filter on SERVICE. The card badge still shows item.category, which is
+         the content type: the two axes are deliberately separate now. */
+      const matchesService = state.filter === 'All' || item.service === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
-      return matchesCategory && matchesSearch;
+      return matchesService && matchesSearch;
     });
     renderGrid();
     updateLoadMore();
@@ -391,7 +399,7 @@
     const visible = state.filtered.slice(0, limit);
 
     if (!visible.length) {
-      grid.innerHTML = '<p class="res-empty">No resources found. Adjust your filters or try a new search term.</p>';
+      grid.innerHTML = emptyStateFor(state.filter, state.search);
       return;
     }
 
@@ -569,6 +577,23 @@
     return DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
   }
 
+  /* A service with no articles yet gets a real message and somewhere to go,
+     rather than a blank grid. Keyed by service so adding another is one entry.
+
+     THIS DISAPPEARS ON ITS OWN. It renders only on the !visible.length branch,
+     so the moment any record carries service: "Solar Lighting" the grid has
+     cards and this is never reached. No code change, no config change. */
+  const SERVICE_EMPTY_STATES = {
+    'Solar Lighting': '<p class="res-empty"><strong>Solar lighting guides are in progress.</strong> ' +
+      'Nothing published yet. In the meantime, ' +
+      '<a href="/services/solar-lighting/">see how solar lighting works on a parking lot</a>.</p>'
+  };
+
+  function emptyStateFor(filter, search) {
+    if (!search && SERVICE_EMPTY_STATES[filter]) return SERVICE_EMPTY_STATES[filter];
+    return '<p class="res-empty">No resources found. Adjust your filters or try a new search term.</p>';
+  }
+
   function buildItemUrl(item, isExternal) {
     if (isExternal) {
       if (item.cta && item.cta.url) return item.cta.url;
@@ -603,11 +628,23 @@
     }
   }
 
+  /* ?category= was the axis before the service split and is still live in
+     external links, in historical links, and on every article breadcrumb until
+     a page is re-rendered. Mapping the old TYPE values onto the new SERVICE
+     values costs four lines and stops those links degrading to "All". */
+  const LEGACY_CATEGORY_TO_SERVICE = {
+    'articles': 'Parking',
+    'guides': 'Parking',
+    'case studies': 'Parking',
+    'ev charging': 'EV Charging'
+  };
+
   function hydrateFilterFromQuery() {
     const params = new URLSearchParams(window.location.search);
-    const category = params.get('category');
-    if (!category) return;
-    const match = filterButtons.find((btn) => (btn.getAttribute('data-filter') || '').toLowerCase() === category.toLowerCase());
+    const raw = params.get('service') || params.get('category');
+    if (!raw) return;
+    const wanted = LEGACY_CATEGORY_TO_SERVICE[raw.toLowerCase()] || raw;
+    const match = filterButtons.find((btn) => (btn.getAttribute('data-filter') || '').toLowerCase() === wanted.toLowerCase());
     if (match) {
       state.filter = match.getAttribute('data-filter') || 'All';
     }

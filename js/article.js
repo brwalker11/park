@@ -194,9 +194,12 @@
   function renderBreadcrumb(article) {
     const categoryLink = document.getElementById('breadcrumb-category');
     const titleCrumb = document.getElementById('breadcrumb-title');
-    const filterUrl = `/resources/?category=${encodeURIComponent(article.category)}`;
-    categoryLink.href = filterUrl;
-    categoryLink.textContent = article.category;
+    /* The crumb follows the axis /resources/ actually filters on. Linking by
+       category would send "Guides" to a chip that no longer exists and land on
+       All. Falls back to Parking for records predating the service field. */
+    const service = article.service || 'Parking';
+    categoryLink.href = `/resources/?service=${encodeURIComponent(service)}`;
+    categoryLink.textContent = service;
     titleCrumb.textContent = article.title;
   }
 
