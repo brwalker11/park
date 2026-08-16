@@ -2221,6 +2221,66 @@ that must still PASS. A guard that has never been shown to fail proves nothing.
 It appears on the icon links, the manifest link, and inside
 `images/site.webmanifest`. Do not strip it on merge day.
 
+## ADA penalty figures need review every July
+
+**`articles/ada-compliance-paid-parking.html` carries two dollar figures that
+change most years.** Fixed in `b3b35ca` from the 2014-era $75,000 / $150,000 to
+the current maxima. The article now states its own verification date, which is
+the thing that was missing and the reason the old figure survived so long.
+
+Current state, verified 2026-08-16:
+
+| | |
+|---|---|
+| First violation | **$118,225** |
+| Each subsequent violation | **$236,451** |
+| Effective | **3 July 2025** |
+| Authority | 28 CFR 85.5 |
+
+**Review each July.** DOJ adjusts Title III civil penalty maxima for inflation
+under the Federal Civil Penalties Inflation Adjustment Act. The figures appear
+in three places and all three must move together:
+
+1. the article lede, `articles/ada-compliance-paid-parking.html:1`
+2. the "Who Can Impose These Penalties" section, same file, including the
+   verified-as-of sentence
+3. the `excerpt` for `ada-compliance-paid-parking` in `data/resources.json`,
+   which duplicates the lede and renders on cards and in meta descriptions
+
+### There was NO 2026 adjustment, and that is not an oversight
+
+**Do not read the July 2025 effective date as a missed year.** DOJ is
+deliberately continuing the 2025 levels through 2026. The annual adjustment is
+calculated from Bureau of Labor Statistics CPI-U data for October of the prior
+year, and BLS never produced the October 2025 figure because of the October to
+November 2025 lapse in appropriations. The statute allows no alternative
+calculation method, so OMB directed agencies to hold at 2025 levels.
+
+This is recorded because the natural reaction to "effective July 2025" seen in
+2027 is to assume nobody checked in 2026. Somebody did. The answer was that
+nothing changed, and the reason it did not change is unusual enough that it
+will not be obvious later.
+
+### What the qualifier is doing, and why it must not be dropped
+
+The number without the qualifier is misleading, and the qualifier is the more
+useful half for a property owner. **Only the Attorney General can seek these
+penalties.** A private individual cannot trigger one. DOJ pursues systemic
+violations rather than a single non-compliant lot. A private suit produces
+injunctive relief and the plaintiff's legal fees, with no damages to the
+plaintiff under federal law.
+
+**The ceiling must never appear without who can reach for it.** Both the lede
+and the card excerpt state them in the same sentence, deliberately, so the
+figure cannot travel alone into a card, a search result or a social preview.
+
+The section points at state law without naming a state or an amount. That is
+deliberate in both directions: omitting it entirely would let "no damages under
+federal law" read as "no financial risk", and naming figures would create a new
+dated claim of exactly the kind this entry exists to prevent.
+
+---
+
 ## Post-Vegas backlog
 
 Not rebrand work. Do not start any of these before the conference.
@@ -2320,7 +2380,7 @@ Not rebrand work. Do not start any of these before the conference.
 
   | File and line | Claim | Why it decays |
   |---|---|---|
-  | `articles/ada-compliance-paid-parking.html:1` | "penalties ranging from **$75,000** for first offenses to **$150,000** for subsequent violations" | DOJ Title III civil penalty maxima are inflation-adjusted **annually** under 28 CFR 36.504. These are the 2014-era figures. Current maxima are materially higher. Stated as fixed. |
+  | `articles/ada-compliance-paid-parking.html:1` | ~~"penalties ranging from **$75,000** for first offenses to **$150,000** for subsequent violations"~~ **FIXED `b3b35ca`** | Was the 2014-era figure. Now $118,225 / $236,451 with the Attorney-General-only qualifier and a verified-as-of marker. **Needs annual review each July, see below.** |
   | `articles/parking-lot-revenue-tax-implications.html:16` | "Minnesota taxes nonresidential parking at **6.875%**. Texas applies **6.25%** at the state level, with local additions bringing the total to **8.25%** in most major cities. Wisconsin charges **5%** statewide. Colorado has a **2.9%** state rate" | Four state rates in one sentence. The state figures look right, but the sentence omits Minnesota metro transit taxes and Milwaukee city and county additions, so the effective rates it implies are low. Highest-count decay surface on the site. |
   | `articles/parking-lot-revenue-tax-implications.html:5` | "no self-employment tax (**currently 15.3%**)" | Correct today. "Currently" is a decay word with no review date attached to it. |
   | `articles/parking-lot-revenue-tax-implications.html:21` | "Even after UBIT (at the **21% corporate rate**)" | Correct today. Rate-pinned. |
@@ -2528,6 +2588,18 @@ Not rebrand work. Do not start any of these before the conference.
   from the conference. The fix is a decision, not a bug fix: either searching
   resets the chip to All, or the empty state says which filter is suppressing
   the results.
+- **`ada-compliance-paid-parking.html:27`: "ADA does not require free parking"
+  is stated unqualified.** Its own pass, deliberately not folded into the
+  penalty fix in `b3b35ca`, which was about a different claim in the same file.
+  Federally the statement is correct. Several states and municipalities do
+  mandate free or extended parking for placard holders, and the sentence gives
+  an owner no signal that local law might override it. The article partly
+  self-corrects two sentences later with "Some jurisdictions prohibit charging
+  disabled placard holders. Check local laws before implementing payment
+  requirements for accessible spaces", so the fix is likely a reordering rather
+  than new research: lead with the qualifier instead of trailing it. Aimed
+  directly at owners setting enforcement policy, which is what makes it worth
+  doing properly rather than quickly.
 - Content rebalancing toward genuine three-pillar parity once lighting content
   earns traffic.
 - Webflow migration evaluation, if in-house editing without a repo becomes a
