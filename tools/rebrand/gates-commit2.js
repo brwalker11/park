@@ -2,6 +2,14 @@
 'use strict';
 /*
  * Bundle B commit 2 verification gates.
+ *
+ * HISTORICAL, POINT-IN-TIME. This script verified ONE pass and cannot pass
+ * again: its headline gate reconstructs every swept file and diffs it against
+ * HEAD, so every commit made since Bundle B commit 2 shows up as an
+ * "unexplained difference". As of 2026-08-16 it fails 11 gates, none of which
+ * indicates a live problem. It is kept as a record of what that sweep
+ * asserted, not as a check to run. Nothing invokes it; it is in no npm script.
+ *
  * Every gate prints the count it checked. Any failure exits non-zero.
  *
  * The headline gate is the DELIBERATE-DIFF gate: for every swept file, the
@@ -62,19 +70,29 @@ gate('old contact-btn gone', contactBtnLeft === 0, `${contactBtnLeft} files stil
 const newLogo = count('src="/assets/brand/MP_Logo_400.png"');
 gate('logo swapped in chrome', newLogo === 148, `${newLogo} files reference MP_Logo_400.png, expected 148`);
 
-/* Logo.svg is deliberately NOT deleted: it is still the Organization /
- * LocalBusiness `logo` value in JSON-LD, which search engines render on
- * white, and MP_Logo_400.png is a silver gradient on transparent. That stays
- * until assets/brand/MP_Logo_dark.png lands. What this gate asserts is that
- * no RENDERED reference survives outside the two frozen consultation pages. */
-const renderedSvg = files.filter((f) => /<img[^>]*images\/Logo\.svg/.test(read(f))).map(rel);
-const jsonLdSvg = files.filter((f) => read(f).includes('images/Logo.svg') && !/<img[^>]*images\/Logo\.svg/.test(read(f))).map(rel);
-gate('no rendered Logo.svg outside the frozen pages',
-  renderedSvg.length === 2 && renderedSvg.every((r) => r.startsWith('consultation/')),
-  `${renderedSvg.length} rendered <img> references remain, all on frozen pages: ${renderedSvg.join(', ')}`);
-gate('Logo.svg survives only in structured data',
-  jsonLdSvg.length === 33,
-  `${jsonLdSvg.length} pages keep images/Logo.svg in JSON-LD only (expected 33), blocked on MP_Logo_dark.png`);
+/* SUPERSEDED 2026-08-16. When this script was written, Logo.svg was still the
+ * JSON-LD `logo` value on 33 pages and could not be dropped, because
+ * MP_Logo_400.png is a silver gradient on transparent and near-invisible on
+ * the white surface a structured-data logo renders on. The gates below
+ * asserted 2 rendered <img> references (both on the then-frozen consultation
+ * pages) and 33 JSON-LD references.
+ *
+ * Both counts are now ZERO. The consultation <img> references were swapped in
+ * f2b1b14; the 33 JSON-LD references were repointed at
+ * assets/brand/MP_Logo_dark.png once that asset landed. The expectations are
+ * updated so this file records the finished state rather than a stale one. */
+/* fixtures/ is excluded on purpose: old-header-markup.html is a deliberate
+   record of the PRE-rebrand header and is supposed to contain Logo.svg. It is
+   not a page and is served to nobody. */
+const notFixture = (f) => !rel(f).includes('tools/rebrand/fixtures/');
+const renderedSvg = files.filter((f) => notFixture(f) && /<img[^>]*images\/Logo\.svg/.test(read(f))).map(rel);
+const jsonLdSvg = files.filter((f) => notFixture(f) && read(f).includes('images/Logo.svg') && !/<img[^>]*images\/Logo\.svg/.test(read(f))).map(rel);
+gate('no rendered Logo.svg anywhere',
+  renderedSvg.length === 0,
+  `${renderedSvg.length} rendered <img> references remain (expected 0): ${renderedSvg.join(', ') || 'none'}`);
+gate('no Logo.svg left in structured data',
+  jsonLdSvg.length === 0,
+  `${jsonLdSvg.length} pages keep images/Logo.svg in JSON-LD (expected 0): ${jsonLdSvg.join(', ') || 'none'}`);
 
 // width/height on every chrome logo img
 let missingDims = 0;
