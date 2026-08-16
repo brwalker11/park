@@ -222,6 +222,43 @@ Every sweep script follows the same shape and any new one should too:
   count is off.
 - **Dry run by default**, apply only with `--write`.
 
+### Strip comments before any substring assertion
+
+**A gate that greps raw file text will match the comment explaining the gate.**
+This has now happened five times in this project, always the same way: the
+replacement names the bad value in order to record why it is bad, and the
+"the bad value is gone" check finds it in its own prose.
+
+- the services split gate matched a comment it had just written
+- the calculator payload gate counted hex literals that were commented out
+- the About gate matched the phrase "folded out of the old `.cta-inline`"
+- the fallback-colour gate matched `#6DB133` inside the comment explaining
+  why `#6DB133` was rejected
+- the logo gate matched `/images/Logo.png` inside the comment explaining that
+  `/images/Logo.png` 404s
+
+Default to stripping comments first:
+
+```js
+const decomment = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, '');
+```
+
+The same failure has a wider form: **assert against the construct, not the raw
+string.** Related misses that comment-stripping alone would not have caught:
+
+- `\brequired\b` matched the visible note "Fields marked * are required"
+  inside the form it was counting. Count `<input ... required>` elements.
+- `is-active` matched the CSS rule `.res-chip.is-active` in the inline
+  payload, not just the one active button. Count `<button ... is-active>`.
+- a "no en dashes" gate matched its own examples; a "no first person" gate
+  matched the nav label "What We Do".
+- `\bsection\b` matched inside `section-head`, and a hyphen is a word
+  boundary, so `\b` does not protect a class-name check.
+
+When a gate fails, check whether it is failing on its own prose before
+assuming the edit is wrong. Three of the five above cost a debugging cycle
+each.
+
 The headline verification is the **deliberate-diff gate**: it reverses the
 pass's intended substitutions on every touched file and requires the result to
 equal the file at `HEAD` byte for byte. Anything that moved outside the
@@ -455,6 +492,42 @@ The runtime converts relative paths to absolute URLs for social meta tags.
 
 Convert JPGs to WebP locally, quality ~85, under 200KB. Never commit raw JPGs.
 Always include `width`, `height`, and `alt`. Use `loading="lazy"` below the fold.
+
+#### Asset paths are CASE-SENSITIVE in production and not locally
+
+**macOS is case-insensitive. Cloudflare Pages is not.** A path that loads
+perfectly on `python3 -m http.server` can 404 on the live site, and nothing
+local will tell you.
+
+This is not hypothetical. `js/article.js` and the homepage `Organization`
+block both referenced `/images/Logo.png`. The file is `logo.png`, lowercase.
+Locally both returned 200. In production:
+
+```
+/images/Logo.png   404
+/images/logo.png   200
+```
+
+It went undetected long enough to reach the homepage's structured-data logo,
+which is the one Google explicitly recommends marking up. Fixed in `97648df`.
+
+**Verify any new or changed asset reference against production, not the dev
+server.** `curl -o /dev/null -w '%{http_code}' https://monetize-parking.com/<path>`
+is a read-only GET on a public file and is the only check that actually
+answers the question. `fs.existsSync()` in a gate has the same blind spot as
+the browser: it runs on macOS.
+
+For a whole-tree check, sweep every `src` and `href` pointing at a local asset
+and assert the target exists:
+
+```bash
+node -e 'const fs=require("fs"),{execSync}=require("child_process");const files=execSync("grep -rl . --include=*.html . | grep -v docs/preview | grep -v fixtures").toString().trim().split("\n");const miss=new Set();for(const f of files){const s=fs.readFileSync(f,"utf8");for(const m of s.matchAll(/(?:src|href)="(\/(?:images|assets)\/[^"?]+)"/g)){if(!fs.existsSync("."+m[1]))miss.add(m[1]+"  <- "+f)}}console.log(miss.size);[...miss].forEach(x=>console.log(x))'
+```
+
+**Run once on 2026-08-16 and it came back clean: zero missing targets.** That
+catches deletions and typos. It does NOT catch a case mismatch, for the same
+reason everything else local does not, so it is a complement to the production
+check rather than a replacement for it.
 
 ### URL Structure
 
