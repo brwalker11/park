@@ -97,15 +97,16 @@
         warnUnknownCategory(clone.category, clone.slug);
       }
       clone.category = category;
-      const image = normaliseImage(clone.thumbnail || clone.image, category);
-      clone.thumbnail = image;
-      clone.image = normaliseImage(clone.image, category);
       /* Records predating the service field derive it from the category rather
          than defaulting flat to Parking. /data/* is cached for an hour, so for
          up to an hour after a deploy a visitor can run new JS against old JSON;
          deriving keeps the 9 EV articles in the EV bucket during that window
-         instead of dumping them into Parking. */
+         instead of dumping them into Parking.
+         Resolved BEFORE the image lookups below, which now consult it. */
       clone.service = clone.service || (clone.category === 'EV Charging' ? 'EV Charging' : 'Parking');
+      const image = normaliseImage(clone.thumbnail || clone.image, category, clone.service);
+      clone.thumbnail = image;
+      clone.image = normaliseImage(clone.image, category, clone.service);
       clone.tags = Array.isArray(clone.tags) ? clone.tags : [];
       clone.type = clone.type || 'internal';
       clone.cta = clone.cta && typeof clone.cta === 'object' ? clone.cta : {};
@@ -570,11 +571,21 @@
     );
   }
 
-  function normaliseImage(path, category) {
+  /* Service wins over category for the fallback gradient. A solar article will
+     carry category "Articles" and service "Solar Lighting"; keying on category
+     would have given it the Articles gradient, which is exactly what the Solar
+     entry was added to prevent.
+
+     This changes nothing for parking content, and that is deliberate:
+     DEFAULT_IMAGES has NO 'Parking' key, so service lookup misses and the
+     category gradient wins, keeping the accurate "Article" / "Guide" /
+     "Case Study" label. Do not add a Parking entry, it would replace the type
+     label on 56 records with a service label that says less. */
+  function normaliseImage(path, category, service) {
     if (path && path.startsWith('/images/')) return path;
     if (path && path.startsWith('http')) return path;
     if (path) return `/images/${path.replace(/^\/+/, '')}`;
-    return DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
+    return DEFAULT_IMAGES[service] || DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
   }
 
   /* A service with no articles yet gets a real message and somewhere to go,

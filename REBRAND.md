@@ -2026,17 +2026,35 @@ Both pre-existing. The first would have broken the feature on deploy.
    derives service from category rather than defaulting flat to Parking, which
    keeps the 9 EV articles in the right bucket during that window.
 
-### One gap, reported not fixed
+### The fallback gradient prefers service over category
 
-The `Solar Lighting` fallback image entry added in `2e2afb6` is keyed by
-**category**, because that is what the gradient label represents ("Guide",
-"Article"). Under the service split a solar article will carry
-`category: "Articles"` and `service: "Solar Lighting"`, so it would get the
-Articles gradient, which is the thing that entry was meant to prevent. It is
-currently theoretical: **all 65 visible records have a thumbnail, so the
-fallback gradient is reached zero times today.** The fix is one line, preferring
-`service` over `category` for the fallback lookup, and it was left out rather
-than widening the pass unasked.
+`normaliseImage()` looks up `DEFAULT_IMAGES[service] || DEFAULT_IMAGES[category]
+|| DEFAULT_IMAGES.Articles`. Closed in the commit after the split: the Solar
+entry added in `2e2afb6` was keyed by category, but a solar article carries
+`category: "Articles"` and `service: "Solar Lighting"`, so it would have got the
+Articles gradient, which is the thing that entry existed to prevent.
+
+**`DEFAULT_IMAGES` deliberately has NO `Parking` key, and must not gain one.**
+That absence is what makes the precedence safe: the service lookup misses for
+parking content, the category gradient wins, and 56 records keep an accurate
+"Article" / "Guide" / "Case Study" label instead of a service label that says
+less. Adding a Parking entry would silently replace all of them.
+
+Verified with four thumbnail-less probe records, each carrying the realistic
+`category: "Articles"` or `"Guides"`:
+
+| probe | service | gradient |
+|---|---|---|
+| PROBE Solar | Solar Lighting | **Solar Lighting**, #2D7A0E |
+| PROBE EV | EV Charging | EV Charging, #2D7A0E |
+| PROBE Parking | Parking | Article, #071B38 |
+| PROBE Parking Guide | Parking | Guide, #0E2A52 |
+
+Still reached zero times by real data: all 65 visible records have a thumbnail.
+The script query was bumped to `?v=service-axis-2` anyway, per the rule above. A
+stale script cannot break anything today, but a solar article published months
+from now sits well inside the one-year immutable window, and that is precisely
+the case this closes.
 
 ---
 
