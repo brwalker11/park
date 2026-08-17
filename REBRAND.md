@@ -2546,6 +2546,25 @@ that must still PASS. A guard that has never been shown to fail proves nothing.
 It appears on the icon links, the manifest link, and inside
 `images/site.webmanifest`. Do not strip it on merge day.
 
+**Also not a revert item, added 2026-08-17: the og-image `?v=2` stays
+permanently.** Same convention, same reason, different asset. It appears on the
+`og:image` and `twitter:image` tags of all 80 pages that carry the default social
+card, 160 references, and in the two substitution regexes in
+`tools/generate-article-pages.js`. **Do not strip it on merge day, and do not
+strip it later as tidying.**
+
+The card's bytes were replaced on 2026-08-17 while its filename stayed the same.
+`/images/*` is served `immutable, max-age=31536000` and social platforms cache OG
+images by URL, so without the query the new card would not have reached anyone
+already holding the old one. The `?v=` is the only thing making the replacement
+visible.
+
+**If the og-image is ever replaced again, bump this to `?v=3` in all 80 pages AND
+in both generator regexes.** The regexes match the versioned string literally; if
+the template moves and they do not, the substitution stops firing and every
+article page silently ships the default card instead of its own hero image. That
+failure is invisible on the page and shows up only when something is shared.
+
 ## ADA penalty figures need review every July
 
 **`articles/ada-compliance-paid-parking.html` carries two dollar figures that

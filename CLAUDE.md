@@ -632,14 +632,13 @@ Never edit `_redirects` without asking. Existing 301s protect SEO equity.
 
 #### Cache lifetimes, and when a version bump is required
 
-Two asset classes in `_headers` behave very differently after a change, and the
-difference decides whether a version bump is optional or mandatory. **Neither
-`/js/*` nor `/styles.css` carries a version query by default; the JS links are
-bumped by hand, the stylesheet link is not versioned at all.**
+Three asset classes in `_headers` behave very differently after a change, and the
+difference decides whether a version bump is optional or mandatory.
 
 | Asset | `Cache-Control` | Stale for | Version bump |
 |---|---|---|---|
-| `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY** |
+| `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY**, by hand on the `<script>` src |
+| `/images/*` | `max-age=31536000, immutable` | **up to a year, and longer on social platforms** | **MANDATORY when bytes change at the same filename** |
 | `/styles.css` | `max-age=86400` | up to a day | optional, and not currently possible |
 
 **`/js/*` is immutable for a year, so a JS change without a bump never reaches a
@@ -649,6 +648,31 @@ change, then `npm run generate:articles`. The convention is a short descriptive
 slug, not a timestamp: `?v=logo-404`, then `?v=service-crumb`, then
 `?v=rail-service`. **A year-long stale window is never acceptable.**
 
+**`/images/*` is also immutable for a year, and this bites whenever an image's
+bytes are replaced without its filename changing.** Normally that never happens,
+because a new image gets a new name. The exception is the fixed-name assets: the
+favicon set, `images/site.webmanifest`, and `images/og-image.png`. **Replacing the
+bytes at an unchanged URL does not reach anyone already holding it.**
+
+The og-image is the worst case, because **social platforms cache OG images by
+URL** on top of the browser cache. Facebook, LinkedIn, X and Slack will keep
+rendering the previous card until each is re-scraped, and the whole purpose of the
+asset is to be shared. A silent year of the wrong card is the default outcome.
+
+**The convention is `?v=` on the reference, and it is already in use.** The
+favicons, the manifest link and the manifest's own contents carry `?v=2`
+permanently; `og:image` and `twitter:image` carry `?v=2` on all 80 pages that use
+the default card, 160 references, added 2026-08-17 when the card was rebranded.
+Both are recorded as "not a revert item" in `REBRAND.md`. **Do not strip either as
+tidying.**
+
+**Any future og-image change needs the version bumped.** All 80 pages **and** both
+substitution regexes in `tools/generate-article-pages.js`, in the same commit,
+then `npm run generate:articles`. The regexes match the versioned URL literally,
+so if the template moves and they do not, the substitution stops firing and every
+article page ships the default card instead of its own hero. That failure is
+invisible on the page and surfaces only when someone shares a link.
+
 **`/styles.css` is one day, and the failure mode is a reversion flash rather than
 a change that never lands.** Because the inline critical CSS is in the HTML and is
 not cached long, while the stylesheet is, a returning visitor briefly gets fresh
@@ -657,9 +681,10 @@ cascade, so a visual change paints at the **new** value on first paint and then
 **reverts to the old one** for the rest of the cache window. It self-heals within
 a day.
 
-**The 24-hour window is usually acceptable. The year-long one never is.** Judge a
+**The 24-hour window is usually acceptable. The year-long ones never are.** Judge a
 `styles.css` change on whether a one-day reversion on returning visitors is
-tolerable for that specific change; for `/js/*` there is nothing to judge.
+tolerable for that specific change; for `/js/*` and for a fixed-name image there is
+nothing to judge.
 
 Adding a version convention to the `styles.css` link would remove the 24-hour
 window, and **has not been done**: the link appears in all **119** pages carrying

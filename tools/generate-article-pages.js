@@ -93,7 +93,11 @@ function main() {
         `<meta property="og:url" content="${articleUrl}">`
       )
       .replace(
-        /<meta property="og:image" content="https:\/\/monetize-parking\.com\/images\/og-image\.png">/,
+        // The ?v=2 must match the template. If the og-image is ever reversioned,
+        // this regex and the twitter:image one below move with it, or the
+        // substitution stops firing and every article page silently ships the
+        // default social card instead of its own hero.
+        /<meta property="og:image" content="https:\/\/monetize-parking\.com\/images\/og-image\.png\?v=2">/,
         `<meta property="og:image" content="${heroImageUrl}">`
       )
       // Pre-populate Twitter tags
@@ -106,7 +110,7 @@ function main() {
         `<meta name="twitter:description" content="${escapeHtml(description)}">`
       )
       .replace(
-        /<meta name="twitter:image" content="https:\/\/monetize-parking\.com\/images\/og-image\.png">/,
+        /<meta name="twitter:image" content="https:\/\/monetize-parking\.com\/images\/og-image\.png\?v=2">/,
         `<meta name="twitter:image" content="${heroImageUrl}">`
       )
       // Pre-populate hero image src and alt (LCP discovery)
