@@ -861,6 +861,27 @@ drifted further out of sync. Nothing loads it. Do not gate or edit it.
 
 ## Working method
 
+**A pass is not complete until it is committed and pushed.** Verification
+against the working tree proves the code is correct. It does not prove the
+preview will serve it, because the preview deploys from the branch, not from
+the working tree. A verified, uncommitted change is invisible to everyone but
+the session that made it.
+
+- Always report the commit hash, and confirm the push actually landed.
+- When work is verified but not committed, **say so explicitly and say it
+  prominently**, not as a closing aside. "Nothing is committed" at the end of a
+  report reads as housekeeping. "This is verified but uncommitted, so the
+  preview will not show it" is the actual state.
+- The check is `git status -sb`: no ahead marker, nothing modified, nothing
+  untracked. Run it after pushing and report the result rather than assuming
+  the push covered everything.
+
+This cost a debugging cycle on 2026-08-16, when three solar articles were built
+and verified end to end in the browser and then reported as done. Every runtime
+check passed against `localhost`. Nothing had been committed, `origin/rebrand`
+was still at the commit from before the session, and the articles were missing
+from the deployed preview.
+
 - Always run a read-only discovery pass before modifying files. Report findings
   and wait for confirmation.
 - Treat any "Do NOT Change" section in a prompt as absolute.
