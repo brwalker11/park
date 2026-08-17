@@ -2347,11 +2347,16 @@ the instruction looked safe and was not, and because anyone reaching for
 these blocks ever do need removing, script the excision against the known block
 bytes and verify with `guards.js` reporting zero, rather than reverting.
 
-**One prerequisite came out of making them permanent: the `www` hostname.** Both
-gates match `'monetize-parking.com'` exactly and `www.monetize-parking.com` serves
-directly rather than redirecting, so merging as-is makes `www` noindexed and
-invisible to GA4 and Ads. It is on the checklist above as the only new blocker,
-with both fixes, and the detail is in `CLAUDE.md`.
+**One prerequisite came out of making them permanent, and it is already closed:
+the `www` hostname. RESOLVED 2026-08-17.** Both gates match
+`'monetize-parking.com'` exactly, and `www.monetize-parking.com` was serving the
+site directly rather than redirecting, which would have made `www` noindexed and
+invisible to GA4 and Ads once the gates shipped. A Cloudflare wildcard redirect
+rule now 301s `www` to the apex with path and query preserved, so the gates are
+correct as written and no page load ever reports `www` as its hostname. Found and
+fixed before it shipped, while production was still `main` and carried neither
+gate. The standing rule it leaves, that any future production hostname must
+redirect to the apex or both gates have to learn about it, is in `CLAUDE.md`.
 
 ### `conversion-guard.js` was always permanent
 
@@ -2461,14 +2466,16 @@ that must still PASS. A guard that has never been shown to fail proves nothing.
 > re-add them.** The hostname gates are permanent infrastructure now; see the
 > section below for the reasoning and for the one prerequisite the change created.
 
-- [ ] **Settle the `www` hostname before merging. This is the only new blocker.**
-  Both gates compare `hostname` against `'monetize-parking.com'` exactly, and
-  `www.monetize-parking.com` serves the site directly rather than redirecting.
-  Merging as-is makes `www` `noindex, nofollow` and invisible to GA4 and Ads.
-  Preferred fix is a 301 from `www` to the apex as a Cloudflare redirect rule,
-  which is a dashboard change and not a repo change. The alternative is accepting
-  both hostnames in both gates, which touches every gated page and needs a
-  `guards.js` recapture. Full detail in `CLAUDE.md`
+- [x] ~~**Settle the `www` hostname before merging.**~~ **RESOLVED 2026-08-17,
+  same day it was found.** `www` now 301s to the apex via a Cloudflare wildcard
+  redirect rule, path and query preserved, so the gates are correct as written and
+  no page load ever reports `www` as its hostname. Nothing to do on merge day
+  beyond the verification below. Detail and the standing rule are in `CLAUDE.md`.
+  Original finding, kept because the failure mode was invisible from inside the
+  repo: both gates compare `hostname` against `'monetize-parking.com'` exactly,
+  and `www` served the site directly rather than redirecting, so merging as-is
+  would have made `www` `noindex, nofollow` and invisible to GA4 and Ads. Every
+  page, every test and both guard scripts would have passed
 - [ ] Confirm Google Ads bidding status. Do not treat this as a blocker. The
   switch off Maximize Clicks is unlikely to have happened, and the merge proceeds
   either way. Record the actual state. The `/consultation/` question is already
@@ -2476,8 +2483,9 @@ that must still PASS. A guard that has never been shown to fail proves nothing.
 - [ ] Merge `rebrand` into `main` via pull request, since direct push is blocked
 - [ ] Verify production tracking fires: GA4 collect requests and the Ads
   conversion on `consultation/thank-you/`
-- [ ] Verify production robots meta reads `index,follow`, not `noindex`, **on the
-  apex AND on `www`**
+- [ ] Verify production robots meta reads `index,follow`, not `noindex`, on the
+  apex. Then confirm `www` still **301s** to the apex, as a redirect rather than as
+  a page: one `curl -sI https://www.monetize-parking.com/`
 - [ ] ~~Delete the Cloudflare Zero Trust Access application for the preview URL~~
   **KEEP IT. Permanent as of 2026-08-17**, for the same reason the gates are: the
   preview environment is ongoing, and Access is what stops it being reached at

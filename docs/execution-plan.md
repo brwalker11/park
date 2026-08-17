@@ -11,6 +11,23 @@ and unlikely before the conference. The two documents agree; where both cover a
 subject, `REBRAND.md` holds the decision and this plan holds the schedule and
 method for carrying it out.
 
+Revised again 2026-08-17, four corrections and no schedule change. **The dates
+still hold**: week 5 starts Mon Aug 31 and merge day is Thu Sep 10, both still
+ahead. What changed is content that had gone stale.
+
+1. **The hostname gates are permanent**, so merge day reverts nothing and Wed
+   Sep 9 no longer dry-runs a revert. See the note under the week 6 table.
+2. **The preview Access application is permanent** and is no longer deleted on
+   merge day.
+3. **Guard counts are 155 noindex and 154 gtag**, raised from 150 / 149 by three
+   file additions.
+4. **Risk register row 4 is rewritten.** A broken guard is now a live defect from
+   the commit that breaks it, not a merge-day conflict to be resolved later.
+
+Weeks 1 to 4 are in the past and are not annotated with what actually landed.
+`REBRAND.md` "Current pass" is the authority on progress; this file is the
+authority on the remaining schedule and method.
+
 ---
 
 ## Does the plan fit
@@ -289,10 +306,26 @@ Code.
 |---|---|---|---|---|---|
 | Mon 7 | QA day 2: visual matrix (pages listed in Task 5) at 375 / 800 / 1280, real devices; fix list executed. Stakeholder review opens on the preview URL | CC + BW | QA day 1 | V | 1 |
 | Tue 8 | Review feedback fixes. **Freeze at end of day Tue Sep 8.** After freeze, content-only fixes | CC | review | V | 1 |
-| Wed 9 | Pre-merge verification: guard hash suite final run; dry-run reverts of `187bfbd` and `3596d3d` on a scratch branch to surface `<head>` conflicts a day early; record Ads bidding status with Ben and confirm which `/consultation/` option was taken | CC | freeze | A | 1 |
-| Thu 10 | **Merge day**, per the REBRAND.md checklist: revert `187bfbd`, revert `3596d3d`, record Ads bidding status (not a blocker), PR `rebrand` into `main`, merge, verify production tracking (GA4 collect, Ads conversion on `consultation/thank-you/`), verify robots meta is `index,follow`, delete the preview Access application, annotate GA4 and Ads | CC + BW | Wed 9 clean | A + V | 1 |
+| Wed 9 | Pre-merge verification: guard hash suite final run (`guards.js verify` and `conversion-guard.js verify`); confirm `www` still 301s to the apex; record Ads bidding status with Ben. **The dry-run reverts that used to sit here are gone**, see the note under this table | CC | freeze | A | 1 |
+| Thu 10 | **Merge day**, per the REBRAND.md checklist: record Ads bidding status (not a blocker), PR `rebrand` into `main`, merge, verify production tracking (GA4 collect, Ads conversion on `consultation/thank-you/`), verify robots meta is `index,follow` on the apex and that `www` 301s, annotate GA4 and Ads. **No reverts. The preview Access application STAYS** | CC + BW | Wed 9 clean | A + V | 1 |
 | Fri 11 | Production soak: spot checks across the visual matrix on the live domain, then a full working day to fix anything the soak surfaces. Site is live, verified, and finished at end of day | CC | merge | V | 0.5 scheduled, full day available |
 | Sat 12, Sun 13 | **Slack. Nothing scheduled.** Recovered by the confirmed Mon Sep 14 start; held for overrun only | n/a | n/a | n/a | 0 |
+
+**Revised 2026-08-17: merge day no longer reverts anything, and Wed 9 no longer
+dry-runs a revert.** The gtag gate and the noindex guard are permanent
+infrastructure, because the preview environment is ongoing rather than a rebrand
+artifact. The Cloudflare Access application on the preview URL is permanent for
+the same reason and is no longer deleted on merge day.
+
+The reverts were tested on 2026-08-17 and **do not apply**: reverting `187bfbd`
+first conflicts on 149 of 150 files, and `3596d3d` first on 74, because both
+blocks sit in a `<head>` that later passes have moved around them. They would also
+have missed five files added since those commits, shipping `noindex, nofollow`
+live on both service pillar pages. That risk is retired rather than mitigated;
+`REBRAND.md` holds the full record.
+
+**Dates in this plan are unchanged and still hold.** Week 5 begins Mon Aug 31 and
+merge day is Thu Sep 10, both still in the future as of this revision.
 
 ### Rules the schedule enforces
 
@@ -301,7 +334,8 @@ Code.
   page takes no image at all.
 - Template touches happen exactly twice (Bundle B, Bundle C), each followed
   by `npm run build` with the 72 regenerated pages committed alongside.
-- The gtag gate (`187bfbd`) and noindex guard (`3596d3d`) are hash-verified
+- The gtag gate and noindex guard are **permanent infrastructure as of
+  2026-08-17, not reverted on merge day**, and are hash-verified
   after every sweep commit; any sweep script anchors its edits on the header
   and footer markup and the inline `<style>` blocks, never on the gated
   `<head>` region. Font preload links insert adjacent to the existing
@@ -459,7 +493,8 @@ D runs Aug 21 to Sep 1; C runs Sep 2.
 - **Guard integrity:** script extracts the noindex guard block (by its
   `<!-- Preview noindex guard - remove on merge day -->` marker) and the gtag
   gate block from every page, hashes each, compares against a baseline
-  captured today. Counts must hold: 150 noindex blocks, 149 gtag gates
+  captured today. Counts must hold: **155 noindex blocks, 154 gtag gates** as of
+  2026-08-17, raised from 150/149 by three file additions
   (404.html has no analytics; the sweep script must handle that page's
   absent gtag block without error, which is why 404.html is in the visual
   matrix).
@@ -516,7 +551,7 @@ checked on a real phone, not only in an emulator.
 | 1b | Supplier photography arrives and cannot be used | ClearWorld sends images at any point | None to the schedule. The solar page is already finished without them | Neither the vendor-neutrality question nor the usage-rights question is resolved (`REBRAND.md`), so nothing is published without both answered and written permission on file. Treat arrivals as post-conference candidates | On arrival: hold. No page is edited to accommodate an image that has not cleared both questions |
 | 2 | Critical CSS defect causes visible regressions | Any payload group fails the styles.css-blocked first-paint check during Bundle B (Tue Aug 18 to Wed Aug 19) | FOUC on up to 119 pages | Recolor deletes nothing and writes literals, not `var()`; per-group verification and per-group revert; tokenization deferred entirely | Wed Aug 19: any failing group reverts and ships with old-value-free recolor retried; if a group cannot pass, it ships un-recolored inline (still coherent, colors then corrected post-conference) |
 | 3 | Solar page copy is late | Not delivered Fri Aug 21 | The single conference-critical new page slips | Grace to Wed Aug 26; then Claude drafts from Ben's outline Mon Aug 24 for Ben to edit; page is built fallback-first so late copy is a paste, not a rebuild | Fri Sep 4: cut-down solar page (hero, three benefits, CTA) locks as shipping content |
-| 4 | A pass breaks the gtag or noindex guards | Guard hash suite mismatch after any commit | Merge-day reverts of `187bfbd` / `3596d3d` conflict; worst case, production launches noindexed or untracked | Sweep scripts anchor on header/footer/inline-style regions, never the gated `<head>` blocks; hash suite after every sweep and Bundle D commit; dry-run reverts on a scratch branch Wed Sep 9 | Immediate on any mismatch: fix before the next commit. Wed Sep 9: dry-run must apply cleanly or Thu Sep 10 is spent resolving, using Fri Sep 11 as the soak day and the recovered weekend as the outer limit |
+| 4 | A pass breaks the gtag or noindex guards | Guard hash suite mismatch after any commit | **A live defect, not a merge-day conflict.** The guards are permanent as of 2026-08-17, so a broken block means the preview is indexable or is firing real analytics from that commit onward | Sweep scripts anchor on header/footer/inline-style regions, never the gated `<head>` blocks; hash suite after every sweep and Bundle D commit | Immediate on any mismatch: fix before the next commit. There is no merge-day revert to protect any more, so the deadline is now rather than Wed Sep 9 |
 | 5 | **Now the expected case, not a risk.** Google Ads bidding does not switch off Maximize Clicks before the conference, because conversions are below the 15 to 20 threshold the switch needs | Already true as of Thu Aug 6 | If `/consultation/` is left frozen: the sole ad landing page and the only Calendly booking route stays on the old brand through the conference, while every other page carries the new one | The plan never assumed the switch and schedules no consultation work. The residual exposure is a positioning decision, not a schedule one: the three options (leave frozen, rebrand anyway, pause the campaign) are recorded in `REBRAND.md` and belong to Ben | Deferred, no forced date. If an option is chosen it must land before the Tue Sep 8 freeze. Wed Sep 9 records the state; merge proceeds regardless |
 | 6 | Scope creep from leadership | Any new request after Fri Aug 21 | The 26-of-27-day schedule has no room for additions | Standing rule, agreed via this plan: post-checkpoint requests go to the post-conference backlog unless leadership names equal scope to remove. Ben enforces; the homepage comp on Tue Aug 11 exists partly to surface opinions early, while reacting is cheap | At each request, same day. The comp review Tue Aug 11 and the stakeholder review Mon Sep 7 are the two sanctioned feedback windows |
 | 7 | Bundle B overruns | Propagation not verified by end of day Thu Aug 20 | Everything downstream stacks behind the sweep; the checkpoint fails | Bundle B carries the project's only new interactive component (the dropdown), built and tested on two pages before propagation; the propagation itself is scripted against byte-identical chrome, which Pass 1 verified | Fri Aug 21 checkpoint: cut list executes, recovering 3 days |

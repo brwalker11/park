@@ -1049,37 +1049,55 @@ preview needs from that day onward. So:
   `tools/conversion-guard.js`. A failure is a live defect, not a future merge
   conflict.
 
-#### Both gates match one hostname exactly, and that is a live constraint
+#### Both gates match one hostname exactly, and that is now correct. RESOLVED
 
 ```js
 window.location.hostname === 'monetize-parking.com'
 ```
 
-**`www.monetize-parking.com` serves the site directly. It does not redirect to
-the apex.** Verified 2026-08-17: HTTP 200, zero redirects, on more than one path.
-Both hostnames are production domains in Cloudflare.
+**This comparison is correct as written, because the apex is the only production
+hostname that ever serves HTML.** `www.monetize-parking.com` 301s to the apex via
+a **Cloudflare wildcard redirect rule**, so no page load ever reports `www` as its
+hostname and neither gate can misfire on it. Do not add `www` to the comparison;
+it would be dead code.
 
-So the comparison above is **wrong for www**, and because the gates are now
-permanent the bug is permanent too. On `www` the noindex guard fires and the
-analytics gate does not, which means **www is `noindex, nofollow` and invisible
-to GA4 and to Google Ads conversion tracking.** The analytics hole is the more
-expensive half: any visit or conversion arriving on `www` is not counted at all,
-and the campaign runs below the conversion volume Ads wants for bidding.
+Verified 2026-08-17 after the rule was added:
 
-This is not yet live. Production is `main`, which carries neither gate, so `www`
-behaves correctly today. **It breaks the moment `rebrand` merges.** Fix it before
-the merge, one of two ways:
+```
+https://www.monetize-parking.com/                    301 -> https://monetize-parking.com/
+https://www.monetize-parking.com/faq/                301 -> https://monetize-parking.com/faq/
+https://www.monetize-parking.com/consultation/       301 -> https://monetize-parking.com/consultation/
+https://www.monetize-parking.com/resources/?service=EV%20Charging
+                                                     301 -> https://monetize-parking.com/resources/?service=EV%20Charging
+```
 
-1. **Accept both hostnames in both gates.** Match `monetize-parking.com` and
-   `www.monetize-parking.com`. Touches every page carrying the gates and requires
-   a `guards.js` recapture, since the block bytes change.
-2. **301 `www` to the apex at Cloudflare**, leaving the gates as written. A
-   redirect rule in the dashboard, not `_redirects`, which handles paths and not
-   hosts. Better for SEO anyway, since it settles one canonical host, and it
-   means the gates never have to know about more than one name.
+The wildcard preserves both path and query string, which matters for
+`/resources/?service=` and for any Ads landing URL carrying parameters.
 
-Option 2 is preferred and is not a repo change. Whichever is chosen, **verify
-`www` after the merge** as well as the apex.
+**What this was.** Before the rule, `www` served the site directly: HTTP 200, zero
+redirects, verified on more than one path, with both hostnames configured as
+production domains in Cloudflare. That made the comparison above wrong for `www`,
+and because the gates are permanent the bug would have been permanent too: on
+`www` the noindex guard fires and the analytics gate does not, so `www` would have
+been `noindex, nofollow` **and invisible to GA4 and Google Ads conversion
+tracking.** The analytics half was the expensive one, since a conversion arriving
+on `www` would not have been counted at all, on a campaign already running below
+the volume Ads wants for bidding.
+
+**It never shipped.** It was found on 2026-08-17 while making the gates permanent,
+before the merge, and while production was still `main`, which carries neither
+gate. Recorded because the failure mode was invisible from inside the repo: every
+page, every test and both guard scripts would have passed, and the symptom would
+have surfaced weeks later as missing conversions and a deindexed hostname.
+
+**The standing rule this leaves:** the gates assume exactly one hostname serves
+HTML. **If another production hostname is ever added to Cloudflare, it must
+redirect to the apex, or both gates have to learn about it.** Adding a domain that
+serves directly reintroduces this silently. `_redirects` cannot do host redirects;
+that is a Cloudflare redirect rule.
+
+**Still verify `www` after the merge**, as a redirect rather than as a page: one
+`curl -sI` confirming a 301 to the apex.
 
 ## Do not touch without explicit instruction
 
