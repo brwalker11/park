@@ -2418,9 +2418,24 @@ that must still PASS. A guard that has never been shown to fail proves nothing.
   conversion on `consultation/thank-you/`
 - [ ] Verify production robots meta reads `index,follow`, not `noindex`
 - [ ] Delete the Cloudflare Zero Trust Access application for the preview URL
-- [ ] Fold any still-relevant findings from `REBRAND.md` into `CLAUDE.md` before
-  deleting
-- [ ] Delete `REBRAND.md` from the repo
+- [ ] **Move the ENTIRE post-Vegas backlog section out of `REBRAND.md`, into
+  `CLAUDE.md` or a new `BACKLOG.md`.** As of 2026-08-17 that is **31 top-level
+  items across roughly 480 lines**, inventoried in a table at the top of the
+  section itself. **Move it wholesale. Do not summarize it, do not triage it, and do not drop
+  items that look stale.** Merge day is the wrong time to decide what still
+  matters: the person doing the merge is working through a checklist under time
+  pressure, not weighing whether a content audit is still worth doing. Anything
+  genuinely dead can be deleted later, deliberately, by someone who has read it.
+  **A backlog that disappears with the file it lived in is a backlog nobody
+  acts on.** `BACKLOG.md` is the better target if the section would swamp
+  `CLAUDE.md`, which at roughly 480 lines it probably would
+- [ ] Fold any other still-relevant findings from `REBRAND.md` into `CLAUDE.md`
+  before deleting. This covers the rest of the file, the chapter records and
+  decisions, and it IS a judgement call. The backlog above is not; that moves
+  whole regardless
+- [ ] Delete `REBRAND.md` from the repo, **only after confirming the backlog
+  exists at its new location.** Check it in as its own commit before the
+  deletion commit, so a mistake is a revert rather than a recovery from history
 - [ ] **Annotate the deploy date in BOTH Google Ads and GA4.** Not optional and
   not cosmetic. `/consultation/` was rebranded with the campaign live and no
   pause, so there is no gap in the data to mark where the page changed. Without
@@ -2500,6 +2515,56 @@ dated claim of exactly the kind this entry exists to prevent.
 ---
 
 ## Post-Vegas backlog
+
+> **THIS SECTION SURVIVES THE DELETION OF `REBRAND.md`.** On merge day it moves
+> **whole** to `CLAUDE.md` or to a new `BACKLOG.md`. It is not summarized, not
+> triaged, and not filtered for staleness during the merge. Merge day is the
+> wrong time to decide what still matters, and a backlog that disappears with the
+> file it lived in is a backlog nobody acts on. The merge-day checklist above
+> carries the same instruction; this copy exists so it travels with the content
+> rather than living only in a checklist someone may work through quickly.
+>
+> **Scope, as of 2026-08-17: 31 top-level items, roughly 480 lines including this
+> inventory.** The table below lists all 31, so
+> what has to move is visible in advance rather than discovered mid-merge.
+
+| # | Item | Kind |
+|---|---|---|
+| 1 | About page: Dave and Dax should read their own bios | Needs a person |
+| 2 | Team photos capped at 100px, CLOSED and now a standing constraint | Constraint |
+| 3 | Contact form: city/state removal and field order, pending Dave and Dax | Needs a person |
+| 4 | Dated-claims audit, 8 rate-pinned figures, none fixed | Content |
+| 5 | CSP scoping fix, needs its own testing cycle | Code |
+| 6 | `articles/parking-today-small-lots/` renders a not-found state over itself | Bug |
+| 7 | Stale asset cleanup: 8 dead stylesheets, unwired tooling, 1.2 MB orphan PNG | Cleanup |
+| 8 | `images/services.webp` and `.jpg`, orphaned by the services restructure | Cleanup |
+| 9 | `images/Logo.svg` deletion | Cleanup |
+| 10 | Vector logo redraw for print and embroidery | Asset |
+| 11 | Transparent tagline and ClearWorld co-brand lockups | Asset |
+| 12 | `sitemap.xml` lists `/ask-the-experts.html`, which 308-redirects | Bug |
+| 13 | Decide how `sitemap.xml` should be generated | Decision |
+| 14 | `docs/website-audit-action-plan.md:609` points at a superseded manifest | Docs |
+| 15 | `package-lock.json` peer markers to commit separately | Cleanup |
+| 16 | Content pass over the 30 video pages: first person, placeholder transcripts | Content |
+| 17 | A type axis on `/resources/`: whether content type earns a control | Decision |
+| 18 | Tag vocabulary pass over 381 tag instances | Content |
+| 19 | State-targeted Google Ads campaign and its landing pages | Decision |
+| 20 | Five Texas state subpages have no body headings | Content |
+| 21 | Content pass over the 73 article body fragments | Content |
+| 22 | `INLINE_CTA_COPY` uses first person | Code |
+| 23 | Dead `insertInlineCta()` in `js/article.js` | Cleanup |
+| 24 | `.cta-inline` rules styling only dead code | Cleanup |
+| 25 | Four dead classes in `css/state-map.css` | Cleanup |
+| 26 | Four more dead files from the resources service split | Cleanup |
+| 27 | `readTime` values contain en dashes | Content |
+| 28 | Resources filter and search are ANDed, confusing under a service axis | Decision |
+| 29 | ADA free-parking claim stated unqualified | Content |
+| 30 | Content rebalancing toward three-pillar parity | Strategy |
+| 31 | Webflow migration evaluation | Strategy |
+
+Item 2 is already closed and is kept as a standing constraint, so it belongs in
+`CLAUDE.md` rather than in a backlog if the two are split. Items 1 and 3 are
+blocked on Dave and Dax and cannot be actioned by whoever inherits this list.
 
 Not rebrand work. Do not start any of these before the conference.
 

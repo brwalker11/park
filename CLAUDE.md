@@ -623,6 +623,43 @@ Fixing this is a post-Vegas task requiring its own testing cycle.
 
 Never edit `_redirects` without asking. Existing 301s protect SEO equity.
 
+#### Cache lifetimes, and when a version bump is required
+
+Two asset classes in `_headers` behave very differently after a change, and the
+difference decides whether a version bump is optional or mandatory. **Neither
+`/js/*` nor `/styles.css` carries a version query by default; the JS links are
+bumped by hand, the stylesheet link is not versioned at all.**
+
+| Asset | `Cache-Control` | Stale for | Version bump |
+|---|---|---|---|
+| `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY** |
+| `/styles.css` | `max-age=86400` | up to a day | optional, and not currently possible |
+
+**`/js/*` is immutable for a year, so a JS change without a bump never reaches a
+returning visitor.** Not "reaches them late", never. Bump the query on the
+`<script>` src in `templates/article-index.html` in the same commit as the JS
+change, then `npm run generate:articles`. The convention is a short descriptive
+slug, not a timestamp: `?v=logo-404`, then `?v=service-crumb`, then
+`?v=rail-service`. **A year-long stale window is never acceptable.**
+
+**`/styles.css` is one day, and the failure mode is a reversion flash rather than
+a change that never lands.** Because the inline critical CSS is in the HTML and is
+not cached long, while the stylesheet is, a returning visitor briefly gets fresh
+inline CSS and a stale stylesheet at the same time. `styles.css` wins the
+cascade, so a visual change paints at the **new** value on first paint and then
+**reverts to the old one** for the rest of the cache window. It self-heals within
+a day.
+
+**The 24-hour window is usually acceptable. The year-long one never is.** Judge a
+`styles.css` change on whether a one-day reversion on returning visitors is
+tolerable for that specific change; for `/js/*` there is nothing to judge.
+
+Adding a version convention to the `styles.css` link would remove the 24-hour
+window, and **has not been done**: the link appears in all **119** pages carrying
+inline critical CSS, so it is a 119-file change plus a regeneration, and it
+introduces a versioning convention this stylesheet has never had. Worth doing as
+its own pass, not as a rider on a style change.
+
 ### Stylesheets
 
 Authoritative stylesheets are `styles.css`, `css/article.css`,
@@ -814,11 +851,11 @@ hand-written and skipped by the generator, so it needs a direct edit. The
 remaining 42 are hand-edited pages. **44 direct edits plus a regeneration**, not
 119 direct edits.
 
-`/styles.css` is served `max-age=86400` with no version query on the link, so a
-returning visitor can run a **stale stylesheet against fresh inline CSS for up to
-a day**, and the stylesheet wins. After a header size change that means the new
-size paints first and then reverts to the old one until the cache expires. Adding
-`?v=` to the `styles.css` link would fix it and is a 119-file change of its own.
+A header size change lands in `styles.css`, which is cached for a day with no
+version query, so returning visitors get a one-day reversion flash: the new size
+paints from the fresh inline CSS, then the stale stylesheet overrides it. See
+"Cache lifetimes, and when a version bump is required" under Headers and
+Redirects for the rule and how it differs from `/js/*`.
 
 ### Typography
 
