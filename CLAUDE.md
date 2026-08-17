@@ -692,7 +692,8 @@ difference decides whether a version bump is optional or mandatory.
 |---|---|---|---|
 | `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY**, by hand on the `<script>` src |
 | `/images/*` | `max-age=31536000, immutable` | **up to a year, and longer on social platforms** | **MANDATORY when bytes change at the same filename** |
-| `/styles.css` | `max-age=86400` | up to a day | optional, and not currently possible |
+| `/css/*` | `max-age=86400` | up to a day, and a **broken** render not an old one | **Purge on deploy.** Changed from immutable 2026-08-17 |
+| `/styles.css` | `max-age=86400` | same | **Purge on deploy.** See `BACKLOG.md` item 41 |
 
 **`/js/*` is immutable for a year, so a JS change without a bump never reaches a
 returning visitor.** Not "reaches them late", never. Bump the query on the
@@ -725,24 +726,67 @@ so if the template moves and they do not, the substitution stops firing and ever
 article page ships the default card instead of its own hero. That failure is
 invisible on the page and surfaces only when someone shares a link.
 
-**`/styles.css` is one day, and the failure mode is a reversion flash rather than
-a change that never lands.** Because the inline critical CSS is in the HTML and is
-not cached long, while the stylesheet is, a returning visitor briefly gets fresh
-inline CSS and a stale stylesheet at the same time. `styles.css` wins the
-cascade, so a visual change paints at the **new** value on first paint and then
-**reverts to the old one** for the rest of the cache window. It self-heals within
-a day.
+**`/css/*` was immutable for a year and is now 86400, matching `/styles.css`.**
+Changed 2026-08-17. Before that, `css/article.css` (184 links across 107 pages),
+`css/state-map.css` (58 links, 29 pages), `css/resources.css` (7 links, 6 pages)
+and `css/style.css` (reached via `@import` inside `article.css`) were pinned for a
+year with **no version query on any link**, so a change to any of them never
+reached a returning visitor at all.
 
-**The 24-hour window is usually acceptable. The year-long ones never are.** Judge a
-`styles.css` change on whether a one-day reversion on returning visitors is
-tolerable for that specific change; for `/js/*` and for a fixed-name image there is
-nothing to judge.
+**Why 86400 rather than versioning the links.** Versioning would have meant a
+query on four separate links plus one inside an `@import`, and then a convention
+saying when to bump each. That convention has to be remembered on every stylesheet
+change by whoever is making it, and the `/js/*` bump has only held because it is
+enforced by a single `<script>` src in one template. Five scattered links have no
+such choke point. **Dropping the header instead means one operational rule, purge
+on deploy, covers every stylesheet on the site**, and there is nothing to forget
+per-file.
 
-Adding a version convention to the `styles.css` link would remove the 24-hour
-window, and **has not been done**: the link appears in all **119** pages carrying
-inline critical CSS, so it is a 119-file change plus a regeneration, and it
-introduces a versioning convention this stylesheet has never had. Worth doing as
-its own pass, not as a rider on a style change.
+The cost is real and accepted: these files are no longer cached for a year, so
+returning visitors refetch them daily. They are small, they are behind Cloudflare's
+edge, and the alternative was a class of bug that is invisible until someone
+reports a broken page.
+
+**This does NOT change `/js/*`, which keeps `immutable` and its bump convention.**
+Two reasons. JS changes here are less frequent than CSS changes, so the cost of
+remembering is paid less often. And the convention is established and working: the
+bump lives on one `<script>` src in `templates/article-index.html`, it has been
+exercised three times (`?v=logo-404`, `?v=service-crumb`, `?v=rail-service`), and
+each time the regeneration propagated it to every article page automatically. A
+working convention with a single choke point is worth keeping; five scattered ones
+were not worth creating.
+
+**`/styles.css` is one day, and its failure mode is the worst of the three.**
+**PURGE THE CLOUDFLARE CACHE AFTER ANY DEPLOY THAT CHANGES `styles.css`.** This is
+a standing post-deploy step, not a judgement call. `BACKLOG.md` item 41 holds the
+detail and the permanent fix.
+
+The mechanism: **HTML is not cached** (`_headers` sets no `Cache-Control` under
+`/*.html`, so Cloudflare serves it `max-age=0, must-revalidate`) while
+`/styles.css` is cached for a day. A deploy therefore hands visitors **new HTML
+against a stylesheet up to 24 hours old.**
+
+**That is not a page rendering with old styling. It is a page rendering broken.**
+Old markup plus new CSS degrades gracefully, because the rules still exist and only
+their values moved. New markup plus old CSS does not: the classes in the HTML have
+**no matching rules at all**. Every structural change on this site is exposed this
+way, the band system and `.page-*` payload blocks most of all, and the effect is
+unstyled or collapsed layout rather than a stale colour.
+
+**This file previously said the 24-hour window was "usually acceptable" and
+"self-heals within a day". That was wrong and it cost a broken production render on
+the merge deploy, 2026-08-17.** The reasoning had been about *value* changes, where
+an old stylesheet still produces a coherent page. It does not hold for markup
+changes, which is what most deploys here are.
+
+Adding a version query to the `styles.css` link removes the window permanently and
+**has not been done**: the link appears in all **119** pages carrying inline
+critical CSS, so it is a 119-file change plus a regeneration. Deferred for that
+reason, and the deferral is what makes the purge mandatory in the meantime. The
+favicon and og-image `?v=` conventions are the precedent for doing it.
+
+For `/js/*` and for a fixed-name image there is nothing to judge either: a missed
+bump there never reaches a returning visitor at all.
 
 ### Stylesheets
 
@@ -1300,11 +1344,23 @@ that hostname must not be indexed and must not fire analytics or ad conversions.
 Deleting the gates on merge day would have removed exactly the protection the
 preview needs from that day onward. So:
 
-- **The noindex guard stays on every page.** Marked
-  `<!-- Preview noindex guard - remove on merge day -->`; the comment text is now
-  wrong and is left alone only because `tools/guards.js` hashes the block. If it
-  is ever reworded, recapture the baseline in the same commit.
-- **The gtag hostname gate stays on every page.**
+- **The noindex guard stays on every page**, marked
+  `<!-- Preview noindex guard - PERMANENT, do not remove. Reasoning in CLAUDE.md -->`.
+  Reworded 2026-08-17; it previously read "remove on merge day", which was stale
+  and was the most likely thing to get someone to delete the guard by following
+  its own instruction.
+- **The gtag hostname gate stays on every page**, and carries the same note as the
+  first line inside its `<script>`, so the note is covered by the hash and cannot
+  be stripped without the guard failing.
+
+**Rewording either comment is a baseline recapture, and the noindex one has a
+trap.** That comment string is *also* `NOINDEX_MARKER` in `tools/guards.js`, the
+string the scanner searches for. Change it on the pages without changing the
+constant and every block becomes undiscoverable: the count drops to zero rather
+than mismatching, which reads like a broken scanner rather than an unguarded site.
+Change both in the same commit, regenerate the 75 article pages so the template's
+copy propagates, then recapture and gate the result: exactly the expected hashes
+changed, none added, none removed.
 - **`tools/guards.js` changes meaning.** It no longer protects blocks that are
   about to be deleted. It now protects **permanent** blocks, the same standing as
   `tools/conversion-guard.js`. A failure is a live defect, not a future merge

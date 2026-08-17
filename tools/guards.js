@@ -8,15 +8,22 @@
  *
  *   1. The noindex guard (commit 3596d3d) - an inline <head> script that sets
  *      meta[name="robots"] to "noindex, nofollow" on any non-production
- *      hostname. Marked by the comment
- *      "<!-- Preview noindex guard - remove on merge day -->".
+ *      hostname. Marked by NOINDEX_MARKER below.
  *   2. The gtag hostname gate (commit 187bfbd) - the inline <head> script that
  *      only initialises GA4 / Google Ads when the hostname is
  *      monetize-parking.com, and defines a no-op gtag otherwise.
  *
- * Both are reverted on merge day. Any sweep that disturbs them turns a clean
- * revert into a conflict, so this script hashes each block on every page and
- * compares against a captured baseline.
+ * BOTH ARE PERMANENT. They were built to be reverted on merge day and that was
+ * wrong: the preview environment is ongoing, so the day they would have been
+ * deleted is the day the preview starts needing them indefinitely. The revert
+ * items are gone from the merge-day checklist and must not be re-added. Full
+ * reasoning in CLAUDE.md, "The hostname gates are permanent infrastructure",
+ * including why git revert of the two commits was tested and does not apply.
+ *
+ * So a failure here is a LIVE DEFECT, not a future merge conflict: it means the
+ * preview is indexable, or is firing real analytics, from the commit that broke
+ * it. This script hashes each block on every page and compares against a
+ * captured baseline.
  *
  * Usage:
  *   node tools/guards.js capture    # write tools/guards.baseline.json
@@ -25,11 +32,12 @@
  * Both subcommands print the number of files scanned and the number of blocks
  * found. `verify` exits non-zero and prints every difference on any mismatch.
  *
- * IMPORTANT - the counts are 150 noindex and 149 gtag, and BOTH include
- * templates/article-index.html. There are only 149 rendered pages; the template
- * is the 150th file carrying the blocks. A checker that enumerates rendered
- * pages only reports 149/148 and looks like a regression. This cost one false
- * alarm already, so the expected totals are asserted explicitly below.
+ * IMPORTANT - the counts are 155 noindex and 154 gtag, and BOTH include
+ * templates/article-index.html. The template is not a rendered page; a checker
+ * that enumerates rendered pages only reports one fewer of each and looks like a
+ * regression. This cost one false alarm already, so the expected totals are
+ * asserted explicitly below. 404.html is the one file with a noindex block and
+ * no gtag block, which is why the two totals differ by one.
  */
 
 const fs = require('fs');
@@ -77,7 +85,12 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
 const EXPECT_NOINDEX = 155;
 const EXPECT_GTAG = 154;
 
-const NOINDEX_MARKER = '<!-- Preview noindex guard - remove on merge day -->';
+// This string is BOTH the marker guards.js searches for AND part of the hashed
+// block. Reword the comment on the pages and this constant must move with it in
+// the same commit, or every block becomes undiscoverable and the counts drop to
+// zero. Changed 2026-08-17 from "- remove on merge day", which was stale once the
+// gates became permanent.
+const NOINDEX_MARKER = '<!-- Preview noindex guard - PERMANENT, do not remove. Reasoning in CLAUDE.md -->';
 const GTAG_NEEDLE = "window.location.hostname === 'monetize-parking.com'";
 
 function sha(s) {
