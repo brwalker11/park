@@ -3,31 +3,51 @@
 This file changes constantly. It holds decisions and status for the rebrand.
 Durable project rules live in `CLAUDE.md`.
 
-Last updated: 2026-08-11
+Last updated: 2026-08-17
 Target: Las Vegas conference, **Monday Sep 14 2026 (CONFIRMED)**
+Merge day: **Thursday Sep 10 2026.** Freeze end of day Tue Sep 8.
 
 ---
 
 ## Current pass
 
-**Status: the nav and footer sweep is complete and pushed. The What We Do menu is finished.**
-Bundle B, Pass 2b-b, the homepage, the 73 article pages, the 28 state subpages,
-the 30 video pages, `/services/`, `/services/solar-lighting/` and
-`/services/ev-charging/` are all done. All three pillars now have real pages or
-a settled answer: solar and EV have pages, parking keeps the `#parking` anchor
-permanently by decision.
+**Status: no pass in progress. Nothing is uncommitted. `origin/rebrand` is at
+`1ec4c7c`.**
 
-The 30C tax credit claims are removed site-wide. The credit expired June 30
-2026 and the article at that URL is now a retrospective.
+**Every page on the site is now on the new design language.** Bundle B, Pass 2b-b,
+the homepage, the 73 article pages, the 28 state subpages, the 30 video pages,
+`/services/`, `/services/solar-lighting/`, `/services/ev-charging/`, `/about/`,
+`/contact/`, both `/consultation/` pages, `/calculator/` and `/calculator/report/`
+are all done. All three pillars have real pages or a settled answer: solar and EV
+have pages, parking keeps the `#parking` anchor permanently by decision.
 
-The nav and footer sweep has run. All four What We Do destinations are settled:
-three pages and one anchor, every surface agreeing. See the settled-destinations
-table in the services section.
+**Done since this line last read "next: the calculator reskin":** the calculator
+and report page reskin (`03707ae`, `5424c68`, `1b0b4ff`, `79d1bfd`, plus the
+`--ok-deep` and `--danger` token families); the resources service split and the EV
+record retype; three solar lighting articles; the related-rail service ranking; the
+header logo to 48/44; and the hostname gates made permanent with `www` 301ing to
+the apex.
 
-**Next: the calculator reskin**, week 5 in the execution plan.
+### What remains before merge day, as of 2026-08-17
 
-Update this line at the end of every pass. If you are starting a session and
-this says a pass is in progress, ask me for the result before proceeding.
+| Item | State |
+|---|---|
+| Calculator reskin, week 5 | **Done**, with one deviation: the results panel is white, not the navy the plan specified. Decide or accept |
+| Bundle C: icon sweep | **Not started.** 3 literal `✓` in `calculator/index.html`. The `.services-list` pseudo-element checkmark in `styles.css:1006` is used by zero pages, so it is dead code, not icon work |
+| Bundle C: motion | **Done early**, in `b2fe5c4` and `86615dd`, not as a bundle. One piece missing: the **nav underline**, which exists nowhere |
+| Imagery, slot #1 | **Not started.** `index.html:355` still holds the PHOTO SLOT comment. No stills delivered; `images/` has only `home_video.mp4` |
+| Imagery, slot #2 | **Obsolete as written.** Its destination was a `/services/parking-revenue/` hero and that page was never built. The homepage 21:9 slot at `index.html:176` still stands |
+| og-image | **Not started.** `images/og-image.png` is still the pre-rebrand card from 2026-03-14. Referenced by 80 pages and by two generator substitutions |
+| QA day 1, day 2 | **Not started** |
+| Ads phone-click conversion action | **Not started**, needs the Ads UI, cannot be done from this repo |
+| Merge day itself | 4 items. No reverts, Access stays. See the checklist |
+
+Nothing on that list is blocked on anything except the stills and the Ads UI, both
+of which are Ben's. The og-image is the one item that is purely a build task and is
+visible to anyone who shares a link.
+
+Update this section at the end of every pass. If it says a pass is in progress,
+ask me for the result before proceeding.
 
 ---
 
