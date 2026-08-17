@@ -37,7 +37,7 @@
   <meta name="twitter:description" content="Charging for parking changes your liability exposure. Learn what insurance coverage you need before monetizing your lot, from garagekeepers to umbrella policies.">
   <script defer src="/script.js"></script>
   <script defer src="/js/article.js?v=rail-service"></script>
-  <!-- Preview noindex guard - remove on merge day -->
+  <!-- Preview noindex guard - PERMANENT, do not remove. Reasoning in CLAUDE.md -->
   <script>
     if (window.location.hostname !== 'monetize-parking.com') {
       let robots = document.querySelector('meta[name="robots"]');
@@ -49,9 +49,10 @@
       robots.setAttribute('content', 'noindex, nofollow');
     }
   </script>
-  <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
+  <!-- Google tag (gtag.js) - PERMANENTLY gated to the production hostname -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>
+    /* PERMANENT hostname gate, do not remove. Reasoning in CLAUDE.md. */
     if (window.location.hostname === 'monetize-parking.com') {
       window.dataLayer = window.dataLayer || [];
       window.gtag = function gtag(){ dataLayer.push(arguments); };

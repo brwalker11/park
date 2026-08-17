@@ -1300,11 +1300,23 @@ that hostname must not be indexed and must not fire analytics or ad conversions.
 Deleting the gates on merge day would have removed exactly the protection the
 preview needs from that day onward. So:
 
-- **The noindex guard stays on every page.** Marked
-  `<!-- Preview noindex guard - remove on merge day -->`; the comment text is now
-  wrong and is left alone only because `tools/guards.js` hashes the block. If it
-  is ever reworded, recapture the baseline in the same commit.
-- **The gtag hostname gate stays on every page.**
+- **The noindex guard stays on every page**, marked
+  `<!-- Preview noindex guard - PERMANENT, do not remove. Reasoning in CLAUDE.md -->`.
+  Reworded 2026-08-17; it previously read "remove on merge day", which was stale
+  and was the most likely thing to get someone to delete the guard by following
+  its own instruction.
+- **The gtag hostname gate stays on every page**, and carries the same note as the
+  first line inside its `<script>`, so the note is covered by the hash and cannot
+  be stripped without the guard failing.
+
+**Rewording either comment is a baseline recapture, and the noindex one has a
+trap.** That comment string is *also* `NOINDEX_MARKER` in `tools/guards.js`, the
+string the scanner searches for. Change it on the pages without changing the
+constant and every block becomes undiscoverable: the count drops to zero rather
+than mismatching, which reads like a broken scanner rather than an unguarded site.
+Change both in the same commit, regenerate the 75 article pages so the template's
+copy propagates, then recapture and gate the result: exactly the expected hashes
+changed, none added, none removed.
 - **`tools/guards.js` changes meaning.** It no longer protects blocks that are
   about to be deleted. It now protects **permanent** blocks, the same standing as
   `tools/conversion-guard.js`. A failure is a live defect, not a future merge
