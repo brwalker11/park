@@ -58,8 +58,9 @@ the date it was opened. Check an item is still true before acting on it.
 | 38 | 42 raw JPGs never converted to WebP | Performance |
 | 39 | No `FAQPage` schema on `/services/` | SEO |
 | 40 | 4 of 8 hidden articles are in `sitemap.xml` and 4 are not, undecided | Decision |
+| 41 | **Purge Cloudflare after any `styles.css` deploy**, or version the link on 119 pages | Deploy |
 
-**40 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
+**41 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
 closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
 duplicated here. Items 31 to 33 were added 2026-08-17, moved off the pre-merge
 schedule in `docs/execution-plan.md` week 5 rather than opened fresh, that file
@@ -710,3 +711,73 @@ Not rebrand work. Do not start any of these before the conference.
   indexed" and set it deliberately per record. Whichever is chosen, record it under
   Hiding Articles in `CLAUDE.md`, because the next person will ask the same
   question.
+
+- **Purge the Cloudflare cache after any deploy that changes `styles.css`. This
+  bit on the merge deploy, 2026-08-17.** Opened the same day, from the incident.
+  **Until the permanent fix lands, treat the purge as a mandatory post-deploy
+  step, not a judgement call.**
+
+  **The mechanism.** `_headers` sets no `Cache-Control` under `/*.html`, so
+  Cloudflare serves HTML `max-age=0, must-revalidate`, effectively uncached. It
+  serves `/styles.css` with `max-age=86400`. A deploy therefore hands visitors
+  **new HTML against a stylesheet up to 24 hours old.**
+
+  **Why this is worse than it sounds, and worse than it was previously recorded as
+  being.** The two directions are not symmetrical:
+
+  | | Result |
+  |---|---|
+  | Old markup, new CSS | degrades gracefully. The rules exist, only values moved |
+  | **New markup, old CSS** | **breaks.** The classes in the HTML have no matching rules at all |
+
+  This site is almost entirely the second case. The band system, the `.page-*`
+  payload blocks and every structural pass ship new class names, so a stale
+  stylesheet does not render an old page, it renders an **unstyled or collapsed**
+  one. `CLAUDE.md` had said the 24-hour window was "usually acceptable" and
+  "self-heals within a day". That was reasoned about *value* changes, it does not
+  hold for markup changes, and it has been corrected.
+
+  **Two ways to fix it. They are not exclusive and the first is free.**
+
+  1. **Purge on deploy.** Cloudflare dashboard, purge everything, or purge
+     `/styles.css` specifically. Zero repo change, zero risk, has to be remembered
+     every time. **This is the interim rule.** Worth checking whether the Pages
+     project can be set to purge automatically on deployment, which would remove
+     the remembering.
+  2. **Add a version query to the `styles.css` link**, `?v=2` and upward, matching
+     the favicon and og-image conventions already in the repo. Removes the window
+     permanently and needs no discipline. Deferred once already as a **119-file
+     change plus a regeneration**: the link sits in every page carrying inline
+     critical CSS. `templates/article-index.html` covers 75 of those by
+     regeneration, so it is 44 direct edits plus a build, the same shape as the
+     og-image pass in `35c5bfb`.
+
+  **Recommended: do option 2 and keep option 1 as the belt.** The version query is
+  the fix; the purge is what protects the next deploy before it lands. Note that
+  option 2 also needs a rule about *when* to bump, or it rots into a constant that
+  nobody touches: bump it in the same commit as any `styles.css` change, the way
+  `/js/*` is bumped.
+
+  **Checked while writing this, and the finding is worse than the item above.**
+  `_headers` serves **`/css/*` as `max-age=31536000, immutable`**, a full year, and
+  **none of those links carries a version query**:
+
+  | Stylesheet | Links | Pages | Cache |
+  |---|---|---|---|
+  | `css/article.css` | 184 | 107 | **1 year, immutable** |
+  | `css/state-map.css` | 58 | 29 | **1 year, immutable** |
+  | `css/resources.css` | 7 | 6 | **1 year, immutable** |
+  | `css/style.css` | via `@import` in `article.css` | 107 | **1 year, immutable** |
+
+  So a change to any of them **never reaches a returning visitor**, the same
+  absolute failure as `/js/*`, except `/js/*` has a bump convention and these have
+  none. `css/article.css` carries the entire article reading surface across 107
+  pages, and a purge is the only thing that has ever made a change to it land.
+
+  **That makes the version-query fix broader than 119 pages.** Doing it properly
+  covers `/styles.css` plus the three `/css/*` links, and `@import url('/css/style.css')`
+  inside `article.css` needs one too or that file stays pinned for a year behind a
+  versioned parent. Alternatively drop `/css/*` to `max-age=86400` to match
+  `/styles.css`, which is a one-line `_headers` change and makes the purge rule
+  cover everything uniformly. **Decide which before starting; the two approaches
+  pull in opposite directions.**

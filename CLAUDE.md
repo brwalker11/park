@@ -692,7 +692,8 @@ difference decides whether a version bump is optional or mandatory.
 |---|---|---|---|
 | `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY**, by hand on the `<script>` src |
 | `/images/*` | `max-age=31536000, immutable` | **up to a year, and longer on social platforms** | **MANDATORY when bytes change at the same filename** |
-| `/styles.css` | `max-age=86400` | up to a day | optional, and not currently possible |
+| `/css/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY, and there is no convention for it.** No `/css/*` link carries a version query |
+| `/styles.css` | `max-age=86400` | up to a day, and a **broken** render not an old one | **Purge on deploy.** See `BACKLOG.md` item 41 |
 
 **`/js/*` is immutable for a year, so a JS change without a bump never reaches a
 returning visitor.** Not "reaches them late", never. Bump the query on the
@@ -725,24 +726,37 @@ so if the template moves and they do not, the substitution stops firing and ever
 article page ships the default card instead of its own hero. That failure is
 invisible on the page and surfaces only when someone shares a link.
 
-**`/styles.css` is one day, and the failure mode is a reversion flash rather than
-a change that never lands.** Because the inline critical CSS is in the HTML and is
-not cached long, while the stylesheet is, a returning visitor briefly gets fresh
-inline CSS and a stale stylesheet at the same time. `styles.css` wins the
-cascade, so a visual change paints at the **new** value on first paint and then
-**reverts to the old one** for the rest of the cache window. It self-heals within
-a day.
+**`/styles.css` is one day, and its failure mode is the worst of the three.**
+**PURGE THE CLOUDFLARE CACHE AFTER ANY DEPLOY THAT CHANGES `styles.css`.** This is
+a standing post-deploy step, not a judgement call. `BACKLOG.md` item 41 holds the
+detail and the permanent fix.
 
-**The 24-hour window is usually acceptable. The year-long ones never are.** Judge a
-`styles.css` change on whether a one-day reversion on returning visitors is
-tolerable for that specific change; for `/js/*` and for a fixed-name image there is
-nothing to judge.
+The mechanism: **HTML is not cached** (`_headers` sets no `Cache-Control` under
+`/*.html`, so Cloudflare serves it `max-age=0, must-revalidate`) while
+`/styles.css` is cached for a day. A deploy therefore hands visitors **new HTML
+against a stylesheet up to 24 hours old.**
 
-Adding a version convention to the `styles.css` link would remove the 24-hour
-window, and **has not been done**: the link appears in all **119** pages carrying
-inline critical CSS, so it is a 119-file change plus a regeneration, and it
-introduces a versioning convention this stylesheet has never had. Worth doing as
-its own pass, not as a rider on a style change.
+**That is not a page rendering with old styling. It is a page rendering broken.**
+Old markup plus new CSS degrades gracefully, because the rules still exist and only
+their values moved. New markup plus old CSS does not: the classes in the HTML have
+**no matching rules at all**. Every structural change on this site is exposed this
+way, the band system and `.page-*` payload blocks most of all, and the effect is
+unstyled or collapsed layout rather than a stale colour.
+
+**This file previously said the 24-hour window was "usually acceptable" and
+"self-heals within a day". That was wrong and it cost a broken production render on
+the merge deploy, 2026-08-17.** The reasoning had been about *value* changes, where
+an old stylesheet still produces a coherent page. It does not hold for markup
+changes, which is what most deploys here are.
+
+Adding a version query to the `styles.css` link removes the window permanently and
+**has not been done**: the link appears in all **119** pages carrying inline
+critical CSS, so it is a 119-file change plus a regeneration. Deferred for that
+reason, and the deferral is what makes the purge mandatory in the meantime. The
+favicon and og-image `?v=` conventions are the precedent for doing it.
+
+For `/js/*` and for a fixed-name image there is nothing to judge either: a missed
+bump there never reaches a returning visitor at all.
 
 ### Stylesheets
 
