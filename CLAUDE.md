@@ -4,18 +4,13 @@ Guidance for Claude Code when working in this repository.
 
 ## Session start
 
-1. Run `git branch --show-current` and report the result. If it is not
-   `rebrand`, STOP and tell me before doing anything else. Do not work on
-   `main` under any circumstances.
-2. Read `REBRAND.md` in the repo root. It holds current rebrand decisions and
-   pass status and changes frequently. This file holds only durable rules.
-   **`REBRAND.md` is deleted when the rebrand merges.** If it is not there, the
-   rebrand is done and step 1's branch rule is the only part of this that still
-   applies.
-3. **`BACKLOG.md` is where outstanding work lives.** Deferred tasks, known defects,
-   and decisions nobody has taken. Check it before proposing new work, because the
-   thing you are about to suggest may already be on it with reasoning attached.
-   After the rebrand merges it is the **only** place outstanding work is recorded.
+1. Run `git branch --show-current` and report the result. **If it is `main`, STOP
+   and tell me before doing anything else.** All work happens on a feature branch;
+   see "The working pattern" under Branch and deployment rules.
+2. **Read `BACKLOG.md`. It is the only place outstanding work is recorded**:
+   deferred tasks, known defects, and decisions nobody has taken. Check it before
+   proposing new work, because the thing you are about to suggest may already be on
+   it with reasoning attached.
 
 ## Project Overview
 
@@ -626,7 +621,7 @@ at `css/style.css:50-76` are all reachable only through that dead function.
 line 149 and in `renderNotFound()`.
 
 Removing any of it means editing the file that carries both rebrand guards, so
-it is deferred. See the post-Vegas backlog in `REBRAND.md`.
+it is deferred. See `BACKLOG.md`.
 
 Bottom CTAs always render two buttons: primary consultation, secondary
 calculator.
@@ -691,8 +686,7 @@ asset is to be shared. A silent year of the wrong card is the default outcome.
 favicons, the manifest link and the manifest's own contents carry `?v=2`
 permanently; `og:image` and `twitter:image` carry `?v=2` on all 80 pages that use
 the default card, 160 references, added 2026-08-17 when the card was rebranded.
-Both are recorded as "not a revert item" in `REBRAND.md`. **Do not strip either as
-tidying.**
+Neither is a revert item. **Do not strip either as tidying.**
 
 **Any future og-image change needs the version bumped.** All 80 pages **and** both
 substitution regexes in `tools/generate-article-pages.js`, in the same commit,
@@ -957,8 +951,7 @@ therefore retina-correct; Dave's 800x800 is 8x at the same size. Measured
 
 **If the display size ever needs to grow, a new photograph has to come first.**
 The rule in `about/index.html` carries a comment saying so. That comment points
-at `REBRAND.md`, which is deleted at the end of the rebrand; **repoint it here**
-when the surrounding area is next touched.
+here.
 
 Also fixed in that pass, recorded so it is not re-introduced: Dave's `<img>`
 declared `width="200" height="200"` against an 800x800 file, now corrected to the
@@ -1506,14 +1499,21 @@ is a Search Console export for `/services/` over 90 days, not more reasoning.
 ## Documentation
 
 - **`BACKLOG.md` - outstanding work. Deferred tasks, known defects, and untaken
-  decisions.** Survives the rebrand; `REBRAND.md` does not. **After the merge it is
-  the only place outstanding work is recorded**, so read it before proposing
-  anything new and add to it rather than to this file. Items that turn out to be
-  standing rules belong here in `CLAUDE.md` instead, and get deleted from
+  decisions. This is the ONLY place outstanding work is recorded.** Read it before
+  proposing anything new, and add to it rather than to this file. Items that turn
+  out to be standing rules belong here in `CLAUDE.md` instead, and get deleted from
   `BACKLOG.md` when they move.
 - `/docs/articles-dynamic.md` - article system guide
 - `/docs/url-migration.md` - URL structure and routing notes
-- `/docs/execution-plan.md` - rebrand schedule and method. Retire with `REBRAND.md`
 - `SEO_TODO.md` - pending SEO tasks. Predates `BACKLOG.md` and overlaps it; fold it
   in when someone next touches either
-- `REBRAND.md` - live rebrand decisions and pass status. **Deleted on merge day**
+- `/docs/` also holds the rebrand-era design direction, its audit, and the
+  execution plan. **All three are historical**, headed with a note to that effect,
+  and reference a `REBRAND.md` that no longer exists. Nothing in them is
+  authoritative; `CLAUDE.md` and `BACKLOG.md` are.
+
+**`REBRAND.md` was the rebrand working document. It was folded into this file and
+deleted on 2026-08-17, before the pull request**, so the merge commit carries
+finished documentation rather than a file describing work in progress. Its durable
+content is here, its outstanding work is in `BACKLOG.md`, and the rest is in git
+history. Do not recreate it.

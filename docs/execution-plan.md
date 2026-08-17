@@ -1,5 +1,11 @@
 # Rebrand Execution Plan
 
+> **Note added 2026-08-17: `REBRAND.md` no longer exists**, and this plan retires
+> with it. It was folded into `CLAUDE.md` and deleted before the pull request.
+> References to it below are historical. Where this file said `REBRAND.md` holds
+> the decision, that decision is now in `CLAUDE.md` if it was durable, in
+> `BACKLOG.md` if it is outstanding, and in git history otherwise.
+
 Status: ACTIVE. Written 2026-08-05 (Wednesday) on `rebrand`, against
 `docs/design-direction.md` and `docs/design-direction-audit.md`. Those two
 documents are inputs and are not modified by this plan. Decisions listed under

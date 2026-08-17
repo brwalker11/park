@@ -1,5 +1,11 @@
 # Design Direction: Monetize Parking Rebrand
 
+> **Note added 2026-08-17: `REBRAND.md` no longer exists.** It was folded into
+> `CLAUDE.md` and deleted at the end of the rebrand. This document references it
+> throughout; those references are historical. Durable rules are now in
+> `CLAUDE.md`, outstanding work is in `BACKLOG.md`, and the original text is in git
+> history.
+
 Status: PROPOSED. Written against commit state of 2026-08-05 on `rebrand`.
 Companion documents: `REBRAND.md` (decisions and pass status), `docs/motion-spec.md` (pending).
 This document specifies design decisions only. No code changes accompany it.

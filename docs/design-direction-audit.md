@@ -1,5 +1,9 @@
 # Design Direction: Critical Audit
 
+> **Note added 2026-08-17: `REBRAND.md` no longer exists.** It was folded into
+> `CLAUDE.md` and deleted at the end of the rebrand. References to it below are
+> historical. Durable rules are in `CLAUDE.md`, outstanding work in `BACKLOG.md`.
+
 Audit of `docs/design-direction.md`, written 2026-08-05 against the current
 `rebrand` branch. The document under audit is not modified by this pass.
 

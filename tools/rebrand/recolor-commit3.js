@@ -24,7 +24,9 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
 const WRITE = process.argv.includes('--write');
 const FROZEN = (r) => r.startsWith('consultation/');
 
-/* Targets come from the Pass 2b-b list in REBRAND.md. Each old literal maps to
+/* Targets come from the Pass 2b-b list, formerly in REBRAND.md, which was
+ * deleted at the end of the rebrand; see git history if this ever needs
+ * re-reading. Each old literal maps to
  * the value its owning primitive holds after the 2b-b retarget, so the inline
  * payloads and the token layer land on the same colour in the same session. */
 const MAP = [

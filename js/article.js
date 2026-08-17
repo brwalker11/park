@@ -254,7 +254,8 @@
 
          Ranking on service restores the boundary on the axis that actually
          means topic. It does NOT make the tags rank anything. See the tag
-         specificity entry in REBRAND.md; that is a content pass, not a sort
+         specificity entry in CLAUDE.md under Related Articles, and the tag
+         vocabulary item in BACKLOG.md; that is a content pass, not a sort
          change. */
       .sort((a, b) => {
         if (b.tagOverlap !== a.tagOverlap) return b.tagOverlap - a.tagOverlap;

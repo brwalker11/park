@@ -467,7 +467,8 @@ body{
    The class is intentionally left in the markup. Do NOT "clean it up" by
    stripping it from the chrome: that is a 151-file sweep across Bundle B frozen
    chrome, and it would also remove the hook if this decision is ever revisited.
-   Removing the rule here is the whole change. See REBRAND.md. */
+   Removing the rule here is the whole change. See "Brand and color" in
+   CLAUDE.md. */
 
 /* ===== Header and footer buttons =====
    Scoped to the chrome on purpose. The site has two competing button systems

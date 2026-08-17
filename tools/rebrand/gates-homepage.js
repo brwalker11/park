@@ -72,6 +72,9 @@ gate('Bundle B chrome byte-identical', chromeOk, chromeDetail.join(', '));
 
 // ---------------------------------------------- 4. no other page changed
 const changed = cp.execSync(`git diff --name-only ${BASE}`, { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+// REBRAND.md was deleted at the end of the rebrand. The entry stays because this
+// is a one-shot gate for a pass that already ran, and removing it would change
+// what the gate allowed at the time.
 const allowed = new Set(['index.html', 'styles.css', 'script.js', 'REBRAND.md', 'docs/execution-plan.md',
   'tools/rebrand/splice-homepage.js', 'tools/rebrand/gates-homepage.js',
   'tools/rebrand/fixtures/main.html', 'tools/rebrand/fixtures/home-critical.css']);

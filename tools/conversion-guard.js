@@ -14,8 +14,8 @@
  * redesign of these two pages. A failure here means "revenue tracking is
  * broken": Google Ads stops counting conversions, or the only booking path on
  * the site stops reporting. Folding them into guards.js would mix those two
- * meanings and would move the 152 / 151 / 303 totals that CLAUDE.md and
- * REBRAND.md quote by number.
+ * meanings and would move the 155 / 154 / 309 totals that CLAUDE.md quotes
+ * by number.
  *
  * WHAT IS COVERED
  *
