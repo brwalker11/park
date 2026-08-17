@@ -3,7 +3,8 @@
 Work deferred past the Las Vegas conference (Mon Sep 14 2026). **Not rebrand
 work.** This file was carved out of `REBRAND.md` on 2026-08-17, wholesale and
 without triage, so that the backlog would outlive the working document it grew
-up in. `REBRAND.md` is deleted at the end of the rebrand; this file is not.
+up in. **`REBRAND.md` was deleted on 2026-08-17;** this file outlived it, which was
+the point. Its durable rules went to `CLAUDE.md`, the rest is in git history.
 
 Durable project rules live in `CLAUDE.md`, not here. If an item turns out to be a
 standing constraint rather than a task, move it there and delete it from this
