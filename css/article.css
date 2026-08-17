@@ -623,7 +623,8 @@
 
 
 /* ============================================================================
-   ARTICLE READING SURFACE  (ported from docs/preview/article.html, 2026-08-11)
+   ARTICLE READING SURFACE  (ported 2026-08-11 from the approved article
+   prototype, since deleted; see git history for docs/preview/article.html)
 
    EVERYTHING below is scoped to `.article-read`, a class that exists only on
    the 73 article pages. That is not caution, it is forced:

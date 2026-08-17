@@ -62,7 +62,8 @@ the date it was opened. Check an item is still true before acting on it.
 **40 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
 closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
 duplicated here. Items 31 to 33 were added 2026-08-17, moved off the pre-merge
-schedule in `docs/execution-plan.md` week 5 rather than opened fresh. **Items 34
+schedule in `docs/execution-plan.md` week 5 rather than opened fresh, that file
+having since been deleted. **Items 34
 and 35 were added 2026-08-17 during the final documentation pass**, when a check
 before deleting `REBRAND.md` found two open items on `/consultation/` that lived
 nowhere else. **Item 36 was added the same day**, out of measuring what the fold
@@ -503,7 +504,8 @@ Not rebrand work. Do not start any of these before the conference.
 - **The nav underline was specified and never built.** Moved off the pre-merge
   schedule 2026-08-17. It was the second half of "Bundle C: motion" in
   `docs/execution-plan.md` week 5, alongside section reveal and the
-  `prefers-reduced-motion` gate. **Those two shipped early**, in `b2fe5c4` and
+  `prefers-reduced-motion` gate. **That document was deleted 2026-08-17**; this item
+  is self-contained and git history holds the original. **Those two shipped early**, in `b2fe5c4` and
   `86615dd`, so the motion work looks complete and this one piece is the only
   thing outstanding. It exists nowhere: no rule in `styles.css`, nothing in
   `script.js`, no `nav-underline` class on any page.
@@ -530,9 +532,10 @@ Not rebrand work. Do not start any of these before the conference.
 - **Imagery slot #2, the monitored-lot still. THE SHOT LIST ENTRY NEEDS REWRITING
   BEFORE THIS IS ACTIONED.** Moved off the pre-merge schedule 2026-08-17.
 
-  As written in `docs/execution-plan.md` Task 1, slot #2 is the
+  As written in `docs/execution-plan.md` Task 1, **since deleted**, slot #2 was the
   **`/services/parking-revenue/` hero, reused as a smaller crop on the services hub
-  parking block**, at 21:9 and minimum 1600px wide. **That page was never built and
+  parking block**, at 21:9 and minimum 1600px wide. The brief is restated in full
+  below, so nothing here depends on retrieving that file. **That page was never built and
   is not going to be.** Parking keeps the `/services/#parking` anchor permanently by
   decision, so the stated destination does not exist and the services hub parking
   block is an anchor target rather than a page with a hero.

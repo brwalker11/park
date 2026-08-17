@@ -189,7 +189,8 @@
      live article at 672px/16px measures 87 REAL characters per line, and a
      68ch column at 18px measures 81. Counted by walking the text node and
      recording where the line top changes, not by trusting the unit.
-     Approved from docs/preview/article.html on 2026-08-11.
+     Approved 2026-08-11 from the article prototype, since deleted; see git
+     history for docs/preview/article.html if the reference is ever needed.
 
      --read-size     18px. The one surface on the site where 16px is small.
      --read-lh       1.72. The .article rule currently overrides the
@@ -311,7 +312,8 @@ body{
   margin-right:auto;
 }
 /* ===== Site chrome: navy header and nav =====
-   Built to docs/preview/homepage.html, the approved visual reference.
+   Built to the approved homepage visual reference, approved 2026-08-10 and
+   since deleted; see git history for docs/preview/homepage.html.
    The first-paint subset of these rules is duplicated into the inline
    critical payload on the 114 pages that carry one; this file holds the
    full set, including hover, focus and the disclosure panels. */

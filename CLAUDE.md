@@ -235,13 +235,19 @@ shown to fail proves nothing.
 
 ## Rebrand sweep and gate scripts
 
-`tools/rebrand/` holds the per-pass sweep and verification scripts, with their
-fixtures in `tools/rebrand/fixtures/`. They are committed for the same reason
-the guard baseline is: a scratchpad copy is lost when the container is
-recycled, and re-deriving one from an already-edited tree is not the same
-thing.
+**`tools/rebrand/` was deleted on 2026-08-17, at the end of the rebrand.** It held
+the per-pass sweep and verification scripts with their fixtures. Every gate script
+in it was a point-in-time diff against a specific base commit and none could pass
+again: measured before deletion, they failed 9, 3, 3 and 2 gates respectively, and
+`gates-commit2.js` said so in its own header. Nothing invoked them and no npm
+script referenced them. `git show` retrieves any of them if a future sweep wants a
+worked example.
 
-Every sweep script follows the same shape and any new one should too:
+**The house style below is the durable part and is why this section stayed.** It
+was learned from those scripts and applies to any sweep across many files, rebrand
+or not.
+
+Every sweep script follows this shape and any new one should too:
 
 - **Anchor on a regex, never on leading whitespace.** Eight pages indent
   `<header class="site-header">` with four spaces and the other 139 with two;
@@ -572,7 +578,7 @@ For a whole-tree check, sweep every `src` and `href` pointing at a local asset
 and assert the target exists:
 
 ```bash
-node -e 'const fs=require("fs"),{execSync}=require("child_process");const files=execSync("grep -rl . --include=*.html . | grep -v docs/preview | grep -v fixtures").toString().trim().split("\n");const miss=new Set();for(const f of files){const s=fs.readFileSync(f,"utf8");for(const m of s.matchAll(/(?:src|href)="(\/(?:images|assets)\/[^"?]+)"/g)){if(!fs.existsSync("."+m[1]))miss.add(m[1]+"  <- "+f)}}console.log(miss.size);[...miss].forEach(x=>console.log(x))'
+node -e 'const fs=require("fs"),{execSync}=require("child_process");const files=execSync("grep -rl . --include=*.html .").toString().trim().split("\n");const miss=new Set();for(const f of files){const s=fs.readFileSync(f,"utf8");for(const m of s.matchAll(/(?:src|href)="(\/(?:images|assets)\/[^"?]+)"/g)){if(!fs.existsSync("."+m[1]))miss.add(m[1]+"  <- "+f)}}console.log(miss.size);[...miss].forEach(x=>console.log(x))'
 ```
 
 **Run once on 2026-08-16 and it came back clean: zero missing targets.** That
@@ -653,7 +659,9 @@ calculator.
 Organization and VideoObject schema on `index.html`. Article and BreadcrumbList
 generated per-article in `js/article.js`.
 
-FAQPage schema can be added to pages with Q&A content. See `SEO_TODO.md`.
+FAQPage schema can be added to pages with Q&A content. `/services/` has none;
+that is item 39 in `BACKLOG.md`, which carries the caution that `faq/index.html`
+duplicates every answer between the JSON-LD and the visible accordion.
 
 ### Headers and Redirects
 
@@ -1195,7 +1203,7 @@ rebrand, so they are listed in full.
 ├── docs/
 │   ├── articles-dynamic.md
 │   └── url-migration.md
-└── SEO_TODO.md
+└── BACKLOG.md
 ```
 
 ## Minified and critical CSS (do not touch)
@@ -1525,14 +1533,29 @@ is a Search Console export for `/services/` over 90 days, not more reasoning.
   proposing anything new, and add to it rather than to this file. Items that turn
   out to be standing rules belong here in `CLAUDE.md` instead, and get deleted from
   `BACKLOG.md` when they move.
+**Live:**
+
 - `/docs/articles-dynamic.md` - article system guide
-- `/docs/url-migration.md` - URL structure and routing notes
-- `SEO_TODO.md` - pending SEO tasks. Predates `BACKLOG.md` and overlaps it; fold it
-  in when someone next touches either
-- `/docs/` also holds the rebrand-era design direction, its audit, and the
-  execution plan. **All three are historical**, headed with a note to that effect,
-  and reference a `REBRAND.md` that no longer exists. Nothing in them is
-  authoritative; `CLAUDE.md` and `BACKLOG.md` are.
+- `/docs/url-migration.md` - URL structure and routing notes. Overlaps this file's
+  URL Structure section; merge candidate
+- `/docs/design-direction.md` - the settled token values and the category gradient
+  palette. **Cited by live code**, so do not delete it: `styles.css` in three
+  places, plus `js/resources.js` and `js/related.js` for the gradient palette
+
+**Historical, kept as a record and not authoritative.** Both are headed with a note
+saying so, and both reference a `REBRAND.md` that no longer exists:
+
+- `/docs/design-direction-audit.md` - the critique that shaped the rebrand plan
+- `/docs/website-audit-action-plan.md` - January 2026 audit. Every finding is
+  resolved except the stale manifest proposal, which is now self-contained as
+  `BACKLOG.md` item 13, so this file is no longer load-bearing and can go whenever
+  someone decides to
+
+**Deleted 2026-08-17**, at the end of the rebrand. Recorded so nobody looks for
+them: `REBRAND.md`, `docs/execution-plan.md`, `docs/page-speed-optimization-plan.md`,
+`docs/preview/` (three approved prototypes), `SEO_TODO.md`, `optimize_images.py`,
+and all 17 files under `tools/rebrand/`. Live work from the two plan documents was
+extracted to `BACKLOG.md` items 37 to 40 first. Everything else is in git history.
 
 **`REBRAND.md` was the rebrand working document. It was folded into this file and
 deleted on 2026-08-17, before the pull request**, so the merge commit carries
