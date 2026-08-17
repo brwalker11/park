@@ -487,9 +487,30 @@ an existing entry without asking.
 
 ### Related Articles
 
-Ranked by shared tags (highest weight), then matching category, then recency.
-Articles never recommend themselves. Up to 5 shown. Implemented in
-`/js/related.js`.
+Sorted by shared tags, then same service, then same category, then recency.
+Articles never recommend themselves. Always filled to five. **The rail is built by
+`js/article.js`, not `js/related.js`.** That second file is loaded by zero pages
+and is kept only so the two copies do not drift.
+
+**The tag key is not actually ranking anything, and the second key is doing the
+work.** `overlapCount` in `js/article.js` is an exact-match count over raw tag
+strings, and of the 305 unique tags in `data/resources.json`, **278 appear on
+exactly one record**. Ninety-one percent of the vocabulary can never overlap with
+anything, so nearly every candidate pair ties at 0 or 1 and whichever key sits
+second decides the rail.
+
+That is why `sameService` was inserted above `sameCategory` on 2026-08-17. Until
+then `sameCategory` was the deciding signal by accident, and because the nine EV
+articles all shared a category value no other record used, it acted as a topical
+firewall. Giving them real content types removed the firewall and **36 of 56
+parking rails immediately filled with EV articles**; one Parking guide ended up
+with five items and no parking content. Ranking on service restored the boundary on
+the axis that means topic.
+
+**Treat the service key as a mitigation, not a fix.** The tags are too specific to
+overlap: they read as one-off SEO phrases rather than a controlled vocabulary. The
+real fix is a tag vocabulary pass, which is in `BACKLOG.md`. Until then, do not
+assume changing a record's `category` is cosmetic; it moves rails.
 
 ### Article Series Navigation
 
@@ -763,6 +784,58 @@ article port and the state pass carry a gate for exactly this.
 node -e "const fs=require('fs'),c=require('crypto');const s=fs.readFileSync(process.argv[1],'utf8');const m=s.match(/<style[^>]*>([\s\S]*?)<\/style>/);console.log(c.createHash('sha1').update(m[1].slice(0,4757)).digest('hex').slice(0,8))" <file>
 ```
 
+### Inline payload rules
+
+Several pages carry an inline `<style>` payload as well as `styles.css`. Two rules
+govern them and they are easy to get backwards.
+
+**`var()` in a HEAD-level payload is a first-paint bug. `var()` in a BODY-level
+payload is fine.** The deciding factor is head or body, not page or payload.
+
+A head-level payload exists to paint correctly before the async `styles.css`
+lands, so a `var()` there resolves to nothing until the stylesheet arrives, which
+is the exact flash the payload exists to prevent. Head payloads are hex literals
+only. A body-level payload is parsed after the `styles.css` link, so every token
+it references is already defined; the calculator's block carries 29 `var()`
+references safely. **Do not "fix" a body payload to match a head one, and do not
+copy a body payload's approach into the head.**
+
+**The head chrome payload defines only 13 tokens:** `--brand`, `--brand-blue`,
+`--ink`, `--muted`, `--card`, `--bg`, `--border`, `--space-section`,
+`--space-block`, `--max-text`, `--h1`, `--h2`, `--h3`. Anything outside that list
+is unavailable at first paint no matter which block references it.
+
+**No page overrides a `styles.css` token from an inline block any more.** Four did
+until 2026-08-13, all with a second `<style>` in the **body** that won the cascade
+permanently and rendered `--muted` as `#6b7280` against the authoritative
+`#64748b`: `contact/index.html`, `contact/thank-you/index.html`,
+`calculator/index.html`, `calculator/report/index.html`. All four are clean now.
+**The reason this matters is the failure it enabled:** rewriting a token name in
+`styles.css` escaped the override, because the body block defined the old name and
+not the new one, so those pages silently changed colour. If a body-level `:root`
+override is ever reintroduced, that trap comes back with it.
+
+### Cross-file token references need literal fallbacks
+
+`styles.css` is the single source for shared primitives and the other stylesheets
+reference them, which creates a load-order dependency that is **not safe bare**.
+
+**Every cross-file reference carries a literal fallback equal to today's value:
+`var(--primitive, #literal)`.** The fallback is a degradation value, playing the
+same role the inline critical CSS literals play. It is not a second source of
+truth.
+
+Measured browser behaviour, which is worse than it sounds: a custom property whose
+value is `var(--undefined)` becomes guaranteed-invalid, and the consuming
+declaration falls back to **inherit**, not to anything sensible. A probe with a red
+parent rendered `rgb(200,0,0)` where `#0f172a` was intended.
+
+On four pages the window is deterministic rather than a race:
+`resources/states/{colorado,minnesota,texas,wisconsin}/index.html` load
+`css/resources.css` **synchronously** while `styles.css` loads **async**, so
+`resources.css` is guaranteed to apply while `styles.css` may not have, on every
+single load. Elsewhere it is a size race that a congested link can lose.
+
 ### Two shared-CSS landmines
 
 **`css/state-map.css` redefines three `styles.css` aliases in its own
@@ -785,6 +858,87 @@ The two consultation pages do not load `styles.css` at all. They are fully
 self-contained with their own `:root`, their own font variables, the only Google
 Fonts links on the site, the only Calendly embed, and header and footer markup
 that diverges from the other 148 pages.
+
+### The band section system, and why everything is scoped
+
+**Nothing in the section or motion system is a bare global class**, and that is a
+hard constraint rather than caution. Four class names were already in use before
+the system existed, and a bare global rule on any of them would have broken
+existing pages:
+
+| Class | Already used by | A bare global rule would |
+|---|---|---|
+| `.eyebrow` | the article template, so all article pages | restyle every article hero eyebrow |
+| `.stat` | `services/index.html` | restyle the services stats |
+| `.icon` | 12 bare uses on calculator, contact/thank-you, calculator/report | resize existing icons |
+| `.btn` | calculator and contact inline payloads | add height and padding their blocks do not override |
+
+So the section system is scoped to `.band`, a class with zero prior consumers, and
+the motion system keys off `data-*` attributes, which collide with nothing. **Keep
+it that way.**
+
+A page opts in per section:
+
+```html
+<section class="band band--page">
+  <div class="band__inner">
+    <span class="eyebrow">Section label</span>
+    <h2 class="h2">Heading</h2>
+    <p class="lede">Supporting sentence.</p>
+  </div>
+</section>
+```
+
+`.band--page`, `.band--card`, `.band--sunken` and `.band--navy` are the four
+surfaces; `.band--sm` compresses the rhythm. **`.band__inner` is 1200px and is not
+`.container`, which is 1100px and consumed by every other page.** `.band--navy`
+re-tints the eyebrow, lede, stat label, secondary button and focus ring on its own,
+so a navy section needs no extra classes. `.band :focus-visible` gives a 2px ring,
+blue on light and white on navy, because band content otherwise fell back to a UA
+ring that is not reliably visible on navy.
+
+Grid, tile, button, stat and icon classes are all band-scoped. Adjacent sections
+should not share a surface.
+
+### The motion system
+
+Code lives in `script.js` (loaded `defer`) and `styles.css`. **Nothing is inline on
+any page.** Exported as `window.MPMotion`.
+
+| Attribute | Effect |
+|---|---|
+| `data-reveal` | entrance reveal, fades and rises 16px |
+| `data-reveal-group` | staggers the `[data-reveal]` children beneath it, `i * 70ms` capped at 420ms |
+| `data-count-to="178"` | counts a number up over 900ms at 40% visibility |
+
+Only `opacity` and `transform` are animated.
+
+**The never-invisible technique, and do not replace it with a global hiding
+class.** The prototype added `is-motion` to `<html>` and hid every reveal target
+beneath it, which means content paints visible, gets hidden, then fades in. Instead
+JS arms elements one at a time and **only ever arms an element currently off
+screen**. An element already in the viewport is marked handled and never hidden.
+What that buys:
+
+- JS absent, blocked, slow or throwing: nothing is armed, so nothing is ever
+  hidden. Verified with scripts blocked: 27 reveal targets, 0 armed, 0 at zero
+  opacity, counters showing final values.
+- `styles.css` arriving late cannot produce a flash, because an armed element is
+  off screen anyway.
+- `prefers-reduced-motion: reduce`: JS arms nothing, and a CSS media query
+  neutralises the armed state as a second line of defence.
+
+Count-up targets carry their final value as text in the HTML, so a JS failure shows
+the real number.
+
+### The YouTube embed on video pages is untouchable from CSS
+
+Styled entirely by inline attributes: a 350px wrapper, a `padding-bottom:177.78%`
+aspect box (9:16 vertical, all 30 pages), and `position:absolute; inset:0` on the
+iframe. Exactly one stylesheet rule anywhere targets an iframe,
+`.res-thumb.video-wrapper iframe` in `styles.css`, and it does not reach these:
+that selector belongs to the cards on `ask-the-experts.html`. **Do not expect a
+stylesheet change to affect the embeds.**
 
 ### Team photo display ceiling
 
@@ -1055,17 +1209,29 @@ drifted further out of sync. Nothing loads it. Do not gate or edit it.
 Five parts, and they only work together. This grew out of the rebrand but is not
 specific to it: **use it for any piece of work large enough to want a preview.**
 
-1. **Create a feature branch.** Never commit to `main`.
-2. **Cloudflare Pages builds a preview** from that branch automatically, at its own
-   hostname. No configuration per branch.
-3. **A Cloudflare Zero Trust Access application gates the preview**, so it is not
-   publicly reachable. This is the outer wall.
-4. **The two hostname guards keep the preview out of search and out of analytics.**
-   A `noindex` script fires on any hostname that is not production, and the GA4 and
-   Google Ads tags initialise only on the production hostname. This is the inner
-   wall, and it is what makes the preview safe to browse and to share internally.
-5. **`main` requires a pull request.** Direct push is blocked, so nothing reaches
-   production without a review step.
+1. **Create a feature branch.** `main` is protected and requires a pull request;
+   direct pushes are refused with GH013, including for the repo owner.
+2. **Cloudflare Pages builds a preview for the branch.** **Preview branches are
+   restricted, not automatic. Check the Cloudflare project settings before assuming
+   a new branch builds.** The restriction has been set to a single named branch,
+   so a new one produces no preview until it is added.
+3. **A Cloudflare Zero Trust Access application gates the preview URL.** It is
+   **permanent.** This is the outer wall. Note that per-commit hash preview URLs are
+   **not** covered by the Access policy and rely on the noindex guard plus
+   obscurity, so never share a hash URL publicly.
+4. **The hostname gates keep analytics, ads and indexing off any non-production
+   hostname.** A `noindex` script fires wherever the hostname is not production, and
+   GA4 and Google Ads initialise only on production. They are **permanent and must
+   not be removed.** This is the inner wall, and it is what makes the preview safe to
+   browse and to share internally.
+5. **`tools/guards.js` and `tools/conversion-guard.js` protect the tracking blocks.**
+   **Run both before and after any pass that touches HTML.** `guards.js` covers the
+   noindex and gtag blocks; `conversion-guard.js` covers the Ads and GA4 conversion
+   plumbing on the two `/consultation/` pages, where a break stops conversions
+   counting with no visible symptom.
+6. **The gates assume exactly one hostname serves HTML.** Any future production
+   hostname must **301 to the apex**, or both gates have to learn about it. See the
+   `www` case below, which already caught this out.
 
 **Access and the guards are two walls for one job, deliberately.** Access can be
 misconfigured, expire, or be deleted by someone tidying up; a link can be shared
@@ -1073,24 +1239,27 @@ past it. The guards do not depend on Access being correct, and Access does not
 depend on the guards being present. Losing one should not put real analytics data
 or a duplicate indexed site at risk.
 
-**The guards are PERMANENT and must not be removed.** They were originally written
-to be reverted when the rebrand merged, and that was wrong: a preview environment
-is ongoing, so the day the guards would have been deleted is the day the preview
-starts needing them indefinitely. The revert items are gone from the merge-day
-checklist and must not be re-added. Full reasoning below, including why
-`git revert` was tested and does not apply.
+### Environment configuration
 
-**What the guards assume:** exactly one hostname serves HTML in production, and the
-comparison is against that hostname by exact string. Any new production domain
-must redirect to the apex, or both guards have to learn about it. See the `www`
-subsection below for the case that already caught this out.
+- **GitHub:** repo `brwalker11/park`. A ruleset on `main` requires a pull request.
+  Direct pushes are refused with GH013, including for the repo owner.
+- **Cloudflare Pages:** project `monetize-parking`. Production branch `main`,
+  deploying to `monetize-parking.com`, `www.monetize-parking.com` and
+  `monetize-parking.pages.dev`. **Preview branches are restricted to a named branch
+  list**, so a new branch produces no preview until it is added. No build command is
+  configured: Cloudflare serves committed files as-is, `npm run build` runs locally,
+  and generated output is committed.
+- **Cloudflare Zero Trust Access:** a self-hosted application gates the preview
+  hostname, policy allowing specific emails only. **Per-commit hash preview URLs are
+  NOT covered by that policy** and rely on the noindex guard plus obscurity. Do not
+  share a hash URL publicly.
+- **`www` 301s to the apex** via a Cloudflare wildcard redirect rule, path and query
+  preserved. This is what makes the single-hostname assumption in the gates correct.
 
 ### Rules
 
 - Never commit directly to `main`. `main` is protected and deploys to production.
-- All rebrand work happens on `rebrand`.
-- Analytics and ad tags stay gated to the production hostname. **Permanent, not
-  for the duration of the rebrand.**
+- Analytics and ad tags stay gated to the production hostname. **Permanent.**
 - A `noindex` meta tag must apply on any non-production hostname. **Permanent.**
 - Do not remove either gate without me asking.
 - The Cloudflare Zero Trust Access application on the preview URL is
@@ -1098,11 +1267,11 @@ subsection below for the case that already caught this out.
 
 ### The hostname gates are permanent infrastructure
 
-**Changed 2026-08-17. They were built as rebrand guardrails to be reverted on
-merge day. They are not being reverted, and the merge-day revert items have been
-removed from `REBRAND.md`.**
+**They were built to be reverted when the rebrand merged, and that was wrong. They
+are permanent. The revert items were removed from the merge-day checklist on
+2026-08-17 and must not be re-added.**
 
-The reasoning is that a preview environment is now ongoing rather than a
+The reasoning is that a preview environment is ongoing rather than a
 rebrand-only artifact. As long as any non-production hostname serves this site,
 that hostname must not be indexed and must not fire analytics or ad conversions.
 Deleting the gates on merge day would have removed exactly the protection the
@@ -1117,6 +1286,31 @@ preview needs from that day onward. So:
   about to be deleted. It now protects **permanent** blocks, the same standing as
   `tools/conversion-guard.js`. A failure is a live defect, not a future merge
   conflict.
+
+#### `git revert` of the two guard commits was tested and does not apply
+
+The gates were added by `187bfbd` (gtag hostname gate) and `3596d3d` (noindex
+guard), both 2026-08-04, and the plan was to revert both on merge day. **Dry-run in
+a throwaway worktree on 2026-08-17, in both orders, and neither applies:**
+
+| Revert | Conflicts | Cause |
+|---|---|---|
+| `187bfbd` first | **149 of 150 files** | `3596d3d` inserted the noindex block directly above the gtag block in every `<head>`, so reverting the older commit collides with the newer one everywhere |
+| `3596d3d` first | **74 files**, the article pages plus the template | the adjacent `article.js` script tag was bare then and now carries a `?v=` query |
+
+The guard blocks themselves are byte-identical, which `guards.js` proves, so every
+conflict is context rather than content. That still means 149 files of hand
+resolution.
+
+**And the reverts would have missed five files**, because those postdate both
+commits: the three solar articles and both service pillar pages. A revert-based
+merge day would have shipped `noindex, nofollow` **live on both pillar pages**,
+silently.
+
+**Recorded because the instruction looked safe and was not.** Anyone reaching for
+`git revert` on a `<head>` change made a hundred commits ago will hit the same wall.
+If these blocks ever do need removing, **script the excision against the known block
+bytes and verify with `guards.js` reporting zero**, rather than reverting.
 
 #### Both gates match one hostname exactly, and that is now correct. RESOLVED
 
@@ -1214,13 +1408,38 @@ from the deployed preview.
 
 ## Brand and color
 
-Color values are IN FLUX during the rebrand. Do not treat any hex value found in
-this repo, in git history, or in your own assumptions as authoritative.
+**The token layer in `styles.css` is the source of truth.** Never hardcode a hex
+value; always reference a token. If a token you need does not exist, stop and ask
+rather than inventing one. Do not treat a hex value found in git history or in an
+older document as authoritative.
 
-Source of truth for color, in order:
-1. CSS custom properties in the tokens file, once it exists
-2. `REBRAND.md`, for decisions not yet implemented
-3. Me. Ask.
+Brand blue is the `#004FC8` family. The dark surface is `#010D20`.
+
+**Green is scoped to solar, EV, sustainability and success content. It is not a
+general brand colour.** If green spreads into general UI the site starts reading as
+a solar company. When in doubt, use blue.
+
+**One deliberate exception: the "What We Do" nav panel is not green.** Solar
+Lighting and EV Charging used to render green there while All Services and Parking
+Revenue did not, and two coloured items among four read as arbitrary rather than as
+a taxonomy: the panel gives a reader no context for what the colour signals.
+Removed 2026-08-15.
+
+**`.scope-green` is still in the chrome markup on all 151 files, deliberately. Do
+not tidy it up.** Only the rule in `styles.css` was removed. Stripping the class is
+a 151-file sweep across frozen chrome that changes the chrome hash, which is far
+larger than the decision warrants, and the class is the hook: if this is ever
+revisited, restoring green in the panel is one rule rather than another 151-file
+sweep.
+
+**Silver wordmark caution.** The silver gradient wordmark disappears on light
+backgrounds. Any logo placed on a light surface must use the solid dark variant, not
+the gradient one. The `.silver` display treatment carries a solid inverse fallback
+first for the same reason, so text is never invisible.
+
+**`#010D20` lives in three places outside the tokens file** and all three move
+together if it ever changes: `<meta name="theme-color">` on every page, and
+`theme_color` plus `background_color` in `images/site.webmanifest`.
 
 Never hardcode a hex value. Always reference a token. If a token you need does
 not exist, stop and ask rather than inventing one.
@@ -1235,6 +1454,54 @@ Applies to all site copy, meta descriptions, and any text you generate:
 - No fabricated statistics. Only verified case study figures (Eau Claire,
   Stillwater). If you need a number you do not have, ask.
 - Vendor-neutral tone. The company is technology-agnostic.
+
+### Dated claims, and the one with a review cadence
+
+**The site has no mechanism for dated claims.** Nothing carries a "verified as of"
+marker by default, no review cadence exists, and `data:resources.json` records a
+publish date but nothing about whether the content is still true. That is how an
+expired tax credit survived six weeks on the homepage. The audit of rate-pinned
+figures is in `BACKLOG.md`; two articles hold nine between them.
+
+**One claim has a hard annual cadence. Review it every July.**
+`articles/ada-compliance-paid-parking.html` carries ADA Title III civil penalty
+maxima, which DOJ adjusts for inflation. Current state, verified 2026-08-16:
+**$118,225** first violation, **$236,451** each subsequent, effective 3 July 2025,
+authority 28 CFR 85.5.
+
+The figures appear in **three places and all three must move together**: the article
+lede, the "Who Can Impose These Penalties" section including its verified-as-of
+sentence, and the `excerpt` for that slug in `data/resources.json`, which duplicates
+the lede and renders on cards and in meta descriptions.
+
+**There was no 2026 adjustment, and that is not an oversight.** DOJ deliberately
+continued 2025 levels through 2026. The adjustment is calculated from BLS CPI-U data
+for October of the prior year, and BLS never produced October 2025 because of the
+appropriations lapse; the statute allows no alternative method, so OMB directed
+agencies to hold. Recorded because the natural reaction to "effective July 2025"
+seen later is to assume nobody checked.
+
+**The qualifier must never be dropped.** Only the Attorney General can seek these
+penalties; a private individual cannot trigger one, and a private suit produces
+injunctive relief and fees rather than damages. **The ceiling must never appear
+without who can reach for it**, which is why both the lede and the card excerpt
+state them in the same sentence: so the figure cannot travel alone into a card, a
+search result or a social preview. The section points at state law without naming a
+state or an amount, deliberately in both directions.
+
+### Settled content decisions, recorded so they stop being reopened
+
+**There is no `/services/parking-revenue/` page and this is not to be revisited.**
+`/services/` is already the parking page: its title and meta description lead with
+parking, and it receives more internal links than anything but the homepage.
+Splitting parking onto a new URL takes substance out of a page that ranks and moves
+it to one that does not, targeting the identical query, which is textbook
+cannibalisation. The asymmetry with solar and EV is the point: solar got a page
+because no solar content existed, EV got one because scattered articles had no
+centre, and parking has neither problem. **Consequence accepted deliberately:** the
+What We Do dropdown is mixed, two pages, one anchor, one hub. `/services/#parking`
+is the permanent answer, not a stopgap. If it is ever reopened, what would settle it
+is a Search Console export for `/services/` over 90 days, not more reasoning.
 
 ## Documentation
 
