@@ -692,8 +692,7 @@ difference decides whether a version bump is optional or mandatory.
 |---|---|---|---|
 | `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY**, by hand on the `<script>` src |
 | `/images/*` | `max-age=31536000, immutable` | **up to a year, and longer on social platforms** | **MANDATORY when bytes change at the same filename** |
-| `/css/*` | `max-age=86400` | up to a day, and a **broken** render not an old one | **Purge on deploy.** Changed from immutable 2026-08-17 |
-| `/styles.css` | `max-age=86400` | same | **Purge on deploy.** See `BACKLOG.md` item 41 |
+| `/css/*`, `/styles.css`, `/script.js` | `max-age=86400` | up to a day, and a **broken** render not an old one | **Purge on deploy.** See `BACKLOG.md` item 41 |
 
 **`/js/*` is immutable for a year, so a JS change without a bump never reaches a
 returning visitor.** Not "reaches them late", never. Bump the query on the
@@ -725,6 +724,56 @@ then `npm run generate:articles`. The regexes match the versioned URL literally,
 so if the template moves and they do not, the substitution stops firing and every
 article page ships the default card instead of its own hero. That failure is
 invisible on the page and surfaces only when someone shares a link.
+
+#### `_headers` in the repo proves nothing about what production serves
+
+**A zone-level Browser Cache TTL of 1 year sat in front of Pages and overrode
+`_headers` for every value below a year. Found and fixed 2026-08-17. Read this
+before trusting any cache header again.**
+
+**The 24-hour window this file used to describe for `/styles.css` never existed on
+production.** The `_headers` rules for `/styles.css` and `/script.js` have said
+`max-age=86400` since long before the rebrand, and production served both at
+`31536000` the whole time. So the exposure was never a day. It was **a year, for
+every stylesheet and for `script.js`**, which is the real reason the merge deploy
+rendered broken rather than merely stale: visitors were holding a stylesheet from
+the previous design, not from the previous day.
+
+**The fingerprint that gave it away.** The served value was
+`public, max-age=31536000` **with no `immutable`**, and that string appears nowhere
+in `_headers`. Every rule at a year carries `immutable`; every rule below a year was
+being raised and emitted bare. Only sub-year values moved. `/data/*` at 3600
+survived because `.json` is not edge-cached (`cf-cache-status: DYNAMIC`), and so did
+HTML. **A value that matches no rule in the file is the signal that something
+upstream is synthesising it**, not that a stale deployment is being served.
+
+**The diagnosis method: compare `pages.dev` against the custom domain.**
+
+```bash
+for h in monetize-parking.com monetize-parking.pages.dev; do
+  curl -sSI "https://$h/css/article.css" | grep -i '^cache-control'
+done
+```
+
+Both hostnames serve the **same Pages deployment**, but they sit in **different
+zones**: the custom domain is in the `monetize-parking.com` zone and inherits its
+settings, while `*.pages.dev` does not. So the two agreeing means `_headers` is
+authoritative end to end, and **the two disagreeing isolates the fault to the zone**
+with one command. That is what identified this: `pages.dev` returned the correct
+`86400` while the custom domain returned `31536000`, which proved the repo, the
+deployment and the `_headers` parsing were all fine.
+
+**Purging the Pages cache cannot fix a zone override, which is why two purges
+changed nothing.** The rewrite happens in front of Pages.
+
+**Where it lives, and both are dashboard-only.** Caching, Configuration, **Browser
+Cache TTL**, which must be **"Respect Existing Headers"**; or a **Cache Rule** with
+a Browser TTL override. Neither is visible from the repo and neither is under
+version control, so nothing in a commit can catch a regression here.
+
+**Verified after the fix**, 2026-08-17: all nine asset classes agree between the two
+hostnames, HTML is still `max-age=0, must-revalidate`, and the `/*` security headers
+are still applied on both. Re-run the loop above after any Cloudflare caching change.
 
 **`/css/*` was immutable for a year and is now 86400, matching `/styles.css`.**
 Changed 2026-08-17. Before that, `css/article.css` (184 links across 107 pages),
