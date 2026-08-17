@@ -1975,8 +1975,107 @@ fixed. `category` still means content type and every consumer of it is
 untouched. Backfill: EV-category records became the EV service, everything else
 Parking. 9 EV Charging, 64 Parking across all 73; 9 and 56 among the 65 visible.
 
-**Type is badge-only on purpose.** A type filter would offer chips returning 4
-results (Guides) and 1 (Case Studies). Revisit if Guides passes ten.
+**The sentence above was true of the CODE and not of the DATA, and that gap was
+closed on 2026-08-17.** Every consumer of `category` was left untouched, which
+is what "the two axes are separate now" meant. But the nine EV records were
+never re-typed: they kept `category: "EV Charging"`, a service value sitting in
+the type field, so 9 of 68 visible records still collapsed the two axes inside
+their own data. Their badges read "EV Charging" while every other card read
+Article, Guide or Case Study, and on a grid already filtered by service that
+badge said nothing.
+
+**Reassigned 2026-08-17. `service` unchanged on all nine.**
+
+| Now Guides | Now Articles |
+|---|---|
+| `hidden-costs-ev-charging-installation` | `ev-charging-property-value-noi` |
+| `questions-before-signing-ev-charging-contract` | `hotel-ev-charging-guest-revenue` |
+| `level-2-vs-dc-fast-charging-property-owners` | `30c-ev-charger-tax-credit-property-owners` |
+| `ev-charging-revenue-share-vs-ownership` | `ev-charging-parking-revenue` |
+| `ev-charging-idle-fees-session-limits` | |
+
+No case study among them: not one names a property, a client, or a measured
+result, so the case-study figure exemption does not reach any of them. Visible
+type distribution moves from 53 Articles / 5 Guides / 1 Case Study / 9 EV
+Charging to **57 Articles / 10 Guides / 1 Case Study**, and `category` no longer
+holds a service value anywhere in the file.
+
+**`DEFAULT_IMAGES['EV Charging']` stays.** It is now unreachable as a category
+key and still live as a service key, since `normaliseImage` resolves service
+first and all nine keep the EV service. Deleting it would break the EV gradient.
+In practice it fires for none of the nine anyway: all nine carry real
+photography, so `normaliseImage` returns on the `/images/` branch before any
+fallback.
+
+**Type is badge-only, and that is now an OPEN DECISION rather than a settled
+deferral.** The original reasoning was that a type filter would offer chips
+returning 4 results (Guides) and 1 (Case Studies), with an explicit trigger:
+revisit if Guides passes ten. **Visible Guides is now exactly ten**, so the
+trigger has fired and the Guides half of the argument no longer holds.
+
+The other half still does. **Case Studies remains at one record**, and that was
+always the weaker leg: one chip returning one result is not a filter. So the
+position is no longer "deferred because the numbers are too small", it is "the
+Guides axis is viable and the Case Studies axis is not, and nobody has decided
+what to do about a control that works on one axis and not the other". Recorded
+as an open decision, with options and a recommended order, in the post-Vegas
+backlog entry for the type axis. Do not read the badge-only choice as still
+settled on its original grounds.
+
+### The reassignment broke the related rails, and this needs a decision
+
+**Found 2026-08-17 while verifying the reassignment. Not fixed, because the fix
+is a code change to `js/article.js` ranking and that was out of scope for a data
+pass.** Recorded here because the rails are now visibly wrong and nothing in the
+badge work suggests looking at them.
+
+**The prediction going in was that tag overlap would dominate and the rails
+would barely move. That was wrong.** `overlapCount` at `js/article.js:304` is an
+exact-match count over raw tag strings, and across this corpus almost every
+candidate pair scores **0 or 1**. The pool ties on the first sort key, so
+`sameCategory` is not a tiebreaker at all: it is the **effective primary
+ranking signal**, with recency deciding underneath it.
+
+Which means `category: "EV Charging"` had been working as an accidental
+**topical firewall**. Nine records sharing a category value no other record used
+could only ever recommend each other, and could never be recommended by a
+parking article. Giving them real content types removed the firewall.
+
+Measured across all 68 visible records, comparing the ranking at `HEAD` against
+the ranking now, using the exact sort from `js/article.js:228-241`:
+
+| | Result |
+|---|---|
+| EV rails changed | **9 of 9** |
+| EV rails that gained non-EV items | 1 (`ev-charging-parking-revenue` picked up `what-is-parking-monetization`) |
+| Parking rails changed | **37 of 56** |
+| Parking rails that gained EV items | **36**, at 1 to 4 slots each |
+
+The EV side is arguably better: those rails are now Guides-with-Guides and
+Articles-with-Articles, still all EV. **The parking side is the regression.**
+Worst live case, confirmed in the browser rather than modelled:
+`/articles/real-costs-parking-management/`, a Parking guide, now has a rail of
+**five items containing zero parking content**: four EV guides and the new solar
+lighting guide. EV records are the newest in the file, so once category stops
+separating them they win the recency tiebreak against most parking content.
+
+Three ways out, in ascending order of how much they fix:
+
+1. **Rank on `service` before `category`.** Insert a `sameService` key above
+   `sameCategory` in the sort. Restores the firewall on the axis that actually
+   means topic, four lines, and it is the change the two-axis split implies
+   anyway. **Requires a cache-buster bump on `/js/article.js`**, because
+   `_headers` serves `/js/*` immutable.
+2. **Fix the tags.** The root cause is that a 68-record corpus produces tag
+   overlaps of 0 and 1. Tags are too specific to rank anything. Larger job,
+   better outcome, and it improves the rails for every record rather than
+   restoring one boundary.
+3. **Accept it.** Defensible only if cross-service discovery is wanted, which
+   contradicts the service split. A parking guide recommending no parking is not
+   that.
+
+Recommended: **option 1 now, option 2 in the content pass.** Not done in this
+pass, and no cache-buster bumped, both per instruction.
 
 **The "All" bucket holds nothing of its own.** Before deciding whether
 cross-cutting content needed a home, the set was measured: of 65 visible
@@ -2467,6 +2566,70 @@ Not rebrand work. Do not start any of these before the conference.
   2026-08-11.** It is a real programme figure, not a fabricated statistic, and
   it is deliberately recorded here so it does not get re-flagged by the next
   audit that greps for currency amounts. Leave it as written.
+
+- **A type axis on `/resources/`: whether content type ever earns a control.**
+  Recorded 2026-08-17. Open decision, not a settled deferral. Supersedes the
+  "type is badge-only" line in the resources section above **only when the
+  distribution changes**, which is the whole question.
+
+  **The immediate defect is FIXED, in the same pass that opened this entry.**
+  The nine EV articles carried `category: "EV Charging"`, a service value in the
+  type field, so their badges read "EV Charging" while every other card read
+  Article, Guide or Case Study, and that badge was redundant on a grid already
+  filtered by service. Reassigned to real content types with `service` unchanged:
+  five Guides, four Articles, no case studies. See the resources section above
+  for the table and the consequences. **This entry is about the control, not
+  about those records.**
+
+  **Why a control is still deferred.** The numbers that argued against it were
+  51 Articles, 4 Guides, 1 Case Study visible. Two things have moved since:
+  the solar lighting guide landed, and the nine EV records were re-typed. The
+  distribution is now **57 Articles, 10 Guides, 1 Case Study** across 68 visible.
+  Guides has cleared the documented revisit threshold of ten. **Case Studies has
+  not moved and is still one.** A chip row where one chip returns 1 result is a
+  list pretending to be a filter, and re-typing the EV records did not and could
+  not change that. So the blocker is no longer "everything is too small", it is
+  "one axis works and one does not".
+
+  **What would need to be true first.** Two things, neither of them a control.
+
+  First, **the 57 Articles need auditing.** "Articles" is now the default any
+  record falls into, and the nine EV records prove the type field was never
+  applied with much care. Some of those 57 are guides by structure: procedural
+  headings, checklists, a decision the reader is being walked through. Until
+  someone reads them, the split between 57 and 10 measures filing habits rather
+  than content.
+
+  Second, **Case Studies holds one record while Eau Claire is the strongest
+  asset on the site.** 178% is the only verified outcome figure available, it is
+  covered by the case-study exemption, and it sits in a bucket of one. Either
+  that bucket grows or the type axis will always have a dead chip. Stillwater is
+  the obvious second and does not have a record.
+
+  **Three implementation options, if it is ever built.**
+
+  1. **A secondary chip row, both axes active at once**, with URLs like
+     `?service=Parking&type=Guides`. Most capable and most expensive: two chip
+     rows above one grid is a lot of control for 68 records, `hydrateFilterFromQuery`
+     grows a second parameter, and every empty intersection needs an empty state.
+  2. **A dropdown rather than chips.** Less visual weight than a second chip row
+     and it suits a lopsided distribution, because a select showing "Case Studies
+     (1)" reads as inventory where a chip returning one result reads as broken.
+     Cheapest of the three that still offers a real filter.
+  3. **Clickable type badges on the cards.** Adds no control to the page at all
+     and scales on its own as the data grows. The badge is already rendered and
+     already says the right thing; making it a link is close to free. Weakest
+     discovery, since nothing advertises that the axis exists.
+
+  **Recommended order when this is picked up:** the nine EV records first
+  (**done**), audit the 57 Articles second, decide on a control third. **Do not
+  add a control before the data supports it.** The chips were rebuilt once
+  already because they mixed a topic label into three format labels; adding a
+  type control over a distribution nobody has audited is the same mistake with
+  the axes the other way round.
+
+  Related, and higher priority than any of this: the reassignment broke the
+  related-article rails. See the subsection in the resources chapter above.
 
 - **State-targeted Google Ads campaign, and whether it needs its own landing
   pages.** Recorded 2026-08-16. Planned, not scheduled. Two things have to be
