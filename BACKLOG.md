@@ -50,18 +50,23 @@ the date it was opened. Check an item is still true before acting on it.
 | 31 | Nav underline specified and never built, the last piece of Bundle C motion | Code |
 | 32 | Imagery slot #1, the approach still, never delivered | Asset |
 | 33 | Imagery slot #2, monitored-lot still. **Shot list entry needs rewriting first** | Asset |
+| 34 | `/consultation/` has no revenue share number. Pending a decision from leadership | Needs a person |
+| 35 | `/consultation/` `_next` relative value unverified against Formspree | Verification |
 
-**33 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
+**35 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
 closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
 duplicated here. Items 31 to 33 were added 2026-08-17, moved off the pre-merge
-schedule in `docs/execution-plan.md` week 5 rather than opened fresh. Numbering
-above is this file's own and does not match the old `REBRAND.md` numbers.
+schedule in `docs/execution-plan.md` week 5 rather than opened fresh. **Items 34
+and 35 were added 2026-08-17 during the final documentation pass**, when a check
+before deleting `REBRAND.md` found two open items on `/consultation/` that lived
+nowhere else. Numbering above is this file's own and does not match the old
+`REBRAND.md` numbers.
 
 **Item 33 must not be actioned as written.** Its shot list entry names a
 destination page that was never built. Read the item before starting it.
 
-**Items 1 and 2 are blocked on Dave and Dax** and cannot be actioned by whoever
-inherits this list.
+**Items 1, 2 and 34 are blocked on other people** and cannot be actioned by
+whoever inherits this list.
 
 Not rebrand work. Do not start any of these before the conference.
 
@@ -508,3 +513,34 @@ Not rebrand work. Do not start any of these before the conference.
   the Task 1 row against that homepage slot, drop the services-hub crop, and keep
   the brief itself: a monitored lot with camera, signage or payment technology
   visible. Do not action the entry as written; it points at a URL that will 404.
+
+- **`/consultation/` states no revenue share number, and the number is with
+  leadership.** Opened 2026-08-14 with the consultation rebuild, moved here
+  2026-08-17 from `REBRAND.md` before that file was deleted. A skeptical owner
+  asks how the company makes money before anything else, and on a paid landing
+  page that silence is louder than a number would be. The page says "no upfront
+  cost" four times over and never says what the arrangement is.
+
+  **Status as of 2026-08-16: pending a decision from leadership.** This is the
+  largest remaining credibility gap on the only paid landing page on the site,
+  and it is not waiting on anyone with repo access. The wording follows once the
+  number is settled. **Do not invent a figure.**
+
+  Closed and recorded so it is not re-flagged: the "nationwide service" claim in
+  the hero trust ticks **is substantiated**, confirmed by Ben 2026-08-16. It was
+  carried as unsubstantiated across several passes on the reasoning that the only
+  verified case study is one lot in Wisconsin. It is ungated deliberately, so the
+  copy stays a content decision rather than a gate failure.
+
+- **`/consultation/` `_next` relative value is unverified against Formspree.**
+  Opened 2026-08-14, moved here 2026-08-17 from `REBRAND.md` before that file was
+  deleted. Both `_next` and the JS redirect were changed from an absolute
+  production URL to `/consultation/thank-you/`, so a preview submission no longer
+  navigates to the live site and fires a real Ads conversion. That was the point
+  of the change.
+
+  The JS handles every normal submission, so `_next` only matters with JavaScript
+  disabled. **Confirming Formspree accepts a relative value needs a live no-JS
+  submission, which would fire a real Ads conversion**, which is why it has not
+  been done. If it is ever tested, do it knowing the conversion will be recorded
+  and annotate it in Ads.
