@@ -54,8 +54,12 @@ the date it was opened. Check an item is still true before acting on it.
 | 34 | `/consultation/` has no revenue share number. Pending a decision from leadership | Needs a person |
 | 35 | `/consultation/` `_next` relative value unverified against Formspree | Verification |
 | 36 | `CLAUDE.md` is about 1,540 lines. Split the reference into `docs/architecture.md` | Docs |
+| 37 | 30 YouTube thumbnails on `ask-the-experts.html` have no `width`/`height` (CLS) | Performance |
+| 38 | 42 raw JPGs never converted to WebP | Performance |
+| 39 | No `FAQPage` schema on `/services/` | SEO |
+| 40 | 4 of 8 hidden articles are in `sitemap.xml` and 4 are not, undecided | Decision |
 
-**36 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
+**40 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
 closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
 duplicated here. Items 31 to 33 were added 2026-08-17, moved off the pre-merge
 schedule in `docs/execution-plan.md` week 5 rather than opened fresh. **Items 34
@@ -172,8 +176,15 @@ Not rebrand work. Do not start any of these before the conference.
   field in its `resources.json` entry, so the runtime renders a not-found state
   over its own content.
 - Stale asset cleanup: eight dead stylesheets (four `.min`, four `critical/`),
-  `postcss.config.js` with no npm script, `tools/build.js` unwired, and
+  `postcss.config.js` with no npm script, `tools/build.js` unwired,
+  `tools/compress-images.js` and `tools/seo-audit.js` also unwired, and
   `images/logo.png` at 1.2 MB referenced by nothing.
+
+  **Added 2026-08-17: `optimize_images.py` at the repo root.** A Python image
+  script with **zero referrers anywhere in the repo**, superseded by
+  `tools/generate-thumbnails.js`, which is wired into `npm run build`, and by
+  `tools/compress-images.js`. Nothing imports it, no npm script calls it, and no
+  document mentions it. It is the most clearly dead file on this list.
 
   **Corrected 2026-08-07:** `css/style.css` was previously listed here as a
   ninth dead stylesheet. It is not dead. `css/article.css:1` pulls it in with
@@ -199,9 +210,25 @@ Not rebrand work. Do not start any of these before the conference.
   untouched. Only the article entries, which read `data/resources.json`, behave
   correctly. During the rebrand the workaround is to revert the file after each
   rebuild; see the sitemap section in `CLAUDE.md`.
-- `docs/website-audit-action-plan.md:609` proposes a superseded `/manifest.json`
-  at the repo root with a conflicting `theme_color: #2563eb`, and would send a
-  reader to a 404. The shipped manifest is `images/site.webmanifest`.
+- **A stale manifest proposal in `docs/website-audit-action-plan.md` would send a
+  reader to a 404.** Made self-contained 2026-08-17 so that document is no longer
+  load-bearing and can be deleted whenever someone decides to.
+
+  The document proposes creating `/manifest.json` at the repo root, with
+  `theme_color: "#2563eb"`, `background_color: "#ffffff"`, and icons at
+  `/images/favicon-192.png` and `/images/apple-touch-icon.png`. **All of that is
+  superseded.**
+
+  What actually shipped: the manifest is **`images/site.webmanifest`**, linked from
+  every page as `/images/site.webmanifest?v=2`, and its `theme_color` and
+  `background_color` are both **`#010D20`**, the rebrand navy. `#2563eb` is the
+  **pre-rebrand blue** and must not be reintroduced; see "Brand and color" in
+  `CLAUDE.md`, which records the three places `#010D20` lives.
+
+  **The work here is to decide whether that document is worth keeping at all.**
+  Its other findings are resolved: the 404 page exists, security and caching
+  headers are in `_headers`, skip links are on 157 pages, and OG tags are present.
+  Nothing else in it is live. Once someone confirms that, delete it.
 - `package-lock.json` has three uncommitted `"peer": true` markers from npm
   11.6.2. Commit separately when a noisy diff does not matter.
 - **Content pass over the 30 video pages.** Found 2026-08-11 while fixing the
@@ -597,3 +624,86 @@ Not rebrand work. Do not start any of these before the conference.
 
   Not urgent. Do it when the file next needs a substantial edit anyway, rather than
   as a pass of its own.
+
+- **30 YouTube thumbnails on `ask-the-experts.html` carry no `width` or `height`,
+  which is a real CLS cost.** Extracted 2026-08-17 from
+  `docs/page-speed-optimization-plan.md` before it was deleted, **with its finding
+  corrected**: the plan framed this as a site-wide problem and it is not.
+
+  Measured 2026-08-17 across every HTML file outside `docs/`: **449 `<img>` tags,
+  31 missing a dimension, and 30 of the 31 are on this one page.** They are all
+  remote `https://img.youtube.com/vi/{id}/maxresdefault.jpg` thumbnails, which are
+  a known 1280x720, so the fix is adding those two attributes to 30 tags. The 31st
+  was in a `tools/rebrand/` fixture that has since been deleted.
+
+  **Everything else that plan asked for is already done, and is recorded here so
+  nobody reopens it from git history:**
+
+  - **LCP request discovery: DONE.** The plan's fix was to inject the real hero
+    image at build time so the browser can discover it without running JS.
+    `tools/generate-article-pages.js:70` writes
+    `<link rel="preload" as="image" href="..." fetchpriority="high">` into every
+    generated page, and all 76 carry it.
+  - **Oversized images served as thumbnails: DONE.** `images/thumbs/` holds 70
+    WebP thumbnails and `npm run generate:thumbnails` is wired into
+    `npm run build`.
+  - **A homepage hero image preload has no subject.** The homepage carries exactly
+    two `<img>` tags, both the logo, both already dimensioned. Its hero is
+    typographic, with `home_video.mp4` referenced only from JSON-LD. There is no
+    homepage hero image to preload.
+
+- **42 raw JPGs were never converted to WebP.** Extracted and merged 2026-08-17
+  from two sources that both carried this item: `SEO_TODO.md` (as "Image
+  Optimization, WebP Conversion") and `docs/page-speed-optimization-plan.md`
+  (Issue 1). Recorded once here rather than twice.
+
+  `images/` holds **42 `.jpg` files alongside 74 `.webp`**, so most of the library
+  is converted and these are the remainder. Some are the originals of files that
+  already have a WebP twin, in which case the JPG is simply dead weight and the job
+  is deletion rather than conversion. Others may still be referenced.
+
+  **Check which before converting anything.** `CLAUDE.md` under Image Path Rules
+  sets the standard: convert to WebP at roughly quality 85, keep under 200 KB,
+  always include `width`, `height` and `alt`, and never commit raw JPGs. The two
+  largest offenders on disk are `rev_share.jpg` at 1.9 MB and `images/logo.png` at
+  1.2 MB, the second of which is already on the stale-asset item above.
+
+- **`/services/` has no `FAQPage` schema.** Extracted 2026-08-17 from `SEO_TODO.md`
+  before it was deleted. Verified still outstanding: `FAQPage` appears once in
+  `faq/index.html` and **zero times in `services/index.html`**.
+
+  `/services/` is the most internally linked page on the site after the homepage,
+  which is what made this worth doing in the original list. **One caution that is
+  not in the original item:** `CLAUDE.md` records that on `faq/index.html` every
+  answer exists **twice**, once in the `FAQPage` JSON-LD and once in the visible
+  accordion, so any edit is two places per answer. Adding schema to `/services/`
+  creates the same duplication there. Decide whether that maintenance cost is worth
+  the rich result before starting.
+
+- **Four of the eight hidden articles are in `sitemap.xml` and four are not, and
+  nothing decided that.** Opened 2026-08-17 while auditing what the rebrand left
+  behind.
+
+  | In `sitemap.xml` | Not in `sitemap.xml` |
+  |---|---|
+  | `license-plate-allow-listing-guide` | `choosing-pricing-strategy` |
+  | `custom-operating-hours-strategy` | `dynamic-pricing-technology` |
+  | `dynamic-pricing-strategies` | `pricing-by-property-type` |
+  | `balancing-revenue-relationships` | `dynamic-pricing-mistakes` |
+
+  The four indexed ones are exactly the `flexible-parking-rules` series members.
+  **`tools/update-sitemap.js` has no `hidden` filter at all**, so the split is
+  incidental rather than a decision anyone took.
+
+  **There is a defensible reading in which the current state is correct.**
+  `CLAUDE.md` defines `hidden` as "hide from listings while keeping it reachable by
+  direct URL", which is not the same as "do not index", and the series members are
+  real content with their own in-page navigation. On that reading the four indexed
+  ones belong in the sitemap and the other four are the anomaly.
+
+  **The work is to decide, then make the code express it**, rather than to change
+  the output. Either add a `hidden` filter to `update-sitemap.js` and drop all
+  eight, or introduce an explicit flag that separates "not in listings" from "not
+  indexed" and set it deliberately per record. Whichever is chosen, record it under
+  Hiding Articles in `CLAUDE.md`, because the next person will ask the same
+  question.
