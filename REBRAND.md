@@ -2074,8 +2074,86 @@ Three ways out, in ascending order of how much they fix:
    contradicts the service split. A parking guide recommending no parking is not
    that.
 
-Recommended: **option 1 now, option 2 in the content pass.** Not done in this
-pass, and no cache-buster bumped, both per instruction.
+Recommended: **option 1 now, option 2 in the content pass.**
+
+### Option 1 shipped 2026-08-17, and it is a MITIGATION, not a solution
+
+`sameService` now sits above `sameCategory` in the sort at `js/article.js`, using
+the same `|| 'Parking'` fallback as `renderBreadcrumb`. Cache buster bumped
+`?v=service-crumb` to `?v=rail-service`, which rewrites the script line on all
+75 generated pages and nothing else. The bump is required, not cosmetic:
+`_headers` serves `/js/*` immutable for a year.
+
+Measured across the 70 non-series articles, comparing the shipped sort against
+the sort as it stood before, and against the pre-reassignment ranking. Off-service
+slots, counted across the 58 parking rails, 290 slots in total:
+
+| State | EV slots | Solar slots | Total off-service |
+|---|---|---|---|
+| Before the EV retype | 1 | **79** | 80 |
+| After the retype, old sort | 97 | 79 | **176** |
+| After the retype, new sort | **1** | **1** | **2** |
+
+43 of 70 rails changed. **No rail has fewer than three items, and none can**:
+`maxCandidates` is `Math.min(5, allArticles.length - 1)` against a 76-record
+file, so every rail is always filled to five and the sort only decides which
+five. Eight of the nine EV rails were already all-EV and did not move; the ninth
+lost its one non-EV item.
+
+**The middle row of that table is the regression this fixed. The top row is a
+second one nobody had noticed.** The three solar articles were already taking
+**79 of 290 slots** in parking rails before the EV retype, for the same reason,
+and that leak shipped in the solar commit and went unreported. The service key
+closes both. Worth stating plainly: the rails were broken before this pass and
+the EV retype made an existing problem visible rather than creating it.
+
+Both surviving off-service items are **correct** and should not be chased:
+`what-is-parking-monetization` surfaces `ev-charging-parking-revenue` on a shared
+`parking revenue` tag, and `parking-lot-security` surfaces
+`what-parking-lot-lighting-costs` on a shared tag. Tag overlap ranks above
+service, so a genuine tag match wins, which is the intended order.
+
+`real-costs-parking-management`, the worst case, went from five items with zero
+parking content to five parking items. Confirmed in the browser, not modelled.
+
+### The real defect: the tags do not rank anything
+
+**This is the finding under all of the above, and the sort change does not touch
+it.** `overlapCount` at `js/article.js:304` is an exact-match count over raw tag
+strings:
+
+```js
+return candidateTags.filter((tag) => baseTags.includes(tag)).length;
+```
+
+Measured over `data/resources.json`: **381 tag instances, 305 unique tags across
+75 records, and 278 of those 305 appear on exactly one record.** Ninety-one
+percent of the vocabulary can never produce an overlap with anything. Only six
+tags reach five or more records: `revenue optimization` (11), `ev charging` (9),
+`parking management` (9), `dynamic pricing` (9), `automation` (8), and
+`ai enforcement` (5).
+
+So almost every candidate pair ties at 0 or 1 on the first sort key, and the
+first key decides nothing. Whichever key sits second becomes the effective
+primary ranking signal. That is the whole mechanism behind both regressions
+above: it was `sameCategory` by accident, it is now `sameService` on purpose, and
+in neither case are the tags doing the work the ranking claims they do.
+
+**The tags are too specific to overlap.** They read as SEO keyword phrases, one
+per record, rather than as a controlled vocabulary: `paid parking for property
+owners`, `parking lot income`, `monetize parking lot` are three separate tags
+meaning approximately one thing. A tag that appears once is a label, not an axis.
+
+**Fixing it properly is a content pass over the 381 tag instances, not a sort
+change.** Roughly: agree a controlled vocabulary of maybe twenty to thirty terms,
+map the 305 existing values onto it, keep the specific phrases only where they
+carry real meaning, and accept that some records will end up with fewer tags.
+Cheap to describe and slow to do, and it improves the rails for all 75 records
+instead of restoring one boundary. Until then the rails are ordered by service,
+then type, then recency, with the tag key contributing almost nothing.
+
+Do not read the shipped sort fix as closing this. It buys correct-looking rails
+on the wrong mechanism.
 
 **The "All" bucket holds nothing of its own.** Before deciding whether
 cross-cutting content needed a home, the set was measured: of 65 visible
@@ -2628,8 +2706,17 @@ Not rebrand work. Do not start any of these before the conference.
   type control over a distribution nobody has audited is the same mistake with
   the axes the other way round.
 
-  Related, and higher priority than any of this: the reassignment broke the
-  related-article rails. See the subsection in the resources chapter above.
+  Related: the reassignment broke the related-article rails, mitigated the same
+  day by ranking on service. See the resources chapter above. **The underlying
+  defect is still open and belongs on this list:**
+
+- **Tag vocabulary pass over 381 tag instances.** Opened 2026-08-17 out of the
+  rail work. 305 unique tags across 75 records, **278 of them on exactly one
+  record**, so tag overlap ranks nothing and the related rails are effectively
+  ordered by service, then type, then recency. Needs a controlled vocabulary of
+  twenty to thirty terms with the existing values mapped onto it. Full reasoning
+  and measurements in the resources chapter. This is the real fix; the sort
+  change was a mitigation.
 
 - **State-targeted Google Ads campaign, and whether it needs its own landing
   pages.** Recorded 2026-08-16. Planned, not scheduled. Two things have to be
