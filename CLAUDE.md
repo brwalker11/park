@@ -2,6 +2,11 @@
 
 Guidance for Claude Code when working in this repository.
 
+**This file is about 1,500 lines. Do not read it front to back.** It is part rules
+and part reference, and the two are used differently: read the rules, then consult
+the reference sections that bear on what you are actually doing. Splitting the
+reference out into `docs/architecture.md` is item 36 in `BACKLOG.md`.
+
 ## Session start
 
 1. Run `git branch --show-current` and report the result. **If it is `main`, STOP
@@ -11,6 +16,23 @@ Guidance for Claude Code when working in this repository.
    deferred tasks, known defects, and decisions nobody has taken. Check it before
    proposing new work, because the thing you are about to suggest may already be on
    it with reasoning attached.
+3. **Read the rules in this file.** Six sections, 320 lines together:
+
+   - **Branch and deployment rules**, including the working pattern and the
+     permanent hostname gates
+   - **Do not touch without explicit instruction**
+   - **Working method**
+   - **Brand and color**
+   - **Content and copy rules**
+   - **Minified and critical CSS**
+
+4. **Consult the reference sections as the work requires them, not in advance.**
+   Architecture, Build, the two integrity-check sections, Local Testing, Measuring
+   rendered CSS, File Organization, the sweep and gate scripts. **Architecture is
+   772 lines and nobody needs all of it**; go to the subsection that matches what
+   you are touching. If you are about to edit an area, it is worth a grep of this
+   file for the relevant class, file or token name first, because most of the
+   painful findings in here were expensive to discover and cheap to re-break.
 
 ## Project Overview
 

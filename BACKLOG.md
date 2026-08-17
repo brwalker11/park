@@ -53,14 +53,16 @@ the date it was opened. Check an item is still true before acting on it.
 | 33 | Imagery slot #2, monitored-lot still. **Shot list entry needs rewriting first** | Asset |
 | 34 | `/consultation/` has no revenue share number. Pending a decision from leadership | Needs a person |
 | 35 | `/consultation/` `_next` relative value unverified against Formspree | Verification |
+| 36 | `CLAUDE.md` is about 1,540 lines. Split the reference into `docs/architecture.md` | Docs |
 
-**35 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
+**36 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
 closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
 duplicated here. Items 31 to 33 were added 2026-08-17, moved off the pre-merge
 schedule in `docs/execution-plan.md` week 5 rather than opened fresh. **Items 34
 and 35 were added 2026-08-17 during the final documentation pass**, when a check
 before deleting `REBRAND.md` found two open items on `/consultation/` that lived
-nowhere else. Numbering above is this file's own and does not match the old
+nowhere else. **Item 36 was added the same day**, out of measuring what the fold
+had done to `CLAUDE.md`. Numbering above is this file's own and does not match the old
 `REBRAND.md` numbers.
 
 **Item 33 must not be actioned as written.** Its shot list entry names a
@@ -545,3 +547,53 @@ Not rebrand work. Do not start any of these before the conference.
   submission, which would fire a real Ads conversion**, which is why it has not
   been done. If it is ever tested, do it knowing the conversion will be recorded
   and annotate it in Ads.
+
+- **`CLAUDE.md` is about 1,540 lines and the "read it at session start"
+  expectation was unrealistic.** Opened 2026-08-17, immediately after folding
+  `REBRAND.md` into it. **This is a readability improvement, not a defect. Nothing
+  in the file is wrong.**
+
+  Measured at the fold: 1,519 lines, 11,706 words, 17 top-level sections, 39
+  subsections, roughly 45 minutes at normal reading speed. The session-start
+  rewrite in the same pass added about 20 lines. Treat the figure as approximate;
+  it drifts with every edit and the proportions below are the useful part. An instruction to read that will be
+  ignored, and an ignored instruction is worse than an honest one, so the
+  session-start step was rewritten in the same pass to say read the rules and
+  consult the reference. **That change makes this item a tidy-up rather than a
+  problem to fix in a hurry.**
+
+  It remains genuinely usable as reference material. The heading structure is
+  stable, the sections are self-contained, and a session consults the two or three
+  that bear on what it is doing rather than reading front to back. Nobody is being
+  misled by it today.
+
+  **The proposal: move the reference material to `docs/architecture.md` and leave
+  `CLAUDE.md` as rules and pointers.** Where the lines actually are:
+
+  | Section | Lines | |
+  |---|---|---|
+  | Architecture | **772** | the obvious candidate, over half the file on its own |
+  | Branch and deployment rules | 160 | rules, stays |
+  | Guard integrity check | 75 | reference, could move |
+  | File Organization | 71 | reference, could move |
+  | Rebrand sweep and gate scripts | 66 | reference, and mostly spent |
+  | Build | 60 | reference, could move |
+  | Content and copy rules | 59 | rules, stays |
+  | Conversion integrity check | 50 | reference, could move |
+  | Measuring rendered CSS | 48 | reference, could move |
+  | everything else | 158 | rules and pointers, stays |
+
+  **Moving Architecture alone leaves about 750 lines, not 200.** Reaching roughly
+  200 means also moving Build, both integrity-check sections, the sweep scripts, the
+  measurement standard and File Organization. That is the honest arithmetic, and it
+  is worth knowing before someone starts and stops halfway.
+
+  Two cautions for whoever does it. **Every pointer has to move with the content:**
+  page comments, `styles.css`, `js/article.js` and both guard scripts cite
+  `CLAUDE.md` sections by name, and the `REBRAND.md` deletion showed how many of
+  those accumulate. And **`docs/` currently holds only historical documents**, all
+  headed as non-authoritative, so putting live reference material there needs the
+  distinction made plainly or the new file inherits the wrong status.
+
+  Not urgent. Do it when the file next needs a substantial edit anyway, rather than
+  as a pass of its own.
