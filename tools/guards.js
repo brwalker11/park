@@ -64,8 +64,18 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
 // donor, so both guard blocks are byte-identical to the donor's by
 // construction rather than by care. Same gated recapture: exactly one entry
 // added, zero removed, all 151 pre-existing hashes byte-identical.
-const EXPECT_NOINDEX = 152;
-const EXPECT_GTAG = 151;
+//
+// Raised again to 155/154 on 2026-08-16, when the three solar lighting
+// articles were added (what-parking-lot-lighting-costs,
+// solar-lighting-winter-performance, when-solar-lighting-is-wrong). Third
+// addition of the rebrand and the first that is not hand-authored: these are
+// generated pages, so all three carry both guard blocks copied from
+// templates/article-index.html by npm run generate:articles, which is why the
+// noindex and gtag counts moved together by three. Same gated recapture:
+// exactly three entries added, zero removed, all 152 pre-existing hashes
+// byte-identical.
+const EXPECT_NOINDEX = 155;
+const EXPECT_GTAG = 154;
 
 const NOINDEX_MARKER = '<!-- Preview noindex guard - remove on merge day -->';
 const GTAG_NEEDLE = "window.location.hostname === 'monetize-parking.com'";

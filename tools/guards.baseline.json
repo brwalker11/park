@@ -1,13 +1,13 @@
 {
-  "capturedAt": "2026-08-13T20:06:28.483Z",
+  "capturedAt": "2026-08-17T00:04:06.581Z",
   "expect": {
-    "noindex": 152,
-    "gtag": 151
+    "noindex": 155,
+    "gtag": 154
   },
   "counts": {
-    "guardedFiles": 152,
-    "noindex": 152,
-    "gtag": 151
+    "guardedFiles": 155,
+    "noindex": 155,
+    "gtag": 154
   },
   "entries": {
     "404.html": {
@@ -286,11 +286,23 @@
       "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },
+    "articles/solar-lighting-winter-performance/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
     "articles/stadium-arena-event-parking/index.html": {
       "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },
     "articles/what-is-parking-monetization/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/what-parking-lot-lighting-costs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/when-solar-lighting-is-wrong/index.html": {
       "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
       "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
     },
