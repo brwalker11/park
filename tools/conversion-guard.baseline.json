@@ -1,0 +1,33 @@
+{
+  "capturedAt": "2026-08-14T22:31:50.037Z",
+  "expect": {
+    "blocks": 5
+  },
+  "blocks": {
+    "ads-conversion": {
+      "file": "consultation/thank-you/index.html",
+      "bytes": 224,
+      "hash": "5de7b065eeb7e03a1a1011705e8bbeb30ebd2eb714ef296ee02af1ef8773f48e"
+    },
+    "ppc-callback-handler": {
+      "file": "consultation/thank-you/index.html",
+      "bytes": 316,
+      "hash": "8dae6485c65485d7b0892722589bbaa551b0bbb814b3f0123dcbaf9cbfa83bd6"
+    },
+    "calendly-listener": {
+      "file": "consultation/index.html",
+      "bytes": 472,
+      "hash": "a2e6b044b33977ead6cf3c3bd716339ea4f64ec49aa7420c6b66e023fd14a013"
+    },
+    "callback-submit-handler": {
+      "file": "consultation/index.html",
+      "bytes": 1421,
+      "hash": "d0bc5e116e794dfc4dbc859d050b373c49fc3e406149f9c1f5ded140bd61ff2d"
+    },
+    "phone-click": {
+      "file": "consultation/index.html",
+      "bytes": 520,
+      "hash": "c10def4f70553589144d120a68ba7c80f8954b411cb12afa817884b6c4c1c2e6"
+    }
+  }
+}

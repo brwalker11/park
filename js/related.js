@@ -33,9 +33,14 @@
 
   function normaliseItem(item) {
     const clone = Object.assign({}, item);
-    const category = clone.category && DEFAULT_IMAGES[clone.category] ? clone.category : 'Articles';
+    /* Same fix as js/resources.js: the image table is not the authority on
+       which categories may exist. Unknown values pass through; only the image
+       falls back. NOTE: this file is currently referenced by zero pages, the
+       related rail is built by js/article.js. Fixed anyway so the two copies
+       do not drift while it sits unused. */
+    const category = clone.category || 'Articles';
     clone.category = category;
-    clone.image = clone.image || DEFAULT_IMAGES[category];
+    clone.image = clone.image || DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
     clone.tags = Array.isArray(clone.tags) ? clone.tags.map((tag) => tag.toLowerCase()) : [];
     clone._dateValue = clone.date ? Date.parse(clone.date) || 0 : 0;
     return clone;
@@ -138,10 +143,24 @@
     container.appendChild(fragment);
   }
   function createFallbacks() {
+    // Category fallback colours, per docs/design-direction.md section 8.
+    // Kept in sync with the identical table in js/resources.js. The gradient
+    // id prefix below deliberately differs between the two files so the two
+    // scripts cannot collide on a DOM id.
+    // #0A7C6B was removed here: it is a teal-green on "Guides", which is not
+    // solar, EV or success content, and so violated the green-scoping rule.
+    // EV Charging is the one category permitted green, and was previously blue.
     const entries = [
-      ['Case Studies', '#273d9a', 'Case Study'],
-      ['Guides', '#0a7c6b', 'Guide'],
-      ['Articles', '#3b3a3f', 'Article']
+      ['Case Studies', '#0043B3', 'Case Study'],
+      ['Guides', '#0E2A52', 'Guide'],
+      ['Articles', '#071B38', 'Article'],
+      ['EV Charging', '#2D7A0E', 'EV Charging'],
+      /* Solar Lighting shares --green-700 with EV Charging rather than
+         introducing a new colour. Both are green-scoped services and the label
+         rendered into the gradient distinguishes them. The lighter --green-500
+         (#6DB133) was rejected: white text on it is 2.63:1, which fails even
+         the 3:1 large-text threshold. #2D7A0E is 5.38:1. */
+      ['Solar Lighting', '#2D7A0E', 'Solar Lighting']
     ];
 
     return entries.reduce((acc, [key, color, label]) => {

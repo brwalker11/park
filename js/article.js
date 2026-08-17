@@ -86,6 +86,14 @@
       slug: item.slug,
       title: item.title,
       category: item.category,
+      /* This map is a whitelist, so a field absent here does not reach
+         renderBreadcrumb no matter what the record says. `service` was missing,
+         which meant `article.service || 'Parking'` in renderBreadcrumb was
+         always taking the fallback: every EV article shipped a crumb reading
+         "Parking" linking to ?service=Parking. Adding the field is the whole
+         fix; the fallback below stays for records predating the service
+         field. */
+      service: item.service,
       tags: Array.isArray(item.tags) ? item.tags : [],
       date: item.date,
       lastmod: item.lastmod || item.date,
@@ -145,7 +153,7 @@
     const modifiedDate = isoDate(article.lastmod || article.date);
 
     setDocumentMeta(article, canonicalUrl, imageUrl, publishDate, modifiedDate);
-    if (robots) {
+    if (robots && window.location.hostname === 'monetize-parking.com') {
       robots.setAttribute('content', 'index,follow');
     }
 
@@ -194,9 +202,12 @@
   function renderBreadcrumb(article) {
     const categoryLink = document.getElementById('breadcrumb-category');
     const titleCrumb = document.getElementById('breadcrumb-title');
-    const filterUrl = `/resources/?category=${encodeURIComponent(article.category)}`;
-    categoryLink.href = filterUrl;
-    categoryLink.textContent = article.category;
+    /* The crumb follows the axis /resources/ actually filters on. Linking by
+       category would send "Guides" to a chip that no longer exists and land on
+       All. Falls back to Parking for records predating the service field. */
+    const service = article.service || 'Parking';
+    categoryLink.href = `/resources/?service=${encodeURIComponent(service)}`;
+    categoryLink.textContent = service;
     titleCrumb.textContent = article.title;
   }
 
@@ -219,11 +230,36 @@
       .map((item) => ({
         article: item,
         tagOverlap: overlapCount(article.tags, item.tags),
+        /* Same 'Parking' fallback as renderBreadcrumb, so a record predating
+           the service field compares against Parking rather than grouping on
+           undefined. */
+        sameService: (item.service || 'Parking') === (article.service || 'Parking'),
         sameCategory: item.category === article.category,
         recency: Date.parse(item.lastmod || item.date || '') || 0
       }))
+      /* sameService sits ABOVE sameCategory, and this is a MITIGATION rather
+         than a fix. The real defect is that tagOverlap does not rank anything:
+         overlapCount is an exact-match count and 278 of the 305 unique tags in
+         data/resources.json appear on exactly one record, so nearly every
+         candidate pair ties at 0 or 1 and the first key decides nothing. That
+         made whichever key came next the effective primary signal.
+
+         Until 2026-08-17 that key was sameCategory, and the nine EV records
+         all carried category "EV Charging", which worked as an accidental
+         topical firewall. Retyping them to real content types removed it, and
+         36 of 56 parking rails immediately filled with EV articles, which are
+         the newest records in the file and so win the recency tiebreak.
+         real-costs-parking-management ended up with five items and no parking
+         content at all.
+
+         Ranking on service restores the boundary on the axis that actually
+         means topic. It does NOT make the tags rank anything. See the tag
+         specificity entry in CLAUDE.md under Related Articles, and the tag
+         vocabulary item in BACKLOG.md; that is a content pass, not a sort
+         change. */
       .sort((a, b) => {
         if (b.tagOverlap !== a.tagOverlap) return b.tagOverlap - a.tagOverlap;
+        if (b.sameService !== a.sameService) return (b.sameService ? 1 : 0) - (a.sameService ? 1 : 0);
         if (b.sameCategory !== a.sameCategory) return (b.sameCategory ? 1 : 0) - (a.sameCategory ? 1 : 0);
         return b.recency - a.recency;
       })
@@ -425,7 +461,12 @@
         name: 'Monetize Parking',
         logo: {
           '@type': 'ImageObject',
-          url: absolute('/images/Logo.png')
+          /* Solid dark navy on white. Structured-data logos render on a
+             white surface, which is what Google's guidance asks you to check.
+             NOT /images/Logo.png: that path 404s in production, the file is
+             lowercase logo.png. NOT MP_Logo_400.png either: silver gradient on
+             transparent, near-invisible on white. */
+          url: absolute('/assets/brand/MP_Logo_dark.png')
         }
       },
       keywords: article.tags
@@ -510,7 +551,7 @@
   }
 
   function trackPageView(canonicalUrl) {
-    if (typeof gtag === 'function') {
+    if (window.location.hostname === 'monetize-parking.com' && typeof gtag === 'function') {
       try {
         const url = new URL(canonicalUrl, window.location.origin);
         gtag('config', 'G-LGHS0L5WE8', {

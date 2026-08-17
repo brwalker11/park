@@ -1,0 +1,634 @@
+{
+  "capturedAt": "2026-08-17T00:04:06.581Z",
+  "expect": {
+    "noindex": 155,
+    "gtag": 154
+  },
+  "counts": {
+    "guardedFiles": 155,
+    "noindex": 155,
+    "gtag": 154
+  },
+  "entries": {
+    "404.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": null
+    },
+    "about/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/30c-ev-charger-tax-credit-property-owners/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/ada-compliance-paid-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/ai-access-vs-gates/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/airport-proximity-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/announce-paid-parking-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/apartment-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/balancing-revenue-relationships/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/brewery-bar-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/choosing-pricing-strategy/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/church-parking-revenue-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/college-town-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/custom-operating-hours-strategy/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/dynamic-pricing-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/dynamic-pricing-mistakes/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/dynamic-pricing-strategies/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/dynamic-pricing-technology/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/eau-claire-revenue-increase/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/ev-charging-idle-fees-session-limits/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/ev-charging-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/ev-charging-property-value-noi/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/ev-charging-revenue-share-vs-ownership/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/event-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/first-90-days-paid-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/flexible-parking-rules/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/free-parking-true-cost/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/gate-arm-maintenance-costs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/gym-fitness-center-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/handling-parking-violations-disputes/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/hidden-costs-ev-charging-installation/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/historic-district-parking-profit/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/hotel-ev-charging-guest-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/hotel-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/how-to-start-charging-for-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/is-it-legal-to-charge-for-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/level-2-vs-dc-fast-charging-property-owners/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/license-plate-allow-listing-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/medical-facility-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/mixed-use-development-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/monthly-passes-vs-hourly-rates/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/municipal-parking-solutions/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/occupancy-vs-compliance/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/office-building-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/optimal-lot-size-profit/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/overnight-24-hour-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/paid-parking-increases-property-value/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/paid-parking-seasonal-destinations/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-during-construction-renovation/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-enforcement-modernization/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-lot-insurance-requirements/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-lot-revenue-potential/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-lot-revenue-tax-implications/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-lot-security/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-lot-striping-layout-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-problems-mean-success/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-revenue-analytics/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-signage-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-today-small-lots/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/parking-validation-programs-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/pricing-by-property-type/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/private-parking-frees-municipal-land/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/qr-code-parking-payments/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/questions-before-signing-ev-charging-contract/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/real-costs-parking-management/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/restaurant-paid-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/retail-parking-revenue-guide/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/scan-to-pay-vs-lpr/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/shared-parking-agreements-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/solar-lighting-winter-performance/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/stadium-arena-event-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/what-is-parking-monetization/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/what-parking-lot-lighting-costs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/when-solar-lighting-is-wrong/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/when-to-start-charging-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/why-gateless-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/winter-parking-revenue-strategies/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "articles/you-didnt-buy-a-parking-lot-to-babysit-it/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "ask-the-experts.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "calculator/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "calculator/report/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "6a763bceb4e01fcfed79d81b26fcd29d2c48876c0649e90e1f37f4ee3a0c395f"
+    },
+    "consultation/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "b66840caab4f2a51873fb57051272278363afed6181627a66f09dbed769c35d9"
+    },
+    "consultation/thank-you/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "b66840caab4f2a51873fb57051272278363afed6181627a66f09dbed769c35d9"
+    },
+    "contact/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "contact/thank-you/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "24e73f0f363a5c235372d24b613c1b97eb83566e3daf19963bceacbf6f61efad"
+    },
+    "faq/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/financial-impact/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/market-overview/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/owner-faqs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/property-types/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/seasonal-considerations/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/technology-solutions/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/colorado/value-add-opportunity/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/financial-impact/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/market-overview/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/owner-faqs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/property-types/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/seasonal-considerations/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/technology-solutions/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/minnesota/value-add-strategy/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/financial-impact/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/market-overview/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/owner-faqs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/property-types/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/seasonal-considerations/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/technology-solutions/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/texas/untapped-opportunity/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/financial-impact/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/market-overview/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/owner-faqs/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/property-types/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/seasonal-considerations/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/technology-solutions/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/states/wisconsin/untapped-opportunity/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/ai-cameras-vs-gates-scan-to-pay/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/ai-parking-compliance-rates/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/ai-parking-enforcement/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/ai-parking-too-good-to-be-true/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/calculate-parking-lot-value/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/cameras-stop-parking-abuse/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/cameras-vs-towing-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/church-parking-non-profit-status/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/custom-parking-rules-tenants-visitors/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/do-you-like-money-parking/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/how-parking-master-leases-work/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/increase-parking-revenue/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/master-lease-parking-lot/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/old-parking-technology-problems/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/paid-parking-seasonal-towns/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-is-real-estate-deal/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-lot-referral-earnings/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-lot-size-requirements/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-mountain-river-towns/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-payment-options/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-real-estate-deal/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-referral-program/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-revenue-retirement-account/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-revenue-split-comparison/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/parking-technology-enforcement/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/smallest-parking-lot-size/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/stop-parking-lot-abuse/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/stuck-in-2005-parking-technology/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/tenant-parking-exemptions/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "resources/videos/tourist-town-parking-abuse/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "services/ev-charging/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "services/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "services/solar-lighting/index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    },
+    "templates/article-index.html": {
+      "noindex": "972cb2809b7d8cb3af1ad5f57ca9f7ac5ac4451e4965bacd979930756a594763",
+      "gtag": "79655a860800cc8cd626b77015c20385d3ffefe454f9c3aae596edc0faf8c675"
+    }
+  }
+}

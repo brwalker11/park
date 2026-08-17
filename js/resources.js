@@ -85,12 +85,28 @@
   function normaliseItems(items) {
     return items.map((item) => {
       const clone = Object.assign({}, item);
-      const category = clone.category && DEFAULT_IMAGES[clone.category] ? clone.category : 'Articles';
+      /* Category is DATA. It used to be coerced to 'Articles' whenever it was
+         not a key of DEFAULT_IMAGES, which made that image table the gatekeeper
+         for which category values were allowed to exist. Adding a new category
+         to a record silently filed it under Articles with no error and no way
+         to notice. Unknown values now pass through, and warn once each. The
+         IMAGE still falls back, in normaliseImage, which is a separate concern
+         from the record's identity. */
+      const category = clone.category || 'Articles';
+      if (clone.category && !DEFAULT_IMAGES[clone.category]) {
+        warnUnknownCategory(clone.category, clone.slug);
+      }
       clone.category = category;
-      const image = normaliseImage(clone.thumbnail || clone.image, category);
+      /* Records predating the service field derive it from the category rather
+         than defaulting flat to Parking. /data/* is cached for an hour, so for
+         up to an hour after a deploy a visitor can run new JS against old JSON;
+         deriving keeps the 9 EV articles in the EV bucket during that window
+         instead of dumping them into Parking.
+         Resolved BEFORE the image lookups below, which now consult it. */
+      clone.service = clone.service || (clone.category === 'EV Charging' ? 'EV Charging' : 'Parking');
+      const image = normaliseImage(clone.thumbnail || clone.image, category, clone.service);
       clone.thumbnail = image;
-      clone.image = normaliseImage(clone.image, category);
-      clone.category = category;
+      clone.image = normaliseImage(clone.image, category, clone.service);
       clone.tags = Array.isArray(clone.tags) ? clone.tags : [];
       clone.type = clone.type || 'internal';
       clone.cta = clone.cta && typeof clone.cta === 'object' ? clone.cta : {};
@@ -143,9 +159,11 @@
       if (item.hidden) return false; // Skip hidden articles
       // Skip main series articles from grid (they appear in series section above)
       if (mainSeriesSlugs.includes(item.slug)) return false;
-      const matchesCategory = state.filter === 'All' || item.category === state.filter;
+      /* Filter on SERVICE. The card badge still shows item.category, which is
+         the content type: the two axes are deliberately separate now. */
+      const matchesService = state.filter === 'All' || item.service === state.filter;
       const matchesSearch = !state.search || item._searchBlob.includes(state.search);
-      return matchesCategory && matchesSearch;
+      return matchesService && matchesSearch;
     });
     renderGrid();
     updateLoadMore();
@@ -382,7 +400,7 @@
     const visible = state.filtered.slice(0, limit);
 
     if (!visible.length) {
-      grid.innerHTML = '<p class="res-empty">No resources found. Adjust your filters or try a new search term.</p>';
+      grid.innerHTML = emptyStateFor(state.filter, state.search);
       return;
     }
 
@@ -506,11 +524,25 @@
   }
 
   function createFallbacks() {
+    // Category fallback colours, per docs/design-direction.md section 8.
+    // Kept in sync with the identical table in js/related.js. The gradient id
+    // prefix below deliberately differs between the two files so the two
+    // scripts cannot collide on a DOM id.
+    // #0A7C6B was removed here: it is a teal-green on "Guides", which is not
+    // solar, EV or success content, and so violated the green-scoping rule.
+    // EV Charging moves from blue to green: it is the one category permitted
+    // green, which is the deliberate inversion of the previous state.
     const entries = [
-      ['Case Studies', '#273d9a', 'Case Study'],
-      ['Guides', '#0a7c6b', 'Guide'],
-      ['Articles', '#3b3a3f', 'Article'],
-      ['EV Charging', '#0b6efd', 'EV Charging']
+      ['Case Studies', '#0043B3', 'Case Study'],
+      ['Guides', '#0E2A52', 'Guide'],
+      ['Articles', '#071B38', 'Article'],
+      ['EV Charging', '#2D7A0E', 'EV Charging'],
+      /* Solar Lighting shares --green-700 with EV Charging rather than
+         introducing a new colour. Both are green-scoped services and the label
+         rendered into the gradient distinguishes them. The lighter --green-500
+         (#6DB133) was rejected: white text on it is 2.63:1, which fails even
+         the 3:1 large-text threshold. #2D7A0E is 5.38:1. */
+      ['Solar Lighting', '#2D7A0E', 'Solar Lighting']
     ];
 
     return entries.reduce((acc, [key, color, label]) => {
@@ -526,11 +558,51 @@
     }, {});
   }
 
-  function normaliseImage(path, category) {
+  /* Loud, but once per value, so a data typo is visible in the console
+     without flooding it. This is the signal that used to be swallowed. */
+  const warnedCategories = new Set();
+  function warnUnknownCategory(category, slug) {
+    if (warnedCategories.has(category)) return;
+    warnedCategories.add(category);
+    console.warn(
+      '[resources] Unknown category ' + JSON.stringify(category) + ' (first seen on "' + slug + '"). ' +
+      'It will display and filter correctly, but has no fallback image. ' +
+      'Add it to createFallbacks() in js/resources.js and js/related.js.'
+    );
+  }
+
+  /* Service wins over category for the fallback gradient. A solar article will
+     carry category "Articles" and service "Solar Lighting"; keying on category
+     would have given it the Articles gradient, which is exactly what the Solar
+     entry was added to prevent.
+
+     This changes nothing for parking content, and that is deliberate:
+     DEFAULT_IMAGES has NO 'Parking' key, so service lookup misses and the
+     category gradient wins, keeping the accurate "Article" / "Guide" /
+     "Case Study" label. Do not add a Parking entry, it would replace the type
+     label on 56 records with a service label that says less. */
+  function normaliseImage(path, category, service) {
     if (path && path.startsWith('/images/')) return path;
     if (path && path.startsWith('http')) return path;
     if (path) return `/images/${path.replace(/^\/+/, '')}`;
-    return DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
+    return DEFAULT_IMAGES[service] || DEFAULT_IMAGES[category] || DEFAULT_IMAGES.Articles;
+  }
+
+  /* A service with no articles yet gets a real message and somewhere to go,
+     rather than a blank grid. Keyed by service so adding another is one entry.
+
+     THIS DISAPPEARS ON ITS OWN. It renders only on the !visible.length branch,
+     so the moment any record carries service: "Solar Lighting" the grid has
+     cards and this is never reached. No code change, no config change. */
+  const SERVICE_EMPTY_STATES = {
+    'Solar Lighting': '<p class="res-empty"><strong>Solar lighting guides are in progress.</strong> ' +
+      'Nothing published yet. In the meantime, ' +
+      '<a href="/services/solar-lighting/">see how solar lighting works on a parking lot</a>.</p>'
+  };
+
+  function emptyStateFor(filter, search) {
+    if (!search && SERVICE_EMPTY_STATES[filter]) return SERVICE_EMPTY_STATES[filter];
+    return '<p class="res-empty">No resources found. Adjust your filters or try a new search term.</p>';
   }
 
   function buildItemUrl(item, isExternal) {
@@ -567,11 +639,23 @@
     }
   }
 
+  /* ?category= was the axis before the service split and is still live in
+     external links, in historical links, and on every article breadcrumb until
+     a page is re-rendered. Mapping the old TYPE values onto the new SERVICE
+     values costs four lines and stops those links degrading to "All". */
+  const LEGACY_CATEGORY_TO_SERVICE = {
+    'articles': 'Parking',
+    'guides': 'Parking',
+    'case studies': 'Parking',
+    'ev charging': 'EV Charging'
+  };
+
   function hydrateFilterFromQuery() {
     const params = new URLSearchParams(window.location.search);
-    const category = params.get('category');
-    if (!category) return;
-    const match = filterButtons.find((btn) => (btn.getAttribute('data-filter') || '').toLowerCase() === category.toLowerCase());
+    const raw = params.get('service') || params.get('category');
+    if (!raw) return;
+    const wanted = LEGACY_CATEGORY_TO_SERVICE[raw.toLowerCase()] || raw;
+    const match = filterButtons.find((btn) => (btn.getAttribute('data-filter') || '').toLowerCase() === wanted.toLowerCase());
     if (match) {
       state.filter = match.getAttribute('data-filter') || 'All';
     }

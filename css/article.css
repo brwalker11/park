@@ -1,17 +1,26 @@
 @import url('/css/style.css');
 
 :root{
-  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", sans-serif;
+  /* Inter moved from sixth to first. In the previous order the browser matched
+     ui-sans-serif before ever reaching Inter, so article body copy rendered in
+     the system font even once the webfont loaded. */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
   --max-w-article: 70ch;
   --space-1: .5rem;  /* 8px */
   --space-2: 1rem;   /* 16px */
   --space-3: 1.5rem; /* 24px */
   --space-4: 2rem;   /* 32px */
   --space-6: 3rem;   /* 48px */
-  --clr-text: #0f172a;      /* slate-900 */
-  --clr-muted: #475569;     /* slate-600 */
-  --clr-accent: #2563eb;    /* blue-600 */
-  --clr-border: #e2e8f0;    /* slate-200 */
+  /* Colour now references the primitives in styles.css (Pass 2a).
+     The literal fallback is mandatory, not decorative: this file can be
+     applied while styles.css has not yet been, and a bare var() to a
+     missing primitive falls back to `inherit`, not to the right colour.
+     Each fallback must stay equal to its primitive; the Pass 2a
+     fallback-integrity check asserts that. */
+  --clr-text: var(--text-1, #0f172a);            /* slate-900 */
+  --clr-muted: var(--text-2, #475569);           /* slate-600 */
+  --clr-accent: var(--blue, #004FC8); /* blue-600 */
+  --clr-border: var(--border-1, #e2e8f0);        /* slate-200 */
   --radius: 14px;
 }
 
@@ -74,7 +83,7 @@
 .article .tip{
   margin: var(--space-4) 0;
   padding: var(--space-3);
-  background: #f0f9ff;
+  background: var(--blue-wash-1, #f0f9ff);
   border-left: 4px solid var(--clr-accent);
   border-radius: 0 var(--radius) var(--radius) 0;
   color: var(--clr-text);
@@ -89,7 +98,7 @@
   margin: var(--space-4) 0;
   padding: var(--space-2) var(--space-3);
   border-left: 4px solid var(--clr-accent);
-  background: #f8fafc;
+  background: var(--surface-page, #f8fafc);
   border-radius: var(--radius);
   color: var(--clr-muted);
 }
@@ -97,7 +106,7 @@
 .article .formula{
   margin: var(--space-3) 0;
   padding: var(--space-2);
-  background:#f8fafc;
+  background:var(--surface-page, #f8fafc);
   border:1px solid var(--clr-border);
   border-radius:var(--radius);
   font-family:'Courier New', Courier, monospace;
@@ -122,7 +131,7 @@
   padding: var(--space-3);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius);
-  background: #ffffff;
+  background: var(--surface-card, #ffffff);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -145,16 +154,16 @@
 }
 .btn-primary{
   background: var(--clr-accent);
-  color: #fff;
+  color: var(--surface-card, #ffffff);
 }
 .btn-primary:hover{ filter: brightness(0.95); }
 .btn-secondary{
-  background:#fff;
+  background:var(--surface-card, #ffffff);
   color:var(--clr-accent);
   border-color:var(--clr-accent);
 }
 .btn-secondary:hover{
-  background:rgba(37,99,235,0.08);
+  background:var(--blue-tint-08, rgba(0,79,200,0.08));
 }
 
 /* Site footer spacing so CTA never overlaps copyright */
@@ -222,8 +231,8 @@
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.55) 100%
+    var(--scrim-black-30, rgba(0,0,0,0.3)) 0%,
+    var(--scrim-black-55, rgba(0,0,0,0.55)) 100%
   );
   z-index: 1;
 }
@@ -317,7 +326,7 @@
   text-decoration:none;
   padding:.5rem;
   border-radius:12px;
-  background:#f8fafc;
+  background:var(--surface-page, #f8fafc);
   border:1px solid var(--clr-border);
   transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
   color:inherit;
@@ -326,7 +335,7 @@
 .related-card:hover{
   transform:translateY(-2px);
   box-shadow:0 12px 24px rgba(15,23,42,0.12);
-  background:#fff;
+  background:var(--surface-card, #ffffff);
 }
 
 .related-thumb{
@@ -335,7 +344,7 @@
   border-radius:12px;
   overflow:hidden;
   flex-shrink:0;
-  background:#e2e8f0;
+  background:var(--border-1, #e2e8f0);
 }
 
 .related-thumb img{
@@ -372,7 +381,7 @@
 .related-empty{
   padding:1rem;
   border-radius:12px;
-  background:#f8fafc;
+  background:var(--surface-page, #f8fafc);
   border:1px solid var(--clr-border);
   color:var(--clr-muted);
   font-size:.9rem;
@@ -396,8 +405,8 @@
 .series-box{
   margin: var(--space-4) 0;
   padding: var(--space-3);
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border: 1px solid #bae6fd;
+  background: linear-gradient(135deg, var(--blue-wash-1, #f0f9ff) 0%, var(--blue-wash-2, #e0f2fe) 100%);
+  border: 1px solid var(--blue-wash-border, #bae6fd);
   border-radius: var(--radius);
 }
 .series-box-header{
@@ -427,7 +436,7 @@
   justify-content: space-between;
   align-items: center;
   padding: .75rem 1rem;
-  background: #fff;
+  background: var(--surface-card, #ffffff);
   border-radius: 10px;
   text-decoration: none;
   color: var(--clr-text);
@@ -466,7 +475,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: var(--space-3);
-  background: #f8fafc;
+  background: var(--surface-page, #f8fafc);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius);
   text-decoration: none;
@@ -532,7 +541,7 @@
   color: var(--clr-muted);
   font-weight: 500;
   padding: .25rem .75rem;
-  background: #f1f5f9;
+  background: var(--surface-sunken, #f1f5f9);
   border-radius: 9999px;
   font-size: .8rem;
 }
@@ -556,8 +565,8 @@
   align-items: center;
   gap: .5rem;
   padding: .75rem;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border: 1px solid #bae6fd;
+  background: linear-gradient(135deg, var(--blue-wash-1, #f0f9ff) 0%, var(--blue-wash-2, #e0f2fe) 100%);
+  border: 1px solid var(--blue-wash-border, #bae6fd);
   border-radius: 10px;
   text-decoration: none;
   color: var(--clr-text);
@@ -587,7 +596,7 @@
   align-items: center;
   gap: .5rem;
   padding: .6rem .75rem;
-  background: #f8fafc;
+  background: var(--surface-page, #f8fafc);
   border: 1px solid var(--clr-border);
   border-radius: 8px;
   text-decoration: none;
@@ -598,17 +607,825 @@
   transition: background .15s ease, border-color .15s ease;
 }
 .sidebar-series-link:hover{
-  background: #fff;
+  background: var(--surface-card, #ffffff);
   border-color: var(--clr-accent);
 }
 .sidebar-series-link.is-current{
-  background: #fff;
+  background: var(--surface-card, #ffffff);
   border-color: var(--clr-accent);
   color: var(--clr-accent);
   font-weight: 700;
 }
 .sidebar-series-link .check{
-  color: #22c55e;
+  color: var(--ok, #10B981);
   font-weight: 700;
 }
 
+
+/* ============================================================================
+   ARTICLE READING SURFACE  (ported 2026-08-11 from the approved article
+   prototype, since deleted; see git history for docs/preview/article.html)
+
+   EVERYTHING below is scoped to `.article-read`, a class that exists only on
+   the 73 article pages. That is not caution, it is forced:
+
+     `<body class="article-page">` is ALSO on all 30 pages under
+     resources/videos/, and those pages consume `.article`,
+     `.article-summary`, `.article-footer`, `.cta-actions`, `.breadcrumb` and
+     `.back-link` from the rules ABOVE this block. Restyling any of them bare
+     would silently restyle the video library.
+
+   So: nothing above this comment changes, and the article template drops the
+   shared class names it no longer needs so the legacy rules simply never
+   match, rather than being fought with overrides.
+
+   Colour comes from the styles.css primitives with literal fallbacks, per the
+   cross-file rule at the top of this file: css/article.css can be applied
+   before styles.css has been, and a bare var() to a missing primitive falls
+   back to `inherit`, not to the right colour.
+   ============================================================================ */
+
+/* ---------- Hero: navy chrome ---------- */
+
+/* `background-image:none !important` is LOAD-BEARING. Do not remove it as a
+   stray !important.
+
+   js/article.js:125 does `hero.style.backgroundImage = url(...)`
+   unconditionally on every render. That is an inline style, so a normal
+   declaration cannot beat it, and the article photograph would paint as a
+   full-bleed backdrop behind this navy band. The redesign uses the image as a
+   contained panel instead. The only alternatives are editing js/article.js,
+   which carries the gtag gate and the noindex guard, or shipping the defect.
+   Verified in a browser: a plain `background:#010D20` still shows the photo. */
+.article-read .article-hero{
+  background: var(--navy-950, #010D20);
+  background-image: none !important;
+  color: var(--text-inverse-1, #F8FAFC);
+  padding: 48px 0 64px;
+  margin: 0;
+  border-radius: 0;
+  min-height: 0;
+  aspect-ratio: auto;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+/* Neutralises the black scrim in css/style.css and earlier in this file, which
+   existed to make white text legible over a photograph. There is no photograph
+   under the text now. */
+.article-read .article-hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(760px 420px at 78% 0%, rgba(0,67,179,0.42), transparent 70%);
+}
+.article-read .article-hero__inner{
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 64px;
+  align-items: center;
+}
+@media (min-width: 769px){ .article-read .article-hero__inner{ padding: 0 24px; } }
+
+.article-read .article-hero .breadcrumb{
+  font-size: .9375rem;
+  color: var(--text-inverse-3, #8FA3C0);
+  margin: 0 0 24px;
+}
+.article-read .article-hero .breadcrumb ol{
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.article-read .article-hero .breadcrumb li{ display: flex; align-items: center; gap: 6px; }
+.article-read .article-hero .breadcrumb li::after{
+  content: "/"; margin: 0;
+  color: var(--text-inverse-3, #8FA3C0); opacity: .55;
+}
+.article-read .article-hero .breadcrumb li:last-child::after{ content: ""; }
+.article-read .article-hero .breadcrumb-link{
+  color: var(--text-inverse-2, #C4D0E2); text-decoration: none;
+}
+.article-read .article-hero .breadcrumb-link:hover{
+  color: var(--text-inverse-1, #F8FAFC);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+/* display:block, not the flex the sibling crumbs use: text-overflow has no
+   effect on a flex container. Titles reach 103 characters in resources.json,
+   so truncation is not optional. */
+.article-read .article-hero .breadcrumb li[aria-current]{
+  display: block;
+  color: var(--text-inverse-3, #8FA3C0);
+  max-width: 44ch;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.article-read #article-title{
+  margin: 0;
+  color: var(--text-inverse-1, #F8FAFC);
+  font-size: clamp(2.25rem, 1.8rem + 2.25vw, 3rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  max-width: 20ch;
+  text-shadow: none;
+}
+
+/* The clock icon is a SIBLING of #article-meta, never a child. js/article.js:133
+   does `metaEl.textContent = buildMetaLine(article)`, which destroys every
+   child of that element. Verified: 2 children and 2 SVGs go to 0. A sibling
+   survives, which is the only way to decorate the line without editing
+   js/article.js. */
+.article-read .article-meta-row{
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 24px;
+  min-height: 22px;
+  color: var(--text-inverse-3, #8FA3C0);
+  font-size: .9375rem;
+}
+.article-read .article-meta-row .icon--sm{
+  width: 16px; height: 16px;
+  stroke: var(--blue-sky, #4DA3FF); stroke-width: 1.75; fill: none;
+  stroke-linecap: round; stroke-linejoin: round; flex: none;
+}
+.article-read #article-meta{ margin: 0; opacity: 1; font-size: inherit; }
+
+.article-read #article-summary{
+  margin: 24px 0 0;
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--text-inverse-2, #C4D0E2);
+  max-width: 52ch;
+}
+
+/* ---------- Hero image panel ----------
+   16:10 and contained, rather than a 21:9 bed under the headline. The h1 is
+   never over a photograph, and the panel costs the fold nothing. */
+.article-read .hero-figure{
+  position: relative;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-dark, rgba(143,163,192,0.22));
+  background: var(--navy-900, #071B38);
+  box-shadow: var(--shadow-lg, 0 4px 12px rgba(1,13,32,0.08), 0 16px 40px rgba(1,13,32,0.14));
+  aspect-ratio: 16/10;
+}
+/* Resets `.article-hero img{position:absolute;inset:0}` from earlier in this
+   file, which pinned the image to the whole hero. */
+.article-read .article-hero img{
+  position: static; inset: auto;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  margin: 0; border-radius: 0;
+  aspect-ratio: 16/10;
+  display: block;
+}
+/* `<p class="eyebrow">Resource</p>` is generator anchor 14 in
+   tools/generate-article-pages.js, matched as an exact literal. It has to stay
+   in the markup verbatim, so it is given a real job here: the category tag on
+   the image panel. A failed match is silent and would ship "Resource" on all
+   72 generated pages. */
+.article-read .hero-figure .eyebrow{
+  position: absolute; left: 16px; bottom: 16px;
+  margin: 0;
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  opacity: 1;
+  color: var(--text-inverse-2, #C4D0E2);
+  background: rgba(1,13,32,0.55);
+  border: 1px solid var(--border-dark, rgba(143,163,192,0.22));
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+/* ---------- Reading layout ----------
+   Article column first in the DOM, rail second and sticky. The old markup put
+   the aside first, so a screen reader met five related-article cards before
+   the headline. */
+.article-read .article-layout{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 20px 96px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 64px;
+  align-items: start;
+}
+@media (min-width: 769px){ .article-read .article-layout{ padding-inline: 24px; } }
+.article-read .article-col{ min-width: 0; }
+
+/* Two widths on purpose. The container is --read-wide; prose is pulled in to
+   --read-measure. Evidence blocks keep the full width so they read as exhibits
+   rather than more column. */
+.article-read .article-body{
+  font-size: var(--read-size, 1.125rem);
+  line-height: var(--read-lh, 1.72);
+  color: var(--clr-text);
+  max-width: var(--read-wide, 46rem);
+}
+.article-read .article-body > p,
+.article-read .article-body > ul,
+.article-read .article-body > ol,
+.article-read .article-body > dl,
+.article-read .article-body > blockquote,
+.article-read .article-body > h1,
+.article-read .article-body > h2,
+.article-read .article-body > h3,
+.article-read .article-body > h4,
+.article-read .article-body > h5,
+.article-read .article-body > h6,
+.article-read .article-body > .kicker,
+.article-read .article-body > .callout,
+.article-read .article-body > .tip{
+  max-width: var(--read-measure, 39rem);
+}
+
+/* ---------- Body markup ----------
+   Counted across all 73 fragments, not assumed:
+     p 1289 / h2 416 / strong 318 / li 342 / a 112 / ul 86 / h3 74 / hr 61
+     span 16 / div 17 / br 8 / em 3 / ol 2 / code 2 / pre 1
+   Zero today: table, img, blockquote, figure, dl, h4-h6. Those are marked
+   DEFENSIVE and styled anyway, because this file already ships unused rules
+   for .callout, .tip and blockquote, and because an editor adding a table
+   tomorrow should not get an unstyled table.
+   Every vertical gap is a multiple of --read-rhythm (8px). */
+
+/* h3 was rendering at 20px/600 in --clr-muted, LIGHTER than the body text it
+   introduces. Both headings are ink now; separation comes from size, weight
+   and space. */
+.article-read .article-body h2{
+  font-size: clamp(1.5rem, 1.35rem + .75vw, 1.875rem);
+  line-height: 1.25; font-weight: 800; letter-spacing: -.02em;
+  color: var(--clr-text);
+  margin: 56px 0 16px;
+  scroll-margin-top: 96px;
+}
+.article-read .article-body h2:first-child{ margin-top: 0; }
+.article-read .article-body h3{
+  font-size: 1.25rem; line-height: 1.35; font-weight: 700; letter-spacing: -.01em;
+  color: var(--clr-text);
+  margin: 40px 0 12px;
+  scroll-margin-top: 96px;
+}
+.article-read .article-body h4{
+  font-size: 1.0625rem; line-height: 1.4; font-weight: 700;
+  color: var(--clr-text); margin: 32px 0 8px;
+}
+.article-read .article-body h5,
+.article-read .article-body h6{
+  font-size: .9375rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--clr-muted); margin: 32px 0 8px;
+}
+
+.article-read .article-body p{ margin: 0 0 24px; }
+.article-read .article-body strong{ font-weight: 700; color: var(--clr-text); }
+.article-read .article-body em{ font-style: italic; }
+.article-read .article-body a{
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--blue-tint-40, rgba(0,79,200,0.4));
+}
+.article-read .article-body a:hover{ text-decoration-color: var(--clr-accent); }
+
+.article-read .article-body ul,
+.article-read .article-body ol{ margin: 0 0 24px; padding-left: 1.4em; }
+.article-read .article-body li{ margin: 0 0 12px; line-height: var(--read-lh, 1.72); padding-left: .2em; }
+.article-read .article-body li:last-child{ margin-bottom: 0; }
+.article-read .article-body ul{ list-style: none; padding-left: 1.6em; }
+.article-read .article-body ul > li{ position: relative; }
+.article-read .article-body ul > li::before{
+  content: ""; position: absolute; left: -1.1em; top: .62em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--clr-accent); opacity: .65;
+}
+.article-read .article-body ol{ counter-reset: mp-ol; list-style: none; padding-left: 2.2em; }
+.article-read .article-body ol > li{ counter-increment: mp-ol; position: relative; }
+.article-read .article-body ol > li::before{
+  content: counter(mp-ol);
+  position: absolute; left: -2.2em; top: .1em;
+  width: 1.65em; height: 1.65em; border-radius: 9999px;
+  background: var(--blue-wash, #EFF6FF);
+  color: var(--blue-deep, #0043B3);
+  font-size: .82em; font-weight: 700; font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; justify-content: center;
+}
+.article-read .article-body li > ul,
+.article-read .article-body li > ol{ margin-top: 8px; margin-bottom: 0; }
+
+/* 61 <hr> across 10 fragments, used as section separators before an h2. The
+   old rule gave them 48px on top of the h2's own 48px top margin, opening a
+   96px hole. Collapsing the following heading closes it. */
+.article-read .article-body hr{
+  border: 0; height: 1px;
+  background: var(--clr-border);
+  margin: 48px 0;
+}
+.article-read .article-body hr + h2{ margin-top: 24px; }
+
+.article-read .article-body code{
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: .9em;
+  background: var(--surface-sunken, #f1f5f9);
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+  padding: .15em .4em;
+}
+.article-read .article-body pre{
+  margin: 0 0 24px; padding: 24px; overflow-x: auto;
+  background: var(--navy-950, #010D20); border-radius: 12px;
+}
+.article-read .article-body pre code{
+  background: none; border: 0; padding: 0;
+  color: var(--text-inverse-1, #F8FAFC);
+  font-size: .875rem; line-height: 1.6;
+}
+/* .formula: one fragment, articles/when-to-start-charging-parking.html. */
+.article-read .article-body .formula{
+  margin: 32px 0; padding: 24px;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--clr-border);
+  border-left: 3px solid var(--clr-accent);
+  border-radius: 0 12px 12px 0;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(1,13,32,0.06), 0 1px 3px rgba(1,13,32,0.08));
+  overflow-x: auto;
+  font-family: inherit; font-size: inherit;
+}
+.article-read .article-body .formula code{
+  background: none; border: 0; padding: 0;
+  font-size: .9375rem; color: var(--clr-text); white-space: pre-wrap;
+}
+/* .kicker: one fragment, articles/you-didnt-buy-a-parking-lot-to-babysit-it.html,
+   whose text is the short label "Resource Insight".
+
+   EVERY property that styles.css:1170 sets is set again here, on purpose. That
+   rule is a bare global `.kicker` and it still applies on article pages. An
+   earlier version of this block set only font-size, colour and margin, so the
+   two rules combined into a 19px uppercase label tracked at 3.42px, larger and
+   louder than the 18px body text it introduces. The bug was the partial
+   override, not the values.
+
+   If you edit this, keep the list complete: font-size, font-weight,
+   letter-spacing, text-transform, colour and margin. Dropping one hands that
+   property back to the global rule.
+
+   Metrics match the design system's eyebrow. Colour stays muted rather than
+   accent so it does not compete with the category eyebrow already in the
+   hero. */
+.article-read .article-body .kicker{
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--muted, #64748b);
+  margin: 0 0 16px;
+}
+
+/* DEFENSIVE from here: no fragment uses these today. */
+.article-read .article-body blockquote{
+  margin: 32px 0; padding: 24px 32px;
+  border-left: 3px solid var(--clr-accent);
+  background: var(--surface-card, #ffffff);
+  border-radius: 0 12px 12px 0;
+  color: var(--clr-muted); font-size: 1.0625rem;
+}
+.article-read .article-body blockquote p:last-child{ margin-bottom: 0; }
+.article-read .article-body .callout,
+.article-read .article-body .tip{
+  margin: 32px 0; padding: 24px 32px;
+  background: var(--blue-wash, #EFF6FF);
+  border: 1px solid var(--blue-tint-12, rgba(0,79,200,0.12));
+  border-radius: 12px; color: var(--clr-text);
+}
+.article-read .article-body .callout p:last-child,
+.article-read .article-body .tip p:last-child{ margin-bottom: 0; }
+/* Scrolls in its own box so a wide table can never make the page scroll sideways. */
+.article-read .article-body table{
+  width: 100%; border-collapse: collapse; font-size: 1rem; margin: 32px 0;
+}
+.article-read .article-body th,
+.article-read .article-body td{
+  text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--clr-border);
+}
+.article-read .article-body th{
+  font-size: .9375rem; font-weight: 700; color: var(--clr-muted);
+  text-transform: uppercase; letter-spacing: .06em;
+  background: var(--surface-sunken, #f1f5f9);
+}
+.article-read .article-body tr:last-child td{ border-bottom: 0; }
+/* enhanceBody() in js/article.js explicitly walks #article-body img, so the
+   system expects them even though no fragment has one. */
+.article-read .article-body img{
+  width: 100%; height: auto;
+  border-radius: 12px; border: 1px solid var(--clr-border);
+  margin: 32px 0; aspect-ratio: auto;
+}
+.article-read .article-body figure{ margin: 32px 0; }
+.article-read .article-body figure img{ margin: 0; }
+.article-read .article-body figcaption{
+  margin-top: 12px; font-size: .9375rem; color: var(--muted, #64748b);
+}
+.article-read .article-body dl{ margin: 32px 0; }
+.article-read .article-body dt{ font-weight: 700; color: var(--clr-text); margin-top: 16px; }
+.article-read .article-body dd{ margin: 8px 0 0; color: var(--clr-muted); }
+
+/* ---------- Series components ----------
+   .series-box, .series-cards-section and .series-breadcrumb are markup inside
+   the 5 series fragments, so the class names are fixed. Restyled, never
+   renamed: a rename would mean editing fragments. */
+.article-read .article-body .series-box{
+  margin: 40px 0; padding: 32px;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(1,13,32,0.06), 0 1px 3px rgba(1,13,32,0.08));
+}
+.article-read .article-body .series-box-header{
+  font-size: .8125rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--clr-accent); margin-bottom: 16px;
+}
+.article-read .article-body .series-box-list{
+  list-style: none; padding: 0; margin: 0; counter-reset: mp-series;
+}
+.article-read .article-body .series-box-list > li::before{ content: none; }
+.article-read .article-body .series-box-item{
+  margin: 0; padding: 0; border-top: 1px solid var(--clr-border);
+}
+.article-read .article-body .series-box-item:first-child{ border-top: 0; }
+.article-read .article-body .series-box-link{
+  counter-increment: mp-series;
+  display: grid; grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center; gap: 16px;
+  padding: 14px 0; text-decoration: none;
+  color: var(--clr-text); font-weight: 600; font-size: 1rem; line-height: 1.45;
+  background: none; border: 0; border-radius: 0;
+  transition: color .15s ease;
+}
+.article-read .article-body .series-box-link::before{
+  content: counter(mp-series);
+  width: 26px; height: 26px; border-radius: 9999px;
+  background: var(--blue-wash, #EFF6FF); color: var(--blue-deep, #0043B3);
+  font-size: .8125rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; justify-content: center; flex: none;
+}
+.article-read .article-body .series-box-link:hover{
+  color: var(--clr-accent); transform: none; box-shadow: none;
+}
+.article-read .article-body .series-box-link .read-time{
+  font-size: .9375rem; color: var(--muted, #64748b); font-weight: 500; white-space: nowrap;
+}
+
+.article-read .article-body .series-cards-section{ margin: 56px 0 0; }
+.article-read .article-body .series-cards-header{
+  font-size: clamp(1.5rem, 1.35rem + .75vw, 1.875rem);
+  line-height: 1.25; font-weight: 800; letter-spacing: -.02em;
+  color: var(--clr-text); margin: 0 0 24px;
+}
+.article-read .article-body .series-cards{
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px;
+}
+.article-read .article-body .series-card{
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  padding: 24px;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(1,13,32,0.06), 0 1px 3px rgba(1,13,32,0.08));
+  text-decoration: none; color: var(--clr-text);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.article-read .article-body .series-card:hover{
+  box-shadow: var(--shadow-md, 0 2px 4px rgba(1,13,32,0.05), 0 6px 16px rgba(1,13,32,0.08));
+  transform: translateY(-2px);
+  border-color: var(--clr-border);
+}
+.article-read .article-body .series-card-title{ font-weight: 700; font-size: 1rem; line-height: 1.4; }
+.article-read .article-body .series-card-meta{
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .9375rem; color: var(--muted, #64748b);
+}
+.article-read .article-body .series-card-arrow{
+  color: var(--clr-accent); font-weight: 700; transition: transform .2s ease;
+}
+.article-read .article-body .series-card:hover .series-card-arrow{ transform: translateX(4px); }
+
+.article-read .article-body .series-breadcrumb{
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+  margin: 0 0 32px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--clr-border);
+  font-size: .9375rem;
+}
+.article-read .article-body .series-breadcrumb-back{
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--clr-accent); text-decoration: none; font-weight: 600;
+}
+.article-read .article-body .series-breadcrumb-back:hover{
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.article-read .article-body .series-breadcrumb-part{
+  color: var(--clr-muted); font-weight: 600;
+  padding: 4px 12px;
+  background: var(--surface-sunken, #f1f5f9);
+  border: 1px solid var(--clr-border);
+  border-radius: 9999px; font-size: .8125rem;
+}
+
+/* ---------- The rail ----------
+   The old rail held five related-article cards, was position:static, and
+   stopped after 1307px against a 9527px article on dynamic-pricing-guide.
+   Roughly 8000px of empty gutter. It is sticky now, and carries what is useful
+   DURING a read: where you are, and one next step. */
+.article-read .article-rail{
+  position: sticky; top: 96px;
+  display: flex; flex-direction: column; gap: 24px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.article-read .rail-heading{
+  font-size: .8125rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted, #64748b); margin: 0;
+}
+.article-read .toc[hidden]{ display: none; }
+/* Marker suppressed where the panel is always open; restored at the mobile
+   breakpoint, where it becomes a real disclosure. */
+.article-read .toc > summary{ list-style: none; cursor: default; }
+.article-read .toc > summary::-webkit-details-marker{ display: none; }
+.article-read .toc-list{ list-style: none; padding: 0; margin: 12px 0 0; }
+.article-read .toc-list li{ margin: 0; }
+.article-read .toc-link{
+  display: block; padding: 7px 0 7px 16px; margin-left: 1px;
+  border-left: 2px solid var(--clr-border);
+  color: var(--clr-muted); text-decoration: none;
+  font-size: .9375rem; line-height: 1.45;
+  transition: color .15s ease, border-color .15s ease;
+}
+.article-read .toc-link:hover{ color: var(--clr-text); border-left-color: var(--muted, #64748b); }
+.article-read .toc-link.is-current{
+  color: var(--clr-accent); font-weight: 600; border-left-color: var(--clr-accent);
+}
+
+.article-read .rail-cta{
+  background: var(--navy-950, #010D20);
+  color: var(--text-inverse-1, #F8FAFC);
+  border: 1px solid var(--border-dark, rgba(143,163,192,0.22));
+  border-radius: 16px; padding: 24px;
+}
+.article-read .rail-cta__title{
+  margin: 0 0 8px; font-size: 1rem; font-weight: 700;
+  color: var(--text-inverse-1, #F8FAFC);
+}
+.article-read .rail-cta__body{
+  margin: 0 0 16px; font-size: .875rem; line-height: 1.55;
+  color: var(--text-inverse-3, #8FA3C0);
+}
+.article-read .rail-cta .btn{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 100%; height: 44px; padding: 0 16px;
+  border: 0; border-radius: 12px;
+  font-family: inherit; font-size: .9375rem; font-weight: 600; line-height: 1;
+  text-decoration: none;
+  background-image: var(--gradient-brand, linear-gradient(135deg,#0B80F9 0%,#004FC8 60%,#0043B3 100%));
+  background-size: 150% 150%; background-position: 0% 0%;
+  color: var(--surface-card, #ffffff);
+  box-shadow: var(--shadow-brand, 0 8px 24px rgba(0,79,200,0.28));
+  transition: background-position .3s ease;
+}
+.article-read .rail-cta .btn:hover{ background-position: 100% 100%; filter: none; }
+
+/* ---------- Bottom CTA band ----------
+   Uses the .band system from styles.css. #article-footer and
+   #article-footer-copy keep their ids: js/article.js writes the copy by id. */
+.article-read .article-cta-band{ text-align: center; position: relative; overflow: hidden; }
+.article-read .article-cta-band::before{
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(640px 360px at 50% 110%, rgba(0,67,179,0.45), transparent 70%);
+}
+.article-read .article-cta-band .band__inner{ position: relative; max-width: 720px; }
+.article-read .article-cta-band .h2{ color: var(--text-inverse-1, #F8FAFC); }
+.article-read #article-footer-copy{
+  margin: 16px auto 0; max-width: 52ch;
+  font-size: 1.1875rem; line-height: 1.6;
+  color: var(--text-inverse-2, #C4D0E2);
+}
+.article-read .cta-row{
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 48px;
+}
+
+/* ---------- Related band ----------
+   Same #related-list id and the same .related-* class names buildRelatedCard()
+   emits, so the runtime needs no change. Only the container moved. */
+.article-read .related-band .section-head{ max-width: 720px; margin-bottom: 48px; }
+.article-read #related-list{
+  display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px;
+}
+.article-read .related-card{
+  display: flex; flex-direction: column; align-items: stretch; gap: 0;
+  padding: 0;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(1,13,32,0.06), 0 1px 3px rgba(1,13,32,0.08));
+  overflow: hidden;
+  text-decoration: none; color: inherit;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.article-read .related-card:hover{
+  box-shadow: var(--shadow-md, 0 2px 4px rgba(1,13,32,0.05), 0 6px 16px rgba(1,13,32,0.08));
+  transform: translateY(-2px);
+  background: var(--surface-card, #ffffff);
+}
+.article-read .related-thumb{
+  width: auto; height: auto; flex: none;
+  aspect-ratio: 16/9; border-radius: 0;
+  background: var(--surface-sunken, #f1f5f9); overflow: hidden;
+}
+.article-read .related-thumb img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.article-read .related-content{
+  display: flex; flex-direction: column; flex: 1; gap: 8px; padding: 24px;
+}
+.article-read .related-tag{
+  font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--clr-accent);
+}
+.article-read .related-title{ font-size: 1rem; font-weight: 700; line-height: 1.4; flex: 1; }
+.article-read .related-read{ font-size: .9375rem; color: var(--muted, #64748b); }
+.article-read .related-empty{
+  grid-column: 1 / -1; padding: 32px; text-align: center;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px; color: var(--clr-muted); font-size: 1rem;
+}
+
+/* Skeletons match the card shape they stand in for, so the swap is not a jump. */
+.article-read .skeleton-card{
+  display: flex; flex-direction: column; gap: 0; padding: 0;
+  border-radius: 16px;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+}
+.article-read .skeleton-thumb{
+  width: auto; height: auto; aspect-ratio: 16/9; border-radius: 0;
+}
+.article-read .skeleton-content{ padding: 24px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px){
+  .article-read .article-hero__inner{ grid-template-columns: minmax(0,1fr) 320px; gap: 32px; }
+  .article-read #article-title{ max-width: none; }
+  .article-read .article-layout{ grid-template-columns: minmax(0,1fr) 260px; gap: 32px; }
+  .article-read #related-list{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 900px){
+  /* The rail collapses above the article. The rail CTA is dropped rather than
+     stacked: the bottom CTA band already covers it on a single column.
+     The measure is NOT released here. Releasing it below 900px was wrong at
+     900px itself, where the single column is 852px and prose ran to about 100
+     characters per line. --read-measure simply never binds on a phone. */
+  .article-read .article-layout{ grid-template-columns: 1fr; padding: 32px 20px 64px; }
+  .article-read .article-rail{ position: static; max-height: none; overflow: visible; order: -1; }
+  .article-read .rail-cta{ display: none; }
+  .article-read .toc{
+    background: var(--surface-card, #ffffff);
+    border: 1px solid var(--clr-border);
+    border-radius: 16px; padding: 16px 24px;
+  }
+  .article-read .toc > summary{
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: space-between; gap: 16px;
+  }
+  .article-read .toc > summary::after{
+    content: ""; width: 9px; height: 9px; flex: none;
+    border-right: 2px solid var(--muted, #64748b);
+    border-bottom: 2px solid var(--muted, #64748b);
+    transform: rotate(45deg) translate(-2px,-2px);
+    transition: transform .2s ease;
+  }
+  .article-read .toc[open] > summary::after{ transform: rotate(-135deg) translate(-3px,-3px); }
+  .article-read .toc-link{ border-left: 0; padding-left: 0; }
+}
+@media (max-width: 860px){
+  .article-read .article-hero{ padding: 32px 0 48px; }
+  .article-read .article-hero__inner{ grid-template-columns: 1fr; gap: 32px; }
+  .article-read .hero-figure{ aspect-ratio: 16/9; }
+  .article-read .article-hero img{ aspect-ratio: 16/9; }
+}
+@media (max-width: 600px){
+  .article-read .article-body .series-cards{ grid-template-columns: 1fr; }
+}
+@media (max-width: 560px){
+  /* The current-page crumb repeats the h1 directly beneath it and was wrapping
+     to two lines on a phone. */
+  .article-read .article-hero .breadcrumb li[aria-current]{ display: none; }
+  .article-read .article-hero .breadcrumb li:nth-last-child(2)::after{ content: ""; }
+  .article-read #related-list{ grid-template-columns: 1fr; }
+}
+/* 18px over a 350px column measures 38 characters per line, below the
+   comfortable floor. 17px brings it to 42 without making the type small. */
+@media (max-width: 430px){
+  .article-read .article-body{ font-size: 1.0625rem; }
+}
+@media (prefers-reduced-motion: reduce){
+  .article-read .related-card,
+  .article-read .article-body .series-card,
+  .article-read .article-body .series-card-arrow,
+  .article-read .toc > summary::after{ transition: none; }
+}
+
+/* ---------- Not-found fallback ----------
+   renderNotFound() in js/article.js does `container.innerHTML = ...` where
+   container is #article, replacing the hero, the layout and the CTA band with
+   a bare h1 and two paragraphs.
+
+   #article used to carry class="article", which gave that fallback a measure
+   and padding for free. The redesign drops that class, because .article is
+   shared with the 30 video pages and could not be restyled. Without these
+   rules the fallback rendered full-bleed with its text flush to x=0.
+
+   #article > h1 and #article > p exist ONLY in the fallback state: in the
+   normal state the direct children are .article-hero, .article-layout and
+   .article-cta-band. So this is a precise hook, not a broad one.
+
+   This fires for any article that fails to load, not only
+   articles/parking-today-small-lots/, which is the one page that hits it on
+   every visit because its resources.json entry has no `content` field. */
+.article-read #article > h1{
+  max-width: var(--read-measure, 39rem);
+  margin: 64px auto 16px;
+  padding-inline: 20px;
+  font-size: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem);
+  line-height: 1.2; font-weight: 800; letter-spacing: -.02em;
+  color: var(--clr-text);
+}
+.article-read #article > p{
+  max-width: var(--read-measure, 39rem);
+  margin: 0 auto 16px;
+  padding-inline: 20px;
+  font-size: 1.125rem; line-height: 1.6;
+  color: var(--clr-muted);
+}
+.article-read #article > p:last-child{ margin-bottom: 96px; }
+
+/* ---------- Focus rings for the article surface ----------
+   styles.css already covers three surfaces: .site-header / .site-footer at
+   :495, and `.band :focus-visible` at :2049 with a white variant for
+   `.band--navy`. Between them that handles the chrome, the bottom CTA band
+   and the related band, all of which are .band elements here.
+
+   The hero and the rail are NOT .band elements, so without these rules their
+   links fall back to the UA ring. On the navy hero that ring is not reliably
+   visible, which is the same finding the homepage recorded when the section
+   system was built. Same values as the band system, deliberately. */
+.article-read #article > .article-hero :focus-visible,
+.article-read .article-layout :focus-visible{
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.article-read #article > .article-hero :focus-visible{
+  outline-color: var(--surface-card, #ffffff);
+}
+
+/* ===================================================================
+   VIDEO PAGES: prose link colour
+   ===================================================================
+   The 30 pages under /resources/videos/ carry <body class="article-page">
+   and wrap their content in <article class="article">. Nothing in
+   styles.css or in this file styled a bare <a>, so the three "Related
+   Resources" links on every one of those pages fell through to the
+   browser's default #0000EE, underlined. 90 links across 30 pages,
+   measured 2026-08-13. They predate the rebrand and were never a token,
+   a literal, or a stale reference: they were never styled at all.
+
+   `.article` is the correct hook: it is on the 30 video pages and on
+   nothing else the site ships. The 73 article pages share
+   `article-page` on the body but deliberately do not use `class="article"`,
+   so they cannot be caught by this.
+
+   `:not([class])` is load-bearing for the same reason it is in
+   css/state-map.css. `.article-footer` sits INSIDE `.article` and holds
+   .btn-primary and .btn-secondary, so a bare `.article a` rule would put
+   link colour on 60 buttons and reproduce exactly the invisible-label bug
+   this pass just fixed on the state subpages. Measured: 150 anchors inside
+   .article across the 30 pages, 90 unclassed and 60 classed.
+
+   Values are copied from the .article-read reading surface above rather
+   than re-derived, so the two reading surfaces cannot drift. */
+.article-page .article a:not([class]){
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--blue-tint-40, rgba(0,79,200,0.4));
+}
+.article-page .article a:not([class]):hover{ text-decoration-color: var(--clr-accent); }

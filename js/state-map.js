@@ -106,7 +106,10 @@
     const pill = document.querySelector(`.state-pill[data-state="${stateName}"]`);
     if (pill) {
       pill.style.borderColor = 'var(--state-active)';
-      pill.style.background = 'rgba(13, 110, 253, 0.08)';
+      // Tokenised in Pass 2b-a, retargeted in 2b-b. --blue-tint-08 now holds
+      // rgba(0,79,200,0.08); this line used to hardcode rgba(13,110,253,0.08)
+      // and followed the token automatically when the value moved.
+      pill.style.background = 'var(--blue-tint-08)';
     }
   }
 

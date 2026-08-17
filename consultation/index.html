@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,765 +6,99 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Free Parking Consultation | Monetize Parking</title>
   <meta name="description" content="Turn your empty parking lot into monthly revenue. No upfront costs, no long-term contracts. Schedule a free 30-minute consultation today." />
-  <meta property="og:image" content="https://monetize-parking.com/images/og-image.png">
+  <meta property="og:image" content="https://monetize-parking.com/images/og-image.png?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Monetize Parking - Parking Lot Revenue Solutions for Property Owners">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://monetize-parking.com/images/og-image.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta name="twitter:image" content="https://monetize-parking.com/images/og-image.png?v=2">
+  <link rel="icon" type="image/png" href="/images/favicon-96x96.png?v=2" sizes="96x96" />
+  <link rel="shortcut icon" href="/images/favicon.ico?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=2" />
+  <meta name="theme-color" content="#010d20" />
+  <meta name="apple-mobile-web-app-title" content="MonetizeParking" />
+  <link rel="manifest" href="/images/site.webmanifest?v=2" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Resource hints for faster third-party connections -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://assets.calendly.com" crossorigin>
+
+  <!-- Critical CSS inlined for fast first paint. Hex literals only: this block
+       paints before the async styles.css link resolves, so var() references to
+       tokens defined there would not resolve at first paint. -->
+  <style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:#F8FAFC;color:#0f172a;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}img{max-width:100%}.skip-link{position:absolute;top:0;left:0;transform:translateY(-100%);padding:8px 16px;background:#004FC8;color:#fff;z-index:9999;text-decoration:none;font-weight:600}.skip-link:focus{transform:translateY(0)}
+.page-consultation .lp-header{background:#010D20;border-bottom:1px solid rgba(143,163,192,0.22);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.page-consultation .lp-header__logo{display:flex;align-items:center}.page-consultation .lp-header__logo-img{height:44px;width:auto;display:block}.page-consultation .lp-header__phone{color:#C4D0E2;font-size:.9375rem;font-weight:600;text-decoration:none}.page-consultation .lp-header__phone:hover{color:#fff}
+.page-consultation .band{padding-block:clamp(4rem,8vw,7rem)}.page-consultation .band--sm{padding-block:clamp(1.75rem,3vw,2.5rem)}.page-consultation .band--page{background:#F8FAFC}.page-consultation .band--card{background:#FFFFFF}.page-consultation .band--sunken{background:#F1F5F9}.page-consultation .band--navy{background:#010D20;color:#F8FAFC}.page-consultation .band__inner{max-width:1200px;margin:0 auto;padding-inline:20px}@media(min-width:769px){.page-consultation .band__inner{padding-inline:24px}}
+.page-consultation .eyebrow{display:block;margin-bottom:16px;font-size:.8125rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#004FC8}.page-consultation .band--navy .eyebrow{color:#4DA3FF}
+.page-consultation .h1{font-size:clamp(2.25rem,1.8rem + 2.25vw,3rem);line-height:1.12;font-weight:800;letter-spacing:-.025em;margin:0}.page-consultation .h2{font-size:clamp(1.75rem,1.5rem + 1.25vw,2.25rem);line-height:1.2;font-weight:800;letter-spacing:-.02em;margin:0}.page-consultation .h3{font-size:clamp(1.25rem,1.15rem + .5vw,1.5rem);line-height:1.3;font-weight:700;letter-spacing:-.01em;margin:0}.page-consultation .lede{font-size:1.1875rem;line-height:1.6;color:#475569;max-width:60ch;margin:0}.page-consultation .band--navy .lede{color:#C4D0E2}
+.page-consultation .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:56px;padding-inline:32px;border:0;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;line-height:1;white-space:nowrap;text-decoration:none;cursor:pointer}.page-consultation .btn--primary{background-image:linear-gradient(135deg,#0B80F9 0%,#004FC8 60%,#0043B3 100%);color:#fff;box-shadow:0 8px 24px rgba(0,79,200,0.28)}.page-consultation .btn--secondary{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.35)}
+.page-consultation .icon{width:24px;height:24px;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}.page-consultation .icon--sm{width:18px;height:18px}
+.page-consultation .band-grid{display:grid;gap:24px}.page-consultation .band-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.page-consultation .band-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}.page-consultation .tile{display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:16px;box-shadow:0 1px 2px rgba(1,13,32,0.06),0 1px 3px rgba(1,13,32,0.08);padding:32px}.page-consultation .band--card .tile{background:#F8FAFC}.page-consultation .tile p{color:#475569;margin:12px 0 0;font-size:1rem;line-height:1.65}
+.page-consultation .section-head{max-width:720px;margin-bottom:48px}.page-consultation .section-head .lede{margin-top:16px}
+/* Hero. Deliberately compact: the Calendly band has to reach the fold, and
+   every 100px spent here pushes the only conversion mechanism down a screen. */
+.page-consultation .lp-hero{padding-block:clamp(2.5rem,4vw,3rem)}.page-consultation .lp-hero__inner{max-width:820px;margin:0 auto;text-align:center}.page-consultation .lp-hero .lede{margin:16px auto 0;max-width:56ch}/* The form is the primary mechanism and sits in the hero. White card inside the
+   navy band: a form wants light contrast, and the card keeps the navy from
+   swallowing the inputs. */
+.page-consultation .lp-form-card{max-width:560px;margin:28px auto 0;padding:28px;background:#FFFFFF;border-radius:16px;box-shadow:0 4px 12px rgba(1,13,32,0.08),0 16px 40px rgba(1,13,32,0.14);text-align:left;color:#0f172a}.page-consultation .lp-form-card .h3{color:#0f172a}.page-consultation .lp-form-card__sub{margin:6px 0 16px;font-size:.9375rem;line-height:1.5;color:#475569}
+.page-consultation .cbf__row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.page-consultation .cbf__group{margin-bottom:12px}.page-consultation .cbf__row .cbf__group{margin-bottom:0}.page-consultation .cbf__row+.cbf__group{margin-top:14px}
+.page-consultation .cbf__label{display:block;margin-bottom:4px;font-size:.875rem;font-weight:600;color:#0f172a}.page-consultation .cbf__req{color:#dc2626}.page-consultation .cbf__opt{font-weight:500;color:#64748b}
+.page-consultation .cbf__input{width:100%;height:46px;padding:0 14px;border:1px solid #E2E8F0;border-radius:10px;background:#FFFFFF;font-family:inherit;font-size:1rem;color:#0f172a}.page-consultation .cbf__input::placeholder{color:#64748b}.page-consultation .cbf__input:focus{outline:none;border-color:#004FC8;box-shadow:0 0 0 3px rgba(0,79,200,0.12)}
+/* Progressive disclosure, mobile only. Above 768px the optional pair is
+   always visible and the toggle is not rendered, so desktop behaviour and the
+   submitted payload are unchanged either way: collapsed fields are hidden with
+   display:none, which still submits them (empty, as before). */
+.page-consultation .cbf__toggle{display:none;align-items:center;gap:8px;width:100%;margin:2px 0 14px;padding:10px 12px;background:#F8FAFC;border:1px dashed #E2E8F0;border-radius:10px;font-family:inherit;font-size:.875rem;font-weight:600;color:#004FC8;cursor:pointer}.page-consultation .cbf__toggle:focus-visible{outline:2px solid #004FC8;outline-offset:2px}.page-consultation .cbf__toggle-icon{transition:transform .15s ease}.page-consultation .cbf__toggle[aria-expanded="true"] .cbf__toggle-icon{transform:rotate(45deg)}
+.page-consultation .cbf__submit{width:100%;margin-top:6px}.page-consultation .cbf__note{margin:10px 0 0;font-size:.8125rem;line-height:1.5;color:#64748b;text-align:center}
+.page-consultation .hp{position:absolute;left:-9999px;opacity:0}
+.page-consultation .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(143,163,192,0.22)}.page-consultation .trust__item{display:inline-flex;align-items:center;gap:8px;font-size:.9375rem;font-weight:600;color:#F8FAFC}.page-consultation .trust__item .icon{color:#4DA3FF}
+/* Proof strip. Sits directly beneath the hero because proof is the cheapest
+   thing on the page to believe and was previously seven sections down. */
+.page-consultation .proof{display:flex;flex-wrap:wrap;align-items:flex-start;gap:32px 48px}.page-consultation .proof__stat{flex:1 1 200px}.page-consultation .proof__num{display:block;font-size:clamp(2rem,1.6rem + 1.5vw,2.75rem);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:#004FC8}.page-consultation .proof__label{display:block;margin-top:8px;font-size:.9375rem;font-weight:600;color:#475569;line-height:1.45}.page-consultation .proof__foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:20px;padding-top:16px;border-top:1px solid #E2E8F0}.page-consultation .proof__note{font-size:.8125rem;line-height:1.5;color:#64748b;margin:0}.page-consultation .proof__link{display:inline-flex;align-items:center;gap:6px;font-size:.9375rem;font-weight:600;color:#004FC8;text-decoration:none}.page-consultation .proof__link:hover{text-decoration:underline}
+/* Calendly. The section background must stay in step with background_color in
+   the embed data-url, or a visible rectangle appears around the iframe. */
+.page-consultation .lp-calendly__head{max-width:720px;margin:0 auto 32px;text-align:center}.page-consultation .lp-calendly__head .lede{margin:16px auto 0}.page-consultation .calendly-inline-widget{border-radius:16px;overflow:hidden;border:1px solid #E2E8F0;box-shadow:0 1px 2px rgba(1,13,32,0.06),0 1px 3px rgba(1,13,32,0.08)}
+.page-consultation .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.page-consultation .step__num{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(0,79,200,0.08);color:#004FC8;font-weight:800;font-size:1.0625rem;margin-bottom:20px}.page-consultation .step p{color:#475569;margin:10px 0 0;font-size:1rem;line-height:1.65}
+.page-consultation .venues{margin-top:40px;padding-top:28px;border-top:1px solid #E2E8F0;font-size:1.0625rem;line-height:1.65;color:#475569;max-width:none}
+.page-consultation .closing{text-align:center}.page-consultation .closing__inner{max-width:720px;margin:0 auto}.page-consultation .closing .lede{margin:16px auto 0}.page-consultation .closing__cta{margin-top:28px}.page-consultation .closing__alt{margin:20px auto 0;max-width:none;font-size:.9375rem;color:#C4D0E2}.page-consultation .closing__alt a{color:#4DA3FF;font-weight:600}
+.page-consultation .lp-footer{background:#010D20;border-top:1px solid rgba(143,163,192,0.22);padding:24px;text-align:center;font-size:.875rem;color:#8FA3C0}
+@media(max-width:1024px){.page-consultation .band-grid--3,.page-consultation .steps{grid-template-columns:1fr}}
+@media(max-width:768px){.page-consultation .band-grid--2{grid-template-columns:1fr}.page-consultation .lp-header{padding:12px 20px}.page-consultation .lp-header__logo-img{height:38px}.page-consultation .lp-header__phone{font-size:.875rem}.page-consultation .cbf__row{grid-template-columns:1fr;gap:0}.page-consultation .cbf__row .cbf__group{margin-bottom:12px}.page-consultation .cbf__toggle{display:flex}.page-consultation .cbf__more{display:none}.page-consultation .cbf__more.is-open{display:block}.page-consultation .lp-form-card{padding:20px;margin-top:20px}.page-consultation .trust{gap:10px 20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.page-consultation .cbf__toggle-icon{transition:none}}</style>
+
+  <!-- Deferred full CSS loading -->
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/styles.css"></noscript>
+
+  <!-- Preview noindex guard - remove on merge day -->
+  <script>
+    if (window.location.hostname !== 'monetize-parking.com') {
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, nofollow');
+    }
+  </script>
+  <!-- Google tag (gtag.js) - gated to production hostname during rebrand -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LGHS0L5WE8');
-    gtag('config', 'AW-18066534348');
+    if (window.location.hostname === 'monetize-parking.com') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-LGHS0L5WE8');
+      gtag('config', 'AW-18066534348');
+    } else {
+      window.gtag = function gtag(){};
+    }
   </script>
 
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --navy: #0f1c2e;
-      --navy-light: #1a2d45;
-      --blue: #0b6efd;
-      --blue-hover: #0a5ed4;
-      --blue-light: rgba(11, 110, 253, 0.1);
-      --gray-50: #f8fafc;
-      --gray-100: #f1f5f9;
-      --gray-200: #e2e8f0;
-      --gray-400: #94a3b8;
-      --gray-600: #475569;
-      --gray-700: #334155;
-      --gray-900: #0f172a;
-      --white: #ffffff;
-      --font-display: 'Inter', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      color: var(--gray-700);
-      line-height: 1.6;
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Minimal Header */
-    .lp-header {
-      background: var(--navy);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .lp-header__logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .lp-header__logo-img {
-      height: 48px;
-      width: auto;
-      display: block;
-    }
-    .lp-header__phone {
-      color: var(--gray-400);
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .lp-header__phone:hover { color: var(--white); }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(170deg, var(--navy) 0%, var(--navy-light) 55%, #1e3a5f 100%);
-      padding: 80px 24px 100px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(11, 110, 253, 0.12) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(11, 110, 253, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .hero__inner {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .hero__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(11, 110, 253, 0.15);
-      border: 1px solid rgba(11, 110, 253, 0.3);
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 28px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      animation: fadeDown 0.6s ease both;
-    }
-    .hero__badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--blue);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .hero__title {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 5.5vw, 56px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 20px;
-      animation: fadeDown 0.6s 0.1s ease both;
-    }
-    .hero__title span {
-      color: var(--blue);
-    }
-    .hero__sub {
-      font-size: clamp(17px, 2.2vw, 20px);
-      color: var(--gray-400);
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
-      animation: fadeDown 0.6s 0.2s ease both;
-    }
-    .hero__cta-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      animation: fadeDown 0.6s 0.3s ease both;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--blue);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 17px;
-      font-weight: 600;
-      padding: 18px 36px;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 20px rgba(11, 110, 253, 0.35);
-    }
-    .btn-primary:hover {
-      background: var(--blue-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(11, 110, 253, 0.45);
-    }
-    .btn-primary svg { transition: transform 0.25s; }
-    .btn-primary:hover svg { transform: translateX(3px); }
-    .hero__cta-note {
-      color: var(--gray-400);
-      font-size: 13px;
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Trust Bar */
-    .trust-bar {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      padding: 24px;
-    }
-    .trust-bar__inner {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 16px 40px;
-    }
-    .trust-bar__item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--gray-600);
-    }
-    .trust-bar__icon {
-      width: 20px;
-      height: 20px;
-      color: var(--blue);
-      flex-shrink: 0;
-    }
-
-    /* Value Props */
-    .value-props {
-      padding: 80px 24px;
-      background: var(--white);
-    }
-    .value-props__inner {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .value-props__heading {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .value-props__heading h2 {
-      font-family: var(--font-display);
-      font-size: clamp(28px, 4vw, 38px);
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 12px;
-    }
-    .value-props__heading p {
-      font-size: 17px;
-      color: var(--gray-600);
-      max-width: 520px;
-      margin: 0 auto;
-    }
-    .value-props__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-    .vp-card {
-      background: var(--gray-50);
-      border: 1px solid var(--gray-200);
-      border-radius: 16px;
-      padding: 32px 28px;
-      transition: all 0.3s ease;
-    }
-    .vp-card:hover {
-      border-color: var(--blue);
-      box-shadow: 0 4px 24px rgba(11, 110, 253, 0.1);
-      transform: translateY(-3px);
-    }
-    .vp-card__icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .vp-card__icon--green,
-    .vp-card__icon--blue,
-    .vp-card__icon--navy,
-    .vp-card__icon--amber { background: rgba(11, 110, 253, 0.1); color: var(--blue); }
-    .vp-card h3 {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 8px;
-    }
-    .vp-card p {
-      font-size: 15px;
-      color: var(--gray-600);
-      line-height: 1.6;
-    }
-
-    /* Who Section */
-    .who-section {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      padding: 80px 24px;
-    }
-    .who-section__inner {
-      max-width: 860px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .who-section h2 {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 3.5vw, 34px);
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 40px;
-    }
-    .who-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      text-align: left;
-    }
-    .who-item {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .who-item__icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--navy);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-bottom: 14px;
-    }
-    .who-item h4 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--gray-900);
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-    .who-item p {
-      font-size: 13px;
-      color: var(--gray-600);
-      line-height: 1.55;
-    }
-    .who-catchall {
-      margin-top: 28px;
-      text-align: center;
-      font-size: 14px;
-      font-style: italic;
-      color: var(--gray-600);
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-
-    /* Social Proof / Case Study */
-    .social-proof {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      padding: 72px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .social-proof__inner {
-      max-width: 960px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .social-proof__label {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray-600);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .social-proof h2 {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 3.5vw, 34px);
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 48px;
-    }
-    .social-proof__stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-bottom: 36px;
-    }
-    .social-proof__stat {
-      padding: 8px 24px;
-      border-right: 1px solid var(--gray-200);
-    }
-    .social-proof__stat:last-child {
-      border-right: none;
-    }
-    .social-proof__stat-number {
-      font-family: var(--font-display);
-      font-size: clamp(34px, 5vw, 52px);
-      font-weight: 700;
-      color: var(--gray-900);
-      line-height: 1.1;
-      margin-bottom: 10px;
-    }
-    .social-proof__stat-label {
-      font-size: 14px;
-      color: var(--gray-600);
-      line-height: 1.5;
-    }
-    .social-proof__link {
-      display: inline-block;
-      font-size: 15px;
-      color: var(--blue);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.2s;
-    }
-    .social-proof__link:hover {
-      color: var(--blue-hover);
-    }
-
-    /* How It Works */
-    .how-it-works {
-      padding: 80px 24px;
-      background: var(--white);
-    }
-    .how-it-works__inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .how-it-works h2 {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 3.5vw, 34px);
-      font-weight: 700;
-      color: var(--gray-900);
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-    }
-    .step {
-      display: flex;
-      gap: 24px;
-      padding-bottom: 48px;
-      position: relative;
-    }
-    .step:last-child { padding-bottom: 0; }
-    .step__number-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .step__number {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--navy);
-      color: var(--white);
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-    .step__line {
-      flex: 1;
-      width: 2px;
-      background: var(--gray-200);
-      margin-top: 8px;
-    }
-    .step:last-child .step__line { display: none; }
-    .step__content {
-      padding-top: 8px;
-    }
-    .step__content h3 {
-      font-family: var(--font-display);
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 6px;
-    }
-    .step__content p {
-      font-size: 15px;
-      color: var(--gray-600);
-      max-width: 500px;
-    }
-
-    /* Final CTA */
-    .final-cta {
-      background: linear-gradient(170deg, var(--navy) 0%, var(--navy-light) 100%);
-      padding: 80px 24px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .final-cta::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Cpath d='M60 0 H0 V60' fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.04'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='60' height='60' fill='url(%23g)'/%3E%3C/svg%3E");
-    }
-    .final-cta__inner {
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .final-cta h2 {
-      font-family: var(--font-display);
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-    .final-cta p {
-      font-size: 17px;
-      color: var(--gray-400);
-      margin-bottom: 36px;
-      line-height: 1.6;
-    }
-    .final-cta .btn-primary {
-      font-size: 18px;
-      padding: 20px 40px;
-    }
-
-    /* Footer */
-    .lp-footer {
-      background: var(--gray-900);
-      padding: 24px 16px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--gray-400);
-      line-height: 1.6;
-    }
-    .lp-footer a {
-      color: var(--gray-400);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color 0.2s;
-    }
-    .lp-footer a:hover { color: var(--white); }
-
-    /* Calendly Embed Section */
-    .lp-calendly-section {
-      padding: 60px 0;
-      background-color: #f8f9fa;
-    }
-    .lp-calendly-section .lp-container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .lp-calendly-section h2 {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 3.5vw, 34px);
-      font-weight: 700;
-      color: var(--gray-900);
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    .lp-calendly-section p {
-      text-align: center;
-      color: #6c757d;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .calendly-inline-widget {
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    /* Divider */
-    .lp-divider {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-      color: var(--gray-400);
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .lp-divider::before,
-    .lp-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
-    }
-
-    /* Callback Form */
-    .callback-section {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      padding: 64px 24px;
-    }
-    .callback-section__inner {
-      max-width: 560px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .callback-section__divider {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-      color: var(--gray-400);
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .callback-section__divider::before,
-    .callback-section__divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
-    }
-    .callback-section h3 {
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 8px;
-    }
-    .callback-section > .callback-section__inner > p {
-      font-size: 15px;
-      color: var(--gray-600);
-      margin-bottom: 32px;
-    }
-    .callback-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      text-align: left;
-    }
-    .callback-form__group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .callback-form__group--full {
-      grid-column: 1 / -1;
-    }
-    .callback-form__label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gray-700);
-    }
-    .callback-form__label .required {
-      color: #ef4444;
-      margin-left: 2px;
-    }
-    .callback-form__input {
-      font-family: var(--font-body);
-      font-size: 15px;
-      padding: 12px 16px;
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      background: var(--white);
-      color: var(--gray-900);
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-    .callback-form__input:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-    .callback-form__input::placeholder {
-      color: var(--gray-400);
-    }
-    .btn-callback {
-      grid-column: 1 / -1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--navy);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 600;
-      padding: 16px 32px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      margin-top: 8px;
-    }
-    .btn-callback:hover {
-      background: var(--navy-light);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(15, 28, 46, 0.25);
-    }
-    .callback-form__note {
-      grid-column: 1 / -1;
-      text-align: center;
-      font-size: 12px;
-      color: var(--gray-400);
-      margin-top: -4px;
-    }
-
-    /* Responsive */
-    @media (max-width: 760px) {
-      .social-proof__stats {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-      .social-proof__stat {
-        border-right: none;
-        border-bottom: 1px solid var(--gray-200);
-        padding-bottom: 28px;
-      }
-      .social-proof__stat:last-child {
-        border-bottom: none;
-        padding-bottom: 8px;
-      }
-    }
-    @media (max-width: 640px) {
-      .hero { padding: 56px 20px 72px; }
-      .btn-primary { width: 100%; justify-content: center; }
-      .trust-bar__inner { gap: 12px 24px; }
-      .who-grid { grid-template-columns: 1fr; }
-      .value-props__grid { grid-template-columns: 1fr; }
-      .callback-form { grid-template-columns: 1fr; }
-    }
-  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -786,260 +120,212 @@
 }
   </script>
 </head>
-<body>
+<body class="page-consultation">
+
+  <a href="#main" class="skip-link">Skip to main content</a>
 
   <header class="lp-header">
     <span class="lp-header__logo" aria-label="Monetize Parking">
-      <img src="/images/Logo.svg" alt="Monetize Parking" class="lp-header__logo-img" />
+      <img src="/assets/brand/MP_Logo_400.png" alt="Monetize Parking" class="lp-header__logo-img" width="400" height="160" />
     </span>
     <a href="tel:+16122454025" class="lp-header__phone">Questions? Call (612) 245-4025</a>
   </header>
 
-  <section class="hero">
-    <div class="hero__inner">
-      <div class="hero__badge">Free 30-Minute Consultation</div>
-      <h1 class="hero__title">Your Parking Lot Is Sitting on <span>Untapped Revenue</span></h1>
-      <p class="hero__sub">Let us help you capture it, whether that means starting paid parking, replacing an outdated system, or optimizing what you have. No upfront costs. No long-term contracts. Just results.</p>
-      <div class="hero__cta-group">
-        <a href="#schedule" class="btn-primary">
-          Schedule Your Free Consultation
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-        <span class="hero__cta-note">30 minutes. No pressure. No obligation.</span>
-      </div>
-    </div>
-  </section>
+  <main id="main">
 
-  <div class="trust-bar">
-    <div class="trust-bar__inner">
-      <div class="trust-bar__item">
-        <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Zero Upfront Costs
+    <section class="band band--navy lp-hero">
+      <div class="band__inner">
+        <div class="lp-hero__inner">
+          <span class="eyebrow">Free 30-Minute Consultation</span>
+          <h1 class="h1">Parking Revenue Consultants for Property Owners</h1>
+          <p class="lede">Start charging for parking, replace an aging system, or earn more from the lot you already run. No upfront cost, month to month, cancel anytime.</p>
+          <div class="lp-form-card">
+            <h2 class="h3">Request a callback</h2>
+            <p class="lp-form-card__sub">Thirty minutes on the phone. You will leave knowing what your lot could earn.</p>
+            <form class="cbf" id="callbackForm" action="https://formspree.io/f/mqegwawp" method="POST">
+              <input type="hidden" name="_subject" value="PPC Landing Page Callback Request" />
+              <input type="hidden" name="_next" value="/consultation/thank-you/" />
+              <input type="text" name="_gotcha" class="hp" autocomplete="off" tabindex="-1" aria-hidden="true" /> <!-- honeypot -->
+              <div class="cbf__row">
+                <div class="cbf__group">
+                  <label class="cbf__label" for="cbName">Name <span class="cbf__req">*</span></label>
+                  <input id="cbName" type="text" name="name" class="cbf__input" autocomplete="name" placeholder="Your name" required />
+                </div>
+                <div class="cbf__group">
+                  <label class="cbf__label" for="cbPhone">Phone <span class="cbf__req">*</span></label>
+                  <input id="cbPhone" type="tel" name="phone" class="cbf__input" autocomplete="tel" placeholder="(555) 123-4567" required />
+                </div>
+              </div>
+              <button type="button" class="cbf__toggle" id="cbfToggle" aria-expanded="false" aria-controls="cbfMore">
+                <svg class="icon icon--sm cbf__toggle-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                Add email or property type
+              </button>
+              <div class="cbf__more" id="cbfMore">
+              <div class="cbf__group">
+                <label class="cbf__label" for="cbEmail">Email <span class="cbf__opt">(optional)</span></label>
+                <input id="cbEmail" type="email" name="_replyto" class="cbf__input" autocomplete="email" placeholder="you@email.com" />
+              </div>
+              <div class="cbf__group">
+                <label class="cbf__label" for="cbType">Property type <span class="cbf__opt">(optional)</span></label>
+                <select id="cbType" name="property_type" class="cbf__input">
+                  <option value="" selected>Select one</option>
+                  <option value="Office Building">Office Building</option>
+                  <option value="Retail/Strip Mall">Retail/Strip Mall</option>
+                  <option value="Hotel/Hospitality">Hotel/Hospitality</option>
+                  <option value="Event Venue">Event Venue</option>
+                  <option value="Church/Place of Worship">Church/Place of Worship</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              </div>
+              <button type="submit" class="btn btn--primary cbf__submit">Request a callback</button>
+              <p class="cbf__note">No obligation. Cancel anytime with no penalties.</p>
+            </form>
+          </div>
+        </div>
+        <div class="trust">
+            <span class="trust__item"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Zero upfront costs</span>
+            <span class="trust__item"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Month-to-month contracts</span>
+            <span class="trust__item"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Vendor-neutral recommendations</span>
+            <span class="trust__item"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Nationwide service</span>
+        </div>
       </div>
-      <div class="trust-bar__item">
-        <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Month-to-Month Contracts
-      </div>
-      <div class="trust-bar__item">
-        <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Vendor-Neutral Recommendations
-      </div>
-      <div class="trust-bar__item">
-        <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Nationwide Service
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <section class="value-props">
-    <div class="value-props__inner">
-      <div class="value-props__heading">
-        <h2>Why Property Owners Choose Us</h2>
-        <p>We take the complexity out of parking monetization so you can focus on what matters.</p>
-      </div>
-      <div class="value-props__grid">
-        <div class="vp-card">
-          <div class="vp-card__icon vp-card__icon--green">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <h3>No Upfront Costs</h3>
-          <p>We set up and manage everything at no cost to you. Our technology partners cover the equipment and installation so you never pay out of pocket.</p>
+    <section class="band band--sm band--card">
+      <div class="band__inner">
+        <span class="eyebrow">Client Result</span>
+        <div class="proof">
+          <span class="proof__stat">
+            <span class="proof__num">178%</span>
+            <span class="proof__label">revenue increase in 90 days</span>
+          </span>
+          <span class="proof__stat">
+            <span class="proof__num">85-90%</span>
+            <span class="proof__label">compliance after integrated enforcement, up from 45%</span>
+          </span>
+          <span class="proof__stat">
+            <span class="proof__num">$240K</span>
+            <span class="proof__label">property value lift from increased NOI</span>
+          </span>
         </div>
-        <div class="vp-card">
-          <div class="vp-card__icon vp-card__icon--blue">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3>Month-to-Month Flexibility</h3>
-          <p>No long-term commitments or hidden fees. Stay because it works, not because you are locked in. Cancel anytime with no penalties.</p>
-        </div>
-        <div class="vp-card">
-          <div class="vp-card__icon vp-card__icon--amber">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <h3>Turn Empty Spaces Into Income</h3>
-          <p>Most private lots sit empty during off-hours. We connect you with the right technology to capture that demand and put real dollars in your pocket every month.</p>
-        </div>
-        <div class="vp-card">
-          <div class="vp-card__icon vp-card__icon--navy">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
-          </div>
-          <h3>Vendor-Neutral Guidance</h3>
-          <p>We are not tied to any single technology provider. We evaluate your lot, your market, and your goals, then recommend the best-fit solution for your situation.</p>
+        <div class="proof__foot">
+          <a href="/articles/eau-claire-revenue-increase/" class="proof__link">Read the Eau Claire case study
+            <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <p class="proof__note">One client engagement. These are not industry averages.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="who-section">
-    <div class="who-section__inner">
-      <h2>We Work With Lots Like Yours</h2>
-      <div class="who-grid">
-        <div class="who-item">
-          <div class="who-item__icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          </div>
-          <h4>Office Buildings & Business Parks</h4>
-          <p>After-hours and weekend spaces sit empty while nearby demand goes unmet.</p>
+    <section class="band band--sm band--page" id="schedule">
+      <div class="band__inner">
+        <div class="lp-calendly__head">
+          <span class="eyebrow">Prefer To Book Directly</span>
+          <h2 class="h2">Pick a time instead</h2>
+          <p class="lede">Booking a slot works just as well as a callback. Choose a time that suits you and a parking revenue specialist will call then.</p>
         </div>
-        <div class="who-item">
-          <div class="who-item__icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/></svg>
-          </div>
-          <h4>Retail Centers & Strip Malls</h4>
-          <p>Add paid parking for non-customers or optimize an existing setup with better pricing.</p>
-        </div>
-        <div class="who-item">
-          <div class="who-item__icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M2 20v-6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6"/><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><path d="M10 9h4"/></svg>
-          </div>
-          <h4>Hotels & Hospitality</h4>
-          <p>Guest parking and overflow lots often have untapped revenue waiting.</p>
-        </div>
-        <div class="who-item">
-          <div class="who-item__icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h4>Event Venues & Stadiums</h4>
-          <p>Capture peak-demand pricing on event days and steady income the rest of the week.</p>
-        </div>
-        <div class="who-item">
-          <div class="who-item__icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <h4>Churches & Places of Worship</h4>
-          <p>Weekday parking revenue can fund ministry without impacting services.</p>
-        </div>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/d/cxtd-94s-fmm/free-parking-consultation?hide_gdpr_banner=1&background_color=f8fafc&primary_color=004fc8" style="min-width:320px;height:700px;"></div>
       </div>
-      <p class="who-catchall">Don't see your property type? We work with lots of all sizes, from 5-space microlots to 500+ space facilities. Every lot is different, and that is exactly why we start with a conversation.</p>
-    </div>
-  </section>
+    </section>
 
-  <section class="how-it-works">
-    <div class="how-it-works__inner">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step__number-col">
-            <div class="step__number">1</div>
-            <div class="step__line"></div>
-          </div>
-          <div class="step__content">
-            <h3>Book Your Free Consultation</h3>
-            <p>Pick a time that works for you. In 30 minutes, we will learn about your lot, your goals, and your current parking situation.</p>
-          </div>
+    <section class="band band--card">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">How It Works</span>
+          <h2 class="h2">Three steps, starting with a conversation</h2>
         </div>
-        <div class="step">
-          <div class="step__number-col">
-            <div class="step__number">2</div>
-            <div class="step__line"></div>
+        <div class="steps">
+          <div class="step">
+            <div class="step__num">1</div>
+            <h3 class="h3">Book the consultation</h3>
+            <p>Pick a time that suits you. Thirty minutes covers your lot, your goals, and your current parking situation.</p>
           </div>
-          <div class="step__content">
-            <h3>Get a Custom Revenue Plan</h3>
-            <p>We evaluate your lot size, location, and local demand to recommend the right technology and pricing strategy for maximum revenue.</p>
+          <div class="step">
+            <div class="step__num">2</div>
+            <h3 class="h3">Get a revenue plan</h3>
+            <p>Your lot size, location and local demand decide which technology and which pricing strategy fit the property.</p>
           </div>
-        </div>
-        <div class="step">
-          <div class="step__number-col">
-            <div class="step__number">3</div>
-            <div class="step__line"></div>
-          </div>
-          <div class="step__content">
-            <h3>Start Earning</h3>
-            <p>Our technology partners handle installation and setup. You start collecting revenue with zero out-of-pocket costs and no long-term commitment.</p>
+          <div class="step">
+            <div class="step__num">3</div>
+            <h3 class="h3">Start earning</h3>
+            <p>Technology partners handle installation and setup. Revenue starts with nothing out of pocket and no long-term commitment.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="social-proof">
-    <div class="social-proof__inner">
-      <span class="social-proof__label">CLIENT SUCCESS STORY</span>
-      <h2>Eau Claire, Wisconsin Parking Lot</h2>
-      <div class="social-proof__stats">
-        <div class="social-proof__stat">
-          <div class="social-proof__stat-number">178%</div>
-          <div class="social-proof__stat-label">average revenue increase in 90 days</div>
+    <section class="band band--sunken">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">Why Owners Choose This</span>
+          <h2 class="h2">What the arrangement actually looks like</h2>
         </div>
-        <div class="social-proof__stat">
-          <div class="social-proof__stat-number">45% &rarr; 90%</div>
-          <div class="social-proof__stat-label">compliance with integrated enforcement</div>
+        <div class="band-grid band-grid--2">
+          <div class="tile">
+            <h3 class="h3">No upfront costs</h3>
+            <p>Setup and management come at no cost to the owner. Technology partners cover the equipment and the installation, so nothing is paid out of pocket.</p>
+          </div>
+          <div class="tile">
+            <h3 class="h3">Month-to-month flexibility</h3>
+            <p>No long-term commitments and no hidden fees. Stay because it works, not because the contract says so. Cancel anytime with no penalties.</p>
+          </div>
+          <div class="tile">
+            <h3 class="h3">Empty spaces become income</h3>
+            <p>Private lots often sit empty during off-hours while nearby demand goes unmet. The right technology captures that demand and turns it into monthly income.</p>
+          </div>
+          <div class="tile">
+            <h3 class="h3">License plate recognition and enforcement</h3>
+            <p>Payment technology only collects from people who choose to pay. Compliance is what decides the number at the end of the month, and compliance comes from enforcement rather than from the payment method. License plate recognition, or LPR, reads plates against paid sessions automatically, so there are no gates, no kiosks, and no attendant. Whether a lot needs it, and which system fits, is part of what the consultation answers.</p>
+          </div>
+          <div class="tile">
+            <h3 class="h3">No product line to protect</h3>
+            <p>Most companies offering parking technology sell parking technology, so the recommendation and the product are the same thing. This is consulting. Systems get sourced from whichever provider fits the lot, which means there is no equipment to move and no reason to recommend a system that does not suit the property. Where the answer is that a lot should be left alone, that is the answer.</p>
+          </div>
         </div>
-        <div class="social-proof__stat">
-          <div class="social-proof__stat-number">$240K</div>
-          <div class="social-proof__stat-label">property value lift from increased NOI</div>
+        <p class="venues">Offices, hotels, churches, stadiums, event venues, retail centers, and private lots. Six spaces or six hundred.</p>
+      </div>
+    </section>
+
+    <section class="band band--navy closing">
+      <div class="band__inner">
+        <div class="closing__inner">
+          <span class="eyebrow">Not Ready to Talk</span>
+          <h2 class="h2">Run the numbers first</h2>
+          <p class="lede">The revenue calculator estimates what a lot earns based on size, occupancy, hours, and rate. It takes about a minute and asks for nothing until the end.</p>
+          <a href="/calculator/" class="btn btn--primary closing__cta">
+            Try the Revenue Calculator
+            <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <p class="closing__alt">Or call <a href="tel:+16122454025">(612) 245-4025</a>.</p>
         </div>
       </div>
-      <a href="https://monetize-parking.com/articles/eau-claire-revenue-increase/" class="social-proof__link" target="_blank" rel="noopener noreferrer">Read the Full Eau Claire Case Study &rarr;</a>
-    </div>
-  </section>
+    </section>
 
-  <section class="final-cta">
-    <div class="final-cta__inner">
-      <h2>Ready to See What Your Lot Could Earn?</h2>
-      <p>Join property owners across the country who are turning empty parking spaces into real monthly income. It starts with a conversation.</p>
-      <a href="#schedule" class="btn-primary">
-        Schedule Your Free Consultation
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <section class="lp-section lp-calendly-section" id="schedule">
-    <div class="lp-container">
-      <h2>Schedule Your Free Consultation</h2>
-      <p>Pick a time that works. A parking revenue specialist will call you for a no-pressure conversation about your property.</p>
-      <div class="calendly-inline-widget" data-url="https://calendly.com/d/cxtd-94s-fmm/free-parking-consultation?hide_gdpr_banner=1&background_color=f8f9fa&primary_color=0b6efd" style="min-width:320px;height:700px;"></div>
-    </div>
-  </section>
-
-  <section class="callback-section">
-    <div class="callback-section__inner">
-      <div class="lp-divider">
-        <span>or request a callback</span>
-      </div>
-      <h3>Prefer We Reach Out to You?</h3>
-      <p>Drop your info below and we will call you within one business day.</p>
-      <form class="callback-form" id="callbackForm" action="https://formspree.io/f/mqegwawp" method="POST">
-        <input type="hidden" name="_subject" value="PPC Landing Page Callback Request" />
-        <input type="hidden" name="_next" value="https://monetize-parking.com/consultation/thank-you/" />
-        <div class="callback-form__group">
-          <label class="callback-form__label">Name <span class="required">*</span></label>
-          <input type="text" name="name" class="callback-form__input" placeholder="Your name" required />
-        </div>
-        <div class="callback-form__group">
-          <label class="callback-form__label">Phone <span class="required">*</span></label>
-          <input type="tel" name="phone" class="callback-form__input" placeholder="(555) 123-4567" required />
-        </div>
-        <div class="callback-form__group">
-          <label class="callback-form__label">Email</label>
-          <input type="email" name="email" class="callback-form__input" placeholder="you@email.com" />
-        </div>
-        <div class="callback-form__group">
-          <label class="callback-form__label">Property Type</label>
-          <select name="property_type" class="callback-form__input">
-            <option value="" disabled selected>Select one...</option>
-            <option value="Office Building">Office Building</option>
-            <option value="Retail/Strip Mall">Retail/Strip Mall</option>
-            <option value="Hotel/Hospitality">Hotel/Hospitality</option>
-            <option value="Event Venue">Event Venue</option>
-            <option value="Church/Place of Worship">Church/Place of Worship</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-callback">
-          Request a Callback
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </button>
-        <div class="callback-form__note">No spam. No obligation. Just a friendly conversation about your lot.</div>
-      </form>
-    </div>
-  </section>
+  </main>
 
   <footer class="lp-footer">
-    &copy; 2026 Monetize Parking. All rights reserved. &nbsp;|&nbsp; <a href="https://monetize-parking.com" target="_blank" rel="noopener noreferrer">Visit our website</a>
+    &copy; 2026 Monetize Parking. All rights reserved.
   </footer>
 
+  <!-- Optional fields disclosure, mobile only -->
+  <script>
+    (function(){
+      var btn = document.getElementById('cbfToggle');
+      var more = document.getElementById('cbfMore');
+      if(!btn || !more) return;
+      btn.addEventListener('click', function(){
+        var open = more.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if(open){
+          var first = more.querySelector('input, select');
+          if(first) first.focus();
+        }
+      });
+    })();
+  </script>
+
+  <!-- Callback form submission -->
   <script>
     (function(){
       var form = document.getElementById('callbackForm');
@@ -1053,26 +339,46 @@
         submitBtn.textContent = 'Sending...';
 
         try {
-          var data = new FormData(form);
           var res = await fetch(form.action, {
             method: 'POST',
             headers: { 'Accept': 'application/json' },
-            body: data
+            body: new FormData(form)
           });
 
           if(res.ok){
-            window.location.href = 'https://monetize-parking.com/consultation/thank-you/';
+            /* Relative, matching contact/ and calculator/. The old absolute
+               production URL meant a preview submission navigated to the live
+               site and fired a real Google Ads conversion. */
+            window.location.href = '/consultation/thank-you/';
           } else {
-            alert('Something went wrong. Please try again or call us at the number above.');
+            alert('Something went wrong. Please try again or call (612) 245-4025.');
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;
           }
         } catch(err){
           console.error('[Callback Form] Fetch error:', err);
-          alert('Something went wrong. Please try again or call us at the number above.');
+          alert('Something went wrong. Please try again or call (612) 245-4025.');
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
         }
+      });
+    })();
+  </script>
+
+  <!-- Phone click conversion tracking -->
+  <script>
+    (function(){
+      var tels = document.querySelectorAll('a[href^="tel:"]');
+      if(!tels.length) return;
+      Array.prototype.forEach.call(tels, function(tel){
+        tel.addEventListener('click', function(){
+          if(typeof gtag !== 'undefined'){
+            gtag('event', 'ppc_phone_click', {
+              event_category: 'conversion',
+              event_label: 'ppc_consultation'
+            });
+          }
+        });
       });
     })();
   </script>

@@ -11,6 +11,13 @@
 /images/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Covers assets/fonts/ and assets/brand/. The brand PNGs previously fell
+# through with no cache header at all. Safe as immutable because filenames
+# carry a version (inter-v20-...); a new font version gets a new filename
+# rather than replacing one in place.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /js/*
   Cache-Control: public, max-age=31536000, immutable
 
