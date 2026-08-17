@@ -101,7 +101,7 @@
    72px sticky header. 305 links across 153 files land here. */
 .page-services .pillar[id]{scroll-margin-top:88px}
 .page-services .pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(135deg,#0B80F9 0%,#004FC8 60%,#0043B3 100%);opacity:0}.page-services .pillar--primary::before{opacity:1}.page-services .pillar--solar::before,.page-services .pillar--ev::before{background:linear-gradient(135deg,#6DB133,#2D7A0E)}.page-services .pillar-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(0,79,200,0.08);color:#004FC8;margin-bottom:24px}.page-services .pillar--solar .pillar-icon,.page-services .pillar--ev .pillar-icon{background:rgba(45,122,14,0.08);color:#2D7A0E}.page-services .pillar p{color:#475569;margin:12px 0 0;flex:1;max-width:none}.page-services .pillar-metric{display:flex;align-items:center;gap:8px;margin-top:24px;padding-top:16px;border-top:1px solid #E2E8F0;font-size:.9375rem;font-weight:600;color:#0F172A}.page-services .pillar-cta{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-weight:600;font-size:.9375rem;color:#004FC8}.page-services .icon{width:24px;height:24px;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}.page-services .icon--sm{width:18px;height:18px}@media(max-width:1024px){.page-services .band-grid--3{grid-template-columns:1fr}}@media(max-width:640px){.page-services .services-hero__actions .btn{width:100%}}
-.page-solar .band-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.page-solar .prose{max-width:39rem}.page-solar .prose p{font-size:1.125rem;line-height:1.72;color:#0f172a;margin:0 0 24px}.page-solar .prose p:last-child{margin-bottom:0}.page-solar .band--navy .prose p{color:#C4D0E2}.page-solar .eyebrow--green{color:#2D7A0E}.page-solar .band--navy .eyebrow--green{color:#6DB133}.page-solar .tile p{color:#475569;margin:12px 0 0;max-width:none}@media(max-width:768px){.page-solar .band-grid--2{grid-template-columns:1fr}}</style>
+.page-solar .band-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.page-solar .prose{max-width:39rem}.page-solar .prose p{font-size:1.125rem;line-height:1.72;color:#0f172a;margin:0 0 24px}.page-solar .prose p:last-child{margin-bottom:0}.page-solar .band--navy .prose p{color:#C4D0E2}.page-solar .eyebrow--green{color:#2D7A0E}.page-solar .band--navy .eyebrow--green{color:#6DB133}.page-solar .tile p{color:#475569;margin:12px 0 0;max-width:none}.page-solar .resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.page-solar .resource-grid .tile{padding:28px}.page-solar .resource-more{margin-top:32px}@media(max-width:768px){.page-solar .band-grid--2{grid-template-columns:1fr}.page-solar .resource-grid{grid-template-columns:1fr}}</style>
 </head>
 <body class="page-services page-solar">
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -274,6 +274,44 @@
           <p>Solar lighting is not right for every lot. Heavy tree cover, north-facing obstructions, and poles in poor structural condition all change the answer, and some sites are better served by conventional lighting or a grid-tied hybrid.</p>
           <p>Every engagement starts with the site. The evaluation covers pole condition and height, sun exposure across the year, the lighting levels your property actually needs, and what your lot is currently spending. The recommendation follows from that, sourced from whichever provider fits, with no product line to protect.</p>
           <p>Where solar makes sense, the case is straightforward. Where it does not, that is worth knowing before anyone quotes a project.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES. Mirrors the shelf on /services/ev-charging/. Three solar
+         records exist, so all three are surfaced and the service link carries
+         anything added later. band--page rather than band--card because the
+         section above it is already a card. -->
+    <section class="band band--page">
+      <div class="band__inner">
+        <div class="section-head">
+          <span class="eyebrow">Resources</span>
+          <h2 class="h2">Before you get a quote</h2>
+        </div>
+        <div class="resource-grid" data-reveal-group>
+          <a class="tile" href="/articles/what-parking-lot-lighting-costs/" data-reveal>
+            <h3 class="h3">What lighting a parking lot actually costs</h3>
+            <span class="pillar-cta">See the cost structure
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a class="tile" href="/articles/solar-lighting-winter-performance/" data-reveal>
+            <h3 class="h3">Does solar lighting work through a Midwest winter?</h3>
+            <span class="pillar-cta">Read the answer
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a class="tile" href="/articles/when-solar-lighting-is-wrong/" data-reveal>
+            <h3 class="h3">When solar lighting is the wrong answer</h3>
+            <span class="pillar-cta">See what disqualifies a site
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </div>
+        <div class="resource-more">
+          <a href="/resources/?service=Solar%20Lighting" class="pillar-cta">Read all solar lighting resources
+            <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
