@@ -308,9 +308,9 @@
                   Email Me This Report
                 </button>
                 <div class="trust-indicators">
-                  <span>✓ No obligation</span>
-                  <span>✓ Free consultation</span>
-                  <span>✓ Vendor-neutral advice</span>
+                  <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No obligation</span>
+                  <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free consultation</span>
+                  <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Vendor-neutral advice</span>
                 </div>
               </div>
             </div>
@@ -634,6 +634,16 @@
 .page-calculator .cta-section{ display:grid; gap:12px; }
 .page-calculator .trust-indicators{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 16px;
   font-size:.8125rem; color:var(--text-3); }
+.page-calculator .trust-indicators span{ display:inline-flex; align-items:center; gap:6px; }
+/* Sized here rather than by .band .icon, which does not reach this element: the
+   tool sits outside the band system on purpose, see 03707ae. 14px against
+   13px text, and stroke-width 2.5 because a 24px viewBox scaled to 14px would
+   render the site's 1.75 at about 1px and read as a hairline. Colour is
+   inherited, so these match the text exactly as the glyphs they replaced did.
+   No literal tick character here on purpose: the plan verifies this sweep with a
+   grep, and one in a comment would keep that grep noisy forever. */
+.page-calculator .trust-indicators .icon{ width:14px; height:14px; flex:none;
+  stroke:currentColor; stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
 
 /* ---------- Buttons, page-local variants ---------- */
 .page-calculator .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px;
