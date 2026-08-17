@@ -774,10 +774,15 @@ Not rebrand work. Do not start any of these before the conference.
   none. `css/article.css` carries the entire article reading surface across 107
   pages, and a purge is the only thing that has ever made a change to it land.
 
-  **That makes the version-query fix broader than 119 pages.** Doing it properly
-  covers `/styles.css` plus the three `/css/*` links, and `@import url('/css/style.css')`
-  inside `article.css` needs one too or that file stays pinned for a year behind a
-  versioned parent. Alternatively drop `/css/*` to `max-age=86400` to match
-  `/styles.css`, which is a one-line `_headers` change and makes the purge rule
-  cover everything uniformly. **Decide which before starting; the two approaches
-  pull in opposite directions.**
+  **RESOLVED for `/css/*` on 2026-08-17: dropped to `max-age=86400`**, matching
+  `/styles.css`, so the purge rule now covers every stylesheet uniformly and there
+  is nothing per-file to remember. Reasoning in `CLAUDE.md` under "Cache lifetimes".
+  `/js/*` deliberately unchanged: it keeps `immutable` and its bump convention,
+  which works because the bump lives on a single `<script>` src in one template.
+
+  **What remains of this item is the choice between the purge rule and versioning
+  `/styles.css` and `/css/*`.** The header change removed the year-long failure but
+  not the 24-hour one, so a deploy can still serve new HTML against day-old CSS
+  until the cache is purged. Versioning would remove that too and needs no
+  discipline, at the cost of five links to bump plus a convention. **Until someone
+  takes that on, the purge is the rule.**

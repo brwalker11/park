@@ -692,8 +692,8 @@ difference decides whether a version bump is optional or mandatory.
 |---|---|---|---|
 | `/js/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY**, by hand on the `<script>` src |
 | `/images/*` | `max-age=31536000, immutable` | **up to a year, and longer on social platforms** | **MANDATORY when bytes change at the same filename** |
-| `/css/*` | `max-age=31536000, immutable` | **up to a year** | **MANDATORY, and there is no convention for it.** No `/css/*` link carries a version query |
-| `/styles.css` | `max-age=86400` | up to a day, and a **broken** render not an old one | **Purge on deploy.** See `BACKLOG.md` item 41 |
+| `/css/*` | `max-age=86400` | up to a day, and a **broken** render not an old one | **Purge on deploy.** Changed from immutable 2026-08-17 |
+| `/styles.css` | `max-age=86400` | same | **Purge on deploy.** See `BACKLOG.md` item 41 |
 
 **`/js/*` is immutable for a year, so a JS change without a bump never reaches a
 returning visitor.** Not "reaches them late", never. Bump the query on the
@@ -725,6 +725,36 @@ then `npm run generate:articles`. The regexes match the versioned URL literally,
 so if the template moves and they do not, the substitution stops firing and every
 article page ships the default card instead of its own hero. That failure is
 invisible on the page and surfaces only when someone shares a link.
+
+**`/css/*` was immutable for a year and is now 86400, matching `/styles.css`.**
+Changed 2026-08-17. Before that, `css/article.css` (184 links across 107 pages),
+`css/state-map.css` (58 links, 29 pages), `css/resources.css` (7 links, 6 pages)
+and `css/style.css` (reached via `@import` inside `article.css`) were pinned for a
+year with **no version query on any link**, so a change to any of them never
+reached a returning visitor at all.
+
+**Why 86400 rather than versioning the links.** Versioning would have meant a
+query on four separate links plus one inside an `@import`, and then a convention
+saying when to bump each. That convention has to be remembered on every stylesheet
+change by whoever is making it, and the `/js/*` bump has only held because it is
+enforced by a single `<script>` src in one template. Five scattered links have no
+such choke point. **Dropping the header instead means one operational rule, purge
+on deploy, covers every stylesheet on the site**, and there is nothing to forget
+per-file.
+
+The cost is real and accepted: these files are no longer cached for a year, so
+returning visitors refetch them daily. They are small, they are behind Cloudflare's
+edge, and the alternative was a class of bug that is invisible until someone
+reports a broken page.
+
+**This does NOT change `/js/*`, which keeps `immutable` and its bump convention.**
+Two reasons. JS changes here are less frequent than CSS changes, so the cost of
+remembering is paid less often. And the convention is established and working: the
+bump lives on one `<script>` src in `templates/article-index.html`, it has been
+exercised three times (`?v=logo-404`, `?v=service-crumb`, `?v=rail-service`), and
+each time the regeneration propagated it to every article page automatically. A
+working convention with a single choke point is worth keeping; five scattered ones
+were not worth creating.
 
 **`/styles.css` is one day, and its failure mode is the worst of the three.**
 **PURGE THE CLOUDFLARE CACHE AFTER ANY DEPLOY THAT CHANGES `styles.css`.** This is

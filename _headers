@@ -21,8 +21,12 @@
 /js/*
   Cache-Control: public, max-age=31536000, immutable
 
+# 86400 to match /styles.css, NOT immutable. None of these links carries a
+# version query, so a year-long cache meant a change never reached a returning
+# visitor. One purge-on-deploy rule now covers every stylesheet. See CLAUDE.md,
+# "Cache lifetimes", for why this was chosen over versioning the links.
 /css/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400
 
 /data/*
   Cache-Control: public, max-age=3600
