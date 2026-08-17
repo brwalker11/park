@@ -2524,7 +2524,20 @@ that must still PASS. A guard that has never been shown to fail proves nothing.
 - [ ] Fold any other still-relevant findings from `REBRAND.md` into `CLAUDE.md`
   before deleting. This covers the rest of the file, the chapter records and
   decisions, and it IS a judgement call. The backlog above is not; that moves
-  whole regardless
+  whole regardless.
+
+  **Two pieces of the fold are already done, 2026-08-17. Do not re-add them:**
+  the **working pattern** section under Branch and deployment rules in
+  `CLAUDE.md`, which describes the whole loop generically for future projects
+  (feature branch, Cloudflare preview, Access gate, hostname guards, PR to
+  `main`) and states that the guards are permanent; and the **`BACKLOG.md`
+  pointer**, in both the Session start steps and the Documentation list, since
+  after this file is deleted `BACKLOG.md` is the only place outstanding work is
+  recorded.
+
+  They were done early on purpose. Both are durable rules that were already true,
+  and leaving the description of how the environment works inside the file that
+  gets deleted is the same mistake the backlog move fixed
 - [ ] Delete `REBRAND.md` from the repo, **only after confirming the backlog
   exists at its new location.** Check it in as its own commit before the
   deletion commit, so a mistake is a revert rather than a recovery from history

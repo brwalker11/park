@@ -9,6 +9,13 @@ Guidance for Claude Code when working in this repository.
    `main` under any circumstances.
 2. Read `REBRAND.md` in the repo root. It holds current rebrand decisions and
    pass status and changes frequently. This file holds only durable rules.
+   **`REBRAND.md` is deleted when the rebrand merges.** If it is not there, the
+   rebrand is done and step 1's branch rule is the only part of this that still
+   applies.
+3. **`BACKLOG.md` is where outstanding work lives.** Deferred tasks, known defects,
+   and decisions nobody has taken. Check it before proposing new work, because the
+   thing you are about to suggest may already be on it with reasoning attached.
+   After the rebrand merges it is the **only** place outstanding work is recorded.
 
 ## Project Overview
 
@@ -1043,6 +1050,43 @@ drifted further out of sync. Nothing loads it. Do not gate or edit it.
 
 ## Branch and deployment rules
 
+### The working pattern, for this and any future project
+
+Five parts, and they only work together. This grew out of the rebrand but is not
+specific to it: **use it for any piece of work large enough to want a preview.**
+
+1. **Create a feature branch.** Never commit to `main`.
+2. **Cloudflare Pages builds a preview** from that branch automatically, at its own
+   hostname. No configuration per branch.
+3. **A Cloudflare Zero Trust Access application gates the preview**, so it is not
+   publicly reachable. This is the outer wall.
+4. **The two hostname guards keep the preview out of search and out of analytics.**
+   A `noindex` script fires on any hostname that is not production, and the GA4 and
+   Google Ads tags initialise only on the production hostname. This is the inner
+   wall, and it is what makes the preview safe to browse and to share internally.
+5. **`main` requires a pull request.** Direct push is blocked, so nothing reaches
+   production without a review step.
+
+**Access and the guards are two walls for one job, deliberately.** Access can be
+misconfigured, expire, or be deleted by someone tidying up; a link can be shared
+past it. The guards do not depend on Access being correct, and Access does not
+depend on the guards being present. Losing one should not put real analytics data
+or a duplicate indexed site at risk.
+
+**The guards are PERMANENT and must not be removed.** They were originally written
+to be reverted when the rebrand merged, and that was wrong: a preview environment
+is ongoing, so the day the guards would have been deleted is the day the preview
+starts needing them indefinitely. The revert items are gone from the merge-day
+checklist and must not be re-added. Full reasoning below, including why
+`git revert` was tested and does not apply.
+
+**What the guards assume:** exactly one hostname serves HTML in production, and the
+comparison is against that hostname by exact string. Any new production domain
+must redirect to the apex, or both guards have to learn about it. See the `www`
+subsection below for the case that already caught this out.
+
+### Rules
+
 - Never commit directly to `main`. `main` is protected and deploys to production.
 - All rebrand work happens on `rebrand`.
 - Analytics and ad tags stay gated to the production hostname. **Permanent, not
@@ -1194,7 +1238,15 @@ Applies to all site copy, meta descriptions, and any text you generate:
 
 ## Documentation
 
+- **`BACKLOG.md` - outstanding work. Deferred tasks, known defects, and untaken
+  decisions.** Survives the rebrand; `REBRAND.md` does not. **After the merge it is
+  the only place outstanding work is recorded**, so read it before proposing
+  anything new and add to it rather than to this file. Items that turn out to be
+  standing rules belong here in `CLAUDE.md` instead, and get deleted from
+  `BACKLOG.md` when they move.
 - `/docs/articles-dynamic.md` - article system guide
 - `/docs/url-migration.md` - URL structure and routing notes
-- `SEO_TODO.md` - pending SEO tasks
-- `REBRAND.md` - live rebrand decisions and pass status
+- `/docs/execution-plan.md` - rebrand schedule and method. Retire with `REBRAND.md`
+- `SEO_TODO.md` - pending SEO tasks. Predates `BACKLOG.md` and overlaps it; fold it
+  in when someone next touches either
+- `REBRAND.md` - live rebrand decisions and pass status. **Deleted on merge day**
