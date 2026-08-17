@@ -86,6 +86,14 @@
       slug: item.slug,
       title: item.title,
       category: item.category,
+      /* This map is a whitelist, so a field absent here does not reach
+         renderBreadcrumb no matter what the record says. `service` was missing,
+         which meant `article.service || 'Parking'` in renderBreadcrumb was
+         always taking the fallback: every EV article shipped a crumb reading
+         "Parking" linking to ?service=Parking. Adding the field is the whole
+         fix; the fallback below stays for records predating the service
+         field. */
+      service: item.service,
       tags: Array.isArray(item.tags) ? item.tags : [],
       date: item.date,
       lastmod: item.lastmod || item.date,
