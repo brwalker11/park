@@ -11,7 +11,10 @@ and unlikely before the conference. The two documents agree; where both cover a
 subject, `REBRAND.md` holds the decision and this plan holds the schedule and
 method for carrying it out.
 
-Revised again 2026-08-17, four corrections and no schedule change. **The dates
+Revised again 2026-08-17, five corrections and no schedule change. The fifth is a
+**deliberate deviation** rather than a correction: week 5's "navy results panel"
+shipped as a white card on the page surface, on purpose. Reasoning under the week 6
+table. **The dates
 still hold**: week 5 starts Mon Aug 31 and merge day is Thu Sep 10, both still
 ahead. What changed is content that had gone stale.
 
@@ -294,7 +297,7 @@ Code.
 
 | Day | Item | Owner | Depends on | Verify | Days |
 |---|---|---|---|---|---|
-| Mon 31, Tue 1 | Calculator minimal reskin: shared navy chrome already applied by Bundle B; this pass tokens the layout surfaces, navy results panel, report modal brought into the form system. No flow changes | CC | Bundle B | V (full calculator run-through, report page, page-load gtag event untouched) | 2 |
+| Mon 31, Tue 1 | **DONE early, 2026-08-13.** Calculator minimal reskin: shared navy chrome already applied by Bundle B; this pass tokens the layout surfaces, ~~navy results panel~~ **white results card on the page surface, deliberate deviation, see below**, report modal brought into the form system. No flow changes | CC | Bundle B | V (full calculator run-through, report page, page-load gtag event untouched) | 2 |
 | Wed 2 | Bundle C: remaining icon sweep (pseudo-element checkmarks, stray emoji outside the homepage) plus motion (single IntersectionObserver: section reveal, nav underline; `prefers-reduced-motion` gate). One template touch, one `npm run build`, 72 pages recommitted | CC | Bundle B | A (rebuild, guard hashes) + V (reduced-motion check) | 1 |
 | Thu 3 | Imagery placement (swap fallbacks for delivered stills, slots #1 and #2 only), og-image built and verified in meta tags. The solar page is not touched by this slot | CC | stills (Wed Sep 2 latest) | V + A (og meta grep) | 1 |
 | Fri 4 | QA day 1: full automated suite (guard hashes, legacy-blue grep, green-scope grep, contrast script over token pairs, alias-leak grep, `node --check`, rebuild determinism, `git diff` on `consultation/` must be empty), Lighthouse on homepage, one article, one state page | CC | all passes | A | 1 |
@@ -310,6 +313,25 @@ Code.
 | Thu 10 | **Merge day**, per the REBRAND.md checklist: record Ads bidding status (not a blocker), PR `rebrand` into `main`, merge, verify production tracking (GA4 collect, Ads conversion on `consultation/thank-you/`), verify robots meta is `index,follow` on the apex and that `www` 301s, annotate GA4 and Ads. **No reverts. The preview Access application STAYS** | CC + BW | Wed 9 clean | A + V | 1 |
 | Fri 11 | Production soak: spot checks across the visual matrix on the live domain, then a full working day to fix anything the soak surfaces. Site is live, verified, and finished at end of day | CC | merge | V | 0.5 scheduled, full day available |
 | Sat 12, Sun 13 | **Slack. Nothing scheduled.** Recovered by the confirmed Mon Sep 14 start; held for overrun only | n/a | n/a | n/a | 0 |
+
+**Deliberate deviation, week 5: the results panel is white, not navy.** This plan
+specified a "navy results panel". `#summaryCard` renders on the card surface
+instead, and **that is the correct treatment and is not to be repainted.**
+
+The reasoning is the one recorded in `03707ae` for keeping the tool out of the band
+system, carried through to its surface. A band is a full-width slab with a centred
+inner; the tool is a two-column grid whose right rail is sticky against an offset
+computed from live header height. Navy on this site is a **band** colour, the
+signal for a full-width slab. Painting a sticky rail card navy would borrow that
+signal for something structurally different, and it would put a dark panel
+immediately beside the light form it summarises, which is the one adjacency the
+band system exists to avoid.
+
+A white card on `--surface-page` reads as what it is: a summary of the form next to
+it. The navy on this page does the framing, at the hero and the closing CTA, which
+is where the plan's intent is actually served. Recorded rather than silently
+accepted, because a later reader comparing plan to page would otherwise find a
+one-word mismatch and no reason for it.
 
 **Revised 2026-08-17: merge day no longer reverts anything, and Wed 9 no longer
 dry-runs a revert.** The gtag gate and the noindex guard are permanent

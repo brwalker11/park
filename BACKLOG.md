@@ -47,10 +47,18 @@ the date it was opened. Check an item is still true before acting on it.
 | 28 | ADA free-parking claim stated unqualified | Content |
 | 29 | Content rebalancing toward three-pillar parity | Strategy |
 | 30 | Webflow migration evaluation | Strategy |
+| 31 | Nav underline specified and never built, the last piece of Bundle C motion | Code |
+| 32 | Imagery slot #1, the approach still, never delivered | Asset |
+| 33 | Imagery slot #2, monitored-lot still. **Shot list entry needs rewriting first** | Asset |
 
-**30 items.** The original list had 31; item 2 was the closed 100px team photo
-constraint, which moved to `CLAUDE.md` and is no longer duplicated here. Numbering
+**33 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
+closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
+duplicated here. Items 31 to 33 were added 2026-08-17, moved off the pre-merge
+schedule in `docs/execution-plan.md` week 5 rather than opened fresh. Numbering
 above is this file's own and does not match the old `REBRAND.md` numbers.
+
+**Item 33 must not be actioned as written.** Its shot list entry names a
+destination page that was never built. Read the item before starting it.
 
 **Items 1 and 2 are blocked on Dave and Dax** and cannot be actioned by whoever
 inherits this list.
@@ -456,3 +464,47 @@ Not rebrand work. Do not start any of these before the conference.
   earns traffic.
 - Webflow migration evaluation, if in-house editing without a repo becomes a
   requirement.
+
+- **The nav underline was specified and never built.** Moved off the pre-merge
+  schedule 2026-08-17. It was the second half of "Bundle C: motion" in
+  `docs/execution-plan.md` week 5, alongside section reveal and the
+  `prefers-reduced-motion` gate. **Those two shipped early**, in `b2fe5c4` and
+  `86615dd`, so the motion work looks complete and this one piece is the only
+  thing outstanding. It exists nowhere: no rule in `styles.css`, nothing in
+  `script.js`, no `nav-underline` class on any page.
+
+  Not a defect. The nav is legible without it and nothing looks unfinished. It
+  was an enhancement to the hover and active state on the primary nav triggers,
+  which currently change colour only. If it is picked up, it belongs with the
+  single `IntersectionObserver` already in `script.js` rather than as a second
+  observer, and it needs the same `prefers-reduced-motion` gate as the reveals.
+
+- **Imagery slot #1, the approach still. Never delivered, fallback is the shipping
+  state.** Moved off the pre-merge schedule 2026-08-17.
+  `index.html:355` still carries the `PHOTO SLOT: shot list #1` comment and the
+  designed fallback renders in its place. The shot brief, from the original shot
+  list: a real site walk or install in progress on an actual client lot, a person
+  or equipment in frame rather than an empty lot, landscape 16:10, minimum 1600px
+  wide, pulled from Dayton footage in preference to `home_video.mp4` because the
+  same hero video plays two sections above and a repeated frame reads as filler.
+
+  `images/` holds `home_video.mp4` and no stills. The plan's own rule was that the
+  fallbacks lock as shipping state on Wed Sep 2 and later arrivals go
+  post-conference, so this is that outcome rather than a missed deadline.
+
+- **Imagery slot #2, the monitored-lot still. THE SHOT LIST ENTRY NEEDS REWRITING
+  BEFORE THIS IS ACTIONED.** Moved off the pre-merge schedule 2026-08-17.
+
+  As written in `docs/execution-plan.md` Task 1, slot #2 is the
+  **`/services/parking-revenue/` hero, reused as a smaller crop on the services hub
+  parking block**, at 21:9 and minimum 1600px wide. **That page was never built and
+  is not going to be.** Parking keeps the `/services/#parking` anchor permanently by
+  decision, so the stated destination does not exist and the services hub parking
+  block is an anchor target rather than a page with a hero.
+
+  **The shot is still wanted; only its home changed.** `index.html:176` carries a
+  live `PHOTO SLOT: shot list #2, a 21:9 still of a monitored lot` on the homepage,
+  which is now the only place it would land. Anyone picking this up should rewrite
+  the Task 1 row against that homepage slot, drop the services-hub crop, and keep
+  the brief itself: a monitored lot with camera, signage or payment technology
+  visible. Do not action the entry as written; it points at a URL that will 404.

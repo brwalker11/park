@@ -32,19 +32,19 @@ the apex.
 
 | Item | State |
 |---|---|
-| Calculator reskin, week 5 | **Done**, with one deviation: the results panel is white, not the navy the plan specified. Decide or accept |
-| Bundle C: icon sweep | **Not started.** 3 literal `✓` in `calculator/index.html`. The `.services-list` pseudo-element checkmark in `styles.css:1006` is used by zero pages, so it is dead code, not icon work |
-| Bundle C: motion | **Done early**, in `b2fe5c4` and `86615dd`, not as a bundle. One piece missing: the **nav underline**, which exists nowhere |
-| Imagery, slot #1 | **Not started.** `index.html:355` still holds the PHOTO SLOT comment. No stills delivered; `images/` has only `home_video.mp4` |
-| Imagery, slot #2 | **Obsolete as written.** Its destination was a `/services/parking-revenue/` hero and that page was never built. The homepage 21:9 slot at `index.html:176` still stands |
-| og-image | **Not started.** `images/og-image.png` is still the pre-rebrand card from 2026-03-14. Referenced by 80 pages and by two generator substitutions |
+| Calculator reskin, week 5 | **Done.** The white results panel is a **deliberate deviation**, accepted 2026-08-17 and reasoned in `docs/execution-plan.md`. Not to be repainted |
+| Bundle C: icon sweep | **Done 2026-08-17.** The 3 literal `✓` in `calculator/index.html` are now the site's inline SVG check. Nothing else was in scope: the `.services-list` pseudo-element checkmark in `styles.css:1006` is used by zero pages, so it is dead CSS and sits in `BACKLOG.md` |
+| Bundle C: motion | **Done early**, in `b2fe5c4` and `86615dd`, not as a bundle. The nav underline it also specified was never built and is **moved to `BACKLOG.md` item 31** |
+| Imagery, slots #1 and #2 | **Moved to `BACKLOG.md`, items 32 and 33.** No stills were ever delivered, so the designed fallbacks are the shipping state, which is what the plan's own Wed Sep 2 rule called for. Slot #2's shot list entry needs rewriting before anyone actions it: its destination page was never built |
+| og-image | **Outstanding. Ben is producing it.** `images/og-image.png` is still the pre-rebrand card from 2026-03-14, referenced by 80 pages and two generator substitutions. The only item left that is visible to anyone who shares a link |
 | QA day 1, day 2 | **Not started** |
 | Ads phone-click conversion action | **Not started**, needs the Ads UI, cannot be done from this repo |
 | Merge day itself | 4 items. No reverts, Access stays. See the checklist |
 
-Nothing on that list is blocked on anything except the stills and the Ads UI, both
-of which are Ben's. The og-image is the one item that is purely a build task and is
-visible to anyone who shares a link.
+**Three things are left before merge day, and only one is a build task:** QA days 1
+and 2, the Ads phone-click conversion action, and the og-image. The first is CC's,
+the second needs the Ads UI, and the third is Ben's. Everything else on the week 5
+schedule is either done or deliberately deferred to `BACKLOG.md`.
 
 Update this section at the end of every pass. If it says a pass is in progress,
 ask me for the result before proceeding.
