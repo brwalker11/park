@@ -218,17 +218,23 @@ First person went from 17 instances to zero. Body copy 542 to roughly 470 words.
 
 ### Open items on this page
 
-- **"Nationwide service" is still in the hero trust ticks and is still
-  unsubstantiated.** The only verified case study is one lot in Wisconsin. It
-  was flagged in the audit, was never in scope to cut, and survives every pass
-  so far. It is not gated against, deliberately, so that removing it stays a
-  content decision rather than a gate failure.
-- **There is no revenue share number anywhere on the page.** A skeptical owner
-  asks how the company makes money before anything else, and on a paid landing
-  page that silence is louder than a number would be. The page says "no upfront
-  cost" four times over and never says what the arrangement is. This is the
-  single biggest remaining credibility gap on the page and the number is not
-  mine to invent.
+- **CLOSED 2026-08-16: "nationwide service" in the hero trust ticks is
+  substantiated.** Confirmed by Ben. **This is no longer an open item and
+  should not be re-flagged.** It is recorded here rather than deleted because
+  the claim was carried as unsubstantiated across several passes, on the
+  reasoning that the only verified case study is one lot in Wisconsin, and the
+  next audit that greps the hero copy will otherwise raise it again. Same
+  treatment as the "$2,500" referral figure on the video page. It remains
+  ungated, which was always deliberate, so the copy stays a content decision
+  rather than a gate failure.
+- **There is no revenue share number anywhere on the page, and the number is
+  now with leadership.** A skeptical owner asks how the company makes money
+  before anything else, and on a paid landing page that silence is louder than
+  a number would be. The page says "no upfront cost" four times over and never
+  says what the arrangement is. **Status as of 2026-08-16: pending a decision
+  from leadership.** Still the single biggest remaining credibility gap on the
+  page, but it is no longer waiting on anyone here; it is waiting on that
+  decision, and the wording follows once the number is settled.
 - **The `_next` relative value is unverified against Formspree.** Both `_next`
   and the JS redirect were changed from an absolute production URL to
   `/consultation/thank-you/`, so a preview submission no longer navigates to the
@@ -2461,6 +2467,38 @@ Not rebrand work. Do not start any of these before the conference.
   2026-08-11.** It is a real programme figure, not a fabricated statistic, and
   it is deliberately recorded here so it does not get re-flagged by the next
   audit that greps for currency amounts. Leave it as written.
+
+- **State-targeted Google Ads campaign, and whether it needs its own landing
+  pages.** Recorded 2026-08-16. Planned, not scheduled. Two things have to be
+  settled before anyone builds a page for it, and they pull in opposite
+  directions.
+
+  **The state content that exists is uneven.** Subpages exist for **Colorado,
+  Minnesota, Texas and Wisconsin**, seven per state under
+  `/resources/states/{state}/`. Colorado and Wisconsin are complete. **Several
+  are too thin to take paid traffic**, and the specifics are already recorded
+  in the entry directly below this one: five of the seven Texas subpages carry
+  no `h2` at all, `texas/financial-impact` is the thinnest, and
+  `minnesota/value-add-strategy` sits just under the threshold. Sending bought
+  clicks to those is worse than sending them nowhere, because a thin page
+  converts badly *and* takes the quality score down with it. **Texas is the
+  state to fix first if Texas is a state being bid on.**
+
+  **A state landing page that duplicates `/consultation/` puts two pages in
+  competition for the same conversion.** `/consultation/` is the paid
+  conversion path and is bid against 18 phrase-match keywords; see the
+  `/consultation/` chapter above. A per-state clone of it would split the
+  conversion signal across two URLs, give Ads two candidates for the same
+  intent, and double the surface that has to stay in sync with whatever the
+  revenue share number turns out to be. **The choice is between geo-modified
+  copy on the single existing landing page and genuinely separate pages, and
+  it needs making before the first one is built, not after.**
+
+  Related and already open: the state TOC is blocked on the same thin content,
+  and the four state tax rates in
+  `articles/parking-lot-revenue-tax-implications.html:16` become a
+  higher-exposure claim the moment paid traffic is aimed at those states. See
+  the dated-claims audit above.
 
 - **Five Texas state subpages have no body headings, and one is close to
   empty.** A content gap, not a design gap: the reading typography now applied
