@@ -343,8 +343,11 @@ body{
   flex: none;
 }
 
+/* 48px is deliberately 2px under the 50px ceiling, which is bound at a 769px
+   viewport, not by the 72px bar. See "Header sizing constraints" in CLAUDE.md
+   before raising this. */
 .site-header .logo {
-  height: 44px;
+  height: 48px;
   width: auto;
   display: block;
 }
@@ -580,7 +583,7 @@ body{
   .nav-toggle { display: flex; }
 
   .site-header .header-inner { height: 64px; position: relative; }
-  .site-header .logo { height: 38px; }
+  .site-header .logo { height: 44px; }
 
   .site-header .site-nav {
     position: fixed;
