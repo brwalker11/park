@@ -86,9 +86,13 @@ pages in the same commit.
 
 ## Guard integrity check
 
-`tools/guards.js` hashes the two rebrand guardrails on every page and compares
-them against a committed baseline. Both are reverted on merge day, so any sweep
-that disturbs them turns a clean revert into a conflict.
+`tools/guards.js` hashes the two hostname gates on every page and compares them
+against a committed baseline, so any sweep that disturbs them is caught.
+
+**As of 2026-08-17 these are permanent infrastructure, not rebrand guardrails
+awaiting a revert.** See "The hostname gates are permanent infrastructure" under
+Branch and deployment rules. A failure here is a live defect on the preview, not
+a future merge conflict.
 
 ```bash
 node tools/guards.js capture
@@ -169,11 +173,13 @@ node tools/conversion-guard.js capture
 node tools/conversion-guard.js verify
 ```
 
-`guards.js` protects blocks that are **deleted on merge day**; a failure there
-means a revert will conflict. This one protects blocks that must **survive
-forever**; a failure means Google Ads has stopped counting conversions on the
-only paid landing page on the site. Merging them would mix those two meanings
-and would move the 152 / 151 / 303 totals quoted throughout this file.
+**Both scripts now protect permanent blocks**, since the hostname gates stopped
+being merge-day casualties on 2026-08-17. They stay separate anyway, for two
+reasons that outlived the original one: they cover different files and different
+block counts, and merging them would move the 155 / 154 / 309 totals quoted
+throughout this file. A `conversion-guard.js` failure has the sharper
+consequence: Google Ads has stopped counting conversions on the only paid landing
+page on the site.
 
 Four hashed blocks: the Google Ads conversion snippet and the
 `ppc_callback_conversion` handler on `consultation/thank-you/`, and the Calendly
@@ -574,8 +580,9 @@ click handler: `consultation/thank-you/index.html`,
 event calls live in `script.js`, `js/article.js`, and `js/state-map.js`, all
 guarded. `js/resources.js` has no analytics code.
 
-During the rebrand these tags are hostname-gated. See `REBRAND.md` for the
-mechanism and the merge-day revert requirement.
+These tags are hostname-gated, permanently. See "The hostname gates are permanent
+infrastructure" under Branch and deployment rules, including the `www` hostname
+problem that has to be settled before the merge.
 
 ### Inline CTAs
 
@@ -746,6 +753,30 @@ The two consultation pages do not load `styles.css` at all. They are fully
 self-contained with their own `:root`, their own font variables, the only Google
 Fonts links on the site, the only Calendly embed, and header and footer markup
 that diverges from the other 148 pages.
+
+### Team photo display ceiling
+
+**`.page-about .team-photo` renders at 100px and 100px is the ceiling. Anyone
+raising it reintroduces a soft image.** Moved here from the post-Vegas backlog on
+2026-08-17: it is a standing constraint, not a task, and it was the only closed
+item on that list.
+
+`images/dax.jpg` and `images/dax.webp` are both 200x200. `dave.jpg` and
+`dave.webp` are both 800x800. **There is no larger Dax source in the repo and the
+photograph cannot be re-shot**, so the resolution mismatch is permanent and the
+fix is the render size rather than the source. At the old 140px, Dax's 200x200
+gave only 1.43x and was soft on any retina display. At 100px it is exactly 2x and
+therefore retina-correct; Dave's 800x800 is 8x at the same size. Measured
+2026-08-14 at `devicePixelRatio` 2.
+
+**If the display size ever needs to grow, a new photograph has to come first.**
+The rule in `about/index.html` carries a comment saying so. That comment points
+at `REBRAND.md`, which is deleted at the end of the rebrand; **repoint it here**
+when the surrounding area is next touched.
+
+Also fixed in that pass, recorded so it is not re-introduced: Dave's `<img>`
+declared `width="200" height="200"` against an 800x800 file, now corrected to the
+true intrinsic size. Same class of defect as the case study image in `d320799`.
 
 ### Header sizing constraints
 
@@ -989,10 +1020,66 @@ drifted further out of sync. Nothing loads it. Do not gate or edit it.
 
 - Never commit directly to `main`. `main` is protected and deploys to production.
 - All rebrand work happens on `rebrand`.
-- Analytics and ad tags must stay gated to hostname `monetize-parking.com` only
-  while the rebrand branch is active.
-- A `noindex` meta tag must apply on any non-production hostname.
-- Do not remove either guardrail without me asking.
+- Analytics and ad tags stay gated to the production hostname. **Permanent, not
+  for the duration of the rebrand.**
+- A `noindex` meta tag must apply on any non-production hostname. **Permanent.**
+- Do not remove either gate without me asking.
+- The Cloudflare Zero Trust Access application on the preview URL is
+  **permanent** for the same reason.
+
+### The hostname gates are permanent infrastructure
+
+**Changed 2026-08-17. They were built as rebrand guardrails to be reverted on
+merge day. They are not being reverted, and the merge-day revert items have been
+removed from `REBRAND.md`.**
+
+The reasoning is that a preview environment is now ongoing rather than a
+rebrand-only artifact. As long as any non-production hostname serves this site,
+that hostname must not be indexed and must not fire analytics or ad conversions.
+Deleting the gates on merge day would have removed exactly the protection the
+preview needs from that day onward. So:
+
+- **The noindex guard stays on every page.** Marked
+  `<!-- Preview noindex guard - remove on merge day -->`; the comment text is now
+  wrong and is left alone only because `tools/guards.js` hashes the block. If it
+  is ever reworded, recapture the baseline in the same commit.
+- **The gtag hostname gate stays on every page.**
+- **`tools/guards.js` changes meaning.** It no longer protects blocks that are
+  about to be deleted. It now protects **permanent** blocks, the same standing as
+  `tools/conversion-guard.js`. A failure is a live defect, not a future merge
+  conflict.
+
+#### Both gates match one hostname exactly, and that is a live constraint
+
+```js
+window.location.hostname === 'monetize-parking.com'
+```
+
+**`www.monetize-parking.com` serves the site directly. It does not redirect to
+the apex.** Verified 2026-08-17: HTTP 200, zero redirects, on more than one path.
+Both hostnames are production domains in Cloudflare.
+
+So the comparison above is **wrong for www**, and because the gates are now
+permanent the bug is permanent too. On `www` the noindex guard fires and the
+analytics gate does not, which means **www is `noindex, nofollow` and invisible
+to GA4 and to Google Ads conversion tracking.** The analytics hole is the more
+expensive half: any visit or conversion arriving on `www` is not counted at all,
+and the campaign runs below the conversion volume Ads wants for bidding.
+
+This is not yet live. Production is `main`, which carries neither gate, so `www`
+behaves correctly today. **It breaks the moment `rebrand` merges.** Fix it before
+the merge, one of two ways:
+
+1. **Accept both hostnames in both gates.** Match `monetize-parking.com` and
+   `www.monetize-parking.com`. Touches every page carrying the gates and requires
+   a `guards.js` recapture, since the block bytes change.
+2. **301 `www` to the apex at Cloudflare**, leaving the gates as written. A
+   redirect rule in the dashboard, not `_redirects`, which handles paths and not
+   hosts. Better for SEO anyway, since it settles one canonical host, and it
+   means the gates never have to know about more than one name.
+
+Option 2 is preferred and is not a repo change. Whichever is chosen, **verify
+`www` after the merge** as well as the apex.
 
 ## Do not touch without explicit instruction
 
