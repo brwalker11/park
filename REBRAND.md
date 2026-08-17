@@ -403,6 +403,41 @@ website blocker.
 
 **`images/logo.png`** (1.2 MB, referenced by nothing) is a deletion candidate.
 
+### Header logo raised to 48px desktop and 44px mobile, 2026-08-17
+
+From 44px and 38px. `MP_Logo_400.png` is 400x160, so the rendered sizes are
+120x48 and 110x44. Applied in `styles.css` and in all 119 inline critical CSS
+copies, because `styles.css` wins the cascade but the inline block governs first
+paint and a stale copy would have flashed the old size.
+
+Verified at a 769px viewport with a fresh stylesheet: 12px of slack above and
+below in the 72px bar, nav still 360px on one line with all three triggers at
+48px, 38px of gap left to the actions, no overflow. Mobile at 375px: 10px of
+slack in the 64px bar, 181px of clear space to the hamburger, and the menu panel
+inset still equal to the bar height.
+
+**The bar heights did not change, so no scroll offset, sticky value or menu inset
+moved.** That was the point of stopping at 48/44 rather than going further.
+
+**The constraints found while measuring are recorded in `CLAUDE.md` under
+"Header sizing constraints", not here**, because they are standing rules for
+anyone touching the header rather than a record of this pass. In short: the
+desktop ceiling is 50px bound at a 769px viewport, the failure mode is a silent
+nav label wrap that no overflow check catches, free-space arithmetic gives a
+false ceiling of 56px, 48px is deliberately 2px under the real one to leave
+headroom for a nav label change, the mobile menu panel hardcodes the 64px bar
+height, and the 88px and 96px scroll offsets are two competing conventions that
+would both need updating if the desktop bar ever grows. Read that section before
+changing any header dimension.
+
+**Known and not fixed:** `/styles.css` is served `max-age=86400` with no version
+query, so for up to a day after deploy a returning visitor runs a cached 44/38
+stylesheet against the fresh 48/44 inline block. The stylesheet wins, so the new
+size paints and then reverts to the old one until the cache expires. Adding `?v=`
+to the `styles.css` link on all 119 pages would fix it. Left alone because it
+self-heals within a day and because versioning `styles.css` is a convention this
+site does not currently have.
+
 ---
 
 ## Pass 1 findings

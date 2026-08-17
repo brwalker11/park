@@ -710,6 +710,116 @@ self-contained with their own `:root`, their own font variables, the only Google
 Fonts links on the site, the only Calendly embed, and header and footer markup
 that diverges from the other 148 pages.
 
+### Header sizing constraints
+
+Measured 2026-08-17 while raising the logo from 44/38 to 48/44. **Every number
+here was measured in a browser, not calculated.** The header is the most
+duplicated block on the site, so getting this wrong is expensive to undo.
+
+**The logo asset is 400x160, so rendered width is always 2.5x the height.** That
+ratio, not the bar height, is what constrains the logo. Every 1px of height
+costs 2.5px of horizontal room.
+
+**The desktop ceiling is 50px, and it is bound at a 769px viewport**, the
+narrowest desktop layout, one pixel above the mobile breakpoint. At that width
+the bar holds brand 110px, a 32px gap, nav 360px, 48px of slack, and actions
+172px, with the Calculator button already hidden below 1025px. The 48px of slack
+buys 19px of height. At 1025px the ceiling is about 104px and at 1280px about
+174px, so **769px is the only width that binds.** Do not check this at desktop
+widths and conclude there is room.
+
+**The failure mode is a silent nav wrap, not an overflow.** At 51px,
+"What We Do" wraps to two lines and its trigger grows from 48px to 76px tall.
+`scrollWidth` never exceeds `clientWidth`, no scrollbar appears, and the page
+does not overflow, so every overflow check passes while the header looks broken.
+
+**Free-space arithmetic gives a FALSE ceiling of 56px. Do not use it.** The gap
+between nav and actions stops shrinking at 32px because `.site-nav` has
+`margin-right: auto` and a default `flex-shrink: 1`: once the auto margin is
+spent, the nav absorbs the pressure by compressing and wrapping rather than by
+reducing the measured gap. The number stays reassuring while the thing it is
+supposed to protect breaks.
+
+**The check that catches it is nav trigger height at a 769px viewport:**
+
+```js
+[...document.querySelectorAll('.site-nav .nav-trigger, .site-nav .nav-link')]
+  .map((t) => Math.round(t.getBoundingClientRect().height))
+```
+
+Three values of `48` is correct. Anything larger means a label has wrapped.
+
+**48px is deliberately 2px under the 50px ceiling.** The margin is not caution
+about the measurement, it is headroom for the nav labels: a fourth nav item, or
+"What We Do" becoming anything longer, would put a logo sitting exactly on the
+ceiling into a silent wrap. **Anyone raising the logo above 48px is spending
+that headroom and must re-measure at 769px.**
+
+**The mobile ceiling is 52px and it is vertical, not horizontal.** The bar is
+64px, so 52px leaves 6px above and below. Horizontally mobile has no constraint
+worth naming: at a 320px viewport with a 56px logo there is still 96px of clear
+space before the hamburger, because the nav is collapsed.
+
+Sharpness is not a constraint at these sizes, unlike the team photographs. The
+asset is 400px wide, so 48px renders at 2.5x and 44px at 3.6x.
+
+#### The mobile menu panel hardcodes the mobile header height
+
+**`.site-nav { position: fixed; inset: 64px 0 0 0 }`** in the `max-width: 768px`
+block. That `64px` is the mobile bar height, repeated as a literal. **Change the
+mobile header height and this must change with it**, or the menu panel overlaps
+the header, or leaves a gap showing the page scrolling behind it.
+
+Nothing links the two numbers. They are in the same media query but tens of
+declarations apart, the panel value looks like a positioning detail rather than a
+derived one, and no comment connects them. Verify after any mobile header change
+with `getComputedStyle(nav).top === barHeight + 'px'`.
+
+#### Two competing scroll-offset conventions, 88px and 96px
+
+Both encode "desktop header height plus breathing room" against a 72px bar, and
+they disagree about the breathing room. **If the desktop header height ever
+changes, all of these move**, and missing one is not subtle: the anchor target
+lands under the sticky header and the reader sees the wrong content with no
+error anywhere.
+
+| Value | Where | Reading |
+|---|---|---|
+| `scroll-padding-top: 88px` | `styles.css:259`, on `html` | 72 + 16. Governs **every** in-page anchor jump site-wide |
+| `scroll-margin-top: 88px` | `styles.css:995` `.service-card`, `styles.css:2388` `.page-services .pillar[id]` | 72 + 16 |
+| `scroll-margin-top: 96px` | `css/article.css:867`, `css/article.css:874`, `css/state-map.css:381`, `css/state-map.css:394` | 72 + 24 |
+| `position: sticky; top: 96px` | `css/article.css:1147`, and inline in **77 HTML files** | article rail |
+
+`.site-header { position: sticky; top: 0 }` itself needs no change at any header
+height, which is why the sticky behaviour looks safe when it is not.
+
+**Reconciling 88 and 96 to one token is worth doing and was not done here.** It
+is a real change to anchor landing positions on every page, so it needs its own
+pass rather than riding along with a logo resize.
+
+#### The header CSS is duplicated across 119 files plus `styles.css`
+
+The full header block is inline critical CSS in **119 HTML files** and again in
+`styles.css`. In every file the inline `<style>` sits **before** the `styles.css`
+link, so at equal specificity **`styles.css` wins the cascade** and the inline
+copy governs only first paint.
+
+That means editing `styles.css` alone changes what renders, and leaving the
+inline copies stale produces a visible jump on first paint. **Edit both, always.**
+
+Of the 119: **75 are generated** from `templates/article-index.html`, so edit the
+template and run `npm run generate:articles` rather than touching them.
+`articles/parking-today-small-lots/index.html` carries the block but is
+hand-written and skipped by the generator, so it needs a direct edit. The
+remaining 42 are hand-edited pages. **44 direct edits plus a regeneration**, not
+119 direct edits.
+
+`/styles.css` is served `max-age=86400` with no version query on the link, so a
+returning visitor can run a **stale stylesheet against fresh inline CSS for up to
+a day**, and the stylesheet wins. After a header size change that means the new
+size paints first and then reverts to the old one until the cache expires. Adding
+`?v=` to the `styles.css` link would fix it and is a 119-file change of its own.
+
 ### Typography
 
 **Inter is self-hosted and active as of 2026-08-07.** Two `@font-face` rules at
