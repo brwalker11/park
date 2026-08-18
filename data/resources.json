@@ -14,7 +14,7 @@
     ],
     "date": "2026-08-16",
     "lastmod": "2026-08-16",
-    "description": "The fixture is the cheap part. Trenching, service capacity, permits and long-term maintenance decide the cost of a parking lot lighting project, and most quotes price none of them.",
+    "description": "The fixture is the cheap part. Trenching, service capacity, permits and maintenance decide what a parking lot lighting project actually costs.",
     "excerpt": "Most lighting quotes price the fixture and leave out the trench. What actually drives the cost of lighting a parking lot, and the six questions that make two proposals comparable.",
     "content": "/articles/what-parking-lot-lighting-costs.html",
     "readTime": "4–5 min",
@@ -38,7 +38,7 @@
     ],
     "date": "2026-08-16",
     "lastmod": "2026-08-16",
-    "description": "Solar lighting fails in winter for three reasons, all of them design decisions made before installation. Array sizing, battery autonomy, and snow shedding, and the four questions that separate an engineered system from a quoted product.",
+    "description": "Solar lighting fails in winter for three reasons, all decided before installation: array sizing, battery autonomy and snow shedding.",
     "excerpt": "Shorter days are the smaller problem. Consecutive overcast days and snow sitting on the panel are what decide whether a system stays lit in February.",
     "content": "/articles/solar-lighting-winter-performance.html",
     "readTime": "4–5 min",
@@ -61,7 +61,7 @@
     ],
     "date": "2026-08-16",
     "lastmod": "2026-08-16",
-    "description": "Shade, pole condition, illuminance requirements and nearby available power all disqualify sites from solar lighting. What to look for before a proposal, and where a grid-tied hybrid fits.",
+    "description": "Shade, pole condition, illuminance requirements and nearby power all disqualify sites from solar lighting. What to check before a proposal.",
     "excerpt": "A solar system on an unsuitable site does not fail immediately. It underperforms slowly, in the season when the lighting matters most.",
     "content": "/articles/when-solar-lighting-is-wrong.html",
     "readTime": "4–5 min",
@@ -84,7 +84,7 @@
     ],
     "date": "2026-04-15",
     "lastmod": "2026-04-15",
-    "description": "EV charging stations increase commercial property value by boosting net operating income. Learn how charging revenue affects NOI, cap rates, and property appraisals.",
+    "description": "How EV charging revenue affects net operating income, cap rates and commercial property appraisals.",
     "excerpt": "EV charging stations increase commercial property value by boosting net operating income. Learn how charging revenue impacts NOI, cap rates, and appraisals.",
     "image": "/images/ev_boost.webp",
     "imageAlt": "EV charging station at a commercial parking lot increasing property value.",
@@ -93,7 +93,8 @@
     "readTime": "6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/ev-charging-property-value-noi/"
+    "url": "/articles/ev-charging-property-value-noi/",
+    "seoTitle": "How EV Charging Raises Property Value and NOI"
   },
   {
     "slug": "hotel-ev-charging-guest-revenue",
@@ -110,7 +111,7 @@
     ],
     "date": "2026-04-15",
     "lastmod": "2026-04-15",
-    "description": "Hotel EV charging attracts higher-spending guests, increases bookings, and creates a new parking lot revenue stream. Learn how to set up charging at your hotel property.",
+    "description": "Hotel EV charging attracts higher-spending guests and adds a parking revenue stream. How to set it up on a hotel property.",
     "excerpt": "Hotel EV charging attracts higher-spending guests and creates a new revenue stream from parking. Learn how to add chargers to your hotel property.",
     "image": "/images/ev_hotel.webp",
     "imageAlt": "EV charging station at a hotel parking lot.",
@@ -119,7 +120,8 @@
     "readTime": "6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/hotel-ev-charging-guest-revenue/"
+    "url": "/articles/hotel-ev-charging-guest-revenue/",
+    "seoTitle": "Hotel EV Charging: Guest Revenue and Bookings"
   },
   {
     "slug": "30c-ev-charger-tax-credit-property-owners",
@@ -136,7 +138,7 @@
     ],
     "date": "2026-08-13",
     "lastmod": "2026-08-13",
-    "description": "The federal 30C EV charger tax credit expired June 30, 2026. What it actually covered, why the 30% figure was often overstated, and how to evaluate charging now.",
+    "description": "The federal 30C EV charger credit expired June 30, 2026. What it covered, why the 30% figure was often overstated, and how to evaluate charging now.",
     "excerpt": "The federal 30C EV charger tax credit expired June 30, 2026. A record of what the credit covered, including the 6% base rate and the conditions attached to 30%, and what an EV charging project has to stand on without it.",
     "image": "/images/ev_sec30.webp",
     "imageAlt": "Level 2 EV charging stations installed in a commercial property parking lot.",
@@ -145,7 +147,8 @@
     "readTime": "5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/30c-ev-charger-tax-credit-property-owners/"
+    "url": "/articles/30c-ev-charger-tax-credit-property-owners/",
+    "seoTitle": "Section 30C EV Charger Tax Credit: What Changed"
   },
   {
     "slug": "level-2-vs-dc-fast-charging-property-owners",
@@ -170,7 +173,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/level-2-vs-dc-fast-charging-property-owners/"
+    "url": "/articles/level-2-vs-dc-fast-charging-property-owners/",
+    "seoTitle": "Level 2 vs DC Fast Charging: Which Fits Your Lot"
   },
   {
     "slug": "hidden-costs-ev-charging-installation",
@@ -196,7 +200,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/hidden-costs-ev-charging-installation/"
+    "url": "/articles/hidden-costs-ev-charging-installation/",
+    "seoTitle": "Hidden Costs of EV Charging Installation"
   },
   {
     "slug": "ev-charging-revenue-share-vs-ownership",
@@ -222,7 +227,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/ev-charging-revenue-share-vs-ownership/"
+    "url": "/articles/ev-charging-revenue-share-vs-ownership/",
+    "seoTitle": "EV Charging: Revenue Share vs Ownership"
   },
   {
     "slug": "ev-charging-idle-fees-session-limits",
@@ -248,7 +254,8 @@
     "readTime": "3-4 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/ev-charging-idle-fees-session-limits/"
+    "url": "/articles/ev-charging-idle-fees-session-limits/",
+    "seoTitle": "EV Charging Idle Fees and Session Limits"
   },
   {
     "slug": "questions-before-signing-ev-charging-contract",
@@ -274,7 +281,8 @@
     "readTime": "3-4 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/questions-before-signing-ev-charging-contract/"
+    "url": "/articles/questions-before-signing-ev-charging-contract/",
+    "seoTitle": "Questions to Ask Before an EV Charging Contract"
   },
   {
     "slug": "parking-lot-revenue-tax-implications",
@@ -290,16 +298,17 @@
     ],
     "date": "2026-03-01",
     "lastmod": "2026-03-01",
-    "description": "Understand how parking lot income is taxed, which expenses are deductible, and whether your state charges sales tax on parking. Schedule E vs Schedule C, depreciation, and UBIT for nonprofits.",
+    "description": "How parking income is taxed, which expenses deduct, and whether your state charges sales tax. Schedule E vs Schedule C, depreciation and UBIT.",
     "excerpt": "Your parking lot is generating revenue. Now what happens at tax time? Here are the foundational concepts every property owner needs to understand about parking income taxes, deductions, and compliance.",
     "image": "/images/tax-parking.webp",
     "imageAlt": "Tax implications of parking lot revenue for property owners.",
     "thumbnail": "/images/tax-parking.webp",
     "content": "/articles/parking-lot-revenue-tax-implications.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/parking-lot-revenue-tax-implications/"
+    "url": "/articles/parking-lot-revenue-tax-implications/",
+    "seoTitle": "Parking Lot Revenue: Tax Implications for Owners"
   },
   {
     "slug": "paid-parking-increases-property-value",
@@ -315,13 +324,13 @@
     ],
     "date": "2026-03-01",
     "lastmod": "2026-03-01",
-    "description": "Parking revenue does more than generate monthly income. Learn how NOI from paid parking multiplies into property value through cap rate math, and what lenders want to see.",
+    "description": "Parking revenue does more than add monthly income. How NOI multiplies into property value through cap rate math, and what lenders look for.",
     "excerpt": "Most property owners think about paid parking as extra monthly income. But in commercial real estate, parking revenue increases the appraised value of your property itself through the NOI multiplier effect.",
     "image": "/images/commercial-property.webp",
     "imageAlt": "How paid parking increases commercial property value.",
     "thumbnail": "/images/commercial-property.webp",
     "content": "/articles/paid-parking-increases-property-value.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/paid-parking-increases-property-value/"
@@ -340,16 +349,17 @@
     ],
     "date": "2026-03-01",
     "lastmod": "2026-03-01",
-    "description": "Gyms create predictable peak-hour parking demand and long off-peak windows. Turn both into revenue with shared parking strategies, membership tier integration, and automated enforcement.",
+    "description": "Gyms create predictable peak-hour demand and long off-peak windows. Turn both into revenue with shared parking and automated enforcement.",
     "excerpt": "Gyms and fitness centers create some of the most predictable parking demand patterns of any business. That predictability creates a revenue opportunity that most property owners completely overlook.",
     "image": "/images/gym-parking.webp",
     "imageAlt": "Gym and fitness center parking lot revenue strategy.",
     "thumbnail": "/images/gym-parking.webp",
     "content": "/articles/gym-fitness-center-parking-revenue.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/gym-fitness-center-parking-revenue/"
+    "url": "/articles/gym-fitness-center-parking-revenue/",
+    "seoTitle": "Gym and Fitness Center Parking Revenue"
   },
   {
     "slug": "overnight-24-hour-parking-revenue",
@@ -365,16 +375,17 @@
     ],
     "date": "2026-03-01",
     "lastmod": "2026-03-01",
-    "description": "If your lot empties at 6 PM you are only monetizing half your asset. Overnight parking strategies for entertainment districts, transit hubs, and residential overflow demand.",
+    "description": "A lot that empties at 6 PM is monetized half the day. Overnight strategies for entertainment districts, transit hubs and residential overflow.",
     "excerpt": "Most paid parking strategies focus on daytime hours. But for many property owners, that approach leaves half the clock on the table. Overnight parking demand is real, growing, and largely unmonetized.",
     "image": "/images/overnight-parking.webp",
     "imageAlt": "Overnight and 24-hour parking revenue strategies.",
     "thumbnail": "/images/overnight-parking.webp",
     "content": "/articles/overnight-24-hour-parking-revenue.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/overnight-24-hour-parking-revenue/"
+    "url": "/articles/overnight-24-hour-parking-revenue/",
+    "seoTitle": "Overnight and 24-Hour Parking Revenue Strategies"
   },
   {
     "slug": "stadium-arena-event-parking",
@@ -390,13 +401,13 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Maximize parking revenue on game days and concert nights near stadiums and arenas. Dynamic pricing strategies, traffic management, season pass programs, and venue partnership opportunities.",
+    "description": "Event-day parking revenue near stadiums and arenas: dynamic pricing, traffic management, season passes and venue partnerships.",
     "excerpt": "Parking lots within walking distance of stadiums and arenas generate most of their annual revenue during 50-80 event days rather than 365 days of steady traffic. This concentrated demand creates opportunities for premium pricing.",
     "image": "/images/stadium.webp",
     "imageAlt": "Stadium parking lot filling with vehicles before a major event.",
     "thumbnail": "/images/stadium.webp",
     "content": "/articles/stadium-arena-event-parking.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/stadium-arena-event-parking/"
@@ -415,16 +426,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Maintain parking revenue during construction or renovation when available spaces decrease. Communication strategies, alternative arrangements, pricing adjustments, and recovery plans.",
+    "description": "Hold parking revenue while construction reduces available spaces. Communication, alternative arrangements, pricing adjustments and recovery.",
     "excerpt": "Construction and renovation projects temporarily reduce parking capacity just when maintaining revenue becomes most critical. Smart operators minimize revenue impact through pricing adjustments and creative space management.",
     "image": "/images/construction.webp",
     "imageAlt": "Parking lot with reduced spaces during nearby construction and renovation work.",
     "thumbnail": "/images/construction.webp",
     "content": "/articles/parking-during-construction-renovation.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/parking-during-construction-renovation/"
+    "url": "/articles/parking-during-construction-renovation/",
+    "seoTitle": "Parking Revenue During Construction and Renovation"
   },
   {
     "slug": "ada-compliance-paid-parking",
@@ -440,16 +452,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Essential ADA requirements for paid parking lots including accessible space counts, van-accessible spaces, signage, payment systems, and enforcement considerations that protect you from violations.",
+    "description": "ADA requirements for paid parking lots: accessible space counts, van-accessible spaces, signage, payment systems and enforcement.",
     "excerpt": "ADA compliance is not optional for parking lots open to the public. Federal civil penalties reach $118,225 for a first violation, but only the Attorney General can seek them. Property owners must meet federal accessibility requirements regardless of lot size.",
     "image": "/images/ada.webp",
     "imageAlt": "ADA compliant accessible parking space with required signage and markings in a paid lot.",
     "thumbnail": "/images/ada.webp",
     "content": "/articles/ada-compliance-paid-parking.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/ada-compliance-paid-parking/"
+    "url": "/articles/ada-compliance-paid-parking/",
+    "seoTitle": "ADA Compliance Requirements for Paid Parking Lots"
   },
   {
     "slug": "parking-lot-striping-layout-revenue",
@@ -465,16 +478,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Optimize parking lot striping and layout to maximize capacity and revenue. Compact vs standard spaces, angle vs perpendicular parking, traffic flow design, and when to re-stripe for more spaces.",
+    "description": "Striping and layout decide capacity. Compact vs standard spaces, angle vs perpendicular, traffic flow, and when re-striping adds spaces.",
     "excerpt": "Parking lot striping determines how many revenue-generating spaces fit in your available square footage. Optimized striping can increase capacity by 15-30% on the same footprint, directly impacting revenue.",
     "image": "/images/striping.webp",
     "imageAlt": "Freshly striped parking lot with optimized layout design for maximum revenue.",
     "thumbnail": "/images/striping.webp",
     "content": "/articles/parking-lot-striping-layout-revenue.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/parking-lot-striping-layout-revenue/"
+    "url": "/articles/parking-lot-striping-layout-revenue/",
+    "seoTitle": "Parking Lot Striping and Layout for More Revenue"
   },
   {
     "slug": "winter-parking-revenue-strategies",
@@ -490,16 +504,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Maintain parking revenue through winter with smart snow removal policies, liability protection, seasonal pricing adjustments, and clear weather-related communication that keeps customers informed.",
+    "description": "Hold parking revenue through winter with snow removal policies, liability protection, seasonal pricing and clear weather communication.",
     "excerpt": "Winter weather reduces parking lot revenue through decreased utilization, increased operating costs, and weather-related closures. Property owners in snow regions need strategies that maintain income while managing expenses.",
     "image": "/images/winter.webp",
     "imageAlt": "Snow-covered parking lot facing winter revenue and maintenance challenges.",
     "thumbnail": "/images/winter.webp",
     "content": "/articles/winter-parking-revenue-strategies.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/winter-parking-revenue-strategies/"
+    "url": "/articles/winter-parking-revenue-strategies/",
+    "seoTitle": "Winter Parking Revenue: Snow, Liability, Pricing"
   },
   {
     "slug": "monthly-passes-vs-hourly-rates",
@@ -515,16 +530,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-26",
-    "description": "Most lot owners pick one pricing model and leave money on the table. Learn when monthly passes guarantee stable income, when hourly rates maximize revenue, and how to use both.",
+    "description": "When monthly passes guarantee stable income, when hourly rates capture more, and how to run both without cannibalizing either.",
     "excerpt": "Most parking lot owners think they need to choose between monthly passes and hourly rates. That binary thinking leaves money on the table. The best revenue strategy uses both.",
     "image": "/images/pass.webp",
     "imageAlt": "Parking lot comparing monthly pass and hourly rate pricing models.",
     "thumbnail": "/images/pass.webp",
     "content": "/articles/monthly-passes-vs-hourly-rates.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/monthly-passes-vs-hourly-rates/"
+    "url": "/articles/monthly-passes-vs-hourly-rates/",
+    "seoTitle": "Monthly Parking Passes vs Hourly Rates"
   },
   {
     "slug": "parking-revenue-analytics",
@@ -540,13 +556,13 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Stop tracking vanity metrics. Learn which parking analytics actually drive revenue decisions: utilization rates, compliance patterns, peak demand timing, and warning signs.",
+    "description": "Which parking metrics drive revenue decisions: utilization rates, compliance patterns, peak demand timing and the early warning signs.",
     "excerpt": "Total monthly revenue tells you almost nothing about how well your parking operation actually performs. The right metrics reveal pricing opportunities, operational problems, and capacity issues before they cost you money.",
     "image": "/images/analytics.webp",
     "imageAlt": "Parking revenue analytics dashboard displaying key performance metrics and data.",
     "thumbnail": "/images/analytics.webp",
     "content": "/articles/parking-revenue-analytics.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-revenue-analytics/"
@@ -565,16 +581,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Learn how to monetize parking in mixed-use developments with retail, residential, and office tenants. Time-sharing strategies, validation programs, and revenue allocation models.",
+    "description": "Monetizing parking across retail, residential and office tenants. Time-sharing strategies, validation programs and revenue allocation.",
     "excerpt": "Mixed-use developments create parking revenue opportunities that single-use properties cannot match. The same spaces serve office workers during weekdays, retail customers on weekends, and residential visitors in evenings.",
     "image": "/images/mixed.webp",
     "imageAlt": "Mixed-use development parking facility serving retail, office, and residential tenants.",
     "thumbnail": "/images/mixed.webp",
     "content": "/articles/mixed-use-development-parking.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/mixed-use-development-parking/"
+    "url": "/articles/mixed-use-development-parking/",
+    "seoTitle": "Mixed-Use Development Parking Revenue"
   },
   {
     "slug": "brewery-bar-parking-revenue",
@@ -590,16 +607,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Monetize parking for breweries, bars, and nightlife venues while managing liability. Evening pricing strategies, rideshare partnerships, and overnight policies that protect revenue.",
+    "description": "Parking revenue for breweries, bars and nightlife venues without adding liability. Evening pricing, rideshare partnerships and overnight policy.",
     "excerpt": "Parking lots near breweries, bars, and restaurants generate strong evening revenue when office lots sit empty. But establishments serving alcohol create liability concerns that require different policies than standard commercial parking.",
     "image": "/images/brew.webp",
     "imageAlt": "Brewery and bar parking lot during evening hours with late-night patrons.",
     "thumbnail": "/images/brew.webp",
     "content": "/articles/brewery-bar-parking-revenue.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/brewery-bar-parking-revenue/"
+    "url": "/articles/brewery-bar-parking-revenue/",
+    "seoTitle": "Brewery and Bar Parking Revenue"
   },
   {
     "slug": "airport-proximity-parking-revenue",
@@ -615,16 +633,17 @@
     ],
     "date": "2026-02-08",
     "lastmod": "2026-02-08",
-    "description": "Compete with official airport parking by offering cheaper long-term rates with shuttle service. Pricing strategies, security requirements, and operational models for airport proximity lots.",
+    "description": "Competing with official airport parking on long-term rates and shuttle service. Pricing, security requirements and operating models.",
     "excerpt": "Parking lots within 2-3 miles of airports compete directly with official airport parking by offering lower rates for travelers willing to take a short shuttle ride. Property owners near airports can generate consistent revenue from multi-day parking.",
     "image": "/images/airport.webp",
     "imageAlt": "Airport proximity parking lot with vehicles parked for long-term traveler use.",
     "thumbnail": "/images/airport.webp",
     "content": "/articles/airport-proximity-parking-revenue.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/airport-proximity-parking-revenue/"
+    "url": "/articles/airport-proximity-parking-revenue/",
+    "seoTitle": "Airport Proximity Parking Lot Revenue"
   },
   {
     "slug": "what-is-parking-monetization",
@@ -640,13 +659,13 @@
     ],
     "date": "2026-02-02",
     "lastmod": "2026-02-02",
-    "description": "Parking monetization turns underused lots into revenue streams. Learn how property owners generate $2,000 to $10,000+ monthly without gates, staff, or upfront costs.",
+    "description": "Parking monetization turns underused lots into revenue. How property owners earn from existing spaces without gates, staff or upfront cost.",
     "excerpt": "Parking monetization is the process of generating revenue from parking spaces that would otherwise sit empty or be used for free. Modern technology has made it easier than ever for property owners to collect parking revenue.",
     "image": "/images/monetize.webp",
     "imageAlt": "Property owner reviewing parking monetization options for an underused parking lot.",
     "thumbnail": "/images/monetize.webp",
     "content": "/articles/what-is-parking-monetization.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/what-is-parking-monetization/"
@@ -671,10 +690,11 @@
     "imageAlt": "Modern municipal parking lot with scan-to-pay and automated enforcement technology.",
     "thumbnail": "/images/city.webp",
     "content": "/articles/municipal-parking-solutions.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/municipal-parking-solutions/"
+    "url": "/articles/municipal-parking-solutions/",
+    "seoTitle": "Municipal Parking Solutions for Cities"
   },
   {
     "slug": "free-parking-true-cost",
@@ -696,7 +716,7 @@
     "imageAlt": "Property owner calculating the hidden costs of offering free parking.",
     "thumbnail": "/images/free.webp",
     "content": "/articles/free-parking-true-cost.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/free-parking-true-cost/"
@@ -715,13 +735,13 @@
     ],
     "date": "2026-02-02",
     "lastmod": "2026-02-26",
-    "description": "Scan-to-pay lets you collect parking revenue with no meters, no gates, and no hardware. Learn how QR code parking payments work, what they cost, and how to get started.",
+    "description": "Scan-to-pay collects parking revenue with no meters, gates or hardware. How QR code payments work, what they cost, and how to start.",
     "excerpt": "Scan-to-pay has become the standard for modern paid parking. Drivers scan a code, pay in seconds, and go. Here is how the technology actually works for property owners.",
     "image": "/images/scan.webp",
     "imageAlt": "Driver scanning a QR code to pay for parking with their smartphone.",
     "thumbnail": "/images/thumbs/scan.webp",
     "content": "/articles/qr-code-parking-payments.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/qr-code-parking-payments/"
@@ -746,10 +766,11 @@
     "imageAlt": "Parking lot with security cameras and LED lighting for safety.",
     "thumbnail": "/images/thumbs/camera_lot.webp",
     "content": "/articles/parking-lot-security.html",
-    "readTime": "5\u20136 min",
+    "readTime": "5–6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/parking-lot-security/"
+    "url": "/articles/parking-lot-security/",
+    "seoTitle": "Parking Lot Security: Cameras, Lighting, Monitoring"
   },
   {
     "slug": "church-parking-revenue-guide",
@@ -764,7 +785,7 @@
     ],
     "date": "2026-01-25",
     "lastmod": "2026-01-25",
-    "description": "Most church lots sit empty Monday through Saturday. Modern parking technology lets you earn weekday revenue with zero hardware costs and no impact on Sunday services.",
+    "description": "Most church lots sit empty Monday through Saturday. How to earn weekday revenue with no hardware cost and no impact on Sunday services.",
     "excerpt": "Churches maintain parking lots sized for Sunday demand that sit empty during weekdays. Modern technology lets religious properties generate revenue while keeping all church activities free.",
     "image": "/images/church.webp",
     "imageAlt": "Church parking lot with weekday parking revenue opportunity.",
@@ -788,7 +809,7 @@
     ],
     "date": "2026-01-25",
     "lastmod": "2026-01-25",
-    "description": "Medical facilities can generate parking revenue while ensuring patient access. Learn how healthcare properties balance convenience with income through smart parking technology.",
+    "description": "How medical offices and clinics balance patient access with parking income, and which technology keeps the two from conflicting.",
     "excerpt": "Medical facilities face parking challenges that combine high demand with ethical sensitivity. Learn how healthcare properties generate revenue without creating barriers to patient care.",
     "image": "/images/medical.webp",
     "imageAlt": "Medical facility parking lot with patient-first revenue strategy.",
@@ -797,7 +818,8 @@
     "readTime": "5-6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/medical-facility-parking-revenue/"
+    "url": "/articles/medical-facility-parking-revenue/",
+    "seoTitle": "Medical Office and Clinic Parking Revenue"
   },
   {
     "slug": "retail-parking-revenue-guide",
@@ -821,7 +843,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/retail-parking-revenue-guide/"
+    "url": "/articles/retail-parking-revenue-guide/",
+    "seoTitle": "Retail Store Parking Revenue: A Guide for Owners"
   },
   {
     "slug": "college-town-parking-revenue",
@@ -845,7 +868,8 @@
     "readTime": "5-6 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/college-town-parking-revenue/"
+    "url": "/articles/college-town-parking-revenue/",
+    "seoTitle": "College Town Parking Revenue for Property Owners"
   },
   {
     "slug": "parking-validation-programs-guide",
@@ -860,7 +884,7 @@
     ],
     "date": "2026-01-25",
     "lastmod": "2026-02-26",
-    "description": "Offer your customers free parking without letting everyone else park for free too. Learn how validation programs protect your revenue while keeping customers happy.",
+    "description": "Give tenants and customers free parking without letting everyone else park free. How validation works, gated and gateless.",
     "excerpt": "Parking validation solves a common challenge: how to offer free customer parking while preventing non-customers from using the lot as free all-day parking.",
     "image": "/images/validation.webp",
     "imageAlt": "Parking validation system providing free customer parking.",
@@ -869,7 +893,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/parking-validation-programs-guide/"
+    "url": "/articles/parking-validation-programs-guide/",
+    "seoTitle": "Parking Validation for Retail Tenants Explained"
   },
   {
     "slug": "announce-paid-parking-guide",
@@ -884,7 +909,7 @@
     ],
     "date": "2026-01-25",
     "lastmod": "2026-01-25",
-    "description": "Implementing paid parking doesn't have to alienate customers. Learn how to communicate parking changes clearly and maintain customer goodwill through the transition.",
+    "description": "Introducing paid parking without alienating customers. How to communicate the change and hold goodwill through the transition.",
     "excerpt": "The decision to implement paid parking often comes with anxiety about customer reaction. The communication strategy matters more than the parking policy itself.",
     "image": "/images/paid_parking.webp",
     "imageAlt": "Clear parking signage announcing paid parking policy changes.",
@@ -910,7 +935,7 @@
     ],
     "date": "2026-01-18",
     "lastmod": "2026-01-18",
-    "description": "Can you legally charge for parking on your property? Learn about zoning, signage requirements, tenant considerations, and enforcement rules that affect private parking operations.",
+    "description": "Charging for parking on private property: zoning, signage requirements, tenant considerations and the enforcement rules that apply.",
     "excerpt": "Learn about zoning, signage requirements, tenant considerations, and enforcement rules that affect private parking operations.",
     "image": "/images/legal.webp",
     "imageAlt": "Property owner reviewing legal requirements for charging for parking on private property.",
@@ -936,7 +961,7 @@
     ],
     "date": "2026-01-18",
     "lastmod": "2026-01-18",
-    "description": "Gateless parking eliminates barriers, reduces maintenance costs, and improves customer experience. Learn why property owners are making the switch from traditional gate systems.",
+    "description": "Gateless parking removes barriers, cuts maintenance and improves the customer experience. Why owners are leaving traditional gate systems.",
     "excerpt": "Eliminate barriers, reduce maintenance costs, and improve customer experience by switching from traditional gate systems to gateless parking.",
     "image": "/images/gateless.webp",
     "imageAlt": "Modern gateless parking facility with license plate recognition technology.",
@@ -962,7 +987,7 @@
     ],
     "date": "2026-01-18",
     "lastmod": "2026-01-18",
-    "description": "Ready to turn your parking lot into a revenue stream? Learn the key steps to set up paid parking, from assessing your property to choosing technology and launching.",
+    "description": "The steps to set up paid parking, from assessing the property to choosing technology and launching without upsetting existing tenants.",
     "excerpt": "Learn the key steps to set up paid parking, from assessing your property to choosing technology and launching your operation.",
     "image": "/images/charging.webp",
     "imageAlt": "Step-by-step guide to starting a paid parking operation on your property.",
@@ -988,7 +1013,7 @@
     ],
     "date": "2026-01-18",
     "lastmod": "2026-02-21",
-    "description": "Most property owners underestimate what their parking is worth. Learn the key factors that drive parking lot revenue and calculate your property's earning potential for free.",
+    "description": "What drives parking lot revenue, and how to estimate what a specific property could earn before committing to anything.",
     "excerpt": "Learn the factors that determine parking lot revenue and discover what your parking spaces might be worth.",
     "image": "/images/pricing.webp",
     "imageAlt": "Parking lot revenue analysis showing factors that determine income potential.",
@@ -1022,7 +1047,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/apartment-parking-revenue/"
+    "url": "/articles/apartment-parking-revenue/",
+    "seoTitle": "Apartment Parking Revenue: What to Charge"
   },
   {
     "slug": "ev-charging-parking-revenue",
@@ -1063,7 +1089,7 @@
     ],
     "date": "2026-01-10",
     "lastmod": "2026-01-10",
-    "description": "Property owners near venues can earn 5x to 10x normal rates on event days. Here's how to find nearby events, set pricing, and manage the rush with no upfront costs.",
+    "description": "Property owners near venues can charge well above normal rates on event days. Finding nearby events, setting pricing and managing the rush.",
     "excerpt": "Capture premium rates during concerts, games, and festivals by planning ahead and setting event-specific parking prices.",
     "image": "/images/event.webp",
     "imageAlt": "Event parking lot near stadium during a major concert or game.",
@@ -1072,7 +1098,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/event-parking-revenue/"
+    "url": "/articles/event-parking-revenue/",
+    "seoTitle": "Event Parking Rates for Game Days and Concerts"
   },
   {
     "slug": "parking-lot-insurance-requirements",
@@ -1088,7 +1115,7 @@
     ],
     "date": "2026-01-10",
     "lastmod": "2026-01-10",
-    "description": "Charging for parking changes your liability exposure. Learn what insurance coverage you need before monetizing your lot, from garagekeepers to umbrella policies.",
+    "description": "Charging for parking changes liability exposure. What coverage to have in place first, from garagekeepers to umbrella policies.",
     "excerpt": "Understand the insurance requirements for paid parking including garagekeepers liability, commercial coverage, and umbrella policies.",
     "image": "/images/insurance.webp",
     "imageAlt": "Parking lot with insurance and liability considerations for paid operations.",
@@ -1097,7 +1124,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/parking-lot-insurance-requirements/"
+    "url": "/articles/parking-lot-insurance-requirements/",
+    "seoTitle": "Parking Lot Insurance for Paid Parking"
   },
   {
     "slug": "hotel-parking-revenue",
@@ -1113,7 +1141,7 @@
     ],
     "date": "2026-01-10",
     "lastmod": "2026-01-10",
-    "description": "Hotels offering free parking leave $500 to $2,000 per month on the table. Learn how to add parking fees guests will accept while capturing non-guest revenue too.",
+    "description": "Free hotel parking leaves money on the table. How to add parking fees guests accept while capturing non-guest revenue too.",
     "excerpt": "Stop subsidizing free parking. Structure hotel parking fees, add valet premiums, and capture non-guest revenue from empty spaces.",
     "image": "/images/hotel_park.webp",
     "imageAlt": "Hotel parking garage with revenue optimization opportunities.",
@@ -1122,7 +1150,8 @@
     "readTime": "4-5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/hotel-parking-revenue/"
+    "url": "/articles/hotel-parking-revenue/",
+    "seoTitle": "Hotel Parking Revenue: Pricing Free Parking"
   },
   {
     "slug": "handling-parking-violations-disputes",
@@ -1138,7 +1167,7 @@
     ],
     "date": "2026-01-10",
     "lastmod": "2026-02-21",
-    "description": "Parking enforcement doesn't have to mean angry customers. Learn how to set fair violation fees, build a simple dispute process, and enforce rules professionally.",
+    "description": "Enforcement without angry customers. Setting fair violation fees, building a simple dispute process and applying rules consistently.",
     "excerpt": "Handle parking violations professionally with clear signage, fair fees, and a simple dispute process that reduces conflicts.",
     "image": "/images/violations.webp",
     "imageAlt": "Parking violation notice and dispute resolution process.",
@@ -1169,7 +1198,7 @@
     "imageAlt": "Comparison of Scan-to-Pay QR code and LPR camera parking technologies.",
     "thumbnail": "/images/thumbs/scan_lpr.webp",
     "content": "/articles/scan-to-pay-vs-lpr.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/scan-to-pay-vs-lpr/"
@@ -1194,7 +1223,7 @@
     "imageAlt": "Timeline showing the first 90 days of implementing paid parking.",
     "thumbnail": "/images/thumbs/90_paid.webp",
     "content": "/articles/first-90-days-paid-parking.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/first-90-days-paid-parking/"
@@ -1219,7 +1248,7 @@
     "imageAlt": "Parking lot signage showing payment instructions and enforcement rules.",
     "thumbnail": "/images/thumbs/park_sign.webp",
     "content": "/articles/parking-signage-guide.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-signage-guide/"
@@ -1238,16 +1267,17 @@
     ],
     "date": "2026-01-10",
     "lastmod": "2026-02-26",
-    "description": "Most office buildings give parking away to tenants and ignore the rest. Learn how to monetize visitor parking, after-hours access, and weekend capacity with no upfront costs.",
+    "description": "What parking earns per square foot against office and retail rent, and how to monetize visitor, after-hours and weekend capacity.",
     "excerpt": "Turn office building parking into revenue with visitor fees, after-hours access, and smart tenant validation.",
     "image": "/images/office.webp",
     "imageAlt": "Office building parking garage with revenue optimization opportunities.",
     "thumbnail": "/images/thumbs/office.webp",
     "content": "/articles/office-building-parking-revenue.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
-    "url": "/articles/office-building-parking-revenue/"
+    "url": "/articles/office-building-parking-revenue/",
+    "seoTitle": "Parking Revenue Per Square Foot vs Office Space"
   },
   {
     "slug": "restaurant-paid-parking",
@@ -1264,13 +1294,13 @@
     ],
     "date": "2025-12-27",
     "lastmod": "2025-12-27",
-    "description": "Restaurant owners worry paid parking drives customers away, but the data says otherwise. Learn how validation programs and smart pricing keep diners coming back.",
+    "description": "Restaurant owners fear paid parking drives diners away. What the data shows, and how validation and pricing keep them coming back.",
     "excerpt": "Customers pay for parking at restaurants worth visiting. Convenience and experience matter more than parking costs.",
     "image": "/images/rest_park.webp",
     "imageAlt": "Upscale urban restaurant district where customers pay for parking to access quality dining.",
     "thumbnail": "/images/thumbs/rest_park.webp",
     "content": "/articles/restaurant-paid-parking.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/restaurant-paid-parking/"
@@ -1296,7 +1326,7 @@
     "imageAlt": "Modern automated parking enforcement system with LPR cameras replacing manual methods.",
     "thumbnail": "/images/thumbs/stone.webp",
     "content": "/articles/parking-enforcement-modernization.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-enforcement-modernization/"
@@ -1322,7 +1352,7 @@
     "imageAlt": "Busy commercial district with high parking demand indicating economic vitality.",
     "thumbnail": "/images/thumbs/park_problems.webp",
     "content": "/articles/parking-problems-mean-success.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/parking-problems-mean-success/"
@@ -1348,7 +1378,7 @@
     "imageAlt": "Downtown municipal land being reclaimed from parking for parks and housing development.",
     "thumbnail": "/images/thumbs/private.webp",
     "content": "/articles/private-parking-frees-municipal-land.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/private-parking-frees-municipal-land/"
@@ -1374,7 +1404,7 @@
     "imageAlt": "Empty parking lot during off-peak hours available for shared parking agreements.",
     "thumbnail": "/images/thumbs/empty_lot.webp",
     "content": "/articles/shared-parking-agreements-revenue.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/shared-parking-agreements-revenue/"
@@ -1400,7 +1430,7 @@
     "imageAlt": "Historic downtown district with limited parking and high demand from visitors and businesses.",
     "thumbnail": "/images/thumbs/historic.webp",
     "content": "/articles/historic-district-parking-profit.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/historic-district-parking-profit/"
@@ -1426,7 +1456,7 @@
     "imageAlt": "Seasonal parking lot in a ski town or beach destination during peak tourist season.",
     "thumbnail": "/images/thumbs/beach.webp",
     "content": "/articles/paid-parking-seasonal-destinations.html",
-    "readTime": "4\u20135 min",
+    "readTime": "4–5 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/paid-parking-seasonal-destinations/"
@@ -1451,7 +1481,7 @@
     "imageAlt": "Flexible parking management rules dashboard showing license plate exemptions and custom pricing schedules.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/flexible-parking-rules.html",
-    "readTime": "5\u20137 min",
+    "readTime": "5–7 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/flexible-parking-rules/"
@@ -1477,7 +1507,7 @@
     "imageAlt": "License plate recognition system automatically exempting employee vehicles from parking fees.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/license-plate-allow-listing-guide.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/license-plate-allow-listing-guide/"
@@ -1503,7 +1533,7 @@
     "imageAlt": "Parking lot operating hours schedule showing peak and off-peak enforcement times.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/custom-operating-hours-strategy.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/custom-operating-hours-strategy/"
@@ -1529,7 +1559,7 @@
     "imageAlt": "Dynamic parking pricing dashboard showing time-based rate adjustments.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/dynamic-pricing-strategies.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/dynamic-pricing-strategies/"
@@ -1555,7 +1585,7 @@
     "imageAlt": "Parking policy diagram showing employee exemptions and visitor payment zones.",
     "thumbnail": "/images/thumbs/rules.webp",
     "content": "/articles/balancing-revenue-relationships.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/balancing-revenue-relationships/"
@@ -1579,14 +1609,14 @@
     "imageAlt": "Why 100% Occupancy Isn't the Goal. 100% Compliance Is",
     "thumbnail": "/images/thumbs/default-guide.webp",
     "content": "/articles/occupancy-vs-compliance.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/occupancy-vs-compliance/"
   },
   {
     "slug": "you-didnt-buy-a-parking-lot-to-babysit-it",
-    "title": "You Didn\u2019t Buy a Parking Lot to Babysit It",
+    "title": "You Didn’t Buy a Parking Lot to Babysit It",
     "category": "Articles",
     "service": "Parking",
     "tags": [
@@ -1604,7 +1634,7 @@
     "imageAlt": "Parking lot owner reviewing automated enforcement reports on a tablet.",
     "thumbnail": "/images/thumbs/monitor.webp",
     "content": "/articles/you-didnt-buy-a-parking-lot-to-babysit-it.html",
-    "readTime": "4\u20136 min",
+    "readTime": "4–6 min",
     "author": "Monetize Parking"
   },
   {
@@ -1627,7 +1657,7 @@
     "imageAlt": "Spreadsheet showing parking revenue break-even analysis.",
     "thumbnail": "/images/thumbs/break.webp",
     "content": "/articles/when-to-start-charging-parking.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking"
   },
   {
@@ -1645,7 +1675,7 @@
     ],
     "date": "2025-11-14",
     "lastmod": "2026-02-21",
-    "description": "A complete guide to dynamic parking pricing. Learn time-based, demand-based, and event-based strategies, the technology you need, and how to implement it step by step.",
+    "description": "Time-based, demand-based and event-based parking pricing: the strategies, the technology required, and how to roll it out in stages.",
     "excerpt": "Boost parking revenue 12-35% with dynamic pricing. Learn the three main strategies, what technology you need, how to implement step by step, and mistakes to avoid.",
     "image": "/images/pricing.webp",
     "imageAlt": "Dynamic pricing dashboard showing real-time parking rate adjustments",
@@ -1678,7 +1708,7 @@
     "imageAlt": "Dynamic pricing strategy comparison showing time-based, demand-based, and event-based options.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/choosing-pricing-strategy.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/choosing-pricing-strategy/"
@@ -1705,7 +1735,7 @@
     "imageAlt": "Parking technology stack showing sensors, software dashboard, and payment systems.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/dynamic-pricing-technology.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/dynamic-pricing-technology/"
@@ -1732,7 +1762,7 @@
     "imageAlt": "Dynamic pricing strategies customized for different property types including office, retail, and hotel.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/pricing-by-property-type.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/pricing-by-property-type/"
@@ -1759,14 +1789,14 @@
     "imageAlt": "Common dynamic pricing mistakes to avoid for parking lot operators.",
     "thumbnail": "/images/thumbs/pricing.webp",
     "content": "/articles/dynamic-pricing-mistakes.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking",
     "featured": false,
     "url": "/articles/dynamic-pricing-mistakes/"
   },
   {
     "slug": "eau-claire-revenue-increase",
-    "title": "Eau Claire Case Study: 178% Revenue Increase | Monetize Parking",
+    "title": "Eau Claire Case Study: 178% Revenue Increase",
     "category": "Case Studies",
     "service": "Parking",
     "featured": true,
@@ -1784,8 +1814,9 @@
     "imageAlt": "Downtown Eau Claire parking lot with professional enforcement system.",
     "thumbnail": "/images/thumbs/parking_up.webp",
     "content": "/articles/eau-claire-revenue-increase.html",
-    "readTime": "3\u20135 min",
-    "author": "Monetize Parking"
+    "readTime": "3–5 min",
+    "author": "Monetize Parking",
+    "seoTitle": "Eau Claire Case Study: 178% Parking Revenue Lift"
   },
   {
     "slug": "real-costs-parking-management",
@@ -1805,7 +1836,7 @@
     "imageAlt": "Parking management team reviewing lot maintenance expenses.",
     "thumbnail": "/images/thumbs/park_mana.webp",
     "content": "/articles/real-costs-parking-management.html",
-    "readTime": "3\u20134 min",
+    "readTime": "3–4 min",
     "author": "Monetize Parking"
   },
   {
@@ -1826,7 +1857,7 @@
     "imageAlt": "AI camera watching an open parking lot entrance.",
     "thumbnail": "/images/thumbs/ai_camera.webp",
     "content": "/articles/ai-access-vs-gates.html",
-    "readTime": "3\u20135 min",
+    "readTime": "3–5 min",
     "author": "Monetize Parking"
   },
   {
@@ -1842,12 +1873,12 @@
     "date": "2025-07-08",
     "lastmod": "2025-08-20",
     "description": "Why recurring gate arm maintenance and breakdowns quietly erode parking profits. See how AI enforcement eliminates the maintenance burden and boosts revenue.",
-    "excerpt": "Recurring gate arm repairs drain parking profits\u2014see the smarter alternative.",
+    "excerpt": "Recurring gate arm repairs drain parking profits—see the smarter alternative.",
     "image": "/images/gate_arms.webp",
     "imageAlt": "Technician repairing a broken parking gate arm.",
     "thumbnail": "/images/thumbs/gate_arms.webp",
     "content": "/articles/gate-arm-maintenance-costs.html",
-    "readTime": "4\u20136 min",
+    "readTime": "4–6 min",
     "author": "Monetize Parking"
   },
   {
@@ -1868,7 +1899,7 @@
     "imageAlt": "Overhead view of a small paid parking lot with full occupancy.",
     "thumbnail": "/images/thumbs/lot_size.webp",
     "content": "/articles/optimal-lot-size-profit.html",
-    "readTime": "4\u20136 min",
+    "readTime": "4–6 min",
     "author": "Monetize Parking"
   },
   {
@@ -1881,7 +1912,7 @@
     "thumbnail": "/images/thumbs/small-lots-main.webp",
     "excerpt": "Even modest parking assets can achieve impressive ROI through automation. Parking Today highlights how one of our partners, Municipal Parking Services (MPS), is helping small lots thrive through smart enforcement and automation.",
     "cta": {
-      "text": "Read on Parking Today \u2192",
+      "text": "Read on Parking Today →",
       "url": "https://parkingtoday.com/segments/medical/small-lots-earn-big-returns-through-automation/",
       "external": true
     },

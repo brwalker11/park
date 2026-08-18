@@ -53,7 +53,7 @@ The site was previously on GitHub Pages. It is not anymore. `_headers` and
 ```bash
 npm install          # required once; node_modules is not committed
 
-npm run build        # thumbnails -> articles -> sitemap, in that order
+npm run build        # thumbnails -> articles -> resource index -> sitemap, in that order
 ```
 
 Individual scripts:
@@ -61,7 +61,14 @@ Individual scripts:
   `/images/` into `/images/thumbs/`, skipping logos, icons, favicons, and
   `default-guide*`. Uses sharp.
 - `npm run generate:articles` - copies `templates/article-index.html` to
-  `/articles/{slug}/index.html` for every entry in `data/resources.json`
+  `/articles/{slug}/index.html` for every entry in `data/resources.json`, and
+  **inlines each article's body, JSON-LD and dates into it**. See "Pages are
+  pre-rendered" under Architecture.
+- `npm run generate:resource-index` - writes the crawlable link index into
+  `resources/index.html` between the `BEGIN:generated-index` /
+  `END:generated-index` markers. **Runs after `generate:articles` on purpose**:
+  it only emits a link when the generated `index.html` for that slug exists on
+  disk, so running it against a stale tree silently drops articles.
 - `npm run generate:sitemap` - regenerates `sitemap.xml` from article data
 
 `tools/build.js`, `tools/compress-images.js`, and `tools/seo-audit.js` exist but
@@ -376,10 +383,57 @@ Content is driven by JSON rather than individual static HTML files.
 - `/tools/generate-article-pages.js` - generates `/articles/{slug}/index.html`
 
 **How it works**: the generate script copies the template to each article
-directory. At runtime `js/article.js` extracts the slug from the URL, fetches
-`data/resources.json`, finds the matching article, loads the body HTML from the
-`content` path, and renders it. SEO tags (title, meta description, canonical,
-Open Graph, Twitter, JSON-LD) are generated client-side from the JSON.
+directory **and inlines that article's body fragment, JSON-LD, dates and meta
+into it**. At runtime `js/article.js` extracts the slug from the URL, fetches
+`data/resources.json`, loads the body from the `content` path if the page did
+not already ship one, and adds the TOC, related rail, breadcrumb and CTA
+tracking.
+
+#### Pages are pre-rendered as of 2026-08-18. Read this before changing either half.
+
+**Until this date the body, the schema and the dates were produced ONLY at
+runtime, and it was the single biggest SEO defect on the site.** Every
+`/articles/{slug}/` page shipped **69 words** of static text - identical across
+all 71 of them once the title and hero alt are excluded - and **zero** ld+json
+blocks. A crawler that does not execute JavaScript saw 71 copies of the same
+boilerplate shell.
+
+Measured consequences in Search Console at the time of the change:
+
+| Bucket | Count |
+|---|---|
+| Crawled - currently not indexed | 49 |
+| Discovered - currently not indexed | 5 |
+| **Soft 404** | **2** |
+
+The two Soft 404s (`ev-charging-revenue-share-vs-ownership`,
+`questions-before-signing-ev-charging-contract`) are the sharpest evidence: both
+are live, both are in the sitemap, both have real content in
+`data/resources.json`, and Google rendered them and still concluded the page was
+empty.
+
+**After the change:** static body text runs 299 to 2,277 words, median 639, and
+every page carries an `Article` and a `BreadcrumbList` block in the HTML.
+
+**The two halves are coupled and must stay in agreement:**
+
+- The generator's Article JSON-LD carries `data-dynamic="article"`, matching the
+  selector `injectJsonLd()` removes before appending its own. **Drop that
+  attribute and every page ends up with two Article blocks.** The BreadcrumbList
+  block deliberately does not carry it, so the runtime leaves it alone.
+- `buildMetaLine()` is implemented in **both** files and they must produce the
+  same string, or the byline visibly rewrites itself on load.
+- `js/article.js` checks `isPrerendered()` before doing anything destructive.
+  **This is what stops a transient fetch failure from wiping a good page and
+  setting `noindex` on it.** Before the change, any error in `init()` fell into
+  `renderNotFound()`, which does exactly that;
+  `/articles/free-parking-true-cost/` has been sitting in "Excluded by noindex
+  tag" since 20 Feb 2026 with no other explanation. Do not remove that check.
+
+Verified in a headless browser across three cases: normal load (498 words, 2
+ld+json, 5 related cards, no page errors, no duplicated body), `resources.json`
+aborted (page intact, schema intact, no noindex, related rail empty), and the
+body fragment aborted (no effect at all).
 
 **Rebrand implication**: all article page chrome lives in ONE template. A header
 or footer change is a single file edit plus a rebuild, not 147 edits.
@@ -388,13 +442,21 @@ or footer change is a single file edit plus a rebuild, not 147 edits.
 runtime. The middle stage is easy to miss because its output is committed and
 looks hand-written.
 
-`tools/generate-article-pages.js` performs **17 build-time substitutions** on
+`tools/generate-article-pages.js` performs **24 build-time substitutions** on
 the template per article: canonical, a `<link rel="preload" as="image">` for
-the hero injected before `</head>`, `<title>`, meta description, `og:title`,
-`og:description`, `og:url`, `og:image`, `twitter:title`, `twitter:description`,
-`twitter:image`, hero `src` and `alt`, the `.eyebrow` category, the hero `h1`,
-the breadcrumb title, and `data-article-slug`.
+the hero **and the two JSON-LD blocks** injected before `</head>`, `<title>`,
+meta description, `og:type`, `og:title`, `og:description`, `og:url`, `og:image`,
+`article:published_time`, `article:modified_time`, `twitter:title`,
+`twitter:description`, `twitter:image`, hero `src` and `alt`, the `.eyebrow`
+category, the hero `h1`, the breadcrumb title, the breadcrumb category link, the
+byline meta line, the summary, **the article body**, and `data-article-slug`.
 
+> **Raised from 17 to 24 on 2026-08-18** by the pre-rendering change described
+> above. Seven substitutions were added: `og:type`, both `article:*` timestamps,
+> the breadcrumb category link, `#article-meta`, `#article-summary`, and
+> `#article-body`. The JSON-LD rides along inside the existing `</head>`
+> substitution rather than adding one of its own.
+>
 > **Corrected 2026-08-11: the count is 17, not 14.** This file said 14 when the
 > section was first written, from a miscount of the `.replace()` chain rather
 > than from a change in the code. Nothing in the generator changed. The number
@@ -439,8 +501,24 @@ not remove it as a stray `!important` during a cleanup.** The redesign uses the
 image as a contained panel instead, and the only alternatives are editing
 `js/article.js`, which carries both guards, or shipping the defect.
 
-All three exist because `js/article.js` is deliberately not edited. See the
-rebrand guardrails.
+All three exist because `js/article.js` was, for the length of the rebrand,
+deliberately not edited.
+
+> **That freeze ended on 2026-08-18** with the pre-rendering change. The file is
+> editable again, and the reason it was frozen is worth stating correctly,
+> because the shorthand above is misleading: **`tools/guards.js` walks `.html`
+> files only, so `js/article.js` is not hashed by either guard script.** The
+> freeze was a rebrand-scope decision, not a guard constraint.
+>
+> **What editing it does cost is a cache bump, and that is mandatory.** `/js/*`
+> is `immutable` for a year, so a change without one never reaches a returning
+> visitor. Bump the query on the `<script>` src in
+> `templates/article-index.html` and run `npm run generate:articles` in the same
+> commit. The sequence so far: `?v=logo-404`, `?v=service-crumb`,
+> `?v=rail-service`, `?v=prerender`.
+>
+> The three constraints above are still live. They are properties of how the
+> runtime addresses the DOM, and none of them was relaxed.
 
 **The generator's anchors are brittle.** Several match literal strings rather
 than structure, so a cosmetic template edit silently stops the substitution and
@@ -453,6 +531,24 @@ the generator still exits 0:
 - `<li id="breadcrumb-title" aria-current="page">Loading…</li>`
 - `<title>Loading article… | Monetize Parking</title>`
 - `data-article-slug=""`
+- `<a id="breadcrumb-category" class="breadcrumb-link" href="/resources/">Category</a>`
+- `<div id="article-meta"></div>`
+- `<div id="article-summary"></div>`
+- `<div id="article-body" class="article-body" aria-live="polite"></div>`
+- `<meta property="og:type" content="website">`
+- `<meta property="article:published_time" content="">` and the `modified_time` twin
+
+**The last four matter more than the rest**, because they are what pre-rendering
+hangs off. If the `#article-body` anchor stops matching, the generator still
+exits 0 and every article page silently reverts to the 69-word shell that put 49
+URLs into "Crawled - currently not indexed". **Do not verify by exit code.**
+After any template change, rebuild and assert the static word count:
+
+```bash
+node -e 'const fs=require("fs");const s=fs.readFileSync("articles/scan-to-pay-vs-lpr/index.html","utf8").replace(/<script[\s\S]*?<\/script>/g,"").replace(/<style[\s\S]*?<\/style>/g,"");console.log(s.slice(s.indexOf("<body")).replace(/<[^>]+>/g," ").split(/\s+/).filter(Boolean).length)'
+```
+
+Anything near 69 means the body substitution stopped firing.
 
 Change the alt text, the eyebrow word, the placeholder copy, or the ellipsis
 character and that field goes unpopulated on all 72 generated pages with no
@@ -596,6 +692,35 @@ check rather than a replacement for it.
 
 All pretty URLs. Each article directory needs an `index.html` for routing.
 
+### SERP title vs page heading
+
+**`title` in `data/resources.json` drives four things at once**: the `<h1>`, the
+`<title>` tag, the resource card on `/resources/`, and the breadcrumb. A string
+tuned for a 60-character SERP limit is usually a worse on-page heading, and the
+reverse.
+
+**`seoTitle` breaks the tie for the `<title>` tag only**, exactly as
+`canonicalOverride` does for canonicals. Optional; absent, `title` is used. Read
+by `seoTitleFor()` in `tools/generate-article-pages.js` and by
+`setDocumentMeta()` in `js/article.js`, and **those two must agree** - if the
+runtime computes a different string the page re-titles itself on load and
+Google, which renders, sees the runtime version.
+
+**The ` | Monetize Parking` suffix is no longer appended to `<title>` on article
+pages.** Measured 2026-08-18: 74 of 75 titles exceeded 60 characters with the
+suffix, only 30 without it, so the suffix alone was truncating 44 pages in the
+SERP. It **is** still appended to `og:title` and `twitter:title`, which are not
+pixel-limited the same way and where a shared card with no brand is worth less.
+That asymmetry is deliberate; do not "fix" it into consistency.
+
+`headline` in the Article JSON-LD stays on `title`, not `seoTitle`, because
+schema headline is meant to match the visible heading.
+
+31 records carry a `seoTitle` as of 2026-08-18. `tools/apply-title-pass.js` was
+the one-off migration that added them and rewrote 37 over-length descriptions;
+it is **not** wired into `npm run build` and can be deleted once the change has
+shipped.
+
 ### Canonical URLs
 
 By default canonical URLs follow `https://monetize-parking.com/articles/{slug}/`.
@@ -656,8 +781,16 @@ calculator.
 
 ### Structured Data
 
-Organization and VideoObject schema on `index.html`. Article and BreadcrumbList
-generated per-article in `js/article.js`.
+Organization and VideoObject schema on `index.html`.
+
+**Article and BreadcrumbList are written into each article page at build time by
+`tools/generate-article-pages.js`**, not generated client-side. They were
+runtime-only until 2026-08-18, which meant every article page served **zero**
+ld+json to a non-rendering crawler; articles were the only page type on the site
+without a BreadcrumbList at all. `js/article.js` still re-emits the Article
+block on load and the two must stay byte-compatible - see "Pages are
+pre-rendered" under Dynamic Article System for the `data-dynamic="article"`
+coupling that stops them duplicating.
 
 FAQPage schema can be added to pages with Q&A content. `/services/` has none;
 that is item 39 in `BACKLOG.md`, which carries the caution that `faq/index.html`
@@ -1279,6 +1412,8 @@ rebrand, so they are listed in full.
 ├── images/                     # WebP preferred; thumbs/ is generated
 ├── tools/
 │   ├── generate-article-pages.js
+│   ├── generate-resources-index.js  # Writes the crawlable link index into
+│   │                                # resources/index.html between its markers
 │   ├── update-sitemap.js
 │   ├── generate-thumbnails.js
 │   ├── build.js                # Not wired to npm, ask before running
@@ -1500,6 +1635,10 @@ that is a Cloudflare redirect rule.
 - `_redirects`.
 - Any `/articles/{slug}/index.html` file directly. These are generated. Edit
   the template or the body fragment instead.
+- Anything between `<!-- BEGIN:generated-index -->` and
+  `<!-- END:generated-index -->` in `resources/index.html`. Generated by
+  `npm run generate:resource-index`. **Do not delete the markers either** - the
+  build step throws rather than guessing where the block belongs.
 - Minified and critical CSS/JS files. See the section above.
 
 ## Working method

@@ -635,3 +635,110 @@
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+   Server-rendered resource index (tools/generate-resources-index.js)
+
+   The card grid above this is built at runtime by js/resources.js, so it does
+   not exist for a crawler that skips JavaScript. This list is written into the
+   HTML at build time and is what gives every article a real internal link from
+   the hub. It is a normal, readable "everything we have" list, not a hidden
+   link farm - do not display:none it, and do not shrink it into a footer blob.
+   --------------------------------------------------------------------------- */
+.res-index {
+  display: block;
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--border, #e2e8f0);
+  background: #ffffff;
+}
+
+.res-index-heading {
+  font-size: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.res-index-sub {
+  color: var(--muted, #64748b);
+  margin: 0 0 2rem;
+}
+
+/* Groups stack; the LIST inside each one flows across columns. Laying the
+   groups out side by side instead put all 59 Parking links in a single 3,900px
+   column next to two short ones. */
+.res-index-groups {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+.res-index-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+
+.res-index-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--muted, #64748b);
+  background: #f1f5f9;
+  border-radius: 9999px;
+  padding: 2px 8px;
+}
+
+.res-index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 260px 4;
+  column-gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.res-index-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  /* Keeps a title and its read time from splitting across a column break. */
+  break-inside: avoid;
+}
+
+.res-index-item a {
+  color: var(--ink, #0f172a);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.res-index-item a:hover,
+.res-index-item a:focus-visible {
+  color: var(--clr-accent, #004fc8);
+  text-decoration: underline;
+}
+
+.res-index-read {
+  flex: none;
+  font-size: 0.75rem;
+  color: var(--muted, #64748b);
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .res-index-item {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+}

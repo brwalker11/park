@@ -43,9 +43,37 @@
 
   document.addEventListener('DOMContentLoaded', init);
 
+  /* Since 2026-08-18 tools/generate-article-pages.js inlines the body fragment,
+     the Article and BreadcrumbList JSON-LD, the dates and the meta line into
+     /articles/{slug}/index.html at build time. This runtime is therefore an
+     ENHANCER on a page that is already complete, not the thing that builds it.
+     Two consequences, and both of them are the whole point of the change:
+
+     1. It must never destroy pre-rendered content. Before this, any failure
+        anywhere in init() - a transient 5xx on data/resources.json, a slow
+        fetch, an abandoned render - fell into renderNotFound(), which wipes
+        #article AND sets meta robots to noindex. On a client-side-only page
+        that merely showed an error. On a pre-rendered page it would throw away
+        good HTML and de-index a healthy URL. Search Console has
+        /articles/free-parking-true-cost/ sitting in "Excluded by noindex tag"
+        since 20 Feb 2026 despite the record being live and correct, which is
+        exactly the shape this failure leaves behind.
+
+     2. It must not re-write what is already right. Re-assigning
+        bodyEl.innerHTML with identical markup costs a reflow and throws away
+        anything enhanceBody() already did.
+
+     isPrerendered() is the single check both rules hang off. */
+  function isPrerendered() {
+    const bodyEl = document.getElementById('article-body');
+    return Boolean(bodyEl && bodyEl.textContent.trim().length);
+  }
+
   async function init() {
+    const prerendered = isPrerendered();
     const slug = getSlug();
     if (!slug) {
+      if (prerendered) return;
       renderNotFound('We couldn’t find that article.', { noindex: true });
       return;
     }
@@ -54,14 +82,30 @@
       const articles = await loadArticles();
       const current = articles.find((item) => item.slug === slug);
       if (!current) {
+        /* A pre-rendered page whose slug is missing from the JSON is a build
+           inconsistency, not a bad URL. The page on screen is valid and was
+           produced from that same JSON, so leave it standing and say so in the
+           console rather than noindexing a live article. */
+        if (prerendered) {
+          console.warn(`Article "${slug}" is pre-rendered but absent from ${DATA_URL}; leaving the page as built.`);
+          attachCtaTracking();
+          return;
+        }
         renderNotFound('We couldn’t find that article.', { noindex: true });
         return;
       }
 
-      const bodyHtml = await loadArticleBody(current.content);
-      renderArticle(current, articles, bodyHtml);
+      const bodyHtml = prerendered ? null : await loadArticleBody(current.content);
+      renderArticle(current, articles, bodyHtml, prerendered);
     } catch (error) {
       console.error(error);
+      if (prerendered) {
+        /* The page is already complete and correct. The rail, related list and
+           breadcrumb may be missing their runtime polish, but the article
+           reads, and that is worth far more than a clean error state. */
+        attachCtaTracking();
+        return;
+      }
       renderNotFound('We couldn’t load this article right now. Please try again soon.');
     }
   }
@@ -85,6 +129,11 @@
     return raw.map((item) => ({
       slug: item.slug,
       title: item.title,
+      /* Optional per-record override for the <title> tag only. This map is a
+         whitelist, so omitting the field here would silently drop it and the
+         runtime would re-title the page with the h1 text on load, undoing the
+         build-time value. Same trap the `service` field hit. */
+      seoTitle: item.seoTitle || '',
       category: item.category,
       /* This map is a whitelist, so a field absent here does not reach
          renderBreadcrumb no matter what the record says. `service` was missing,
@@ -117,7 +166,7 @@
     return response.text();
   }
 
-  function renderArticle(article, allArticles, bodyHtml) {
+  function renderArticle(article, allArticles, bodyHtml, prerendered) {
     const container = document.getElementById('article');
     const hero = container.querySelector('.article-hero');
     const heroImage = document.getElementById('hero-image');
@@ -143,7 +192,13 @@
     summaryEl.style.display = article.excerpt ? '' : 'none';
     footerCopy.textContent = 'Ready to turn this strategy into new parking revenue? Let’s build the plan together.';
 
-    bodyEl.innerHTML = bodyHtml;
+    /* On a pre-rendered page the identical markup is already in the DOM, so
+       re-assigning it only costs a reflow. enhanceBody() still runs either way -
+       it is idempotent and it is what sets lazy loading and backfills missing
+       alt text on body images. */
+    if (!prerendered) {
+      bodyEl.innerHTML = bodyHtml;
+    }
     enhanceBody(bodyEl);
 
     const prettyUrl = absolute(`/articles/${article.slug}/`);
@@ -378,7 +433,12 @@
   }
 
   function setDocumentMeta(article, canonicalUrl, imageUrl, publishDate, modifiedDate) {
-    document.title = `${article.title} | Monetize Parking`;
+    /* Must match seoTitleFor() in tools/generate-article-pages.js, including the
+       absence of the brand suffix. If these two disagree the page re-titles
+       itself on load and Google, which renders, sees the runtime version - so
+       the build-time fix would have been undone by the file meant to preserve
+       it. The suffix stays on og:/twitter: below, deliberately. */
+    document.title = article.seoTitle || article.title;
     setMeta('description', article.description);
     setLinkCanonical(canonicalUrl);
 
