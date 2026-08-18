@@ -58,7 +58,7 @@ the date it was opened. Check an item is still true before acting on it.
 | 38 | 42 raw JPGs never converted to WebP | Performance |
 | 39 | No `FAQPage` schema on `/services/` | SEO |
 | 40 | 4 of 8 hidden articles are in `sitemap.xml` and 4 are not, undecided | Decision |
-| 41 | **Purge Cloudflare after any `styles.css` deploy**, or version the link on 119 pages | Deploy |
+| 41 | Purge Cloudflare after a stylesheet deploy, or version the links. **Now a real 24h window, was a year** | Deploy |
 
 **41 items.** The original list carved out of `REBRAND.md` had 31; item 2 was the
 closed 100px team photo constraint, which moved to `CLAUDE.md` and is not
@@ -712,15 +712,30 @@ Not rebrand work. Do not start any of these before the conference.
   Hiding Articles in `CLAUDE.md`, because the next person will ask the same
   question.
 
-- **Purge the Cloudflare cache after any deploy that changes `styles.css`. This
-  bit on the merge deploy, 2026-08-17.** Opened the same day, from the incident.
-  **Until the permanent fix lands, treat the purge as a mandatory post-deploy
-  step, not a judgement call.**
+- **Purge the Cloudflare cache after any deploy that changes a stylesheet. This bit
+  on the merge deploy, 2026-08-17.** Opened the same day, from the incident.
+  **Until the permanent fix lands, treat the purge as a mandatory post-deploy step,
+  not a judgement call.**
+
+  **CORRECTED 2026-08-17, and the original diagnosis was wrong about the size of
+  the window.** This item first said the exposure was 24 hours. On production it was
+  **a year**, for every stylesheet and for `script.js`. A zone-level Browser Cache
+  TTL of 1 year sat in front of Pages and overrode `_headers` for every value below a
+  year, so the `max-age=86400` that `_headers` had specified for `/styles.css` and
+  `/script.js` since long before the rebrand **was never what production served**.
+  That is why the merge deploy rendered broken rather than stale: visitors held a
+  stylesheet from the previous design, not from the previous day. The zone setting is
+  now "Respect Existing Headers" and the fix is verified. Full diagnosis, including
+  the `pages.dev` comparison that found it, is in `CLAUDE.md` under "Cache
+  lifetimes".
+
+  **So the 24-hour window described below is real now, for the first time.** It is
+  the post-fix state, not the state during the incident.
 
   **The mechanism.** `_headers` sets no `Cache-Control` under `/*.html`, so
   Cloudflare serves HTML `max-age=0, must-revalidate`, effectively uncached. It
-  serves `/styles.css` with `max-age=86400`. A deploy therefore hands visitors
-  **new HTML against a stylesheet up to 24 hours old.**
+  serves stylesheets with `max-age=86400`. A deploy therefore hands visitors **new
+  HTML against a stylesheet up to 24 hours old.**
 
   **Why this is worse than it sounds, and worse than it was previously recorded as
   being.** The two directions are not symmetrical:
@@ -781,8 +796,16 @@ Not rebrand work. Do not start any of these before the conference.
   which works because the bump lives on a single `<script>` src in one template.
 
   **What remains of this item is the choice between the purge rule and versioning
-  `/styles.css` and `/css/*`.** The header change removed the year-long failure but
-  not the 24-hour one, so a deploy can still serve new HTML against day-old CSS
-  until the cache is purged. Versioning would remove that too and needs no
-  discipline, at the cost of five links to bump plus a convention. **Until someone
+  the stylesheet links.** Two separate fixes closed the year-long failure: the
+  `/css/*` header change in `267d395`, and the zone Browser Cache TTL fix on the same
+  day. Neither closes the 24-hour one, so a deploy can still serve new HTML against
+  day-old CSS until the cache is purged. Versioning would remove that too and needs
+  no discipline, at the cost of five links to bump plus a convention. **Until someone
   takes that on, the purge is the rule.**
+
+  **One thing this incident should change about how the next person works here:
+  never treat a correct `_headers` as evidence that production is correct.** The
+  repo was right, the deployment was right, the Pages platform was right, and the
+  site was still wrong, for months, silently. The one-command check is in
+  `CLAUDE.md`. Run it after any Cloudflare caching change, and after any change to
+  `_headers`.
