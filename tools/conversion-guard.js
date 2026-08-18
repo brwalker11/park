@@ -119,13 +119,14 @@ const BLOCKS = [
 /* Strings that must be present, with an exact occurrence count. */
 const ASSERTIONS = [
   { file: LP, needle: "gtag('config', 'AW-18066534348')", count: 1, why: 'Ads tag configured on the landing page' },
+  { file: LP, needle: 'AW-18066534348/u9kyCMPIquMcEMzf5aZD', count: 1, why: 'the Calendly booking conversion label (secondary Ads action, added 2026-08-17)' },
   { file: LP, needle: 'calendly.com/d/cxtd-94s-fmm/free-parking-consultation', count: 1, why: 'the live booking link' },
   { file: LP, needle: 'hide_gdpr_banner=1', count: 1, why: 'Calendly GDPR banner stays suppressed' },
   { file: TY, needle: "gtag('config', 'AW-18066534348')", count: 1, why: 'Ads tag configured on the thank-you page' },
   { file: TY, needle: 'AW-18066534348/dpBlCNapw5YcEMzf5aZD', count: 1, why: 'the conversion label' },
   { file: TY, needle: "'value': 1.0", count: 1, why: 'conversion value' },
   { file: TY, needle: "'currency': 'USD'", count: 1, why: 'conversion currency' },
-  { file: TY, needle: "source=calendly", count: 1, why: 'the branch that stops double-counting Calendly bookings in GA4' },
+  { file: TY, needle: "source=calendly", count: 2, why: 'the two branches (Ads head snippet and GA4 load handler) that stop double-counting Calendly bookings. Raised from 1 on 2026-08-17 when the head snippet became conditional' },
 ];
 
 /* Conditional: only enforced when the trigger string is present in the file. */
