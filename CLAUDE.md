@@ -692,6 +692,35 @@ check rather than a replacement for it.
 
 All pretty URLs. Each article directory needs an `index.html` for routing.
 
+### SERP title vs page heading
+
+**`title` in `data/resources.json` drives four things at once**: the `<h1>`, the
+`<title>` tag, the resource card on `/resources/`, and the breadcrumb. A string
+tuned for a 60-character SERP limit is usually a worse on-page heading, and the
+reverse.
+
+**`seoTitle` breaks the tie for the `<title>` tag only**, exactly as
+`canonicalOverride` does for canonicals. Optional; absent, `title` is used. Read
+by `seoTitleFor()` in `tools/generate-article-pages.js` and by
+`setDocumentMeta()` in `js/article.js`, and **those two must agree** - if the
+runtime computes a different string the page re-titles itself on load and
+Google, which renders, sees the runtime version.
+
+**The ` | Monetize Parking` suffix is no longer appended to `<title>` on article
+pages.** Measured 2026-08-18: 74 of 75 titles exceeded 60 characters with the
+suffix, only 30 without it, so the suffix alone was truncating 44 pages in the
+SERP. It **is** still appended to `og:title` and `twitter:title`, which are not
+pixel-limited the same way and where a shared card with no brand is worth less.
+That asymmetry is deliberate; do not "fix" it into consistency.
+
+`headline` in the Article JSON-LD stays on `title`, not `seoTitle`, because
+schema headline is meant to match the visible heading.
+
+31 records carry a `seoTitle` as of 2026-08-18. `tools/apply-title-pass.js` was
+the one-off migration that added them and rewrote 37 over-length descriptions;
+it is **not** wired into `npm run build` and can be deleted once the change has
+shipped.
+
 ### Canonical URLs
 
 By default canonical URLs follow `https://monetize-parking.com/articles/{slug}/`.

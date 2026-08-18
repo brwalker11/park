@@ -32,6 +32,27 @@ function loadArticles() {
   return JSON.parse(raw);
 }
 
+/* The string that goes in <title>, which is NOT the same string as the <h1>.
+   `title` in data/resources.json drives four things at once - the h1, the SERP
+   title, the resource card and the breadcrumb - so a title tuned for a 60-character
+   SERP limit made a worse on-page heading, and vice versa. `seoTitle` breaks the
+   tie for the SERP only, exactly as `canonicalOverride` does for canonicals.
+   Absent, behaviour is unchanged.
+
+   The " | Monetize Parking" suffix is NOT appended here, and that is the point.
+   Measured 2026-08-18: 74 of 75 article titles exceeded 60 characters WITH the
+   suffix, but only 30 exceeded it without. The suffix alone was truncating 44
+   pages in the SERP, at an average position of 13.7 where a clipped title is
+   the whole first impression. Google appends the site name itself when it
+   judges it useful.
+
+   The suffix DOES stay on og:title and twitter:title. Those are not
+   pixel-limited the same way and a shared card with no brand on it is worth
+   less. See CLAUDE.md, "SERP title vs page heading". */
+function seoTitleFor(article) {
+  return article.seoTitle || article.title || 'Loading article…';
+}
+
 function isoDate(input) {
   if (!input) return '';
   const value = Date.parse(input);
@@ -233,10 +254,10 @@ function main() {
         /<meta property="article:modified_time" content="">/,
         `<meta property="article:modified_time" content="${modifiedDate}">`
       )
-      // Pre-populate title tag
+      // Pre-populate title tag. No brand suffix - see seoTitleFor().
       .replace(
         /<title>Loading article… \| Monetize Parking<\/title>/,
-        `<title>${escapeHtml(title)} | Monetize Parking</title>`
+        `<title>${escapeHtml(seoTitleFor(article))}</title>`
       )
       // Pre-populate meta description
       .replace(

@@ -129,6 +129,11 @@
     return raw.map((item) => ({
       slug: item.slug,
       title: item.title,
+      /* Optional per-record override for the <title> tag only. This map is a
+         whitelist, so omitting the field here would silently drop it and the
+         runtime would re-title the page with the h1 text on load, undoing the
+         build-time value. Same trap the `service` field hit. */
+      seoTitle: item.seoTitle || '',
       category: item.category,
       /* This map is a whitelist, so a field absent here does not reach
          renderBreadcrumb no matter what the record says. `service` was missing,
@@ -428,7 +433,12 @@
   }
 
   function setDocumentMeta(article, canonicalUrl, imageUrl, publishDate, modifiedDate) {
-    document.title = `${article.title} | Monetize Parking`;
+    /* Must match seoTitleFor() in tools/generate-article-pages.js, including the
+       absence of the brand suffix. If these two disagree the page re-titles
+       itself on load and Google, which renders, sees the runtime version - so
+       the build-time fix would have been undone by the file meant to preserve
+       it. The suffix stays on og:/twitter: below, deliberately. */
+    document.title = article.seoTitle || article.title;
     setMeta('description', article.description);
     setLinkCanonical(canonicalUrl);
 
