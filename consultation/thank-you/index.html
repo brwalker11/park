@@ -78,11 +78,23 @@
 
   <!-- Event snippet for Submit lead form conversion page -->
   <script>
-    gtag('event', 'conversion', {
-      'send_to': 'AW-18066534348/dpBlCNapw5YcEMzf5aZD',
-      'value': 1.0,
-      'currency': 'USD'
-    });
+    /* Fires only for callback-form arrivals. Calendly bookings arrive flagged
+       in the query string and report through their own Ads action fired on the
+       landing page. The sessionStorage guard stops a thank-you page refresh
+       from re-firing the conversion. */
+    (function(){
+      var isCalendly = window.location.search.indexOf('source=calendly') !== -1;
+      var fired = false;
+      try { fired = sessionStorage.getItem('mp_ads_conv') === '1'; } catch (e) {}
+      if (!isCalendly && !fired) {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18066534348/dpBlCNapw5YcEMzf5aZD',
+          'value': 1.0,
+          'currency': 'USD'
+        });
+        try { sessionStorage.setItem('mp_ads_conv', '1'); } catch (e) {}
+      }
+    })();
   </script>
 </head>
 <body class="page-consultation page-thankyou">
