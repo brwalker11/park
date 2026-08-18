@@ -7,7 +7,8 @@
     "generate:articles": "node tools/generate-article-pages.js",
     "generate:sitemap": "node tools/update-sitemap.js",
     "generate:thumbnails": "node tools/generate-thumbnails.js",
-    "build": "npm run generate:thumbnails && npm run generate:articles && npm run generate:sitemap"
+    "build": "npm run generate:thumbnails && npm run generate:articles && npm run generate:resource-index && npm run generate:sitemap",
+    "generate:resource-index": "node tools/generate-resources-index.js"
   },
   "devDependencies": {
     "cheerio": "^1.1.2",
