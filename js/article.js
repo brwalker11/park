@@ -72,8 +72,33 @@
   async function init() {
     const prerendered = isPrerendered();
     const slug = getSlug();
+
+    /* A pre-rendered page is COMPLETE. Body, Article and BreadcrumbList schema,
+       dates, byline, summary, breadcrumb and - since 2026-08-21 - the related
+       rail are all in the HTML. There is nothing left for this runtime to
+       build, so it does not fetch anything at all.
+
+       That early return is the whole point, not a tidy-up. loadArticles() pulls
+       data/resources.json, which is 85KB, on EVERY article pageview, and after
+       pre-rendering the only thing left that consumed it was the rail. The page
+       was paying 85KB to rank five links that were already sitting in the
+       markup.
+
+       What still runs: enhanceBody() sets lazy loading and backfills missing alt
+       text on body images, attachCtaTracking() wires the CTA events, and the
+       GA4 page view fires off the canonical already in the head. The table of
+       contents is built by script.js from the body headings, which are now
+       present at parse time rather than after two round-trips, so it renders
+       sooner than it used to. */
+    if (prerendered) {
+      enhanceBody(document.getElementById('article-body'));
+      attachCtaTracking();
+      const canonical = document.querySelector('link[rel="canonical"]');
+      trackPageView(canonical ? canonical.href : window.location.href);
+      return;
+    }
+
     if (!slug) {
-      if (prerendered) return;
       renderNotFound('We couldn’t find that article.', { noindex: true });
       return;
     }

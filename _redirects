@@ -37,3 +37,19 @@
 
 # Articles listing redirect
 /articles /resources/ 301
+# Cloudflare treats /articles and /articles/ as different paths, so the rule
+# above does NOT cover the trailing-slash form and it was returning 404. Exact
+# match only - a wildcard here would swallow every /articles/{slug}/ page.
+/articles/ /resources/ 301
+
+# Same failure on the video library hub: 30 pages exist under it, the hub itself
+# 404s. The library lives at /ask-the-experts.
+/resources/videos/ /ask-the-experts 301
+
+# Syndicated feature with no body of its own. The page ships an EMPTY
+# #article-body and no schema, so js/article.js falls through to
+# renderNotFound() and real visitors are shown "We couldn't find that resource".
+# It is absent from the sitemap and from every internal link, so redirecting it
+# is strictly better than serving an error page. Reversible: delete this rule if
+# the record ever gets real content or a real external URL.
+/articles/parking-today-small-lots/* /resources/ 301

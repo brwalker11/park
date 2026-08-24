@@ -14,7 +14,7 @@ const VIDEOS_DIR = path.join(ROOT, 'resources', 'videos');
 const STATIC_ROUTES = [
   { route: '/', priority: '1.0' },
   { route: '/about/', priority: '0.7' },
-  { route: '/ask-the-experts.html', priority: '0.8' },
+  { route: '/ask-the-experts', priority: '0.8' }, // NOT .html - that path 301s to this one
   { route: '/calculator/', priority: '0.9' },
   { route: '/contact/', priority: '0.9' },
   { route: '/faq/', priority: '0.7' },
