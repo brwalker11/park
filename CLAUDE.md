@@ -837,6 +837,33 @@ FAQPage schema can be added to pages with Q&A content. `/services/` has none;
 that is item 39 in `BACKLOG.md`, which carries the caution that `faq/index.html`
 duplicates every answer between the JSON-LD and the visible accordion.
 
+#### VideoObject duration and uploadDate come from `data/videos.json`
+
+Until 2026-08-21 all 30 pages under `/resources/videos/` shipped
+`"duration": "PT0M0S"` and `"uploadDate": "2025-01-01T00:00:00Z"`. Both were
+placeholders and both were false. `uploadDate` is a **required** field for
+VideoObject, and a zero duration is not a missing value - it asserts the video
+has no length. Google had discovered **zero** videos site-wide, and the sitemap
+report agreed: "Discovered videos: 0".
+
+Real values were read from the live YouTube watch pages (`lengthSeconds` and the
+`itemprop="uploadDate"` meta) and recorded in `data/videos.json`, which is now
+the source of truth: durations 35-64s, uploads 1-6 February 2026. Never refresh
+these by estimate - only from YouTube.
+
+**The video pages are hand-maintained; there is no generator for them.**
+`tools/fix-video-schema.js` is a one-off repair, deliberately NOT wired into
+`npm run build`. It is dry-run by default and takes `--write`. It matches the
+**pretty-printed** field text (`"duration": "PT0M0S"`, space included), requires
+each placeholder exactly once per page, requires the recorded YouTube id to
+appear on the page it is editing, and reverses both substitutions to check the
+result restores the original byte for byte before writing anything.
+
+If videos are added or replaced, extend `data/videos.json` with real captured
+values and run the script again. If a new page is authored with the correct
+values inline, the script will refuse to touch it (placeholder not found) - that
+is the intended behaviour, not a bug to work around.
+
 ### Headers and Redirects
 
 `_headers` sets security headers, a Content Security Policy, and cache control.
