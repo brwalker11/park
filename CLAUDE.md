@@ -80,7 +80,7 @@ are not wired to any npm script. Do not run them without asking.
 `sitemap.xml` whether or not any article content changed.** Two separate
 mechanisms, worth knowing apart because only one is content-driven:
 
-1. **8 static routes** (`/`, `/about/`, `/ask-the-experts.html`, `/calculator/`,
+1. **8 static routes** (`/`, `/about/`, `/ask-the-experts`, `/calculator/`,
    `/contact/`, `/faq/`, `/resources/`, `/services/`) get `lastmod` set to
    **today, unconditionally**, from `new Date()` at
    `tools/update-sitemap.js:141`. These change on every single run.
@@ -442,7 +442,7 @@ or footer change is a single file edit plus a rebuild, not 147 edits.
 runtime. The middle stage is easy to miss because its output is committed and
 looks hand-written.
 
-`tools/generate-article-pages.js` performs **24 build-time substitutions** on
+`tools/generate-article-pages.js` performs **25 build-time substitutions** on
 the template per article: canonical, a `<link rel="preload" as="image">` for
 the hero **and the two JSON-LD blocks** injected before `</head>`, `<title>`,
 meta description, `og:type`, `og:title`, `og:description`, `og:url`, `og:image`,
@@ -451,6 +451,12 @@ meta description, `og:type`, `og:title`, `og:description`, `og:url`, `og:image`,
 category, the hero `h1`, the breadcrumb title, the breadcrumb category link, the
 byline meta line, the summary, **the article body**, and `data-article-slug`.
 
+> **Raised to 25 on 2026-08-21** by the related-rail pre-render. `#related-list`
+> is now written at build time, which is what allows `js/article.js` to skip
+> `loadArticles()` entirely - removing an 85KB `data/resources.json` download
+> from every article pageview and turning five JS-only links per article into
+> crawlable HTML. Measured effect: **0 to 370 crawlable rail links site-wide.**
+>
 > **Raised from 17 to 24 on 2026-08-18** by the pre-rendering change described
 > above. Seven substitutions were added: `og:type`, both `article:*` timestamps,
 > the breadcrumb category link, `#article-meta`, `#article-summary`, and
@@ -535,6 +541,8 @@ the generator still exits 0:
 - `<div id="article-meta"></div>`
 - `<div id="article-summary"></div>`
 - `<div id="article-body" class="article-body" aria-live="polite"></div>`
+- `<div id="related-list" class="related-list" aria-live="polite">` and its
+  skeleton cards, matched by `RELATED_LIST_RE` as a whole block
 - `<meta property="og:type" content="website">`
 - `<meta property="article:published_time" content="">` and the `modified_time` twin
 
@@ -605,6 +613,39 @@ an existing entry without asking.
 - `/js/state-map.js` - interactive map on `/resources/`
 
 ### Related Articles
+
+**Built at build time as of 2026-08-21, not at runtime.** `buildRelatedRail()` in
+`tools/generate-article-pages.js` writes `#related-list` into every generated
+page. `renderRelated()` in `js/article.js` still exists and still works, but it
+is only reachable on a page that failed to pre-render, which is the fallback
+path.
+
+Three deliberate differences in the build-time version, all corrections:
+redirect sources are excluded (derived from `_redirects`, so rails cannot link
+at a 301); `type: "external"` is excluded; and `hidden: true` is honoured in the
+default rail, which the runtime never did. The **series branch does not apply
+the hidden filter**, because the four series sub-articles are hidden precisely
+so the series sidebar is where they surface.
+
+`data/series.json` was extracted from `SERIES_CONFIG` so the generator and the
+runtime cannot disagree. **`js/resources.js` still carries its own copy** for the
+`/resources/` grid; migrating it is outstanding.
+
+**An inbound-link floor runs after ranking.** `rebalanceRails()` guarantees every
+linkable article at least `MIN_INBOUND` (3) inbound rail links. Pre-rendering
+alone produced a badly skewed graph - one article took 39 inbound links while 27
+took none - because 278 of the 305 tags appear on exactly one record, so tag
+overlap ties at zero for nearly every pair and recency decides most rails. The
+pass only touches the tail: it moves a slot from an article that is above the
+floor to one that is below it, choosing the host that ranks the starved article
+highest so the link still reads sensibly. **Series rails are marked `fixed` and
+are never rebalanced.** After the pass: min 3, median 3, max 22.
+
+The whole pipeline is deterministic - candidates carry a slug tiebreak, hosts are
+visited in sorted order, and the loop is capped - so a rebuild with unchanged
+input produces byte-identical output. Verified across three consecutive runs.
+`npm run generate:articles` prints the inbound distribution, so a regression is
+visible in the build log rather than needing to be hunted.
 
 Sorted by shared tags, then same service, then same category, then recency.
 Articles never recommend themselves. Always filled to five. **The rail is built by
@@ -1632,7 +1673,13 @@ that is a Cloudflare redirect rule.
 - The GA4 or Google Ads tags themselves. Gating when they load is fine when
   asked. Altering or removing them is not.
 - Formspree endpoints.
-- `_redirects`.
+- `_redirects`. **Edited 2026-08-21 with explicit approval**, adding four lines: exact-match
+  rules for `/articles/` and `/resources/videos/` (both hub paths returned 404 because
+  Cloudflare treats the trailing-slash form as a different path from the existing
+  `/articles` rule), and a wildcard retiring `/articles/parking-today-small-lots/`, which
+  shipped an empty `#article-body` and showed readers "We couldn't find that resource".
+  Gated before writing: all 144 live sitemap URLs were checked against every rule and none
+  is shadowed.
 - Any `/articles/{slug}/index.html` file directly. These are generated. Edit
   the template or the body fragment instead.
 - Anything between `<!-- BEGIN:generated-index -->` and

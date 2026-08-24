@@ -1,0 +1,15 @@
+{
+  "_comment": "Article series definitions. Extracted 2026-08-21 from the SERIES_CONFIG object in js/article.js, byte-for-byte identical in content, so the build-time related rail and the runtime cannot disagree. js/resources.js still carries its own copy for the /resources/ page grid; migrating that one to read this file is outstanding. Do not edit one copy without the other.",
+  "series": [
+    {
+      "name": "Flexible Parking Rules",
+      "mainSlug": "flexible-parking-rules",
+      "articles": [
+        { "slug": "license-plate-allow-listing-guide", "title": "License Plate Allow Listing Guide", "part": 1 },
+        { "slug": "custom-operating-hours-strategy", "title": "Custom Operating Hours Strategy", "part": 2 },
+        { "slug": "dynamic-pricing-strategies", "title": "Dynamic Pricing Strategies", "part": 3 },
+        { "slug": "balancing-revenue-relationships", "title": "Balancing Revenue & Relationships", "part": 4 }
+      ]
+    }
+  ]
+}
