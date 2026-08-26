@@ -192,6 +192,11 @@ document.addEventListener('click', e => {
   if (href.endsWith('/calculator/') && typeof gtag === 'function') {
     gtag('event', 'calculator_start', { method: 'Hero CTA' });
   }
+  if (href.startsWith('tel:') && typeof gtag === 'function') {
+    const where = link.closest('.site-footer') ? 'footer'
+      : link.closest('.mobile-actions') ? 'mobile_nav' : 'page';
+    gtag('event', 'phone_click', { link_location: where, page_path: location.pathname });
+  }
 });
 
 /* Optional: adjust hash navigation for sticky header */
