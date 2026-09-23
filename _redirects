@@ -53,3 +53,15 @@
 # is strictly better than serving an error page. Reversible: delete this rule if
 # the record ever gets real content or a real external URL.
 /articles/parking-today-small-lots/* /resources/ 301
+
+# Vanity path for the Instagram bio link. Instagram renders the raw URL in the
+# profile rather than a title, so a tagged link displays as
+# "monetize-parking.com/start/?utm_source=instagra…" truncated mid-parameter.
+# This keeps the visible link short while the destination still carries the
+# campaign, which the in-app browser needs because it strips the referrer.
+# 302 rather than 301 on purpose: the bio destination may be repointed later and
+# a permanent redirect stays cached in browsers that already followed it.
+# YouTube needs no equivalent: it displays the link title and hides the query
+# string, so the tagged URL can sit in the channel link as-is.
+# Reversible: delete this rule and put the full tagged URL back in the bio.
+/ig /start/?utm_source=instagram&utm_medium=social&utm_campaign=bio_link 302
