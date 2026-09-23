@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start Here | Monetize Parking</title>
+<meta name="description" content="Work out what your parking lot could earn, read how solar lighting pencils out, or book a free assessment.">
+<meta name="robots" content="noindex, follow">
+
+<link rel="icon" href="/images/favicon-96x96.png?v=2" sizes="96x96">
+<link rel="shortcut icon" href="/images/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=2" sizes="180x180">
+<meta name="theme-color" content="#010D20">
+<link rel="manifest" href="/images/site.webmanifest?v=2">
+
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preload" href="/assets/fonts/inter-v20-latin-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<link rel="canonical" href="https://monetize-parking.com/start/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Start Here | Monetize Parking">
+<meta property="og:description" content="Work out what your parking lot could earn, read how solar lighting pencils out, or book a free assessment.">
+<meta property="og:url" content="https://monetize-parking.com/start/">
+<meta property="og:site_name" content="Monetize Parking">
+
+<style>
+  body.page-start{ background:var(--navy-950); }
+  .hub{
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    background:var(--navy-950);
+  }
+  .hub__inner{
+    width:100%;
+    max-width:34rem;
+    margin:0 auto;
+    padding:clamp(2rem,6vw,3.5rem) 16px clamp(2rem,5vw,3rem);
+    flex:1 0 auto;
+  }
+  .hub__brand{
+    display:block;
+    width:172px;
+    margin:0 auto clamp(1.75rem,4vw,2.5rem);
+  }
+  .hub__brand img{display:block;width:100%;height:auto;}
+
+  .hub__lede{text-align:center;margin-bottom:clamp(1.75rem,4vw,2.5rem);}
+  .hub__lede h1{
+    font-size:clamp(1.75rem,5vw,2.125rem);
+    line-height:1.15;
+    letter-spacing:-0.02em;
+    color:var(--text-inverse-1);
+    margin:0 0 .6rem;
+  }
+  .hub__lede p{
+    font-size:1.0625rem;
+    line-height:1.6;
+    color:var(--text-inverse-2);
+    margin:0;
+  }
+
+  .hub__list{display:flex;flex-direction:column;gap:14px;}
+
+  .hub-item{
+    display:block;
+    text-decoration:none;
+    background:var(--navy-900);
+    border:1px solid var(--border-dark);
+    border-radius:16px;
+    padding:1.15rem 1.25rem;
+    transition:transform .16s ease, border-color .16s ease, background-color .16s ease;
+  }
+  .hub-item:hover,.hub-item:focus-visible{
+    transform:translateY(-2px);
+    border-color:var(--blue-sky);
+    background:var(--navy-800);
+  }
+  .hub-item__title{
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    font-weight:650;
+    font-size:1.0625rem;
+    color:var(--text-inverse-1);
+    margin:0 0 .3rem;
+  }
+  .hub-item__title svg{flex:none;opacity:.55;transition:transform .16s ease,opacity .16s ease;}
+  .hub-item:hover .hub-item__title svg{transform:translateX(3px);opacity:1;}
+  .hub-item__desc{
+    font-size:.9375rem;
+    line-height:1.55;
+    color:var(--text-inverse-3);
+    margin:0;
+  }
+
+  /* Primary: the low-commitment offer gets the visual weight */
+  .hub-item--primary{
+    background:var(--gradient-brand);
+    border-color:transparent;
+    box-shadow:var(--shadow-brand);
+    padding:1.45rem 1.35rem;
+  }
+  .hub-item--primary:hover,.hub-item--primary:focus-visible{
+    background:var(--gradient-brand);
+    border-color:transparent;
+  }
+  .hub-item--primary .hub-item__title{
+    color:var(--text-inverse-1);
+    font-size:1.1875rem;
+  }
+  .hub-item--primary .hub-item__title svg{opacity:.85;}
+  .hub-item--primary .hub-item__desc{color:var(--text-inverse-2);}
+  .hub-item--primary .hub-item__flag{
+    display:inline-block;
+    font-size:.6875rem;
+    font-weight:700;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--text-inverse-1);
+    background:var(--scrim-white-18);
+    border-radius:999px;
+    padding:.25rem .6rem;
+    margin-bottom:.7rem;
+  }
+
+  .hub__foot{
+    flex:none;
+    text-align:center;
+    padding:1.5rem 16px 2.25rem;
+    border-top:1px solid var(--border-dark);
+    margin-top:clamp(2rem,5vw,3rem);
+  }
+  .hub__contact{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.25rem;
+    /* site styles.css caps <p> width with no auto margins, so re-centre here */
+    max-width:34rem;
+    margin:0 auto .75rem;
+    font-size:.9375rem;
+  }
+  .hub__contact a{color:var(--blue-sky);text-decoration:none;font-weight:550;}
+  .hub__contact a:hover{text-decoration:underline;}
+  .hub__fine{max-width:34rem;margin:0 auto;font-size:.8125rem;line-height:1.5;color:var(--text-inverse-3);}
+
+  @media (prefers-reduced-motion: reduce){
+    .hub-item,.hub-item__title svg{transition:none;}
+    .hub-item:hover,.hub-item:focus-visible{transform:none;}
+  }
+</style>
+<!-- Preview noindex guard - PERMANENT, do not remove. Reasoning in CLAUDE.md -->
+  <script>
+    if (window.location.hostname !== 'monetize-parking.com') {
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, nofollow');
+    }
+  </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LGHS0L5WE8"></script>
+<script>
+    /* PERMANENT hostname gate, do not remove. Reasoning in CLAUDE.md. */
+    if (window.location.hostname === 'monetize-parking.com') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-LGHS0L5WE8');
+    } else {
+      window.gtag = function gtag(){};
+    }
+  </script>
+</head>
+<body class="page-start">
+
+<div class="hub">
+  <div class="hub__inner">
+
+    <a class="hub__brand" href="/" aria-label="Monetize Parking home">
+      <img src="/assets/brand/MP_Logo_400.png" alt="Monetize Parking" width="400" height="160">
+    </a>
+
+    <div class="hub__lede">
+      <h1>Start here</h1>
+      <p>Everything below is free and takes a few minutes. No upfront costs, no obligation.</p>
+    </div>
+
+    <div class="hub__list">
+
+      <a class="hub-item hub-item--primary" href="/calculator/" data-hub="calculator">
+        <span class="hub-item__flag">Most popular</span>
+        <span class="hub-item__title">
+          What could your lot earn?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+        <span class="hub-item__desc">Run the numbers on your own property in about two minutes and see a revenue estimate.</span>
+      </a>
+
+      <a class="hub-item" href="/services/solar-lighting/" data-hub="solar">
+        <span class="hub-item__title">
+          Solar lighting
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+        <span class="hub-item__desc">What it costs, where it works, and the situations where it is the wrong call.</span>
+      </a>
+
+      <!--
+        CASE STUDY SLOT
+        No case study page exists on the site yet. When one is published, delete this
+        comment and uncomment the block below, then set the href.
+
+      <a class="hub-item" href="/REPLACE-WITH-CASE-STUDY-URL/" data-hub="case-study">
+        <span class="hub-item__title">
+          See the numbers from a real lot
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+        <span class="hub-item__desc">What one property owner started with, what changed, and what it earns now.</span>
+      </a>
+      -->
+
+      <a class="hub-item" href="/contact/" data-hub="contact">
+        <span class="hub-item__title">
+          Get a free assessment
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+        <span class="hub-item__desc">Tell us about your lot and one of our consultants replies within one business day.</span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer class="hub__foot">
+    <p class="hub__contact">
+      <a href="tel:+16122454025">(612) 245-4025</a>
+      <a href="mailto:info@monetize-parking.com">info@monetize-parking.com</a>
+    </p>
+    <p class="hub__fine">Vendor-neutral consulting for parking revenue, solar lighting, and EV charging.<br>&copy; 2026 Monetize Parking</p>
+  </footer>
+</div>
+
+<script src="/script.js" defer></script>
+
+
+<script>
+  /* Which hub row got tapped. Internal hrefs stay clean of UTMs on purpose:
+     a campaign parameter on an internal link restarts the GA4 session and
+     overwrites the original source (instagram / youtube). */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-hub]') : null;
+    if (!a || typeof gtag !== 'function') return;
+    gtag('event', 'hub_click', {
+      link_id: a.getAttribute('data-hub'),
+      link_url: a.getAttribute('href')
+    });
+  });
+</script>
+
+</body>
+</html>

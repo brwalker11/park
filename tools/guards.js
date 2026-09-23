@@ -82,8 +82,8 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
 // noindex and gtag counts moved together by three. Same gated recapture:
 // exactly three entries added, zero removed, all 152 pre-existing hashes
 // byte-identical.
-const EXPECT_NOINDEX = 155;
-const EXPECT_GTAG = 154;
+const EXPECT_NOINDEX = 156;
+const EXPECT_GTAG = 155;
 
 // This string is BOTH the marker guards.js searches for AND part of the hashed
 // block. Reword the comment on the pages and this constant must move with it in
