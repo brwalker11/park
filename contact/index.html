@@ -365,6 +365,7 @@
     btn.disabled = true;
     try {
       const data = new FormData(form);
+      data.append('form_check', 'mp-verified1');
       const res = await fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: data });
       if (res.ok) {
         window.location.href = '/contact/thank-you/';

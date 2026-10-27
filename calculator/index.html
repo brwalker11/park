@@ -1041,6 +1041,7 @@
 
           try {
             const data = new FormData(emailForm);
+            data.append('form_check', 'mp-verified1');
 
             const res = await fetch(emailForm.action, {
               method: 'POST',
