@@ -352,10 +352,12 @@
         submitBtn.textContent = 'Sending...';
 
         try {
+          const data = new FormData(form);
+          data.append('form_check', 'mp-verified1');
           var res = await fetch(form.action, {
             method: 'POST',
             headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
+            body: data
           });
 
           if(res.ok){
